@@ -76,3 +76,9 @@
 * La melanina viene concentrata al di sopra del nucleo
 * Principalmente la melanina protegge lo strato basale dell'epidermide
 * Al termine dell'esposizione il ritorno al livello basale di melanina è dovuto all'esfoliazione dei cheratinociti melanizzati
+* Le radiazioni UV >320nm non sono praticamente assorbite dai tessuti
+* Le UVB sono le più dannose e causano aging
+* Si hanno anche melanomi non correlati al sole (es. colon, bocca)
+* Il vetro blocca gli UV, non puoi prendere il sole dietro una finestra
+* Gli organismi unicellulari sono particolarmente sensibili agli UV
+* Si formano dimeri di pirimidina
