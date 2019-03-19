@@ -27,7 +27,7 @@
 * Oggi la cristallografia si fa in pochi centri specializzati
 	+ In Europa si fa a Grenoble dove c'è un sincrotrone
 
-## Trovare le pinding pockets 
+## Trovare le binding pockets 
 * Il primo step è trovare il sito o i siti di modulazione/legame
 * Un singolo composto potrebbe interagire con più di una tasca nella stessa proteina
 * E' possibile descrivere un pocketoma che raccolga le tasche note, e predica le interazioni di una molecola 
