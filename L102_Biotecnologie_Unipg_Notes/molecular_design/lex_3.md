@@ -1,4 +1,5 @@
 # Lex.3
+
 * La pKa è essenziale per determinare la permeabilità di molecole a livello delle membrane biologiche
 * I farmaci tendono ad essere carichi a pH fisiologico
 * Per convenzione si usa sempre la pKa, anche per le basi
