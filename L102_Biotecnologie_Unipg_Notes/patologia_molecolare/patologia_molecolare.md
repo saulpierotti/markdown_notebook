@@ -58,7 +58,9 @@ p308 pontierL'omeostasi è l'insieme dei meccanismi atti a mantenere costante la
 
 ## Malattie ereditarie
 * Nella maggior parte dei casi le alterazioni genetiche alla base di queste sono prezigotiche
-        + È frequente che l'alterazione sia *ex novo* sulla linea germinale di un genitore anziché preesistente
+
+      + È frequente che l'alterazione sia *ex novo* sulla linea germinale di un genitore anziché preesistente
+      + La distrofia muscolare di duchenne nel 60% dei casi avviene per mutazione ex novo della X nei gameti
 * Per familiarità si intende la presenza di un'alterazione genetica in una linea di discendenza
 * Si definiscono congenite le alterazioni genetiche presenti al momento della nascita, che siano o meno immediatamente visibili a livello fenotipico
 * Un'alterazione congenita non necessariamente è di base genetica, ad esempio HIV può essere trasmesso per via verticale e quindi è congenito
