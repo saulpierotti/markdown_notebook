@@ -1,3 +1,7 @@
+% Appunti Patologia Molecolare
+% Saul Pierotti
+% \today
+
 # Lex.1
 * L'epigenetica influenza pesantemente il fenotipo umano
 * Homo sapiens è partito dal Camerun (Y ancestrale), mentre neanderthal da più su
@@ -129,7 +133,8 @@
 
 ### Malattie mitocondriali
 * I mitocondri non hanno capacità riparativa
-	+ Se si rovinano sono degradati      ▪ 
+	+ Se si rovinano sono degradati
+
 # Lex.5
 
 ## ALterazioni cromosomiche
