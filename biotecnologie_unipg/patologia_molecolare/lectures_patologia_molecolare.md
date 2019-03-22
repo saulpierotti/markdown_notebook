@@ -3,29 +3,10 @@
 % \today
 
 # Lex.1
-* L'epigenetica influenza pesantemente il fenotipo umano
-* Homo sapiens è partito dal Camerun (Y ancestrale), mentre neanderthal da più su
-* La terapia può essere differenziata per gender
-* La febbre non è patologia, e  la tachipirina si prende sopra 38.5
-* 1990 si inizia a sequenziare il DNA
-* Il tempo di degradazione di  una proteina ne influenza l'effetto
-* Patologia del DNA, RNA,  proteine, lipidi, zuccheri, epigenetica
-* La patologia è andata da uno studio d'organo ad uno cellulare, al metabolico, al subcellulare, al molecolare
-* Libro Pontieri, anche vecchie edizioni. Solo volume 1
-* Verra fatto almeno un esame ogni mese, eccetto agosto
 
 # Lex.2
-* La riparazione del DNA può variare in base al soggetto ed alterare la gravità della risposta a      mutageni
-* La riparazione sfrutta BER, NER, HR, NHEJ
-* La polimerasi compie errori con 10^-5, ma con mismatch repair arriva a 10^-9
-* Syntetic letality
-* HPV può causare tumore genitale e orale, ma non per tutti
-	+ Uno SNPs su una proteina apre una tasca che permette ad HPV di inibirlo
 
 # Lex.3
-* Le patologie genetiche non sono richieste all'esame
-* Le malattie genetiche spesso sono ex novo sulla linea germinale, non sono portate dai genitori
-	+  La distrofia muscolare di duchenne nel 60% dei casi avviene per mutazione ex novo della X nei gameti
 * Alterazioni solo a livello della proteina possono derivare da alterazioni delle proteine che la       regolano
 	+ Isoforme dovute da inizi  alternativi e PTMs
 * Modifiche su RNA
@@ -174,9 +155,6 @@
 ### Superfemmine (XXX)
 * Fenotipo per lo più normale
 
-## Omeostasi
-* I sistemi biologici tendono sempre a tornare allo stato fisiologico
-
 ### Agenti fisici
 * Sono le radiazioni ionizzanti ed eccitanti
 	+ Sono ionizzanti le radiazioni >10 eV (X rays)
@@ -256,35 +234,33 @@
 * I primi meccanismi di difesa sono vomito e diarrea
 * L'espressione di alcuni geni tra uomo e donna è diversa, e pertanto la medicina dovrebbe essere personalizzata
 
-### Micotossine
+## Micotossine
 * Le aflatossine si trovano nei cereali ma anche nel latte
 	+ E' prodotta da *Aspergillus flavus*
 	+ Raggiunge il latte tramite i cereali usati a scopo zootecnico
 
-### Metalli pesanti
-
-#### Piombo
+## Piombo
 * Molti cosmetici sono ricchi di piombo
 * Le ceramiche sono ricche di piombo
 * Una volta la benzina era ricca di piombo
 * L'intossicazione cronica dà deficit intelletivo e motorio
 
-#### Alluminio
+## Alluminio
 * E' presente nei deodoranti a lunga permanenza
 * Questi deodoranti legano fortemente l'epidermide e durano circa 15 gg, ossia il tempo di rigenerazione della stessa
 
-#### Mercurio
+## Mercurio
 * Inibisce il rilascio di neurotrasmettitori e la polimerizzazione dei microtubuli
 * E' particolarmente presente in tonno e altri pesci
 
-#### Cromo esavalente
+## Cromo esavalente
 * Da' reazioni di ipersensibilità cutanea
 
-### Altre sostanze
+## Altre sostanze
 * Il cloruro di vinile è presente nel PVC, che una volta era usato per la pellicola alimentare
 * L'acrilammide è neurotossica
 
-### Interferenti endocrini
+## Interferenti endocrini
 * Sono spesso derivati dalle plastiche come **bisphenol A** e **acido ftalico**
 * Possono causare sterilità e teratogenesi
 	+ La fertilità maschile è calata del 70% negli ultimi decenni
@@ -314,3 +290,42 @@
 * Si ha alta incidenza anche di cancro al pancreas
 	+ La sopravvivenza media è di 1 anno dalla diagnosi (!)
 * Il peso alla nascita da madre fumatrice è inferiore per l'effetto vasocostrittore della nicotina
+
+#Lex.8
+
+## Stimolanti e narcotici
+* Causano azione stimolante del CNS, aggressività, insonnia, senso di benessere, perdita del senso critico
+* L'epigenetica della sintesi dei neurotrasmettitori e dei loro recettori influenza lo sviluppo di dipendenza a stimolanti
+
+### Amfetamine
+* Sono inibitori della ricaptazione di dopamina e noradrenalina, e delle monoammino ossidasi (MAO)
+* L'amfetamina viene usata a basse concentrazioni nelle diete dimagranti
+	+ Ha effetto anoressizzante
+
+### Cocaina
+* Inibisce il reuptake della dopamina
+* La cocaina al momento è pericolosamente diffusa
+* E' alla base dell'aumentata frequenza di infarto sotto ai 40 anni
+* Causa vasocostrizione, portando a necrosi tissutale
+* E' frequente la distruzione dei tessuti nasali
+* L'acqua del Tevere nell'ansa degli Ornari presenta livelli di metaboliti della cocaina molto elevati
+* Causa una fortissima dipendenza
+* Spesso si osservano graanulomi da talco
+
+### Eroina
+* Aumenta la tolleranza al dolore
+* Da' fortissima assuefazione
+
+### Cannabinoidi
+* Possono essere efficaci nel trattamento del dolore cronico, nella prevenzione della nausea da chemioterapia
+* Può contribuire a curare spasmi muscolari dovuti da problemi neurologici
+* Sembra incrementare il rischio di incidenti stradali
+* Può essere pericolosa in concomitanza ad alterazioni cardiocircolatorie
+* Sembra possoa diminuire il QI
+
+##  Patologie da errata alimentazione
+* Un tempo vi erano carenze alimentari dovute a mancato accesso ad alcuni alimenti
+* Oggi si hanno nuove carenze dovute a mode alimentari poco salutari
+	+ Sono frequenti atassie celebrali nei bambini di famiglie con diete particolari
+* Una misura grossolana del peso rispetto all'altezza è il BMI
+* L'acido ortofosforico della Coca Cola precipita il Ca2+ nelle cripte gastriche, impedendone l'assorbimento

@@ -141,9 +141,9 @@ Il  padre della chemioinformatica è Gasteiger
 	+ Più è grande meno è aacido poichè distribuisce la carica (?)
 * Effetto induttivo
 	* Altri atomi elettronegativi presenti nella molecola influenzano l'acidità
-	+ Mediato da legami sigma
+	+ Mediato da legami $\sigma$
 * Effetto di risonanza
-	+ Mediato da legami pi
+	+ Mediato da legami $\pi$
 * Ibridizzazione
 	+ Più aaumenta il carattere s più l'acido è forte
 * Effetto prossimtà
@@ -196,10 +196,10 @@ Il  padre della chemioinformatica è Gasteiger
 * Una volta bisognava fare fitting della sequenza sulla densità elettronica
 	+ Ora si fa via software
 * La strettezza della mappa di densità mi riflette la risoluzione della struttura che posso ottenere
-* Si considera alta risoluzione 1.5 angstrom, bassa risoluzione 5 angstrom
-	+ Per poterci lavorare bene deve essere almeno 2.5 angstrom
+* Si considera alta risoluzione 1.5$\AA$, bassa risoluzione 5$\AA$
+	+ Per poterci lavorare bene deve essere almeno 2.5$\AA$
 
-	+ Per poterci lavorare bene deve essere almeno 2.5 angstrom
+	+ Per poterci lavorare bene deve essere almeno 2.5$\AA$
 * Oggi la cristallografia si fa in pochi centri specializzati
 	+ In Europa si fa a Grenoble dove c'è un sincrotrone
 
@@ -284,4 +284,6 @@ Il  padre della chemioinformatica è Gasteiger
 * Posso usare probes anfifilici per evidenziare dove avviene la transizione idrofobico-idrofilico
 * Studiando con probe idrofobico, H2O e anfifilico il colesterolo posso predire come questo si posiziona sulle membrane
 * Le strutture delocalizzate sono molto apolari poichè polarizzabili
+
+# Lex.7
 
