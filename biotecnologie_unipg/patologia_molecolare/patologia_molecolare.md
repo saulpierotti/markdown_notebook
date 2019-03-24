@@ -10,6 +10,8 @@
 
 # Note sparse
 * La vita media aumenta di circa 3 mesi ogni anno, anche se ora sta rallentando
+	+ Si ipotizza il limite fisiologico sia attorno ai 120 anni
+* Nonostante l'aumento della vita media la qualità della vita dell'anziano è ancora scarsa
 * Gli integratori alimentari sono inutili e non vi è una carenza sottostante carenza
 * L'epigenetica influenza pesantemente il fenotipo umano
 * Homo sapiens è partito dal Camerun (Y ancestrale), mentre neanderthal da più su
@@ -24,10 +26,17 @@
 * La polimerasi compie errori con una frequenza di $10^{-5}$, ma con il mismatch repair arriva ad un tasso di soli $10^{-9}$
 * HPV può causare tumore genitale e orale, ma non per tutti i soggetti
 	+ Uno SNPs su una proteina apre una tasca sulla stessa che permette ad HPV di inibirla, scatenando la tumorigenesi
+* Gli eccessi ormonali possono portare ad azioni collaterali su recettori impropri per cui normalmente vi è bassa affinità
+* I Geni HOX sono un cluster coinvolto nel controllo della metamerizzazione, si attivano in modo sequenziale sul cromosoma e sono estremamente conservati
+* I mitocondri non hanno capacità riparativa e pertanto se vengono danneggiati sono degradati
+* Una cellula tumorale ha una capacità proliferativa afinalistica, nel senso che porta alla morte dell'organismo e quindi di se stesso
+* I batteri sono gli organismi di maggior successo (?)
+* Dal punto di vista evolutivo il cromosoma X è essenziale, mentre Y porta geni non essenziali
 
 # Da approfondire
 * Syntetic letality
 * Cerca il lavoro americano su integratori
+	+ Sono state trovate piccole quantità di sidenafil per l'uomo e antidepressivi per le donne negli integratori alimentari
 
 # Introduzione
 * La patologia generale studia gli agenti responsabili delle manifestazioni patologiche e la patogenesi
@@ -60,6 +69,7 @@
 * Nella maggior parte dei casi le alterazioni genetiche alla base di queste sono prezigotiche
 	+ È frequente che l'alterazione sia *ex novo* sulla linea germinale di un genitore anziché preesistente
 	+ La distrofia muscolare di duchenne nel 60% dei casi avviene per mutazione ex novo del cromosoma X nei gameti
+* Il 70% delle patologie congenite hanno causa ignota, il 20% hanno causa ereditara
 * Per familiarità si intende la presenza di un'alterazione genetica in una linea di discendenza
 * Si definiscono congenite le alterazioni genetiche presenti al momento della nascita, che siano o meno immediatamente visibili a livello fenotipico
 * Un'alterazione congenita non necessariamente è di base genetica, ad esempio HIV può essere trasmesso per via verticale e quindi è congenito
@@ -67,6 +77,130 @@
 	+ Molte alterazioni del cariotipo sono letali e possono essere spesso osservate in prodotti abortivi
 	+ Sono frequenti alterazioni del cariotipo a livello somatico, che possono dar luogo a tumorigenesi
 	+ Spesso le aneuploidie prezigotiche derivano da mancata disgiunzione in meiosi 1
+	+ Le alterazioni del cariotipo più frequenti coinvolgono gli eterocromosomi o il cromosoma 21
+* Le alterazioni che non coinvolgono il gene ma solo la proteina espressa possono derivare da alterazioni di altri geni che ne regolano il processamento
+	+ Possiamo avere isoforme dovute da inizi alternativi della trascrizione o traduzione
+	+ Si possono osservare modifiche post-traduzionali differenziali
+	+ Vi possono essere alterazioni nel pathway di splicing (alterazioni delle SNRNPs)
+	+ Possono essere alterati dei miRNA
+	* Per osservare la presenza di isoforme di splicing di una proteina posso clonarne il cDNA
+* Le malattie che insorgono nel primo trimestre sono dette embriopatie
+	+ Sono le più gravi siccome in questa fase si ha la formazione degli organi
+* Le malattie che invece si manifestano nel seondo e terzo trimestre sono dette fetopatie
+	+ In questa fase gli organi si accrescono ma sono già completamente formati, e pertanto le fetopatie sono relativamente meno gravi
+
+## Alcuni esempi di malattie a base genetica
+
+### Diabete
+* Nel diabete alcune proteine vengono spontaneamente glicosilate per l'abbondanza di glucosio circolante
+* Il processo di glicosilazione non è enzimatico
+* Queste glicazioni potrebbero impedire la degradazione di certe proteine, causandone accumulo
+
+### Acondroplasia
+* L'acondroplasia è causata da un difetto in un recettore per un fattore di crescita che impedisce la normale crescita ossea
+* Si osserva altezza media di 130 cm, mentre la testa è di dimensioni normali poichè la sua crescita non coinvolge tale fattore
+* Nell'80% dei casi si osservano mutazioni de novo al gene coinvolto
+
+### Alzheimer
+* L'età di insorgenza dipende dall'esposizione a fattori ambientali stressanti
+	+ Si ha anche un fattore di rischio a base genetica ma non sono noti i geni coinvolti
+	+ Si osserva atrofia dei giri celebrali dovuta a fenomeni di necrosi e apoptosi
+	+ Si ha mancanza di interconnessioni tra le varie aree celebrali, soprattutto tra telencefalo e aree profonde
+* Un'ipotesi vede coinvolta la proteina APP, detta precursore amiloide
+	+ Le proteine presenilina 1 e 2 normalmente clivano APP, e loro mutazioni sono state correlate ad Alzheimer precoce
+	+ L'accumulo di APP satura la capacità delle chaperons, e l'eccesso non viene ripiegato correttamente
+	+ L'accumulo avviene nel RER e questo porta a stress cellulare con accumulo di ROS
+	+ Viene così indotta apoptosi neuronale
+* Secondo un'altra ipotesi la proteina Tau viene iperfosforilata e si accumula, impedendo la formazione dei microtubuli e inducendo così morte neuronale
+
+### Parkinson
+* La malattia è caratterizzata dalla perdita di neuroni dopaminergici a livello della substansia nigra
+* Nei pazienti si osserva accumulo di aggregati insolubuli di $\alpha$-sinucleina 
+	+ Questa proteina è stata scoperta a Cambridge da una ricercatrice di Arezzo
+	+ Gli aggregati sono detti corpi di Lewi
+* Esiste anche Parkinson in forma giovanile
+* Nelle scimmie si sono osservati risultati incoraggianti trapiantando selettivamente cellule staminali nella substanzia nigra
+* Oramai ci sono pochi investimenti in questa malattia poichè si è dimostrata molto difficile da trattare 
+
+### Sclerosi laterale amiotrofica
+* Alcune forme sono correlate ad una mutazione gain of function della superossido-dismutasi (SOD)
+* Si può avere degenerazione sia del primo che del secondo motoneurone
+* La sua insorgenza è stata correlata a predisposizione genetica accoppiata ad ecccitotossicità da glutammato, accumulo di ROS, carenza di fattori di crescita, fattori tossici ambientali ed infezioni virali
+
+### Osteogenesis imperfecta
+* Il paziente ha ossa estremamente fragili a causa di difetti nella produzione di collagene di tipo I
+* I sintomi includono sordità, deformità ossee, bassa statura
+* Una caratteristica peculiare è la colorazione blu delle sclere
+ 
+### Distrofia muscolare di Duchenne
+* E' causata da una mutazione del gene della distrofina
+* La distrofina è codificata da un gene enorme sul cromosoma X
+	+ Questa proteina impedisce che le cellule muscolari si lesionino nello strofinarsi durante le contrazioni
+	+ Ancora il citoscheletro alla matrice extracellulare
+* La mancanza di distrofina causa instabilità del sarcolemma, che si danneggia permettendo l'ingresso di $Ca^{++]$
+* Si manifesta attorno ai 3 anni con problemi di deambulazione
+* Progredisce con impossibilità di deambulazione a 12 anni e morte a 20 a causa di problemi dei muscoli respiratori
+
+### Fibrosi cistica
+* E' causata da un mutazione del canale per $Cl^-$ CFTR
+* La mancata secrezione di cloro impedisce la diluizione delle secrezioni, che divengono estremamente dense
+* Si osservano problemi respiratori e occlusione dei dotti pancreatici
+
+### Fenilchetonuria
+* E' dovuta ad un alterazione nel metabolismo della fenilalanina
+* Gli alti livelli di fenilalanina che si producono hanno effetti tossici, particolarmente a livello del CNS
+* I pazienti hanno tipicamente capelli biondi, cute chiara e ritardo mentale
+* Se si tratta alla nascita tramite una dieta priva di fenilalanina si ha assenza di ritardo mentale
+	+ Questo approccio è detto dietoterapia
+* Oggi di routine si fa screening alla nascita per la presenza della malattia, in modo da poter intervenire precocemente con una dieta adeguata
+
+### Emoglobinopatie
+* Sono patologie dovute ad alterazioni dei geni codificanti per le catene globiniche
+* Sono frequenti anche alterazioni di tipo quantitativo
+
+### X fragile
+* E' una patologia X-linked con frequenza di 1/1550 nel maschio
+* Diagnosi difficile
+* I sintomi includono ritardo mentale, orecchie a sventola, macrorchidismo
+* Il nome della patologia è dovuto ad un'anomalia citogenetica inducibile in assenza di foliato, un tempo usata come strumento diagnostico
+* Avviene in figli di madri che portano una pre-mutazione dovuta da aumento di repeat CGG
+	+ Nel figlio si osserva ulteriore aumento del numero di ripetizioni
+	+ Il maschio riceve la X sempre della madre (!)
+
+### Corea di Huntington
+* L'esordio è tipicamente tra i 30 e 50 anni con movimenti incontrollabili e demenza
+* La patogenesi è dovuta ad accumulo di huntigntontina, una proteina particolarmente tossica a livello del nucleo striato nel CNS
+* La mutazione responsabile è un'espansione del repeat CAG nel gene del huntingtontina, che codifica per un tratto poly-Q
+	+ La lunghezza del repeat è direttamente correlata alla penetranza della patologia
+* I sintomi precoci sono per lo più dovuti al danneggiamento dello striato
+
+### Trisomia 21
+* La patologia è per lo più causata da una mancata disgiunzione del cromosoma 21 in meiosi 1
+* E' sufficiente che il solo q21 sia traslocato (trisomico) per avere il fenotipo patologico, non è necessaria la traslocazione dell'intero cromosoma
+* Vi è una forte correlazione tra età della madre e probabilità di avere un figlio affetto, mentre l'età del padre non è influente
+	+ I 35 anni sono la soglia critica dopo la quale si ha un forte aumento dell'incidenza
+	+ Questa correlazione è dovuta al fatto che i danni genetici ai gameti si accumulano nel tempo
+	+ Le uova sono particolarmente soggette a questi danni poichè sono presenti già dalla nascita nel corpo della donna
+	+ L'aumento di aberrazioni citologiche nelle uova con l'età è anche causa della diminuita fertilità della donna in età avanzata
+* Una volta si osservava la presenza di pochi individui Down perchè questi erano subito messi in istituto quando nascevano, ma nascevano comunque (!)
+* Una particolarità interessante è che gli individui affeti hanno una bassissima incidenza di cancro
+
+### Sindrome di Turner
+* E' una monosomia del cromosoma X con genotipo X0
+* Gli individui affetti sono sempre di sesso femminile e di bassa statura
+* La bassa statura dipende dalla carenza quantitativa del gene SHOX, un homeobox
+* Il fatto che la statura dipenda molto dalla X fa pensare che nel maschio questa sia un tratto di origine prevalentemente materna
+* Altri tratti sono presenti nei pazienti su base probabilistica, poichè caratterizzati da una componente epigenetica
+* La sterilità è molto comune ma non assoluta (!)
+
+### Sindrome di Klinefelter
+* La patologia è caratterizzata dal genotipo XXY, e gli individui affetti sono di sesso maschile
+* I soggetti sono molto alti, a causa della presenza di 2 X materne
+* Si osserva ridotta fertilità e microorchidismo
+
+### Triple X syndrome
+* Il fenotipo è per lo più normale e la maggior parte degli individui affetti non viene mai diagnosticato
+* La formazione di 2 corpi di Barr assicura comunque un livello di espressione genica pressochè normale
 
 # Patologia ambientale
 
