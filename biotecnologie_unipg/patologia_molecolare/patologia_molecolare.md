@@ -13,9 +13,10 @@
 	+ Si ipotizza il limite fisiologico sia attorno ai 120 anni
 * Nonostante l'aumento della vita media la qualità della vita dell'anziano è ancora scarsa
 * Gli integratori alimentari sono inutili e non vi è una carenza sottostante carenza
+	+ Non si deve abusare di antiossidanti poichè anche questi alterano l'omeostasi
 * L'epigenetica influenza pesantemente il fenotipo umano
 * Homo sapiens è partito dal Camerun (Y ancestrale), mentre neanderthal da più su
-* La terapia può e dovrebbe essere differenziata per gender
+* L'espressione di alcuni geni tra uomo e donna è diversa, e pertanto la medicina dovrebbe essere personalizzata per gender
 * La febbre non è patologia, e la tachipirina si prende solo sopra 38.5
 * Nel 1990 si inizia a sequenziare il DNA
 * Il tempo di degradazione di una proteina ne influenza l'effetto
@@ -32,6 +33,8 @@
 * Una cellula tumorale ha una capacità proliferativa afinalistica, nel senso che porta alla morte dell'organismo e quindi di se stesso
 * I batteri sono gli organismi di maggior successo (?)
 * Dal punto di vista evolutivo il cromosoma X è essenziale, mentre Y porta geni non essenziali
+* GRP78 (BiP) è un chaperon che lega le proteine misfolded a livello dell'ER, attivando fra l'altro la misfolded protein response
+* Le principali cause di decesso nel mondo sono cancro e malattie cardiovascolari
 
 # Da approfondire
 * Syntetic letality
@@ -137,7 +140,7 @@
 * La distrofina è codificata da un gene enorme sul cromosoma X
 	+ Questa proteina impedisce che le cellule muscolari si lesionino nello strofinarsi durante le contrazioni
 	+ Ancora il citoscheletro alla matrice extracellulare
-* La mancanza di distrofina causa instabilità del sarcolemma, che si danneggia permettendo l'ingresso di $Ca^{++]$
+* La mancanza di distrofina causa instabilità del sarcolemma, che si danneggia permettendo l'ingresso di $Ca^{++}$
 * Si manifesta attorno ai 3 anni con problemi di deambulazione
 * Progredisce con impossibilità di deambulazione a 12 anni e morte a 20 a causa di problemi dei muscoli respiratori
 
@@ -227,12 +230,16 @@
 * A livello del PNS un trauma è invece riparabile se i neuroni coinvolti non sono compromessi
 	+ Il moncone prossimale si degrada fino al pirenoforo, e a questo segue una rigenerazione con una velocità di circa 1mm al giorno
 	+ Il moncone distale si degrada, mentre le cellule di Schwann riformano una guaina integra che dirige la crescita delle nuove neurofibrille
+* Una lesione cutanea lascia una cicatrice se danneggia la membrana basale
+* Una cictarice manca di annessi cutanei, può avere un colore differente dal resto dell'epidermide (**discheratosi**), non suda, non presenta peli
 
 ## Trasferimento di energia termica
 * L'energia termica può causare danni locali oppure effetti sistemici
 
 ## Azione locale del calore
 * Si ha un'ustione quando i tessuti superano i 40-45°C
+	+ La soglia del dolore è intorno ai 45°C
+* I danni causati da sostanze chimiche non sono detti ustioni ma causticazione
 * La gravità dipende da estensione, profondità ed altri fattori
 	+ Quantità di calore trasferito
 	+ Temperatura raggiunta dai tessuti
@@ -242,10 +249,16 @@
 * Uno strato calloso è più resistente agli insulti termici di una porzione epiteliale più sottile, come una mucosa
 * Il calore umido è più dannoso perchè impedisce i processi di evaporazione termodispersivi
 * La gravità delle ustioni è classificata in gradi
-	+ Primo grado: vasodilatazione con formazione di eritema
+	+ Primo grado: vasodilatazione con formazione di eritema dovuto al rilascio di istamina
 	+ Secondo grado: infiammazione con accumulo di fluido, che forma un fittene
 	+ Terzo grado: necrosi tissutale con formazione di escara e possibile carbonizzazione
 * Ustioni particolarmente estese in superficie o profondità possono anche dar luogo ad effetti sistemici
+* Secondo la regola di Wallace vi sono 11 zone corporee che coprono ciascuna il 9% di superficie
+	+ Questo viene utilizzato per stimare l'estensione di un'ustione
+
+## Alterazioni della temperatura corporea
+* Sopra ai 41 gradi si può avere danno celebrale
+* Sotto ai 33-35°C le reazioni biochimiche sono molto rallentate
 
 ## Patologie da elevata temperatura ambientale
 * Il colpo di sole è causato dall'esposizione ai raggi solari del capo scoperto
@@ -271,29 +284,41 @@
 	+ La morte interviene quando la temperatura corporea scende sotto ai 25°C
 	+ I sintomi sono inizialmente di intenso freddo, cui segue sonnolenza ed apatia
 	+ Il riscaldamento dell'assiderato deve essere lento per prevenire la vasodilatazione generalizzata
+* Nel congelare colture cellulari è importante compiere il processo con una tempistica appropriata
+	+ Un congelamento troppo rapido causa danno meccanico dovuto alla formazione di grandi cristalli
+	+ Un congelamento troppo lento causa la formazione di un fluido iperosmotico che lisa le cellula richiamando acqua
 
 ## Patologie da radiazioni
 * Le radiazioni possono essere di natura elettromagnetica o corpuscolate
 * Si definiscono eccitanti le radiazioni con energia inferiore a 10eV, e ionizzanti quelle con energia superiore
 	+ 10eV è la quantità tipica di energia necessaria ad allontanare un elettrone dall'orbitale esterno di un atomo
+* La maggior parte delle radiazioni a cui siamo esposti è di origine naturale
+	+ La fonte principale è il Radon (55%)
 
-## Radiazioni eccitanti
+### Radiazioni eccitanti
 * Le radiazioni infrarosse manifestano principalmente un effetto termico
 * La radiazione visibile è poco penetrante, ma può diventare patogena in presenza di fluorofori che la assorbono e la trasferiscono alle cellule
 	+ Questo fenomeno è detto effetto fotodinamico
 	+ Composti responsabili sono sia endogeni (porfirine) che esogeni (chinino, essenza di bergamotto)
 * Le radiazioni ultraviolette sono più penetranti e preferenzialmente assorbite da proteine ed acidi nucleici
 	+ Inducono la formazione di dimeri di pirimidina, che se in quantità esagerata possono sopraffare i meccnismi riparativi
+	+ Le radiazioni UVB sono le più dannose e causano aging precoce
+	+ Le radiazioni UV con $\lambda$ >320nm non sono praticamente assorbite dai tessuti
 	+ Categorie professionali particolarmente esposte al sole sono soggette a melanomi ed epiteliomi nelle zone esposte
-	+ I portatori di difetti nei sistemi riparativi (*Xeroderma pigmentosum, sindrome di Bloom*) sono particolarmente soggetti a danni di questo tipo
+		+ Esistono anche melanomi non correlati all'esposizione al sole (es. colon, bocca)
+	+ I portatori di difetti nei sistemi riparativi (*Xeroderma Pigmentosum, sindrome di Bloom*) sono particolarmente soggetti a danni di questo tipo
 	+ L'esposizione di breve durata causa una leggera infiammazione della congiuntiva e dialtre mucose
 	+ L'esposizione protratta causa ipercheratosi e deposizione di melanina
+	+ La melanina viene concentrata al di sopra del nucleo, e protegge lo strato basale dell'epidermide dove sono presenti le cellule in divisione
+	+ Al termine dell'esposizione il ritorno al livello basale di melanina è dovuto all'esfoliazione dei cheratinociti
+	+ Il vetro blocca gli UV, e pertanto non è possibile prendere il sole da dietro ad una finestra
+	+ Gli organismi unicellulari sono particolarmente sensibili alla radiazione UV
 
-## Radiazioni ionizzanti
+### Radiazioni ionizzanti
 * Un atomo sottoposto a radiazione ionizzante può espellere un elettrone divenendo uno ione carico positivamente
 * Se l'energia fornita è sufficiente l'elettrone espulso può a sua volta eccitare altri elettroni dello stesso atomo o di altri atomi, causando ionizzazioni secondarie
 * Pe ragioni quantitative la maggior parte delle radiazioni ionizzanti negli organismi è assorbita dall'acqua
-	+ Questo porta alla formazione di radicali per lo più ossidanti come OH°
+	+ Questo porta alla formazione di radicali per lo più ossidanti come OH°, in un processo detto di radiolisi
 * L'azione delle radiazioni ionizzanti è dovuta sia all'effetto diretto sui costituenti cellulari che ai processi di ossidoriduzione dovuti alla ionizzazione dell'acqua
 * L'entità dell'azione diretta a parità di dose di radiazione dipende dalle dimensioni della molecola interessata, per ragioni probabilistiche
 * L'azione indiretta funzionalmente più rilevante è quella a carico di acidi nucleici, proteine e lipidi
@@ -306,6 +331,16 @@
 	+ Questo solitamente porta a morte per infezioni opportuniste
 * L'esposizione cronica predispone allo sviluppo di neoplasie, sopratutto epiteliali e leucemie
 * Un altro organo molto sensibile sono le gonadi, dove si riduce la gametogenesi
+* Le fasi del ciclo cellulare in cui si ha la massima sensibilità alle radiazioni sono la mitosi e la fase S
+	+ In fase S è presente ssDNA ed in mitosi la condensazione della cromatina rende più facile danneggiare il DNA
+	+ In mitosi una singola radiazione può creare moltissimi DSBs colpendo un cromosoma condensato (!)
+	+ Questa differente sensibilità delle cellule è  sfruttata in radioterapia per colpire selettivamente cellule tumorali in attiva divisione
+
+### Agenti protettivi nei confronti delle radiazioni
+* Le cellule impiegano agenti riducenti come la cisteina ed il GSH per contrastare i danni ossidativi dovuti alla radiolisi dell'acqua
+* Sono utilizzati anche antiossidanti, che di solito sono di origine vegetale
+	+ Le piante hanno molti antiossidanti perchè sono sempre esposte al sole e quindi suscettibili a danni da radiazioni
+	+ La vitamina E, presente nell'olio EVO, è un antiossidante che partecipa alla rigenerazione del GSH ossidato
 
 ## Corrente elettrica
 * Il corpo umano si comporta da buon conduttore elettrico
@@ -323,11 +358,6 @@
 * La corrente alternata è sempre più pericolosa di quella continua, ma la corrente ad alta frequenza è meno pericolosa di quella a bassa frequenza
 * La morte è solitamente dovuta a fibrillazione ventricolare o a spasmo laringeo
 
-## Baropatie
-* Piccole variazioni graduali di pressione sono ben tollerate dall'organismo
-* A pressioni elevate aumenta la solubilità dei gas respirati nel sangue, sopratutto azoto. Se si risale a pressioni inferiori in modo troppo rapido si ha un crollo di solubilità che causa la formazione di emboli gassosi
-	+ A livello arterioso questi si accumulano nei capillari, occludendoli e causando ischemia tissutale
-	+ A livello venoso le bolle gassose si raccolgono a livello del ventricolo destro, rendendo poco efficace l'azione cardiaca
 
 ## Baropatie
 * Piccole variazioni graduali di pressione sono ben tollerate dall'organismo
@@ -338,6 +368,7 @@
 * A pressioni ridotte diminuisce la pressione parziale di ossigeno, causando ipossia
 	+ Come meccanismo omeostatico si osserva iperpnea, tachicardia
 	+ A lungo termine si ha stimolazione dell'eritropoiesi
+* La presenza di forza gravitazionale è essenziale al mantenimento della massa ossea e muscolare
 
 ## Danno diffuso da agenti chimici
 * Per danno difuso si intende quello non selettivo, dipendente ad esempio dal pH del composto o dalle sue proprietà denaturanti nei confronti delle proteine
@@ -351,6 +382,62 @@
 
 ## Danno da veleni e tossici
 * Il danno è di tipo selettivo e dipende strettamente dalla dose
+* I primi meccanismi di difesa dall'ingestione di un prodotto tossico sono il vomito e la diarrea
+
+### Micotossine
+* Le aflatossine sono prodotte da *Aspergillus flavus* e si ritrovano nei cereali e prodotti caseari
+	+ Raggiunge il latte tramite l'alimentazione dell'animale
+
+### Piombo
+* Molti cosmetici sono ricchi di piombo
+* Le ceramiche sono ricche di piombo
+* Una volta la benzina era ricca di piombo
+* L'intossicazione cronica causa deficit intelletivo e motorio
+
+### Alluminio
+* E' presente nei deodoranti a lunga permanenza
+* Questi deodoranti legano fortemente l'epidermide e durano circa 15 gg, ossia il tempo di rigenerazione della stessa
+
+### Mercurio
+* Inibisce il rilascio di neurotrasmettitori e la polimerizzazione dei microtubuli
+* E' particolarmente presente nel tonno e altri pesci predatori
+
+### Cromo esavalente
+* Causa reazioni di ipersensibilità cutanea
+
+### Interferenti endocrini
+* Sono spesso derivati dalle plastiche come il bisphenol A e l'acido ftalico
+* Possono causare sterilità e teratogenesi
+	+ La fertilità maschile è calata del 70% negli ultimi decenni, probabilmente in parte a causa dell'utilizzo di plastiche
+* I parabeni erano usati in molti saponi e fungono da interferenti endocrini
+* Gli estrogeni sono usati di proposito negli allevamenti perchè danno ritenzione idrica e quindi aumento di peso delle carcasse
+* Queste molecole interferiscono con l'apparato riprodutivo e con la tiroide
+
+### Altre sostanze chimiche
+* Il cloruro di vinile è presente nel PVC, che una volta era usato come pellicola alimentare
+* L'acrilammide è una molecola neurotossica
+
+### Farmaci
+* Un farmaco può essere utilizzato se il rapporto rischio beneficio è favorevole
+* Non esiste un farmaco privo di effeti collaterali (Es. il paracetamolo è epatotossico mentre l'ibuprofene ha un effetto antiaggregante)
+* Non esiste un farmaco che sia raccomandato nel sano
+* Gli eccessi di fitoterapici sono tossici, così come quelli di qualsiasi farmaco
+
+### Etanolo
+* In Italia vi sono 30000 morti all'anno per cause dirette ed indirette
+* Le bevande fermentate possono arrivare al 15% in etanolo, i distillati anche al 40%
+* L'assorbimento dipende da quantità, velocità, concentrazione e contenuto gastrico
+* L'etanolo può anche essere assorbito per inalazione
+* L'alcool deidrogenasi è espressa maggiormente nell'uomo che nella donna, e pertanto i livelli di tolleranza sono diversi
+* L'acetaldeide prodotta dal metabolismo dell'etanolo colpisce il citoscheletro dei cardiomiciti, portando a fibrosi cardiaca
+
+### Tabagismo
+* A seguito di tabagismo si hanno importanti alterazioni dell'espressione genica e un importante effetto mutagenico
+* Il cancro causato dal fumo spesso presenta una tipica mutazione di K-ras
+* L'azione mutagena è principalmente causata dal benzopirene
+* Nei fumatori si ha alta incidenza anche di cancro al pancreas
+	+ La sopravvivenza media è di 1 anno dalla diagnosi (!)
+* Il peso alla nascita da madre fumatrice è inferiore alla norma per l'effetto vasocostrittore della nicotina che diminuisce la nutrizione del feto
 
 ## Patologie da errata alimentazione
 * L'inadeguatezza alimentare deve essere valutata sia sul piano qualitativo che quantitativo
