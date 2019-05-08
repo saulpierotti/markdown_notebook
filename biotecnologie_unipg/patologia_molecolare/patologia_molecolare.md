@@ -8,6 +8,55 @@
 + Il libro consigliato è Pontieri Vol.1
 + Le patologie genetiche non sono richieste all'esame
 
+# Programma
++ Cause intrinseche di malattia
++ Patologia Genetica
+	+ Analisi genica strumentale nella diagnosi delle malattie umane.
+	+ Modelli sperimentali di malattie genetiche.
+	+ Malattie monogeniche autosomiche ed eterocromosomiche. Eterogeneità genetica, eterogeneità allelica, interazione tra i geni ed i loro prodotti, interazioni gene-ambiente, mutazioni dinamiche e somatiche, modificazioni epigenetiche.
+	+ Mutazioni del DNA e meccanismi di riparazione.
+	+ Mutazioni del DNA mitocondriale.
+	+ Suscettibilità genetica alle malattie nell'uomo. Concetto di penetranza.
+	+ Patologia del sangue da difetto genetico: Talassemie, Sferocitosi, Falcemia, Emofilia.
+	+ Distrofia muscolare.
+	+ Alterazioni cromosomiche. Alterazioni numeriche e strutturali dei cromosomi: Sindrome di Down, sindrome di Turner e sindrome di Klinefelter.
++ Cause estrinseche di malattia
+	+ Agenti fisici. Radiazioni non ionizzanti e ionizzanti. Basse e alte temperature: congelamenti ed ustioni. Energia elettrica ed elettromagnetica.
+	+ Agenti chimici e ambientali. Inquinamento ambientale. Sostanze stupefacenti.
+	+ Cause alimentari. Vitamine A,D,E,K, gruppo B e C.
+	+ Radicali liberi. Stress ossidativo.
+	+ Embriopatia e fetopatie di natura fisica, infettiva, endocrina e tossica
++ Patologia Cellulare
+	+ La cellula: cenni sulla struttura e principali funzioni. Ciclo cellulare, fasi e proteine regolatrici del ciclo. Recettori di membrana, pathways principali del segnale mitogenico.
+	+ -Lesioni elementari della cellula. Patologia del nucleo, del mitocondrio, del reticolo endoplasmatico, del lisosoma, del citoscheletro, dei perossisomi, dell?apparato di Golgi e della membrana cellulare.
+	+ 
+	+ Processi regressivi
+	+ Atrofie fisiologiche e patologiche.
+	+ Processi regressivi intracellulari. Degenerazione vacuolare, idropica e rigonfiamento torbido. Degenerazione ialina e mucosa. Steatosi.
+	+ Processi regressivi extracellulari. Amiloidosi. Degenerazione ialina, fibrinoide e mucosa. Patologia dei componenti della matrice extracellulare, fibrosi, cirrosi, sclerosi.
+	+ Morte cellulare. Necrosi. Vari tipi di necrosi. Gangrene. Gli esiti del processo necrotico. Autolisi post-mortale. Apoptosi. Eventi molecolari della morte apoptotica.
+	+ Invecchiamento. Teorie della senescenza. La senescenza in cellule intermitotiche e post-mitotiche. Analisi della senescenza a livello molecolare. Invecchiamento dell'organismo, cellulare e subcellulare. Patologia dell'invecchiamento.
+	+ Concetto di Immunopatologia e malattia Autoimmune
++ Processi progressivi
+	+ Ipertrofia ed iperplasia fisiologiche e patologiche. Il processo rigenerativo delle cellule labili, stabili e perenni. La rigenerazione epatica. La ricostituzione.
++ Oncologia
+	+ Classificazione dei tumori. Caratteristiche della cellula normale e trasformata. Metaplasia. Displasia. Anaplasia. Tumori benigni e maligni. Classificazione istogenica ed elementi di morfologia dei tumori umani benigni e maligni. Carcinoma in situ.
+	+ Elementi di epidemiologia dei tumori. Cancerogenesi: chimica, fisica (radiazioni ultraviolette, radiazioni ionizzanti), virale, da cause ambientali.
+	+ Co-cancerogenesi, meccanismi della trasformazione.
+	+ Basi molecolari della trasformazione cellulare. Meccanismi patogenetici. Concetto di oncogene ed oncosoppressore. Controllo della replicazione del DNA. Le mutazioni. Neoplasie a carattere familiare ereditario. Cariotipo ed alterazioni cromosomiche nei tumori.
+	+ Ruolo del controllo dell?apoptosi nei tumori.
+	+ Patologia molecolare della riparazione del DNA. Patologia del mismatch repair. Sindromi di Lynch e carcinoma colon-rettale ereditario. Patologia dello excision repair. Xeroderma pigmentosum e atassia teleangectasica.
+	+ Patologia della trascrizione e traduzione.
+	+ Angiogenesi tumorale.
+	+ Concetto di invasività tumorale. Metastatizzazione e stadiazione. Meccanismi molecolari alla base del fenomeno delle metastasi. Tumori primitivi e metastatici. Vie di metastatizzazione.
++ Infiammazione
+	+ Caratteri generali. Definizione di infiammazione. Meccanismi di riconoscimento di un patogeno. Caratteri distintivi tra flogosi acute e croniche.
+	+ Flogosi acuta essudativa (Angioflogosi). Le fasi. I mediatori plasmatici e tissutali dell?infiammazione. L'essudazione: i diversi tipi di essudato. Le proteine della fase acuta. Le cellule della infiammazione acuta. La diapedesi, la chemiotassi e la fagocitosi. I diversi tipi di infiammazione acuta: sierosa, siero-fibrinosa, fribinosa, catarrale, purulenta, emorragica, necrotico-emorragica e allergica.
+	+ Flogosi cronica (Istoflogosi). Le cellule della infiammazione cronica.
+	+ Le infiammazioni croniche granulomatose e interstiziali. Struttura dei granulomi: tubercoloma, sifiloma, nodulo reumatico, leproma, granuloma di origine virale, granuloma da corpo estraneo.
+	+ Esiti dei processi infiammatori.
+	+ I processi riparativi ed il tessuto di granulazione.
+
 # Note sparse
 + La vita media aumenta di circa 3 mesi ogni anno, anche se ora sta rallentando
 	+ Si ipotizza il limite fisiologico sia attorno ai 120 anni
@@ -497,3 +546,22 @@
 	+ Le manifestazioni patologiche sono spesso ritardate dalle abbondanti scorte presenti, eccetto per alcune vitamine del gruppo B
 + Le ipervitaminosi interessano solo le vitamine liposolubili, poichè quelle idrosolubili sono facilmente eliminate con le urine
 + L'acido ortofosforico della Coca Cola precipita il $Ca^{++}$ nelle cripte gastriche, impedendone l'assorbimento
+
+# Patologia cellulare
+
+# Cancro
++ I tumori o neoplasie sono l'insieme di una popolazione di cellule somatiche che ha solitamente origine clonale ed ha subito una serie di danni genomici peculiari
++ Le mutazioni cancerogene tipicamente causano
+	+ Autonomia moltiplicativa
+	+ Perdita di capacità differenziativa
+	+ Perdità della capacità di fare PCD
++ Tutti i citotipi possone eventualmente andare incontro ad una trasformazione neoplastica
++ Non tutte le anomalie di accrescimento e proliferazione sono neoplasie (es. ipertrofia ed iperplasia)
+	+ Non sono trasformazioni neoplastichè perché sono reversibili al cessare dello stimolo che ne ha causato l'insorgere
++ Il termine tumore deriva dall'aspetto macroscopico che solitamente è rilevato sul sito anatomico di origine
++ Il termine cancro deriva da granchio ed è dovuto al fatto che le cellule tumorali formano propaggini che infiltrano e distruggono il tessuto sano, come chele di un granchio
+	+ Inizialmente indicava solo i tumori epiteliali maligni ma ora è ustao impropriamente per tutte le neoplasie maligne
++ I tumori hanno cause multiple, esogene ed endogene
+p201 sez. 10.3
+
+# Infiammazione
