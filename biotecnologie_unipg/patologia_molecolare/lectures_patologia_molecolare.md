@@ -47,11 +47,7 @@
 + E' importante usare occhiali da sole per proteggere il cristallino da questi danni
 + I fumatori possono sviluppare cataratta precoce, così come chi si sottopone a chemioterapia
 	+ I chemioterapici bloccano la proliferazione, e quindi agiscono anche sulle cellule staminali del cristallino
-+ I chemioterapici danneggiano soprattutto le cellule in divisione, ma non solo
 
-## Chemioterapia
-	+ Anche il CNS è soggetto a questi danni, e si sviluppa il cosidetto *chemiobrain*
-	+ Si hanno problemi al sistema immunitario, perdita di capelli
 
 # Attività fisica
 + Il metabolismo basale è dovuto principalmente a termoregolazione e CNS, e non possiamo in pratica agire su questi parametri
@@ -207,142 +203,13 @@ Nell'anziano il lume delle arterie è già ridotto e questo mette in campo mecca
 + il limite dell'ipertrofia è dato dall'angiogenesi
 
 # Lex.11
-+ Indicazioni per esame
-	+ Chiede sindrome di Down, Turner, Klinefelter
-	+ Come muore una persona di cancro
-		+ Le metastasi compromettono funzioni fisiologiche
-+ Uso di molecole che attivano il sistema immunitario per combattere un tumore
-+ Differenze tra neoplasie benigne e maligne
-	+ Principalmente invasività e metastasi
-+ Un tumore benigno è il lipoma
-+ L'invasività è la capacità di infiltrare il tessuto sano
-	+ Il tumore danneggia fisicamente il tessuto
-+ Velocità di crescita
-	+ Non necessariamente un tumore benigno cresce più lentamente di uno maligno, e spesso non è così
-+ Inizio del 900 il cancro più frequente era allo stomaco
-	+ Poi con il frigorifero è sceso molto
-	+ A norcia ancora hanno alta incidenza per l'uso di nitriti
-	+ Forse H. pilori causa infiammazione cronica, causando cancro
-		+ La sua eradicazione potrebbe essere concausa della diminuzione di questo cancro
-+ Dagli anni 50 ha iniziato a salire il cancro alle vie respiratorie per il fumo
-	+ Dagli anni 90 ha iniziato a scendere per minor uso del fumo
-+ Sangue occulto nelle feci
-	+ Se positivo quasi sempre vero!
-+ Pancreas 6 mesi-1 anno di sopravvivenza
-+ Utero in discesa per uso di preservativi (dovuto HPV)
-	+ Anche per PAP test
-	+ In futuro per vaccinazione
-+ I tumori più frequenti sono breast e prostata, ma raramente fatali
-+ Mappa dei nei gratuita melanoma day
-+ Neoplasia
-	+ Un parenchima, che da il nome al tumore
-	+ Uno stroma
-+ Un tumore benigno prende il suffisso -oma
-	+ L'eccezione è melanoma, che è maligno
-+ I tumori epiteliali sono più frequenti di quelli mesenchimali
-	+ Contatto con l'esterno
-+ I tumori mesenchimali maligni hanno il suffisso -sarcoma
-+ I tumori maligni epiteliali hanno il suffisso -carcinoma
-+ Studiare genoma e proteoma del tumore può non essere sufficiente
-	+ Un approccio è studiare il metaboloma
-+ Si pensa vi debbano essere più mutazioni contemporanee per indurre cancro
-	+ Possono pure essere modifiche epigenetiche (!)
-	+ Aumento della proliferazione
-	+ Diminuzione della stabilità genomica
-+ Spesso un tumore ha più cloni distinti mutati da un clone originale unico
-	+ E' eterogeneo
-+ Se ho già un allele mutato dallo zigote, basta un danno solo a causare mancanza del gene
-	+ Tumori precoci familiari
 
 # Lex.12
-+ Oncosoppressori
-	+ Nei tumori spesso si osservano mutazioni degli oncosoppressori
-	+ Il ciclo cellulare è controllato da gate keepers e
-	+ Gli oncosoppressori sono stati scoperti perchè inibiti da oncovirus come HPV
-	+ Il primo ad essere scoperto Rb (retinobalstoma)
-		+ Causa retinoblastoma perchè l'occhio è esposto a UV e non fa apoptosi
-		+ Rb inibisce E2F, che è un TF che trascrive i geni di fase S
-		+ Rb è fosforilato ed inibito dalle CDK di fase S
-		+ L'attivazione di Rb è regolata dal bilanciamento tra GFs e inibitori di crescita
-	+ p53 agisce come omotetramero
-		+ Ha un'emivita normale di 20'
-		+ Non è letale in ontogenesi, ma i KO sviluppano cancro in 3 mesi
-		+ Ha un dominio attivatore TAD, una PRR (Proline rich), un dominio DNA binding, una regione di tetramerizzazione
-		+ La maggior parte delle mutazioni nel DNA-BD
-		+ E' attivato dai sensori ATM e ATR, che screenano il DNA alla ricerca di danno
-		+ p53 attivato blocca il ciclo cellulare
-		+ Se il DNA è riparato si continua col ciclo
-		+ Se non viene riparato innesca senescenza con p21, oppure apoptosi con Bax
-		+ Normalmente p53 è degradato dal proteasoma perche l'E3 MDM2 lo ubiquitina
-		+ p53 vive poco perchè altrimenti in overexpression da apoptosi, letale in embriogenesi nel topo
-		+ MDM2 è un oncogene
-		+ ATM fosforila p53, che si distacca da MDM2 e quindi non è degradato
-		+ p53 produce anche MDM2 in un loop negativo
-		+ L'acetilazione delle K di p53 modula l'output (repair, apoptosi, senescenza)
-		+ E' un oncosoppressore dominante, ne basta una sola copia mutata(!)
-		+ p53 agisce sia come TF che a livello citosolico
-		+ Il fatto che i Dp53 siano vitali significa che le sue funzioni siano quasi tutte ridondanti, eccetto nella tumorigenesi
-			+ Non è essenziale per apoptosi
-		+ p53 trascrive Puma, Noxa e Bax, che spingono all'apoptosi
-		+ Nel citosol p53 va nel mitocondrio dove regola apoptosi
-		+ Può regolare il metabolismo cellulare con TIGAR
-		+ Gli elefanti non hanno praticamente cancro
-			+ Hanno 40 copie di p53
-		+ Le nutline inibiscono l'interazione di p53 con MDM2
-		+ Prima-1met riattiva le conformazioni mutanti di p53, sono in fase 2
-	+ BRCA1
-		+ Effetto Jolie, tutti vogliono fare mastectomia
-		+ Implicazioni cancro a mammella, utero, colon, prostata
-		+ E' una proteina grande che fa sensing del dna damage
-		+ Importante in DSBR
-		+ Anche una sola copia mutata rende più probabile mutare la seconda, perchè non fa repair
-		+ PARP bloccani caspasi 3
-			+ PARP inhibitors attivano apoptosi, synthetic letality
-	+ CDK4
-		+ regola chkp g1s
-	+ APC
-		+ Poliposi multipla familiare del colon
-		+ Cancro a 60 anni al 100%(!)
-		+ Controlla signaling WNT (wint) e beta catenina
-		+ Il colon è uno dei tessuti a più alta replica
-	+ Mismatch repair
-		+ Cancro al colon non poliposico
 
 # Lex.13
-+ Cancerogenesi chimica
-	+ Iniziazione da parte di cancerogeno genotossico
-	+ Promozione aspecifica con olio di croton, infiammatorio
-		+ Le sigarette hanno effetto infiammatorio
-+ Idrocarburi policiclici aromatici spesso derivati dal benzene
-	+ DMBA usato sperimentalmente come cancerogeno
-	+ benzopirene, nitrosamine
-	+ carbamati
-+ Le metastasi sono un fenomeno poco attivo
-	+ Perdita di meccanismi di adesione omotipica
-		+ Epithelial mesenchimal transition (EMT)
-	+ Attività di adesività eterotipica
-	+ Rilascio di enzimi proteolitici che alterano la ECM
-	+ Capacità di locomozione
-	+ CD44 è una molecola complessa, con 10 esoni a splicing alternativo
-	+ Angiogenesi necessaria sopra ai 1-2 mm
-		+ Napoleone Ferrara ha fatto anticorpi anti VEGF
-+ La degradazione della matrice innesca reazione immunitaria, che produce GFs per provare a riparare la lesione
-	+ Indirettamente stimola angiogenesi tumorale
-+ Spesso oggi si fa overdiagnosi
-+ La diffusione linfatica è comune nei tumori epiteliali (carcinomi)
-+ Le metastasi si depositano in zone a lento flusso ematico
-+ Le cellule fanno transzione inversa da mesenchima ad epitelio nel sito di arrivo
-+ In circolazione le cellule aderiscono e formano trombi, che le mascherano dal sistema immunitario
-+ Angiogenesi della metastasi, che può a sua volta dare metastasi
-+ Possiamo avere metastasi per contiguità
-	+ Es da pancreas a fegato
-+ Diffusione celomatica
-	+ Nel peritoneo
-+ Canalicolare, es da rene a vescica
-+ Diffusione ematica propria dei tumori mesenchimali
-+ Metastasi frequenti in ossa, cervello, fegato, polmoni
 
-# Vacanze di pasqua---------------------------------------------------------------
+# Vacanze di pasqua
+***
 
 # Lex.14
 + NF$\kappa$B e TLRs, infiammazione
@@ -364,3 +231,29 @@ Nell'anziano il lume delle arterie è già ridotto e questo mette in campo mecca
 	+ Epatizzazione rossa (aumento cellularità)
 	+ Diminuzione spazi respiratori
 + Infiammazione acuta e cronica
+
+# Lex.15
++ Programma per l'esame
+	+ Come malattie genetiche sono talassemie, sferocitosi, falcemia, emofilia
+	+ Come malattie cromosomiche Down, Klintefelter e Turner
+	+ Fare bene i meccanismi di riparazione del DNA
+		+ NHEJ, HR, BER, NER
+		+ Lynch, Ataxia telengectasia, Xeroderma pigmentosum
+	+ Patologia cellulare
+		+ Come degenerazioni steatosi (alcolica e non) e amiloidosi
+			+ Adaptine ed allarmine
+		+ Necrosi e apoptosi
+			+ Vari tipi di necrosi
+		+ Atrofia ed ipertrofia, iperplasia
+	+ Tumori
+		+ Benigni e maligni
+		+ Invasitvità e metastatizzazione
+		+ Oncogeni ed oncosoppressori
+		+ Gain of function e loss of function
+		+ Angiogenesi
+		+ Cancerogenesi
+	+ Infiammazione
+		+ Cause, riconoscimento del patogeno
+		+ Infiammazione acuta e cronica
+		+ Polmonite come infiammazione acuta
+		+ Granuloma tubercolare o da corpo estraneo come infiammazione cronica

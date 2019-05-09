@@ -526,7 +526,7 @@
 + Se l'ipoalimentazione evolve in denutrizione si riduce la capacità di difesa dell'organimso verso gli agenti infettivi e si osservano edemi causati da ipoproteinemia
 	+ A causa dell'ipoproteinemia si ha un abbassamento della pressione colloido-osmotica del plasma, che si accumula a livello dell'interstizio
 	+ Un grado estremo di denutrizione è definito **marasma**
-+ L'iponutrizione può dipendere da mancato accesso a cibo adeguato oppure essere di origine psicologica, in tal caso detta anoressia nervosa
+++ L'iponutrizione può dipendere da mancato accesso a cibo adeguato oppure essere di origine psicologica, in tal caso detta anoressia nervosa
 + Un tempo vi erano carenze alimentari dovute a mancato accesso ad alcuni alimenti mentre oggi si hanno nuove carenze dovute a mode alimentari poco salutari
 	+ Sono frequenti atassie celebrali nei bambini di famiglie con diete particolari
 + Una misura grossolana dello stato nutrizionale dell'organismo è il BMI, che però non distingue l massa grassa da quella muscolare
@@ -555,6 +555,14 @@
 	+ Autonomia moltiplicativa
 	+ Perdita di capacità differenziativa
 	+ Perdità della capacità di fare PCD
++ Studiare genoma e proteoma del tumore può non essere sufficiente
+	+ Un approccio è studiare il metaboloma
++ Si pensa vi debbano essere più mutazioni contemporanee per indurre cancro
+	+ Possono pure essere modifiche epigenetiche (!)
+	+ Coinvolgono aumento della proliferazione e diminuzione della stabilità genomica
++ Spesso un tumore ha più cloni distinti mutati da un clone originale unico, è eterogeneo
++ Se ho già un allele mutato dallo zigote, basta un danno solo a causare mancanza del gene
+	+ Questo è alla base dei tumori precoci familiari
 + Tutti i citotipi possone eventualmente andare incontro ad una trasformazione neoplastica
 + Non tutte le anomalie di accrescimento e proliferazione sono neoplasie (es. ipertrofia ed iperplasia)
 	+ Non sono trasformazioni neoplastichè perché sono reversibili al cessare dello stimolo che ne ha causato l'insorgere
@@ -562,6 +570,258 @@
 + Il termine cancro deriva da granchio ed è dovuto al fatto che le cellule tumorali formano propaggini che infiltrano e distruggono il tessuto sano, come chele di un granchio
 	+ Inizialmente indicava solo i tumori epiteliali maligni ma ora è ustao impropriamente per tutte le neoplasie maligne
 + I tumori hanno cause multiple, esogene ed endogene
-p201 sez. 10.3
++ I tumori vengono classificati in benigni e maligni in base alle loro modalità di accrescimento e al loro comportamento nei riguardi dei tessuti limitrofi
+	+ Le differenze tra neoplasie benigne e maligne sono principalmente invasività e formazione di metastasi
+	+ Non necessariamente un tumore benigno cresce più lentamente di uno maligno, e spesso non è così
+	+ I tumori benigni mantengono carettersitiche morfofunzionali simili a quelle originali e si sviluppano in modo espansivo
+		+ Lo sviluppo espansivo compriume le cellule circostanti senza disintegrarle
+		+ Può comunque causare danni da compressione
+		+ Non rispettano i meccanismi di omeostasi proliferativa e di secrezione di prodotti (adenomi)
+		+ Una volta asportati, non recidivano
+	+ I tumori maligni presentano cellule morfologicamente distinte da quelle normali, polimorfiche 
+		+ Il nucleo è spesso ipercromico ed in fase mitotica
+		+ Infiltra e distrugge i tessuti limitrofi
+		+ Le cellule tumoraliLe cellule tumorali ddanno metastasi, ossia si distaccano e viaggiano sospese nel sangue e nella linfa formando emoboli neoplastici
+			+ L'embolo neoplastico può arrestarsi e dare origine a tumori secondari
+			+ La metastatizzazione trasforma il tumore da patologia locale a sistemica
+		+ Data la difficoltà nell'asportare chirurgicamente tutte le cellule neoplastiche, danno spesso recidiva
+		+ Producono cachessia nell'organismo perché producono od inducono la produzione di citochine come il TNF
++ Il Pap-Test (Papanicolau) è consiste nell'analisi microscopica di cellule di sfaldamento presenti nel secreto vaginale
+	+ Permette anche l'individuazione di lesioni precancerose e processi infiammatori di vario tipo
+	+ Metodi simili sono applicabili in altri tumori interessanti superfici di organi che comunicano con l'esterno
++ Napoleone Ferrara ha scoperto il VEGF e fatto anticorpi contro di esso che limitano l'angiogenesi tumorale
++ Spesso oggi si fa overdiagnosi, che limita l'attenzione dedicata ai casi veramente importanti
+
+## Classificazione
++ Una neoplasia presenta un parenchima, che da il nome al tumore, ed uno stroma che lo sostiene
++ I tumori sono classificati in base al tessuto di origine, che spesso può essere dedotto da analisi istologicai o biochimica
+	+ Tumori di origine incerta sono definiti anaplastici
++ I tumori benigni epiteliali si presentano come una protuberanza che emerge dal tessuto di origine
+	+ Il polipo ha un penduncolo che lo connette al tessuto di origine
+		+ Hanno uno stroma connettivale con vasi e un rivestimento epiteliale
+	+ Spesso non presentano atipie
+	+ Il papilloma è simile ma ha un peduncolo connettivale ramificato
+		+ In alcuni casi (vescica) può essere considerato maligno
+	+ La verruca è una neoplasia ipercheratosica, a volte di origine virale
++ I tumori maligni epiteliali sono detti epiteliomi o carcinomi
+	+ Hanno margini mal definiti
+	+ Sono spesso coriacei e posso dar luogo ad ulcere e sanguinamenti
+	+ L'epitelioma basocellulare origina dallo strato basale e quello spinocellulare o squamoso da cellule cheratinizzate
+		+ Quello spinocellulare è più soggetto a metastasi
++ I tumori benigni dell'epitelio ghiandolare sono detti adenomi
+	+ Spesso riproducono l'architettura della ghiandola di origine
+	+ Posso dare tumori misti come i fibroadenomi mammari e i tumori della parotide
++ I tumori maligni dell'epitelio ghiandolare sono detti adenocarcinomi
+	+ Ricordano ancora la struttura della ghiandola di origine
+	+ Se sono molto indifferenziati sono detti carcinomi
+		+ Sono formati da isole o cordoni cellulari che non hanno struttura ghiandolare
++ I tumori benigni del connettivo sono detti mesenchimali
+	+ Sono chiamati col nome del tessuto di origine seguito da -oma
++ I tumori connettivali maligni sono detti sarcomi
+	+ Sono distinti in blastici (differenziati) ed anaplastici
+	+ Hanno cellularità molto più elevata del tessuto di origine
++ I tumori emolifopoietici sono detti leucemie (staminali midollari) o linfomi (linfociti maturi)
+	+ Le leucemie possono essere linfoidi o mieloidi
+	+ I linfomi possono essere Hodgkin (con cellule multinucleate dette di Reed-Sternberg) e non Hodgkin
+	+ I plasmacitomi derivano da una plasmacellula differenziata e producono quantità abnormi della sua immunoglobulina
+		+ A volte producono un eccesso di catene leggere che sono filtrate dal glomerulo renale e in parte riassorbite dal tubulo, danneggiandolo
++ I melanociti derivano dalla cresta neurale e possono dare tumori benigni o maligni
+	+ Quelli benigni sono detti nevi
+		+ Se divengono displastici sono soggetti a trasfromazione maligna
+	+ Il tumore maligno è detto melanoma
++ I tumori del sistema nervoso sono distinti in tumori delle cellule neuroepiteliali, delle guaine e delle meningi
++ Esistono anche tumori placentari e che originano dagli annessi embrionali
++ I teratomi sono tumori molto indifferenziati che derivano da tessuto non presenti normalmente nel loro sito di origine
++ Esistono anche teratomi benigni frequenti nelle gonadi
++ I tumori sono classificati in gradi da I a IV in base a quanto sono differenziati
+
+## Invasività e metastatizzazione
++ L'invasività neoplastica dipende dal fatto che le cellule tumorali hanno poca adesione omotipica
+	+ L'invasività è la capacità di infiltrare il tessuto sano, danneggiandolo fisicamente
+	+ Spesso è dovuto alla riduzione della produzione di caderine
+	+ Si ha perdita di inibiziona da contatto
+	+ Rilasciano proteasi che degradano la ECM
+	+ Metabolizzano il glucosio per via glicolitica anche in presenza di ossigeno (lo fanno solo le cellule della retina in condizioni fisiologiche)
+		+ Questo produce lattato che abbassa il pH locale, favorendo l'azione delle proteasi
+	+ Aumentano l'espressione di integrine che promuovono l'adesione eterotipica ed alla matrice
+	+ Rilascia fattori angiogenetici
+		+ Lo sviluppo avascolare del tumore può arrivare fino ad 1 mm
++ La metastatizzazione è la capacità di formare tumori secondari
+	+ Non è sempre correlata all'invasività
+	+ Il 60% di pazienti hanno metastasi al momento della diagnosi
+	+ Una cellula tumorale ha fenotipo metastatico se
+		+ E' capace di distaccarsi dalla sede di origine
+		+ Riesce ad invadere il connettivo ed i capillari
+		+ Sopravvive nel sangue (o linfa)
+		+ Riesce ad arrestarsi in determinate sedi del circolo sanguigno (o linfatico) tramite l'espressione di integrine
+		+ Riesce ad uscire dal vaso
+		+ Si moltiplica ed invade i tessuti in cui si arresta esprimendo molecole di adesione che interagiscono nella nuova sede
+		+ Produce fattori angiogenetici nella nuova sede che gli garantiscono nutrimento
+	+ Il fenotipo metastatico è spesso organotropico, in base alle molecole di adesione espresse
+	+ Alcuni organi non presentano quasi mai metastasi (cuore, mucolo scheletrico, milza)
+	+ La via di diffusione ematica è usata principalmente dai sarcomi ed alcuni carcinomi
+		+ Viene raggiunta direttamente o tramite la linfa, attraverso il dotto toracico
+		+ Una volta nel sangue le cellule sono avvolte da un reticolo di fibrina e piastrine in quanto l'alterazione dell'endotelio dovuta alla loro azione produce effetti coagulativi
+			+ In circolazione le cellule metastatiche aderiscono e formano trombi, che le mascherano dal sistema immunitario
+	+ La via linfatica è preferita dai carcinomi
+		+ Consente il raggiungimento dei linfonodi regionali, prima stazione di arresto
+	+ La via transcelomatica usa pleure, peritoneo e pericardio come via di trasmissione
+		+ Il fluido del peritoneo è detto ascite
+		+ Il pericardio può essere raggiunto da metastasi pleuriche
+	+ La via canalicolare sfrutta il dotto di vari organi (ghiandole, tubuli renali, uretere)
+	+ Possiamo avere metastasi per contiguità, che non viaggiano nel circolo ematico
+		+ Un esempio è il trasferimento da pancreas a fegato
+	+ Le metastasi sono un fenomeno poco attivo poichè le cellule metastatiche non hanno solitamente capacità di locomozione
+	+ La degradazione della matrice innesca una reazione immunitaria, che produce fattori di crescita per provare a riparare la lesione ed indirettamente stimola l'angiogenesi tumorale
+	+ Le metastasi si depositano in zone a lento flusso ematico
+	+ Per poter metastatizzare le cellule neoplastiche compiono una Epithelial to Mesenchimal Transition (EMT)
+		+ Le cellule fanno transzione inversa da mesenchima ad epitelio nel sito di arrivo
+	+ La metastasi fa angiogenesi, e può a sua volta metastatizzare
+	+ Le metastasi sono frequenti in ossa, cervello, fegato, polmoni
+
+## Cancerogenesi
++ La cancerogenesi è un processo multifasico caratterizzato da iniziazione, promozione e prograssione
++ Tutti i meccanismi cancerogenetici causano danni genomici
++ La popolazione neoplastica è molto variegata e non clonale
++ I cancerogeni chimici agiscono al raggiungimento di una dose soglia, che può anche essere dilazionata nel tempo
++ La cancerogenesi chimica sperimentale viene iniziata da parte di un cancerogeno genotossico e promossa in modo aspecifico con olio di croton, un agente infiammatorio
++ Le sigarette hanno effetto infiammatorio e per questo promuovono la carcinogenesi
++ Gli idrocarburi policiclici aromatici sono spesso derivati del benzene
+	+ Il DMBA (dimetil-benz-antracene) è usato sperimentalmente come cancerogeno
+	+ Altri sono il benzopirene, le nitrosamine ed i carbammati
+
+## Oncogeni ed oncosoppressori
++ Sono stati scoperti come geni virali ma poi identificati anche nel genoma dell'ospite
++ Gli oncogeni cellulari derivano da protooncogeni cellulari altamente conservati
+	+ Sono geni che presiedono a fenomeni di moltiplicazione e proliferazione
+	+ La trasformazione in oncogeni è causata da stimoli esogeni
+	+ Le mutazioni degli oncogeni sono dominanti
++ Gli oncosoppressori sono normalmente coinvolti nel limitare la replicazione cellulare
+	+ La loro mutazione deve avvenire in entrambi gli alleli per causare carcinogenesi
+		+ Ci sono eccezioni
+	+ La mutazione di p53 causa la sindrome di Li-Fraumeni, che predispone ad una vasta gamma di tumori
+	+ Sono oncosoppressori anche i geni che presiedono alla PCD
++ Il ciclo cellulare è controllato da geni gate keepers e care takers
+	+ I geni gate keepers controllano la proliferazione
+	+ I geni care takers presiedono all'integrità genomica
++ Il primo oncosoppressore ad essere scoperto è stato pRb (Retinoblastoma protein)
+	+ E' un gate keeper
+	+ Causa retinoblastoma perchè l'occhio è particolarmente suscettibile a danni genomici
+		+ E' sempre esposto a radiazione UV e le cellule della retina non possono farle cellule della retina non possono faretosi
+	+ Blocca la progressione da fase G1 a fase S
+	+ Lega ed inibisce E2F, che è un TF che trascrive i geni di fase S
+	+ Rb è fosforilato ed inibito dalle CDK di fase S
+	+ L'attivazione di Rb è regolata dal bilanciamento tra GFs e inibitori di crescita
+
+## Immortalizzazione
++ Le cellule sono normalmente sierodipendenti, ossia necessitano di fattori di crescita presenti nel siero
++ Molte cellule tumorali sintetizzano i fattori di crescita di cui necessitano e quindi non sono sierodipendenti
++ Cellule normali si dividono 50-100 volte prima di andare in senescenza, mentre quelle tumorali possono dar luogo a linee cellulari
+	+ Questo è dovuto all'iperespressione della telomerasi
++ In molti tumori si ha iperespressione della ciclina D che porta all'ingresso in G1 dalla G0
+	+ Questo porta all'ingresso immediato in G1 dopo la fase M ed il salto della G0
+
+## Azione del sisitema immunitario
++ I meccanismi di difesa contro i tumori sono sia innati (NK) che specifici
++ I meccanismi specifici (BCs e TCs) riconoscono antigeni tumorali costituiti da geni cellulari mutati
++ Un approccio terapeutico è l'uso di molecole che attivano il sistema immunitario per combattere un tumore
+
+## Epidemiologia
++ Nel corso del XX secolo l'incidenza dei tumori ha subito un costante incremento
++ I tumori sono la seconda causa di morte nei paesi industrializzati, dopo le malattie cardiocircolatorie
++ L'80% dei tumori ha causa esogena e solo il 5% ha base genetica
++ Il carcinoma allo stomaco era molto frequente all'inizio del '900, mentre ora è più raro
+	+ Era dovuto alla cattiva conservazione degli alimenti
+	+ Il frigorifero è stato uno dei maggiori contributi alla sua diminuzione
+	+ I norcini hanno ancora un alto tasso di incidenza dovuto all'uso di nitriti
+	+ Forse *Helicobacter pilori* causa infiammazione cronica, causando cancro allo stomaco
+		+ La sua eradicazione potrebbe essere concausa della diminuzione di questo cancro
++ Il carcinoma polmonare è aumentato enormemente a causa del fumo
+	+ Ha iniziato ad aumentare negli anni 50 e poi ha iniziato a scendere nel 90 per la maggior sensibiliziazione all'argomento
++ L'incidenza di tutti i tipi di tumori aumenta dopo i 30 anni
+	+ Specialmente l'incremento si osserva dopo l'età riproduttiva, dove non agisce la selezione
+	+ Questo nella donna coincide con la menopausa
++ L'aumento della vita media aumenta sensibilmente l'incidenza delle neoplasie nella popolazione
++ Si ritiene che i tumori infantili (sotto i 5 anni) abbiano origine intrauterina
++ L'incidenza di tumori è equivalente per i 2 sessi, ma la distribuzione in rapporto con l'età è molto diversa
+	+ Sotto i 10 anni l'incidenza è maggiore nel maschio
+	+ Tra i 20 e 60 anni l'incidenza è elevata nelle donne, specie per tumori a mammella e utero
+	+ Sopra i 60 anni l'incidenza è molto maggiore nel maschio
++ Il carcinoma del collo dell'utero è raro nella vergine e più frequente nelle pluripare
++ Al contrario, le nullipare hanno maggiore incidenza di carcinomi dell'endometrio e dell'ovaio
++ L'esposizione professionale è un importante fattore di rischio
+	+ Gli spazzacamino sviluppano frequentemente tumore a livello delle pieghe scrotali
++ L'esposizione ambientale è aumentata molto con l'urbanizzazione
+	+ Uno dei principali fattori di rischio sono gli idrocarburi policiclici aromatici
++ Il rischio oncogenico iatrogeno è quello dovuto a farmaci
++ Il rischio oncogenico alimentare può essere qualitativo (dovuto al tipo di alimento), quantitativo (iperalimentazione) o accidentale (inquinamento dell'alimento con composti cancerogeni)
+	+ Contaminanti cancerogeni sono le aflatossine
++ Il rischio voluttuario è dovuto all'esposizione volontaria a fattori di rischio come il fumo di sigaretta
++ Il sangue occulto nelle feci se positivo è quasi sempre veritiero
++ Per il tumore al pancreas si hanno solo 6 mesi di sopravvivenza poichè viene di solito individuato in stadio avanzato
++ Il tumore all'utero è in discesa per uso di preservativi (minor trasmissione di HPV)
+	+ Questo è dovuto anche al Pap-test ed alla vaccinazione anti-HPV
++ I tumori più frequenti sono alla mammella ed alla prostata, ma sono raramente fatali
++ Nei melanoma day spesso viene offerta la mappatura gratuita dei nei
++ I tumori epiteliali sono più frequenti di quelli mesenchimali poichè gli epiteli sono a contatto con l'esterno
+
+## Chemioterapia
++ I chemioterapici danneggiano soprattutto le cellule in divisione, ma non solo
+	+ Anche il CNS è soggetto a questi danni, e si sviluppa il cosidetto *chemiobrain*
+	+ Si hanno problemi al sistema immunitario, perdita di capelli
+
+
+# Lex.12
++ p53 agisce come omotetramero e gioca un ruolo essenziale in progressione del ciclo cellulare, apoptosi e integrità genomica
+	+ Ha un'emivita normale di circa 20 minuti
+		+ Normalmente p53 è degradato dal proteasoma perche l'E3 ubiquitina ligasi MDM2 lo ubiquitina
+		+ p53 vive poco perchè altrimenti in overexpression da apoptosi, letale in embriogenesi nel topo
+	+ La sua assenza non è letale in ontogenesi, ma i topi p53 ko sviluppano cancro in 3 mesi dalla nascita
+	+ Ha un dominio attivatore TAD, un dominio PRR (proline rich repeat), un dominio DNA binding ed una regione di tetramerizzazione
+	+ La maggior parte delle mutazioni avvengono nel DNA binding domain
+	+ E' attivato dai sensori ATM e ATR, che screenano il DNA alla ricerca di danno
+		+ Sono delle chinasi
+		+ ATM fosforila p53, che si distacca da MDM2 e quindi non è degradato
+		+ ATR è attivato in risposta a ssDNA esposto
+		+ ATM è attivato da DSBs
+	+ Quando attivato blocca il ciclo cellulare
+		+ Se il DNA è riparato si continua col ciclo, ma se non viene riparato innesca senescenza tramite p21, oppure apoptosi attivando Bax
+	+ MDM2 è un oncogene
+	+ p53 produce anche MDM2 in un loop negativo
+	+ L'acetilazione delle K di p53 modula la risposta al danno (repair, apoptosi, senescenza)
+	COME FA???
+	+ E' un oncosoppressore dominante, ne basta una sola copia mutata(!)
+	CONTROLLA
+	+ p53 agisce sia come TF che a livello citosolico
+	+ Il fatto che i p53 ko siano vitali significa che le sue funzioni sono quasi tutte ridondanti, eccetto nella tumorigenesi
+		+ Non è essenziale per l'apoptosi, che deve necessariamente avvenire in ontogenesi
+	+ p53 trascrive Puma, Noxa e Bax, che spingono verso l'apoptosi
+	+ Nel citosol p53 va nel mitocondrio dove regola apoptosi
+	+ Può regolare il metabolismo cellulare tramite TIGAR
+		+ TIGAR regola il metabolismo del glucosio e autofagia
+	+ Gli elefanti non hanno praticamente cancro ed hanno 40 copie di p53
+	+ Le nutline (molecole simili ad imidazolo) inibiscono l'interazione di p53 con MDM2 e quindi forzano l'attivazione di p53
+	+ PRIMA-1-met è un farmaco che riattiva le conformazioni mutanti di p53, è in trial di fase 2
++ BRCA1
+	+ Effetto Jolie, tutti vogliono fare mastectomia
+	+ Implicazioni cancro a mammella, utero, colon, prostata
+	+ E' una proteina grande che fa sensing del dna damage
+	+ Importante in DSBR
+	+ Anche una sola copia mutata rende più probabile mutare la seconda, perchè non fa repair
+	+ PARP bloccani caspasi 3
+		+ PARP inhibitors attivano apoptosi, synthetic letality
++ CDK4
+	+ regola chkp g1s
++ APC
+	+ Poliposi multipla familiare del colon
+	+ Cancro a 60 anni al 100%(!)
+	+ Controlla signaling WNT (wint) e beta catenina
+	+ Il colon è uno dei tessuti a più alta replica
++ Mismatch repair
+	+ Cancro al colon non poliposico
++ CD44 è una molecola complessa, con 10 esoni a splicing alternativo
+	+ E' implicato nella metastatizazione
+	+ E' un recettore per acido ialuronico e collagene
+	+ E' coinvolto in angiogenesi, proliferazione, survival
 
 # Infiammazione
