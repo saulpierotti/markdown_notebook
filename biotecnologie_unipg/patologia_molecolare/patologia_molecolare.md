@@ -8,54 +8,31 @@
 + Il libro consigliato è Pontieri Vol.1
 + Le patologie genetiche non sono richieste all'esame
 
-# Programma
-+ Cause intrinseche di malattia
-+ Patologia Genetica
-	+ Analisi genica strumentale nella diagnosi delle malattie umane.
-	+ Modelli sperimentali di malattie genetiche.
-	+ Malattie monogeniche autosomiche ed eterocromosomiche. Eterogeneità genetica, eterogeneità allelica, interazione tra i geni ed i loro prodotti, interazioni gene-ambiente, mutazioni dinamiche e somatiche, modificazioni epigenetiche.
-	+ Mutazioni del DNA e meccanismi di riparazione.
-	+ Mutazioni del DNA mitocondriale.
-	+ Suscettibilità genetica alle malattie nell'uomo. Concetto di penetranza.
-	+ Patologia del sangue da difetto genetico: Talassemie, Sferocitosi, Falcemia, Emofilia.
-	+ Distrofia muscolare.
-	+ Alterazioni cromosomiche. Alterazioni numeriche e strutturali dei cromosomi: Sindrome di Down, sindrome di Turner e sindrome di Klinefelter.
-+ Cause estrinseche di malattia
-	+ Agenti fisici. Radiazioni non ionizzanti e ionizzanti. Basse e alte temperature: congelamenti ed ustioni. Energia elettrica ed elettromagnetica.
-	+ Agenti chimici e ambientali. Inquinamento ambientale. Sostanze stupefacenti.
-	+ Cause alimentari. Vitamine A,D,E,K, gruppo B e C.
-	+ Radicali liberi. Stress ossidativo.
-	+ Embriopatia e fetopatie di natura fisica, infettiva, endocrina e tossica
-+ Patologia Cellulare
-	+ La cellula: cenni sulla struttura e principali funzioni. Ciclo cellulare, fasi e proteine regolatrici del ciclo. Recettori di membrana, pathways principali del segnale mitogenico.
-	+ -Lesioni elementari della cellula. Patologia del nucleo, del mitocondrio, del reticolo endoplasmatico, del lisosoma, del citoscheletro, dei perossisomi, dell?apparato di Golgi e della membrana cellulare.
-	+ 
-	+ Processi regressivi
-	+ Atrofie fisiologiche e patologiche.
-	+ Processi regressivi intracellulari. Degenerazione vacuolare, idropica e rigonfiamento torbido. Degenerazione ialina e mucosa. Steatosi.
-	+ Processi regressivi extracellulari. Amiloidosi. Degenerazione ialina, fibrinoide e mucosa. Patologia dei componenti della matrice extracellulare, fibrosi, cirrosi, sclerosi.
-	+ Morte cellulare. Necrosi. Vari tipi di necrosi. Gangrene. Gli esiti del processo necrotico. Autolisi post-mortale. Apoptosi. Eventi molecolari della morte apoptotica.
-	+ Invecchiamento. Teorie della senescenza. La senescenza in cellule intermitotiche e post-mitotiche. Analisi della senescenza a livello molecolare. Invecchiamento dell'organismo, cellulare e subcellulare. Patologia dell'invecchiamento.
-	+ Concetto di Immunopatologia e malattia Autoimmune
-+ Processi progressivi
-	+ Ipertrofia ed iperplasia fisiologiche e patologiche. Il processo rigenerativo delle cellule labili, stabili e perenni. La rigenerazione epatica. La ricostituzione.
-+ Oncologia
-	+ Classificazione dei tumori. Caratteristiche della cellula normale e trasformata. Metaplasia. Displasia. Anaplasia. Tumori benigni e maligni. Classificazione istogenica ed elementi di morfologia dei tumori umani benigni e maligni. Carcinoma in situ.
-	+ Elementi di epidemiologia dei tumori. Cancerogenesi: chimica, fisica (radiazioni ultraviolette, radiazioni ionizzanti), virale, da cause ambientali.
-	+ Co-cancerogenesi, meccanismi della trasformazione.
-	+ Basi molecolari della trasformazione cellulare. Meccanismi patogenetici. Concetto di oncogene ed oncosoppressore. Controllo della replicazione del DNA. Le mutazioni. Neoplasie a carattere familiare ereditario. Cariotipo ed alterazioni cromosomiche nei tumori.
-	+ Ruolo del controllo dell?apoptosi nei tumori.
-	+ Patologia molecolare della riparazione del DNA. Patologia del mismatch repair. Sindromi di Lynch e carcinoma colon-rettale ereditario. Patologia dello excision repair. Xeroderma pigmentosum e atassia teleangectasica.
-	+ Patologia della trascrizione e traduzione.
-	+ Angiogenesi tumorale.
-	+ Concetto di invasività tumorale. Metastatizzazione e stadiazione. Meccanismi molecolari alla base del fenomeno delle metastasi. Tumori primitivi e metastatici. Vie di metastatizzazione.
+# Programma (detto a voce)
++ Malattie genetiche
+	Talassemie, sferocitosi, falcemia, emofilia
++ Malattie cromosomiche
+	+ Down, Klintefelter e Turner
++ Meccanismi di riparazione del DNA (da fare bene)
+	+ NHEJ, HR, BER, NER
+	+ Lynch, Ataxia telengectasia, Xeroderma pigmentosum
++ Patologia cellulare
+	+ Steatosi (alcolica e non) e amiloidosi
+		+ Adaptine ed allarmine
+	+ Necrosi e apoptosi, vari tipi di necrosi
+	+ Atrofia ed ipertrofia, iperplasia
++ Tumori
+	+ Cancerogenesi
+	+ Benigni e maligni
+	+ Invasitvità e metastatizzazione
+	+ Oncogeni ed oncosoppressori
+	+ Mutazioni gain of function e loss of function
+	+ Angiogenesi
 + Infiammazione
-	+ Caratteri generali. Definizione di infiammazione. Meccanismi di riconoscimento di un patogeno. Caratteri distintivi tra flogosi acute e croniche.
-	+ Flogosi acuta essudativa (Angioflogosi). Le fasi. I mediatori plasmatici e tissutali dell?infiammazione. L'essudazione: i diversi tipi di essudato. Le proteine della fase acuta. Le cellule della infiammazione acuta. La diapedesi, la chemiotassi e la fagocitosi. I diversi tipi di infiammazione acuta: sierosa, siero-fibrinosa, fribinosa, catarrale, purulenta, emorragica, necrotico-emorragica e allergica.
-	+ Flogosi cronica (Istoflogosi). Le cellule della infiammazione cronica.
-	+ Le infiammazioni croniche granulomatose e interstiziali. Struttura dei granulomi: tubercoloma, sifiloma, nodulo reumatico, leproma, granuloma di origine virale, granuloma da corpo estraneo.
-	+ Esiti dei processi infiammatori.
-	+ I processi riparativi ed il tessuto di granulazione.
+	+ Cause, riconoscimento del patogeno
+	+ Infiammazione acuta e cronica
+	+ Polmonite come esempio di infiammazione acuta e granuloma tubercolare o da corpo estraneo come esempio di infiammazione cronica
++ Il programma ufficiale è nel file apposito
 
 # Note sparse
 + La vita media aumenta di circa 3 mesi ogni anno, anche se ora sta rallentando
@@ -84,9 +61,12 @@
 + Dal punto di vista evolutivo il cromosoma X è essenziale, mentre Y porta geni non essenziali
 + GRP78 (BiP) è un chaperon che lega le proteine misfolded a livello dell'ER, attivando fra l'altro la misfolded protein response
 + Le principali cause di decesso nel mondo sono cancro e malattie cardiovascolari
++ cellule che non si replicano sono adipociti, cristallino, cellule del sertoli, e neuroni
+	+ si è tuttavia scoperto che alcuni neuroni hanno capacità replicativa
++ Synthetic letality è il processo per cui l'inibizione di una funzione cellulare è letale solo in compresenza di aun'altra alterazione
+	+ E' sfruttata per colpire selettivamente cellule tumorali che presentano una di queste alterazioni
 
 # Da approfondire
-+ Syntetic letality
 + Cerca il lavoro americano su integratori
 	+ Sono state trovate piccole quantità di sidenafil per l'uomo e antidepressivi per le donne negli integratori alimentari
 
@@ -120,7 +100,7 @@
 # Malattie ereditarie
 + Nella maggior parte dei casi le alterazioni genetiche alla base di queste sono prezigotiche
 	+ È frequente che l'alterazione sia *ex novo* sulla linea germinale di un genitore anziché preesistente
-	+ La distrofia muscolare di duchenne nel 60% dei casi avviene per mutazione ex novo del cromosoma X nei gameti
+	+ La distrofia muscolare di Duchenne nel 60% dei casi avviene per mutazione ex novo del cromosoma X nei gameti
 + Il 70% delle patologie congenite hanno causa ignota, il 20% hanno causa ereditara
 + Per familiarità si intende la presenza di un'alterazione genetica in una linea di discendenza
 + Si definiscono congenite le alterazioni genetiche presenti al momento della nascita, che siano o meno immediatamente visibili a livello fenotipico
@@ -549,6 +529,263 @@
 
 # Patologia cellulare
 
+## Accrescimento cellulare patologico non neoplastico
++ Il peso e le dimensioni di organi sono mantenuti constanti da meccanismi omeostatici
++ In risposta a situazioni peculiari diversi organi possono variare le proprie dimensioni
++ L'accrescimento di un organo o tessuto è detto ipertrofia
+	+ Se è dovuto ad aumento delle dimensioni cellulari si parla di vera ipertrofia
+		+ E' tipico di cellule terminalmente differenziate
+	+ Se è dovuto ad aumento del numero di cellule si parla di iperplasia
+		+ E' tipico di cellule capaci di dividersi
+	+ La pseudoipertrofia è dovuto all'accumulo di liquidi o altre sostanze
++ La diminuzione delle dimensioni di un organo è parallelamente definita ipotrofia ed ipoplasia
+	+ Atrofia e aplasia sono termini in disuso
++ L'agenesia è il mancato sviluppo di un organo in ontogenesi
++ Tutti questi fenomeni sono distrettuali (non coinvolgono l'intero organismo) e reversibili (ritornano alla normalità dopo la scomparsa dello stimolo che li ha innescati)
++ Le principali cause dell'ingrandimento ipertrofico o iperplastico sono
+	+ Aumento della richiesta funzionale
+		+ Ipertrofia della muscolatura scheletrica e cardiaca
+		+ Ipertrofia della muscolatura liscia a monte di una stenosi (restringimento di un canale che ostacola il passaggio del contenuto)
+		+ Ipertrofia renale a seguito di nefrectomia monolaterale
+	+ Aumento della stimolazione ormonale (fisiologico o meno)
+		+ Ipertrofia dell'utero in gravidanza e della mammella nella donna in pubertà
+		+ Ipertrofia delle ghiandole endocrine a seguito di iperstimolazione da parte dell'adenoipofisi
+	+ Iperalimentazione, che induce iperplasia degli adipociti
++ La diminuzione ipotrofica o ipoplastica sono dovute a diminuita richiesta funzionale e diminuita stimolazione ormonale
++ il limite superiore dell'ipertrofia è dato dall'angiogenesi
++ L'ipertrofia può non garantire una risposta efficace all'aumento di richiesta funzionale
+	+ Il cuore ipertrofico è intrinsecamente più debole perchè l'ipertrofia non è accompagnata ad angiogenesi e quindi l'irrorazione ematica viene compromessa
++ L'ipertrofia rigenerativa avviene nel processo di guarigione delle ferite e nelle situazioni di perdita di massa cellulare
+	+ Il fegato si rigenera in circa 20 giorni, tornando precisamente alla massa iniziale
+	+ Nel rimarginare una ferita la replicazione cellulare si arresta quando i 2 lembi si incontrano
++ L'innesco dell'ipertrofia è mediato dal rilascio di fattori di crescita codificati da protooncogeni
+	+ Alcuni di questi sono mitogeni come HGF (epatociti), EGF (epidermide), FGF (fibroblasti), TGF-alfa
+	+ Altri sono rilasciati dopo l'ipertrofia e la bloccano, come il TGF-beta
++ Gli ormoni modulano direttamente l'espressione genica innescando l'ipertrofia
++ Non si possono fare più di 2 tagli cesarei ppoiché la cicatrice si potrebbe strappare, in quanto il tessuto cicatriziale non fa iperplasia come il resto dell'utero in gravidanza
+	+ Questo porta a morte della donna
+
+## Differenziamento cellulare
++ E' dovuto all'espressione di alcuni geni ed alla repressione di altri
++ La metaplasia è il cambio di differenziamento dovuto alla de-repressione di geni di lineage in tipi cellulari differenziati
+	+ Un esempio è la cheratinizzazione della mucosa linguale
+	+ La metaplasia ossea consiste nella formazione di tessuto osseo a partire da connettivo fibroso in risposta ad uno stimolo flogistico prolungato
++ L'anaplasia è un processo metaplastico in cui la cellula torna ad uno stato meno differenziato
+	+ E' reversibile ma spesso associata a trasformazione neoplastica, che è irreversibile
+
+## Processi degenerativi cellulari
++ Le degenerazioni sono reversibili ma se persistono possono culminare nella necrosi
++ Non implicano necessariamente morte tissutale
++ Sono una deviazione metabolica tissutale accompagnata da accumulo di sostanze non normalmente presenti in tali quantità nel tessuto
++ Distinguiamo degenerazioni epitaliali e connettivali
++ Ai fini dell'esame consideriamo solo la degenerazione grassa (steatosi) e amiloide
++ Le cellule possono subire danni lievi, subletali o letali
++ Alcune modificazioni biochimiche sono tipiche delle cellule danneggiate
+	+ Ingresso di $Na^+$ e fuoriuscita di $K^+$
+		+ Il $Na^+$ è più grande del $K^+$ e porta con sè più acqua, e quindi questo causa rigonfiamento
+	+ Aumenta la glicolisi anaerobia con accumulo di piruvato e lattato in caso di ipossia
+		+ L'efficienza del sistema anaerobio è $1/16$ di quello aerobico
+		+ Diminuisce il pH intracellulare
+	+ Si innescano meccanismi di autofagia
+	+ Aumenta il $Ca^{++}$ e si attivano le proteasi $Ca^{++}$ dipendenti
+		+ Questo è il punto di non ritorno, da qui in poi si va in necrosi
+
+### Steatosi
++ E' causata dall'accumulo di lipidi (di solito trigliceridi) nel citoplasma di cellule che normalmente non li presentano
++ Si verifica quando si ha una discrepanza tra assunzione cellulare di lipidi e possibilità di smaltimento degli stessi
++ Può essere dovuta da alcool o iperalimentazione, o altre cause
++ I lipidi possono essere di origine endogena o esogena
++ Organi frequentemente colpiti sono il rene, il miocardio e sopratutto il fegato
++ Lo studio della steatosi viene fatto col microtomo congelatore per evitare di utilizzare solventi che scioglierebbbero i lipidi, e colorando col Sudan
++ Il fegato è l'organo più frequentemente colpito ed è anche l'organo dove arrivano i cataboliti di trigliceridi rilasciati dagli adipociti e i lipidi assorbiti nell'intestino
+	+ Sintetizza acidi grassi dai carboidrati lui stesso e li esterifica in trigliceridi, che poi invia ad alti distretti come LDL
++ Le lipoproteine contengono proteine, fosfolipidi, colesterolo, esteri del colesterolo e trigliceridi
+	+ La sintesi delle lipoproteine necessita dell'apporto alimentare di metionina come donatore di metile, che è usato per la sintesi di colina
+	+ La colina è essenziale per la sintesi dei fosfolipidi, che nelle lipoproteine si interpongono tra proteine e trigliceridi
+	+ Metionina e colina sono per questo definiti fattori lipotropi, e la loro carenzariduce lo smaltimento di trigliceridi da parte degli epatociti
++ Composti tossici come etanolo, tetracloruro di carbonio e vari veleni interferiscono con  la sintesi proteica impedendo la produzione di lipoproteine e quindi causando steatosi
++ La steatosi intestinale è dovuta ad una mutazione che impedisce la formazione dei chilomicroni
++ Cause della steatosi alcolica
+	+ Sono tutte riconducibili all'aumento di NADH, AcCOA e acetaldeide
+	+ L'acetaldeide danneggia il citoscheletro, riduce la sintesi proteica ed aumenta la produzione di ROS
+	+ Aumento della biosintesi degli acidi grassi
+	+ Inibisce la loro ossidazione
+	+ Inibisce la sintesi proteica
+	+ Causa perossidazione dei lipidi di membrana
+	+ Interferisce con le proteine del citoscheletro
+	+ Riduce l'appetito e quindi l'assunzione di proteine
+	+ Aumenta il fabbisogno di colina in quanto favorisce le metilazioni
++ Principali cause di steatosi non alcolica
+	+ Da aumentata assunzione di lipidi o mobilitazione dei depositi, dovuta ad iperalimentazione o diabete mellito di tipo I
+	+ Da aumentata biosintesi di acidi grassi, dovuta da etanolo o da carenza di acidi grassi poliinsaturi
+		+ Il fegato non può sintetizzare acidi grassi insaturi ma aumenta la sitemsi di acidi grassi in risposta alla loro carenza
+	+ Deficiente assunzione di proteine, che altera la sintesi di apolipoproteine
+	+ Carenza di metionina o colina
+	+ Da deficienze proteosintetiche dovute ad assunzione di amanitina, o aflatossine
+		+ L'amanitina è un inibitore della RNA polimerasi
+	+ Da perossidazione lipida dovuta da tetracloruro di carbonio
+		+ Il meccanismo è molto complesso
+	+ Da blocco della secrezione dovuto da colchicina, falloidina, vinblastina
+		+ Bloccano la formazione dei microtubuli
++ La steatosi epatica macrovescicolare consiste in un grande vacuolo che disloca il nucleo in periferia
+	+ Può avvenire dopo un episodio auto di eccesso di lipidi, ma di solito può regredire
++ La steatosi epatico microvescicolare è caaratterizzata da tanti piccoli vacuoli
+	+ Avviene per accumulo cronico, con regressione parziale delle macrovescicole che man mano si formano nei vari episodi ma non scompaiono completamente
++ Il colesterolo è per lo più di origine endogena
+	+ Il 30% è alimentare, il resto viene prodotto dal fegato
+	+ Non vi è un livello particolare che è pericoloso, pittosto bisognerebbe controllare i livelli di trigliceridi e fare un eco-dopller carotideo
++ La steatosi evolve in steatoepatitte e poi in cirrosi
+	+ La cirrosi è irreversibile e può essere causata anche da iperalimentazione ed epatite C
++ E' possibile togliere l'80% del fegato di un topo
+	+ Ho tanta riserva funzionale, e quindi per osservare un danno funzionale necessito di averne compromesso gran parte
++ La risposta ad acidi grassi è mediata dai recettori PPAR e dalle sirtuine
+	+ I PPARs sono recettori nucleari che rispondono a FFAs
+	+ Le sirtuine sono deacetilasi che operano su istoni ed altre proteine
+		+ Sono sensibili ai livelli di NADH e AcCoA
++ I prodotti tossici come idrocarburi aromatici sono rilevati da AHR, che upregola l'espressione dei CYPs
++ Osservo iperinsulinemia (non so perchè sta qua, lo lascio in caso mi ricordi)
+
+### Amiloidosi o beta-fibrillosi
++ E' categorizzata come una degenerazione del connettivo, ossia come modifica della composizione della ECM
++ La sostanza amiloide è il materiale di accumulo extracellulare di questa degenerazione
+	+ E' detta amiloide perché si colora di rosso con lo iodio, come l'amido
+	+ E' di natura proteica
+	+ Ha proprietà di colorazione peculiari
+		+ Si colora di rosso anzichè di blu-viola con il blu di toluidina
+		+ E' l'unico costituente biologico che si colora con rosso Congo
+		+ Sotto luce polarizzata è birifrangente, cosa tipica delle struttre fibrillari
+	+ E' costituita da 3 componenti
+		+ Fibrille proteiche in forma beta, la maggior componente
+		+ Globuline ematiche, dette componente P, che sono legate alle fibrille
+		+ Proteoglicani
+	+ E' molto poco solubile e crea gravi danni da compressione nei tessuti in cui si deposita
++ Le fibrille possono avere varia origine
+	+ Derivano da proteine ematiche fisiologicamente presenti nel plasma ma che in alcuni casi aumentano marcatamente in condizioni patologiche che possono culminare in amiloidosi
+	+ Queste proteine sono idrolizzate in frammenti che polimerizzano depositandosi extracellularmente
++ La classificazione è molto complessa e la provenienza delle fibrille può essere varia
+	+ Può essere in forma sistemica con localizzazione preferenziale in fegato, rene, milza, miocardio, esofago, lingua
+	+ Può essere in forma localizzata nel CNS
+	+ Le fibrille AA derivano da SAP, una proteina di fase acuta epatica
+	+ Le fibrille AL derivano dalle catene leggere lambda delle immunoglobuline
+	+ Le fibrille ATTR derivano dalla transtiretina, o prealbumina
+	+ Le fibrille AH compaiono in pazienti sottoposti ad emodialisi e derivano dalla beta-2 microglobulina
+		+ E' una proteina che normalmente viene filtrata e riassorbita nel rene ma non è filtrata negli apparati di dialisi
+	+ Le fibrille Prp sono di origine prionica e sono resistenti alle proteasi
+	+ Le fibrille AC si pensa derivino dalla calcitonina
+	+ Le fibrille AB derivano da APP, una proteina plasmatica
++ Non è ben chiaro perchè le fibrille si depositino in sedi specifiche
++ La sola sintesi in eccesso dei precursori non sembra sufficiente a causare l'amiloidosi
++ La malattia di Creutzfeld-Jacob è dovuta ad un'amiloidosi causata da Prp mal ripiegata, che catalizza la conversione di froma di altra Prp
+	+ Topi Prp ko sono immuni alla malattia
+
+### Altri processi degenerativi (da non fare nel dettaglio)
++ Ipossia e molti composti tossici e agenti infettivi causano prima rigonfiamento torbido, che poi procede verso degenerazione vacuolare e poi degenerazione a gocce ialine
+	+ Cellule soggette a rigonfiamento torbido hanno citoplasma granulare e rigonfio
+		+ I mitocondri si rigonfiano e fanno sembrare la cellula torbida
+		+ L'alterazione mitocondriale causa deficit energetico e quindi crollo dei gradienti ionici
+	+ Nella degenerazione vacuolare si formano vacuoli contenenti acqua e proteine
+	+ Nella jalinosi (tipica dei tubuli renali) si ha riassorbimento di proteine che raggiungono il citosol per pinocitosi
++ Le tesaurismosi (malattie da accumulo) sono una condizione ereditaria dovuta a difetti di enzimi lisosomiali
+	+ La sfingolipidosi causa accumulo di sfingolipidi specialmente in CNS e macrofagi
+	+ La gangliosidosi causano accumulo di gangliosidi particolarmente nel CNS
+	+ La mucopolisaccaridosi causa accumulo di mucopolisaccaridi, particolarmente in ossa, cartilagine ed umor vitreo
+	+ La glicogenosi causa accumulo di glicogeno e ipoglicemia
++ Le alterazioni del connettivo coinvolgono accumulo nella sostanza fondamentale, extracellularmente
+	+ La degenerazione fibrinoide è associata a flogosi e malattie autoimmuni
+	+ La degenerazione mucosa è causata da accumulo di GAG (acido jaluronico), è responsabile dell'esoftalmo ipertiroideo
+	+ La degenerazione jalina è dovuta alla deposizione di materiale amorfo
+		+ Avviene spesso nelle vecchie cicatrici e nello stroma di tumori
+
+## Necrosi
++ La necrosi è la morte accidentale di gruppi più o meno numerosi di cellule apparteneti allo stesso tessuto o organo in conseguenza di insulti lesivi
++ E' costantemente seguita da infiammazione acuta poiché i detriti cellulari sono fortemente flogogeni e richiamano fagociti
++ Le cause principali sono ipossia, carenze nutritive, denaturazione delle proteine, distruzione meccanica, termica o chimica
++ Sembra culminare in effetti dovuti a denaturazione proteica (necrosi coagulativa) oppure ad autolisi dovuta al rilascio di enzimi lisosomiali (necrosi colliquativa)
++ Molti agenti chimici causano necrosi turbando l'omeostasi del $Ca^{++}$, aumentandone la concentrazione intracellulare
++ Le cellule necrotiche sono prima rigonfie e poi lisate
++ Dopo la morte cellulare si osserva picnosi (riduzione del volume del nucleo), carioressi (frammentazione nucleare) e cariolisi (dissoluzione del nucleo)
++ Si osserva condensazione della cromatina, blocco della sintesi di ATP
++ E' reversibile fino al punto di non ritorno, costituito dal rilascio del contenuto lisosomiale
++ L'ischemia causa blocco della fosforilazione ossidativa, che blocca quindi la produzione di ATP
+	+ Senza ATP si blocca la Na/K ATPase e crolla il gradiente $Na$, che spinge a sua volta il gradiente $Ca^{++}$
+	+ Aumenta il $Ca^{++}$ intracellulare
+	+ Per assenza di ossigeno si fa glicolisi anaerobica ma questo abbassa il pH intracellulare per produzione di piruvato e lattato
+	+ Si blocca la sintesi proteica per carenza di ATP
+	+ Ho DNA damage dovuto a blocco di tutti i meccanismi di sintesi per carenza energetica
++ L'infarto è più grave nel giovane poichè le cellule non sono adattate ad uno stato cronico di ipossia
+	+ Nell'anziano il lume delle arterie è già ridotto e questo mette in campo meccanismi di adattamento cellulari all'ipossia tramite il fattore di crescita IHF
+	+ IHF induce l'espressione di fattori angiogenici come VEGF
+	+ Si formano vie di irrorazione ridondanti che rendono meno grave l'infarto
++ La necrosi gangrenosa dovuta dai clostridi è del tipo umido ed ha una prognosi peggiore di quella secca
++ Un ascesso è una raccolta di essudato purulento all'interno di tessuti
+	+ E' solitamente causato da stafilococchi
++ Un ulcera è una ferita a difficoltosa cicatrizzazione, è spesso infetta con batteri che sottraggono nutrimento impedendo la ricostituzione del tessuto
++ Il fegato che ricresce fa ricostituzione, non rigenerazione perchè la struttura macroscopica che si rigenera è diversa da quella originale
++ La coda della lucertola che ricresce è invece una vera rigenerazione
+
+# Autofagia
++ L'autofagia permette di rimuovere i componenti cellulari danneggiati
++ Si attiva particolarmente in periodi di digiuno
++ Sembra un meccanismo simile all'endospora batterica, la cellula si isola dall'esterno e usa le proprie risorse
++ In alcuni approcci chemioterapici si usano inibitori dell'autofagia per forzare la cellula tumorale a interfacciarsi con l'esterno
++ Si distingua macroautofagia, microautofagia e autofagia mediata da chaperons
++ Normalmente mTOR e AMPK fosforilano ULK1 ed ULK2, inibendo l'autofagia
++ L'inibizione di mTOR ed AMPK attiva le ULKs, che formano un complesso con altre proteine Atg che innesca la formazione dell'autofagosoma
+
+## Degenerazione amiloidea
++ L'accumulo è extracellulare e impedisce gli scambi di sostanze con la cellula
++ E' correlata ad Alzheimer
++ E' caratterizzato da materiale fibrillare in conformazione beta, che data la conformazione non può essere degradato
++ Le proteine misfolded sono legate da BiP che attiva le allarmine e geni di adattamento
++ Può essere sistemica, spesso dovuta all'accumulo di immunoglobuline
+	+ In caso di infiammazioni croniche e mieloma
++ Può essere localizzata ad esempio nel cervello (Alzheimer)
+	+ Può essere dovuto a varie proteine
+
+## Apoptosi
++ Nell'apoptosi si ha disgregazione in corpi apoptotici che sono poi catturati da leucociti
++ Il nucleo si frammenta e la cromatina si condensa
++ L'apoptosi è altamente regolata ed una volta innescata è irreversibile
++ Non è una morte cellulare infiammatoria, anche se sembra che il leucocita comunque riceva segnali quando fagocita i corpi apoptici
++ Definirla programmata è un po' impreciso, può essere tale ma anche no, ad esempio può essere indotta a seguito di un danno
++ Avviene per definire la struttura di organi in ontogenesi, e nei linfociti anti-self nel timo
++ Può avvenire per deprivazione di fattori di crescita ed anche in patologie neurodegenerative
++ Valutare apotosi
+	+ Tecnica Tunnel
+	+ Ladder in elettroforesi
+	+ Caspasi 3 clivata
+		+ E' la caspasi esecutrice che taglia il DNA
++ La via intrinseca origina da sensing di stress cellulare, mentre quella estrinseca da signaling da parte di altre cellule
+	+ Entrambe convergono sulla caspasi 3
+	+ Si ha l'attivazione di caspasi iniziatrici, che attivano a loro volta caspasi esecutrici (3, 6, 7)
++ La via estrinseca è innescata da un recettore contenente death domains
+	+ Recettori con death domains son TNFR e FAS
+	+ Il signaling porta alla formazione del complesso DISC
+	+ FAS recluta FADD che attiva la caspasi 8, la quale attiva BID che va nel mitocondrio
+		+ Si attiva anche la caspasi 10, che cliva la 3
+	+ TNFR recluta TRADD che attiva le caspasi 1 e 4, che attivano la 3
++ La via intriseca è innescata dal rilascio di citocromo C dal mitocondrio per perforazione della membrana mitocondriale esterna
+	+ Bax, Bak e Puma promuovono la perforazione mentre Bcl-2 e Bcl-xl la inibiscono
+	+ Il citocromo C nel citosol lega APAF1 ed ATP, formando l'apoptosoma
+	+ Questo complesso attiva la pro-caspasi 9
+	+ La caspasi 9 cliva la procaspasi 3, attivandola
+	+ Dal mitocondrio viene rilasciata anche SMAC, che inibisce IAP nel citosol
+		+ IAP normalmente sopprime le caspasi
++ L'aumento dei livelli di $Ca^{++}$ intracellulare innesca apoptosi intrinseca
++ Radiazioni, tossine, e ROS causano danno al DNA, che attiva p53
+	+ p53 può attivare direttamente la caspasi 3 e può indurre il rilascio di citocromo C dai mitoconddri
+	+ Trascrive Bax, Bak e Puma
++ Le cellule che non fanno apoptosi (cristallino) fanno senescenza, ossia entrano in G0
++ TNF induce anche infiammazione, oltre che apoptosi dipende dal signaling network a valle
++ Le proteine PARP inibiscono l'apoptosi e stimolano meccanismi di repair
+	+ Si prova ad inibire PARP a scopo farmacologico per i tumori, per indurre apoptosi
+		+ E' un esempio di sintetic letalithy che ha rivoluzionato la prognosi del tumore alla mammella e all'ovaio
++ L'etoposide lega il DNA e la Topoisomerasi II, impedendo a questa di rilegare gli strands
+	+ Introduce quindi DSBs, con più efficienza in cellule che si dividono attivamente come quelle neoplasiche
+	+ Il danno al DNA può indurre apoptosi della cellula
++ A scopo terapeutico non posso spingere troppo verso l'apoptosi altrimenti danneggio troppo le cellule sane
++ In alcuni casi posso avere cancro secondario alla chemioterapia, indotto da questa
+
 # Cancro
 + I tumori o neoplasie sono l'insieme di una popolazione di cellule somatiche che ha solitamente origine clonale ed ha subito una serie di danni genomici peculiari
 + Le mutazioni cancerogene tipicamente causano
@@ -712,6 +949,57 @@
 	+ Lega ed inibisce E2F, che è un TF che trascrive i geni di fase S
 	+ Rb è fosforilato ed inibito dalle CDK di fase S
 	+ L'attivazione di Rb è regolata dal bilanciamento tra GFs e inibitori di crescita
++ p53 agisce come omotetramero e gioca un ruolo essenziale in progressione del ciclo cellulare, apoptosi e integrità genomica
+	+ Ha un'emivita normale di circa 20 minuti
+		+ Normalmente p53 è degradato dal proteasoma perche l'E3 ubiquitina ligasi MDM2 lo ubiquitina
+		+ p53 vive poco perchè altrimenti in overexpression da apoptosi, letale in embriogenesi nel topo
+	+ La sua assenza non è letale in ontogenesi, ma i topi p53 ko sviluppano cancro in 3 mesi dalla nascita
+	+ Ha un dominio attivatore TAD, un dominio PRR (proline rich repeat), un dominio DNA binding ed una regione di tetramerizzazione
+	+ La maggior parte delle mutazioni avvengono nel DNA binding domain
+	+ E' attivato dai sensori ATM e ATR, che screenano il DNA alla ricerca di danno
+		+ Sono delle chinasi
+		+ ATM fosforila p53, che si distacca da MDM2 e quindi non è degradato
+		+ ATR è attivato in risposta a ssDNA esposto
+		+ ATM è attivato da DSBs
+	+ Quando attivato blocca il ciclo cellulare
+		+ Se il DNA è riparato si continua col ciclo, ma se non viene riparato innesca senescenza tramite p21, oppure apoptosi attivando Bax
+	+ MDM2 è un oncogene
+	+ p53 produce anche MDM2 in un loop negativo
+	+ L'acetilazione delle K di p53 modula la risposta al danno (repair, apoptosi, senescenza)
+	+ E' un oncosoppressore dominante, ne basta una sola copia mutata(!)
+		+ Agisce da dominante negativo
+	+ p53 agisce sia come TF che a livello citosolico
+	+ Il fatto che i p53 ko siano vitali significa che le sue funzioni sono quasi tutte ridondanti, eccetto nella tumorigenesi
+		+ Non è essenziale per l'apoptosi, che deve necessariamente avvenire in ontogenesi
+	+ p53 trascrive Puma, Noxa e Bax, che spingono verso l'apoptosi
+	+ Nel citosol p53 va nel mitocondrio dove regola apoptosi
+	+ Può regolare il metabolismo cellulare tramite TIGAR
+		+ TIGAR regola il metabolismo del glucosio e autofagia
+	+ Gli elefanti non hanno praticamente cancro ed hanno 40 copie di p53
+	+ Le nutline (molecole simili ad imidazolo) inibiscono l'interazione di p53 con MDM2 e quindi forzano l'attivazione di p53
+	+ PRIMA-1-met è un farmaco che riattiva le conformazioni mutanti di p53, è in trial di fase 2
++ BRCA1 è una proteina che prende parte ad HR, nel DSB repair
+	+ Effetto Jolie, tutti vogliono fare mastectomia se sanno di avere BRCA1 mutato in famiglia, anche se spesso non è necessario
+	+ Sue mutazioni sono implicate in cancro a mammella, utero, colon e prostata
+	+ E' una proteina molto grande che fa sensing del DNA damage
+	+ Anche una sola copia mutata rende più probabile mutare la seconda, perchè limita le capacità di DNA repair
++ PARP è una proteina che in risposta a danno single strand sintetizza uno stretch di poli-A che funge da segnalatore
+	+ Questa poli-A sembra segnalare anche per apoptosi
+	+ Quando si innesca apoptosi PARP è inattivato dalla caspasi 3
+	+ PARP inhibitors bloccano il riparo di danni single strand e questo causa dopo replicazione la formazione di DSBs
+	+ Le cellule tumorali spesso sono mutanti per meccanismi di DSBR e quindi vanno in apoptosi a seguito di danno al DNA
+	+ E' un esempio di synthetic letality
++ CDK4 è una chinasi che regola il passaggio del checkpoint G1-S
++ APC è una proteina che quando mutata causa la poliposi multipla familiare del colon
+	+ Nei mutanti si ha incidenza di cancro a 60 anni al 100%(!)
+	+ E' un regolatore negativo della beta catenina, formando il destruction complex per questa
+		+ La beta catenina è un segnalatore intracellulare coinvolto nella regolazione dell'adesione cellulare che è attivata segnala tramite il pathway Wnt
+	+ Il colon è uno dei tessuti a più alto tasso di replicazione
++ CD44 è una molecola complessa, con 10 esoni a splicing alternativo
+	+ E' implicato nella metastatizazione
+	+ E' un recettore per acido ialuronico e collagene
+	+ E' coinvolto in angiogenesi, proliferazione, survival
++ Mutazioni del sistema di mismatch repair (MSH, MLH) predispongono al cancro colorettale non poliposico ereditario (sindrome di Lynch)
 
 ## Immortalizzazione
 + Le cellule sono normalmente sierodipendenti, ossia necessitano di fattori di crescita presenti nel siero
@@ -769,59 +1057,5 @@
 + I chemioterapici danneggiano soprattutto le cellule in divisione, ma non solo
 	+ Anche il CNS è soggetto a questi danni, e si sviluppa il cosidetto *chemiobrain*
 	+ Si hanno problemi al sistema immunitario, perdita di capelli
-
-
-# Lex.12
-+ p53 agisce come omotetramero e gioca un ruolo essenziale in progressione del ciclo cellulare, apoptosi e integrità genomica
-	+ Ha un'emivita normale di circa 20 minuti
-		+ Normalmente p53 è degradato dal proteasoma perche l'E3 ubiquitina ligasi MDM2 lo ubiquitina
-		+ p53 vive poco perchè altrimenti in overexpression da apoptosi, letale in embriogenesi nel topo
-	+ La sua assenza non è letale in ontogenesi, ma i topi p53 ko sviluppano cancro in 3 mesi dalla nascita
-	+ Ha un dominio attivatore TAD, un dominio PRR (proline rich repeat), un dominio DNA binding ed una regione di tetramerizzazione
-	+ La maggior parte delle mutazioni avvengono nel DNA binding domain
-	+ E' attivato dai sensori ATM e ATR, che screenano il DNA alla ricerca di danno
-		+ Sono delle chinasi
-		+ ATM fosforila p53, che si distacca da MDM2 e quindi non è degradato
-		+ ATR è attivato in risposta a ssDNA esposto
-		+ ATM è attivato da DSBs
-	+ Quando attivato blocca il ciclo cellulare
-		+ Se il DNA è riparato si continua col ciclo, ma se non viene riparato innesca senescenza tramite p21, oppure apoptosi attivando Bax
-	+ MDM2 è un oncogene
-	+ p53 produce anche MDM2 in un loop negativo
-	+ L'acetilazione delle K di p53 modula la risposta al danno (repair, apoptosi, senescenza)
-	COME FA???
-	+ E' un oncosoppressore dominante, ne basta una sola copia mutata(!)
-	CONTROLLA
-	+ p53 agisce sia come TF che a livello citosolico
-	+ Il fatto che i p53 ko siano vitali significa che le sue funzioni sono quasi tutte ridondanti, eccetto nella tumorigenesi
-		+ Non è essenziale per l'apoptosi, che deve necessariamente avvenire in ontogenesi
-	+ p53 trascrive Puma, Noxa e Bax, che spingono verso l'apoptosi
-	+ Nel citosol p53 va nel mitocondrio dove regola apoptosi
-	+ Può regolare il metabolismo cellulare tramite TIGAR
-		+ TIGAR regola il metabolismo del glucosio e autofagia
-	+ Gli elefanti non hanno praticamente cancro ed hanno 40 copie di p53
-	+ Le nutline (molecole simili ad imidazolo) inibiscono l'interazione di p53 con MDM2 e quindi forzano l'attivazione di p53
-	+ PRIMA-1-met è un farmaco che riattiva le conformazioni mutanti di p53, è in trial di fase 2
-+ BRCA1
-	+ Effetto Jolie, tutti vogliono fare mastectomia
-	+ Implicazioni cancro a mammella, utero, colon, prostata
-	+ E' una proteina grande che fa sensing del dna damage
-	+ Importante in DSBR
-	+ Anche una sola copia mutata rende più probabile mutare la seconda, perchè non fa repair
-	+ PARP bloccani caspasi 3
-		+ PARP inhibitors attivano apoptosi, synthetic letality
-+ CDK4
-	+ regola chkp g1s
-+ APC
-	+ Poliposi multipla familiare del colon
-	+ Cancro a 60 anni al 100%(!)
-	+ Controlla signaling WNT (wint) e beta catenina
-	+ Il colon è uno dei tessuti a più alta replica
-+ Mismatch repair
-	+ Cancro al colon non poliposico
-+ CD44 è una molecola complessa, con 10 esoni a splicing alternativo
-	+ E' implicato nella metastatizazione
-	+ E' un recettore per acido ialuronico e collagene
-	+ E' coinvolto in angiogenesi, proliferazione, survival
 
 # Infiammazione
