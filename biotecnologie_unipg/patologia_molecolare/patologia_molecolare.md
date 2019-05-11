@@ -65,6 +65,7 @@
 	+ si è tuttavia scoperto che alcuni neuroni hanno capacità replicativa
 + Synthetic letality è il processo per cui l'inibizione di una funzione cellulare è letale solo in compresenza di aun'altra alterazione
 	+ E' sfruttata per colpire selettivamente cellule tumorali che presentano una di queste alterazioni
++ La legge di Starling dice che il miocardio regola la forza in sistole in relazione alla distensione raggiunta in diastole
 
 # Da approfondire
 + Cerca il lavoro americano su integratori
@@ -1084,7 +1085,9 @@
 	+ E' dominata da una risposta Th1
 + IL1 ha un ruolo centrale, è rilasciata dai fagociti mononucleati e causa febbre, perdita di appetito e sonnolenza
 
-## Riconoscimento del patogeno
+## Riconoscimento del flogogeno
++ I patogeni presentano patterns molecolari detti PAMPs, mentre le cellule self danneggiate (es. necrosi) rilasciano DAMPs
++ Questi sono riconosciuti da recettori come i TLR, che innescano la via di NF$\kappa$B
 
 ## Angioflogosi
 + Si svolge essenzialmente in corrsipondenza del microcircolo, che va a subire delle modificazioni tipiche del processo flogistico acuto
@@ -1188,6 +1191,12 @@
 	+ Inizialmente si ha epatizzazione rossa, con essudato emorragico
 	+ Segue l'epatizzazione grigia a causa della compressione dei vasi dell'interstizio, che diminuisce l'irrorazione ematica e rende visibili per trasparenza i depositi carboniosi
 	+ In via di risoluzione si ha epatizzazione gialla per la presenza di leucociti  che compiono un processo di lipofanerosi (degenerazione grassa)
++ La polmonite è una condizione infiammatoria acuta degli alveoli polmonari
+	+ Può essere di origine virale o batterica
+	+ E' spesso causata da betteri che sono normalmente presenti nel sano (* Streptococcus pneumoniae*)
+	+ Se questi batteri raggiungono gli alveoli, questi si localizzano nell'interstizio tra le cellule e negli alveoli stessi
+	+ Vengono richiamati neutrofili che fagocitano ed uccidono i batteri, e rilasciano citochine infiammatorie
+	+ L'essudato che si forma si accumula negli alveoli ed impedisce la respirazione (epatizzazione)
 
 ## Fagocitosi
 + I fagociti possono essere professionali (neutrofili, eosinofili, macrofagi) o facoltativi (fibroblasti, mastociti, cellule endoteliali e altre)
@@ -1234,6 +1243,12 @@
 	+ Quando vanno in necrosi tubercoli vicini si formano delle caverne, frequenti nei polmoni
 	+ Il materiale necrotico può essere espulso allesterno con la tosse, fenomeno detto emottisi
 	+ La guarigione avviene per cicatrizzazione con deposizione di sali di calcio
++ La tubercolosi è solitamente asintomatica ma nel 10% dei casi può essere letale
+	+ I sintomi classici sono tosse cronica, sputum contenente sangue, febbre e perdita di peso
+	+ Si tratta con antibiotici, ma vi sono molti casi di resistenza
+	+ Il micobatterio viene fagocitato dai macrofagi alveolari (cellule della polvere) e si replica nei loro endosomi, essendo resistente alla fagocitosi
+	+ Il macrofago muore e viene fagocitato da un altro macrofago, formando la cellula polinucleata centrale del granuloma tubercolare
+	+ Il granuloma si trova nel lume alveolare
 
 ## Manisfestazioni sistemiche
 + Sono tutte mediate dalle citochine rilasciate nel processo flogistico
@@ -1271,7 +1286,7 @@
 	+ Alcune sono di nuova sintesi, altre solo rilasciate
 	+ Le principali sono proteine del complemento, proteina C reattiva, proteina A amiloide, antichimotripsina, antitripsina, fibrinogeno e aptaglobine
 
-## Processo riparativo capitolo 3.1
+## Processo riparativo
 + La flogosi lascia dietro di se aree necrotiche che formano cavità ricolme di detriti ed eventualmente sangue coagulato
 + Le cellule, in relazione alle loro capacità proliferative sono distinte in 
 	+ Cellule labili, che sono fisiologicamente sostituite in modo periodico come quelle dell'epidermide ed ematiche

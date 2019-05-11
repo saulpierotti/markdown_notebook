@@ -70,8 +70,5 @@
 ***
 
 # Lex.14
-+ NF$\kappa$B e TLRs, infiammazione
-+ La necrosi (es. un taglio) causa il rilascio di DAMPs e quindi infiammazione
-+ Legge di Sterling
 
 # Lex.15
