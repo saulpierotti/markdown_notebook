@@ -1059,3 +1059,222 @@
 	+ Si hanno problemi al sistema immunitario, perdita di capelli
 
 # Infiammazione
++ L'infiammazione o flogosi è l'insieme delle modificazioni che si verificano in un distretto colpito da un danno non letale
+	+ Il danno può essere causato da agenti fisici, chinmici o biologici
+	+ Si svolge con le stesse modalità, indipendentemente dall'agente che lo ha causato
++ E' una manifestazione prevalentemente locale
+	+ Si ha comunque anche un effetto sistemico tramite citochine che inducono la risposta di fase acuta da parte del fegato
++ Si indica con l'organo colpito seguito dal suffisso -ite
++ Febbre e lecocitosi (aumento del numero di leucociti ematici) sono due manifestazioni caratteristiche
++ E' normalmente utile, ma se lo stimolo nocivo è particolarmente intenso la flogosi può divenire dannosa
+	+ E' difficile determinare quando la flogosi passa da meccanismo omeostatico a fenomeno patologico per se stessa
++ I sintomi cardinali della flogosi sono
+	+ *Calor*, aumento della temperatura locale
+	+ *Tumor*, gonfiore
+	+ *Rubor*, rossore
+	+ *Dolor*, indolenzimento
+	+ *Functio laesa*, compromissione funzionale
++ I vasi della zona infiammata aumentano il flusso ematico e lo rallentano fino alla stasi
+	+ Questo permette la fuoriuscita di fluido e leucociti che si accumulano nella matrice del connettivo
++ L'infiammazione acuta o angioflogosi ha prevalenza di effetti vascolari
+	+ Non è necessariamente un fenomeno di bvreve durata (!)
+	+ E' dominata da una risposta di tipo Th2
++ L'infiammazione cronica o istoflogosi ha una prevalenza di effetti del tessuto per migrazione nello stesso di monociti e linfociti
+	+ Può seguire l'infiammazione acuta od essere tale sin dal principio
+	+ E' dominata da una risposta Th1
++ IL1 ha un ruolo centrale, è rilasciata dai fagociti mononucleati e causa febbre, perdita di appetito e sonnolenza
+
+## Riconoscimento del patogeno
+
+## Angioflogosi
++ Si svolge essenzialmente in corrsipondenza del microcircolo, che va a subire delle modificazioni tipiche del processo flogistico acuto
+	+ Brevissima vasocostrizione (10-20 secondi) di natura simpatica, che non gioca un ruolo significativo
+	+ Vasodilatazione provocata dall'effetto di molecole rilassanti la muscolatura liscia delle arteriole terminali
+	+ Iperemia attiva provocata dal rilassamento delle arteriole e dal cedimento degli sfinteri precapillari
+	+ Iperemia passiva indotta dal rallentamento del sangue nel microcircolo
+		+ Aumenta la superficie circolatoria per cedimento degli sfinteri precapillari
+		+ Aumenta la viscosità ematica per fuoriscita della componente plasmatica che concentra la partecorpuscolata rimanente
+		+ Marginazione dei leucociti mediata da molecole di adesione 
+	+ Diapedesi dei leucociti mediata da chemiotassi verso citochine, chemochine, prodotti microbici e del complemento
+	+ Formazione dell'essudato costituito da cellule sospese in un fluido
+		+ E' dovuto all'aumento della pressione idrostatica a causa dell'iperemia e alla riduzione della pressione colloido-osmotica dovuta alla fuoriuscita di proteine
+		+ Determina la formazione dell'edema ed il *tumor*
+	+ Fagocitosi dei detriti cellulari e dei microrganismi
+		+ A questo segue la risoluzione o cronicizzazione del processo infiammatorio e l'innesco dei meccanismi riparativi del tessuto
++ I mediatori chimici della flogosi possono essere preformati o di nuova sintesi, oppure formati da precursori inattivi (mediatori di fase fluida)
++ L'istamina è importante nella vasodilatazione iniziale
+	+ Viene rapidamente degradata e le cellule divengono rapidamente resistenti al suo effetto
+	+ E' prodotta da mastociti e basofili, che la conservano in granuli e la rilasciano per degranulazione esplosiva
+	+ E' captata da recettori H1 e H2
+		+ I recettori H1 sono espressi dalle fibrocellule della parete vascolare e ne mediano la contrazione, che allarga le giunzioni intraendoteliali
+			+ Segnala tramite cGMP
+		+ I recettori H2 mediano effetti antiinfiammatori ma partecipano anche alla vasodilatazione
+			+ Sono anche presenti a livello gastrico e nel respiratorio dove stimolano la secrezione di muco
+			+ Segnala tramite cAMP
++ La serotonina è un'altra ammina biogena con effetto simile all'istamina, sintetizzata dal triptofano
++ I derivati dell'acido arachidonico sono importanti nella genesi e mantenimento della flogosi
++ L'acido arachidonico è presente nelle membrane, particolarmente di macrofagi, mastociti e piastrine e viene liberato dai fosfolipidi di membrana dalla fosfolipasi A2
+	+ Prende una di 2 vie biosintetiche, quella delle ciclossigenasi o quella delle lipossigenasi
+	+ Le ciclossigenasi (COX) producono prostaglandine e trombossano A2
+		+ Le prostaglandine sono vasodlatatori, aumentano la permeabilità capillare e la sensibilità al dolore
+		+ Il trombossano A2 causa vasocostrizione, broncocostrizione ed aggregazione piastrinica
+		+ La COX esiste in forma costitutiva ed inducibile
+		+ COX1 è presente nella mucosa gastrica ed altre cellule, mentre COX2 è espressa particolarmente in caso di infiammazione
+		+ Le COX sono il target dei FANS (NSAID)
+	+ Le lipossigenasi producono leucotrieni, che causano broncocostrizione e sono agenti chemiotattici
++ Gli enzimi lisosomiali sono importanti per l'azione dei fagociti
++ Le citochine sono mediatori molto precisi del processo infiammatorio
+	+ Le citochine Th1 comprendono molte chemochine e sono coivolte nella cronicizzazione della flogosi
+	+ Le citochine Th2 agiscono su granulociti e linfociti B e presiedono alla flogosi acuta e mediata da anticorpi
+		+ Sono coinvolte nella risposta allergica
+	+ La presenza di citochine di un tipo inibisce il rilascio del tipo opposto
+	+ La loro produzione è regolata principalmente da NF$\kappa$B
++ L'ossido nitrico (NO) è prodotto da endotelio, astrociti, macrofagi a partire dall'arginina usando la NOS
+	+ Esiste una NOS costitutiva (cNOS), una inducibile (iNOS) ed una celebrale (nNOS)
+	+ Finge anche da neurotrasmettitore (eccitotossicità da glutammato)
+	+ Molti mediatori della flogosi attivano la NOS inducibile
+	+ Causa rilassamento della muscolatura liscia delle venule e l'inibizione dell'aggregazione piastrinica
+	+ E' usato dai fagociti come meccanismo di killing
++ Le chinine sono peptidi coinvolti nell'indurre vasodilatazione e contrazione della muscolatura liscia
+	+ Derivano da precursori plasmatici detti chinogeni
+	+ Vengono idrolizzati dagli enzimi callicreina e plasmina, che sono presenti anch'essi nel plasma come precursori (zimogeni)
+	+ La callicreina viene attivata dall atripsina e dal fattore di Hageman, è essa stessa chemiotattica ed attiva il fattore di Hageman e la plasmina
+	+ La plasmina è attivata dalla callicreina, da enzimi batterici e da attivatori del plasminogeno dei fagociti
+		+ Oltre ad attivare le chinine attiva il complemento per via classica ed il fattore di Hageman
+		+ Idrolizza anche la fibrina
++ Il complemento si attiva sia per via classica che alternativa nel corso della flogosi ed ha attività di killing e proinfiammatoria
++ Le cellule immunitarie vengono attivate da citochine come IL8 per i neutrofili e IL4 per gli eosinofili
++ I mastociti sono cellule rotondeggianti residenti nel connettivo contenenti granuli di eparina ed istamina
+	+ Risponmdono ad allergeni ed anafilatossine (C3a e C5a)
+	+ A seguito di stimolazione degranulano istamina in modo esplosivo
++ I basofili sono gli equivalenti ematici dei mastociti
++ I neutrofili si muovono attivamente e sono richiamati per primi nel focolaio flogistico, specie in presenza di batteri piogeni
+	+ Sono fagociti e liberano metaboliti dell'acido arachidonico ed enzimi lisosomiali
++ Gli eosinofili sono attivati da citochine Th2 come IL4 in risposta ad allergeni e parassiti
+	+ Uccidono i parassiti con ROS ed una perforina detta proteina basica maggiore
++ I monociti/macrofagi (sono detti macrofagi se nel connettivo) sono attivati da IFN$\gamma$
+	+ Fagocitano microrganismi, fungono da APC, producono citochine (IL1, IL6, IL8, IL12, TNF$\alpha$)
+	+ Partecipano alla cronicizzazione
++ I natural killer sono richiamati da citochine Th1 ed uccidono cellule infette da virus e microrganismi tramite perforine e granzimi
++ Le piastrine a seguito del danneggiamento vascolare in sede di flogosi producono derivato dell'acido arachidonico, perforine e ROS
++ I linfociti arrivano tardivamente e sono i principali produttori di citochine
++ Le plasmacellule producono anticorpi
++ Le cellule endoteliali presentano recettori per citochine e rispondono in particolare al TNF$\alpha$
+	+ A seguito di stimolazione provocano iperemia, aumento della permeabilità capillare, esprimono selettine, favoriscono la diapedesi dei leucociti e favoriscono la coagulazione ematica
++ L'extravasazione dei neutrofili è polarizzata verso la parete del vaso interessata, per espressione differenziale di molecole di adesione e chemiochine da parte delle cellule endoteliali
++ I fibroblasti sono essenziali per la risoluzione della flogosi  inm quanto ricostituiscono la matrice connettivale
++ L'essudato si forma per aumento della permeabilità capillare e della pressione idrostatica, per crollo della pressione oncotica e per diminuzione del drenaggio linfatico
+	+ Il passaggio di fluido verso l'interstizio è definita edema infiammatorio
+	+ Ha un pH acido per presenza di lattato
+	+ La componente liquida deriva dal plasma e contiene proteine plasmatiche e sostanze liberate dalle cellule lese come acidi nucleici e fosfolipidi, e mucopolisaccaridi della matrice (acido jaluronico)
+	+ La parte corpuscolata comprende polimorfonucleati
+	+ Il contenuto proteico è inferiore a quello plasmatico (3-4% contro il 7.5-8%)
++ Il trasudato è invece un edema che si forma in assenza di flogosi per variazioni pressorie (vedi cap 19)
+	+ Ha un contenuto proteico inferiore a quello dell'essudato
++ Per distinguere essudato e trasudato se ne fa cadere una goccia in un cilidro contenente qualche goccia di soluzione di acido acetico
+	+ Nell'essudato i complessi proteine-mucopolisaccaridi precipitano e formano una nube simile al fumo di sigaretta
+	+ Nel trasudato questi complessi non sono presenti e la nube non si forma
++ La flogosi acuta si distingue in varie forme, caratterizzate da un essudato peculiare
+	+ Si ricorda la flogosi sierosa, fibrosa (con extravaso del fibrinogeno), catarrale, purulenta, emorragica (rottura della parete capillare), necrotica ed allergicai (con prevalenza di eosinofili)
++ La flogosi acuta può produrre uno di questi 3 esiti
+	+ La necrosi causata dagli enzimi lisosomiali dei leucociti, che danneggiano anche le cellule self
+		+ Si può formare un essudato purulento detto ascesso, che necessita di essere svuotato per incisione
+		+ Se il pus trova spontaneamente un'apertura verso l'esterno si produce una fistola
+	+ La cronicizzazione, quando la flogosi non riesce ad eliminare l'agente flogogeno
+	+ La guarigione, con riassorbimento dell'essudato e apoptosi dei leucociti rimanenti dopo la fagocitosi di agente flogogeno e detriti cellulari
++ L'epatizzazione è una raccolta di essudato negli alveoli polmonari che impedisce la penetrazione dell'aria
+	+ Alla percussione il suono è ottuso
+	+ E' così chiamata perchè il polmone assume un aspetto simile a quello del fegato, per aumento della cellularità
+	+ Inizialmente si ha epatizzazione rossa, con essudato emorragico
+	+ Segue l'epatizzazione grigia a causa della compressione dei vasi dell'interstizio, che diminuisce l'irrorazione ematica e rende visibili per trasparenza i depositi carboniosi
+	+ In via di risoluzione si ha epatizzazione gialla per la presenza di leucociti  che compiono un processo di lipofanerosi (degenerazione grassa)
+
+## Fagocitosi
++ I fagociti possono essere professionali (neutrofili, eosinofili, macrofagi) o facoltativi (fibroblasti, mastociti, cellule endoteliali e altre)
++ Si forma un fagosoma per emissione di pseudopodi che poi diviene fagolisosoma per fusione con un lisosoma
++ I residui digestivi vengono spesso esocitati
++ Il killing è digestivo e mediato da NO e ROS
++ Alcuni microrganismi riescono a sopravvivere e raggiungono il citoplasma dei fagociti
++ I materiali da fagocitare possono essere opsonizati da immunoglobuline e complemento
+
+## Istoflogosi
++ La flogosi cronica si può instaurare per cronicizzazione dell'angioflogosi, per resistenza alla fagocitosi del patogeno o per produzione preferenziale di citochine Th1
++ Nella cronicizzazione del processo acuto si ha una riduzione dei fenomeni vascolari e di essudato simile alla guarigione
++ I polimorfonucleati vengono sostituiti da macrofagi, linfociti, plasmacellule e NK
+	+ Si dispongono attorno al vaso come un manicotto, inducendone la compressione
++ Si instaura uno stato di sofferenza tissutale dovuto al ridotto apporto ematico ed alla presenza dell'infiltrato
++ I fibroblasti spesso sono stimolati a proliferare formando un eccesso connettivale detto fibrosi o sclerosi
++ La flogosi cronica può essere granulomatosa o non granulomatosa
++ In tutti i casi si osserva aumento dei linfociti e monociti ematici (infiltrato linfomonocitario) dovuto al rilascio di IL3 e GM-CSF da parte dei CD4+
++ Nel quadro non granulomatoso l'infiltrato è dominato da linfociti e plasmacellule, in modo indipendente dal tipo di agente flogistico
+	+ Per questo erano dette aspecifiche
++ Nel caso granulomatoso microrganismi o materiale anche non organico sopravvive alla fagocitosi
+	+ In una malattia ereditaria la granulomatosi è cronica per difetto dei leucociti, che sono incapaci di uccidere
+	+ L'infiltrato è dominato da macrofagi e forma strutture concentriche di forma sferica, dette granuli
+	+ Il centro di un granulo contiene una cellula gigante multinucleata formata dalla fusione di macrofagi, circondata da macrofagi detti epitelioidi, a loro volta circondati da CD4+ e fibroblasti
+	+ La struttura del granuloma è peculiare per ciascun agente flogogeno
+		+ Per questo, le infiammazioni granulomatose sono anche dette specifiche
+	+ I granulomi non sono vascolarizzati e quindi vanno incontro a necrosi
++ Un corpo estraneo al di sotto dello strato proliferativo della cute viene circoscritto in un granuloma
+	+ Si formano quando il corpo estraneo penetra al di sotto dello strato proliferativo dell'epidermide
+	+ I granulomi da corpo estraneo hanno un ricambio delle cellule che li costituiscono molto lento
+	+ Sono provocati da materiale vegetale, animale o minerale, o sintetico, poco solubile ed indigeribile
+	+ La penetrazione nell'organismo è transcutanea o inalatoria
+	+ Esempi di corpi estranei sono schegge di legno, spine, aculei, schegge di proiettili, fibre tessili, talco, olio, paraffina, silicone, carbone (tatuaggi)
+	+ Non si risolvono spontaneamente
+	+ Sono formati da una cellula gigante con nuclei distribuiti irregolarmente circondata da cellule epitelioidi e linfociti, plasmacellule e fibroblasti
+	+ Granulomi inalatori sono dovuti a carbone, silice, asbesto, berillio
+		+ La malattia che causano è detta pneumoconiosi
++ I granulomi immunologici o da ipersensibilità sono ad elevato tasso di ricambio cellulare
+	+ Ne sono esempi il granuloma tubercolare, della sifilide e della lebbra
++ Il granuloma tubercolare o tubercolo si forma principalmente nel polmone ma anche in altri organi in cui *Mycobacterium tubercolosis* ha indotto un'infiammazione cronica
+	+ Va facilmente incontro a necrosi, detta caseosa perché ricorda macroscopicamente il formaggio grattugiato
+	+ E' costituito da una cellula gigante di Langhans circondata da cellule epiteliodi circondate da linfociti e fibroblasti
+	+ La cellula di Langhans spesso contiene micobatteri
+	+ Quando vanno in necrosi tubercoli vicini si formano delle caverne, frequenti nei polmoni
+	+ Il materiale necrotico può essere espulso allesterno con la tosse, fenomeno detto emottisi
+	+ La guarigione avviene per cicatrizzazione con deposizione di sali di calcio
+
+## Manisfestazioni sistemiche
++ Sono tutte mediate dalle citochine rilasciate nel processo flogistico
++ La leucocitosi consiste nell'aumento numerico dei leucociti ematici
+	+ L'aumento dei monociti è tipico della flogosi cronica, mentre i neutrofili sono tipici di quella acuta
+	+ In casi gravi si possono osservare anche leucociti immaturi in circolo, ed in casi estremi carenza di neutrofili dovuta ad esaurimento del midollo osseo
+	+ In flogosi allergiche e parassitarie si ha aumento degli eosinofili
++ La febbre consiste in un'alterazione funzionale reversibile del setpoint dei neuroni ipotalamici causata da citochine
+	+ Esperimenti sul coniglio hanno dimostrato che l'LPS è il costituente microbico più efficace nell'indurre febbre
+		+ Tra il momento di inoculazione del l'LPS e il rialzo termico vi è un periodo di latenza
+		+ La febbre non avviene in animali lecupenici perchè irradiati
+		+ L'inoculaizone di sangue di un coniglio febbricitante nel sano induce febbre istantaneamente, senza periodo di latenza
+	+ I composti pirogeni possono essere esogeni o endogeni
+		+ Sono pirogeni esogeni le endotossine e altri costituenti batterici
+		+ I pirogeni endogeni sono le citochine, principalmente IL1, TNF, IFN, IL6, IL2, IL8
+	+ Le citochine passano la BBB tramite l'area cribrosa che circonda l'ipotalamo preottico
+		+ Stimolano anche le stesse cellule endoteliali della BBB a secernere citochine nel CSF
+	+ Gli antipiretici sono farmaci che bloccano la COX impedendo la sintesi della prostaglandina E2 (PGE$_2$)
+		+ Questo è possibile perchè i neuroni ipotalamici non sono sensibili direttamente alle citochine, ma alla PGE$_2$ prodotta dalle cellule circostanti in risposta alle citochine
+	+ Le PGE$_2$ interagiscono con recettori di membrana dei neuroni ipotalamici, portando alla sintesi di cAMP, che ha effetto inibitorio sui neuroni stessi
+	+ La febbre inizia con una fase prodromica di rialzo termico in cui si ha una sensazione di freddo, la fase del fastigio in cui si ha temperatura costante e la defervescenza, caratterizzata dalla sensazione di caldo
+		+ La defervescenza può essere brusca (per lisi) o graduale (per crisi)
+	+ Alcune alterazioni metaboliche sono tipiche della febbre
+		+ Durante la febbre aumentano tutti i processi ossidativi, ed il metabolismo basale si alza del 4% con una febbre a 39$^\circ$C
+		+ Inizialmente si ha consumo dei carboidrati con iperglicemia, seguita in casi di lunga durata da uso degli acidi grassi con chetonemia ed acidosi
+		+ Le proteine endogene vengono metabolizzate, causando perdita di peso per diminuzione della massa muscolare
+		+ Eiminazione eccessiva di azoto e creatinina nelle urine
+		+ Diminuisce la produzione di urina per la marcata sudorazione
+	+ A livello del cardiocircolatorio si ha tachicardia continua (+8 bpm per grado di febbre)
+	+ A livello respiratorio si ha polipnea dovuta sia a stimolo centrale che all'acidosi
+	+ Si ha anoressia ed eventiualmente nausea e vomito
+	+ A livelli molto elevati si osservano alterazioni del CNS come il delirio
++ Vengono rilasciate proteine di fase acuta da parte degli epatociti
+	+ Il loro rilascio è stimolato da IL1, TNF$\alpha$ ed IL6
+	+ Alcune sono di nuova sintesi, altre solo rilasciate
+	+ Le principali sono proteine del complemento, proteina C reattiva, proteina A amiloide, antichimotripsina, antitripsina, fibrinogeno e aptaglobine
+
+## Processo riparativo capitolo 3.1
++ La flogosi lascia dietro di se aree necrotiche che formano cavità ricolme di detriti ed eventualmente sangue coagulato
++ Le cellule, in relazione alle loro capacità proliferative sono distinte in 
+	+ Cellule labili, che sono fisiologicamente sostituite in modo periodico come quelle dell'epidermide ed ematiche
+	+ Cellule stabili, che normalmente non si dividono ma possono farlo in caso di danneggiamento del tessuto, come gli epatociti ed i parenchimi di varie ghiandole
+	+ Cellule perenni, che non si possono mai dividere e quindi una perdita a loro carico è permanente, come neuroni e cellule muscolari
+		+ In realtà a volte sembra le cellule perenni possano dividersi
