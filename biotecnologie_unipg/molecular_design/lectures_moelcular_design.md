@@ -7,67 +7,6 @@
 # Lex.2
 + Le simulazioni di docking hanno una precisione sull'ordine degli Angstrom
 
-## Dati chimici, farmaceutici e biologici
-
-+ I dati di struttura possono essere archiviati in vari formati
-	+ pdb è tipico di macromolecole
-	+ mol2 è usato per piccole molecole
-+ Tutti i formati riportano delle informazioni essenziali, e altre non essenziali
-	+ Il tipo di atomo
-	+ Le coordinate atomiche xyz
-	+ Non è necessario inserire i legami, poichè sono dedotti dalle distanze atomiche
-		+ In alcuni formati è comunque riportata una matrice di connettività
-	+ Spesso sono riportate informazioni sulla confidenza della posizione
-		+ La confidenza è assoluta per strutture calcolate e non sperimentali
-	+ Può essere riportata la densità di carica elettronica dei vari atomi
-		+ Viene salvata per evitare di ricalcolarla
-	+ Può essere riportata la geometria molecolare, osssia lo stato di ibridazione
-
-### Formato PDB
-+ Riporta il tipo di atomo, l'aminoacido, le coordinate
-+ La precisione è riportata tramite il B-factor
-	+ La vibrazione termica causa incertezza nella misura
-+ ATOM indica tutti gli atomi che partecipano alla struttura di aminoacidi
-+ HETATM indica atomi di solvente, piccole molecole, ecc.
-+ Gli H non sono mai presenti perchè non visibili ai raggi X, ma possono essere inseriti su modelli virtuali
-
-### Metodi sperimentali
-+ Tramite cristallografia ai raggi X, specie per macromolecole
-+ Per piccole molecole si usa più NMR
-	+ Piu per ottenere la struttura, che la conformazione
-	+ Oggi sono usati spettrometri NMR anche per le proteine, anche se non è sempre applicabile
-	+ Non serve il cristallo (!)
-+ Per misurare precisamente gli H si usa la cristallogrfia a diffrazione neutronica
-
-### Metodi teorici
-+ L'ab initio usa modelli hard basati esclusivamente su modelli quantistici, ossia risolve l'equazione di Schroedinger
-	+ Non sempre è computazionalmente possibile
-+ I metodi semiempirici richiedono alcuni parametri sperimentali, e risolve la funzione d'onda solo per gli elettroni di valenza
-	+ Sono più approssimati, ma più veloci
-	+ Usano modelli di meccanica classica per gli altri elettroni
-+ Metodi di meccanica molecolare ignorano gli effetti quantisitici
-+ Inizio inserendo una struttura 2D al PC
-	+ Utilizzando il metodo prescelto, viene calcolata la struttura 3D
-
-### Cambridge Cristallographic Data Centre
-+ E' un DB a pagamento di strutture di piccole molecole
-+ Presenta molte più strutture di PDB
-
-### Uso delle SMILES
-+ Posso usarle per effettuare una ricerca in DB, di solito per sottstrutture o gruppi funionali
-	+ Questo permette di ricercare molecole con funzione biologica simile
-	+ La SMILES che uso è detta query
-
-## Calcolo delle strutture 3D
-+ Impiega metodi di minimizzazione energetica per calcolare la conformazione a partire dalla struttura 2D
-	+ Minimizzano l'energia interna della molecola
-	+ Il minimo di energia di solito corrisponde alla struttura cristallografica
-+ Si valuta come l'energia varia al variare della posizione, fino ad arrivare ad un minimo
-+ I metodi semiempirici e di meccanica molecolare sono troppo lenti
-	+ Si parla di secondi, ma se i composti sono milioni è un problema
-	+ E' stato inventato il metodo CONCORDE, che ha ridotto drasticament i tempi
-	+ Con la potenza di calcolo attuale non è più un problema
-
 # Lex.3
 + La pKa è essenziale per determinare la permeabilità di molecole a livello delle membrane biologiche
 + I farmaci tendono ad essere carichi a pH fisiologico
