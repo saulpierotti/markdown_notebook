@@ -5,51 +5,8 @@
 # Lex.1
 
 # Lex.2
-+ Le simulazioni di docking hanno una precisione sull'ordine degli Angstrom
 
 # Lex.3
-+ La pKa è essenziale per determinare la permeabilità di molecole a livello delle membrane biologiche
-+ I farmaci tendono ad essere carichi a pH fisiologico
-+ Per convenzione si usa sempre la pKa, anche per le basi
-
-## Cosa determina la pKa
-+ L'elemento a cui H+ è legato
-	+ Più è elettronegativo meno è acido (?)
-	+ Più è grande meno è aacido poichè distribuisce la carica (?)
-+ Effetto induttivo
-	+ Altri atomi elettronegativi presenti nella molecola influenzano l'acidità
-	+ Mediato da legami $\sigma$
-+ Effetto di risonanza
-	+ Mediato da legami $\pi$
-+ Ibridizzazione
-	+ Più aaumenta il carattere s più l'acido è forte
-+ Effetto prossimtà
-	+ Vicinanza di un gruppo che forma legami H intramolecolari
-
-## Determinazione sperimentale della pKa
-+ Elettroforesi capillare, titolazione spettrofotometrica, titolazione potenziometrica
-+ Una pKa sperimentale è sempre preferibile ad una calcolata
-+ Non sempre è possibile la determinazione sperimentale per motivi tecnici o economici, e quando ho molte molecole
-
-## Metodi per determinare la pKa
-+ I metodi ab initio sono troppo poco precisi e richiedono molto tempo
-+ I metodi sperimentali richiedono di avere a disposizione un campione
-+ La QSAR è la tecnica più usata
-
-## A Perugia è stato sviluppato MoKa
-+ Molto veloce, accurato, considera le molecole poliprotiche
-+ Indipendente dalla rappresentazione esplicita degli H
-+ Calcola il LogP (partizione EtOH-H2O) e LogD (LogP in funzione del pH)
-+ Può essere allenato con un modello
-+ Si basa sui campi GRID, dove un probe si muove e valuta le interazioni con la molecola
-	+ Si stanno ora sviluppando probes poliatomici
-+ Si creano dei livelli allontanandosi dall'atomo di riferimento
-	+ Il livello 0 è l'atomo stesso, e si pongono tutti i bit a 0 eccetto quello per N
-	+ La rappresentazione è non più binaria
-	+ Si crea un fingerprint concatenaando questi bit
-+ Si crea una tabella che correla il fingerprint con la pKa, usata come modello di training
-	+ Usa il metodo PLS 
-+ Bisogna considerare i tuatomeri, poichè ognuno ha una sua pKa (!)
 
 # Lex.4
 
@@ -60,72 +17,14 @@
 # Lex.7
 
 # Lex.8
-+ Maybe missing (?)
 
 # Lex.9
-+ Non vi è correlazione tra momento idrofilico e forza delle interazioni idrofiliche (integy moment)
-+ E' importante disegnare descrittori non correlati tra loro, altrimenti descrivo 2 volte la stessa cosa (!)
-+ Se l'idrofilicità è diffusa anzichè localizzata è più facile che il composto passi la BBB
-+ Critical packing
-	+ E' un parametro usato da chi studia tensioattivi e micelle, inventato da un russo
-	+ E' un fattore geometrico che indica il fattore critico di impacchettamento
-	+ Alla concentrazione micellare critica una molecola anfifilica forma micelle anzichè stare in soluzione
-	+ E' dato da un equazione che considera lunghezza lipofila della molecola, volume lipofilo e superficie idrofilica
-+ Equazione di Stokes-Einstein
-	+ Predice la diffusività in acqua usando solo parametri fisici
-+ Un modello del prof di machine learning usa i vari descrittori per predire la diffusività
-+ La diffusività è poi trattata come un altro descrittore
-+ E' in accordo con i dati sperimentali
-+ Elongation è un altro descrittore
-	+ E' la lunghezza più probabile della molecola
-	+ In una molecola flessibile è diversa dalla lunghezza della molecola disegnata (!)
-	+ Può essere calcolata con un'equazione
-+ LogP è il parametro più misurato sperimentalmente che si conosca
-	+ E' il logaritmo di una partizione
-	+ E' la partizione acqua/n-ottanolo
-	+ Una volta si usava olio di oliva ma poi si è standardizzato con n-ottanolo
-	+ n ottanolo è poco miscibile in acqua
-	+ $P={[n-ott]}/{[H_2O]}$
-	+ Se LogP è 0 significa che P=1 e quindi la molecola ha la stessa solubilità in acqua e n-ottanolo
-	+ Se è 1 è 10 volte più solubile in n-ottanolo, se -1 viceversa
-	+ Approssima il comportamento sulle membrane
-+ Calcolare il LogP
-	+ Riesco a correlare bene con la conformazione, ma vi sono outliers
-	+ Gli outliers sono molecole molto flessibili che non hanno una conformazione ben definita
-	+ Quale conformazione scelgo per la previsione?
-+ pH fluidi biologici 7.4
-+ Posso dire al software di modificare la molecola per adattarla al pH di lavoro
-	+ Modifica lo stato di protonazione in base al pH
-	+ Usa l'algoritmo di MoKa
-	+ Il LogP varia molto con il pH (!)
 
 # Lex.10
-+ Metabolismo
-+ Farmacocinetica
-+ Organoidi usati per studiare metabolismo di xenobiotici
 
 # Lex.11
-+ Profarmaci
-+ Il Fluoro è isosterico all'idrogeno
-+ Previsione dei siti di metabolismo con MetaSite
-+ Il fluoro è spesso utilizzato per gestire il metabolismo dei farmaci
-	+ Il legame F-C è molto forte e difficile da rompere
-+ Devo valutare l'ingombro sterico per capire se la molecola entra nella tasca enzimatica
-+ Devo capire quale parte della molecola sarà vicina al sito attivo
-+ Posso giocare sulla termodinamica della reazione e sulla cinetica
-+ Diversi CYP hanno tasche di dimensioni e caratteristiche diverse
 
 # Lex.12
-+ Simulazione 3d di attività di un cyp
-+ La piridina si ossida su N a dare un N-ossido, molto polare
-+ La probabilità di un sito di metabolismo è data dal prodotto tra l'esposizione al sito attivo e la reattività della posizione
-+ Il radicale benzilico è un toluene senza un elettrone
-	+ E' uno dei radicali più stabili, e quindi uno di quelli che si formano più facilmente
-	+ Per questo una volta si pensava fosse sempre uno dei siti più reattivi per le ossidazioni CYP, che sono radicaliche
-	+ In realtà comunque dipende molto dall'esposizione del sito
-+ Se voglio una prova del metabolismo posso fare una LC-MS/MS prima e dopo metabolismo con microsomi
-	+ La differenza di massa mi da un'idea di che modifiche sono avvenute
-	+ Non sempre è univoco
 
 # Lex.13
 + Intelligenza artificiale
