@@ -22,6 +22,8 @@
 + Le simulazioni di docking hanno una precisione sull'ordine degli Angstrom
 + Le drugs tendono ad avere simile LogD a pH 7.4, anche se hanno profili molto diversi
 + Il pH dei fluidi biologici è attorno a 7.4
++ La sterling a corciano produce steroidi
++ Oggi si può fare MALDI/TOF su tessuti
 
 # Uso di modelli nelle scienze sperimentali
 + I modelli sono impiegati in ogni settore scientifico, ma alcuni campi impiegano modelli hard ed altri soft
@@ -503,9 +505,200 @@
 	+ Si è poi passati a studiare la correlazione tra gruppi di X ed una Y
 		+ Non è adatto quando le X sono segretamente correlate
 	+ La chemometria oggi fa analisi multivariata, ossia mischia tutte le X e Y per cercare correlazioni nascoste
+
+# Dati e satistica
 + Correlazione non indica causalità (!)
 + I dati chemometrici sono semplici informazioni
 	+ Sono rumorosi e per produrre conoscenza devono essere interpretati
 	+ I dati possono essere soft (qualitativi) o hard (quantitativi)
 	+ Quando possibile, è preferibile lavorare con dati quantitativi
+		+ AI lavora meglio con dati hard
 	+ Se sono disponibili solo dati qualitativi, questi vanno convertiti
+	+ I dati possono essere discreti o continui, in un range finito o infinito
+		+ I dati continui sono più trattabili matematicamente di quelli discreti perché sono derivatizzabili
+	+ Possono essere di origine naturale, sperimentale o calcolati
+	+ Se i dati sono raccolti male, è impossibile estrarne conoscenza
++ L'errore può essere sistematico, casuale, accidentale
++ La probabilità di un evento è la sua tendenza ad accadere
++ La probabilità segue spesso una distribuzione normale
+	+ $f(x)=\frac{1}{\sqrt{2\pi\sigma^2}}e^{-\frac{(x-\mu)^2}{2\sigma^2}}$
+	+ E' definita da media $\mu$ e deviazione standard $\sigma$
+	+ La deviazione standard è preferibile alla varianza perchè ha la stessa dimensionalità dei dati
+	+ La probabilità di un evento è data dalla auc che lo caratterizza
++ I dati possono essere pretrattati per rendere l'analisi statistica più accurata
+	+ Lo scaling serve ad uniformare il range di dati diversi e li centra sulla media
+		+ $u=\frac{x-\mu}{\sigma}$
+		+ Riporta tutti i dati nel range -1/1
+		+ Il dato scalato è detto variabile ridotta
+		+ Essenzialmente moltiplico i dati per una costante
++ I gradi di libertà sono il numero di misure meno il numero di parametri calcolati dai dati stessi
+	+ $\phi=n-parametri$
+	+ In una regressione lineare stimo 2 parametri (slope e intercetta), quindi ho n-2 gradi di libertà
++ Un outlier è un dato che non appartiene ad una popolazione di dati
+	+ E' al difuori del range di probabilità predetto
+	+ Cade al di fuori del modello o non segue il trend dei dati
+	+ Si considera tale se è più di 3 $\sigma$ in misure in triplicato
+	+ Se è vicino al limite della misura è pericoloso, potrebbe essere falso
++ I computer di solito lavorano con matrici
+	+ Lavoriamo solo con matrici 2d perchè è possibile ricondurre un a matrice n-dim a 2d
+	+ Per ricondurre una matrice a 2d si fa unfolding
+		+ Accodo tutti i dati su una sola dimensione, ottengo un vettore
++ Analisi di immagine
+	+ Un'immagine può essere ricondotta ad una matrice
+	+ L'esperimeto è il pixel, le variabili sono la luminanza dei vari canali
++ Per semplificare conviene linearizzare le relazioni tra dati, scegliendo opportunamente gli assi
+	+ Un modello non linear è la superificie di risposta
+	+ Il modello più semplice è più probabile, modelli complessi tendono a fare overfitting
+	+ Le reti neurali fanno un po' overfitting
++ La regressione lineare usa il metodo dei least squares
+
+# Pattern recognition
++ L'obbiettivo della pattern recognition è il conoscimento o riconoscimento di strutture di dati
++ Relaziona variabili X a variabili Y
++ Il metodo usato dipende dal tipo di matrici che ho
+	+ Con una sola matrice X posso usare LDA, PCA, CA
+	+ Con una matrice X ed un vettore Y posso usare MLR, MRA, RS
+	+ Con matrici X e Y il discorso è più complesso
+
+# Linear discriminant analysis (LDA)
++ E' un metodo di riduzione della dimensionalità con supervisione
++ Può essere usato solo su dati già divisi in classi
++ Trova una linea di separazione tra classi di oggetti
++ E' applicabile anche a dimensioni superiori
+	+ In tal caso trovo un piano o un iperpiano di separazione
++ Tenta di ridurre la dimensionalità preservando al massimo l'informazione che discrimina le classi
++ I dati sono proiettati sulla retta/piano/iperpiano ortogonale a quella di separazione
+	+ E' la dimensione che massimizza la diversità delle classi
++ E' stata inventata da Fisher nel 1936 per classificare gli Iris
++ La LDA ha pregi e difetti
+	+ Lavora bene in presenza di collinearità ed in analisi multivariata
+	+ Lavora bene con classi a distribuzione differenziale
+	+ Necessità di conoscenza pregressa delle classi
+	+ Lenta per matrici grasse
+	+ Non funziona su set di dati incompleti
+	+ Difficile con molte classi
+	+ La scelta dei descrittori influenza la qualità della discriminazione
+	+ LDA funziona bene con poche classi, fino a 5 circa
+
+# Principal component analysis (PCA)
++ E' un metodo di riduzione della dimensionalità che cerca di preservare al massimo la variazione presente nei dati
++ E' un metodo nonsupervised, non necessita di una precedente classificazione dei dati
++ E' spesso definito come metodo di compressione dei dati, ma in realtà è un metodo di riduzione
++ Gestisce bene la collinearità
++ PCA è preferibile a LDA quando non si hanno informazioni sulla varianza dei dati, quando i dati sono incompleti
++ A differenza di LDA non introduce bias ed è più veloce
++ Definisce una serie di componenti proncipali, che contengono un valore discendente di varianza dei dati
++ In PCA ho uno score plot ed un loading plot
++ Lo score plot è un grafico con i dati di partenza graficati sulle componenti principali
+	+ Solitamente si usa PC1 e PC2 (dette T1 e T2)
++ Il loading plot mostra il contributo delle dimensioni originali a ciascuna componente principale
+	+ E' sempre fatto il PC1 e PC2 di solito, dette P1 e P2
+	+ Ciascuna variabile originale è descritta da un vettore nel piano P1-P2
+	+ Tutti i vettori partono dall'origine
+	+ L'angolo tra i vettori delle variabili ne indica la correlazione
+	+ La distanza dal centro ne indica l'influenza su ciascuna PC, ossia il coseno con essa
++ Il valore originale X è dato dallo score del punto nelle componenti principali per il loading della variabile in ciascuna componente, più E
+	+ $X=TP+E$
++ Il numero di PC da scegliere viene solitamente determinato con l'eigenvalue
+	+ Si plottano le componenti rispetto all'eigenvalue
+	+ Si prendono le PC con eigenvalue >1
+	+ Un eigenvalue è la misura dello spreading dei dati su un eigenvector, ossia una componente
++ Posso decidere quando fermarmi per cross-validation ($Q^2$)
+	+ Calcolo sistematicamente tutti i dati della matrice originale usando gli altri dati a disposizione, con un numero di componenti da 1 al massimo
+	+ Lo scarto $Q^2$ tende a scendere con l'aumentare delle componenti per poi salire di nuovo per overfitting
+		+ Al contrario, il fitting del modello $R^2$ tende a 0 con l'aumentare delle componenti, senza punti di minimo
+		+ Se uso troppe componenti modello il rumore anzichè i dati
+	+ Scelgo il numero di PC del punto di minimo
++ Posso fermarmi in base all'interpretazione
+	+ Mi fermo quando un nuovo componente non può essere fisicamente spiegato
+	+ E' il metodo più sicuro
+	+ Uso il numero di PC necessarie a separare le classi in studio, e non di più
+
+# Partial least squares o projection to latent structures (PLS)
++ E' simile alla PCA, ma invece che massimizzare la varianza globale nelle componenti massimizza l'influenza delle componenti sulle variabili di risposta
+	+ Cerca di relazionare una matrice di variabili con una matrice di risposte
++ Una volta si faceva multiple regression analysis (MRA)
+	+ Funzionava solo con poche x
+	+ Non permette buchi nella matrice
+	+ Non è stabile con x correlate tra loro
++ Siccome richiede delle variabili di risposta, è un metodo supervised
++ Teorizzato da Svante Wold
++ Gestisce bene sia matrici larghe che strette, collinearità, dati incompleti
++ Le componenti sono scelte in modo da massimizzare la variabilità nello spazio delle variabili e delle variabili di risposta, e anche la correlazione tra questi spazi
++ Anche in PLS ho score e loading plot
+	+ Nel loading plot ho sia le variabili che le variabili risposta
++ Posso anche fare plot tra la PC nello spazio X e Y
+
+# PLS-discriminant analysis (PLS-DA)
++ Richiede una definizione diretta delle classi di interesse
++ Lavora bene con classi piccole e ben definite
+
+# Neural networks (NN) e intelligenza artificiale (AI)
++ Alan Turing ha dato le basi per lo sviluppo dell'AI
++ ENIAC fu uno dei primi computer
++ Perchè oggi vi è un'esplosione di tecnologie AI?
+	+ Sono disponibili grandi quantità di dati
+	+ L'AI va gestita
++ Il primo software AI è stato sviluppato a Stanford per risolvere gli spettri MS
+	+ All'aumentare della massa il numero di molecole compatibili con un certo spettro MS aumenta esponenzialmente
+	+ Fecero quind spettri MS/MS, che riducevano le ambiguità
+	+ Svilupparono un software capace di riconoscere gruppi chimici dagli spettri, in questo modo affinando i risultati a poche o 1 molecola
+		+ E' considerato il primo knowledge-based system
+		+ E' basato sulla conoscenza di esperti nel campo, che hanno scritto il programma
++ A Perugia si è riapplicato lo stesso concetto per identificare lipidi in studi di lipidomica
++ Per determinare il passaggio tra 2 stati, non è necessario descrivere gli stati stessi
+	+ E' quello che viene fatto calcolando la strada per un posto
++ I sistemi knowledge based sono applicabili solo a sistemi noti, non generano soluzioni nuove
+	+ Sono molto usati nella ricerca universitaria, meno in quella di nicchia ed applicata di frontiera
++ Machine learning è il sistema più usato in AI
+	+ Estrae un pattern da dati raw
+	+ La sua efficacia dipende molto dal sistema di coordinate usato
+	+ Posso applicarlo per ottimizzare la resa di una reazione
+		+ Devo descrivere i reagenti e le condizioni
++ La parte difficile di AI è estrarre knowledge dai dati
++ Sono un meccanismo di compressione dei dati
++ Il loro obiettivo è una forte riduzione della dimensionalità che però massimizza la correlazione con le risposte
++ Può sfruttare PCA o PLS
++ Collega un input layer con un output layer tramite hidden layers
++ Potrebbe lavorare male con troppi descrittori
+	+ In tal caso si usano metodi inbridi che prima estraggono le PC
+
+# FLAP
++ In molti casi le proprietà chimiche di una molecola non sono sufficienti per prevedere le interazione con un suo recettore
+	+ Volsurf è utile per predire le interazioni con i solventi, non con il recettore
++ Le piccole molecole di solito interagiscono in tasche del recettore, le proteine su superfici dello stesso
++ FLAP è un software che gestisce queste situazioni e permette di comparare ligandi e proteine (tasche)
++ Sfrutta i MIF di GRID, allineamento e chemometria
++ Usa probes DRY, OH e ionici per definire le proprietà delle tasche
+	+ In queste interazioni è importante anche la geometria dell'interazione
+	+ Testo una banca dati di gruppi chimici sulle tasche
+	+ Mettendo poi insieme i gruppi posso creare una molecola che interagisca col recettore
++ Dalla struttura cristallografica di una proteina ne definisce delle tasche, o queste possono essere direttamente specificate
++ Compie una serie di operazioni su ligandi e tasche proteihe
+	+ Li analizza con probes usando GRID
+	+ Definisco dei punti a massima interazione e più spaziati possibili per i vari probes per semplificare la descrizione
+		+ Lo fa l'algoritmo
+		+ Approssimo la forma delle varie zone d'interazione
+		+ Essenzialmente scelgo solo i punti più rappresentativi metre scarto gli altri
+	+ Definisco la sua superficie sempre con GRID, e seleziono i punti più rappresentativi
+	+ Unisco le 2 cose creando una shape con i punti di forma e interazione sovrapposti
++ Crea delle quadruplet, entità geometriche di 4 punti uniti con dei segmenti (6 per unirli tutti) da tutte le possibili combinazioni di punti
+	+ E' definita dalle 6 distanze, dalle feature dei 4 punti (dry, ecc.) e dalla chiralità
+	+ Uso quattro punti perchè ho 4 probes (3+1 shape)
+	+ Un ultimo descrittore mi indica la chiralità
+		+ Non è chiralità chimica, ma dei punti
+		+ E' una caratteristica intrinseca della quadrupletta
+		+ Può essere positiva o negativa
+		+ Tutte le quadruplette sono chirali anche se hanno tutti i punti uguali
+	+ Creo una matrice piana con tutte le quadruplette possibili
+	+ Con queste descrivo una matrice cubica che ha una piana per ogni conformazione possibile della molecola/tasca
+	+ La matrice è un fingerprint di tasche e ligandi
++ Faccio fitting di ligando e tasca
+	+ Confronto la tasca e la molecola quadrupletta per quadrupletta
+	+ Essenzialmente cerco di allineare i fingerprint di tasca e ligando
+	+ Sovrappongo donatori con accettori, non gruppi uguali (!), mentre Il DRY viene sovrapposto con se stesso
+	+ C'è un po' di tolleranza
+	+ Poso la molecola nella cavità sovrapponendo le quadruplette
+	+ In una piccola molecola ho circa 2-3*10^5 quadruplette, in una proteina circa 3-5*10^6
+	+ E' possibile specificare requisiti chiave, ad esempio il matching di un residuo critico
++ FLAP può essere usato per screenare virtualmente ligandi
