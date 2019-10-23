@@ -36,3 +36,13 @@
 	* This bond is stable in an oxydized ambient
 * Redox ambient potential describes the tendency of molecules in an environment to lose or acquire electrons
 * Steric hindrance
+* Bond resonance
+* Peptide bond is around $1.5\AA$ (?) and is polar, 
+	* A long protein chain is highly polar end to end 2-4 Kcal/mol
+* A Debye is the unit of measure of permanent dipoles
+* A water molecule has a dipole
+* The C-H bond is not polar (!)
+* The $OH_4$ structure is called hydronium ion
+	* One O atom generally interacts with 4 H, binding 2 at a time in a covalent way
+* An H bond can be completely explained only with quantomechanics, it is 3-5 Kcal/mol and $1.5\AA$
+* Cell membrames
