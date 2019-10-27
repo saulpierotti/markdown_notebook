@@ -42,7 +42,27 @@
 * A Debye is the unit of measure of permanent dipoles
 * A water molecule has a dipole
 * The C-H bond is not polar (!)
-* The $OH_4$ structure is called hydronium ion
+* The $OH_3$ structure is called hydronium ion
 	* One O atom generally interacts with 4 H, binding 2 at a time in a covalent way
 * An H bond can be completely explained only with quantomechanics, it is 3-5 Kcal/mol and $1.5\AA$
 * Cell membrames
+
+# 23/10/19
+* The dipolar interaction energy can be derived from the dipol moments
+* The London force is the most dependent on distance
+* The hydrophobic effect is the tendency of nonpolar molecules to aggregate in a polar solvent so to minimize the surface exposed to the solvent
+* DNA
+* We do not know the structure of mRNA
+* The width of the DNA helix depends on salt concentration
+	* The more salt the more compact it is
+* The information content of DNA is in AT CG base pairing (so she wants)
+* Transcribed regions are called loci
+* Trascription is controlled by DNA methylation
+
+# 24/10/19
+* The relative dielectric constant comes from condensers
+* A biological process is a series of chemical reactions catalized by enzymes
+* Protein biosynthesis is a biological process that transfer information from DNA to ribosomes
+* The receiver of information is the ribosome
+* Every protein has an half-life: there is turnover
+* The genetic code is redundant
