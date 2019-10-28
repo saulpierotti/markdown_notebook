@@ -42,7 +42,7 @@
 * A Debye is the unit of measure of permanent dipoles
 * A water molecule has a dipole
 * The C-H bond is not polar (!)
-* The $OH_3$ structure is called hydronium ion
+* The $OH_3^+$ structure is called hydronium ion
 	* One O atom generally interacts with 4 H, binding 2 at a time in a covalent way
 * An H bond can be completely explained only with quantomechanics, it is 3-5 Kcal/mol and $1.5\AA$
 * Cell membrames
@@ -66,3 +66,34 @@
 * The receiver of information is the ribosome
 * Every protein has an half-life: there is turnover
 * The genetic code is redundant
+
+# 28/10/19
+* A protein is a biopolymer made of repeating peptide bonds, which form the backbone
+* When an aminoacid enters in the structure of a protein, it becomes an amino-residue
+* An aminoacid has a carboxil group and an aminic group bonded to a $C_\alpha$
+	* The side chain R can be one of 20 varieties
+	* The carboxil group has a $pK_a \approx 4.2$
+	* The amino group has a $pK_a \approx 9$
+* The formation of the peptide bond is a condensation process where a water molecule is expelled
+* The peptide bond is planar and has a dipole moment of around x debye
+	* The bond is subjected to resonance because the $C_\alpha$ is bound to 2 electronegative atoms, O and N
+	* It is shorter than a single bond, and the bond with O is longer than a double bond
+	* The plane is defined by O, $C_\alpha$ and N
+* Can every sequence be a protein?
+* The bond between $C_\alpha$ and N is called $\Phi$, the bond between $C_\alpha$ and COOH is called $\Psi$
+	* Rotation is possible around these bonds
+* Amino acids are zwitterionic, meaning that they have at phisiological pH both positive and negative charge
+* The protein structure is the golden standard of proteomics
+	* It allows the best predictions on function
+* Functional genomics is the use of available data to infer information about unknown genes and proteins
+* The secondary structure derives from the stabilisation of the protein by hydrogen bonding
+* SCOP categorizes protein domains
+	* The class of a protein is the way in which the backbone is organised (secondary structure)
+		* An all-alpha or all-beta protein have more than 90% of the residues in that conformation
+		* Alpha+beta proteins have a linker connecting the 2 domains
+		* Alpha/beta proteins have a mixing of the structures
+	* A fold is the topological arrangment of a portion of secondary structure
+	* A superfamily has a probable common ancestor
+	* A family is a collection of proteins that have similar function and structure
+		* They can also have very different sequences (!)
+* To categorize proteins, we have to do a structural alignment

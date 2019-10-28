@@ -361,3 +361,37 @@ rewied until here
 	* $\nabla f=\lambda \nabla g$ where $\lambda$ is the Lagrange multiplier
 * The Lagrangian function $L(\vec(x), \lambda)$ is bad
 * Information entropy
+
+# Probability
+* Probability can be interpreted in several ways
+	* In a frequency approach, it is the ratio between favourable events and total events
+	* It can also be viewed as the confidence in an event happening
+* The sample space is the set of all possible outcomes of an experiment
+* An event is a subset of the sample space
+* A probability is a number between 0 and 1
+	* $0\leq P(E_i)\leq1$
+* The sum of the probabilities of all the outcomes is equal to 1
+	* $P(\cup E_i)=1$
+* The probability of on of 2 events happening is equal to the sum of the probabilities minus their intersection
+	* $P(A\cup B)=P(A)+P(B)-P(A\cap B)$
+* If two events have NO intersection they are said mutually exclusive
+* The intersection of 2 events that are independent and not mutually exclusive is the product of their probabilities
+	* $P(A \cap B)=P(A)*P(B)$
+* The conditional probability of $A$ given $B$ is represented as $P(A|B)$
+	* If the events are independent, $P(A|B)=P(A)$
+	* If they are not independent, $P(A|B)=\frac{P(A\cap B)}{P(B)}$
+* The intersection of 2 non-independent event is therefore
+	* $P(A\cap B)=P(A)*P(B|A)=P(B)*P(A|B)$
+* 2 mutually exclusive events cannot be independent, and vice-versa
+* The bayes formula: $P(A|B)$ is different from $P(B|A)$
+	* $P(B|A)=\frac{P(A|B)*P(B)}{P(A)}$
+* To count events considering order we use permutations
+	* With replacement (same element can be drawn twice)
+		* It is the number of events multiplied by itself for a number of times equal to the lenght of the sequence
+		* $l$ : sequence length, $n$ : possible outcomes $\implies x=n^l$
+	* Without replacement (same element cannot be drawn twice)
+		* It is the same of the replacement case, but n becomes n-1 at each iteration
+		* $l$ : sequence length, $n$ : possible outcomes $\implies x=\frac{n!}{(n-l)!}$
+* To count events NOT considering order we use combinations
+	* With replacement (same element can be drawn twice)
+	* Without replacement (same element cannot be drawn twice)
