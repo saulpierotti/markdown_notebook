@@ -80,6 +80,8 @@
 	* It is shorter than a single bond, and the bond with O is longer than a double bond
 	* The plane is defined by O, $C_\alpha$ and N
 * Can every sequence be a protein?
+	* A protein is long between 50 and 200-300 residues
+	* If it is shorter usually it cannot fold in solution
 * The bond between $C_\alpha$ and N is called $\Phi$, the bond between $C_\alpha$ and COOH is called $\Psi$
 	* Rotation is possible around these bonds
 * Amino acids are zwitterionic, meaning that they have at phisiological pH both positive and negative charge
@@ -97,3 +99,75 @@
 	* A family is a collection of proteins that have similar function and structure
 		* They can also have very different sequences (!)
 * To categorize proteins, we have to do a structural alignment
+* Proteins are a frustrated system because mainly hydrophobic
+	* They tend to fold in solution
+	* The $\Delta G$ associated with the folding process is around 0-50 kcal/mol and it is mostly indipendent from the protein itself
+
+# 29/10/19
+* A protein is stable because it is capable of auto-organization in a polar solvent, which gives rise to million of pairwise interaction
+* Proteins form crystals when the solution is super-saturated
+* Proteins are social entities
+* The folding of a protein is defined hydrophobic collapse
+* Chaperons help the folding process in vivo
+* Folding in vitro happens in a binary system made of the protein and water
+* It is better to say compute than predict
+* What is protein function?
+	* It can catalize a chemical reaction
+* In bioinformatics, enzymes are classified in clusters by the Enzyme commission classification (ECC)
+* The EC classification is a hierarchical system
+	* EC1 are oxydoreductases
+	* EC2 are transferases
+		* They transfer a functional group from a molecule to another
+	* EC3 are hydrolases
+	* EC4 are lyases
+		* A lyase is an enzyme that catalyzes the breaking of a covalent bond by a mean different from hydrolysis
+	* EC5 are isomerases
+		* They promote intra-molecular rearrangement
+	* EC6 are ligases
+		* A ligase forms new bonds using ATP
+	* EC7 are translocases
+		* It is a fancy name for membrane transporter
+	* Numbers after the first narrow down the activity of the enzyme
+* The EC number does not consider isoforms (!)
+	* It cannot differentiate 
+* GO terms are a big achievement of bioinformatics
+* GO means gene ontology
+	* An ontology is a vocabulary
+* GO terms are standard words or phrases used for indexing or retrieving information
+	* They are reviewed by experts in the respective fields
+* GO defines relationships between terms
+* Cellular component, Biological process and Molecular function are the 3 roots of Gene ontologies
+	* From the roots, we can go down a hierarchical organization to find a specific term (es. cytosol)
+	* Each term has a random number assigned to it
+* The problem of protein validation: we can easily detect putative proteins, but it is difficult to experimentally validate them
+* Computational biology is a field of bioinformatics involved in the development of tools for sequence analysis, functional genomics and proteomics
+* Systems biology develops models for biological systems
+* Thermodynamics dominates our life
+	* U is the internal energy of the system, it is composed of a kinetic term and a potential term
+	* W is mechanical work on the system
+	* Q is heat added to the system
+	* Most of the quantities in thermodynamics cannot be measured in an absolute way, only changes are measurable
+* The entalpy is the sum of internal energy and mechanical work done on the system
+	* $H=U+pV$
+	* The mechanical work is composed of the product of pressure and volume
+	* A negative change in entalpy means that the process is exotermic
+* Entropy
+* Gibbs free energy
+	* If $\Delta G$ is 0 we are in an equilibrium condition
+	* In life equilibrium means death
+* Kinetics is a branch of thermodynamics
+
+# 30/10/19
+* The equilibrium constant of a reaction $A\rightleftharpoons B$ is $K_{eq}=\frac{[B]}{[A]}$
+* $\Delta G$ is related to $K_{eq}$ by $\Delta G^0=-RT\ln (K_{eq}^0)$
+* There is a relationship between the kinetic constants and the equilibrium constant
+* Enzyme reactions can be modelled by the Michaelis-Menten equation
+	* $K_m$ and $V_{max}$ are parameters of the equation
+	* The relationship is hyperbolic
+	* $K_m$ is the $[S]$ at which $v=\frac{1}{2}V_{max}$
+	* The enzymes that follow this kinetic are monomeric
+* Multimeric enzymes are modelled by the Hill equation
+	* The relationship is a sigmoid
+	* There is an exponential term h
+	* The parameters are the same of the MM, $V_{max}$ and $[S]_{0.5}$
+	* This takes into account the allosteric effect
