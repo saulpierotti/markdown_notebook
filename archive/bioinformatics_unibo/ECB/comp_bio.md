@@ -913,16 +913,12 @@ rewied until here
 	* Each parametric test has a non-parametric alternative
 
 ## Correlation and regression
-* The covariance of 2 random variables is $Cov(X,Y)=E[(X-E[X])(Y-E[Y])$
-* 
-
-# 31/10/19
 * Correlation can be measured by a coefficient $\rho$
     * Given the variables x and y, we can compute $\mu_x$ and $\mu_y$
     * If we graph a point ($\mu_x,\mu_y)$ we define the centroid of the data
     * The covariance is a good measure of linear dependence between x and y
         * $cov(x,y)=\frac{1}{n-1}\sum_i (x_i-\mu_x)(y_i-\mu_y)$
-    * We can then define the Pearson's correlation coefficient $\rho=\frac{cov(x,y)}{\sigma_x , \sigma_y)}$
+    * We can then define the Pearson's correlation coefficient $\rho=\frac{cov(x,y)}{\sigma_x \sigma_y}$
         * It is a number between -1 and 1 because it is rescaled by the standard deviations of x and y
         * The Pearson's coefficient tests only linear dependency (!)
             * If $\rho=0$ we can NOT say that x and y are independent, they can have higher-order dependencies
@@ -933,7 +929,7 @@ rewied until here
     * Always look at the graph before drawing conclusions, because it can be different fro what you think
 * CORRELATION DOES NOT IMPLY CAUSATION
 * The Spearman's correlation coefficient measure monotonic dependency
-    * It is the Pearson's coefficient of the rank of the variables
+    * It is the Pearson's coefficient of the rank of the variables, it is its non-paramtric alternative
     * If we make a ranking of values from the lowest to the highest, the rank of a value is its position in the ranking
     * We have to test the significance also of this coefficient, that depends on the amount of data
 * The Matthews correlation coefficient (MCC) is used for categorical variables
@@ -953,6 +949,8 @@ rewied until here
 * The error can be estimated considering overfitting by giving a penalty for high coefficients
 * To test the quality of a model we need to use data not used for building the model itself (!)
 * Cross-validation is very dangerous
+
+## Principal component analysis
 * Principal component analysis is used with high-dimensional data
     * It reduces the number of dimensions, so to be able to plot the results
     * A good idea to preliminarily decrease the number of variables is to remove the ones with the lowest variance
@@ -963,4 +961,9 @@ rewied until here
     * $\Lambda=\begin{pmatrix}\lambda_1&0\\0&\lambda_2\end{pmatrix}$
     * If I rank the eigenvalues from highest to lowest, I can choose to use only a subset of dimensions that maximizes the variation
 * PCA can discriminate only linear dependencies (!) by rotating the frame of reference so to align it with the variation
+* If a variable has a relatively high covariance, it will dominate the principal components
+* It makes sense to compare variances only if they are in the same unit of measure
+* I can standardize the variables so to have unit variance and 0 mean to avoid this problems
 * Instead of a covariance matrix, I can do PCA with a correlation matrix
+* The correlation of a variable on each of the eigenvectors is called loading
+* To choose the number of principal components, a common rule is to exclude the dimension with $\lambda < 1$
