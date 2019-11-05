@@ -2,6 +2,60 @@
 % Saul Pierotti
 % \today
 
+# Lecture I and II - General chemistry
+* Unit of measure for dipole: Debye (D)
+	* $D=10^{-18}staC*cm$
+* Water dipole moment: 1.85 D
+* Peptide bond dipole moment: 3.5 D
+* Non-bonding interactions: charge-charge>charge-dipole>diploe-dipole>charge-nonpolar>dipole-nonpolar>nonpolar-nonpolar
+* Hydrophobiic effect: the tendency of hydrophobic molecules to clump up together in a polar solvent in a way that minimizes the surface exposed to the solvent
+	* It is dominated by the entropic component
+* Chemical bond: interaction between atoms, moleculs, and ions that makes it possible for them to associate toghether. It is important beacause everithing exists because of chemical bonds. Its potential energy is lower than that of the single elements.
+* Intramolecular bonds: metallic, covalent, ionic
+* Membrane stability: interaction of polar groups with water, London forces among lipid tails, hydrophobic effect of the lipid tails
+* Covalent bond: -40/-110 kcal/mol, 2 $\AA$
+* Ionic bond: -5/-10 kcal/mol
+* Hydrogen bond: -5/-3 kcal/mol
+* Hydrophobic: -1 kcal/mol
+* Van der Waals: -0.5 kcal/mol
+* Chemical reaction: a process in which one or more reactants are converted to products
+* Dissociation process: She means ionization. Henderson Hasselbalch equation
+* Molecule: charachterized by its electron density.
+* Atomic reactivity: number of electrons in the outermost shell
+* Model: equation that describes a phenomenon
+
+# Lecture III - DNA
+* Human proteins: >100000
+* DNA: deoxyribonucleic acid. She wants structure
+* Why DNA stores information (ilarious): the univocal base-paring system allows the replication of the information content
+* Genetic code: set of rules by which information stored in the genome is translated into proteins in living cells
+
+# Lecture IV and V - Thermodynamics
+* $\Delta G^0=-RT \ln K_{eq}$
+* $U=Q-W$
+* $H=U+pV$
+* $\Delta S=\Delta Q_{rev}/T$
+* Standard condition: 298 K, 1 atm, pH 7, all reactants 1 M
+* Variables: a term in an equation that is free to change independently, or in relation to another variable
+* Parameters: a term in an equation that defines the relationship between variables
+* Chemical potential: molar chemical energy of a substance $\mu=G/N$
+* Kinetics: adds time as a new variable
+* Enzyme kinetics: Michaelis-Menten ($V=\frac{V_{max}*[S]}{K_m+[S]}$) and Hill ($V=V_{max}\frac{([S]/[S]_{0.5})^h}{1+([S]/[S]_{0.5})^h}$)
+* Kinetic constant: proportionality factor that relates the concentraion of substrates and the reaction rate
+* $K_eq=\frac{k_{fw}}{k_{rv}}$
+
+# Lecture VI - Proteins
+* Protein: a biopolymer composed of aminoacid residues joined toghether by repetitive bonds
+* Proteomics: study of the whole protein content in a specific cell type.
+* Secondary structure: $\alpha-helix$, $\beta-sheet$, turns
+* Protein function: for enzymes it can be defined on the basis of the reaction that they catalyses. For non-enzymes GO-terms
+* Reactome: sum of biochemical reactions in a cell type
+* When do I know the structure of a protein: when I know its electron density
+* Biological process: series of biochemical reactions catalysed by enzymes.
+* Metabolic pathway: biological process that converts reactants in products.
+* Why -omics: they reflect an olistic view of biology. An interpretation of the cell as a netweork of interaction entities with emergent proprieties, that cannot be easily inferred from the single components
+* PDB: 157000 structures
+
 # 21/10/19
 * The course is made of elements, it is not a complete course
 * We want to understand biomolecules
