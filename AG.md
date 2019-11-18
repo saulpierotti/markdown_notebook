@@ -5,12 +5,12 @@
 # Course structure
 * Population genetics
 * Genome structure and variability in vertebrates (we may mention plants and bacteria)
-* High throughput genomic platforms.
+* High throughput genomic platforms
 * Applications of NGS
 * Array comparative genome hybridization 
 * PLINK, genetic data analysis. How to use this software and apply some design using this tool
 * Linkage analysis and genetic mapping
-* QTL analysis 
+* QTL analysis
 
 # Examination mode
 * Final exam has 2 levels
@@ -18,8 +18,8 @@
 		* A text should be written including an appropriate introduction to the problem/question that the experiment or project would like to analyse or answer, aim of the project, a section with materials and methods, expected results and impact
 		* The project should be submitted to the professor one week before the interview
 		* We should specify What is the aim of the project and what I’d like to solve with it
-			* If it makes sense, we can undergo a discussion with him.
-		* The project is based on money: we’ll have a budget. 
+			* If it makes sense, we can undergo a discussion with him
+		* The project is based on money: we’ll have a budget
 	* Interview based on the project submitted and other two questions
 		* Only students that are positively evaluated at the first level are admitted at the second level
 		* Evaluation of basic knowledge
@@ -28,9 +28,9 @@
 * We’ll have an example of a project, the topic of the project it’s up to us
 * We need to choose a complex genome/organism
 * Each one will have a different budget
-* It’s better to do the project according to what we discuss in the lectures.
-* It has to be something new.
-* The first date would be in February after Winter School and another one in March.
+* It’s better to do the project according to what we discuss in the lectures
+* It has to be something new
+* The first date would be in February after Winter School and another one in March
 * Near to the end of the course we’ll have a test with 30 questions to test our level (it won’t count for the final score)
 
 # Introduction

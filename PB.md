@@ -124,4 +124,3 @@
 	* `s.lower()`
 	* `s.replace("a","b")`
 	* `s.startswith("a")`
-
