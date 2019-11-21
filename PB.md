@@ -121,3 +121,49 @@
 	* `s.lower()`
 	* `s.replace("a","b")`
 	* `s.startswith("a")`
+
+# Functions
+* A function is a code block with a name
+* A built-in function is readily understood by the python interpreter
+```
+def fun(par):
+	my code+par
+x = "some data"
+fun(x)
+```
+* The return statement assigns its value to the function
+* In the following x=1
+```
+def fun():
+	return 1
+x = fun()
+```
+* The first statement in a function is called docstring
+```
+def fun():
+	"""this is a function that doesn't do anything"""
+```
+* Comments in pyhton are made with # and they are useful to make code more readable
+
+# Lists
+* Lists behave similarly to strings
+* To check if an element is in a string or list I can do
+```
+my_list = [1,2,3,4]
+print(2 in my_list)
+>>> True
+```
+* The main difference is that in lists I can reassign elements
+* The split function splits a string in a list separated by the separator given as an argument
+* I cannot split for the empty charachter, to separate a string in any charachter I shoul use `list(str)
+
+# For loop
+```
+my_list = [1,2,3,4]
+for num in my_list:
+	print(num)
+>>>1
+>>>2
+>>>3
+>>>4
+```
