@@ -57,3 +57,20 @@
 * Nuclear DNA is 99.99% identical among individuals, while mitochondrial genome is more similar
 * The simplest definition of gene is "coding region"
 * We can predict the phenotype of an animal just looking at the genotype (!)
+* To do applied genomics I need a reference genome
+* If I do not have a reference genome for my species of interest, I need to construct it or I can use one of a closely-related species
+* The cost of sequencing is dropping in a way similar to Moore's law
+	* Around 2008 the drop was much faster than Moore's law, thanks to NGS
+* The shotgun approach does not have a particular target, it sequences everything
+* Genomic data are typically stored in the cloud
+* Hardy-Weinberg equilibrium
+	* $\begin{cases}p^2+q^2+2pq=f(AA)+f(Aa)+f(aa)=(p+q)^2=1 \\ p+q=1\end{cases}$
+	* The allele frequencies refer to the current generation, while the genotype frequencies refer to the next generation
+* Mendel's first law: alleles segregate with other alleles
+* Mendel's second law: independent assortment
+* Mendel's third law: some alleles are dominant on others
+* Mendel's second law: independent assortment
+* We reviewed PCR, agarose gel electrophoresys and Sanger sequencing basics
+* NGS: Illumina, Ion torrent (Thermo fisher), PacBio, Nanopore
+	* PacBio is going to be acquired by Illumina
+	* We have short reads, therefore assembly is difficult

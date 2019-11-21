@@ -2,20 +2,17 @@
 % Saul Pierotti
 % \today
 
-# 14/11/19
-* 5/12 mid term exam on paper, it is worth 8/32 points
-* Finals are on February and march
-* This module is about Python
-* Textbooks are not required but can be interesting for an in-depth understanding
-* Slides are really synthetic
-* Tutor: Giacomo Tartari
+# Course organization
+* 5/12 mid term exam on paper, it is worth 8/32 points, finals are on February and march
+* This module pf the course is about Python
+
+# Linux an CS basics
 * The main resource of a computer are RAM and CPU
 * The OS allocates resources to programs, and impedes interference among them
 * Linux is a kernel, it manages resources for the OS
 	* It derives from Unix, like also MacOS
 	* It is multithreaded (it can run more than 1 program at the same time) and multiuser
 	* The users are isolated from each other, they cannot interfere
-	* There are many Distros
 * A Linux distro includes an install system for the distro itself, drivers, a package manager, tools
 	* Some tools are really specific, and probabily I will never need them
 	* A package manager allows to install and remove tools
@@ -49,15 +46,16 @@
 	* Permissions can be read as `-rwxrwr--`, where the first 3 charachters refer to user, then group, then others, then all
 	* Permissions are added and remove with the `chmod` command
 	* `chmod u+x` adds execute permission to user, while `chmod o-w` removes write permisission to others
+	* `chmod 777` gives full permissions to everyone
 * A running program is identified by a unique PID (program id)
 	* `ps -a` lists all the running processes with PID
 	* `kill PID` kills the running process
-		* This should be used only as a last option (!)
+		* This should be used only as a last option, I risk to lose data (!)
 * A single program can span multiple processes
 * `sleep` suspends the current shell for the specified time
 * `man` opens the manual of a command
 * The argument of a command is the subject of the operation
-* The parameter
+* The parameters of a command are the option that specify its action
 * The output of a command can be written to a file with the redirect operator `>`
 	* `ps -a > output.txt`
 	* The error messages will still be printed on screen
@@ -74,10 +72,15 @@
 	* `nano` and `pico` are easy to use
 	* `vim` and `emacs` are more advanced but less easy
 	* Some have a GUI version, like `gvim` and `xemacs`
-* A computer is fast, but stupid
-	* It does exactly what you tell it to do
+* A computer is fast, but stupid, It does exactly what you tell it to do
 * Programming is useful for dealing with complex operations, repetitive tasks, huge amounts of data
 * Sometimes I can do things with a PC without knowing how they are done: libraries
+* Documentation is really useful as a reference, but is not really good for learning
+* Things work most of the time, until they do not work once and no one knows why
+* I can run a script in the background using an & after the command
+	* `~ python test.py &`
+
+# Python basics
 * Pyhton is fast to implement, widely used, has many libraries, it is well documented
 	* It is not used so much by computer scientists, but a lot by non computer scientists
 	* We want to be as efficient as needed, not as efficient as possible (!)
@@ -88,14 +91,8 @@
 	* I can create a text file and run it from the shell
 	* I can use an IDE to write, execute, access documentation
 	* I can write directly in the Python interpreter without creating a file
-* Documentation is really useful as a reference, but is not really good for learning
-* Things work most of the time, until they do not work once and no one knows why
-
-# 15/11/19
-* I can run a script in the background using an & after the command
-	* `~ python test.py &`
 * The operator / is division in python2, while in python 3 the operator // is integer division
-	* The result of intyeger division is itself an integer
+	* The result of integer division is itself an integer
 	* Floating point division in python3 is done by the operator /
 	* In python2 the type of division is determined by the context
 		* It is integer division only if both numbers are integers, otherwise it is floating point

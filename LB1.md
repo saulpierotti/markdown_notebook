@@ -25,7 +25,7 @@
 * Data mining is the retrieval of information from a database
 	* It is done with a browser
 
-# Protein cristallography
+# X-ray cristallography
 * I can understand that I have a protein crystal by shining light on it and seeing how it diffracts
 * Routinely X-ray diffraction is not able to locate hydrogens
 * Each crystal has a unit cell
@@ -53,12 +53,12 @@
 	* This fitting procedure is called refinement, because it reduces noise in the model
 * To validate my model, I compute the diffraction pattern of the theoretical protein structure to check if it matches the experimental pattern within a reasonable tollerance
 
-## Crio-eletron microscopy
+## Crio-electron microscopy
 * Crio-electron microscopy gives us a diffraction pattern using an electron beam
 	* It is really useful for really big complexes that cannot be cristallized
 	* Resolution is lower than X-ray diffraction
 
-## PDB
+## PDB and other DBs and tools
 * The PDB file does not contain the electron density, it is an approximation of the structure
 * The resolution of an X-ray diffraction is important
 	* $5.0\AA$ resolution is reasonably accurate only for the position of the backbone
@@ -82,3 +82,53 @@
 	* Blue is good, red is bad
 * DSSP is a program that reads a PDB file and assigns a secondary structure to each PDB coordinate
 	* It was made by Sanders, one of the founders of bioinformatics, and Kabsch
+* A database can be defined by its statistics
+* Data in a DB can be distributed in categories that are relevant for the interpretation of data
+* The space group refers to the simmetries of the unit cell
+* The Ramachadran plot of a structure can be generated with Procheck (EMBL)
+	* It is much more informative than the 3d view generated with Rasmol
+* The PDBsum is a pictorial database that provides an at-a-glance overview of the contents of each 3D structure deposited in the Protein Data Bank
+	* It is offered by EMBL
+	* It shows also the Procheck output for the structure
+	* It shows the biological unit instead of the unit cell
+
+# Nuclear magnetic resonance
+* It does not require the crystal, it is performed in an homogeneous really concentrated protein solution
+* The frequencies used are on the radiowave lenght, so really low energies
+* NMR measures contacts among atoms in solution, it measure frequence changes when nuclei come close to each other
+* The data produced is a contact map
+* The only nuclei considered are mainly O, H, C
+* From NMR I get many conformation for each molecule, and if I visualize it in a molecular visualization software I see many superimposed structures
+	* The core is usually stable and in agreement with X-ray data, while regions with high temperature factor have many configurations
+	* From the many structures I can recover a consensus structure
+
+# Time resolved X-ray crystallography
+* I use pulsed X-ray instead of a continuous beam
+* I can observe the conformational changes of the protein between different pulses
+
+# Protein structure allignment
+* We wan to compare the structure of 2 proteins
+* Hydrogens bond are mainly located at the level of the backbone
+* I keep 1 protein fix as a template, and I try to superimpose the other backbone
+	* There are many different algorithms to do this
+* The first reasonable step would be to compare the position of the backbone of the 2 proteins
+* Sequence similarity is meaningful only with an underlying structural similarity
+* The reduce representation of a protein contains only the $C-C\alpha-N$ elements of the backbone
+* The simplest measure of structural similarity is the root mean squared deviation (RMSD) among atomic coordinates
+* One of the algorthm for strucutural alligment used in the PDB is called java combinatorial extension (JCE)
+* JCE was written by Philippe Bourne, the director of the PDB
+	* It is one of the best-performing algorithms
+* The lenght of an allignment is the lenght of the protein sequence, plus the gap introduced
+* Sequence identity is a score between 0 and 1 that gives the number of corresponding residues after the allignment
+* Sequence similarity is a score between 0 and 1 that gives the number of similar residues after the allignment
+* Structure is conserved more than sequence (!)
+
+# Protein families
+* Multiple structural allignment allow to define protein families
+	* We know around 14000 protein families
+* They were discovered by M. Dayhoff
+* A protein family is the set of proteins that perform the same function in different organism
+* Proteins in the same family can also be really different in sequence, but the structure is really similar
+* We cannot detect sequence similarity when under 30%, but we can detect structure similarity in those cases
+	* Under 30% the result is not statistically significant
+* A superfamily is a set of protein families with different foldings that can perform the same function

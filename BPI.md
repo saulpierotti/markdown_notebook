@@ -80,7 +80,7 @@
 	* The derivative is then released and identified by cromatography or electrophoreys, before repeating the cycle
 	* Amino acids are red at 269 nm
 
-# Mass spectrometry
+# Mass spectrometry - basis is not for exam
 * A mass spectrometer contains an ion source, a mass filter and a detector
 * Some ion sources can be interfaced with a separation technique, others must be operated manually
 * Soft ionization method do not break chemical bonds, while hard methods do that
@@ -171,3 +171,26 @@
 	* Fragmentation of the peptide bond produces y or b fragments
 * I can recover the mass of the residues by analyzing the mass difference between ions
 * Given a MS/MS spectrum, the sofware Peaks can give the protein sequence, with a confidence for each residue
+
+# Synthetic biology - Not for exam
+* In order to provide proprieties that are not available in nature we can use non-natural amino acids
+* We can also modify polymerases in order to use non-natural nucleotides that still pair among themselves in a specific way
+
+# Molecular cloning - Not for exam
+* Molecular cloning is essential because it is our only way to obtain high amounts of proteins
+* The general workflow is to isolate the cDNA of the protein, insert it in a plasmid and transfect bacteria with it
+	* The cDNA is amplified with primers containing a 3' overhang that allows to introduce the appropriate restriction sites
+* When I cut my plasmid, I want to use single cutters so to avoid that the plasmid could close on itself
+	* Usually I can cut exactly where I want because plasmids are engineered to have many restriction sites
+* Selection of recombinants is done with antibioitics for bacteria and mammalian cells, and with auxotrofs for yeast
+* Cells are made competent with a $CaCl_2$ solution
+* Commercially available competent cells are usually much more efficient, even though a little bit more expensive
+* Transfection can be done by heat-shock or electroporation
+* Plasmids tend to be toxic for bacteria, because of their metabolic burden
+* DNA absorbs at 260 nm, proteins at 280 nm
+* Protein biotinylation can be performed in vivo or chemically
+	* Chemically, I usually bind biotin to Lys residues
+	* In vivo I can fuse my protein with a biotin binding domain and clone it toghether with BirA, a biotinylating enzyme
+* For in silico cloning, we can use Vector NTI Advance or the online platform Benchling
+* When I create recombinant proteins, it is smart to add a linker
+	* Usually Gly is used
