@@ -15,6 +15,7 @@
 
 # Introduction
 * The reference source in the filed is the Journal of Bioinformatics
+* Functional annotation is the core of this course
 * Functional annotation studies the relationship between structure and function
 * Functional annotation requires data collection, storage and analysis
 * Functional annotation is the activity of attributing structural and functional features to translated protein sequences
@@ -24,6 +25,7 @@
 * A database release is its content at a given date
 * Data mining is the retrieval of information from a database
 	* It is done with a browser
+* In Hamburg there is an EMBL faicility that uses X-rays in a flow citometer
 
 # X-ray cristallography
 * I can understand that I have a protein crystal by shining light on it and seeing how it diffracts
@@ -92,6 +94,17 @@
 	* It shows also the Procheck output for the structure
 	* It shows the biological unit instead of the unit cell
 
+# PDB101
+* A crystal is composed of the unit cell, that is translationally repeated in the crystal
+* The unit cell is composed of asymmetric units, that rotated and translated form the unit cell
+* The asymmetric unit is the unique part of the crystal structure
+* The biological assembly is the biologically relevant form
+* Occupancy of an atom is the fraction of times that atom is in the specified position in the crystal
+	* The occupancies for an atom always sum to 1, giving the possible alternate conformations
+* The R-value is the fit between the theoretical diffraction pattern of the model and the experimental one
+	* 0 is a perfect fit, 0.63 is a the fit of a random diffraction pattern
+* R-free is another statistic that avoids the bias introduced in the refinement step
+
 # Nuclear magnetic resonance
 * It does not require the crystal, it is performed in an homogeneous really concentrated protein solution
 * The frequencies used are on the radiowave lenght, so really low energies
@@ -128,7 +141,59 @@
 	* We know around 14000 protein families
 * They were discovered by M. Dayhoff
 * A protein family is the set of proteins that perform the same function in different organism
-* Proteins in the same family can also be really different in sequence, but the structure is really similar
+* Proteins in the same family can also be really different in sequence, but their structure is really similar
 * We cannot detect sequence similarity when under 30%, but we can detect structure similarity in those cases
 	* Under 30% the result is not statistically significant
 * A superfamily is a set of protein families with different foldings that can perform the same function
+
+# Domains
+* A protein domain coincides with the folded protein for small globular proteins (150 aa)
+* When the PDB grew, we realised that multi-domain proteins share domains with small globular proteins
+
+# Sequence allignment
+* It is our only way to compare proteins for which I do not have structures
+* Sequence comparison can be pairwise or database search
+* Database search is an extension of pairwise sequence alignment
+* Sequence allignment can be local or global
+* A global allignment optimizes pairing over the whole sequences by introducing gaps
+	* A global allignment has a lenght that is at least as long as the longest sequence
+* A local alignment stops the allignment if continuing it makes it worse
+* A metric is a set of rules that allow us to define the distance between strings
+* The Hamming distance is, for a pair of sequences equal in lenght, the number of mismatching positions
+	* It is used for ungapped allignments
+* The Levensthein or edit distance of 2 strings is the minimal number of edits necessary to change 1 string into the other
+	* It is suitable for gapped allignments
+* A scoring scheme is a measure of sequence similarity
+	* It is a substitution matrix
+* Sequence alligment algorthms seek to maximize a scoring function or minimize a dissimilarity measure
+* For aminoacids, we have the PAM and BLOSUM matrices, and matrices derived from structure allignment
+* 1PAM (Dayhoff) is 1% of accepted mutation
+* PAM corrects for the relative abundance of aminoacids
+* PAM250 is constructed with sequences of 20% of sequence identity
+* Odds are ratios of probabilities
+* The log-odds of a mutation can be used as a score
+	* It is the log of the probability of the substitution normalized for the frequencies of the residues
+	* It is often multiplied by 10 because it is a really small value
+* The PAM is a symmetric matrix, therefore sometimes only half is shown
+* Conservation is always positively score, but with different scores depending on aa abundance
+* The BLOSUM are a family of matrices that also use the log-odds for the substitutions
+	* They were produced in the 1990, where there where many more sequences available
+	* Lower matrices (es. BLOSUM40) are more permissive
+* Dynamic programming optimizes the solution of subproblems in order to find a global solution
+	* It gives the correct solution, but it is computationally expensive
+* For database searches, we use methods based on words (K-tuples), also called heuristic
+	* Heuristic means approximate, it does not give an optimal solution
+* Gaps are introduced in order to optimize the number of identities
+* Dynamic programming approaches are Needelman-Wunsch (global) and Smith-Waterman (local)
+* BLAST is an heuristic local allignment method used for database search
+* FASTA is another heuristic algorthm but is no longer used
+* An heuristic method is optimized for the expected result, therefore it does not have any intrinsic validity
+* In BLAST I chop the query in K-tuples and search for matching K-tuples in the database
+	* The K stands for the number of fragments in which I chopped my query
+	* I can search for exact matches or allow for gaps
+	* Then it tries to extend the match until its score is lower than a threshold
+	* Parameters that can be chosed are scoring matrices and gap penalty
+* We are doing multiple alignments to build a sequence profile
+* A sequence profile is a matrix with residues in the y axis and the position in the alignment in the x axis
+	* It is a compressed way to describe a protein family
+* A protein family is a set of proteins charachterised by structural superimposition

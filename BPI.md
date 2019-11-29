@@ -7,7 +7,7 @@
 * The program will be finished in December, in January we will only do exercises
 * The examination is composed in a poster presentation and an oral part
 	* A poster is a self-sufficient work
-	* Usually it is prepared at the begininning of a scientist's career
+	* Usually it is prepared at the beginning of a scientist's career
 	* We should base our poster on selected papers
 	* The poster is not mandatory, but if we do it we will only be asked 1 question in the exam
 * Proteomics is one of the main omics, but also interactomics and secretomics are becaming really interesting
@@ -194,3 +194,56 @@
 * For in silico cloning, we can use Vector NTI Advance or the online platform Benchling
 * When I create recombinant proteins, it is smart to add a linker
 	* Usually Gly is used
+* When I clone a protein into an expression vector, I need to optimize codon usage for that organism
+	* An old approach was to use the most used codon
+	* Now it is common to respect the codon frequencies of its proteins
+	* When I do codon optimization, I can play a little bit so to avoid or introduce cut sites where needed
+* Once I have designed my sequence, I can order it from companies
+* Addgene is the most used plasmid repository
+* You can also order a plasmid from your sequence
+* There are also spin-off that do all the work for you and give you the plasmid to be transfected
+	* It is expensive (some thousand €)
+* Bacterial cultures and eukariotic cell lines can be purchased from ATCC (mostly for cell lines) or from DSMZ (Liebniz, for bacteria)
+	* Cell lines from ATCC are expensive
+	* Bacterial strains from DSMZ are cheap (20€)
+* Site directed mutagenesis can be used for changing the proprieties of proteins
+	* We can change emission wavelenght, increase stability
+
+# Quantitative proteomics
+* Quantitative proteomics gives us an understanding of the state of the cell
+* In MS, I can do quantitative analyses with labeled or label-free approaches
+	* Labeled approaches are SILAC, ICAT, iTRAQ, O18/O16 enxymatic labeling
+	* In labeled approaches I can run all my samples toghether, while in label-free approaches I can only run one sample at a time
+* The SILAC approach uses a labeled aminoacid in a culture medium deprived of that aminoacid
+	* The aminoacid has to be essential (!)
+	* It is frequent to use deuterated Leu (Leud3)
+	* It can be used only for cell cultures and not for samples like urine, blood, ecc
+	* The 2 samples are mixed early in the sample preparation process and analysed together by LC-MS
+	* The LC treats in the same way the samples
+	* In MS, I can easily distinguish the peaks from the 2 samples, and compare protein expression levels
+	* I can also perform SILAC in whole organisms by using appropriate food (!)
+		* This has to be done for more than 1 generation (!)
+* The ICAT approach uses a reactive group that can label an aminoacid side chain
+	* I can use biotin linked with a thiol-specific reactive group (iodoacetamide) through an etilene glycole polimer linker
+	* The linker can be deuterated/normal
+	* Biotin is used for purifing tagged peptides in both normal and deuterated samples, so to minimize error
+	* It can be used only for proteins with accessible Cys, which is much rarer than Leu (SILAC) (!)
+* In the iTRAQ appraoch links an isobaric tag to amine groups
+	* The tag is composed of a balance group and a reporter group
+	* There are 4 different couples of reporter-balance groups, but the couples have all the same mass
+	* The tag is made so to fragment by CID in MS/MS analises between peptide and balance group, and between balance and reporter group
+	* In the first MS the different tags behave in an identical way
+	* After fragmentation, the tags are quantified to yeld the relative and absolute abundances of proteins 
+* In label-free approaches I usually compare LC-MS or LC peaks, and then identify the protein by MS/MS (LC-MS/MS or LC/LC-MS/MS)
+	* The main problem of this approach is the experimental error between different runs
+	* The large volume of data requires automation
+	* Peak intensity is not-quantitative, but in a specific setting with ESI it was found to be roughly
+* Spectral count is another label-free approach where I count the number of peptides identified from my sample
+	* The most represented the protein, the more peptides will be identified
+	* It is not so precise (!)
+
+# 3D MALDI imaging
+* I can use consecutive sections of tissue slice to get a 3d picture of a tissue
+* It is similar to immunohistochemistry, but without the need for ABs (!)
+* 
+

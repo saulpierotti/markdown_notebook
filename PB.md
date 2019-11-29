@@ -155,7 +155,7 @@ print(2 in my_list)
 ```
 * The main difference is that in lists I can reassign elements
 * The split function splits a string in a list separated by the separator given as an argument
-* I cannot split for the empty charachter, to separate a string in any charachter I shoul use `list(str)
+* I cannot split for the empty charachter, to separate a string in any charachter I should use `list(str)`
 
 # For loop
 ```
@@ -167,3 +167,30 @@ for num in my_list:
 >>>3
 >>>4
 ```
+# If statements
+
+```
+if test:
+	code
+elif test2:
+	code
+else:
+	code
+```
+* Logical tests are `==, !=, <, >, <=, >=`
+* Logical operations are `and, or, not`
+
+# Files
+* A file can be opened in reading (r), write (w) and append (a)
+	* Opening in write destroys the prevoious content of the file (!)
+```
+filein = open("path/to/file","r")
+print filein
+>>><open file 'path/to/file', mode 'r' at 0x00000>
+```
+* If I use a for loop in a file, I loop through its lines
+* By default, \n is included in the line and it can be removed with string.rstrip()
+* A file can be closed with filein.close, and this is really important when we are writing in a file
+	* Writing operations can be put in a buffer by the OS, and so if my program crashes I do not now if the file has actually been written
+* To write in a file I can do `fileout.write("some string")`
+	* The \n has to be added manually (!)

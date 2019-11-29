@@ -77,3 +77,37 @@
 * Functional information is a bit sparse in the entry, it can be in many different fields
 * There is also a comment field in the entry
 * We did an exercise about how to do an advanced search on UniProt and download the result as an Excel file, that I cannot reproduce here
+	* We basically have to use boolean terms for the search, select the needed columns for display and then download in the required file format
+* To retrieve the IDs for other databases, we use the Retrieve/ID mapping section
+	* Many databases have a mapping feature, but UniProt is the best place for doing ID mapping (!)
+	* UniProt mapping can be done also from the Unix command line
+* In order to facilitate the retrieval of information from an entry, UniProt creted a visual interface called feature viewer
+	* This is required because of the high information density of UniProt entries, which makes it difficult to read all the information in a textual format
+* Automatic annotation in TrEMBL uses data from SwissProt to infer information
+	* It is composed of 2 main pipelines: Unirule and SAAS
+* Unirule uses expert-curated rules
+	* For each automatic annotation, we can see the set of rules that generated it
+* SAAS uses machine learning for finding the best set of rules, based on sequence features
+* HAMAP is used as a partially automated rule source in Unirule
+	* It is effective when the protein is part of a well defined family
+	* It is used in place of manual annotation when it gives a result at least as good as the manual one
+	* It claims to be more error-free than manual annotation
+* UniParc is the biggest non-redundant protein sequence database, it contains sequences from various sources
+	* It is not annotated
+* UniRef provides clusters of sequences from UniProtKB and selected UniParc entry
+	* It can be accessed from any entry going to the "similar sequences" link
+	* UniRef100 combines identical sequences with at least 11 residues
+	* UniRef90 clusters UniRef100 sequences that share at least 90% sequence identity and 80% overlapping with the seed
+	* UniRef50 in the same way clusters sequences from UniRef90
+	* It is useful because I can use the seed as a representative of the cluster, and so reduce the number of entries that I analyse
+		* It can make BLAST searches faster (!)
+	* The seed is usually the longest or best annotated sequence sequence
+		* It is considered annotation score, if it is manually annotated, and the source organism
+		* If the source organism is a model organism it is preferred
+* All the changes that an entry witnessed are stored in UniProt in the "history" link
+* In UniProt I can also find complete proteomes
+	* They are a collection of all the entries from an organism with a completely sequenced genome
+	* Reference proteomes are the ones with best annotated entries and usually belong to model organisms
+	* They evolve with time, when new proteins are added
+	* They involve a lot of manual curation
+* There are 25000 genes, 100000 transcripts and 1000000 proteins in humans
