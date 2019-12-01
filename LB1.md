@@ -57,8 +57,13 @@
 
 ## Crio-electron microscopy
 * Crio-electron microscopy gives us a diffraction pattern using an electron beam
-	* It is really useful for really big complexes that cannot be cristallized
-	* Resolution is lower than X-ray diffraction
+* It is really useful for really big complexes that cannot be cristallized
+* Resolution is lower than X-ray diffraction
+* It allowed to obtain the structure of entire ribosomes
+* It cannot be used with small proteins that cannot whitstand the electron bombardment
+* It is possible to capture the protein in different conformations, and so understand how it works
+	* It was used by Rubinstein to obtain a movie of V-ATPase (!)
+* It is really costly, around 6000€/day
 
 ## PDB and other DBs and tools
 * The PDB file does not contain the electron density, it is an approximation of the structure
@@ -131,6 +136,11 @@
 * One of the algorthm for strucutural alligment used in the PDB is called java combinatorial extension (JCE)
 * JCE was written by Philippe Bourne, the director of the PDB
 	* It is one of the best-performing algorithms
+	* It breaks down the proteins in fragments, and it tries to allign the structure of these by several methods (RMSD, secondary strucutre, ...)
+	* It forms a series of alligned fragment pairs (AFPs) and filters them, retaining only those that respect a given measure of local similarity
+	* It generates an optimal path among AFPs, that yelds the final allignment
+	* The first AFP that nucleates the allignment can occur at any position
+	* The size of AFP and the maxium allowed gap are parameters, usually set to heuristic optimal values
 * The lenght of an allignment is the lenght of the protein sequence, plus the gap introduced
 * Sequence identity is a score between 0 and 1 that gives the number of corresponding residues after the allignment
 * Sequence similarity is a score between 0 and 1 that gives the number of similar residues after the allignment
@@ -197,3 +207,62 @@
 * A sequence profile is a matrix with residues in the y axis and the position in the alignment in the x axis
 	* It is a compressed way to describe a protein family
 * A protein family is a set of proteins charachterised by structural superimposition
+* Affinity comes from electron densities
+* Protein families are important because they allow us to cluster PDB data
+	* They are constructed starting by comparing proteins with the same function
+	* It can be then computationally describe with structural allignment
+	* A protein family is described with an HMM (hidden markow model)
+* A heuristic method is not based on theory, while QED is firmly based on theoretical ground
+* Whatever is heuristic is at the core data-driven
+* A sequence alligment mixes algorthm and substitution matrices to give a result
+* Sequence allignment methods are less stable than structural ones, more sensitive to lenght of the sequences and other variables
+* Hidden Markow Models are also called Pfam domains
+* When alligning structures, it is better to use structures taken with the same method
+* The score of an alignment is the sum over its lenght of the score for each match
+	* It uses a score substitution matrix to determine the score of each match
+* The bit-score is the Log scaled version of the score
+	* It is used by BLAST and it uses a formula that is a bit complex
+		* $S'=\frac{\lambda S-\ln(K)}{\ln(2)}$
+	* The bit-score S' depends on the parameters $\lambda$ and K
+	* The 2 parameters depend on the substitution matrix and on the gap penalty
+	* It is independent on the size of the search space (dimension of the database)
+* The E-value is a correction of the p-value for multiple testing
+	* It is the expected number of matches of that score that I expect in a random database
+	* It depends on $K, \lambda$ and the size of the database
+
+## BLAST (original paper)
+* Originally described by Altschull in 1990 in J. Mol. Bio.
+* It is 1 order of magnitude faster than other heuristic methods
+* Global alligment methods (NW) optimize the allignment over the whole sequence, and can include low-similarity regions
+* Local allignment methods (SW) can yeld multiple allignments from a single comparison
+	* Low similarity regions do not affect the allignment score
+	* Local allignment is preferred in DB searches
+* Many similarities methods start with a substitution matrix
+	* It used PAM120 for proteins and a -5 identity -4 mismatch matrix for DNA
+* A sequence allignment is a continuous stretch of residues of any lenght
+* The similarity score of an allignment is the sum of similarity values for each pair of alligned residues
+* A maximal segment pair (MSP) is defined as the highest scoring pair of identical segments chosen from 2 sequences
+	* It can be of any lenght, so to maximize the score
+	* It provides a measure of local similarity
+* Since in biology we care for all conserved regions, not only the best scoring one
+	* Therefore a segment pair id defined as locally MSP if its score cannot be improved by extending or shortening both segments
+* BLAST seeks all local MSP that score above a cutoff
+* The greatest advantage of MSP is that we have the matematical tools to determine its statistical significance
+* I want to retrive from a database all the sequences with MSP score above a cutoff S
+	* Sequences that score far above the cutoff are almost definitely biologically relevant, while borderline matches can be evalued considering the biological context
+* BLAST speeds up DB search by avoiding to spend time in sequences that are unlikely to give high MSP scores
+	* Given a fixed word lenght w, BLAST seeks only segment pairs with a word of score at least T
+	* When a matche is found, BLAST tries to extend the segment to see if it reaches the desired final cutoff score S
+	* The lower the value of T, the more probable that a segment of score >S will contain a word with score >T
+	* However, the lower the value of T the higher the number of hits, and therefore the execution time
+	* Random simulations allowed to determine an optimal T value for various conditions
+* The algorithm first makes a list of words that score >T when compared with some word of the query
+	* The time of list generation is linearly proportional to the lenght of the query
+* During the extension phase, if the score falls below a certain treshold lower than the original MSP, it is discarded
+	* It loses in accuracy, but in a negligible manner
+* Theoretical results on the distribution of MSP scores of random sequences allow the following determiantion
+	* Given a set of probabilities for the occurrence of each residue and a scoring matrix
+	* The theory gives the parameters $\lambda$ and K for evaluating the statistical significance of MSP scores
+	* With 2 random sequences of lenght m and n, the probability of finding an MSP with score equal or better than S is $1-e^{-y}$, with $y = K*m*n*e^{-\lambda S}$
+	* In a similar way, we can calculating the probability of having c MSPs with score greater than S
+	* This result is the p-value of the MSP score
