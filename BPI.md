@@ -49,6 +49,9 @@
 * A volcano plot has the fold change in expression in the x axis and the significance in the y axis
 	* It is used to rapidly identify differentially expressed proteins (it is also applicable to other fields)
 
+# Random notes
+* Bioluminescence seems that appeared as a way to get rid of oxygen, when it firs appeared in geological times
+
 # Protein separation
 * Proteins can be separed with different chromatographies or electrophoresis, microdialysis
 * We can use depletion techniques to remove typical high-abbundance proteins
@@ -247,3 +250,42 @@
 * It is similar to immunohistochemistry, but without the need for ABs (!)
 * 
 
+# Protein-protein interactions
+* String is a database of experimental and predicted interactions
+* Physical interactions are experimentally determined with a bait-prey approach
+* Frequently we want to identify the partner of a specific protein
+	* In this case we have 1 bait and a library of preys
+* The yeast two-hybrid system uses a trascription factor as a reporter
+	* The TF is composed of a DNA binding domain and an activating domain
+	* The 2 domains are separately linked to bait and prey
+	* A reporter gene is expressed if the 2 proteins interact
+	* We build bait and prey plasmids with the recombinant proteins
+	* The reporter gene can be a survival gene, or beta galactosidase (blue colonies in X-gal)
+* The mammalian two-hybrid uses 3 plasmids
+	* A plasmid with the BD, one with the AD, and a third with a minimal TATA box and the reporter gene
+	* It is used for proteins that are not appropiately modified post-translationally by yeast
+	* It is useful also for proteins that reside in a specific organelle
+	* Another advantage is that it is faster: the reporter gene makes a visible effect in 48h, while with yeast we have to wait for the colonies to grow
+* SEAP (secreted alkaline phosphatese) is a secreted protein that can withstand 65°C and it is often used as a reporter gene
+	* We can degrade the endogenous alkalin phosphatase by heating to 65°C so to remove background noise
+	* We can detect alkaline phosphatase activity in various ways
+	* It is advantageous because it is secreted, so we do not need to lyse our cells (!)
+* The Pull-down assay uses a recombinant bait-tag complex expressed in E. coli
+	* We can immobilize the bait using antibodies anti-tag, or molecules that bind the tag
+	* Glutathion-S-transferase is a commonly used tag, pulled down with glutathion
+* The co-immunoprecipitation assay exploits the specificity of an Ab for the bait
+	* The prey bound to the bait co-precipitates
+	* After a washing step, we can elute and then identify our protein
+* Arrays are differentiated from chips because in arrays we have molecules immobilized in high density, while chips exploit microfluidic technologies 
+* Protein arrays can be used to determine interacting partners
+* Immobilization of nucleic acids on a chip is easy, but with proteins it is more tricky because you can loose functionality
+	* The orientation of absorption is the main problem, that can be overcome by using immunoaffinity binding that forces orientation 
+	* Covalent binding is usually achieved with Lys residues
+* Aptamers are a syntetic peptides or oligonucleotides that can bind a target in a really specific way
+	* I incubate a random library with the target and then I wash away all but aptamers that bind the target
+	* I charachterise the bound aptamers and I amplify them, and repeat the process
+	* It is a targeted evolution system
+	* I am selecting for partners of the tag in the experimental conditions, but I do not know if they will bind also in vivo (!)
+	* I have to test also for selectivity
+	* It is a really expensive system, and to date only the aptamer for thrombin is really effective
+* Protein array printing is done by robots, with contanct or non contact methods
