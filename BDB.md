@@ -111,3 +111,31 @@
 	* They evolve with time, when new proteins are added
 	* They involve a lot of manual curation
 * There are 25000 genes, 100000 transcripts and 1000000 proteins in humans
+
+# Protein classification databases
+* Proteins can be classified in superfamilies, families, subfamilies
+* A protein can be composed of different domains
+* Sequence features are active sites, binding sites and other charachteristics found inside domains
+* A signature is a matemathical model build from multiple sequence allignments
+* A signle motif, also called pattern, can be represented by a regular expression
+	* Prosite is a DB of patterns
+* A fingerprint is composed of multiple motives in a specific arrangement
+	* PRINTS is a DB for fingerprints
+* A profile is built from a multiple global allignment and consists of a position-specifc scoring matrix (PSSM)
+* HMMs convert an MSA in a PSSM
+* The general workflow of building a signature is to do a MSA, generate a draft model, use it against the all Uniprot and develop a mature model
+* InterPro is a meta-DB that gathers data about patterns, profiles, fingerprints, HMMs
+	* It is an hub of protein calssification and annotation
+	* It also gathers data from UniProt and PDB
+	* It is cited by uniprot in each entry
+* Pfam families are made from a seed alignment manually curated, and then are refined by searching the whole uniprot
+* Topology schemes are useful for identifing the fold of a protein
+* Structural classification DBs are SCOP and CATH/Gene3D
+* It seems that we have discovered all fold types
+	* No new folds have been reported in SCOP and CATH
+* CATH classifies structures from the PDB while Gene3D predicts the location of functional domains in available sequences using informations from CATH
+* ECOD is another DB that claims to classify many more domains of CATH and SCOP (it makes a finer classification)
+	* Its classification is based on evolutionary relationships
+	* It is a newcomer, we will see how it will go
+* SCOP in itself is dead, but its legacy has been taken by SCOPe
+* SCOP2 is a different DB, made from the same people that made SCOP, that uses a different classification system based on networks

@@ -419,41 +419,4 @@
 	* If my starting sequence identity is above 60% my model is good for docking and it is comparable to a low quality experimental structure
 	* In the 60-30% range we have a rough idea of the organisation of the backbone
 	* Under 30% we can be lucky, or completely wrong
-* The coverage of a local allignment is its lenght compared to the sequences
-
-# Exercise for the report
-* In the report we can model as many sequences from the homework.txt file as we want, but the first one (B0JDP9) should be annotated in depth
-* The protein is a putative laccase from a boletus and it is really poorly annotated
-	* Will we confirm this EC number?
-* It comes from TrEMBL and it has evidence at the transcript level
-* There are some GO terms, but they have been only annotated computationally
-* There is a putative signal peptide
-	* Should we carry it along in the computation?
-	* In the PDB structures we do not have signal peptides
-* We perform a BLASTp against the PDB
-* What E-threshold do we choose?
-	* If it is too low I tend to find very exact but local allignments, if it is too high non-significative matches
-	* I do not use filters, I allow gaps and I want 50 hits
-	* I leave the auto matrix
-		* It will use blosum62
-	* Let start with 0.1
-* In the report I would write
-	* I used blastp 2.9.0+, E-value 0.1, matrix Auto against uniprotkb_pdb version...
-	* In the materials and methods I should specify a reference for blast, the parameters used, the DB version used
-* The score reported after BLAST is a bit-score
-* I retrieved A0A3F2YLU5, with e-value 0.0 and 62.3% identity
-	* There is a small portion missing at N terminal, maybe the signal peptide?
-* The second hit (Q12718) is a Swissprot entry so we start from it
-	* Identity 62.0%, e-value 0.0
-	* Function: lignin degradation and detoxification of lignin derived products
-		* EC 1.10.3.2, curated
-			* This EC number is for a laccase, or urshiol oxidase
-			* If I follow the link from the EC number, I go to Enzyme (Expasy)
-			* There are cofactors: Cu cation, so there is a metal binding site
-	* There are some pubblications: we should read them
-	* It is a secreted protein, so I can expect SS bridges
-	* There are many PTMs: SS bonds, glycosilation
-	* Since there are glycosilations, I have many residues that have to be conserved for conserving structure
-		* All the glycosilations are N-linked on Asn
-	* We have only 1 PDB structure: 1GYC
-		* It is an X-ray with $1.90\AA$ resolution
+* In the report we can model as many sequences from the file as we want, but the first should be annotated in depth

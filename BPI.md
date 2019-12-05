@@ -289,3 +289,62 @@
 	* I have to test also for selectivity
 	* It is a really expensive system, and to date only the aptamer for thrombin is really effective
 * Protein array printing is done by robots, with contanct or non contact methods
+* Phage display is an in vitro selection technique that fuses a target protein with the coat protein of a phage
+	* I can easily build a library of putative interactors to my protein of interest
+	* Through repetitive selection and infection cycles, we can select for strong binders to the protein of interest
+	* The selection is done with a standard affinity techniques using the protein/molecule of interest as a bait
+	* High affinity phages bind the support, and then can be eluted with free bait
+	* I can perform targeted evolution with error-prone PCR
+	* It is used in drug discovery for selecting targets and for selecting high specificity antibodies
+	* As always, are we sure that our findings will translate in vivo?
+* FRET and BRET can show in vivo interactions
+	* BRET is like FRET but uses bioluminescence
+	* It uses 2 fluorescent molecules, one emitting on the absorption wavelenght of the other
+	* It is really strongly dependent on the distance between the 2 molecules, so it can detect interactions
+	* The resonace efficiency depends on the inverse 6th power of the distance (generally 1-10 nm is the range)
+	* The energy transfer is non-radiative: the relative orientation of the dipole moment of the molecules must be approximately parallel
+	* There has to be spectral overlap between emission of the donor and absorption of the acceptor
+	* For fluorescent proteins I can just clone a recombinant protein (in vivo!), while for organic molecules I need click chemistry (in vitro!)
+	* FRET can be used for detecting not only interaction, but also conformational changes (!)
+		* This is useful for detecting enzimatic activity, intramolecular interactions, ligand binding
+		* I can engeneer a sensor that emits FRET when there is kinase or protease activity in the medium
+	* RET signal is rationmetric: it does not depend on the number of cells, volume and other variables
+	* The signal is calculated as a ratio of the emissions of acceptor and donor, minus a correction factor that accounts for the spectral overlapping of donor and acceptor
+	* In BRET luminescence is a consequence of a chemical reaction: we do not need to excite
+		* There can not be autofluorescent background, and no photobleaching
+	* The SRET (sequential BRET-FRET) uses a 3-step energy trasfer
+		* Its efficiency is quite low (!)
+	* Since we use fusion proteins, we can alterate the structure of our protein (!)
+	* It has been used for GPCRs
+	* When we use BRET for monitoring homodimerization, I have to consider that I will have many dimers with the same tag (so no fluorescence (!))
+	* we can also use quantum dots as acceptors
+		* A quantum dot is a semiconductor nanocrystal
+		* Its emission can be finely tuned by particle size, and its emission spectrum is really narrow
+		* Their abosrption spectrum is really wide, it can be excited by almost any fluorescent biomolecule
+	* QD-BRET uses a quantum dot bioconjugate with Renilla Luciferase that is able of self-excitation
+	* QD-BRET was pioneerly used to detect protease activity
+		* Inteins (do)
+* Protein complementation assay (PCA) is based on the expression of a luciferase as separated domains bound to proteins that we think could interact
+	* If the proteins interact, the luciferase assebles and we can detect luminescence
+	* The major drawback is that the 2 halves of the luciferase have high affinity for each other, so they could interact even without interaction of the target proteins (!)
+	* The binding of protein fragments is really cooperative, therefore it can be used to span a wide range of 
+	* NanoBiT is a next-generation PCA approach that was develloped by target evolution
+		* The halves have low affinity to each other, so they do not give aspecific signal
+		* They have low steric hindrance, so they do not disturb interactions
+* We can combine PCA and BRET to assay non-binary interactions
+	* The donor or acceptor can be made of 2 halves that are functional only if assembled
+* We can use these tools also for in vivo imaging
+	* This is in complaiance with the 3R rule
+		* Reduction of the number of animals required
+		* Refinement of the experiment so to minimize harm
+		* Replace, if possible, the use of animals
+	* There is no need to kill the animal, so we can get imaging at different timepoints (!)
+	* We can use these tools to monitor the occurrence of specific biological events
+	* The general method is to overlap a light image of the animal with the image of the signal, taken in a dark box
+		* We have information on both signal intensity and location
+	* The nude mouse is really useful because it lacks the thymus and it is nude
+		* It is easier for imaging, and for implanting xenografts
+	* We need to use mostly red light emission spectra, because it penetrates more easily through tissues
+* NIR-II imaging (do)
+* Single walled carbon nanotubes (SWCN) are being exploited (do)
+* For QD and SWCN, we have no information about the clinical safety of these devices

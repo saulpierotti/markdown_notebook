@@ -82,6 +82,10 @@
 	* PacBio is going to be acquired by Illumina
 	* We have short reads, therefore assembly is difficult
 	* 454 (La Roche, pirosequencing) is practically dead today
+* The depth of coverage is the number of unique reads that contain a specifc nucleotide in the assembly
+	* He said also another definition, check
+* Sequencing a mammalian genome at 50x costs around 2000€+VAT in China or South Korea
+	* BGI (Bejing genome institute) is the largest sequencing provider
 
 ## Ion torrent
 * There are many sequencing chips, with different throughputs
@@ -155,6 +159,51 @@
 	* I can play with fragment size to obtain my contigs
 * When I sequence a genome, I need to consider sequencing depth and coverage
 	* Sequencing depth is the average number of times that a nucleotide in my reference genome is represented in a read
+
+## AB SOLiD
+* It is dead by now, but could be potentially great because it gives the highest throughput
+* Its reads are really short (30 bp) so it is computationally heavy to asseble the reads and it is impossible to use with repetitive regions
+
+## Complete genomics
+* It is used for re-sequencing common genomes
+* Fragments are made circular and then amplified by rolling circle amplification, obtaining DNA nanoballs
+
+## PacBio
+* It is really a promising technology
+* Reads are long, up to a 6-10 kb, but troughput is low
+* The error rate is quite high, and probably it cannot be reduced under 5%
+* It is costly, 40k€ for 10x in mammalian genomes
+* It is a golden standard for new sequencing projects, usually matched with Illumina
+	* PacBio facilitates assembly, Illumina gives a low error rate
+* PacBio is going to be bought by Illumina, but the anti-trust is opposing it
+
+## Oxford nanopore
+* Long reads, but high error rate and low thorughput
+* The reads can potentially be very long, up to 100kb depending on library preparation
+* DNA passes trough an hemolysine pore altering the ion flow thorugh the pore
+* Interpretation of the raw data is difficult, because the meaning of reads depends on the sequence context
+	* Machine learning (!)
+
+## Applications of NGS
+* ChiPseq (chromatine immunoprecipitation) is a method used to analyse DNA-protein interactions
+	* The output is a library of sequences bound that bind the protein of interest
+	* The first step is to fix the proteins with DNA using formaldehyde
+	* Subsequently, cells are lised and DNA fragmented
+	* The sequences of interest are recovered with Ab against the protein of interest
+	* I reverse the DNA-protein binding and sequence the fragments 
+* If I want to reduce cost, I can sequence only the part of interest, for instance the exome
+	* In order to sequence the exom I need a capturing system, and if not commercially available I have to evaluate if developping a capturing system is worth it 
+	* In order to enrich for the exome, I need to have specific probes that bind to exon regions, either in solution (on beads) or in microarrays
+* In order to reduce cost, I can run more samples in the same lane by using a barcode attached to my fragments
+* MySeq can be used for metagenomics (16S sequencing, 24 samples per lane) and for microbial WGS
+* HiSeq can be used for WGS (3-4 lanes per genome) and exome capture (4 samples per lane)
+
+# How to do a de novo sequencing
+* The human genome is repeat rich
+* The main approaches are whole genome shotgun and hierarchical shotgun approach (BAC based)
+* Hierarchical shotgun allows to resolve repetitive regions by building bigger contigs (!)
+* At the time of the first human genome, sequencing was expensive so we could not sequence BACs and then assemble them, we needed to select non-duplicate BACs beforehand
+	* I start from a gene in a known position in a chromosome, and check which BACs contain it by PCR
 
 # Aplotypes
 * We can detect crossing-over by looking for the association of genetic markers
