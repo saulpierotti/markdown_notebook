@@ -420,9 +420,14 @@
 	* In the 60-30% range we have a rough idea of the organisation of the backbone
 	* Under 30% we can be lucky, or completely wrong
 * The coverage of a local allignment is its lenght compared to the sequences
+* How to select the best template
+	* Highest sequence identity
+	* Highest coverage
+	* Highest template resolution
 
 # Exercise for the report
 * In the report we can model as many sequences from the homework.txt file as we want, but the first one (B0JDP9) should be annotated in depth
+* As a template we should use one that has a title, author (me), abstract
 * The protein is a putative laccase from a boletus and it is really poorly annotated
 	* Will we confirm this EC number?
 * It comes from TrEMBL and it has evidence at the transcript level
@@ -447,6 +452,7 @@
 	* Identity 62.0%, e-value 0.0
 	* Function: lignin degradation and detoxification of lignin derived products
 		* EC 1.10.3.2, curated
+			*1. . . means ocydoreductase
 			* This EC number is for a laccase, or urshiol oxidase
 			* If I follow the link from the EC number, I go to Enzyme (Expasy)
 			* There are cofactors: Cu cation, so there is a metal binding site
@@ -457,3 +463,86 @@
 		* All the glycosilations are N-linked on Asn
 	* We have only 1 PDB structure: 1GYC
 		* It is an X-ray with $1.90\AA$ resolution
+		* Crystal structure determination at room temperature of a laccase from trametes versicolor in its oxidised form containing a full complement of copper ions 
+			* Full complement means 4 Cu++ ions in this case
+	* When we want information about an enzyme, we can look in BRENDA
+* We should study the problem before attempting to solve it
+* In the template we see that 3 Cu++ are in plane, while 1 is further apart
+* Whatever we do in our model, the 3 coppers have to be in that exact distances, to the .1 digit
+	* This architecture is a funneling system for extracting electrons from the substrate
+* Biological motivations have to be included in the report
+	* We shouldn't copy-paste, but read the articles and understand
+* When a metal ion enters in the structure of a protein it needs to be stabilized by residues
+	* Cu++ is most frequently stabilised by His
+* The copper ions are numbered and are referred to with a type entry
+	* The type refers to the spectrum of the ion
+* I should write a table where I report whatever is relevant (position that have to be conserved)
+* In the template 
+* The stabilizion of Cu is given by the interaction of the Cu outermost cell with His side chain through the formation of coordination (covalent) bonds
+	* Coordination bonds involve sharing 2 electrons
+* Positions that need to be conserved (numbers of cu not correct)
+	* His84->Cu1
+	* His86->Cu2
+	* His129->Cu2
+	* His131->Cu3
+	* His415->Cu4
+	* His418->Cu1
+	* His420->Cu3
+	* His472->Cu3
+	* His473->Cu4
+	* His474->Cu2
+	* His478->Cu4
+* These positions are in uniprot, in PDB it is different because of the signal peptide
+	* I can alligne with lalign the 2 sequences and see
+* The His have to be in that position and they need to have the same torsion angles ($\chi$ angles)
+	* The $\chi$ angle is the relative torsion angle between the lateral side chain and the backbone
+* If in the active site the torsion angles are different, I cannot have a functional site
+* In order to reduce an O2 molecule I need 4 electrons
+* Electrons are funneled and this process is really dependent on the position of the metal ions
+* In a redox reaction the acceptor has an higher redox potential of the donor
+* Laccases are not so specific
+* Before the paper, there was another crystal of a laccase but it was copper depleted
+	* The fold was similar to this
+	* 
+* Electrons flow from the lone Cu to the 3 Cu in plane
+* In the abstract we need an excuse to justify why we are doing this activity
+* There are residues of the gene sequence that do no match the structure
+	* It can be sequencing errors, gene variants, due to the expression system
+* The abstract should be a few lines
+* Introduction can be a few sentences expanding what was said in the abstract
+* Experimental procedure should follow the workflow that we did
+	* The allignment, with all the parameters and references
+	* A reference to modeller
+* We should put a picture of the 3d structure
+* We have 2 SS bridges to put as a constraint in the model
+* The cluster of 4 Cu is called also T2/T3 cluster
+	* The 3 Cu are type 3
+	* The lone Cu is type 2
+* There is a water funnel from the catalytic site to the solvent
+* Alligning uniprot and pdb sequences with lalign, I see that the difference is in the signal peptide
+	* 20 residues more in the uniprot
+So these are the PDB positions
+	* Lone Cu
+		* Cys453.sg->Cu1(cu1503)
+			* 2.19 $\AA$
+		* His395.nd1->Cu1(cu1503)
+			* 2.02 $\AA$
+		* His458.nd1->Cu1(cu1503)
+			* 2.04 $\AA$
+	* Cu triplet
+		* His66.nd1->Cu3(cu1500)
+			* 2.15 $\AA$
+		* His109.ne2->Cu3(cu1500)
+			* 2.12 $\AA$
+		* His454.ne2->Cu3(cu1500)
+			* 2.17 $\AA$
+		* His111->Cu2(cu1501)
+			* 2.23 $\AA$
+		* His400.ne2->Cu2(cu1501)
+			* 2.12 $\AA$
+		* His452.ne2->Cu2(cu1501)
+			* 2.16 $\AA$
+		* His64.ne2->Cu4(cu1502)
+			* 2.01 $\AA$
+		* His398.ne2->Cu4(cu1502)
+			* 1.97 $\AA$
