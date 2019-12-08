@@ -101,7 +101,7 @@
 	* UniRef50 in the same way clusters sequences from UniRef90
 	* It is useful because I can use the seed as a representative of the cluster, and so reduce the number of entries that I analyse
 		* It can make BLAST searches faster (!)
-	* The seed is usually the longest or best annotated sequence sequence
+	* The seed is the longest or best annotated sequence
 		* It is considered annotation score, if it is manually annotated, and the source organism
 		* If the source organism is a model organism it is preferred
 * All the changes that an entry witnessed are stored in UniProt in the "history" link
@@ -111,31 +111,56 @@
 	* They evolve with time, when new proteins are added
 	* They involve a lot of manual curation
 * There are 25000 genes, 100000 transcripts and 1000000 proteins in humans
+* Uniprot can be accessed programmatically through a python library
+
+# Errors in databases
+* For a long time sequences have been annotated on the basis of structural and sequence similarity
+* This approach has its limits, since not always structural or sequence similarity correspond to similar function
+* Burkard Rost published a paper where he says that enzyme function is less conserved than expected
+* The current level of misannotation is unknown, and seems to be increasing
+* The level of misannotation in enzyme superfamilies that comprise families with different functions is particularly high
+* The analysis of the conservation of catalytic residues can improve annotation accuracy
 
 # Protein classification databases
+* Classifing proteins reduces the amount of data we need to deal with, and allows us to make predictions about protein function
+* Interpro and Pfam are databases of protein classification based on sequence
 * Proteins can be classified in superfamilies, families, subfamilies
-* A protein can be composed of different domains
-* Sequence features are active sites, binding sites and other charachteristics found inside domains
-* A signature is a matemathical model build from multiple sequence allignments
+	* The deeper we go, the more we can infer functional features for the members
+* A domain is an independently-folding unit of protein sequence which harbours a function
+* Sequence features are active sites, binding sites and other charachteristics short sequences found inside domains
+* A protein signature is a matemathical model build from multiple sequence allignments
+	* Motives, fingerprint, profiles, HMM are signatures
 * A signle motif, also called pattern, can be represented by a regular expression
 	* Prosite is a DB of patterns
 * A fingerprint is composed of multiple motives in a specific arrangement
 	* PRINTS is a DB for fingerprints
+	* Fingerprints are useful for differentiating subfamilies
 * A profile is built from a multiple global allignment and consists of a position-specifc scoring matrix (PSSM)
-* HMMs convert an MSA in a PSSM
+* HMMs are complex algorithms capable of modelling the prbabilities of residue change, insertion and deletion
+	* They are a really powerful protein signature
 * The general workflow of building a signature is to do a MSA, generate a draft model, use it against the all Uniprot and develop a mature model
 * InterPro is a meta-DB that gathers data about patterns, profiles, fingerprints, HMMs
-	* It is an hub of protein calssification and annotation
+	* It is an hub of protein classification and annotation
 	* It also gathers data from UniProt and PDB
 	* It is cited by uniprot in each entry
 * Pfam families are made from a seed alignment manually curated, and then are refined by searching the whole uniprot
+	* The mature MSA is automatic, while the seed is curated manually
+	* A Pfam family is represented by an HMM
+	* Superfamilies in Pfam are called clans
+	* From 2016 Pfam started to use reference proteomes insted of the whole Uniprot, to decrese redundancy
+* The number of protein folds is limited, and classifying protein based on their fold allows to understand their functional and structural relationships
 * Topology schemes are useful for identifing the fold of a protein
+* We can represent the topology of a protein by drawing its secondary structure as a flat diagram
 * Structural classification DBs are SCOP and CATH/Gene3D
 * It seems that we have discovered all fold types
-	* No new folds have been reported in SCOP and CATH
-* CATH classifies structures from the PDB while Gene3D predicts the location of functional domains in available sequences using informations from CATH
-* ECOD is another DB that claims to classify many more domains of CATH and SCOP (it makes a finer classification)
+	* No new folds have been reported in SCOP and CATH since 2010
+* SCOP in itself is dead, but its legacy has been taken by SCOPe
+	* The first level classification is alpha, alpha/beta, alpha+beta, all beta, small proteins
+	* The classification is class>fold>superfamily>family>sequence
+* SCOP2 is a different DB, made from the same people that made SCOP, that uses a different classification system based on networks
+* CATH classifies structures from the PDB while Gene3D predicts the location of functional domains in available sequences (Uniprot) using informations from CATH
+	* The first level classification is Mainly alpha - Alpha-beta - Mainly beta
+	* The classification is class>architecture>topology or fold>homologous superfamily>sequence family
+* ECOD is another DB that claims to classify many more domains than CATH and SCOP (it makes a finer classification)
 	* Its classification is based on evolutionary relationships
 	* It is a newcomer, we will see how it will go
-* SCOP in itself is dead, but its legacy has been taken by SCOPe
-* SCOP2 is a different DB, made from the same people that made SCOP, that uses a different classification system based on networks

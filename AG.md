@@ -198,13 +198,6 @@
 * MySeq can be used for metagenomics (16S sequencing, 24 samples per lane) and for microbial WGS
 * HiSeq can be used for WGS (3-4 lanes per genome) and exome capture (4 samples per lane)
 
-# How to do a de novo sequencing
-* The human genome is repeat rich
-* The main approaches are whole genome shotgun and hierarchical shotgun approach (BAC based)
-* Hierarchical shotgun allows to resolve repetitive regions by building bigger contigs (!)
-* At the time of the first human genome, sequencing was expensive so we could not sequence BACs and then assemble them, we needed to select non-duplicate BACs beforehand
-	* I start from a gene in a known position in a chromosome, and check which BACs contain it by PCR
-
 # Aplotypes
 * We can detect crossing-over by looking for the association of genetic markers
 * An aplotype is a cluster of genes that are usually eredited toghether
@@ -231,3 +224,39 @@
 	* It reports chromosome number, SNP ID, position, distance from other SNPs
 * A polimorphism has a frequency higher than 1%
 * For genotyping, we want to exclude rare alleles
+
+# How to do a de novo sequencing
+* The human genome is repeat rich
+* The main approaches are whole genome shotgun and hierarchical shotgun approach (BAC based)
+* Hierarchical shotgun allows to resolve repetitive regions by building bigger contigs (!)
+* At the time of the first human genome, sequencing was expensive so we could not sequence BACs and then assemble them, we needed to select non-duplicate BACs beforehand
+* I start from a gene in a known position in a chromosome, and check which BACs contain it by PCR
+	* This links my assembly to the physical chromosome
+* Genetic maps are linkage maps, and they can be used for assembling genomes
+* Physical maps refer to the position of a gene in the chromosome
+* A strategy to select overlapping BACs is to digest them with restriction enzymes and search for common fragments among different BACs
+* The main problems of hierarchical shotgun are that it is slow and assembly is problematic if some BACs contain chimeric DNA
+	* Chimeric DNA is a fragment that is created by the association of fragments from different chromosomes during the construction of the library
+* The alternative to hierarchical shotgun is whole genome shotgun
+* The state of the art is to do a first PacBio sequencing to get a rough map to which I can attach subsequent precise Illumina paired-end reads
+	* I want to use more than one Illumina run, with different lengths, so to discriminate repetitive regions and to correct errors in the PacBio phase
+* Radiation hybrid maps now can be used for refining an assembly
+	* I form an hybridome between an immortalized cell from a different species and a normal cell from the organism that I want to sequence
+	* The hybrid will lose most of the genome of the normal cell, and it will retain a random fragment
+	* In this way I can get a library (!)
+	* The evaluation of the retained fragment is done by cariotyping thanks to banding patterns
+	* I can then test by PCR to locate specific tags
+	* By cross-referencing caryotype and PCR I can get a rough map of in which chromosome genes are (not so useful now, used in the pre-sequencing era)
+	* If before the formation of the hybrid I irradiate the normal line, I break its DNA and get small fragments
+	* In this case I wont to have avery big library, where each clone has a small fragment
+	* I can test by PCR in order to understand which markers from which chromosomes I get from each clone
+	* If in my assembly I have a contig that I cannot locate, I design PCR primers for that region
+	* I test all the library with the primers, and I select the clones that contain my tag
+	* I check those clones for other markers of known position, and I check the ones that are more frequently associated with the tag of unknown position
+	* In this way, I can say that the unallocated contig is physically linked to a tag of known position
+	* The distance from between tags defined in this way is defined in cRay
+
+# Repeated sequences
+* They can be spotted with repeat masker
+* This tool can mark SINE, LINE, Alu and will mask it in my sequence
+* Masking means to substitute a sequence with a stretch of NNNN of the same length
