@@ -422,8 +422,58 @@
 * The coverage of a local allignment is its lenght compared to the sequences
 * How to select the best template
 	* Highest sequence identity
-	* Highest coverage
+	* Highest coverage, at least 70%
 	* Highest template resolution
+* Modeller was written by Sali, a PhD student, who became really famous
+	* It is written in Fortran
+	* It transplants the coordinates of the template to the target and it seeks for protein stability
+	* It checks if the pairwise interactions are conserved (spatial restraints)
+* Once we get the model, if it does not make sense we can try to tweak the initial sequence allignment
+* If the model respects the ramachadran plot, we can allign it to the template structure
+* When trasferring functional annotation, we have to be careful of the meaning of what we are doing
+	* The GO Cellular component can be different even if the structure is conserved
+* Swiss-model runs modeller in remote, and it has many pre-computed models
+* We need to be carefull with the pre-calculated models because they do not have any quality check (!)
+* Modeller is a software that models the 3D structure of proteins by satisfaction of spatial restraints
+* The input for modeller are the set of spatial restraints on the structure of the protein and of the ligand to be modelled
+* The output is a structure for the target that satisfies the restraints as well as possible
+	* Restraints are distances, angles, pairs of angles, ecc.
+	* The restraints are automatically derived from the allignment with the template
+	* A restraint is defined in term of a probability density function
+* In modeller I can ask as many models as I want, and they are scored from best to worse
+
+# How to write a report
+* We can try again with 5 models instead of 3
+* Title should be "Functional annotation of proteins with comparative modelling"
+* For now just introduction, not abstract
+* In the introduction we should put the biological importance of the template and something about the protein family
+	* We should also introduce a general description of the active site
+	* It should be max 40-30 lines and it should include all the references
+	* References should have name-year, or however we want
+* In the methods we should put
+	* DB used for the project with relative versions
+	* Computational methods with appropriate versions
+* Template selection:
+	* Constraints adopted for the selection of the template
+	* Figure with allignment of target and template
+* Modeller at work
+	* We can say version an the fact that it was implemented in house
+	* Output table of modeller
+	* Ramachadran plot with procheck
+* Target annotation
+	* Structural superimposition of target and template with RMSD
+	* Since I had an high homology, I can exclude sequence allignment from jce
+	* Comparison of active sites
+* N glicosilations
+	* We can explain residues that can be glicosilated and what is an n glicosilation
+* Eventual transfer of GO terms
+* Figures with rasmol
+	* We need to cite it
+* We can write a comparison with swissmodel, if we want
+* Discussion and eventually a figure of the active site
+* Send the report in pdf
+	* casadio@biocomp.unibo.it
+	* Also the tutors
 
 # Exercise for the report
 * In the report we can model as many sequences from the homework.txt file as we want, but the first one (B0JDP9) should be annotated in depth
@@ -546,3 +596,32 @@ So these are the PDB positions
 			* 2.01 $\AA$
 		* His398.ne2->Cu4(cu1502)
 			* 1.97 $\AA$
+* Glycosilation sites from the pdb file
+	* Asn54
+	* Asn217
+	* Asn251
+	* Asn333
+	* Asn341
+	* Asn436
+* SS bridges from the pdb file
+	* Cys117-Cys205
+		* 2.04 $\AA$
+	* Cys85-Cys488
+		* 1.98 $\AA$
+* I align the target and template with lalign global and I convert it to pir with the script provided
+* The file produced is not the one that I can use for modeller because I do not have the ligands, and there is a strange Q after a long gap
+	* Each allignment must end with *
+	* The header starts with > and there are a series of identifiers
+	* In the second line contains information about the structure and additional informations
+	* Eteroatoms are represented with dots at the end of the allignment
+	* The template is an X-ray structure so I specify StructureX, while the target to model is specified as Sequence
+* We need to edit the pdb file so to remove the Q removed from the alignment (!)
+	* When I specify the end of the model, I need to include also the Cu ions! (499residues+4Cu-1Q in this case)
+	* The heteroatoms are retrieved one after the other, so the ones that I want have to be the first ones
+* Modeller produces a lot of output files and a series of values in stdout
+	* molpdf is the pdf function of the model, and it has to be minimized
+	* The DOPE score is related to the internal energy of the molecule, so the lower the better
+	* The GA341 score is related to sequence identity among template and target
+* How to evaluate a model
+	* We should chose the one with the lowest molpdf, but we cannot compare the pdf of different allignments
+* The last part of the project is to select evaluate the result and eventually transfer the GO terms

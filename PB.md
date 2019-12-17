@@ -189,8 +189,84 @@ print filein
 >>><open file 'path/to/file', mode 'r' at 0x00000>
 ```
 * If I use a for loop in a file, I loop through its lines
-* By default, \n is included in the line and it can be removed with string.rstrip()
+* By default, \\n is included in the line and it can be removed with string.rstrip()
 * A file can be closed with filein.close, and this is really important when we are writing in a file
 	* Writing operations can be put in a buffer by the OS, and so if my program crashes I do not now if the file has actually been written
 * To write in a file I can do `fileout.write("some string")`
-	* The \n has to be added manually (!)
+	* The \\n has to be added manually (!)
+
+# Dictionaries
+* A dictionary is made of values, that can be retrieved through keys
+```
+my_dic = {key1:value1, key2:value2}
+print(my_dic[key1])
+>>>value1
+```
+* Key and value can be strings, integers, floats
+* The number of key-value pairs in the dictionary can be retrieved with `len(my_dic)`
+* Dictionaries are mutable
+```
+D1 = {"name":"saul"}
+D1["surname"] = "pierotti"
+print(D1)
+>>>{"name":"saul,"surname":"pierotti"}
+```
+* In general, variables can be eliminated with del
+```
+x = 1
+del x
+print(x)
+>>>Traceback (most recent call last):
+>>>  File "<stdin>", line 1, in <module>
+>>>NameError: name 'x' is not defined
+```
+* Also dictionary entries can be eliminated
+```
+D1 = {"name":"saul"}
+D1["surname"] = "pierotti"
+del D1["name"]
+print(D1)
+>>>{"surname":"pierotti"}
+```
+* The get method of dictionaries allows to return the value of a key specified as first argument, or the second argument if the key does not exist
+```
+D1 = {"A":9}
+print(D1.get("B",1))
+print(D1.get("A",2))
+>>>9
+>>>1
+```
+* This is useful for incrementing a value, or creating it if it does not exist
+```
+my_seq = "ATTTAATGGGCCCGGCCCGGG"
+for char in my_seq:
+	D1[char] = D1.get(char, 0) + 1
+print(D1)
+>>>{"A":3,"T":4,"C":6,"G":8}
+```
+* The keys method returns a type dict_keys object with the keys of a dictionary
+	* In python2 it returns a normal list
+```
+D1 = {"name":"saul"}
+print(D1.keys())
+>>>dict_keys(["name"])
+```
+* By default dictionary elements are not sorted, they are in order of insertion
+	* In python3 they do not have an order
+* I can sort a list with the sort method
+```
+my_list = [1,3,56,21,12]
+my_list.sort()
+print(my_list)
+>>>[1,3,12,21,56]
+```
+* The system time in python can be retrieved with
+```
+import datetime
+datetime.datetime.now()
+```
+* I can get the execution time of a task by subtracting the current time at the beginning and end of it
+
+# Recursion
+* We can have simple recursion if a function invokes itself, or mutual recursion when a function invokes another function that invokes the first one
+* A recursive function comprise an inductive case and one or more base cases

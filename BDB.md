@@ -164,3 +164,55 @@
 * ECOD is another DB that claims to classify many more domains than CATH and SCOP (it makes a finer classification)
 	* Its classification is based on evolutionary relationships
 	* It is a newcomer, we will see how it will go
+
+# X-ray crystallography
+* Sychrotron produce X-rays with really high brillance, so I have an high signal-to-noise ratio
+	* They allow to use smaller crystals
+* The inverse Fourier transform is equivalent to passing the radiation through a lens
+	* It does a Fourier synthesis
+	* We do not have materials that can focus X-rays
+* The X-rays are scattered by the electron cloud and never reach the nuclei, this is why we get electron densities
+* We use crystals instead of single molecules because it amplifies the signal and reduces the noise
+* The reciprocal space of a Fourier transform is a graph were each frequency is reported with a corresponding amplitude
+	* I always get pairs of frequencies, for example 3 and -3, because I cannot discriminate the direction of a wave
+* A 2d wave can be represented in the reciprocal space as points on the plane, were the combinations of x and y frequency is represented
+* The coordinates in the reciprocal space are called h and k
+* When I sum more 2d waves, in the reciprocal space I just put all the points deriving from them together
+* The phase of the different frequencies refers to how they allign toghether
+* If I apply a low-pass filter to the reciprocal space, I get back a less detailed image
+	* High frequencies are responsible for fine details
+* On the opposite, with an high-pass filter I get only the details but not the bulk image
+* From a 3d Fourier transfor I get a 3d reciprocal space with coordinates hkl
+* From rotating the crystal, I get a series of 2d images that allow to reconstruct the 3d reciprocal space
+* The space groups refers to the rotational simmetries of the unit cell
+	* It is important for the crystallographer because they determine the rotations that I have to apply to my crystal during data collection
+
+# NMR
+* The conditions in which it is performed are more similar to those encountered in vivo
+* It uses the same principle as MRI
+* It allows to determine also the structure of moble regions
+	* This is also used for studying protein folding
+* It cannot be used for big proteins (>80kDa)
+* The wavelenght is on the microwave spectrum
+* An NMR structure is an average of many models
+* Sometimes also the single models in the bundle are deposited
+
+# CryoEM
+* The resolution has increased enormusly in the last 20 years
+	* We went from 25 $\AA$ in 2005 to 2 $\AA$ in 2015
+* Lenses for an electron beam are electromagnets
+* What allowed a great increase in resolution is cooling the sample, so that it does not get damaged by the electron beam
+* We started also to use very low intensity of the beam in order to avoid damage, but this lowers the signal quality
+	* In order to increase quality we take many images and average them
+* The cooling is done very fast so that water solidifies in an amorphus form
+* The microscope sees many different molecules, all oriented randomly
+* An algorithm clusters the images by orientation and averages the ones in the same orientation and conformation, so to increase quality
+* From the averaged images, I can obtrain a 3d structure
+* In the last years a series of small improvements incresed significantly resolution
+* CryoEM gives you an electron density (!)
+* Size does not matter (!)
+
+# PDB file
+* The B factor is the mean square deviation of the position, so it is measured in $\AA^2$
+* There are several parsing tools for PDB files
+* Now data are deposited also in xml format

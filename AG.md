@@ -260,3 +260,15 @@
 * They can be spotted with repeat masker
 * This tool can mark SINE, LINE, Alu and will mask it in my sequence
 * Masking means to substitute a sequence with a stretch of NNNN of the same length
+* Pseudogenes can be processed or non processed (with introns) and they are not recognised by repeatmasker
+
+# NGS workflow
+* In sequencing, if we are not sure about a variant we exclude it
+* Wen I do genotyping by sequencing, the regions of interest have a very high depth of coverage so I can trust the results
+* We have tools for allignment of reads to a reference like bowtie
+	* They produce a BAM file
+* There are tools for calling mutations, Indels, ecc.
+* If I do not have enough money to sequence any individual, I can pool DNA samples in group (i.e. breed) and do a sequencing for each group
+	* I can digest my samples and run them on gel, so to select only DNA of a certain lenght
+	* If I see definite bands in the gel, these probably come from repeated regions that are cut at the same lenght
+	* In the digestion, I can choose a restriction enzyme with a long target sequence if I want longer fragments (cut site less probable!) and vice versa

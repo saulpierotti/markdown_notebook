@@ -530,3 +530,12 @@
 * PDBePISA is a tool for the exploration of interfaces and prediction of quaternary structures and prediction of quaternary structures
 * The SKL tag targets proteins to peroxisomes and it is recognised by the PTS1 receptor
 * When chosing a tool, we should be careful to check if it is still active and maintained
+
+# Poster presentation
+* We should select an original research article according to impact factor of the journal, H-index of the author
+* The impact factor is really dependent on the field, so we should check the ranking of journal in its subject category
+* If we choose a paper about a bioinformatics tool, it is better to choose one in a bioinfromatics journal because they tend to be more statistically robust
+* Standard size is 70*100 cm
+* Title at the top, with the affiliation logo
+* Few sentences, aimed at non-specialists
+* I want collaboration with people in other fields (!)
