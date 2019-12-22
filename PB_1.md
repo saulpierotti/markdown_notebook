@@ -270,3 +270,5 @@ datetime.datetime.now()
 # Recursion
 * We can have simple recursion if a function invokes itself, or mutual recursion when a function invokes another function that invokes the first one
 * A recursive function comprise an inductive case and one or more base cases
+
+# Regex
