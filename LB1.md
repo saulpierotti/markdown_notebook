@@ -8,7 +8,7 @@
 	* It is about protein-protein interaction
 	* We will have an exam also for this part
 * There will be a written test on 09/01/20
-* We have to write a report for 10/01/20 or 22/01/20
+* We have to write a report for 09/01/20 or 22/01/20
 	* If we submit for the first deadline we will have feedback
 * The oral defence will be in the last week of January
 	* Probably it will be 29-31/01/20
@@ -17,22 +17,32 @@
 * Hydrogens bond are mainly located at the level of the backbone
 * The reference source in the filed is the Journal of Bioinformatics
 * Functional annotation is the core of this course
+* We will focus on proteins because we have many structures available, and we can establish a clear relationship among protein structure and function
 * Functional annotation studies the relationship between structure and function
 * Functional annotation requires data collection, storage and analysis
 * Functional annotation is the activity of attributing structural and functional features to translated protein sequences
+* Functional annotation is not prediction: we use data to infer properties
+* Functional genomics is the process of how the genome gives rise to the proteome and metabolome, which in turn influence gene expression
 * Before starting data analysis, be sure of the quality of your data (!)
 * A database must be implemented, curated and mined
 * Database curation refers to updating the data and to keeping them compliant with the database standard
 * A database release is its content at a given date
 * Data mining is the retrieval of information from a database
 	* It is done with a browser
+* A relational database is organized in tables in relation with each other
+* A file is a container of data
+* A file format is the specific organization of a collection of data
 * In Hamburg there is an EMBL faicility that uses X-rays in a flow citometer
-
-# Random
-* Affinity among molecules comes from the electron densities
-* The biological unit of a structure can be retrieved from PDBsum
+* A protein is stable because of H-bonding in the backbone
 
 # X-ray cristallography
+* A molecule is carachterized by its electron density
+* Affinity among molecules comes from the electron densities
+* A PDB file is not the protein structure, but a way to represent it
+* A protein is
+	* A polymer formed of amminoacil residues joined together by peptidic bonds
+	* A frustrated system capable of auto-organization in the solvent
+	* A social entity that interacts with other molecules
 * I can understand that I have a protein crystal by shining light on it and seeing how it diffracts
 * Routinely X-ray diffraction is not able to locate hydrogens
 * Each crystal has a unit cell
@@ -55,18 +65,24 @@
 	* By knowing all the terms except d, I can derive the minimal distance between the diffraction planes
 * A typical diffraction maps is organized with 3 coordinates (H, K, L) and an intensity dimension (I)
 	* The intesity is proportional to the amplitude, therefore to the amount of costructive interference
-	* The 3 coordinates reflect the facts that we are operating in 3 dimensions
+	* The 3 coordinates refer to the reciprocal space of the Fourier transform
 	* I can recove the electron densities from the diffraction pattern with the Fourier transform
 		* It is a computation-heavy task
 * I cannot recover the phase from the diffraction map
 	* In a synchrotron, I can recover the phase of the wave with the anisotropy approach
+* Errors in the electron density mainly derive from errors in the phases
+* The resolution of a diffraction map depends on how ordered the crystal is
+	* It is typically 0.5-5 $\AA$
 * Once I have the electron density, I need to fit my molecule in it to determin the conformation
 	* This is easier if my electron density has an high resolution
 	* I can take advantage of similar proteins with a similar structure to do the fitting
 	* This fitting procedure is called refinement, because it reduces noise in the model
 * To validate my model, I compute the diffraction pattern of the theoretical protein structure to check if it matches the experimental pattern within a reasonable tollerance
+	* This is the R-value (!)
+* In order to facilitate crystallization, protein can be stabilized by crosslinking
+	* A crosslinker is a molecule that forms chemical bonds with the protein and stabilizes it
 
-## Crio-electron microscopy
+# Crio-electron microscopy
 * Crio-electron microscopy gives us a diffraction pattern using an electron beam
 * It is really useful for really big complexes that cannot be cristallized
 * Resolution is lower than X-ray diffraction
@@ -90,12 +106,13 @@
 * I use pulsed X-ray instead of a continuous beam
 * I can observe the conformational changes of the protein between different pulses
 
-## PDB and other DBs and tools
+# PDB file
 * The PDB file does not contain the electron density, it is an approximation of the structure
 * The resolution of an X-ray diffraction is important
 	* $5.0\AA$ resolution is reasonably accurate only for the position of the backbone
 	* $1.5\AA$ can be generally trusted, also for drug design
 * A ligand in PDB is any molecule co-cristallized with the macromolecule considered
+* An heteroatom is any atom in a PDB file that does not belong to the primary sequenc eof the protein
 * Signal peptides are 10 to 30 residues in length
 	* They are usually cleaved and therefore they do not appear in the protein 3d strucutre
 * A PDB file has an unique identifier of 4 letters and numbers
@@ -105,9 +122,13 @@
 	* It is the sequence derived from the structure, it can be different than the one in uniprot (!)
 * Coverage refers to the percentage of protein sequences covered in the protein structure
 * PDB files produced using a synchrotron source have 2 spots associated with every atom
-* For each ATOM we have the xyz coordinates, the occupancy, and temperature factor
-	* Occupancy is how well the atom fits the electron density
-	* The temperature factor refers to the mobility of the position
+* For each ATOM we have the xyz coordinates, the occupancy, and temperature factor (B size)
+* Occupancy is how well the atom fits the electron density
+	* It is usually 1
+	* If it is less than 1, there are more records for the same atom with occupancies that add up to 1
+	* The same atom represented more than once has the residue name changed as ARES, BRES, CRES, ...
+* The temperature factor refers to the mobility of the position
+	* Tends to be higher at the surface and lower in the core
 * The PDB file contains the atomic model of a macromolecule
 * The CPK colorscheme is a popular set of colors used for the different atoms
 * The structure validation window reports the percentile rank of different validation methods
@@ -126,6 +147,12 @@
 	* Resolution range from $<1\AA$ to $>4.6\AA$, with a peak around $2\AA$ 
 		* Distribution not normal with a long right tail
 	* 1702 source organinsms
+* In protein structure we do not have signal peptides because they are cleaved post-translationally
+* For every PDB entry, there is a validation report with all the statistics
+	* This is summarized by percentile ranks on the PDB webpage
+* Atom coordinates have 5 digits, xx.xxx
+	* The significance of the digits depends on the resolution of the structure
+* mmCIF is a different file format that is used for representing protein structures
 
 # PDBsum
 * It is a pictorial database that provides an at-a-glance overview of the contents of each 3D structure deposited in the Protein Data Bank
@@ -167,15 +194,15 @@
 	* Structural allignemnt usually only considers the position of the backbone, so it works on the reduced representation of the protein
 * After the allignemnt, it is possible to derive various measures of strucutral similarity
 	* The simplest metric is the root mean squared deviation (RMSD) among atomic coordinates
-	* The raw score can be normalized by subtracting the mean and dividing by the standard deviation, so to get the z-score
+* The raw score (a dimensionless metric) can be normalized by subtracting the mean and dividing by the standard deviation, so to get the z-score
 * One of the most famous structural allignment alogorithms is jCE (Java Combinatorial Extension), written by Philippe Bourne, the director of the PDB
 	* It is one of the best-performing algorithms
-	* It breaks down the proteins in fragments, and it tries to allign the structure of these by several methods (RMSD, secondary strucutre, ...)
+	* It breaks down the proteins in fragments, and it tries to allign the structure of these by several methods (RMSD, secondary structure, ...)
 	* It forms a series of alligned fragment pairs (AFPs) and filters them, retaining only those that respect a given measure of local similarity
 	* It generates an optimal path among AFPs, that yelds the final allignment
 	* The first AFP that nucleates the allignment can occur at any position
 	* The size of AFP and the maxium allowed gap are parameters, usually set to heuristic optimal values
-	* An important drawback is that It does not deal well with flexible regions that can have different conformations, since it is based on rigid superimpoisitio
+	* An important drawback is that It does not deal well with flexible regions that can have different conformations, since it is based on rigid superimpoisition
 * FATCAT is another algorithm that deals better with flexible regions, but can also give spuorios allignments among unrelated regions
 * Many algorthms cannot recognize structural similarities that are not sequence order dependent
 * Triangle Match deals with sequence order independent relationships
@@ -186,6 +213,7 @@
 
 # Protein structural classification
 * A protein family is the set of proteins that perform the same function in different organism, and therefore share a similar structure
+* Protein classification is generally conservative: when in doubt we make a new division
 * Protein families were discovered by M. Dayhoff
 * Multiple structural allignment allows to define protein families
 * We know around 14000 protein families
@@ -195,6 +223,7 @@
 	* It is a compressed way to describe a consensus sequence
 * A protein family is a set of proteins charachterised by structural superimposition
 * Protein families are important because they allow us to cluster PDB data
+	* Proteins in the same family typically have >30% identity, but there are exceptions (globins)
 	* They are constructed starting by comparing proteins with the same function
 	* It can be then computationally described with structural allignment
 	* A protein family is described with an HMM (hidden markow model)
@@ -205,9 +234,12 @@
 * Pfam categorizes all the entries in the PDB in protein families, clustering for strucutral similarity
 	* The Pfam database was built by performing pairwise comparison of all the PDB entries
 	* A protein family is described by a Hidden Markow Model (HMM)
-* A superfamily is a set of protein families with different foldings that can perform the same function
+* A superfamily is a set of protein families with possibly different foldings that can perform the same function
+	* The functional similarity suggest common origin, but this is not certain
 * A protein domain coincides with the folded protein for small globular proteins (150 aa)
 * When the PDB grew, we realised that multi-domain proteins share domains with small globular proteins
+* A protein domain is a protion of the sequence that harbours a function
+	* It is also defined as indipendently folding, but are we sure they did experiments about it?
 * SCOP categorizes proteins in superfamilies, Pfam families and fold
 * The SCOP fold can be all alpha, all beta, alpha+beta, alpha/beta, small proteins
 	* Alpha+beta has distinct alpha and beta regions
@@ -216,13 +248,24 @@
 * Proteins in the same superfamily have low sequence identity, but common structural and functional features suggest evolutionary relationships
 * Proteins are said to have the same fold if they have the same secodary structres in the same arrangement and with the same topology
 	* If 2 proteins have the same fold they do not need to be evolutionary related: it can be a case of converging evolution
+* Margaret Dayhoff studied cytochrome c and determined that it is similar in many organisms
+	* She was the first to relate structure and function
+* Protein in the same family with less than 30% homology are called distantly related homologs
 
 # Sequence allignment
 * It is our only way to compare proteins for which I do not have structures
+* I have around 180,000,000 proteins in UniProtKB
+	* 99% are only predicted
+	* 561,568 in Swiss-Prot
+	* 179,250,561 in TrEMBL
+* There are at least 3 orders of magnitude among the number of strucutres and sequences in databases
+	* Actually more because PDB is redundant and UniProt no
+* A gene is a transcribed locus
 * A sequence allignment is a continuous stretch of residues of any lenght
 * Sequence comparison can be pairwise or database search
 * Database search is an extension of pairwise sequence alignment
 * Sequence allignment can be local or global
+* Multiple alignments are based on many pairwise alignments
 * A global allignment optimizes pairing over the whole sequences by introducing gaps
 	* A global allignment has a lenght that is at least as long as the longest sequence
 * A local alignment stops the allignment if continuing it makes its score lower
@@ -356,7 +399,6 @@
 	* We can use the multiple sequence allignment (derived from structure) and the HMM of a protein family to model them (!)
 * We can have proteins that have the same domains but shuffled in a different order
 	* In this case structural allignment is problematic
-* Building by homology is the operation of (do)(next time)
 
 # Ramachadran plot
 * A Ramachadran plot is a bidimensional map of a protein structure where the torsion angles of the backbone are reported
@@ -392,7 +434,7 @@
 	* Building by homology
 	* Threading
 	* Ab initio
-* Which method is better to use depends on the availability of strucutures that have a sequence identity over a thrshold with my sequence
+* Which method is better to use depends on the availability of strucutures that have a sequence identity over a threshold with my sequence
 	* Above 30% I can use the concept of protein family (building by homology)
 	* Below 30% I need to use threading, fold recognition, machine learning
 	* If I have a new folding, I need ab initio or machine learning
@@ -441,187 +483,3 @@
 	* The restraints are automatically derived from the allignment with the template
 	* A restraint is defined in term of a probability density function
 * In modeller I can ask as many models as I want, and they are scored from best to worse
-
-# How to write a report
-* We can try again with 5 models instead of 3
-* Title should be "Functional annotation of proteins with comparative modelling"
-* For now just introduction, not abstract
-* In the introduction we should put the biological importance of the template and something about the protein family
-	* We should also introduce a general description of the active site
-	* It should be max 40-30 lines and it should include all the references
-	* References should have name-year, or however we want
-* In the methods we should put
-	* DB used for the project with relative versions
-	* Computational methods with appropriate versions
-* Template selection:
-	* Constraints adopted for the selection of the template
-	* Figure with allignment of target and template
-* Modeller at work
-	* We can say version an the fact that it was implemented in house
-	* Output table of modeller
-	* Ramachadran plot with procheck
-* Target annotation
-	* Structural superimposition of target and template with RMSD
-	* Since I had an high homology, I can exclude sequence allignment from jce
-	* Comparison of active sites
-* N glicosilations
-	* We can explain residues that can be glicosilated and what is an n glicosilation
-* Eventual transfer of GO terms
-* Figures with rasmol
-	* We need to cite it
-* We can write a comparison with swissmodel, if we want
-* Discussion and eventually a figure of the active site
-* Send the report in pdf
-	* casadio@biocomp.unibo.it
-	* Also the tutors
-
-# Exercise for the report
-* In the report we can model as many sequences from the homework.txt file as we want, but the first one (B0JDP9) should be annotated in depth
-* As a template we should use one that has a title, author (me), abstract
-* The protein is a putative laccase from a boletus and it is really poorly annotated
-	* Will we confirm this EC number?
-* It comes from TrEMBL and it has evidence at the transcript level
-* There are some GO terms, but they have been only annotated computationally
-* There is a putative signal peptide
-	* Should we carry it along in the computation?
-	* In the PDB structures we do not have signal peptides
-* We perform a BLASTp against the PDB
-* What E-threshold do we choose?
-	* If it is too low I tend to find very exact but local allignments, if it is too high non-significative matches
-	* I do not use filters, I allow gaps and I want 50 hits
-	* I leave the auto matrix
-		* It will use blosum62
-	* Let start with 0.1
-* In the report I would write
-	* I used blastp 2.9.0+, E-value 0.1, matrix Auto against uniprotkb_pdb version...
-	* In the materials and methods I should specify a reference for blast, the parameters used, the DB version used
-* The score reported after BLAST is a bit-score
-* I retrieved A0A3F2YLU5, with e-value 0.0 and 62.3% identity
-	* There is a small portion missing at N terminal, maybe the signal peptide?
-* The second hit (Q12718) is a Swissprot entry so we start from it
-	* Identity 62.0%, e-value 0.0
-	* Function: lignin degradation and detoxification of lignin derived products
-		* EC 1.10.3.2, curated
-			*1. . . means ocydoreductase
-			* This EC number is for a laccase, or urshiol oxidase
-			* If I follow the link from the EC number, I go to Enzyme (Expasy)
-			* There are cofactors: Cu cation, so there is a metal binding site
-	* There are some pubblications: we should read them
-	* It is a secreted protein, so I can expect SS bridges
-	* There are many PTMs: SS bonds, glycosilation
-	* Since there are glycosilations, I have many residues that have to be conserved for conserving structure
-		* All the glycosilations are N-linked on Asn
-	* We have only 1 PDB structure: 1GYC
-		* It is an X-ray with $1.90\AA$ resolution
-		* Crystal structure determination at room temperature of a laccase from trametes versicolor in its oxidised form containing a full complement of copper ions 
-			* Full complement means 4 Cu++ ions in this case
-	* When we want information about an enzyme, we can look in BRENDA
-* We should study the problem before attempting to solve it
-* In the template we see that 3 Cu++ are in plane, while 1 is further apart
-* Whatever we do in our model, the 3 coppers have to be in that exact distances, to the .1 digit
-	* This architecture is a funneling system for extracting electrons from the substrate
-* Biological motivations have to be included in the report
-	* We shouldn't copy-paste, but read the articles and understand
-* When a metal ion enters in the structure of a protein it needs to be stabilized by residues
-	* Cu++ is most frequently stabilised by His
-* The copper ions are numbered and are referred to with a type entry
-	* The type refers to the spectrum of the ion
-* I should write a table where I report whatever is relevant (position that have to be conserved)
-* In the template 
-* The stabilizion of Cu is given by the interaction of the Cu outermost cell with His side chain through the formation of coordination (covalent) bonds
-	* Coordination bonds involve sharing 2 electrons
-* Positions that need to be conserved (numbers of cu not correct)
-	* His84->Cu1
-	* His86->Cu2
-	* His129->Cu2
-	* His131->Cu3
-	* His415->Cu4
-	* His418->Cu1
-	* His420->Cu3
-	* His472->Cu3
-	* His473->Cu4
-	* His474->Cu2
-	* His478->Cu4
-* These positions are in uniprot, in PDB it is different because of the signal peptide
-	* I can alligne with lalign the 2 sequences and see
-* The His have to be in that position and they need to have the same torsion angles ($\chi$ angles)
-	* The $\chi$ angle is the relative torsion angle between the lateral side chain and the backbone
-* If in the active site the torsion angles are different, I cannot have a functional site
-* In order to reduce an O2 molecule I need 4 electrons
-* Electrons are funneled and this process is really dependent on the position of the metal ions
-* In a redox reaction the acceptor has an higher redox potential of the donor
-* Laccases are not so specific
-* Before the paper, there was another crystal of a laccase but it was copper depleted
-	* The fold was similar to this
-	* 
-* Electrons flow from the lone Cu to the 3 Cu in plane
-* In the abstract we need an excuse to justify why we are doing this activity
-* There are residues of the gene sequence that do no match the structure
-	* It can be sequencing errors, gene variants, due to the expression system
-* The abstract should be a few lines
-* Introduction can be a few sentences expanding what was said in the abstract
-* Experimental procedure should follow the workflow that we did
-	* The allignment, with all the parameters and references
-	* A reference to modeller
-* We should put a picture of the 3d structure
-* We have 2 SS bridges to put as a constraint in the model
-* The cluster of 4 Cu is called also T2/T3 cluster
-	* The 3 Cu are type 3
-	* The lone Cu is type 2
-* There is a water funnel from the catalytic site to the solvent
-* Alligning uniprot and pdb sequences with lalign, I see that the difference is in the signal peptide
-	* 20 residues more in the uniprot
-So these are the PDB positions
-	* Lone Cu
-		* Cys453.sg->Cu1(cu1503)
-			* 2.19 $\AA$
-		* His395.nd1->Cu1(cu1503)
-			* 2.02 $\AA$
-		* His458.nd1->Cu1(cu1503)
-			* 2.04 $\AA$
-	* Cu triplet
-		* His66.nd1->Cu3(cu1500)
-			* 2.15 $\AA$
-		* His109.ne2->Cu3(cu1500)
-			* 2.12 $\AA$
-		* His454.ne2->Cu3(cu1500)
-			* 2.17 $\AA$
-		* His111->Cu2(cu1501)
-			* 2.23 $\AA$
-		* His400.ne2->Cu2(cu1501)
-			* 2.12 $\AA$
-		* His452.ne2->Cu2(cu1501)
-			* 2.16 $\AA$
-		* His64.ne2->Cu4(cu1502)
-			* 2.01 $\AA$
-		* His398.ne2->Cu4(cu1502)
-			* 1.97 $\AA$
-* Glycosilation sites from the pdb file
-	* Asn54
-	* Asn217
-	* Asn251
-	* Asn333
-	* Asn341
-	* Asn436
-* SS bridges from the pdb file
-	* Cys117-Cys205
-		* 2.04 $\AA$
-	* Cys85-Cys488
-		* 1.98 $\AA$
-* I align the target and template with lalign global and I convert it to pir with the script provided
-* The file produced is not the one that I can use for modeller because I do not have the ligands, and there is a strange Q after a long gap
-	* Each allignment must end with *
-	* The header starts with > and there are a series of identifiers
-	* In the second line contains information about the structure and additional informations
-	* Eteroatoms are represented with dots at the end of the allignment
-	* The template is an X-ray structure so I specify StructureX, while the target to model is specified as Sequence
-* We need to edit the pdb file so to remove the Q removed from the alignment (!)
-	* When I specify the end of the model, I need to include also the Cu ions! (499residues+4Cu-1Q in this case)
-	* The heteroatoms are retrieved one after the other, so the ones that I want have to be the first ones
-* Modeller produces a lot of output files and a series of values in stdout
-	* molpdf is the pdf function of the model, and it has to be minimized
-	* The DOPE score is related to the internal energy of the molecule, so the lower the better
-	* The GA341 score is related to sequence identity among template and target
-* How to evaluate a model
-	* We should chose the one with the lowest molpdf, but we cannot compare the pdf of different allignments
-* The last part of the project is to select evaluate the result and eventually transfer the GO terms

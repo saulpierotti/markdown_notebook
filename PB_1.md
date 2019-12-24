@@ -4,7 +4,7 @@
 
 # Course organization
 * 5/12 mid term exam on paper, it is worth 8/32 points, finals are on February and march
-* This module pf the course is about Python
+* This module of the course is about Python
 
 # Linux an CS basics
 * The main resource of a computer are RAM and CPU
