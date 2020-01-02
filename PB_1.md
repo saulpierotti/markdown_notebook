@@ -1,4 +1,4 @@
-% Programming for Bioinformatics
+% Programming for Bioinformatics - part 1
 % Saul Pierotti
 % \today
 

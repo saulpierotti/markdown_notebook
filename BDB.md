@@ -166,6 +166,13 @@
 	* It is a newcomer, we will see how it will go
 
 # X-ray crystallography
+* Bragg's law: $2 d \sin \theta = n \lambda$
+	* $2 d \sin \theta$ is the excess distance traveled by light when hitting a diffraction plane with distance d with an incidence angle $\theta$
+	* $n \lambda$ is an integer number of wavelenghts
+	* If the additional distance traveled is an integer number of wavelengts, I have constructive interference and therefore a signal
+	* The diffracted beam is deviated by $2 \theta$ from the incident beam
+* The distance of a diffraction spot r from the expected incidence point of the primary beam on a detection screen placed at distance A from the crystal is $A \tan 2 \theta$
+* The phase of a wave is the distance of the first crest from a reference point
 * Sychrotron produce X-rays with really high brillance, so I have an high signal-to-noise ratio
 	* They allow to use smaller crystals
 * The inverse Fourier transform is equivalent to passing the radiation through a lens
@@ -184,16 +191,74 @@
 * On the opposite, with an high-pass filter I get only the details but not the bulk image
 * From a 3d Fourier transfor I get a 3d reciprocal space with coordinates hkl
 * From rotating the crystal, I get a series of 2d images that allow to reconstruct the 3d reciprocal space
+* The unit cell is the minimal translational repeating unit
+* The asymmetric unit is the minimal rotational and translational repeating unit
+* The unit cell can be organized as 1 of the 14 possible 3-dimensional Bravais lattices
 * The space groups refers to the rotational simmetries of the unit cell
 	* It is important for the crystallographer because they determine the rotations that I have to apply to my crystal during data collection
+* The space group is represented as $P2_1 2_1 2_1$
+	* P is the Bravais lattice
+	* The numbers refer to the rotational simmetry axes
+		* 2 means 180°, 3 means 120°, means 90°
+	* The subscript refers to the screw axis
+		* 1 means a traslation of 1 unit cell along the rotation axis
+* The phase of the diffracted beams cannot be recovered from the diffraction map only
+* In multiple isomorphous replacement (MIR) the crystal is immersed in an heavy atom solution, or an heavy atom is co-crystallized with the sample?
+	* The addition of the heavy atom should not alter the space group (should be isomorphous)
+	* The diffraction maps are collected both with and without the heavy atoms
+	* This allows to recover the phases
+	* At least 2 isomorphus derivatives must be used to determine univocally the phases
+* In multiwavelenght anomalous dispersion (MAD) the X-ray fluorescence of atoms is used to recover the phases
+	* Since X-ray fluorescence requires really specific wavelenghts, it can only be done in synchrotrons
+	* The re-emitted ray has a predictable phase-shift that allows to recover the phases
+* In molecular replacement (MR) heavy atoms are integrated in the structure of the protein
+	* Selenocysteine is usually used in place of cystein
+* The R factor is the ration between the difference between the observed and calculated electron density and the observed electron density
+* R-free is calculated in the same way but uses a subset of data not included in the iterative optimization
+	* It avoids overfitting
 
 # NMR
-* The conditions in which it is performed are more similar to those encountered in vivo
 * It uses the same principle as MRI
-* It allows to determine also the structure of moble regions
-	* This is also used for studying protein folding
+	* A collection of nuclei is distributed on various energy levels dependting on their orientation relative to the magnetic field applied
+	* Radiofrequency is applied and the nuclei are excited
+	* The nuclei relaxate by releasing energy to the environment (spin-lattice relaxation) or to other nuclei (spin-spin)
+	* The relaxation time depends on the molecular environment and produces a signal
+* It requires the use of cryomagnet, made of superconductive materials kept at 4K
+* The frequencency of a magnet (es. 600 Hz) refers to the frequency of oscillation of a proton in the field it generates
+	* It is a way to express field strenght
+	* Higher field strenght traslates to higher oscillation frequency
+* Proteins are in solution, and need to be in high concentration
+	* It cannot be used for membrane proteins
+	* Also soluble proteins tend to precipitate in high concentration
 * It cannot be used for big proteins (>80kDa)
+	* Big proteins require big magnets
+* It allows to determine also the structure of mobile regions
+	* This is also used for studying protein folding
+* 1D and homonuclear 2D NMR allows to reach up to 10 kDa
+* Heteronuclear NMR (with C13, N15, H2) allows the determination of bigger proteins
+* NMR structures dominate the PDB for small proteins
+* The wavelength used is on the microwave range
+* The conditions in which it is performed are more similar to those encountered in vivo
 * The wavelenght is on the microwave spectrum
+* In 1D NMR the relaxiation signals are averaged and then the Fourier transform is applied
+	* This allows to recover the typical frequency of each group
+* Chemical shift is the variation in magnetic proprieties of nuclei due to their electronic environment
+	* The proton of an alifatic compound has a different spectrum than that of an hydrophilic environment
+* Scalar coupling is the transfer of magnetization among nuclei through chemical bonds
+	* It is measured by COESY spectra
+	* It works up to 3 bonds apart
+	* If I see a signal between 2 nuclei, I know that they are at most 3 bonds apart
+* Dipolar coupling is the interaction of nuclei across space
+	* It is measured by NOESY
+	* It gives constraints about distance between nuclei
+* All these information gives us restraints on dihedral angles, distances
+* Structures are determined via simulated annelaing
+	* I start with a random model
+	* I try to optimize the restraints and iterate
+* Since I do simulated annealing, I get different models for each random starting model
+	* The models are collected in a bundle in the PDB file
+* Model variability can suggest flexibility or uncertainty
+* The dynamics of individual atoms can be checked by specific NMR experiments
 * An NMR structure is an average of many models
 * Sometimes also the single models in the bundle are deposited
 
@@ -216,3 +281,7 @@
 * The B factor is the mean square deviation of the position, so it is measured in $\AA^2$
 * There are several parsing tools for PDB files
 * Now data are deposited also in xml format
+* RSR (real space R value) measures the fit between a residue and the data
+* RSRZ is a normalized RSR relative to residue type and resolution
+	* If RSRZ is >2 we have an outlier
+* The clashscore refers to atoms bumping into each other

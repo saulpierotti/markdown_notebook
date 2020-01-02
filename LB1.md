@@ -13,6 +13,14 @@
 * The oral defence will be in the last week of January
 	* Probably it will be 29-31/01/20
 
+# Things to have in mind
+* H bonds are 3 $\AA$ long, they require planarity and their E = -4 kcal/mol
+* Salt bridge -5 kcal/mol, 4 $\AA$
+* Lennard-Jones interactions have E = -1 kcal/mol
+* SS bonds -60 kcal/mol, 2.05 $\AA$
+* Covalent bonds 2-3 $\AA$, -100 kcal/mol
+
+
 # Introduction
 * Hydrogens bond are mainly located at the level of the backbone
 * The reference source in the filed is the Journal of Bioinformatics
@@ -138,8 +146,8 @@
 * A database can be defined by its statistics
 * Data in a DB can be distributed in categories that are relevant for the interpretation of data
 * The space group refers to the simmetries of the unit cell
-* The Ramachadran plot of a structure can be generated with Procheck (EMBL)
-	* It is much more informative than the 3d view generated with 17Rasmol
+* The Ramachandran plot of a structure can be generated with Procheck (EMBL)
+	* It is much more informative than the 3d view generated with Rasmol
 * Some PDB statistics
 	* 158180 macromolecular structures
 	* 76380 enzymes
@@ -157,7 +165,7 @@
 # PDBsum
 * It is a pictorial database that provides an at-a-glance overview of the contents of each 3D structure deposited in the Protein Data Bank
 * It is hosted by EMBL-EBI
-* It shows also the Procheck/Procheck NMR Ramachadran plot for the structure
+* It shows also the Procheck/Procheck NMR Ramachandran plot for the structure
 * It shows the biological unit instead of the unit cell
 
 # PDB101
@@ -170,14 +178,6 @@
 * The R-value is the fit between the theoretical diffraction pattern of the model and the experimental one
 	* 0 is a perfect fit, 0.63 is a the fit of a random diffraction pattern
 * R-free is another statistic that avoids the bias introduced in the refinement step
-
-# Ramachadran plot
-* $\alpha$ carbons in proteins are $3.8\AA$ apart
-* The $\phi$ angle is the dihedral angle between N-C$\alpha$, $\psi$ is between C$\alpha$-COOH
-* The Ramachadran plot graphs the $\phi$ angle of a residue against its $\psi$ angle
-* Some regions of the plot are really common and allowed, some are not because of steric hindrance
-* The Ramachadran plot of a protein is a scatterplot of its dihedral angles superimposed on a color code for the allowed conformational spaces
-* Procheck and Procheck NMR calculate Ramachadran plots from PDB files
 
 # Protein structural allignment
 * Rigid superimposition requires the knowledge of at least 3 non-allineated equivalent residues, while structural allignment requires no previous knowledge of equivalent positions
@@ -194,6 +194,7 @@
 	* Structural allignemnt usually only considers the position of the backbone, so it works on the reduced representation of the protein
 * After the allignemnt, it is possible to derive various measures of strucutral similarity
 	* The simplest metric is the root mean squared deviation (RMSD) among atomic coordinates
+		* It should be below 3 $\AA$
 * The raw score (a dimensionless metric) can be normalized by subtracting the mean and dividing by the standard deviation, so to get the z-score
 * One of the most famous structural allignment alogorithms is jCE (Java Combinatorial Extension), written by Philippe Bourne, the director of the PDB
 	* It is one of the best-performing algorithms
@@ -400,15 +401,30 @@
 * We can have proteins that have the same domains but shuffled in a different order
 	* In this case structural allignment is problematic
 
-# Ramachadran plot
-* A Ramachadran plot is a bidimensional map of a protein structure where the torsion angles of the backbone are reported
+# Ramachandran plot
+* $\alpha$ carbons in proteins are $3.8\AA$ apart
+* The $\phi$ angle is the dihedral angle between N-C$\alpha$, $\psi$ is between C$\alpha$-COOH
+* The Ramachandran plot graphs the $\phi$ angle of a residue against its $\psi$ angle
+* Some regions of the plot are really common and allowed, some are not because of steric hindrance
+* The Ramachandran plot of a protein is a scatterplot of its dihedral angles superimposed on a color code for the allowed conformational spaces
+* Procheck and Procheck NMR calculate Ramachandran plots from PDB files
+* A Ramachandran plot is a bidimensional map of a protein structure where the torsion angles of the backbone are reported
 	* Don't say residues, they are in the backbone
 * The expected values are determined by measuring torsion angles from a set of well charachterized proteins
-* The main regions are alpha (A), beta (B), 3-10 helices and left-handed helices (l)
+* The main regions are alpha (A), beta (B), 3-10 helices and left-handed helices (l), and proline region
+	* In the top left quadrant (negative $\phi$, positive $\psi$) we have beta-strands
+		* Note that beta-strands can be also partially allowed in the extreme bottom left because the angles are circular (180 = -180 !)
+		* Same thing in the extrem top right and extreme bottom right
+	* Alpha-helices are on the left, vertically centered but more towards the bottom quadrant (negative $\phi$, negative to slightly positive $\psi$)
+	* In the top right quadrant we have left-handed 3-10 helices (slightly positive $\phi$ and $\psi$)
+	* Proline is special because of its cis peptide bond and has a specific area on the rigth, at the extreme bottom (very negative $\psi$, positive $\phi$)
+	* Glycine has really low steric hindrance and can be practically everywhere in the plot
 * A good model has at lest 90% of the residues in the most allowed regions
+	* This is based on the analysis of 118 structures of at least 2 $\AA$ resolution and R-factor less than 20%
 * The G factor, for the different angles, measures how unusual a structure is
+	* It is a log-odds based on the observed distribution of stereochemical properties
 
-# Building by homology
+# Protein structural prediction
 * The goodness of a protein strucuture can be determined by comparison with a set of optimal conditions, determined by analysis of the PDB database
 * The strongest interaction in proteins are H bonds
 	* The electronegative atoms that partecipate in H bonds are O and N in proteins
@@ -471,7 +487,7 @@
 	* It transplants the coordinates of the template to the target and it seeks for protein stability
 	* It checks if the pairwise interactions are conserved (spatial restraints)
 * Once we get the model, if it does not make sense we can try to tweak the initial sequence allignment
-* If the model respects the ramachadran plot, we can allign it to the template structure
+* If the model respects the Ramachandran plot, we can allign it to the template structure
 * When trasferring functional annotation, we have to be careful of the meaning of what we are doing
 	* The GO Cellular component can be different even if the structure is conserved
 * Swiss-model runs modeller in remote, and it has many pre-computed models
@@ -483,3 +499,29 @@
 	* The restraints are automatically derived from the allignment with the template
 	* A restraint is defined in term of a probability density function
 * In modeller I can ask as many models as I want, and they are scored from best to worse
+
+# Modeller (from manual and other source)
+* Modeller is a computer program that models three-dimensional structures of proteins and their assemblies by satisfaction of spatial restraints
+* The input to the program are the restraints on the spatial structure of the aminoacid sequence to be modeled
+* The output is a 3d structure that satisfies the restraint as well as possible
+* Restraints can be related structures, NMR experimental data, rules of secondary structure packing, other experiments
+* The model is computed by optimization of a the modeller objective function called molpdf
+* The sequence alignment of target and template must be given as input
+* Given an alignment, the restraints on distances, angles and other features are automatically derived from the staistical analisys of the relationships between many pairs of homologous structures
+	* This was based on 105 families that included 416 proteins of known structure
+* From the statistical distribution of a restraint (e.g. distance of related C-C bonds) I can derive the pdf for that specifc property
+* Spatial restraints and CHARM energy terms are combined into an objective function
+* The objective function is minimized in a Cartesian space via conjugate gradients, molecular dynamics and simulated annealing
+* Different models can be obtained by varying the initial structure
+	* This is done in a randomized way
+* Variability among models can be interpreted as error in a specific region of the fold
+* Some regions use a specialized modeling protocol (e.g. loops)
+* The optimization is iterated, first satisfying short-range restraint and then long-range
+* Every model produced is carachterized by molpdf, DOPE score and GA341 score
+* The DOPE (discrete optimized protein energy) is a statistical potential described by Sali in a paper (doi: 10.1110/ps.062416606) 
+	* It approximates the free energy of a protein, since the native conformation was demonstrated to have the lowest free energy (Anfinsen, 1972)
+	* It is too costly to compute the free energy
+	* DOPE is constructed from a set of crystallographic structures, so it is knowledge-based
+* GA341 (doi: 10.1110/ps.062095806) is a function of the statistical potentials, z-score, compactness and sequence identity with the template
+	* It ranges from 0 to 1, where 1 is a good model
+	* It is based on machine learning

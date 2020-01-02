@@ -59,6 +59,14 @@
 * Protein electrophoresis can be done in native conformation or by SDS-PAGE
 * Immunological techniques are Western blot, ELISA, immunoprecipitation
 	* Antibodies have affinity constants ranging from $10^9$ to $10^12$ M
+* Indirect ELISA is more sensitive than the direct version
+	* A primary Ab has several epitopes (!)
+* Sandwich ELISA is more specific because requires the contemporaneous recognition of 2 non-overlapping epitopes
+* Competitive ELISA is more senitive and requires less Ab
+	* It is basically a negtaive version, where if the Ab is washed away means that there was antigen in the sample
+* Sample solubilization is done in Urea 7M, Thiourea 2M and Chaps 4%
+* SS bridges can be broken with DTT or tributilphosphine
+* SDS-PAGE is stained with Comassie or silver staining
 * The upper limit for the number of resolvable proteins in a 2D-PAGE is 10000
 * Spot identification in 2D-PAGE can be done by MS or by image analysis
 	* Image analysis can be done by comparing our image with gel images of identified proteins present in databases
@@ -104,7 +112,8 @@
 	* Since I have multiple-charged ions, I have many peaks for each analite
 		* With molecules under 1200 Da I tend to have single ions
 		* The multiple peaks are normally distributed and can be deconvoluted via software to derive the MW of the ion
-	* Native and complexed proteins tend to have non-normal distribution of ions
+			* This is done by transformation or maximum entropy
+	* Native and complexed proteins tend to have non-normal distribution of ions, while denatured proteins have a gaussian peak distribution
 	* It is very sensitive, but I need really pure samples
 * In MALDI the solid sample is heated by a laser while embedded in the matrix
 	* The matrix becomes ionized and transfer charge to the analite, while exploding at supersonic speed
@@ -135,6 +144,7 @@
 * Tandem MS combines 2 MS in the same instrument
 	* I avoid fragmentation in the first step using a soft ionization of the molecular ion
 	* A collision cell between the 2 MS filled with inert gas allows to fragment the analite
+	* Fragmentation happens because of CAD (collision activated) and CID (collision induced)
 
 # Peptide mass fingerprinting
 * It is the main bottom-up approach
@@ -172,8 +182,14 @@
 	* If the charge is retained in the N-terminal fragment, the ion is termed a, b or c
 	* If the charge is retained in the C-terminal fragment, the ion is termed x, y or z
 	* Fragmentation of the peptide bond produces y or b fragments
+	* The nomenclature of the fragments derives from Ropestroff and Foleman
+* Fragmentation can be done by CID or ETD (electron transfer)
+	* CID produces mostly b and y ions because the collision energy is low and can fragment only the peptide bond
 * I can recover the mass of the residues by analyzing the mass difference between ions
+	* To do this I need the entire b or y series (!)
+	* The peptide mass is given by the b-OH (-17u) or by y+H+ (-1u)
 * Given a MS/MS spectrum, the sofware Peaks can give the protein sequence, with a confidence for each residue
+* Peaks gives the statistic ALC (average local confidence, the average likelyhood of an aa in the sequence) and a global statistic (TLC, the expected number of correct aa) for the peptide
 
 # Synthetic biology - Not for exam
 * In order to provide proprieties that are not available in nature we can use non-natural amino acids
@@ -261,6 +277,7 @@
 * It can be used not only for proteins, but also other molecules
 * I can study many different molecules at the same time
 * The spatial resolution is not as good as with IHC
+* It tends to be not representative, since not all molecules can be easily ionized
 
 ## SELDI
 * Surface enhanced LDI (SELDI) is a variation of MALDI that instead of mixing the sample with the matrix, uses a surface that has biochemical affinity to the target molecule
@@ -309,12 +326,13 @@
 * The reporter gene can be a survival gene, or beta galactosidase (blue colonies in X-gal)
 * This system is useful for a firts screening of large cDNA libraries
 
-## Mammalian two-hybrid
+## Mammalian two-hybrid (doi/10.2144/97222pf02) 
 * The mammalian two-hybrid uses 3 plasmids
 * A plasmid harbours the BD, one the AD, and a third comprises a minimal TATA box and the reporter gene
 * It is used for bait and prey proteins that are not appropiately modified post-translationally by yeast
 * It is useful also for proteins that reside in a specific organelle
 * Another advantage is that it is faster: the reporter gene typically used give a visible effect in 48h, while with yeast we have to wait for the colonies to grow 3-4 days
+* The protein have to interact in the nucleus: the plasmids used include a NLS
 * The most used reporter genes are SEAP, luciferase, and $\beta$-galactosidase
 * SEAP (secreted alkaline phosphatese) is a secreted protein that can withstand 65°C
 	* We can degrade the endogenous alkalin phosphatases of the cells by heating them to 65°C so to remove background noise
@@ -347,7 +365,8 @@
 * The co-immunoprecipitation assay exploits the specificity of an Ab for the bait
 * The first step is to obtain a cell extract in non-denaturing conditions
 * The prey bound to the bait co-precipitates
-* The Ab-bait complexes are immobilised on a sepharose gel
+* The Ab-bait complexes are immobilised on a protein A or protein G sepharose gel
+	* Protein A and protein G are bacterial cell wall proteins that bind Fc$\gamma$
 * After a washing step, we can elute and then identify our interactors
 * The main advantage is that I operate with a cell extract, so I do not have alterations due to expression systems and the environment is as similar as possible to the in vivo situation
 * The identification is similar to the other pull-down assays: I detach the complexes with SDS sample buffer and then identify them with WB
@@ -470,6 +489,7 @@
 * If the proteins interact, the luciferase assembles and we can detect luminescence
 * PCA can also be used to detect intramolecular interactions
 * The major drawback is that the 2 halves of the luciferase have high affinity for each other, so they could interact even without interaction of the target proteins (!)
+* With metil-binding proteins, PCA can be used to asses DNA metilation
 * The binding of the 2 protein fragments of Luc is really cooperative, therefore it goes from completely undetactable to maximum signal in a really narrow range
 	* This is in contrast to FRET, which has a really low dinamyc range and requires extensive optimization
 * NanoBiT is a next-generation PCA approach that was develloped by targeted evolution
