@@ -40,9 +40,6 @@
 * Scoring matrices can be based on observed substitution, on physicochemical properties, or other data
 * The McLachlan matrix is based on residue similarity, Grantham on chemical distance
 
-# For upload
-* We scored an alignment with a blosum matrix stored in a text file
-
 # PAM matrices
 * PAM matrices are based on an evolutionary model, while BLOSUM are based on real alignments
 * PAM were created by M. Dayhoff in 1972 and their name is an acronim for "point accepted mutation"
@@ -60,7 +57,11 @@
 # BLOSUM
 * Blosum means block substitution matrix
 * They were built by Henikoff and Henikoff in 1992
+* They started from 500 multiple local alignments or related protein sequences
+* From these they retrieved more than 2000 ungapped multiple sequence alignments (conserved blocks), that formed the BLOCKS database
+* In each multiple alignment, they clustered all the sequences that showed a % identity and average their log-odds
 * They were made by alignments of protein sets with different degrees of conservation
 	* We do not assume any model, all the substitutions are based on observed frequencies
 * High BLOSUM matrices are used for closely related sequences
 * We can build our own BLOSUMs based on a specific subset of proteins
+* BLOSUM62 is the best performing matrix for comparing weak homologies

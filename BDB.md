@@ -285,3 +285,12 @@
 * RSRZ is a normalized RSR relative to residue type and resolution
 	* If RSRZ is >2 we have an outlier
 * The clashscore refers to atoms bumping into each other
+	* I have a clash when 2 atoms are closer that the sum of Van der Waals radii plus a margin
+* The RSR-Z (real space r value)
+* Poor ranking does not necessarily mean bad quality!
+
+# Chimera
+* To select a residue I use `select #model:residue@atomtype`
+* There is no need to put and among atoms
+* To put more that 1 condition, I put &
+* Not is done with ~

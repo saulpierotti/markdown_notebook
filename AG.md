@@ -76,6 +76,7 @@
 * Scaffolds are assembled from contigs
 * Sometimes it is not possible to assemble entire chromosomes
 * The quality score of an assembly (n50) is the minimum size of scaffolds that contain 50% of the assembled genome
+* A human chromosome is on average 80-100 Mb
 
 # Next generation sequencing
 * NGS: Illumina, Ion torrent (Thermo fisher), PacBio, Nanopore, 454
@@ -272,3 +273,22 @@
 	* I can digest my samples and run them on gel, so to select only DNA of a certain lenght
 	* If I see definite bands in the gel, these probably come from repeated regions that are cut at the same lenght
 	* In the digestion, I can choose a restriction enzyme with a long target sequence if I want longer fragments (cut site less probable!) and vice versa
+
+# DNA chips
+* In human the average linkage disequilibrium is low, around 1kb
+* When effective population size is low, likage disequilibrium is large
+	* This is true for lifestock
+* In DNA sequencing chips, I detect a series of SNPs distanced about the linkage disequilibrium
+	* If 2 SNPs are close enough, I can infer that the sequence in between is what I would expect from the aplotype
+
+# Genotyping platforms
+* The main ones are from Illumina and Affimetrix
+* The specific fragments to be genotyped are detected by primer extension
+	* I have a primer right in front of a SNP
+	* I add the 2 possible nucleotides for the SNP labeled with different fluorophores and blocked
+	* I see what happens
+
+# Copy number variation
+* A CNV is a 1 kb or longer DNA segment present at variable copy number
+* They can be discovered by analizing the depth of coverage of the region
+	* This does not tell me in which allele the copies are (!)
