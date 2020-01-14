@@ -37,7 +37,9 @@
 * Genomics is the study of genome structure and function
 * The genome is the entire genetic content of an organism
 * Applied genomics is the use of technologies, tools and experimental designs to analyse genome and extract information form them
+* Genetics studies differences: we cannot track things that are not different among individuals
 * A reference genome of a species is the basis used for analyzing the genome of an individual
+	* In some cases if I do not have a reference genome I can use that of a similar species
 * We have about 2 nuclear genomes per cell, but even thousands of mithocondrial genomes
 * Mithocondrial genomes can be not all equal: heteroplasmy
 * The human nuclear genome is around 3 Gb, the mithocondrial genome 16.7 Kb
@@ -59,6 +61,9 @@
 * We can predict the phenotype of an animal just looking at the genotype (!)
 * To do applied genomics I need a reference genome
 * If I do not have a reference genome for my species of interest, I need to construct it or I can use one of a closely-related species
+* Genomics produces around 10 Zb of data per year
+	* We cannot store everithing: we must select what is worth storing and what is not
+	* It is interesting to look at portions that differ from the reference genome
 * The cost of sequencing is dropping in a way similar to Moore's law
 	* Around 2008 the drop was much faster than Moore's law, thanks to NGS
 * The shotgun approach does not have a particular target, it sequences everything
@@ -77,6 +82,7 @@
 * Sometimes it is not possible to assemble entire chromosomes
 * The quality score of an assembly (n50) is the minimum size of scaffolds that contain 50% of the assembled genome
 * A human chromosome is on average 80-100 Mb
+* Penetrance is the proportion of individual with a given genotype that manifest the associated phenotype
 
 # Next generation sequencing
 * NGS: Illumina, Ion torrent (Thermo fisher), PacBio, Nanopore, 454
@@ -215,10 +221,14 @@
 * The genotype is not sufficient for predicting the aplotypes
 	* I cannot differentiate if a variation is in one chromosome or the other (!)
 	* We need information on aplotype frequencies or on the parents
+* PHASE is a website for analyzing aplotypes
+* I cannot determine the aplotype by only looking at the genotype: I need data on the population
 
 # Plink
 * Plink is an important tool for working with reference genomes
 * The PED file is a text file with a row for each individual
+	* It stores the pedigree of the population
+	* This format is standard and it is used by different tools
 	* It is Tab-separated and there are fields for the father, mother, sex, family, phenotype, SNPs
 	* Missing data are usually reported with 0
 * The MAP file is a text file that has a line for each SNP
@@ -281,14 +291,59 @@
 * In DNA sequencing chips, I detect a series of SNPs distanced about the linkage disequilibrium
 	* If 2 SNPs are close enough, I can infer that the sequence in between is what I would expect from the aplotype
 
-# Genotyping platforms
-* The main ones are from Illumina and Affimetrix
-* The specific fragments to be genotyped are detected by primer extension
-	* I have a primer right in front of a SNP
-	* I add the 2 possible nucleotides for the SNP labeled with different fluorophores and blocked
-	* I see what happens
-
 # Copy number variation
 * A CNV is a 1 kb or longer DNA segment present at variable copy number
 * They can be discovered by analizing the depth of coverage of the region
 	* This does not tell me in which allele the copies are (!)
+* There are portions of mithocondrial DNA integrated in the nuclear genome
+	* These are called NUMTS and they are mostly pseudogenes, but maybe some of them are functional
+	* They are still being integrated, so they tend to be quite variable
+	* The ones integrated most recently tend to be really similar to the mithocondrial sequences
+* Array competitive genomic hybridization (aCGH) was once a golden standard for CNVs, now it is not
+	* It is used for the identification of tumors
+	* It is performed on a DNA microarray
+	* Single probes are 50-75 nucleotides long and they are syntetized
+		* They are selected so to be spaced around 20 kb apart and to have a specific GC %
+		* I need to have a certain GC % so to be able to do the annealing step for all the microarray at the same temperature
+		* I do not want probes on repeated sequences
+	* I do the hybridization with a reference DNA and the sample mixed and marked with different fluorophores
+	* I measure the log_2 of the ratio of the intensities in order to call CNVs
+		* 0 means that I have the same number of copies, 1 that I have the double number of copies
+	* If I want to decrease the noise I can decide to call only more than 5 (es) sequential calls at the same level
+		* In this way I loose resolution (!)
+	* Note that if I compare the X chromosome in males and females, I get double the reads in females (!)
+	* It is a good complement for cytogenetics
+
+# GWAS
+* I want to find the association between a phenotype and a genomic locus
+* I can genotype individuals with a SNPs array and see if there is association with the phenotype
+	* I check allele frequencies that differ in the different cohorts
+* The result is a Manhattan plot
+	* I have the chromosome lenght on the x axis (coordinate of the SNPs)
+	* In the y axis I have the -log of the p-value for the association
+		* Lower p-values are on the highest part (!)
+* I am doing a lot of multiple testing so my threshold must be really high (!)
+	* I use the Bonferroni correction or false discovery rate
+* Continuous traits tend to be normally distributed
+	* On a SNPs A/G I can have 3 possible genotypes: AA, AG, GG
+	* I measure the genotype of each individual and its continuous trait
+	* I take the means of the groups for each genotype and I perform a statistical test on means, like ANOVA
+
+# Detect inbreeding
+* The inbreeding coefficient indicates the probability that random positions among 2 individuals are equal by descent
+	* It is calculated by tracing a close path on the pedigree of an individual
+* Runs of homozigosity (ROH) refer to stretches of chromosome which are completely homozygus
+	* This could mean that the 2 stretches are identical by descent (!)
+	* The ROH % is equivalent to the coefficient of inbreeding
+
+# Genotyping
+* Genotyping means to determine the genotype at one locus
+* I can perform high throughput genotyping with beadchips
+	* I have beads with primers that anneal in different positions in the genome, so to be evenly spaced and belowe the linkage disequilibrium lenght
+	* The output of a beadchip is essentially a .map file with additional experimental information (signal intensity for the SNP)
+	* The position of some probes in the genome is unknown, so the row of their SNP starts with 0 (chromosome) and ends with 0 (position)
+* The main genotyping platforms are from Illumina and Affimetrix
+* The specific fragments to be genotyped are detected by primer extension
+	* I have a primer right in front of a SNP
+	* I add the 2 possible nucleotides for the SNP labeled with different fluorophores and blocked
+	* I see what happens
