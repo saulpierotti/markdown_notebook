@@ -156,4 +156,8 @@
 
 # Regex
 * They are more powerful than globe patterns
-
+* Special symbols
+	* `.` matches any single carachter
+	* `*` matches any number of times (also 0) the previous carachter
+	* `^b` matches anything that begins with b
+	* For more see slides
