@@ -294,3 +294,59 @@
 * There is no need to put and among atoms
 * To put more that 1 condition, I put &
 * Not is done with ~
+
+# NCBI
+* It is the major bioinformatics hub in the US
+* It resides in Bethesda, MD
+* It is part of the NIH (National Institute of Health)
+* There is much training material on NCBI, such as books and tutorials
+* From the homepage, I can perform a search on all the NCBI databases
+	* I get a page that redirects me to results in the different databases
+* Genbank is the analogue of the ENA (european nucleotide archive)
+	* It is a database of genetic sequences
+	* The annotation is provided by the sibmitter of data
+	* It collects a huge amount of information
+* NCBI, EBI and DDBJ formed a consortium called INSDC (international nucleotide sequence database collaboration)
+	* They exchange data daily
+	* Genbank is the most commonly used portal
+* Genbank is not a database, but a portal containing many databases
+	* Sequences are not annotated and only updated by submitters
+* Sequences are reported with the Genbank flatfile
+	* There is an accession number, which is unique
+	* A version for the record
+	* The GI code is the old accession number format, but it is still present in old entries
+		* New entries do not have it!
+	* There is a features section
+		* It specifies source organism, coding sequences (CDS), protein ID
+		* The protein ID entry contains an in silico translation of the CDS
+	* The property section collets various properties like source database
+* Genebank is organized in 12 traditional divisions and bulk divisions
+	* The traditional divisions collect different groups of source organisms and they tend to be well annotated
+	* The bulk divisions collect data like EST (expressed sequence tags), and they are less accurate
+* Refseq is a collection of reference sequences
+	* It is non redundant and contains genomic DNA, mRNA, proteins
+	* Entry from Genbank are reviewed and then migrated to Refseq
+	* It is like SwissProt for TrEMBL
+	* Refseq cannot be searched directly, its entries are inside nucleotide, gene, protein
+* NCBI is a bit of a mess for how it is organized, there are collection, databases, things are not so intuitive
+* Accession number prefixes in Refseq are widely used also in other databases
+	* NM_123456 means mRNA
+	* NP_123456 means protein
+	* NR_123456 means non coding
+	* NW_123456 is a genome
+	* XP, XM, XT means the predicted counterpart of NP, NM, NR
+* Refseq curation is carachterized by status codes: provisional, validated, reviewed
+* Gene
+* OMIM is a db of disease genes or diseases
+	* It is the reference database on the topic
+* dbSNP contains mainly SNPs but also short indels
+	* The official name has changed but the acronym was retained
+	* Single SNPs have an ss# accession
+	* Identical ss# entries are reviewed and consolidated in one rs# entry* BLAST is also hosted in NCBI
+	* There is BLASTp, BLASTn, BLASTx, psiBLAST, 
+	* psiBLAST uses a position-specific scoring matrix
+		* This derives from a first MSA generated from a normal BLAST
+
+# HMMER
+* It is an implementation of HMM algorithms for the search of distant homologs It is an alternative of psiBLAST
+* It was slow, but now it is almost as fast as BLAST

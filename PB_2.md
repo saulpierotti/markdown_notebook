@@ -65,3 +65,15 @@
 * High BLOSUM matrices are used for closely related sequences
 * We can build our own BLOSUMs based on a specific subset of proteins
 * BLOSUM62 is the best performing matrix for comparing weak homologies
+
+# Needelman Wunsch algorithm
+* Create the matrix
+
+```
+def score_m(s1,s2,S,d):
+	init F to 0 matrix
+	init F(i,0)
+	init F(0,j)
+	iteration
+	return F
+```

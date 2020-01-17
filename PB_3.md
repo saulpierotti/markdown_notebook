@@ -124,3 +124,36 @@
 	* It is used for building pipelines (!)
 * If I want to store an intermediate result in a pipeline, I use `tee`
 	* `input command1 | tee output1.txt | command2 > output2.txt`
+
+# Text manipulation
+* Concatenate and print to stdout: `cat`
+	* `cat file1 file2 > file3` creates file3 containing the concatenation of file1 and file2
+* Print the first/last n lines: `head -n` and `tail -n`
+	* `head -4 myfile.txt` prints the first 4 lines
+	* I can print a specific line by piping head and tail
+		* `head -4 myfile | tail -1`
+* Sort a file content: `sort`
+	* The default sorting behaviour is lexicographic: 10 comes before 1
+	* If I specify to sort according to a specific column I specify -k
+	* columns are defined by whitespaces
+	* `sort -k 2 myfile` sorts according to the second column
+	* I can sort numerically with `sort -n`
+	* I can remove duplicated lines with `sort -u`
+		* This works only if the lines are next to each other ofter sorting (!)
+* Report or omit repeated lines: `uniq`
+	* It detects only adiacent duplicates (!)
+		* It is algortimically complex to detect unsorted duplicates
+	* `uniq -d` prints only duplicated lines
+* Extract a column from a file: `cut -f`
+	* `-f` specifies the field separator, that defaults to Tab
+* Count stuff: `wc`
+	* `wc -l` counts the lines in a file
+	* `wc -c` counts the bytes (carachters including the newline)
+* Compare files line by line: `diff`
+	* It prints the lines that are missing from the respective files
+	* It is similar to the NW algorithm
+* Find common lines in sorted files: `comm`
+
+# Regex
+* They are more powerful than globe patterns
+
