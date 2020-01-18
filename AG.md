@@ -17,7 +17,7 @@
 	* Preparation of a genomic project
 		* A text should be written including an appropriate introduction to the problem/question that the experiment or project would like to analyse or answer, aim of the project, a section with materials and methods, expected results and impact
 		* The project should be submitted to the professor one week before the interview
-		* We should specify What is the aim of the project and what I’d like to solve with it
+		* We should specify what is the aim of the project and what I’d like to solve with it
 			* If it makes sense, we can undergo a discussion with him
 		* The project is based on money: we’ll have a budget
 	* Interview based on the project submitted and other two questions
@@ -53,7 +53,7 @@
 * A phenotype is an observable charachteristic
 * Comparative genomics is the study of genomic differences between species
 	* It is really helpful for genome annotation
-* The first draft of the human genome was completed in 2001, and the HGP was started in 1990, and the HGP was started in 1990
+* The first draft of the human genome was completed in 2001, and the HGP was started in 1990
 * 3% of human DNA is coding
 * Repetitive sequences are problematic for assembling genomes
 * Nuclear DNA is 99.99% identical among individuals, while mitochondrial genome is more similar
@@ -71,10 +71,10 @@
 * Hardy-Weinberg equilibrium
 	* $\begin{cases}p^2+q^2+2pq=f(AA)+f(Aa)+f(aa)=(p+q)^2=1 \\ p+q=1\end{cases}$
 	* The allele frequencies refer to the current generation, while the genotype frequencies refer to the next generation
+	* It holds in absence of genetic drift, non-random mating, selection, migration, mutation
 * Mendel's first law: alleles segregate with other alleles
 * Mendel's second law: independent assortment
 * Mendel's third law: some alleles are dominant on others
-* Mendel's second law: independent assortment
 * We reviewed PCR, agarose gel electrophoresys and Sanger sequencing basics
 * Reference genomes can be found in the Ensemble database
 * A genome assembly can be done in chromosomes or in scaffolds
@@ -85,16 +85,36 @@
 * Penetrance is the proportion of individual with a given genotype that manifest the associated phenotype
 
 # Next generation sequencing
-* NGS: Illumina, Ion torrent (Thermo fisher), PacBio, Nanopore, 454
-	* PacBio is going to be acquired by Illumina
+* NGS platforms: Illumina, Ion torrent (Thermo fisher), PacBio, Nanopore, 454
+	* PacBio was going to be acquired by Illumina, but the antitrust opposed and the merger was canceled
 	* We have short reads, therefore assembly is difficult
 	* 454 (La Roche, pirosequencing) is practically dead today
 * The depth of coverage is the number of unique reads that contain a specifc nucleotide in the assembly
-	* He said also another definition, check
 * Sequencing a mammalian genome at 50x costs around 2000€+VAT in China or South Korea
-	* BGI (Bejing genome institute) is the largest sequencing provider
+	* BGI (Bejing genome institute) is the largest sequencing provider and it is chinese
+	* NOVOGENE is from South Korea
+	* If I chose to use these services, I need to consider shipping restrictions, costs, and product degradation
+* In sequencing, if we are not sure about a variant we exclude it
+* Wen I do genotyping by sequencing, the regions of interest have a very high depth of coverage so I can trust the results
+* We have tools for allignment of reads to a reference like bowtie
+	* They produce a BAM file
+* There are tools for calling mutations, Indels, ecc.
+* If I do not have enough money to sequence any individual, I can pool DNA samples in group (i.e. breed) and do a sequencing for each group
+* A reduced representation library is obtained by digestion of the genome
+	* I run the digest on agarose and retrieve only a specific subset of MW
+	* If I see definite bands in the gel, these probably come from repeated regions that are cut at the same lenght
+		* I want to exclude this (!)
+	* In the digestion, I can choose a restriction enzyme with a long target sequence if I want longer fragments (cut site less probable!) and vice versa
+* Fastq is similar to fasta but it has additional information on it
+	* It uses ASCII symbols to code a quality score (PHRED score, from the homonimous software) in a separate line from the one where the bases are stored
+	* The quality score is the ASCII code of the charachter (!)
+	* The highest quality is 90 for fastq
+	* The quality score rarely exceeds 60 in row data, but can be higher in assemblies
+	* The threshold quality score now accepted for base calling is 30
+* Allignments are saved in .sam format, a tab-delimited text file that can be converted in a binary .bam file
+	* samtools is used for working with sam files
 
-## Ion torrent
+# Ion torrent
 * There are many sequencing chips, with different throughputs
 * The sequencing device is a semiconductor chip with millions of nano-wells
 	* Each well is represented as a pixel
@@ -106,8 +126,8 @@
 * During the addition of a nucleotide, a proton is released
 * If I add nucleotides one at a time, I can sense the pH change due to the many protons released by the clones
 * If I have multiple nucleotides of the same type in a row, I get a stronger signal
-* Regions with a stretch of the same nucleotide, called omopolymeric, it is difficult to exactly count the number of nucleotides
-* fastq is a fasta file with additional information attached
+* Regions with a stretch of the same nucleotide are called omopolymeric
+	* It is difficult to exactly count the number of nucleotides in these regions
 * The raw data produced is called ionogram
 * We use universal adapters with a specific portion to amplify the DNA fragments
 * The machine is called ion or proton torrent
@@ -118,7 +138,7 @@
 * I can only sequence small fragments: I need a fragmentation step
 * Fragmentation can be done by sonication or with aspecific DNases
 * Playing with the time of fragmentation, I can modulate the length of the fragments
-* Frequently I need to try in different ways!
+* Frequently I need to try in different ways (!)
 * It is a random process!
 * I have to amplify all my fragments by PCR
 * It will take forever with standard PCR, so I do emulsion PCR where every drop harbours a reaction
@@ -133,15 +153,22 @@
 * The real throughput of my sequencing system is lower than the theoretical one
 * To increase my output, I can regolate my flow (nucleotides added) considering gc content of my target
 * I have a reference sequence known, and if this sequence reaches a threshold signal I keep my read, otherwise I discard it
-* Fastq is similar to fasta but it has additional information on it
-	* It uses ASCII symbols to code a quality score in a separate line from the one where the bases are stored
-	* The quality score is the ASCII code of the charachter (!)
-	* The highest quality is 90 for fastq
-* In missed reads I have too many empty spaces iny read, more than statistically reasonable
-* Allignments are saved in .sam format, a tab-delimited text file that can be converted in a binary .bam file
-* The threshold quality score now accepted is 30
+* In missed reads I have too many empty spaces in each read, more than statistically reasonable
+* ChiPseq (chromatine immunoprecipitation) is a method used to analyse DNA-protein interactions
+	* The output is a library of sequences that bind the protein of interest
+	* The first step is to fix the proteins with DNA using formaldehyde
+	* Subsequently, cells are lised and DNA fragmented
+	* The sequences of interest are recovered with Ab against the protein of interest
+	* I reverse the DNA-protein binding and sequence the fragments 
+* If I want to reduce cost, I can sequence only the part of interest, for instance the exome
+	* In order to sequence the exom I need a capturing system
+	* If not commercially available I have to evaluate if developping a capturing system is worth it 
+	* In order to enrich for the exome, I need to have specific probes that bind to exon regions, either in solution (on beads) or in microarrays
+* In order to reduce cost, I can run more samples in the same lane by using a barcode attached to my fragments
+* MySeq can be used for metagenomics (16S sequencing, 24 samples per lane) and for microbial WGS
+* HiSeq can be used for WGS (3-4 lanes per genome) and exome capture (4 samples per lane)
 
-## Roche 454
+# Roche 454
 * It works in similar way to Ion Torrent, but it senses the release of pyrophosphate during elongation
 * It was the first NGS to be developped, but also the first one to become obsolete
 * Like Ion Torrent, it uses beads on a chip and the target is amplified by emulsion PCR
@@ -153,7 +180,7 @@
 * It has revolutionized bacterial taxonomy because it allowed to sequence the rRNA 16s
 	* This is because it can produce longer reads than other NGS techniques
 
-## Illumina
+# Illumina
 * Adapters are ligated to my fragments
 * In a flowcell, I have many oligos that can anneal with the adapters
 * After bridge-amplification, I get clonal clusters of fragments
@@ -167,43 +194,41 @@
 * When I sequence a genome, I need to consider sequencing depth and coverage
 	* Sequencing depth is the average number of times that a nucleotide in my reference genome is represented in a read
 
-## AB SOLiD
+# AB SOLiD
 * It is dead by now, but could be potentially great because it gives the highest throughput
 * Its reads are really short (30 bp) so it is computationally heavy to asseble the reads and it is impossible to use with repetitive regions
 
-## Complete genomics
+# Complete genomics
 * It is used for re-sequencing common genomes
-* Fragments are made circular and then amplified by rolling circle amplification, obtaining DNA nanoballs
+* Fragments are made circular and then amplified by rolling circle amplification, obtaining DNA nanoballs (DNBs)
+* DNBTMs are around 200 nm in size
+* They are anchored in a chip obtain by photolitography
+* The chip is made so to have a grid pattern of sticky spots
+* Each sticky spot recives exactly one nanoball, thanks to proprietary technology
+* Sequencing is done by combinatorial probe-anchor ligation (cPAL)
+	* The DNB contains genomic DNA and an adapter sequence
+	* An anchor probe binds to the adapter
+	* Fluorescent nucleotides are incorporated by ligase
+* This company was acquired by BGI and it does not sell sequencing equipment
+* You send samples to them and they produce data in ~100 days
 
-## PacBio
+# PacBio
 * It is really a promising technology
 * Reads are long, up to a 6-10 kb, but troughput is low
 * The error rate is quite high, and probably it cannot be reduced under 5%
 * It is costly, 40k€ for 10x in mammalian genomes
 * It is a golden standard for new sequencing projects, usually matched with Illumina
 	* PacBio facilitates assembly, Illumina gives a low error rate
-* PacBio is going to be bought by Illumina, but the anti-trust is opposing it
+* PacBio was going to be bought by Illumina, but the anti-trust opposed it and themerger was canceled
 
-## Oxford nanopore
+# Oxford nanopore
 * Long reads, but high error rate and low thorughput
 * The reads can potentially be very long, up to 100kb depending on library preparation
 * DNA passes trough an hemolysine pore altering the ion flow thorugh the pore
 * Interpretation of the raw data is difficult, because the meaning of reads depends on the sequence context
 	* Machine learning (!)
-
-## Applications of NGS
-* ChiPseq (chromatine immunoprecipitation) is a method used to analyse DNA-protein interactions
-	* The output is a library of sequences bound that bind the protein of interest
-	* The first step is to fix the proteins with DNA using formaldehyde
-	* Subsequently, cells are lised and DNA fragmented
-	* The sequences of interest are recovered with Ab against the protein of interest
-	* I reverse the DNA-protein binding and sequence the fragments 
-* If I want to reduce cost, I can sequence only the part of interest, for instance the exome
-	* In order to sequence the exom I need a capturing system, and if not commercially available I have to evaluate if developping a capturing system is worth it 
-	* In order to enrich for the exome, I need to have specific probes that bind to exon regions, either in solution (on beads) or in microarrays
-* In order to reduce cost, I can run more samples in the same lane by using a barcode attached to my fragments
-* MySeq can be used for metagenomics (16S sequencing, 24 samples per lane) and for microbial WGS
-* HiSeq can be used for WGS (3-4 lanes per genome) and exome capture (4 samples per lane)
+* The platform is cheap (~5000€, sometimes given for free) but adapters and accessories are expensive
+* It is invaluable when I have to work on-site, since it is small and portable
 
 # Aplotypes
 * We can detect crossing-over by looking for the association of genetic markers
@@ -224,19 +249,60 @@
 * PHASE is a website for analyzing aplotypes
 * I cannot determine the aplotype by only looking at the genotype: I need data on the population
 
+# Genotyping
+* Genotyping means to determine the genotype at one locus
+* I can perform high throughput genotyping with beadchips
+	* I have beads with primers that anneal in different positions in the genome, so to be evenly spaced and belowe the linkage disequilibrium lenght
+	* The output of a beadchip is essentially a .map file with additional experimental information (signal intensity for the SNP)
+	* The position of some probes in the genome is unknown, so the row of their SNP starts with 0 (chromosome) and ends with 0 (position)
+* The main genotyping platforms are from Illumina and Affimetrix
+* The probe is designed so to
+	* Bind to a unique region (it has to be long enough!)
+	* It has to have standard GC content, so I can melt all the chip at the same temperature
+* The specific fragments to be genotyped are detected by primer extension
+	* I have a primer right in front of a SNP
+	* I add the 2 possible nucleotides for the SNP labeled with different fluorophores and blocked
+	* I see what happens
+* The minor allele frequency (MAF) is the frequency of the rarer variant of a SNP
+	* It can go from 0 to 0.5
+* I do not need to genotype all the SNPs
+	* I can take advantage of linkage disequilibrium to detect aplotypes
+	* Polimorphic sites are more informative than sites with rare variants, so I tend to focus on them for determining an aplotype
+* Genotyping by sequencing (GBS) allows to detect unknown SNPs and it is typically done with pooled reduced representation libraries
+* Illumina can produce customized genotyping chips
+
 # Plink
+* A pedigree is a representation of individuals and relationships among them
+	* It can be represented in plane text or in binary form
 * Plink is an important tool for working with reference genomes
-* The PED file is a text file with a row for each individual
+	* It can work with text files (`--file` parameter, without extension for homonimous .ped and .map files)
+	* It can work with binaries (`--bfile` option)
+* PED and MAP file work in pairs: I typically have a file.ped and file.map with the same root name and referring to the same data
+* The PED (pedigree) file is a text file with a row for each individual
 	* It stores the pedigree of the population
 	* This format is standard and it is used by different tools
 	* It is Tab-separated and there are fields for the father, mother, sex, family, phenotype, SNPs
 	* Missing data are usually reported with 0
-* The MAP file is a text file that has a line for each SNP
+* The MAP (map on the genome) file is a text file that has a line for each SNP
 	* It reports chromosome number, SNP ID, position, distance from other SNPs
-* A polimorphism has a frequency higher than 1%
-* For genotyping, we want to exclude rare alleles
+	* It is produced from the output of a genotyping platform
+* A polymorphism has a frequency higher than 1%
+* Before doing data analysis, check your data (!)
+	* I want to exclude faulty individuals and faulty loci
+	* Plink can filter out data given a threshold
+	* I want to exclude low-frequency alleles: my focus is the population, not the individual
+	* I can exclude SNPs that violate HW
+	* I can exclude mendelian errors: genotypes that are impossible given the parents
+* Basic usage
+	* `--freq` gives the frequency of a SNP
+	* If I don't trust the data provider about the sexes, I can check for absolute homozigosity at X loci: in this case I have a male
+	* I can want to filter out duplicates due to sampling errors
+	* If I am working with non-human or I have partially assembled scaffolds, I need to specify `--allow-extra-chromosomes` or the species, if available in plink (es. `--sheep`)
+	* `--out` specifies the root filename of the output
+	* `--noweb` is usually required otherwise it checks forever for updates
+	
 
-# How to do a de novo sequencing
+# De novo sequencing
 * The human genome is repeat rich
 * The main approaches are whole genome shotgun and hierarchical shotgun approach (BAC based)
 * Hierarchical shotgun allows to resolve repetitive regions by building bigger contigs (!)
@@ -249,6 +315,8 @@
 * The main problems of hierarchical shotgun are that it is slow and assembly is problematic if some BACs contain chimeric DNA
 	* Chimeric DNA is a fragment that is created by the association of fragments from different chromosomes during the construction of the library
 * The alternative to hierarchical shotgun is whole genome shotgun
+* N50 is a statistics that defines assembly quality in terms of contiguity
+	* It is the lenght of the sorterst contig that allows to surpass 50% coverage of the genome
 * The state of the art is to do a first PacBio sequencing to get a rough map to which I can attach subsequent precise Illumina paired-end reads
 	* I want to use more than one Illumina run, with different lengths, so to discriminate repetitive regions and to correct errors in the PacBio phase
 * Radiation hybrid maps now can be used for refining an assembly
@@ -259,7 +327,7 @@
 	* I can then test by PCR to locate specific tags
 	* By cross-referencing caryotype and PCR I can get a rough map of in which chromosome genes are (not so useful now, used in the pre-sequencing era)
 	* If before the formation of the hybrid I irradiate the normal line, I break its DNA and get small fragments
-	* In this case I wont to have avery big library, where each clone has a small fragment
+	* In this case I want to have a very big library, where each clone has a small fragment
 	* I can test by PCR in order to understand which markers from which chromosomes I get from each clone
 	* If in my assembly I have a contig that I cannot locate, I design PCR primers for that region
 	* I test all the library with the primers, and I select the clones that contain my tag
@@ -273,16 +341,6 @@
 * Masking means to substitute a sequence with a stretch of NNNN of the same length
 * Pseudogenes can be processed or non processed (with introns) and they are not recognised by repeatmasker
 
-# NGS workflow
-* In sequencing, if we are not sure about a variant we exclude it
-* Wen I do genotyping by sequencing, the regions of interest have a very high depth of coverage so I can trust the results
-* We have tools for allignment of reads to a reference like bowtie
-	* They produce a BAM file
-* There are tools for calling mutations, Indels, ecc.
-* If I do not have enough money to sequence any individual, I can pool DNA samples in group (i.e. breed) and do a sequencing for each group
-	* I can digest my samples and run them on gel, so to select only DNA of a certain lenght
-	* If I see definite bands in the gel, these probably come from repeated regions that are cut at the same lenght
-	* In the digestion, I can choose a restriction enzyme with a long target sequence if I want longer fragments (cut site less probable!) and vice versa
 
 # DNA chips
 * In human the average linkage disequilibrium is low, around 1kb
@@ -335,15 +393,3 @@
 * Runs of homozigosity (ROH) refer to stretches of chromosome which are completely homozygus
 	* This could mean that the 2 stretches are identical by descent (!)
 	* The ROH % is equivalent to the coefficient of inbreeding
-
-# Genotyping
-* Genotyping means to determine the genotype at one locus
-* I can perform high throughput genotyping with beadchips
-	* I have beads with primers that anneal in different positions in the genome, so to be evenly spaced and belowe the linkage disequilibrium lenght
-	* The output of a beadchip is essentially a .map file with additional experimental information (signal intensity for the SNP)
-	* The position of some probes in the genome is unknown, so the row of their SNP starts with 0 (chromosome) and ends with 0 (position)
-* The main genotyping platforms are from Illumina and Affimetrix
-* The specific fragments to be genotyped are detected by primer extension
-	* I have a primer right in front of a SNP
-	* I add the 2 possible nucleotides for the SNP labeled with different fluorophores and blocked
-	* I see what happens

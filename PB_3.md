@@ -156,8 +156,23 @@
 
 # Regex
 * They are more powerful than globe patterns
-* Special symbols
+* `grep` means global regular expression print
+	* It searches in a file and prints all the lines that match the pattern
+* `egrep` can handle extended regex
+* `fgrep` is fast but does not deal with regex, it searches fixed patterns
+* Regex searches for a string containing the expression
+	* `abc` matches ANY string containing abc
+* Standard regex
 	* `.` matches any single carachter
 	* `*` matches any number of times (also 0) the previous carachter
 	* `^b` matches anything that begins with b
-	* For more see slides
+	* `[ABC]` matches A, B or C
+	* `^` and `$` match beginning and end
+	* `A{3,5}` matches AAA, AAAA and AAAAA, `A{2,}` matches 2 or more A
+	* `\` turns of a metacarachter
+* Extended regex
+	* `?` matches the preceding 0 or 1 time
+	* `+` matches the preceding 1 or more times
+	* `(exp1|exp2)` matches either exp1 or exp2
+* I can invert the matching with `grep -v`
+* I can search for words using `grep -w`
