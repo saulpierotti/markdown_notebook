@@ -154,7 +154,7 @@
 	* It is similar to the NW algorithm
 * Find common lines in sorted files: `comm`
 
-# Regex
+# Regex and grep
 * They are more powerful than globe patterns
 * `grep` means global regular expression print
 	* It searches in a file and prints all the lines that match the pattern
@@ -176,3 +176,110 @@
 	* `(exp1|exp2)` matches either exp1 or exp2
 * I can invert the matching with `grep -v`
 * I can search for words using `grep -w`
+
+# awk
+* `awk` is a programming language designed for text processing
+* The name comes from the initials of the authors
+* The awk synthax can be used for text processing, arithmetic operations, string operations, and others
+* It reads from STDIN or from a file
+* The input is read as a set of records divided into fields
+* A record is a line by default
+* A field is a word by default
+* The field and record separators can be changed, also to regex
+* The specified operation is performed for every record, or to records that match a pattern
+* The syntax is `awk 'pattern {action}' [filename]`
+* If I use regex, it is `awk '/regex/ {action} [filename]`
+* If action is not specified, it defaults to echo to STDOUT, essentially behaving like `grep`
+* I can reference single fields of a record in the action
+	* `$1`,`$2` refer to the first and second field
+	* `$0` refers to the entire record
+* I can specify multiple pattern with multiple actions
+* There are optional blocks
+	* `BEGIN{action}` and `END{action}` are executed before and after the parsing
+* Variables can be built-ins or user-defined
+	* Variables do not need to be declared
+	* It is good practice to initialize them in the BEGIN block
+* Some built-ins
+	* `NR` is the number of the current record (line)
+	* `NF` is the field number (word)
+	* `FS` is the field separator
+	* `RS` is the record separator
+	* `$n` represents the nth field
+* I can change the field and record separators by assigning `FS` and `RS` (!)
+* Some standard operators
+	* Standard arithmetic operators: `+ - * / % ++ --`
+	* Relational operators: `== != < > <= >=`
+	* Logical operators: `&&(AND) ||(OR) !(NOT)`
+* There are 2 regex operators
+	* `str ~ /regex/` returns true if str matches regex
+	* `str !~ /regex/` returns true if str does not match regex
+* Some string operators
+	* They can change with `awk` version (!)
+	* `length(str)` returns the lenght
+	* `sub(regex,repl,str)` replaces the regex in str with repl
+	* `substr(str,pos,len)` extracts a substring
+	* `index(str,match)` returns the index of match in str, if it exists
+	* `tolower(str)` and `toupper(str)` convert cases
+* The print function
+	* `print str1,str2` prints the strings separated by the built-in `OFS`
+		* If `,` is omitted the strings are printed without separator
+	* `OFS` (output field separator) can be assigned and defaults to space
+	* A newline is always added at the end of the print
+* Commands can be separated in a single block by `{cmd1; cmd2}`
+* `getline` is used to read the next line from input
+	* It is like file.readline() in python
+	* Once read, the line is not read again (!)
+* `printf` takes in input a format string followed by a comma-separated list of arguments
+	* printf means formatted printing
+	* It is similar to printf() in C, since it aek was written by the same author of C (!)
+	* I can put special symbols in my string, that refer to datatypes
+		* `%d %f %s` refer to int, float, string
+	* I can then refer to the symbols after the print
+		* `{printf "%d is an integer",1}`
+	* I can remove newlines by
+		* `awk '{printf "%s ",$0}`
+* Associatives arrays are basically dictionaries
+	* `awk '{array[key]=value}'`
+	* The key can also be in the form `[key1,key2,keyn]`
+		* In this case it just concatenates the keys as strings and forms a complex key
+	* Non-existent values default to 0 (!)
+* The if statement is done like
+	* `awk {if(test)codeblock;else codeblock}`
+* The for loop is done like in Perl
+	* `awk {for(i=0,i<10,i++) codeblock}`
+* But I can also iterate on an array
+	* `awk {for(key in arr) print arr[key]}`
+* The while loop
+	* `awk {while(test) codeblock}`
+* Be careful with pipes and redirections (!)
+	* Once opened a pipe inside awk, it remains open for the whole computation
+	* This can lead to unexpected behaviour
+	* The standard way to correct is to store the command in a variable
+	* `awk '{cmd="my_cmd";close(cmd) code|cmd}'`
+
+# Sed
+* It is a tool for text manipulation
+* It is less powerfull than `awk`
+* `sed` reads a file line by line and it does things with it
+* If I don't do anything with a line, it goes to STDOUT
+* `sed '1p'` duplicates the first line
+	* `p` is for print
+* `sed -n '1p'` prints only the first line
+	* `-n` suppresses default printing to STDOUT of lines
+* A line can also be specified by regex
+* `sed 1d` prints all the file but the first line
+	* `d` is for delete
+* Pattern substitution is really easy with `sed`
+	* We use the `s` flag
+	* `sed 's/find/replace/'`
+	* By default it only works on the first occurrence
+	* If I want to replace all the occurrencies, I need the flag `g`
+		* `sed 's/find/replace/g'`
+* The `-i` option owerwrites the original file
+* If I want to do more than one thing
+	* I can do `sed -e 'cmd1' -e 'cmd2'`
+	* An alternative is `sed 'cmd1;cmd2'`
+		* Be careful, they are executed one after the other (!)
+* I can create a script for sed and call it
+	* Commands have to be one per line
+	* `sed -f script`

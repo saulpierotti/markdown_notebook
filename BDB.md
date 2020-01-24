@@ -350,3 +350,16 @@
 # HMMER
 * It is an implementation of HMM algorithms for the search of distant homologs It is an alternative of psiBLAST
 * It was slow, but now it is almost as fast as BLAST
+
+# Ensemble
+* The annotation is first performed automatically for the whole genome (hence the name Ensemble)
+* Manual annotation thorugh VEGA and Havana
+	* These projects focus solely on vertebrate model organisms
+* Gold color is for when Havana and Ensembl agree on a transcript
+* Red transcript can be from only Havana, or only Ensembl
+	* Their number starts with 20_ for Ensembl and 00_ for Havana
+* Blue refers to non-conding transcripts
+	* They are only Havana, we do not have tools to detect them automatically (!)
+* Green is for genes in the Consensus CDS protein set (CCDS)
+	* It means that the gene is consistently predicted by NCBI, EBI, UCSC, Sanger
+* Genese in the forward strand are shown above the contig, genes in the reverse strand are below it
