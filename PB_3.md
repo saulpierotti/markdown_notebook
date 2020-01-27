@@ -283,3 +283,16 @@
 * I can create a script for sed and call it
 	* Commands have to be one per line
 	* `sed -f script`
+
+# Shell scripting
+* I can specify the interpreter with an hashbang
+	* `#!/path/to/interpreter`
+* Comments are rendered with #
+* Syntax is somewhat shell-dependent
+* Variables are by default local, and can be made global by exporting
+	* `VAR=1; echo $VAR`
+	* `VAR=1; export $VAR`
+* Special variables
+	* `$0` is the name of the script, or /bin/bash if interactive
+	* `$1` is the first argument and so on
+	* `$#` is the number of arguments
