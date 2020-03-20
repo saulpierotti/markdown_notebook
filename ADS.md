@@ -249,4 +249,30 @@ MERGESORT(A,1,A.lenght)
 * The $O$ (big-O) notation indicates an upper bound for the asymptotic behaviour
 	* The formal definiton is similar to that of $\Theta$, but instead of a tight bound I only search for an upper bound
 		* I only want a constant, not 2 (!)
-* The $o$ (small-o) notation indicates a lower bound for the function
+* The $\Omega$ (big-Omega) notation indicates a lower bound for the function
+* An important theorem: $f(n) = \Theta(g(n)) \iff f(n) = O(g(n)) \land f(n) = \Omega(g(n))$
+* Factorials are faster than exponentials, but slower than $n^n$ (!)
+
+# Designing algorithms
+* A recurrence equation describes a function in terms of its value on a smaller input
+* An example: analysis of a divide and conquer algorithm
+	* $T(n)$ is the running time of the algorithm on input n
+	* Dividing takes $D(n)=\Theta(1)$ time
+	* Conquer takes the same $T$ on a smaller input, so $aT(n/b)$
+		* I need to solve $a$ subproblems in with an inpuit size reduced of a factor $b$
+	* Combining the solutions takes $C(n)=\Theta(n)$ time
+	* So we have that $T(n) = \begin{cases} c & n = 1 \\2T(n/2)+c+cn & n>1 \end{cases}$
+* Solving recurrence equations: the iteration method
+	* If I have $T(n)=T(n/2)+c \implies T(n/2)=T(n/4)+c$ and so on
+	* This implies that $T(n)=c+c+T(n/4)$
+	* If I continue this until I get to the base case $T(1)$
+	* I can write therefore $T(n)=c*k+T(n/2^k)$
+	* The base case will be when $n=2^k$ and therefore $k=\log{n}$
+	* So I get that $T(n)=c*\log{n}+T(n/2^{\log{n}})=c*\log{n}+T(1)$
+	* This means that $T(n)=\Theta(\log{n})$
+* Solving recurrence equations: the recursion tree method
+	* I convert the equation into a tree and sum up the cost of each node
+	* Let's try with $T(n)=2T(n/2)+n^2$
+	* The root has a cost $n^2$ and 2 children of cost $T(n/2)$ each
+	* I continue to expand until the base case
+	* This gives us a $O(n^2)$, since I cannot determine a tight bound

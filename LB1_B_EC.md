@@ -48,6 +48,11 @@
 * Remote similarities are detected by a subset of methods, and different methods recognize different similarities
 * Speed is an issue in many algorithms
 * We want our method to be biologically meaningful, not only geometrically
+* The expected score or random pairwise alignments is an extreme value distribution
+	* I would have a gaussian if there was no evolution
+	* In real databases I have an excess of good-scoring pairs
+* When I want to determine the distribution of scores, it is better to have an analitycal distribution than an empirical one
+	* I don't have tools for working with empirical distributions (!)
 
 ## CE algorthm
 * Compares AFPs composed of 8 residues, stiches them together and finds an optimal path trough them with dynamic programming
@@ -96,6 +101,45 @@
 
 # RNA structure
 * Most RNAs are around 50 bp
-* The best atoms for representing the backbone are C4 and O3, since they have the most constant inter-nuclotide distance
+* Secondary structure of RNAs is usually represented with parenteses
+	* I cannot represent pseudo-knots in this way
+* For RNA, the secondary strucutre is much more informative than for proteins
+	* A certain secondary structure constraints a lot the tertiary structure
+* There is less variability in RNA strucutures than in proteins
+* The best atom for representing the backbone is C3', since it has the most constant inter-nuclotide distance
+* The professor adapted MAMMOTH to work with RNA C3' atoms instead of Ca in proteins: SARA
+	* The statistics of the score had to be re-evaluated
+	* They still used the extreme value distribution, which is defined by $\mu$ and $\sigma$
+	* They selected how the parameters change when RNA size changes
+	* The set of unit vectors was 3 instead of 7 
+	* The method gives a -log(p-value) score
+	* By comparing RNAs of known function, I can determine a score threshold that gives correct functional annotation
+* Another method was developped in Israel: ARTS
+* Few people are working in RNA: not so many methods
 * The twilight zone of RNA sequence alignment is around 60%
-* Secondary structure identity (PSS) correlates well with tertiary structure identity (PSI)
+* Secondary structure identity (PSS) correlates well with tertiary structure identity (PSI) but not with sequence identity
+
+# Multiple sequence alignment
+* We can observe blocks of conservation in MSAs
+* In MSA it is easier that in pariwise alignments to identify conserved regions
+* Conserved regions could be functionally important
+* I can transform a MSA in a profile of the sequences
+* A profile is a matrix with a row for each possible residue and a column for each position
+	* The value of each element reflects the frequency of a residue in a specific position
+	* Each position is therefore a vector of 20 elements
+	* I can also have a row for the presence of a gap in the position
+* Shannon entropy: information content of a message
+	* Far a single colum $S(p) = \sum_{i=1}^{20}-p_i \ln{p_i}$
+	* Total conservation: $S(p)=0$
+	* All residues are equally probable: $S(p)=ln(20)$
+	* There are more sofisticated models that take into account the expected frequency of residues
+	* The entropy of an alignment si obtained by summing the Shannon entropy over the all alignment
+* Scoring an MSA: sum of pairwise scores or entropy score
+	* I can obtain the MSA so to minimise its entropy
+	* I can score each pairwise alignment and sum it
+* I can align a sequence to a profile
+	* Each position is aligned to a vector for the position
+	* The score for the position of the residue in the sequence with every possible residue is summed and weighted for the frequency encoded in the vector
+	* These scores can be used with a dynamic programming algortihm
+* To calculate an MSA, I want to optimise its score
+* Dynamic programming approaches exist, but they are $O(N^M)$

@@ -99,12 +99,140 @@
 	* We want to maximise electrostatic and geometric affinity
 * We first perform a step called pose generation that explores the conformational space, and subsequently we rank the possible solutions
 * A ligand can be a small molecule or also a macromolecule
+	* Binding sites for ligands are small and deep
+	* Peptides are 8-10 aminoacid long and tend to have a floppy backbone
+	* Proteins tend to have rigid backbones: interfaces are large and flat
 * Docking is a golden standard in PPIs, because it is reliable, but it is computationally expensive: it is not an high throughput method
 * A must for docking is to have a good 3d structure or model
+	* Usually a crystal structure is better than an homology model, but also a crystal is a kind of model, it can be wrong (!)
 * In order to test a docking method, I can take a structure with a co-crystalised ligand
 	* I artificially separate the molecules and compare the docking prediction with the experimental data
 	* This method is called bound docking
 * On the contrary, in unbound docking it may be that I am using a structure for a protein that is in the wrong conformation for the interaction
+	* It is far more complex than bound docking
 	* A structure is defined native if in an uncomplexed state, pseudonative if complexed with a ligand different from the one used in the docking
 	* I can also do unbound docking on a model
 * Typical limitations of the apprach are: conformational changes, errors in the structures or models, limited computing resources
+* In order to do docking I need a representation of the protein surface
+	* The kind of representation that I use will influence the algorithms that I can employ for the docking
+	* I can use mathematical models that describe its shape and electrostatic proprieties
+	* The protein frame can be treated in a static or dynamic way
+* I can consider the protein and its ligand as rigid or flexible
+	* Rigid docking can explore the whole protein surface and it is faster, but less accurate
+		* Rigid docking algorithms proved to be useful for enzyme-inhibitor and antigen-antibody docking
+	* Semi-flexible docking treats the ligand as flexible and the protein as rigid
+	* Flexible docking treats everything as flexible: it is more accurate but really slow
+* The search algorithms can work in different ways, but it produces an enormous number of solutions ($10^9$)
+	* Brute-force the solution space
+	* Guided progression through the solution space, sometimes only considering solution that confrom to pre-determined criteria
+	* Data-driven: uses the available information about interface residues
+* Scoring functions are needed for ranking the possible solutions, and they can use different approaches
+	* They can use a force field, a set of parameters that define the potential energy of a system and it is based on molecular mechanics
+	* Empirical functions are simpler and use a reduced description of the most important interactions
+* The initial screening of poses is usually based on geometric criteria, then top-ranking conformations are discriminated with more advanced methods based on energy contributions
+* The native pose tends to belong to a cluster of high-scoring poses
+	* Events that occur in cluster tend to not be random
+	* The native pose is typically at the center of the most populated cluster of solutions
+* CAPRI is an international competition for docking algorithms organised by EBI, like the CASP is for structure prediction
+* ClusPro and HADDOCK are 2 docking web-servers
+
+# PPI data and databases
+* There are databases that collect only experimental data, and databases with computationally-derived interactions
+* Experimental data are not always more reliable than computationally derived ones (!)
+	* There are no experimental method that can replicate binary interactions under physiological conditions
+* Low-thoroughput techniques can be more reliable of high-thorughput ones
+* High-troughput techniques: yeast-2-hybrid, affinity purification MS
+* Medium-troughput techniques: 
+* Low-troughput techniques: 
+* Methods can be binary or co-complex
+	* Co-complex methods can detect non-direct interactions among proteins, i.e. if they belong to the same complex
+* Yeast-2-hybrid (Y2H) is fast and scalable, but has disadvantages
+	* An yeast protein can act as a bridge and give a false interaction
+	* The conditions in yeast can not be physiological
+	* The proteins that I am studying could in reality reside in different compartments
+* Affinity purification MS: affinity chromatografy and the MS
+	* It is in vitro (!)
+	* I cannot identify proteins in really low amounts by MS, and proteins that are not in databases
+	* False positives due to breakage of cell compartments
+* Co-immunoprecipitation: antibodies interact with protein A, that interacts with protein B
+	* With the antibody I can pull down protein B
+	* Similar pros and cons with affinity purification MS
+	* The interactors can be studied by MS
+* X-ray crystallography: high detail level but challenging
+	* Very low troughput
+	* Artificial environment
+	* There are false positives and negatives
+* Data must be accessible and intellegible to the user
+	* It requires a lot of effort to implement, curate and maintain PPI databases
+* In the past data producers where also data analyzers
+* Today this is not possible any more: specialized jobs and not enough time and resources for data producers
+* Data should comply with the FAIR principles
+	* Findable, Accessible, Interoperable, Reusable
+	* We want unique and persistent data identifiers
+* Primary databases: experimental interactions manually curated
+	* IntAct, MINT
+* Secondary (meta) databases: integration of primary databases
+	* APID, PINA
+* Prediction databases: integration of experimental predictions with computational predictions
+	* STRING
+* IMEx is an international consortium of interaction data providers who share curation efforts
+	* Data is curated once and then shared among members
+	* Curation is entirely manual
+	* Data is provided in standard formats: MITAB or PSI-MI XML 2.5
+	* UniProt, MINT, IntAct are in the consortium
+	* STRING is NOT in IMEx because it includes predictions
+* The ideal would be to have a single database to uniform interface and data mining, but this is not possible
+* A good compromise: standards and guidelines to uniform data access and retrieval
+* The problem of standards: creating a standard to uniform previous competing standards create just one more competing standard
+* PSIQUIC is an unified query client interface for retrieving data from some biological databases
+	* It provides links to the included databases
+* Mentha and virus-mentha are interactome databases
+
+# Interaction networks
+* Material was extracted from the EBI online course
+* Networks are everywhere
+* They where first studied in the context of social networks
+* Euler first represented a problem with a graph: Koenisberg 7 bridges
+* Networks are useful when dealing with large amounts of data
+* Network biology is a branch of system biology
+* Indirected networks: no direction in the interactions, es PPI networks
+* Directed networks: unidirectional interaction, metabolic networks and gene regulation
+* Weighted networks: edge encode a weight such as the reliability of an interaction, the quantitative expression induction, sequence similarity of genes
+* A graph can be represented by an adiacency matrix
+	* 1 means connected, 0 not connected
+	* In an undirected network the matrix is symmetric, in a directed network it is not
+* The topology of a network refers to its connectivity
+	* A topological cluster is more connected to itself than to other parts of the network
+	* The degree of a node is the number of edges connected to it
+	* A network is scale-free if it has a small number of high degree nodes and many nodes with low degree
+	* The degree centrality of a node tells us how relevant is a node for the entire network
+* Our knowledge of interaction networks is noisy and incomplete
+* Some features about a network could change in the future, when more data are available
+* Small world effect: the shortest path among any 2 nodes tends to be small: 6 degrees of separation
+	* Signals are quick and efficient, and reliable
+	* Perturbating a single node does not cause enormous alterations on the network
+* PPINs are tendentially scale-free: many nodes with few connections and a few hubs
+	* A random mutation in the network is unlikely to hit an hub
+	* It is vulnerable to targeted attack on hubs
+* PPINs have high transitivity: many clusters with many internal interactions
+* The PSI-MI score assigns the reliability of interactions
+	* It evaluates the number of independent publications advocating for an interaction, the type of experiment that supports it and the interaction type
+	* Interaction type refers to direct or indirect
+	* It is a normalized score so it ranges from 0 to 1, above 0.4 the interaction is quite reliable
+* The study of centrality of a network tries to understand which nodes/edges are essential for the functioning of the network
+	* Drug targets are typically centralities of their networks
+* Centrality can be measured in different ways
+	* Degree of the node: it is a local measure that ignores the structure of the network
+	* Global centrality and betweennes centrality: global measures
+	* Random walks: average distance of the path from a random node to the one of interest
+* Closeness centrality: how short is the shortest path from node i to any other node
+	* $CC(i)=\frac{N-1}{\sum_j d(i,j)}$
+	* N-1 refers to the number of nodes (N) minus that of interest
+	* $\sum_j d(i,j)$ is the farness metric: the distance to every other node
+	* I can represent farness of all node pairs also with a symmetric matrix
+	* Summing each row and dividing for N-1 I get the CC for each node
+* Betweeness centrality: the number of shortest paths passing through node i between nodes j and k
+	* $CB(i)=\sum_{j<k}g_{jk}(i)/g_{jk}$
+	* The inequality avoid counting 2 times the same path A->B and B->A
+	* I sum over the ration between the number of geodesics (shortest pats, g) between j and k passing through i and those not passing through it
+* Annotation enrichment
