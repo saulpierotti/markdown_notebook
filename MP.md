@@ -246,4 +246,24 @@
 	* I start from a topology and I test its posterior probability
 * ML is probably the most used method now
 * In certain conditions the Bayesian analysis consistently overestimates the probability of clades, when compared with ML
-* 
+
+---
+# upload
+* This note are just quick and dirty, I will make them better as soon as possible, sorry for any inconvenience
+* We will make talks in the last week of April about a paper
+	* It is not mandatory
+	* We can choose a paper and ask him if it is ok
+	* We are expected to do 15-20 minutes presentation
+	* There should be intro, methods, result, discussion and have a look also in the supplementary!
+	* Have a look also at the main references cited on the paper!
+	* The presentation will be done on Teams
+* In order to calibrate the molecular clock we need some node that anchors the tree to an absolute timescale
+	* I need to know the time of at least one specific node
+	* This information can be obtained from fossils or biogeographic data
+		* I can know that a specific node has a specific age because I can date its fossils
+		* I can know when some islands separated, and so I know when 2 population started to evolvbe independently
+	* Keep in mind that the dating of fossils and biogeographic events is really uncertain!
+		* We need to model this uncertainty
+	* From that node, I can then propagate the absolute dating to the rest of the tree
+---
+* The supergene approach

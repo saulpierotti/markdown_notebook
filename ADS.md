@@ -276,3 +276,81 @@ MERGESORT(A,1,A.lenght)
 	* The root has a cost $n^2$ and 2 children of cost $T(n/2)$ each
 	* I continue to expand until the base case
 	* This gives us a $O(n^2)$, since I cannot determine a tight bound
+
+# Heapsort
+* Normally, the numbers to be sorted are a key that is paired to other data, forming a record
+	* A record is composed of a key and satellite data
+* When I want to sort, are all keys unique?
+* Its running time is $\Theta n \log{n}$
+* It is based on a data structure called heap
+	* An heap is a nearly complete binary tree
+		* All nodes are binary except for possibly the last level
+		* If the last level is not full, it is filled from left to right
+	* It follows the heap property: the value of a parent must be greter that that of a children
+		* This is a max heap, there are also min heaps where the property is opposite
+	* The size of an heap is the number of nodes
+* We can represent an heap with an array
+	* The first element is the root
+	* The children of the root are the second and third element
+	* The fourth and fifth element are the children of the second, and so on
+	* The children of node A[i] are nodes A[2i] and A[2i+1]
+	* The parent of A[i] is $A[\lfloor i/2 \rfloor]$
+	* The maximum element is always the root
+* How to maintain the max heap property (MAX-HEAPIFY)
+	* I recursively explore the tree
+	* If I find a parent smaller than its child, I swap them and continue
+	* I assume that there is only one violation
+	* The running time is O(log n), or linear to heap size (O(h))
+
+```pascal
+MAX-HEAPIFY(A,i)
+	l, r = 2i, 2i+1
+	if l <= A.heap-size and A[l]>A[i]
+		largest = l
+	else largest = i
+	if r <= A.heap-size and A[r]>A[i]
+		largest = r
+	else largest = i
+	if largest != i
+		exchange A[i] and A[largest]
+		MAX-HEAPIFY(A,largest)
+```
+
+* Now we start from a random array and we want to make it a max heap
+	* Note that $A[(\lfloor n/2 \rfloor +1)...n]$ are leaves
+
+```pascal
+BUIL-MAX-HEAP(A)
+	A.heap-size = A.lenght
+	for i = floor(A.lenght/2) downto 1
+		MAX-HEAPIFY(A,i)
+```
+
+* This operations has an loose upper boundf of O(n log n)
+	* I do n/2 times a O(log n) operation
+* However, the argument to MAX-HEAPIFY is almost never n (!)
+	* In the first step it is 1, then 2 and so on
+* The worst case running time of MAX-HEAPIFY is O(log i) where i is the value of the for loop in BUILD-MAX-HEAP
+	* We obtain O(n)
+* The next step is to actually sort the array
+	* We swap the root with the last element and decrease the heap-size by 1
+	* We call MAX-HEAPIFY on the root to rebuil the max-heap property
+	* We repeat until the heap-size is 1
+	* The array is sorted (!)
+
+```pascal
+HEAPSORT(A)
+	BUILD-MAX-HEAP(A)
+	for i = A.lenght down to 1
+		exchange A[1] with A[-1]
+		A.heap-size = A.heap-size - 1
+		MAX-HEAPIFY(A,1)
+```
+
+* The total running time is O(n log n)
+* Compared to mergesort, which has a $\Theta(n log n)$, here we have an O bound
+	* The worst case is like mergesort, but it can be faster (!)
+* A priority queue is a data structure for maintaining a set S of element each with a priority value called key
+	* Heaps are really useful for implementing priority queues
+	* Getting the largest element takes constant time
+	* Extracting the largest element and re-building the heap takes O(log n) since it calls MAX-HEAPIFY

@@ -140,6 +140,44 @@
 * I can align a sequence to a profile
 	* Each position is aligned to a vector for the position
 	* The score for the position of the residue in the sequence with every possible residue is summed and weighted for the frequency encoded in the vector
+		* This is a matrix by vector multiplication (!)
 	* These scores can be used with a dynamic programming algortihm
 * To calculate an MSA, I want to optimise its score
-* Dynamic programming approaches exist, but they are $O(N^M)$
+* Dynamic programming approaches exist, but they are $O(N^M)$ and they are np-hard
+* A possible solution is to do a progressive MSA, like with Clustal
+	* I allign sequences in pairs, one after the other
+	* The result depends on the order of how I pair sequences (!)
+		* I usually pair the most similar sequences first
+	* From each pairwise alignment, I build a profile
+	* I iterate until there are no sequences left, by aligning pairwise sequences and profiles
+	* In order to do this I need to be able to align profiles (!)
+	* I want to be conservative with gaps with the initial pairwise alignments, and introduce them later on profiles
+		* When I get to profiles I have info about conservation (!)
+		* Errors in the first alignments are propagated
+		* If I am not conservative I can become full of gaps
+	* I can improve the alignment by changing the sequence tree
+		* By default Clustal uses NJ
+		* Maybe I have a tree available (!)
+* A profile-to-profile alignments involve the pairwise comparison of same-dimentional vectors
+	* I do a double sum all against all elements weighted with a substitution matrix
+	* This is done via a simple vector to matrix multiplication, followed by a multiplicatio for the remaining vector (!)
+	* Adding gaps is tricky, since their penalty logically depends on the position and conservation
+* An MSA method can be evaluated from the functionally important residues that are correctly aligned
+* MUSCLE is an iterative MSA method
+	* It is based on kmers
+		* If a rare kmer is present in 2 sequences maybe they are related
+	* It creates a distance matrix with all sequences against each other
+	* From the matrix, the tree is calculated with UPGMA
+	* It creates the alignment progressively
+	* From the alignment evaluates the pairwise distances using the Kimura distance
+	* It creates a new distance matrix and a new tree, and from this a new MSA
+	* It splits the tree and aligns the profiles
+	* It iterates this last step
+* An MSA should be consistent: if residue X is aligned with Y and Y is aligned with Z, then X is aligned to Z
+	* I can use this property backwards by assigning an higher score to MSA that respect this property
+	* The consistency refers to the respective pairwise alignments
+	* Progressive MSA methods frequently are not consistent
+* T-coffe is an MSA method based on consistency
+	* I do all the possible pairwise and I measure sequence identity
+		* This is the primary library
+	* Every pairwise has a weight equal to its identity
