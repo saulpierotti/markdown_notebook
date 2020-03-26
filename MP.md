@@ -248,6 +248,7 @@
 * In certain conditions the Bayesian analysis consistently overestimates the probability of clades, when compared with ML
 
 ---
+
 # upload
 * This note are just quick and dirty, I will make them better as soon as possible, sorry for any inconvenience
 * We will make talks in the last week of April about a paper
@@ -265,5 +266,17 @@
 	* Keep in mind that the dating of fossils and biogeographic events is really uncertain!
 		* We need to model this uncertainty
 	* From that node, I can then propagate the absolute dating to the rest of the tree
----
+
+# 25/03
 * The supergene approach
+* The supertree approach is based on joining different trees
+	* In this way I can reconsile trees buil with different methods (DNA, phenotype, biogeography)
+	* An informal supertree is made by joining subtrees
+	* A formal supertree involves also possibly mixing OTUs among trees
+	* Joining trees based on a consensus needs the subtrees to be compatible
+		* The trees should not be in conflict with each other
+	* I can represent a tree with a matrix of OTUs vs nodes
+		* I put one when the OTU is included in the node
+	* I can create a matrix containing the nodes of both trees to join
+* The supermatrix approach
+
