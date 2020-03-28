@@ -171,6 +171,8 @@ INSERTION-SORT(A)
 	* Divide a problem in subproblems of smaller size
 	* Solve the subproblems recursivley (conquer)
 	* Combine the solution to solve the original problem
+	* When subproblems are too big to be solved directly we are in the recursive case
+	* When subproblems can be solved directlyu we are in the base case
 * The complicated part is the merging process
 * It runs always as n*log(n), there is not worst or best case
 * It requires a lot of memory to store all the sub-arrays
@@ -253,7 +255,7 @@ MERGESORT(A,1,A.lenght)
 * An important theorem: $f(n) = \Theta(g(n)) \iff f(n) = O(g(n)) \land f(n) = \Omega(g(n))$
 * Factorials are faster than exponentials, but slower than $n^n$ (!)
 
-# Designing algorithms
+# Recurrence equations
 * A recurrence equation describes a function in terms of its value on a smaller input
 * An example: analysis of a divide and conquer algorithm
 	* $T(n)$ is the running time of the algorithm on input n
@@ -281,7 +283,7 @@ MERGESORT(A,1,A.lenght)
 * Normally, the numbers to be sorted are a key that is paired to other data, forming a record
 	* A record is composed of a key and satellite data
 * When I want to sort, are all keys unique?
-* Its running time is $\Theta n \log{n}$
+* Its running time is $\Theta n \log{n}$ and it sorts in place like insertion-sort
 * It is based on a data structure called heap
 	* An heap is a nearly complete binary tree
 		* All nodes are binary except for possibly the last level
@@ -296,6 +298,21 @@ MERGESORT(A,1,A.lenght)
 	* The children of node A[i] are nodes A[2i] and A[2i+1]
 	* The parent of A[i] is $A[\lfloor i/2 \rfloor]$
 	* The maximum element is always the root
+* We can define 3 basic functions that return the index of the left child, right child and parent of element with index i in an heap
+
+```pascal
+LEFT(i)
+	return 2i
+
+
+RIGHT(i)
+	return 2i+1
+
+
+PARENT(i)
+	return floor(i/2)
+```
+
 * How to maintain the max heap property (MAX-HEAPIFY)
 	* I recursively explore the tree
 	* If I find a parent smaller than its child, I swap them and continue
@@ -304,7 +321,7 @@ MERGESORT(A,1,A.lenght)
 
 ```pascal
 MAX-HEAPIFY(A,i)
-	l, r = 2i, 2i+1
+	l, r = LEFT(i), RIGHT(i)
 	if l <= A.heap-size and A[l]>A[i]
 		largest = l
 	else largest = i
@@ -350,7 +367,58 @@ HEAPSORT(A)
 * The total running time is O(n log n)
 * Compared to mergesort, which has a $\Theta(n log n)$, here we have an O bound
 	* The worst case is like mergesort, but it can be faster (!)
+
+# Priority queues
 * A priority queue is a data structure for maintaining a set S of element each with a priority value called key
-	* Heaps are really useful for implementing priority queues
-	* Getting the largest element takes constant time
-	* Extracting the largest element and re-building the heap takes O(log n) since it calls MAX-HEAPIFY
+* There are max and min priority queues
+* A max priority queue supports the following operations
+	* Return the element with largest key
+	* Remove the element with largest key and return it
+	* Increase the key of an element
+	* Insert a new element
+* Heaps are really useful for implementing priority queues
+* Getting the largest element takes constant time
+
+```pascal
+HEAP-MAXIMUM(A)
+	return A[1]
+```
+
+* Extracting the largest element and re-building the heap takes O(log n) since it is essentially a single call to MAX-HEAPIFY plus a constant amount of work
+
+```pascal
+HEAP-EXTRACT-MAX(A)
+	if A.heapsize < 1
+		error "heap uderflow"
+	max = A[1]
+	A[1] = A[A.heapsize]
+	A.heapsize = A-heapsize - 1
+	MAX-HEAPIFY(A,1)
+	return max
+```
+
+* Increseing the value of a key is O(log n) since the maximum possible number of place exchanges is equal to the height of the heap, log n
+
+```pascal
+HEAP-INCREASE-KEY(A, i, key)
+	if key < A[i]
+		error "new key smaller than current key"
+	A[i] = key
+	while i > 1 and A[PARENT(i)] < A[i]
+		exchange A[i] with A[PARENT(i)]
+		i = PARENT(i)
+```
+
+* Inserting a new element into the heap is equivalent to increasing the key of an alredy existing one
+	* I can insert an element with key infinitely small and update it to the real value
+	* It uses HEAP-INCREASE-KEY so its running time is O(log n)
+
+```pascal
+MAX-HEAP-INSERT(A, key)
+	A-heapsize = A.heapsize + 1
+	A[A.heapsize] = - infinity
+	HEAP-INCREASE-KEY(A, A.heapsize, key)
+```
+
+# Quicksort
+
