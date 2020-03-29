@@ -130,6 +130,7 @@
 	* This derives from the probability of coalescence
 	* Whith more than 6 genes the probability of a wrong tree is significantly reduced
 * Incomplete lineage sorting is the non-overlapping of gene and species tree
+	* Its probability is directly proportional with the ploidy of the species and inversely proportional with the number of generations since the split and with the number of genes under analysis
 
 # Multiple sequence alignments
 * A multiple sequence alignment (MSA) is an hypothesis about the homology of multiple sequences
@@ -143,7 +144,7 @@
 	* I can use a weight for each score that balances the over-representation of some sequences
 * We could use dynamic programming on a multi-dimensional matrix for maximizing the WSP function, but this requires $O(N^M)$ time
 	* N is the sequence lenght and M the number of sequences
-	* It is impossible for more than 4 sequences
+	* It is practically impossible for more than 4 sequences
 * Progressive alignment methods are fast but sub-optimal
 	* They build a tree and use the tree for guiding the alignment
 		* Usually the tree is built with NJ
@@ -159,32 +160,59 @@
 * Iterative approach: the alignment is refined in iteration steps until I reach the maximum possible score
 	* It is faster and more effective than the progressive alignment
 	* I create a guide tree using a raw distance matrix
-	* This is the framework use dby MUSCLE and MAFFT
+	* This is the framework use by MUSCLE and MAFFT
 * Strucutral methods use information about the RNA or protein strucuture
 	* A loop can be of variable lenght, but a domain is more constrained
-* In many cases (well-behaving datasets) the different alignment appraches give the same result, but there can be subtle differences
+* In many cases (well-behaving datasets) the different alignment approaches give the same result, but there can be subtle differences
 * In difficult cases the result can be quite different
 * These methods employ a random seed: the same analysis can give slightly different results
+
+# Distance matrices
 * The distance among sequences can be estimated from the number of observed substitutions
+	* This is called observed distance or p-distance
 	* I cannot observe multiple substitutions, so I tend to underestimate the distance (!)
-* The expected distance is calculated by considering the average substitution rate ($\mu$), the relative substitution rate (s) and the nucleotide frequency ($\pi$)
-	* This is a Markov model and corrects for multiple substitutions (!)
-	* It assumes that the substitution rate is constant in time and that the nucleotide frequencies are at equilibrium
-	* The relative substitution rate i -> j is assumed to not depend on the status of the position prior to i
-* There are many models that use different values for the parameters
-	* Jukes Cantor (JK) does not specify any parameter (0 parameters)
-	* Kimura 2 parameter (KM) uses equal values for the substitutions, $\pi s = 0.25$ (1 real parameter)
-	* HKY uses potentially different substitution rates (4 parameters)
-	* TN corrects for transition and transversion (5 parameters)
+	* We say that the p-distance saturates with respect to the true distance d when d gets high
+	* From now, we will refer to true distance with d and observed distance with p
+* The number of mutation expected in a given amount of time can be modelled by a Poisson distribution
+* This Poisson process can be described by a Markov chain
+	* I can describe the Markov chain with a matrix Q of transition probabilities
+* The transition probability of X to Y $a_{X,Y}$ is composed of the product of different terms
+	* $p(X -> Y) = \mu * \pi_X * a_{X,Y}$
+	* $\mu$ is the mean substitution rate
+	* $\pi_X$ is the relative abundance of the state X
+	* $a_{X,Y}$ is the relative mutation rate of X into Y compared to the other possible mutations
+	* The self-transition probabilities are choosen so to make the sum of outgoing transitions from each state equal to 1
+* Note the assumptions we are making
+	* Mutations probablities are only dependent on the immediately preceding state (Markov property)
+	* Substitution rates are constant in time (homogeneity)
+	* The nucleotide frequencies are at equilibrium (stationariety)
+	* These assumptions are not necessarily biologically reasonable, be careful (!)
+* It is possible to develop time-reversible and non-time-reversible substitution models
+	* In a time reversible model $p(X -> Y) = p(Y -> X)$, so their matrices are symmetric
+	* We will only treat time-reversible models
+* Given any Q matrix, it is possible to compute the probability of change for any evolutionary time t as exponential of the matrix
+	* $p(t) = Q^t$
+* The Q matrix has 8 degrees of freedom
+	* I have 6 possible relative mutation rates
+		* These are the mutation rates Saul, not the transition probabilities (!)
+	* I have 4 possible nucleotide frequencies
+	* The 2 groups have to sum up to 1, so I loose 2 degrees of freedom
+	* $df = 6+4-2 = 8$
+* There are many models that specify a different number of parameters
+	* Jukes Cantor (JK69) does not specify any parameter (0 parameters)
+		* It assumes equal nucleotide frequencies, $\pi=0.25$
+		* Substitution rates are all equal
+	* Kimura 2 parameter (KM) uses equal values for the substitutions, $\pi s = 0.25$, but models transitions and transversions
+	* HKY85 is like the KM but it accounts for different nucleotide frequencies
+	* TN models purine transition, pyrimidine transition and  general transversion (5 parameters), plus different nucleotide frequencies
 	* The general time reversible model (GTR) specifies all the parameters (8 parameters)
-	* Note that 3 parameters specify 4 values since they have to sum up to 1, so I loose 1 degree of freedom
-	* More parameters are not always better, I risk to do overparametrization (!)
+* More parameters are not always better, I risk to do overparametrization (!)
+	* This is true when the exact value for the parameters is unknown
 * The strenght of a phylogenetic signal decrease with time since it is more probable to have multiple substitutions
 	* The plot of observed mutation with respect to distance tends to saturate
 * Among-site variation: mutation rate among different position can vary
 	* We can model the among-site variation with the gamma distribution
 	* The shape parameter of the gamma distribution is called $\alpha$ , while when included in a Markov model it is called $\gamma$ because of the distribution
-
 
 # Tree reconstruction approaches
 * The number of possible trees increases rapidly when increasing the number of nodes: this is the tree-space
