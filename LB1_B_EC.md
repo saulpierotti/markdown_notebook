@@ -264,25 +264,64 @@
 	* Multi-threading can greatly speed-up these softwares, since there is a lot of parallel computing
 	* Many algos take advantage of parallel processing
 
-# Probabilistic models of protein families
+# Probabilistic sequence models
+* A model is an object producing different outcomes (sequences) from a probability distribution
+* The probability distribution in sequence space determines the specificity of the model
+* The probability for model M of generating sequence s is $p(s|M)$
+* In the reverse, I can see a model as an object that given an outcome computes a probability value
+* Models can be trained: I can adjust the probability density function over the sequence space from a set of known sequences
+	* If I want to model the globin family, I can train my model with sequences that are know to belong to that family
+* After training, I can use the model to compute the probability of an unknown sequence to belong to the globin family
+* The model M given a sequence s returns the probability $p(s|M)$
+	* This is the probability of the model generating the sequence, not the sequence coming from the model
+* Most times I am interested in the probability of a given sequence s to come from the model M
+	* This is the probability of a sequence being part of a specific family
+	* This is $p(M|s)$
+* In order to compute $p(M|s)$ from $p(s|M)$ I need to use Bayes theorem
+	* $p(M|s) = p(s|M)p(M)/p(s)$
+* The priors $p(M)$ and $p(s)$ needs to be estimated to do the conversion
+	* $p(M)$ is the a priori probability of any sequence belonging to the model
+		* This is the relative abundance of the class, relative to all possible classes
+		* It can be estimated from the abundance of the known sequences in the family
+	* $p(s)$ is the a priori probability of the sequence and cannot be estimated reliably
+* In order to avoid specifing $p(s)$ I can compare the probabilities of 2 different models
+	* Instead of looking for $p(M_1|s)$, I look for $p(M_1|s)/p(M_2|s)$
+	* $\frac{p(M_1|s)}{p(M_2|s)} = \frac{p(M_1|s)p(M_1)}{p(s)} \frac{p(s)}{p(M_2|s)p(M_2)} = \frac{p(M_1|s)p(M_1)}{p(M_2|s)p(M_2)}$
+	* In this way, the conditional probabilities of the sequences are easy to estimate from the models themselves
+	* The ratio $p(M_1)/p(M_2)$ can be estimated from the relative abundance of the 2 classes
+* To make the calculation more standard, I can systematically compare any model to the NULL model
+* The NULL model N is a model that generates all the possible sequences with equal probabilities, only depending on the residue frequencies
+
+# Markov Models
+* HMM have their most frequent application in speech recognition
+* A simple Markov Model, or Markov chain is a collection of states associated with probabilities for all the possible transitions between them
+* It is useful for modeling the probability of a sequence of states that only depend on the rpeciding state in the sequence
+* I can consider each residue as a state, and I can assume that its state depends only on the previous residue
+* The Markov model will contain all the possible residues and their transition probabilities
+* In this framework, the transition probability is the probability that residue B follows residue A in position $x_i$ of a sequence
+* The trasition probability $a_{AB}$ is the conditional probability of the position i+1 being B given that position i is A
+	* $a_{A,B} = p(x_{i+1} = B| x_i = A)$
+* The probability of a sequence x of lenght n is the product of all the transition probabilities at the various positions
+	* Here I am assuming independence of each transition
+	* $p(x) = p(x_n|x_{n-1})*p(x_{n-1}|x_{n-2})*...*p(x_2|x_1)*p(x_1)$
+	* $p(x) = p(x_1)*\prod_{i=2}^na_{x_i-1,x_i}$
+	* I can also add a BEGIN and an END state to my model for avoiding irregularities
+* Let's say I want to model the probability that a given sequence is a CpG island
+	* In such sequence, $a_C,G$ would be much higher than elsewhere
+	* I can create 2 different Markov chains $M_+$ and $M_-$ for modelling the 2 sequences: CpG island and non CpG island
+	* The 2 models will have the same states but different transition probabilities
+	* To determine the likelihood S of a sequence x being a CpG island, i can compare the log-odds of the 2 models
+		* $S(x) = \log{\frac{P(x|M_+)}{P(x|M_-)}} = \sum_{i=1}^n \log{\frac{a^+_{x_{i-1},x_i}}{a^-_{x_{i-1},x_i}}}$
+* Let's now try to model the presence of a CpG island in a larger sequence
+	* I can integrate both models $M_+$ and $M_-$ in a single model
+	* I will have 2 states for each nucleotide, one for each model
+	* The transition probabilities inside states of the + and - models will be similar to before
+	* In addition I will have a small probability of going from a state of one model to any state of the other model
+	* It will be more probable to go from - to + than vice versa
+		* This means that I will be most of the time in -, so most of the sequence is not a CpG island
+	* This is an Hidden Markov Model since for every position the sequence itself I cannot no which state generated it
+		* For each possible nucleotide I have 2 states, and I do not know which one it came from
 * I can define the probability of a sequence $s_i$ to be generated by a family described by the model $M$
 	* $p(s_i|M)$
-* I want my model to be trainable and consist in a probability density function
-	* A basic model can be based on a similarity measure of the sequence to the family
-* What I really want is not $p(s_i|M)$ but $p(M|s_i)$
-	* This is the probability of the model given the sequence
-	* My given is always the sequence (!)
-* To pass among the 2 I need Bayes theorem and so $p(M)$ and $p(s_i)$
-* $p(M)$ can be estimated from the abundance of the family (number of sequences contained)
-	* A family with many sequences is a priori more probable to contain any sequence
-* I cannot exstimate $p(s_i)$!
-* I can overcome this by comparing different models
-	* The ratio of conditional probabilities of the sequence on 2 models allows to cancel the $p(s_i)$ term
-* To standardize the calculation for all families, we can create a null model
-* The null model can equiprobably generate any sequence and it takes into account only differential residue probabilities
-* A Markov chain is the probability of a sequence of events that depend only on the event before
-	* It is given by the probability of the first event of the chain times the chain of conditional probabilities (transition probabilities)
-* I can apply a MM to the probability of sequences
-	* I can model the probability of a residue given the one before
-	* Since I have also BEGIN and END states the MM has N*(N+2) parameters
-	* For the model to be complete the sum of probabilities going out of a node has to be 1
+* In a Markov model, the sum of probabilities going out of a state is always 1
+	* It is certain that I will go out of the state
