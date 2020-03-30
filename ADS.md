@@ -421,4 +421,156 @@ MAX-HEAP-INSERT(A, key)
 ```
 
 # Quicksort
+* It is a divide and conquer algorithm
+* The conquer and combine parts are really easy, but divide requires effort
+	* This is sharply different from MERGESORT, where combine is the most demanding part
+* Divide: we want to find indexes p, q, r such that the elements $A[p...q-1] \leq A[q] \leq A[q+1...r]$
+	* q is determined by the PARTITION function
+* Partioning: I want to create 4 zones with indeces p, i, j, r such that $A[p...i] \leq A[r] < A[i+1...j]$
+	* A[r]=x is called pivot element and it can be choosen freely
+	* Usually the implementation places x at the end of the array
+	* The region $A[j+1...r-1]$ is unrestricted
+	* The value returned by the partitioning step will be the q of the divide step
+	* i is initialized to p-1 so that there are no elements between them
+	* In the for loop j is always mooving
+		* If the new element is bigger than x, nothing happens
+		* If it is smaller, I increse i of 1 and place it in the new i position
+		* What was previously in the i position is necessarilyh bigger than x, since it was in the j region, and so I place it as element j
+		* After the end of the for I have a series of elements smaller than x, a series of elements bigger, and x itself at the end
+		* I exchange x with the element i+1, which is necessarily bigger than it
+		* Now x is what splits the array in a smaller and a bigger subarray, and so I return its index (i+1 now) which will be assigned to q
+* The base case is when the subarray has 3, 2, or 1 elements
+	* In this case the PARTITION function puts them in order
+* Conquer: the 2 subarrays $A[p:q-1]$ and $A[q+1:r]$ are sorted recursively with QUICKSORT
+* Combine: trivial, everithing is sorted because QUICKSORT sorts in place(!)
 
+
+```pascal
+QUICKSORT(A, p, r)
+	if p < r
+		q = PARTITION(A, p, r)
+		QUICKSORT(A, p, q-1)
+		QUICKSORT(A, q+1, r)
+
+PARTITION(A, p, r)
+	x = A[r]
+	i = p - 1
+	for j = p to r - 1
+		if A[j] <= x
+			i = i + 1
+			exchange A[i] and A[j]
+	exchange A[i+1] and A[r]
+	return i + 1
+
+QUICKSORT(A, 1, A.lenght)
+```
+
+* The running time depends on wether the array is balanced or not
+	* This in turn depends on the choice of the pivot element x
+	* The choice of the pivot influences the running time (!)
+	* The array is balanced if the pivot cause a constant proportional split
+	* If the array is balanced we are in the best case
+* The worst case running time is $\Theta(n^2)$ (unbalanced array) and the average and best case running times are $\Theta(n\log{n})$
+	* In practice we are almost always in the best case or close to it (!)
+* The array is maximally unbalanced when it is already sorted (!)
+	* In this case I have a subarray with 0 elements and one with n-1 elements
+	* I do n-1 recursions, sicne at each step I decrease n by 1 and I stop when I get to 1
+	* I pay a cost T(0) for the branch with 0 elements and a cost T(n-1) for the branch with n-1 elements
+	* At each level of the tree I pay a fixed cost $\Theta(n)$ for the partitioning
+	* $T(n) = T(n-1) + T(0) + \Theta(n)$
+	* I have n calls of $\Theta(n)$ complexity: the cost is $\Theta(n^2)$
+* The array is perfectly balanced when I get a constant proportional split
+	* Doesn't matter the proportionality, it can also be a 1/100 to 99/100 split, as long as it is not 0 to n-1
+	* In this case $T(n) = 2T(n/2) + \Theta(n)$
+	* T(n) is of complexity $\Theta(n\log{n})$
+* In a random array I expect a mix of good and bad splits
+	* This only adds a constant term to the complexity
+	* In this case I still have a complexity of $\Theta(n \log{n})$
+* To assure that no particular input (i.e. a sorted array) cause the worst-case scenario of quicksort, I can use the randomized version of the algorithm
+	* I can either randomize the input or the choice of the pivot
+
+
+# Sone reflections on sorting
+* All the algorithms we saw sort in place with the exception of MERGESORT
+* A sort can be stable or not
+	* Sorting stability is the preserving of the orders of records with equal keys
+	* This is important for sorting keys with satellite data, to not mix up the satellite data order
+		* If I order column A and then column B, I see that column A is not ordered anymore even for entries with the same keys on column B
+	* Insertion sort and mergesort are stable, heapsort and quicksort are not stable
+* All the algorithms we saw sort by comparing elements
+* The lower bound for comparision-based sorting is $\Omega(n \log{n})$ because in the worst case I need to do at least n log n comparisons
+	* Any comparison sort alogrithm must be able to sort any possible input of size n
+	* There are n! possible permutations of an array of size n, and the algorthm must be able to solve all of them
+	* Every permutation requires a different rearrangement of the array in order to be sorted
+	* I can imagine a decision tree with n! leaves, corresponding to all the permutions
+	* The height of the decision tree represent the number of single comparisons that the algorithm has to do in the worst case
+	* A tree of heigh h has $2^h$ leaves, and so a tree with n! leaves has heigh $\log{n!}$
+	* We saw before that $\Theta (n!) = \Theta (n \log{n})$
+* Heapsort and Mergesort are asymptotically optimal comparison sort algorithms
+
+# Counting sort
+* It can sort in linear time since it is not based on comparison
+* It assumes that the input array contains only integers in the range 0 - k
+* For each element x into the array, determine how many elements are equal or smaller than x
+* Put x in the correct position in the array
+* It uses an input array A, an output array B and a counter array C
+* I first create an array C of lenght k containing all 0s
+* I go through all the elements in A
+	* In each iteration i use A[j] as an index in C, and I increment that position of 1
+	* In this way element C[i] contains the number of occurrences of the value i in the array A
+* I go through C and I add, starting from the beginning, the value of C[i-1] to C[i]
+	* In this way element C[i] contains the number of elements in A that are smaller or equal to i
+	* I am converting a counter for i in a cumulative counter
+* Finally, I iterate j from the A.lenght downto 1
+	* I put in the output array B the element A[j] in the position that is stored in C[A[j]]
+		* If there are i elements in A smaller than A[j], then A[j] is put in B[i]
+	* I decrease the respective counter in C of 1, so that if I find another element in A with the same key it is put in the previous position of B
+
+```pascal
+COUNTING-SORT(A, B, k)
+	let C[0...k] be a new array
+	for i = 0 to k
+		C[i] = 0
+	for j = 1 to A.length
+		C[A[j]] = C[A[j]] + 1
+	for i = i to k
+		C[i] = C[i] + C[i-1]
+	for j = A.length downto 1
+		B[C[A[j]]] = A[j]
+		C[A[j]] = C[A[j]] - 1
+```
+
+* The first and third for loops require both time $\Theta(k)$
+* The second and last for loops require both $\Theta(n)$
+* The total running time is $\Theta(n+k)$
+* The running time is at minimum $\Omega(n)$, and O(n+k)
+	* If k = O(n), then COUNTING-SORT runs in $\Theta(n)$
+	* Since I use COUNTING-SORT only when k = O(n), in practice the algorithm runs in $\Theta(n)$
+* COUNTING-SORT is stable
+	* The last equal key element of A is the first to be put in B
+	* The last for loop runs backwards, so the first element is put in the last position
+	* Order is preserved
+	* This is important because COUNTING-SORT is frequently used as a subroutine of RADIX-SORT
+		* RADIX-SORT requires a stable sorting subroutine
+
+# Radix sort
+* It consideres the key as a number in base k, which has d digit and so occupies d columns
+* It looks at 1 column at a time, starting from the LEAST significant and sorting it with any stable algorithm
+	* If I start from the most significant, I need to recurse for sorting the least significant digits
+	* If I start from the least significant and I use a stable sort, when I sort the most significant column everithing is correclty sorted
+* It requires only a for loop with i from 1 to d
+	* In each iteration it calls a stable sorting algorithm on column i
+* It takes only d passes on the array
+
+```pascal
+RADIX-SORT(A, d)
+	for i = 1 to d
+		use a stable sort to sort A on digit i
+```
+
+* RADIX-SORT takes $\Theta(d*f(n))$ time, where f(n) is the running time of the subroutine used
+* If I use COUNTIG-SORT as a subroutine, it take $\Theta(d(n+k))$
+* In decimal notation k=9 since a column can only hold digits in the range 0 - 9
+* Therefore when the base used is smaller than n, RADIX-SORT has complexity $\Theta(n)$
+* RADIX-SORT is not stable and does not sort in place
+	* If memory is a problem then QUICKSORT is better
