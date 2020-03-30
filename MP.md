@@ -211,8 +211,17 @@
 * The strenght of a phylogenetic signal decrease with time since it is more probable to have multiple substitutions
 	* The plot of observed mutation with respect to distance tends to saturate
 * Among-site variation: mutation rate among different position can vary
-	* We can model the among-site variation with the gamma distribution
+	* An example: the third codon position mutates faster than the first, that in turn mutates faster than the second
+	* In general, different positions are snjected to different evolutionary forces
+* We can model the among-site variation with the gamma distribution with expectation 1 and variance 1/$\alpha$
+	* The modelled variable r is the relative mutation rate among sites, and its average is of course 1
+	* $Pdf(r) = \alpha^\alpha r^{\alpha-1}/e^{-\alpha r}\Gamma(\alpha)$
 	* The shape parameter of the gamma distribution is called $\alpha$ , while when included in a Markov model it is called $\gamma$ because of the distribution
+	* By adjusting the parameter $\alpha$ I can accomodate different degrees of rate heterogenity
+	* When $\alpha > 1$ the curve is bell-shaped and models weak heterogeneity, with a big peak around 1
+	* With $\alpha < 1$ the curve resembles an exponential decay, some position are really variable and others really conserved
+
+--- so far so good
 
 # Tree reconstruction approaches
 * The number of possible trees increases rapidly when increasing the number of nodes: this is the tree-space
