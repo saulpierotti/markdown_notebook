@@ -221,37 +221,99 @@
 	* When $\alpha > 1$ the curve is bell-shaped and models weak heterogeneity, with a big peak around 1
 	* With $\alpha < 1$ the curve resembles an exponential decay, some position are really variable and others really conserved
 
---- so far so good
-
 # Tree reconstruction approaches
 * The number of possible trees increases rapidly when increasing the number of nodes: this is the tree-space
-* The best tree can be searched with an algorithmic distance-based or characther-based approach
-	* An algorithmic approach first obtains the distances, and from them draws the tree
-		* UPGMA, WGMA, Neighbour-joining are in this category
-		* It is really easy to get wrong trees with them (!)
+	* With 3 OTUs I have just 1 possible tree
+	* With 4 OTUs I have 3 possible trees
+	* With n OTUs I have $(2n-5)!2^{n-3}(n-3)!$ possible trees
+* The best tree can be searched with an algorithmic distance-based or characther-based approach (tree search)
+* Algorithmic approach: first obtains the distances, and from them draw the tree
+	* These methods are based on pairwise distances
+	* UPGMA, WGMA, Neighbour-joining are in this category
+	* It is really easy to get wrong trees with them (!)
+	* They were initially developped for phenograms (trees based on phenotypic features)
+	* Now they are applied for the construction of ultrametric trees
+		* A tree is ultrametric when the OTUs are equidistant from the root
+	* In general, I start from the most similar sequences and I join them in a new OTU, and I proceed like this until I join all the OTUs
+* Tree search: find the tree that maximises an optimality criterion, also called objective function
+	* In general these are function for scoring a give tree, not a series of step for obtaining it
+	* Maximum likelyhood, maximum parsimony are in theis category
+	* They can be refined by bayesian inference
+	* They determine which tree is more likely, given the sequences
+	* They are more reliable than algorithmic methods
 	* In charachter-based methods I need to know the ancestral sequence (!)
-		* They are also called as tree search methods, and they choose a tree in the tree space considering an optimality criterion
-		* An exaustive search is almost always impossible
-			* The branch and bound approach is apossible solution: I create an optimal tree with a subset of sequences and I add a sequence at a time
-			* Heuristic search
-		* They can be refined by bayesian inference
-		* They determine which tree is more likely, given the sequences
-		* They are more reliable than algorithmic methods
-		* Maximum likelyhood, maximum parsimony are in theis category
-	* There are methods that combine the approach: I create a starting tree with neighbor joning and then refine it with other approaches
-		* I can also start from a tree supplied from the user
-* WPGMA
-	* Start from a star-like tree
-	* Create a distance matrix all-against-all
-	* Join the closest sequences: I get a new tree and an average sequence instead of the 2 original ones
-	* Create a new distance matrix and repeat until I create the whole tree
-* UPGMA
+	* An exaustive search is almost always impossible
+		* The branch and bound approach is a possible solution: I create an optimal tree with a subset of sequences and I add a sequence at a time
+		* I can employ some heuristics
+* There are methods that combine the approaches: I create a starting tree with neighbor joning and then refine it with other approaches
+	* I can also start from a tree supplied from the user
+* UPGMA and WPGMA are also called clustering methods
+* WPGMA: the distance from a node k to another node u is the average of the distances of the children of k to u
+	* Weighted pair group method with arithmetic mean
+	* When I join 2 OTUs A and B, I place them at the same distance from the parent node
+	* Now the distance from the (A,B) node to any other node is the average of the distances from the node to A and B
+	* When joining the node (A,B) with the node (C,D), their distance is the average among the distace C to (A,B) and D to (A,B)
+* UPGMA: like WPGMA but the average is weighted on the numerosity of the OTUs under a node
+	* Unweighted pair group method with arithmetic mean
+	* Unweighted refers to the fact that each distance contributes equally to the average, so the actual avergae is weighted on the numerosity (!)
+	* In an ultrametric tree it gives the same result as WPGMA
 * Both WPGMA and UPGMA are really sensitive to differences in rate of mutation among branches (differential branch lenght from a single split)
 	* This is defined as rate heterogeneity
 	* When I average 2 sequences I am assuming that their rate heterogeneity is equal (!)
-* Neighbour-joining tries to overcome the rate heterojeneity problem by trasposing the distance matrix
-* Maximum parsimony aims at finding the tree that can be explained with the minimum number of changes
-	* For each tree it produces a statistics know as tree lenght, which refers to the number of hypotetical changes (mutations)
+* To overcome the limitation of clustering methods, algorithms based on additive distances were developped
+* Addittive distances satisfy the four point metric condition for any 4 taxa A, B, C, D that are joined as (A,B) and (C,D)
+	* $d_{ab}+d_{cd} \leq max(d_{ac}+d_{bd},d_{ad}+d_{bc})$
+	* This is because the branch among the internal nodes is always >= 0
+	* This means that I can estimate distances among taxa by summing intermediate distances
+* Addittive trees are always superior when the tree is not ultrametric
+	* This is when the sequences do not follow a clock-like behaviour
+* Real dataset can deviate from the four-point metric because of noise
+	* In this case I need to artificially add a systematic error to correct
+* Minimum evolution (ME) is a tree scoring function that selects the tree that minimizes overall branch lenght
+	* $S = \sum_{i=1}^{2n-3} v_i$
+	* There are 2n-3 branches in an unrooted tree of n OTUs, and I am assuming that distances are addittive
+	* In this method branch lenght is inferred from pairwise genetic distances
+	* An exaustive ME search is practically impossible with more than 10 sequences because of the numerosity of the possible trees
+* Neighbor-joining (NJ) is an heuristic used for estimating the ME tree
+	* It is conceptually related to clustering but it does not assume clock-like behaviour
+	* It minimizes the metric S of ME locally, in pairwise comparisons, but it does not guarantee to find the global minimum of the metric S
+	* I always start from a distance matrix
+	* I calculate for every OTU the net divergence r as the sum of the distances from the OTU to all the other OTUs
+		* It is basically the sum of the colum of the matrix corresponding to the OTU
+		* $r_a = d_{ab}+d_{ac}+d_{ad}$
+	* I create a rate-corrected matrix by subtarcting from the pairwise distances the sum of the net divergences of the 2 OTUs considered divided by n-2
+		* $M_{ab} = d_{ab} - r_a - r_b$
+		* n is the total number of OTUs
+		* n-2 are the degrees of freedom
+		* Note that in this matrix I have negative values
+	* Now I join the closest OTUs (most negative score) in the trasposed matrix
+	* I calculate the distance from the node to the OTUs
+	* I create a new distance matrix with the OTUs fused using the four-point condition
+		* I know the distance of the C from A from the original matrix
+		* I know the distance from A to the new node because I just calculated it
+		* The distance from D to the node is thus the difference among them, since the tree is addittive
+
+--- so far so good
+
+* Maximum parsimony: the tree or set of trees that can be explained with the minimum number of evolutionary changes
+	* This criterion follows from the Okham's Razor
+		* There is no real statistical justification
+		* It is still useful as a fallback method when computational power is an issue for maximul likelihood methods
+	* Parsimony works better when evolution is slow, but this is NOT an assumption of the method
+	* It is difficult to state the assumptions of a parsimony method, but we can say when it is good and when it suffers
+		* Parsimony doesn't work well with long branch attraction
+		* It fails catastrofically in the Felsentein zone
+			* It converges on the wrong tree with increasing certainty as more data are added
+			* The Felstenstein zone is when unrelated taxa share more identity than related taxa by chance
+	* The objective function of MP is the lenght L of the tree $\tau$
+		* $L(\tau) = \sum_{i=1}^n l_i$
+		* n is the number of charachters in the MSA
+		* l is the lenght of that specific charachter
+	* For every charachter l is the number of changes implied by the tree times the cost of each change
+		* $l_i = \sum_{k=1}^{2n-3} c_{a_kb_k}$
+		* In the simplest model the cost is 1 if the position is conserved, 0 otherwise
+
+* For each tree it produces a statistics know as tree lenght, which refers to the number of hypotetical changes (mutations)
 	* It chooses the shortest tree according to this optimality criterion
 	* Not all variable sites are used: only those for which the ancestral state is known or can be guessed
 		* Singlets are excluded (mutation observed only in 1 sequence)
@@ -316,4 +378,19 @@
 		* I put one when the OTU is included in the node
 	* I can create a matrix containing the nodes of both trees to join
 * The supermatrix approach
+
+# DNA sequence databases
+* Databases are useful for making sequences freely available and for independent validation
+* If I take a sequence from a database, I have a reference for it (!)
+* I can find information about the taxonomy related to a sequence
+	* NCBI is not autoritative for taxonomy, but still gives an useful indication
+* I can find metadata about the sequence
+	* In some cases I can also find in which museum the original speciment is conserved (!)
+* The BOLD database contains a DNA barcode for many species
+* RNAcentral was a database about RNA sequences that now is discontinued
+	* There are many alternatives for studying non-conding RNA sequences
+* NCBI has many resources
+	* Genbank is directly submitted by the user and not validated by NCBI staff
+	* Refseq is reviewed and annotated by NCBI staff
+	* Pubmed is good for biomedical papers
 

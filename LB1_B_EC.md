@@ -325,3 +325,29 @@
 	* $p(s_i|M)$
 * In a Markov model, the sum of probabilities going out of a state is always 1
 	* It is certain that I will go out of the state
+* When I have only 2 possible mutually exclusive models, I can have a measure for $p(s)$
+	* $p(s|M_1) + p(s|M_2) = p(s)$
+* From this, I can recover $p(M_1|s)$ and $p(M_2|s)$
+	* $p(M_1|s) = \frac{p(s|M_1)p(M_1)}{p(s)} = \frac{p(s|M_1)p(M_1)}{p(s|M_1) + p(s|M_2)}$
+	* $p(M_2|s) = \frac{p(s|M_2)p(M_2)}{p(s)} = \frac{p(s|M_2)p(M_2)}{p(s|M_1) + p(s|M_2)}$
+* We always work with Markov models of order 1: every state depends only on the previous 1 state
+	* There are also MM of order 0 or >1
+
+# Training the model
+* The parameters for a model can be estimated from a set of training data
+* For any sequence s and model M, I can express $p(s|M)$ as the Markov chain that can produce s
+	* $p(s|M) = \prod_{j = 0}^{n+1} \prod_{k = 0}^{n+1} a_{jk}^{n^{jk}}$
+	* In this representation 0 is the BEGIN state and n+1 the END state
+	* The probability is the product of the transition probability for all the possible transitions to the power of how many times they do occur
+* The model is always under the normalization constraint
+	* $\forall j \: \sum_{k=1}^{n+1} a_{jk} = 1$
+	* The sum of outgoing transitions from any stae must sum up to 1
+* Maximum likelihood estimation: the value of the parameter $\theta$ is the one that maximises the probability of the dataset D given the model and the parameter
+	* $\theta_{ML} = argmax_\theta P(D|M, \theta)$
+	* The solution for any parameter $\theta$ can be obtained
+		* $\theta = a_{ik} = \frac{n_{ik}}{\sum_j n_{ij}}$
+		* The optimal value of the parameter is the frequence of occurrence of the transition in the dataset
+		* The normalization constraint forces to divide the count of transitions for the total number of outgoing transitions
+* Maximum a posteriori estimation: the Bayesian correction of the ML approach
+	* $\theta_{MAP} = argmax_\theta (p(\theta|M, D))$
+	* $p(\theta|M, D) = p(D| M, \theta)p(\theta)$
