@@ -83,3 +83,47 @@
 	* I can make linear dependencies which are not linear
 * I can reduce any polynomial regression to a linear by adding new features (!)
 	* I can use $x$ and $x^2$ instead of only $x$
+
+# Classification
+* Classification problems can be binary or multiclass
+* Linear regression is not good for pure classification problems
+	* My problem is in nature not linear
+	* I want an output in the range 0-1, not a continuous one
+* Logistic regression: a classification algorithm
+	* It is a sigmoid or logistic function that outputs in the 0-1 range
+	* It is a function of the regression function itself $\theta^T x$
+		* $h_\theta (x) = \frac{1}{1+e^{-\theta^T x}}$
+	* I can interpret it as a probability of belonging to class y=1, given the measurement x and the parametrization $\theta$
+		* $h_\theta (x) = p(y=1|x,\theta)$
+	* In general the logistic function takes any range of values, e.g. outputs of a function, and reports it in the range 0-1
+	* The output is the probability of the input belonging to class 1, and the probability of belonging to 0 is its complementary
+* I am defining with the logistic a decision bundary that discriminates 1 and 0 outputs
+* The decision boundary is not decided by the data, but by our hypothesis
+	* It is a product of the model we use
+* The decision boundary is not necessarily linear
+	* By using higher order polinomials I can have circles and more complex boundaries
+* The cost fucntion for the logistic regression cannot be the argument of the logistic
+	* If we apply GD on the initial function that is plugged into the logistic, there is no guarantee of convergence
+	* This cost function is not convex (!)
+* We can define this cost function for a single element y
+	* $cost(h_\theta(x), y) = \begin{cases} - \log{(h_\theta (x))} & y=1 \\ - \log{(1-h_\theta(x))}  & y=0 \end{cases}$
+* This can be rewritten as
+	* $cost(h_\theta(x), y) = - y \log{(h_\theta (x))} - (1-y) \log{(1-h_\theta(x))}$
+* The total cost function J is then
+	* $J(\theta) = \frac{1}{m} \sum_{i=1}^m cost(h_\theta(x_i), y_i)$
+	* $J(\theta) = \frac{1}{m} \sum_{i=1}^m - y_i \log{(h_\theta (x_i))} - (1-y_i) \log{(1-h_\theta(x_i))}$
+* The GD algorithm for classification is identical to that for linear regression
+	* The only difference is the h itself, so our hypothesis
+	* The process for optimizing the descent is the same
+
+# Alternatives to GD
+* GD is not the only possibility, there is also conjugate gradients and other approaches
+* Other approaches are more opaque, there are libraries that provide them but they are difficult to understand
+
+# Multiclass classification
+* One-vs-all approach: I decompose the problem in several binary classifications
+	* I assign a class to 1 and all the other datapoints to 0
+	* I determine the decision boundary
+	* I repeat with the second class and so on
+	* Now we know the probability that a datapoint belongs to each of the classes
+	* Our prediction is the class that gives me the highest probability

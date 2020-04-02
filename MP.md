@@ -292,9 +292,6 @@
 		* I know the distance of the C from A from the original matrix
 		* I know the distance from A to the new node because I just calculated it
 		* The distance from D to the node is thus the difference among them, since the tree is addittive
-
---- so far so good
-
 * Maximum parsimony: the tree or set of trees that can be explained with the minimum number of evolutionary changes
 	* This criterion follows from the Okham's Razor
 		* There is no real statistical justification
@@ -305,24 +302,38 @@
 		* It fails catastrofically in the Felsentein zone
 			* It converges on the wrong tree with increasing certainty as more data are added
 			* The Felstenstein zone is when unrelated taxa share more identity than related taxa by chance
+	* Not all variable sites are necessarily used: only those for which the ancestral state is known or can be guessed
+		* Singlets are excluded (mutation observed only in 1 sequence)
 	* The objective function of MP is the lenght L of the tree $\tau$
 		* $L(\tau) = \sum_{i=1}^n l_i$
 		* n is the number of charachters in the MSA
 		* l is the lenght of that specific charachter
 	* For every charachter l is the number of changes implied by the tree times the cost of each change
 		* $l_i = \sum_{k=1}^{2n-3} c_{a_kb_k}$
-		* In the simplest model the cost is 1 if the position is conserved, 0 otherwise
+		* In the simplest model the cost is 0 if the position is conserved, 1 otherwise
+	* The costs can be represented by a cost matrix
+		* The matrix is symmetrical, so that the lenght of the tree is constant regardless of the position of the root
+	* There are dynamic programmim approaches for finding the optimal tree
+* Branch and bound: an algorithm for exhaustive search that prunes some of the possibilities
+	* It can be applied to MP, but it can use any optimality criterion
+	* In practice it is applicable for 15-25 taxa
+	* I do an exhaustive search by progressively adding taxa to the tree
+	* I keep track of the best solution until now while doing so
+	* If I find a subtree with not all the taxa added that is worse than the best tree that I have, I stop evaluating it
+		* It will never give a result which is better than the one that I have
+	* It is like $\alpha/\beta$ pruning
 
-* For each tree it produces a statistics know as tree lenght, which refers to the number of hypotetical changes (mutations)
-	* It chooses the shortest tree according to this optimality criterion
-	* Not all variable sites are used: only those for which the ancestral state is known or can be guessed
-		* Singlets are excluded (mutation observed only in 1 sequence)
-* Maximum likelyhood
+--- so far so good
+
+* Maximum likelyhood: optimize the likelyhood of observing the data given the model
 	* Likelihood is a posterior probability: it is the probability of the dataset given the model
-	* It uses all the variable sites
-	* For every site the probability of its state in every sequence is modelled to get a probability for the site
-	* The probability for all sites are combined to get a probability for the tree
-		* This is a really small number: we use its -log
+	* For a state of a particular position, its probability is evaluated as the ration among the count for the state and the total count for the position
+		* $\theta = h/n$, where h is the count of the state and n the total count
+		* This is a probability, not a likelyhood, I am now building the model given the dataset
+	* The likelihood 
+	* The likelihood of the tree L is the product of the likelyhood of all sites s
+		* $L = \prod_j s_j$
+	* Since L is usually really small, -Log L is usually used as an optimality criterion
 	* It is used much more than maximum parsimony
 * There is a sampling bias in tree reconstruction: we cannot sample the entire population of a species
 * The robustness of a tree can be tested in different ways

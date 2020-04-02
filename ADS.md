@@ -574,3 +574,196 @@ RADIX-SORT(A, d)
 * Therefore when the base used is smaller than n, RADIX-SORT has complexity $\Theta(n)$
 * RADIX-SORT is not stable and does not sort in place
 	* If memory is a problem then QUICKSORT is better
+
+# Dynamic sets
+* In CS, differently from maths, sets can change
+* A set supporting elementary operations is a dictionary
+	* Elementary set operations are insertion, deletion and test membership
+* Each set elements has key, and optional features
+	* It can have satellite data
+	* It can have a pointer, which points to another element in the set
+* Set operations can be queries or modifying operations
+	* A query always returns a pointer to an element in the set
+	* A modifying operation modifies the set
+		* INSERT(S,x) and DELETE(S,x)
+* Dynamic sets can be represented with different data structures: stacks
+
+# Stack
+* It is a pile of elements on top of each other
+* A new element is always added to the top of the stack: PUSH(S, x)
+* Elements are always removed from the top of the stack: POP(S)
+* Popping order is the reverse of the push order
+	* They follow the last in first out (LIFO) policy
+* A stack is NOT a good data structure for sorting and it is not used for this purpose
+* Some applications of stacks
+	* Storing undo history in text editors
+	* Synthax parsing: evaluating missing parenteses
+		* I push open and close parenthesis to the stack and pop twice when I find matching parenthesis
+		* At the end of the file I require the stack to be empty
+* A stack of n elements can be implemented with an array S[1..n]
+* The S.top call returns the index of the top of the stack
+* STACK-EMPTY(S) and STACK-FULL(S) return true or false in O(1)
+
+```pascal
+STACK-EMPTY(S)
+	if S.top == 0
+		return True
+	else
+		return False
+
+STACK-FULL(S)
+	if S.top == S.lenght
+		return True
+	else
+		return False
+```
+
+* PUSH(S,x) is also O(1)
+* If the size of the stack is not infinite I need first to check if it is full
+
+```pascal
+PUSH(S,x)
+	if not STACK-FULL(S)
+		S.top = S-top + 1
+		S[S.top] = x
+	else
+		error "stack is full, cannot push"
+```
+
+* POP(S) returns the element we popped and removes it from the stack
+
+```pascal
+POP(S)
+	if not STACK-EMPTY(S)
+		S.top = S.top - 1
+		return S[S.top + 1]
+
+	else:
+		error "stack empty, nothing to pop"
+```
+
+# Queue
+* In a queue I use a FIFO policy instead of a LIFO
+* I add elements to the queue with the enque operation in O(1)
+	* New elements are added at the end of the queue
+* Elements are removed with the dequeue operation
+	* They are always removed from the top of the queue
+* Also queues can be implemented with arrays
+* Queues are circular, there is no end and beginning for the array (!)
+	* For n elements I need an array of n+1 size (!)
+	* This is because I need an empty element for marking the end of the queue
+* I define several attributes for the queue
+	* Q.head is the index of first element of the queue
+	* Q.tail is the index of the last element of the queue + 1, it is the next available position
+		* It points to an empty element of the array (!)
+* Initally I have that Q.head = Q.tail = 1
+* The queue is full when Q.head = Q.tail + 1 (circular case) or when Q.head = 1 and Q.tail = Q.lenght (linear case)
+
+```pascal
+QUEUE-EMPTY(Q)
+	if Q.head == Q.tail
+		return True
+	else
+		return False
+
+QUEUE-FULL(Q)
+	if Q.head == Q.tail + 1 or (Q.head == 1 and Q.tail = Q.lenght)
+		return True
+	else
+		return False
+
+ENQUEUE(Q,x)
+	if QUEUE-FULL(Q)
+		error "Queue is full, cannot add"
+	Q[Q.tail] = x
+	if Q.tail == Q.lenght
+		Q.tail = 1
+	else
+		Q.tail = Q.tail + 1
+
+DEQUEUE(Q)
+	if QUEUE-EMPTY(Q)
+		error "Queue is empty, nothing to dequeue"
+	x = Q[Q.head]
+	if Q.head == Q.lenght
+		Q.head = 1
+	else
+		Q.head = Q.head + 1
+	return x
+```
+
+# Arrays
+* They are easy and fast to use, they can implement many data structures
+* It is really inflexible for organising data
+* I need (directly or nor) to specify the size of the array at the beginning
+* I cannot implement all data structures with arrays
+
+# Linked lists
+* It is like an array where elements are next to each other
+* The order is NOT determined by indeces, but by pointers in each element for the next element
+* They are allocated dynamically when new elements are added
+* L.head is a pointer to the first element of the linked list
+* Each element x has 2 attributes
+	* x.key is the content of the element
+	* x.next is a pointer to the next element
+* If x.next = NIL it means that we reached the end of the list
+* If x.head = NIL the list is empty
+* In double linked lists each elements has also a x.prev attribute
+	* x.prev is a pointer to the previous element in the list
+* Returning an element is O(1) in an array but O(n) in a linked list
+	* I need to go through all the elements (!)
+	* In this pseudocode if k is not in list I am returning NIL
+
+```pascal
+SEARCH-LIST(L, k)
+	x = L.head
+	while x != NIL and x.key != k
+		x = x.next
+	return x
+```
+
+* Inserting at the beginning of a double linked list is O(1)
+
+```pascal
+LIST-INSERT(L, x)
+	x.next = L.head
+	if x.head != NIL
+		L.head.prev = x
+	L.head = x
+	x.prev = NIL
+```
+
+* Deleting when I have a pointer x is general and it takes also O(1)
+
+```pascal
+LIST-DELETE(L, x)
+	if x.prev != NIL
+		x.prev.next = x.next
+	else
+		L.head = x.next
+	if x.next != NIL
+		x.next.prev = x.prev
+```
+
+# Rooted trees
+* We already saw how to represent a binary rooted tree with arrays
+* I can represent them also with linked lists
+* Each element x of the linked list will contain
+	* x.left and x.right, pointers to the childrens
+	* x.p is a pointer to the parent
+	* x.key and x.data are key and satellite data
+* Some properties of the tree T
+	* T.root is a pointer to the root
+		* T.root.p = NIL
+	* The tree is empty if T.root = NIL
+	* If x.left and x.right are NIL x doesn't have children nodes
+* I am not cenessarily limited to binary trees with linked lists
+	* I can have x.child1, x.child2, x.childk
+	* This is wasteful since I need to know the number of children in advance (!)
+* I can do it more efficiently
+	* x.child is the first chilf of x
+	* x.child.sibiling is the next child of x
+	* If x.child.sibiling = NIL x.child is the last children
+	* The children are themselves a linked list (!)
+
+# Hash tables

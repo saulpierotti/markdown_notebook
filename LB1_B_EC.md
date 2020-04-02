@@ -351,3 +351,6 @@
 * Maximum a posteriori estimation: the Bayesian correction of the ML approach
 	* $\theta_{MAP} = argmax_\theta (p(\theta|M, D))$
 	* $p(\theta|M, D) = p(D| M, \theta)p(\theta)$
+
+# HMM
+* 
