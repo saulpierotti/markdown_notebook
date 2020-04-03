@@ -376,6 +376,37 @@
 * The number of possible paths is the number of states elevated to the lenght of the sequence
 	* No way you can do that brute force
 * There are different algorithms for computing $p(x|M)$ under an HMM
+	* In general, my aim is to decode the path from the sequence, so that I can assess the true probability
+* Viterbi algorithm: dynamic programming for finding the most probable path
+	* If I need to choose just 1 path the most probable one is the most logical choice
+	* Let's define the most probable path $\pi^* = argmax(p(x,\pi))$
+	* I can find $\pi^*$ recursively
+		* I suppose that the probability of $\pi^*$ having state k in position i is $v_k(i)$ and it is known for all the states k
+			* This means that I know the probability of each state in each position of the most probable path
+		* I can calculate recursively the probability of state l for position i+1
+			* $v_l(i+1)=e_l(x_{i+1})* max_k(v_k(i)a_{kl})$
+			* The first term is the emission probability of the state l for the observed symbol $x_{i+1}$
+			* The second term is the probability of having state k in position i times the transition probability from k to l
+			* In the second term I take the max in k, so I choose the k that maximises the quantity
+			* The problem then recurses in calculating $v_k(i)$ and so on
+		* All sequences need to start at some point: the recursion ends in $v_0(0)=1$
+			* It is certain that the beginning of the sequence comes from state 0
+	* Given this framework, I can create a dynamic programming matrix that finds the optimal path
+		* Initialization
+			* $i = 0,\; v_0(0) = 1,\; v_k(0) = 0 \quad \mbox{for}\; k > 0$
+		* Recursion with i = 1 to L (lenght of sequence)
+			* $v_l(i) = e_l(x_i) * max_k(v_k(i-1)a_{kl})$
+			* $pointer_l(i) = argmax_k(v_k(i-1)a_{kl})$
+		* Termination
+			* $p(x, \pi^*)=max_k(v_k(L)a_{k0})$
+			* $\pi^*(L) = argmax_k(v_k(L)a_{k0})$
+		* Traceback with i = L downto 1
+			* $\pi^*(i-1) = pointer_i(\pi^*_i)$
+	* The probabilities obtained with the Viterbi algorithm are really small and give underflow errors
+		* It is better to operate in log space
+			* I use $\log{v_l(i)}$
+		* This makes also the products become sums
+
 --- not so sure under here
 * Forward algorithm: I just consider the most probable path $\pi^*$
 	* It is a huge approximation, but it works surprisingly well

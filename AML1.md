@@ -127,3 +127,24 @@
 	* I repeat with the second class and so on
 	* Now we know the probability that a datapoint belongs to each of the classes
 	* Our prediction is the class that gives me the highest probability
+
+# Overfitting
+* I have overfitting when my model does not generalize
+* How to reduce overfitting
+	* Reduce the number of features
+		* This is risky since I can loose useful information
+	* Tune down the weight of features
+* I don't need to specify how small a feature should be (!)
+* I can modify my cost function so that the cost for a feature is really high, and thus gets tuned down by the GD
+	* I can add the square of the parameters that I want to tune down to the cost function
+	* I add the square because the parameters can be negative (!)
+	* In this way I penalise when they get too big
+	* This term is added to the sum of squared distances of the previous cost function
+* I get a cost function that is a tradeoff between fitting and avoidance of overfitting
+* I can do this by introducing the regularization hyperparameter $\lambda$
+	* It is a multiplier to the sum of squares of all the parameters
+		* I am actually excluding $\theta_0$ from this
+	* It penalizes the cost function when parameters get too large
+* By tuning $\lambda$ I can modify the behaviour of my model
+	* When $\lambda$ is really large I go towards underfitting
+	* When it is too small I have overfitting
