@@ -367,7 +367,6 @@
 		* In MP the lenght is measured as number of mutations
 	* I start from the best tree in MP and I count the number of steps needed to make a node collapse
 	* If I need 2 additional mutations from the best tree to make a node disappear, the decay index is 2
---- so far so good
 
 # Bayesian analysis
 * In the Bayesian framework I update my beliefs with new observations
@@ -385,6 +384,9 @@
 * I can therefore assume that $p(M|d) \propto p(d|M)p(M)$
 * If I already know something about the taxonomy of the OTUs, I can include them in the prior
 * Markov chain Monte Carlo sampling (MCMC): estimate the posterior distribution
+	* This method is intrinsic to Bayesian inference: I have a prior, I update it with new data, and I continue lihe this
+		* The new data are the estimated tree topologies at every iteration
+		* For each topology I have a prior, and I update it with the ML estimate, getting the posterior
 	* In most cases it is impossible to estimate the posterior distribution analytically
 	* I build a Markov chain that converges on my posterior probability distribution
 	* There are many algorthms, but the most used is the Metropolis-Hasting
@@ -402,28 +404,76 @@
 	* It can be difficult to understand when I am at convergence
 * In certain conditions the Bayesian analysis consistently overestimates the probability of clades, when compared with ML
 
+# Molecular clock calibration
+* The simplest molecular clock assumes constant substitution rate, and this is really unlikely in nature
+* Different branches tend to evolve at different rates, and we can take account of this by using a relaxed clock
+* Closely related organisms tend to have similar substitution rates
+	* Substitution rates are affected by generation time, DNA repair, and other factors
+* We can get a reference point from geological information (i.e. when two landmasses separated)
+	* Geological time references are frequently really uncertain, since they happen in long timescales
+* The fossil record is quite uncertain, since it is discontinuous
+	* For many species I don’t have a fossil available, or I can have fossils only in specific timepoints with long gaps in between them
+	* Fossil preservation can influence my time estimate and also the attribution of the fossil to a certain clade.
+	* If the fossil is really uncomplete or degraded I cannot be sure of the clade it belongs to (!)
+	* In general, from a fossil I can get a lower time boundary
+		* A fossil of a clade tells me that te clade itself cannot be more recent than the fossil, but it can be older (!)
+* In Bayesian analysis I can use the time estimate as a prior
+	* In this way I can also model the time uncertainty (an hard minimum timeborder and a more flexible maximum time border) by tweaking the prior probability distribution
+	* Usually an exponential distribution is used as a model for fossil-record timepoints, since it reflects the soft-hard boundary pair
+	* The lognormal distribution also can model this uncertainty
+		* It has a high region near the cutoff that decreases sharply towards the minimum and slowly towards the maximum
+		* It is the probability distribution of a random variable whose logarithm is normally distributed.
+	* The normal distribution is more used for timepoints that do not derive from fossils
+		* It is a symmetric distribution, so it cannot implement an asymmetric soft-hard boundary. It is used for geological data
+	* The uniform distribution is the one that implies less assumptions, but it is also the less informative
+		* It is used for calibrating the root, since it is the point of the tree  of which we usually know less
+* Calibrating a clock can require a lot of effort for collecting data to be used as a prior (!)
+* I can increase the reliability of my estimate by including many fixed time references in my tree
+* Sensitivity analisys: correlation of the predicitons from different methods
+	* It can show when my Bayesian prediction are strongly influenced by the priors
+* Bayesian analisys tends to be sometimes heavily influenced by priors
+	* Nodes that are calibrated by timepoints show little difference in their age estimate after the data (sequences) have been considered
+	* Nodes that do not have a prior estimate are instead heavily guided by the data
+	* When doing Bayesian inference I need to be carefull to not make the priors override the data
+
+# Biases in phylogenetic reconstructions
+* With maximum likelihood estimates I get the most likely tree given the data, but it is not necessarily the true tree
+* My data could be biased, or not representative of the population
+	* Methods for nodal support can address this issue
+*	Systematic errors can derive from biases in the nucleotide composition (e.g. GC content), from saturation of the signal and from exceptional events in the evolutionary history of the OTUs
+* Sequences with a similar GC content tend to appear more related than how really are, and vice-versa for really different GC contents
+	* GC content tend to vary a lot in the same genome and among genomes
+	* Regions with similar GC content inside a genome are called isochores.
+	* Different clades can have really different typical GC content
+		* In bacteria it is reallly variables, in mammals really constant
+	* We don’t know why GC content varies so much
+		* Selective mutations, differential codon usage
+		* There can be a mutational bias where some mutations (e.g. AT -> GC) are more frequent than their opposite (e.g. GC -> AT)
+		* Genome stability can also be a factor (heat adaptation)
+* GC content is not stable and varies over time
+	* Our models assume that nucleotide composition is at equilibrium and when GC content changes over time this is not true
+* Signal saturation happens when the observed distance reaches a plateau due to the many substitutions at the same site. 
+	* Homologies observed in saturated sequences can be due to chance instead of true homology (homoplasy)
+	* This phenomenon gives rise to long branch attraction
+* Branches which are really long compared to the rest of the tree tend to cluster because of chance similarities
+	* Maximum parsimony is really sensitive to long branch attraction since it cannot model multiple substitutions
+* The area of the tree space that suffers from long branch attraction is called Felsestein zone
+	* In the Felsenstein zone likelihood methods outperforms parsimony
+* In some cases however, long branches are really related to each other: this is the inverse Felsenstain zone (Farris zone)
+	* In the Farris zone parsimony outperforms likelihood.
+* The sponge war: sponges were considered the sister clade of all metazoans, but then a paper supported that Ctenophora  (jellyfish) is the real sister clade
+	* A debate started in the community and then this was dismissed
+	* This mistake was probably due to long branch attraction between the outgroup and Ctenophora
+	* The choice of the outgroup can introduce a bias (!)
+* Pancrustacea is a monophiletic group that includes insects and crustaceans
+	* The true topology of the group is debated, mainly because of many really long branches and significant compositional bias
+* In time mutations tend to become fixed or extinct
+* In incomplete lineage sorting there can be fixation of a mutation in the same allele in different branches generating a case of homoplasy
+	* This happens when there is a true split before a mutation becomes fixed
+	* In this case I tend to have unstable nodes, that are not consistent among different analyses
+	* This is frequent when there are multiple speciation events that are close in time (rapid radiation)
+
 ---so far so good
-
-# Molecular clock
-
----from lectures
-# upload
-* This note are just quick and dirty, I will make them better as soon as possible, sorry for any inconvenience
-* We will make talks in the last week of April about a paper
-	* It is not mandatory
-	* We can choose a paper and ask him if it is ok
-	* We are expected to do 15-20 minutes presentation
-	* There should be intro, methods, result, discussion and have a look also in the supplementary!
-	* Have a look also at the main references cited on the paper!
-	* The presentation will be done on Teams
-* In order to calibrate the molecular clock we need some node that anchors the tree to an absolute timescale
-	* I need to know the time of at least one specific node
-	* This information can be obtained from fossils or biogeographic data
-		* I can know that a specific node has a specific age because I can date its fossils
-		* I can know when some islands separated, and so I know when 2 population started to evolvbe independently
-	* Keep in mind that the dating of fossils and biogeographic events is really uncertain!
-		* We need to model this uncertainty
-	* From that node, I can then propagate the absolute dating to the rest of the tree
 
 # 25/03
 * The supergene approach
