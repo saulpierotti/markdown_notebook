@@ -299,6 +299,9 @@
 	* Parsimony works better when evolution is slow, but this is NOT an assumption of the method
 	* It is difficult to state the assumptions of a parsimony method, but we can say when it is good and when it suffers
 		* Parsimony doesn't work well with long branch attraction
+			* Long branch attraction is when 2 long branches (distant nodes) are clustered because they both diverged a lot from the original, not because they are similar
+			* The similarity arises by chance, is more diversity from all the rest
+			* It is a systematic error
 		* It fails catastrofically in the Felsentein zone
 			* It converges on the wrong tree with increasing certainty as more data are added
 			* The Felstenstein zone is when unrelated taxa share more identity than related taxa by chance
@@ -331,27 +334,76 @@
 		* $L = \prod_j s_j$
 	* Since L is usually really small, -Log L is usually used as an optimality criterion
 	* It is used much more than maximum parsimony
+
+# Nodal support
+* Given discording predicitons, I can elaborate a consensus tree
+* A strict consensus tree has polytomies for each disagreement
+* A consensus based on the majority rule chooses the nodes that appear in most fundamental trees
+* We need a measure for node statistical significance: nodal support
+	* There is a sampling bias in tree reconstruction: we cannot sample the entire population of a species
+	* I never know if my sample is representative of the population
+* We distinguish broadly resampling techniques and character-based approaches
+* Bootstrap analysis: random resampling with replacement
+	* It is useful when I don't know the sampling distribution and I cannot derive it
+	* I approximate the real distribution by resampling
+	* Bootstrapping means to take a subset of the columns of the MSA with replacement until I get an alignment of the original lenght
+		* Since there is replacement I can have the same column twice and not have some columns
+	* The new shuffled and resempled alignment is called bootstrap replicate
+	* I create in this way a series of bootstrap replicates for my dataset
+	* I can get a tree from each replicate
+	* The statistical support for a node is the fraction of tree replicates in which the node is present
+	* Bootstrap results cannot detect systematic errors in tree reconstruction
+		* It is not suitable when LBA (long branch attraction) is likely
+	* They also cannot detect a biased sample
+* Jacknife analysis: random resampling by independent removal
+	* It is similar to bootstrap analysis, but I randomly remove one (or more) of the sites in each resampling
+	* My new subset is thus shorter than the original
+	* Like in bootstrap, I can get many subsets and I create a tree for each of them
+	* The jacknife support for a subtree is the fraction of times it appears in the subsets
+* In both bootstrap and jacknife I should be suspicious when the support is under 70%
+	* 200 to 2000 resamplings are usually recommended
+* Bremer support or deacy index: a method for testing maximum parsimony
+	* The decay index is the difference in lenght between the shortest tree and the shortest tree that is incompatible with the node
+		* In MP the lenght is measured as number of mutations
+	* I start from the best tree in MP and I count the number of steps needed to make a node collapse
+	* If I need 2 additional mutations from the best tree to make a node disappear, the decay index is 2
 --- so far so good
-* There is a sampling bias in tree reconstruction: we cannot sample the entire population of a species
-* The robustness of a tree can be tested in different ways
-	* Resampling: modify arbitrarely my dataset and see if the tree changes
-		* Bootstrap analysis: removal with replacement
-		* Jacknife analysis: removal without replacement
-		* The support for a node is the percentage of its appearance in the resampled datasets
-	* Charachter based
-		* Bremer support: number of minimum steps needed to collapse a node
-			* It is used mostly with maximum parsimony
-			* If I need 2 steps for collapsing a node the Bremer support for that node is 2
-* Bayesian analysis is based on posterior probabilities
-	* It is based on the probability of the model being correct given the data
-	* I have a probability for each node (!)
-	* In general, if M is the model and D the data $P(M|D)=P(D|M)P(M)/P(D)$
-	* $P(M)$ is defined as prior, $P(D|M)$ is the likelihood
-	* Priors are typically the same for all trees, but we can give some an higher prior
-		* This can be for instance because of the taxonomy of the group under investigation
+
+# Bayesian analysis
+* In the Bayesian framework I update my beliefs with new observations
+	* I go from a prior belief, to a posterior belif which is the prior conditioned on the data
+* It is impossible to go from $p(d|M)$ (likelyhood) to $p(M|d)$ (posterior probability) without knowing $p(M)$
+	* $p(M)$ is called prior in bayesian jargon
+	* $p(M|d)$ is a posterior
+		* It is the probability of the prior update with the available data
+* If I don't know anything about the prior I can use a uniform distribution
+	* I consider all possible values equally likely
+* If I calculate a tree with Bayes, there is no need for validation
+	* What I am using for evaluating trees is already the probability of the tree being correct (!)
+* In this calculations I can ignore $p(d)$ since it is constant for all models
+	* $p(d) = \sum_M p(d|M)p(M)$
+* I can therefore assume that $p(M|d) \propto p(d|M)p(M)$
+* If I already know something about the taxonomy of the OTUs, I can include them in the prior
+* Markov chain Monte Carlo sampling (MCMC): estimate the posterior distribution
+	* In most cases it is impossible to estimate the posterior distribution analytically
+	* I build a Markov chain that converges on my posterior probability distribution
+	* There are many algorthms, but the most used is the Metropolis-Hasting
+	* I start from a random point in the parameter space $\theta$
+	* I nudge it randomly so to get a different point
+	* I calculate the ratio among the posteriors evaluated with the 2 parameter sets
+	* If the new posterior is higer I take it, if it is lower I reject it
+	* I continue like this until convergence
+	* I can allow to sometimes accept a decrease in my probability to not be trapped in local maxima
+	* The first stage of the MCMC is usually really fast-increasing and it is called burnin
+	* After I while I can reach a plateu and I start to wonder around
+		* It is important to continue the analysis at the plateau so to map the region
+		* This is called mixing behaviour
+		* I can tune the mixing by changing the size of jumps
+	* It can be difficult to understand when I am at convergence
+
+
 * MCMC (Markov chain Moncte Carlo) is based on bayesian statistics
 	* I start from a topology and I test its posterior probability
-* ML is probably the most used method now
 * In certain conditions the Bayesian analysis consistently overestimates the probability of clades, when compared with ML
 
 ---
