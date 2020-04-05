@@ -322,19 +322,16 @@
 	* If I find a subtree with not all the taxa added that is worse than the best tree that I have, I stop evaluating it
 		* It will never give a result which is better than the one that I have
 	* It is like $\alpha/\beta$ pruning
-
---- so far so good
-
 * Maximum likelyhood: optimize the likelyhood of observing the data given the model
 	* Likelihood is a posterior probability: it is the probability of the dataset given the model
 	* For a state of a particular position, its probability is evaluated as the ration among the count for the state and the total count for the position
 		* $\theta = h/n$, where h is the count of the state and n the total count
 		* This is a probability, not a likelyhood, I am now building the model given the dataset
-	* The likelihood 
 	* The likelihood of the tree L is the product of the likelyhood of all sites s
 		* $L = \prod_j s_j$
 	* Since L is usually really small, -Log L is usually used as an optimality criterion
 	* It is used much more than maximum parsimony
+--- so far so good
 * There is a sampling bias in tree reconstruction: we cannot sample the entire population of a species
 * The robustness of a tree can be tested in different ways
 	* Resampling: modify arbitrarely my dataset and see if the tree changes

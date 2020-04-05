@@ -371,10 +371,12 @@
 	* The path is typically hidden, so this equation is not useful in practice
 * The probability of the above equation under a model M can be rewritten as $p(x,\pi|M)$
 	* This can be decomposed as $p(x,\pi|M)=p(x|\pi,M)*p(\pi|M)$
-* If I want to obtain $p(x|M)$ under an HMM I need to sum over all the possible paths
+* Naive approach: if I want to obtain $p(x|M)$ under an HMM I need to sum over all the possible paths
 	* $p(x|M) = \sum_\pi p(x,\pi|M)$
-* The number of possible paths is the number of states elevated to the lenght of the sequence
-	* No way you can do that brute force
+	* The number of possible paths is the number of states elevated to the lenght of the sequence
+		* No way you can do that brute force
+	* The time complexity is $O(tn^t)$ where n is sequence lenght an t the number of different symbols
+		* Danger! NP-hard!
 * There are different algorithms for computing $p(x|M)$ under an HMM
 	* In general, my aim is to decode the path from the sequence, so that I can assess the true probability
 * Viterbi algorithm: dynamic programming for finding the most probable path
@@ -406,7 +408,119 @@
 		* It is better to operate in log space
 			* I use $\log{v_l(i)}$
 		* This makes also the products become sums
+* Forward algorithm: why only the most probable path, if I can have all of them?
+	* Using only $\pi^*$ as in the Viterbi algotihm is a huge approximation, but it works surprisingly well
+	* Actually we don't need to do so, since we can calculate the complete probability of x for all paths
+	* We can just replace the maximizations of the Viterbi algorithm with sums
+	* We can define $f_k(i)$ as the forward parallel of the Viterbi quantity $v_k(i)$
+		* It is the probability of state k in position i under the forward algorithm
+	* The probability of state k in position i is the joint probability of the sequence up to position i and the fact that the current state is k
+		* $f_k(i) = p(x1..x_i, \pi_i = k)$
+	* The recursion equation is therefore
+		* $f_l(i+1)=e_l(x_{i+1})* \sum_{k=0}^i(f_k(i)a_{kl})$
+	* Like the Viterbi approach, the forward algorithm can give underflow errors
+		* I can correct by operating in log space or scaling the probabilities
+		* In log space the math is not as clean as with the Viterbi
+	* The time complexity is $O(tn^2)$
+* Backward algorithm: some as forward, but starting from the end
+	* The quantities that I consider here is $b_k(i)$
+	* It is the probability of state k in position i
+	* I don't use the backword algorithm for calculating $p(x)$, since usually I get it with the forward algorithm
+* The backward algorithm is useful for calculating posterior probabilities
+* What I am really interested in is not $p(x, \pi_i = k|M)$, but $p(\pi = k|x, M)$
+	* I want to now the probability of the hidden state k being at work given the sequence
+	* $p(x,\pi_i = k)$ can be decomposed as $f_k(i)b_k(i)$
+		* This is the joint probability of having $\pi_i = k$ when the sequence up to i and from i to the end is equal to the respective portions of x
+	* From this I can get the posterior probabilities
+		* $p(\pi = k|x) = p(x, \pi_i = k)/p(x) = f_k(i)b_k(i)/ p(x)$
+		* $p(x)$ is the result of the forward algorithm here (!)
+* A posteriori decoding: when choosing the most probable path is not justified
+	* In some situations just choosing the most probable path (Viterbi decoding) is not legitimate
+		* I can have many paths with similar probabilities, and a posteriori decoding evaluates all of their contributions for any state
+	* For position i the a posteriori estimate for state $\pi_i$ is $\hat{\pi_i}$, as compared to $\pi^*_i$ of Viterbi decoding
+		* $\hat{\pi_i}=argmax_k(p(\pi_i = k|x))$
+		* This probability includes all the possible paths that can bring me in position i at state k
+	* This definition is not very useful for determining the path, I can only decode a single state
+	* If I use this equation for the whole path, it can be non-sensical (!)
+		* It could include forbidden transitions
+		* It can give the most probable state in position i given path, and then a state in position i+1 given a different path, when the transition from the 2 is impossible
 
---- not so sure under here
-* Forward algorithm: I just consider the most probable path $\pi^*$
-	* It is a huge approximation, but it works surprisingly well
+# HMM for pairwise alignments
+* I can see a gapped alignment as a finite state automaton (FSA) with a match state M, and two state for the respective insertions, X and Y
+	* In this FSA I have score changes at every state transition
+* I can similarly create a probabilistic HMM with the same states
+	* It does not emit a sequence, but an alignment (!)
+	* It is called pair HMM
+* The pair HMM has the following properties
+	* The state M has emission probabilities for all possible matches $x_i:y_i$
+	* State X has emission probabilities for all possible single charachter insertions in X (or delitions in Y) such as $x_i:gap$
+	* State Y has emission probabilities for all possible single charachter insertions in Y (or delitions in X) such as $y_i:gap$
+	* We introduce a BEGIN and END state
+	* The transition probabilities are called
+		* $\delta$ for M->X,Y
+		* $\epsilon$ for Y->Y and X->X
+		* $\theta$ for M,Y,X -> END
+		* The other probabilities can be derived from the complements to 1
+	* Every position in the pair HMM has two indexes intead of 1
+* The Viterbi path of the pair HMM is the optimal FSA alignment (!)
+	* It is the one I would recover from the NW algorithm
+
+# Profile HMMs
+* Profile HMMs are the most important application of HMMs to bioinformatics
+	* They were first done by Krogh (the one from Denmark)
+* In the ungapped case, I just want to model the propensity of the position for a symbol
+	* The profile HMM will have for each state M emission probabilities deriving from the profile vector at that position
+* Introducing gaps, we see how their penalty shouldn't be the same across the alignment
+* I can introduce the insert (I) state for modelling insertions in my sequence with respecty to its family profile
+* The I state has emission probabilities deriving from background distribution
+	* We need a transition from $M_i$ to $I_i$, a loop from $I_i$ to itself and a transition from $I_i$ to $M_{i+1}$
+	* This model is essentially an affine gap
+* The deletion could be modelled by a series of transitions from $M_i$ to all $M_{i+k}$, all the subsequent states
+	* This requires n(n-1)/2 transitions, and I need probabilities for all of them
+* To avoid this I insert silent states D for modelling deletions
+	* A silent state is a state that does not emit any symbol
+	* Now I have transitions from $M_i$ to $D_{i+1}$ and from $D_{i+1}$ to $D_{i+k}$
+		* I can enter in a delete state (and not add anything to my sequence) and continue there
+	* I have also transitions $D_i$ to $M_{i+1}$ for modelling when the deletion ends
+	* In this way I have 4n-8 parameters
+* This delete model has different transitions in different positions, so I can include a position-specific gap penalty (!)
+* In my insert model I cannot do this, since I have loops for long insertions in the same I state
+	* This makes sense since The insertion only matters where it starts and how long it is
+	* For delitions it matters which residues are missing from the family profile (!)
+* As a final refinement, I can include transitions between delete and insert states
+	* They are quite unlikely and usually they do not affect much the alignment
+	* These are $D_i$ to $I_i$ and $I_i$ to $D_{i+1}$
+* Any profile HMM is able to produce any possible seuqence in sequence space
+* Parameterising a profile HMM means to make the probability distribution of the produced sequences peak around members of the modelled family
+	* We can play with transition and emission probabilities, and with the lenght of the model itself
+* Modelling the lenght of the model means to decide which MSA columns to assign to match states, and which to insert states
+	* A heuristic rule is to assign to insert states the columns that have more than half gaps
+* Probabilities can be estimated from the transition and emission frequencies of the sequences in the MSA
+	* For this to be meaningful, I need a big training set
+	* There can be transitions or emissions with 0 probability due to sampling limitations
+		* We can add pseudocounts for coping with this
+* I can evaluate the score of an alignment to a profile with the profile HMM
+	* I can calculate $p(x,\pi^*|M)$ with Viterbi or $p(x|M)$ with the forward algorithm
+* I can use the log-likelyhood $LL = -\log{p(x|M)}$ as the alignment score
+	* It is strongly lenght dependent and in a not linear fashion (!)
+	* I can normalize it obtaining a Z-score
+	* For the normalization I need a $\mu$ and a $\sigma$ for the length-dependent score distribution
+* I can also use the log-odds against the NULL model
+	* This has usually a 3 times better signal-to-noise ratio in discriminating families
+	* The NULL model is obtained from the residue composition of the training set
+* The accuracy of a prediction can be evaluated on the confusion matrix
+	* It is a simple 2*2 matrix that relates true and false positives and negatives
+	* The variables under consideration are the true condition and the test outcome
+* The accuracy ACC can be evaluated from the confusion matrix
+	* $ACC = (TP+TN)/(TP+TN+FP+FN)$
+	* This measure can be biased if the classes (positive and negatives or prediction 1 and prediction 2) are highly unbalanced
+* A better approach is to evaluate sensitivity (True positive rate , TPR) and specificity (Positive predicted value, PPV)
+	* $TPR = TP/(TP+FN)$
+	* $PPR = TP/(TP+FP)$
+* The Matthews correlation coefficient (MCC) is the analogous of Pearson for categorical predictions
+	* $MCC = \frac{(TP*TN)-(FP*FN)}{\sqrt{(TP+FP)(TP+FN)(TN+FP)(TN+FN)}}$
+	* It measures the correlation among predictions and real classes
+	* It is not affected by class unbalance
+* The ROC curve (receiver operating carachteristics) is a plot of FPR (false positive rate) against TPR (true positive rate) when a parameter varies
+	* This can be a tuning parameter
+	* The area under the ROC curve is 0.5 for random predictions ad 1 for a perfect predicition
