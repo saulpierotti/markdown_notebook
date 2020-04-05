@@ -400,14 +400,13 @@
 		* This is called mixing behaviour
 		* I can tune the mixing by changing the size of jumps
 	* It can be difficult to understand when I am at convergence
-
-
-* MCMC (Markov chain Moncte Carlo) is based on bayesian statistics
-	* I start from a topology and I test its posterior probability
 * In certain conditions the Bayesian analysis consistently overestimates the probability of clades, when compared with ML
 
----
+---so far so good
 
+# Molecular clock
+
+---from lectures
 # upload
 * This note are just quick and dirty, I will make them better as soon as possible, sorry for any inconvenience
 * We will make talks in the last week of April about a paper
