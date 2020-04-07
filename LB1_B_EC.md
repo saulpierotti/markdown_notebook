@@ -531,5 +531,21 @@
 	* They present a domain chain defined by M, I and D states
 	* The domain chain is connected by 2 states that model the C and N terminal regions of the domain
 	* A J state models inter-domain regions
-* The default input format is Stockholm
+* The score of a sequence is calculated in the Bayesian frame against the NULL model
+* HMMER takes the trained model and scores 200 randomly generated sequences with it in the Bayesian framework
+	* The Log odd of the sequences is fitted with a Gumbell distribution
+	* This allows to estimate the distribution parameters $\mu$ and $\lambda$
+* Once I have the score distribution of random sequences, I can get the p-value of a sequence that I score against the model
+	* $p(s>t) = 1 - exp(-e^{-\lambda(t - \mu)})$
+* From the p-value I can obtain the e-value, the number of random sequences expected to have score >t
+	* $p = 1-e^{-E}$
+	* E is the average number of rare events, modelled under the Poisson distribution
+* The default input format is Stockholm, but it accepts many common formats
 	* It can include info on secondary structure and can mask some carachters
+* It is composed of several tools
+	* `hmmbuild` takes an msa and gives an HMM
+	* `hmmemit` generates a sample sequence from the HMM
+	* `hmmsearch` searches a database with the HMM returning a list ordered by e-value
+	* `hmmalign` alignes sequences to a given model
+	* `hmmpress` converts one or more concatenated HMMs in binary for subsequent searches
+	* `hmmscan` uses a binary HMM db to scan a sequence
