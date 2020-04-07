@@ -767,3 +767,256 @@ LIST-DELETE(L, x)
 	* The children are themselves a linked list (!)
 
 # Hash tables
+* Dictionaries are really useful in many scenarios in CS
+	* They implement INSERT, SEARCH and DELETE operations
+	* An hash table can be used for implementing a dictionary
+* An hash table is a generalization of a simple array
+	* I have n elements that associated with one key each
+	* The keys are drawn from the key universe U of size m
+	* The key of each element is unique
+* I can represent the hash table with an array T[0...m-1]
+	* Each position in T is called slot and maps to a key in U
+	* For each element x with key k, T[k] contains x itself or a pointer to it
+	* If no elements has key k, then T[k] = NIL
+* I can implement SEARCH, INSERT and DELETE with hash tables in O(1)
+
+```pascal
+SEARCH(T,k)
+	return T[k]
+
+INSERT(T,x)
+	T[x.key] = x
+
+DELETE(T,x)
+	T[x.key] = NIL
+```
+
+* In general U can be very large, so I do not really store it
+	* I only store the U subset K containing the keys that I am actually yusing
+* An hash function maps every input to a slot in the hash table
+	* In this case I reduce U to K, which has size m
+	* We will not study hash functions, but we assume them to be well designed and to output with equal probability to each slot
+* It can happen that 2 elements hash to the same slot, and I define this as a collision
+	* It is impossible to completely avoid collisions, since m is smaller than the univers U of possible elements
+	* When I have a collision I create a linked list of the elements hashing at that location
+* The size of the hash table influences the speed in operating with it
+	* If it has only 1 element essentially I don't have an hash table but a linked list
+	* If it is too big it requires a lot of space
+	* Typically the right size is 1/5 to 1/10 of the number of elements
+* I can keep the list ordered or not
+	* If not ordered inserting is faster and I can implement a LIFO behaviour
+* In a chained hash insert I usually insert new elements at the top of the respective linked list
+	* Inserting is O(1) and searching is O(k), with k lenght of the list
+	* Deleting takes O(k) if the list is single linked, O(1) if double-linked
+		* I assume that I have a pointer for x so I don't have to search it
+		* If the list is single linked I need to find the predecessor of x in order to recreate the list (!)
+* The load factor $\alpha$ of an hash table is the number of elements in the table n divided by the number of slots m
+	* $\alpha = n/m$
+	* This is true if I assume that every slot has the same probability to be hashed by an element
+	* $\alpha$ can be 1, bigger or smaller
+* The worst case in hash table searching is an unsuccessful search
+	* The time complexity is $O(1+\alpha)$
+		* O(1) is required for computing the hash function
+	* I need to look through the whole table (!)
+	* If I assume m to be proportional to n I have that $m=O(n)$
+	* In this case $\alpha=O(1)$ since $O(n)/O(n)=O(1)$
+
+# Binary search trees
+* It can be used both as a dictionary and as a priority queue
+* On average all operations are O(log n), with a worst case O(n)
+	* Tree walks are an exception and always require O(n) since they go across the whole tree
+* It can be represented by a linked list with parent, left child, right child, key attributes
+* They respect the binary search tree property
+	* The key of all the elements in the left subtree of node x are smaller or equal to x.key
+	* The key of all the elements in the right subtree of node x are bigger or equal to x.key
+* In the following algorithms the initial calls are with x equal to a pointer to the root of the tree
+* Inorder tree walk: print the keys in sorted order
+	* For each node, I need to print first the left child, then the node itself, then the right child
+
+```pascal
+INORDER-TREE-WALK(x)
+	if x is not NIL
+		INORDER-TREE-WALK(x.left)
+		print x.key
+		INORDER-TREE-WALK(x.right)
+```
+
+* Preorder tree walk: root is printed first, then the children in order
+
+```pascal
+PREORDER-TREE-WALK(x)
+	if x is not NIL
+		print x.key
+		INORDER-TREE-WALK(x.left)
+		INORDER-TREE-WALK(x.right)
+```
+
+* Postorder tree walk: the children in order are printed first, then the root
+
+```pascal
+POTSORDER-TREE-WALK(x)
+	if x != NIL
+		INORDER-TREE-WALK(x.left)
+		INORDER-TREE-WALK(x.right)
+		print x.key
+```
+
+* Search a key x: at every level I half the search space
+	* If the current node is smaller than x I go to the right child, if it is bigger I go to the left child, If it is equal I stop
+	* I go recursively until I find the key or I finish the tree
+* This recursive approach has complexity proportional to the height of the tree O(h)
+
+```pascal
+TREE-SEARCH(x,k)
+	if x == NIL or k == x.key
+		return x
+	if k < x.key
+		return TREE-SEARCH(x.left,k)
+	else
+		return TREE-SEARCH(x.right,k)
+```
+
+* I can do the same also iteratively
+
+```pascal
+ITERATIVE-TREE-SEARCH(x,k)
+	while x is not NIL and k is not x.key
+		if k < x.key
+			x = x.left
+		else
+			x = x.right
+	return x
+```
+
+* Finding the minimum key: always go left
+	* The running time is O(h), so on average O(log n)
+* Finding the maximum: always go right
+	* It is equivalent to finding a minimum
+
+```pascal
+TREE-MINIMUM(x)
+	while x.left != NIL
+		x = x.left
+	return x
+
+TREE-MAXIMUM(x)
+	while x.right != NIL
+		x = x.right
+	return x
+```
+
+* If all keys are distinct, the successor of x is defined as the y such that y.key is the smallest key bigger or equal to x
+	* It is the smallest element with key equal or bigger than that of x
+* If x has a right subtree, the successor of x is the minumum of x.right
+* If it has not, I need to go up the tree until I find a node that is the left child of its parent
+	* The successor of x is the parent of that node
+* If x is the biggest element of the tree I return NIL
+
+```pascal
+TREE-SUCCESSOR(x)
+	if x.right != NIL
+		return TREE-MINIMUM(x.right)
+	y = x.p
+	while y != NIL and x == y.right
+		x = y
+		y = y.p
+	return y
+```
+
+* The predecessor of x is the node y for which x is its successor
+	* It is the node with the biggest key that is smaller than that of x
+	* The pseudocode is symmetrical to that for the successor
+
+```pascal
+TREE-PREDECESSOR(x)
+	if x.left != NIL
+		return TREE-MAXIMUM(x.right)
+	y = x.p
+	while y != NIL and x == y.left
+		x = y
+		y = y.p
+	return y
+```
+
+* Insertion: always at the leaves (!)
+	* I want to insert an element z such that z.key = v
+	* I start from the root and maintain 2 pointers
+		* x is the current node
+		* y is the parent of x (trailing pointer)
+	* If x.key is smaller than v I go to the right, otherwise I go to the left
+	* When x = NIL we are at the correct position
+		* If v is smaller than y.key, then I insert z as y's left child
+		* Otherwise I insert it as right child
+	* The running time is O(h)
+
+```pascal
+TREE-INSERT(T,z)
+	y = NIL
+	x = T.root
+	while x != NIL
+		y = x
+		if z.key < x.key
+			x = x.left
+		else
+			x = x.right
+	z.p = y
+	if y == NIL
+		T.root = z
+	elif z.key < y.key
+		y.left = z
+	else
+		y.right = z
+```
+
+* Deletion: it is complicated
+	* If z has no children I just remove a pointer to it from its parent
+	* If z has 1 child I set the pointer of its parent to z child instead of z itself
+		* I also need to update the parent of z's child
+	* If z has 2 children it is complicated
+		* z's successor y is the minimum element in z's right subtree
+		* y cannot have a left child since there cannot be elements smaller than y in that subtree
+		* I delete y from the tree and replace z with y
+* To make the code for delete easier to read I define a function TRANSPLANT
+	* It replaces the subtree rooted at u with the one rooted at v
+	* I check if u is the root
+		* In this case I put v as the root
+		* If not, I check if u is the left child of its parent
+			* In this case, I put v as left child of u's parent
+			* If not, it means that u is the right child of its parent
+			* In this case, I put v as right child of u's parent
+	* At the end I update the parent of the moved subtree v to make it equal to that of the previous subtree u
+
+```pascal
+TRANSPLANT(T,u,v)
+	if u.p == NIL
+		T.root = v
+	elseif u == u.p.left
+		u.p.left = v
+	else
+		u.p.right = v
+	if v != NIL
+		v.p = u.p
+```
+
+* Now we can describe the delete pseudocode
+	* If z doesn't have a left child, I transplant the whole right subtree of z to z's parent
+		* If there is no right subtree, I just put NIL as right childso it's ok
+	* If z doesn't have a right child, I do the same with the left subtree
+	* If both checks failed, z has 2 children
+		* I set y as z's successor (minimum of its right subtree)
+		* if the parent of y is not z
+			* I remove y from the tree by transplanting it with its right child (it cannot have a left child!)
+			* I replace z with y
+			* I update the right child of y to that of z
+			* I update the parent of the right child of y (that was of z before) to be y itself
+		* I transplant z with y
+		* I update pointers for y.left and for the parent of the new y.left
+
+```pascal
+TREE-DELETE(T,z)
+	if z.left == NIL
+		TRANSPLANT(T,z,z.right)
+```
+
+* All the operations in binary search trees are O(h)
+* This means that they are fast when the tree is not too deep

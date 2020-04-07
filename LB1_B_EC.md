@@ -524,3 +524,12 @@
 * The ROC curve (receiver operating carachteristics) is a plot of FPR (false positive rate) against TPR (true positive rate) when a parameter varies
 	* This can be a tuning parameter
 	* The area under the ROC curve is 0.5 for random predictions ad 1 for a perfect predicition
+
+# HMMER
+* It is a widely used tool for creation of HMMs from MSAs
+* Its HHMs are based on a domain structure
+	* They present a domain chain defined by M, I and D states
+	* The domain chain is connected by 2 states that model the C and N terminal regions of the domain
+	* A J state models inter-domain regions
+* The default input format is Stockholm
+	* It can include info on secondary structure and can mask some carachters
