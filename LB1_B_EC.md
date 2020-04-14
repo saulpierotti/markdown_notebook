@@ -549,3 +549,70 @@
 	* `hmmalign` alignes sequences to a given model
 	* `hmmpress` converts one or more concatenated HMMs in binary for subsequent searches
 	* `hmmscan` uses a binary HMM db to scan a sequence
+
+# Kunitz domain project
+* We want to produce an HMM of the Kunitz domain
+* The Kuniz domain is a protease inhibitor
+	* APP (Alzheimer) and TFPI (Tissue factor inhibitor) have this domain
+* Aprotinin is a drug that act as an anti-fibrinolitic
+	* It is actually the bovin pancreatic protease inhibitor
+	* A good structure is 3TGI, that also shows the mechanism of inhibition
+	* It has 6 cysteines
+	* Uniprot: P00974
+* The domain is included in single-domain and multiple-domain proteins
+	* I prefer to build my HMM with single-domain proteins if available in enough number
+		* Other domains nearby could influence the structure of my domain
+* We want to build our HMM of the Kunitz domain starting from structural information and use the model for annotating SwissProt
+
+# Retriving the structures
+* Several options available
+    * We can use PDBfold searching with a prototype structure
+    * We can search on CATH
+* Potential problems
+    * PDBs with multiple chains
+    * Chains with multiple domains
+    * Redundant PDB structures: I can get more copies of the same protein
+    * Mutated proteins for experimental reasons
+    * Variable resolution
+* Possible solutions
+    * Accept only structures with resolution above 2.5-3 $\AA$
+        * Interaction and $C\alpha-C\alpha$ distances are on this range
+            * H bonds are around 3 $\AA$ long
+* I select a set of seed proteins and I refine them on the basis of the structural alignment
+* I convert the alignment in Stockholm format with Jalview or with a script
+
+## Creating and testing the model
+* I use `hmmbuild` to get the model from the alignment
+* I scan the original seed set wtih my model with `hmmscan` to see If I get a significant E-value
+* I do a real benchmark with non-seed proteins that I know to have the Kunitz domain
+    * Since SwissProt is manually annotated, I can define a subset containing all the Kunitz-containing proteins
+    * I also need a set of negatives to test the specificity of the model
+* I need to define the confusion matrix for my model
+* I can use the Matthews correlation to give a quality score to my model
+* I can plot a ROC curve
+* The Kunitz domain is really well defined and annotated, so I expect few false negatives and positives
+    * I can manually review all of them and understand where the model failed
+* It is important to understand the limitations of my method!
+
+# Project report
+* To be done following the structure of the Oxford Bioinformatics journal
+* I should put an abstract with information about the problem and summary of the results
+    * Should be short!
+* Introduction should contain info on the domain, previous work, ecc.
+    * It will contain most of the citation
+    * It should describe the state of the art
+* Materials and methods: in bioinformatics mostly only methods
+    * Defines the reproducibility of the work
+    * I should describe procedures, algorithms, validation
+    * I should describe the dataset
+* Results: what I did with the methods and what I got out of it
+* I should include subsections in all parts
+    * People can be interested only in some aspects!
+* Conclusion/discussion: summarise, discuss the limitations and future directions
+* I should start from materials and methods and results
+* At the end I write conclusion and introduction
+* Reference: always to be included
+* Supplementary materials can be included
+* Note: there will still be a final exam
+* Deadline: May 18 and then 3 weeks after it for the final version
+* To be sent by mail at emidio.capriotti@unibo.it with object should be "project lb1b - Saul Pierotti"

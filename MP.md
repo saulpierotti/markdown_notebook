@@ -330,10 +330,13 @@
 	* For a state of a particular position, its probability is evaluated as the ration among the count for the state and the total count for the position
 		* $\theta = h/n$, where h is the count of the state and n the total count
 		* This is a probability, not a likelyhood, I am now building the model given the dataset
+	* ML is a Markov model that combines the probability of a given carachter state at all nodes
+		* The models that I use are the GTR, HKK, ecc.
 	* The likelihood of the tree L is the product of the likelyhood of all sites s
 		* $L = \prod_j s_j$
 	* Since L is usually really small, -Log L is usually used as an optimality criterion
 	* It is used much more than maximum parsimony
+* Typically MP gives me a set of equally good trees while ML tends to give only 1 tree
 
 # Nodal support
 * Given discording predicitons, I can elaborate a consensus tree
@@ -472,34 +475,151 @@
 	* This happens when there is a true split before a mutation becomes fixed
 	* In this case I tend to have unstable nodes, that are not consistent among different analyses
 	* This is frequent when there are multiple speciation events that are close in time (rapid radiation)
+* Long branch attraction: wrong clustering of long branches
+	* Long branches tend to carry a saturated signal
+	* Random similarities can make algorithms cluster the branches together, even if they are not related
+	* ML is typically better than MP when LBA is present
+* Felsenstein zone: MP is likely to choose the wrong solution because of LBA
+	* This happens when the long branches are not closely related!
+* Inverse Felsenstein zone (Farris zone): MP is likely to choose the right solution in presence of long branches
+	* This happens when the long branches are actually also closely related
 
----so far so good
+# Phylogenomics
+* Phylogenomics: I align all the possible orthologues (typically more than 50) and get a supermatrix
+	* It is essentially a total evidence approach!
+	* There are many conflicting genes in a genome
+	* Sometimes the outliers drive the analysis, be careful!
+	* In phylogenomics you are wrong but with high statistical support!
+	* Data can be taken from genomes, but usually RNA-seq is preferred
+* The best way to find potential orthologues in a reciprocal BLAST
+	* In reciprocal BLAST I get a significant BLAST result and I BLAST it again against the query
+		* If the result is still significant I consider the pair orthologous
+* Most of the work in phylogenomics is in building the matrix
+	* The analysis is then analogous to multilocus phylogenetics
+	* In phylogenomics papers they usually try with different matrices
+* Phylogenomics cannot resolve errors due to base compositional bias
+	* This can be better corrected by changing the model
+	* Phylogenomics is really sensitive to model violations
+	* The CAT model is usually used in phylogenomics
 
-# 25/03
-* The supergene approach
-* The supertree approach is based on joining different trees
-	* In this way I can reconsile trees buil with different methods (DNA, phenotype, biogeography)
-	* An informal supertree is made by joining subtrees
-	* A formal supertree involves also possibly mixing OTUs among trees
-	* Joining trees based on a consensus needs the subtrees to be compatible
-		* The trees should not be in conflict with each other
-	* I can represent a tree with a matrix of OTUs vs nodes
-		* I put one when the OTU is included in the node
-	* I can create a matrix containing the nodes of both trees to join
-* The supermatrix approach
+# Supermatrix approach
+* Polytomies are non-binary splits in a tree
+	* Hard polytomies are due to rapid radiating evolution and they are hard to solve
+	* Soft polytomies are due to the use of not-enoguh informative sites for the inference
+	* We can resolve polytomies by using more genes in my supermatrix
+	* A bifurcating tree is one lacking polytomies
+* What I am analysing in phylogenetics in not really the gene, but mostly the CDS for coding genes
+	* Of course I can also include non-coding sequences sometimes
+* The supermatrix approach: concatenate MSAs
+	* I align several genes indipendently
+	* I concatenate the alignments to get a supermatrix
+	* I compare the tree obtained from the supermatrix with the single gene trees
+	* I can also concatenate molecular data and classical data, codified with specific carachter states
+* It is important to align the single genes independently since I don't want to align positions of one gene with position of another!
+* When I do the phylogenetic inference, I want to use different models for the different genes
+	* It can give better results!
+	* To do so, I need to find partitions in the supermatrix
+	* Partitions are most commonly the original genes that composed it, which are analysed in dependently and then the results are combined
+	* In the case of coding genes I can include 3 different partitions, one for each coding frame
+* Merging the trees of single genes can be done usign congruence or total evindence
+	* Different genes can give conflicting signals!
+	* Congruence: I select only the genes with non-conflicting topology
+	* Total evidence: I use the supermatrix and accept the cumulative result
+	* Now total evidence is favored
+* Case study: Xenoturbella
+	* It is not clear from morphology where it belongs in the animal tree
+	* Early studies were based on the nuclear 18S and mythocondrial COX1
+		* These analyses put it close to molluscs
+	* A 2003 study that included rare mitochondrial rearrangements places it in Deuterotostomia instead of Proteostomia (molluscs are here)
+		* In the previous study they actually sequenced molluscs!
+		* Xenoturbella eats molluscs
+	* A 2009 study places it again in Protostomia, but not close to molluscs
+	* It seemed related to Acelomorpha
+	* The same tree was built with 2 different matrices
+		* A 330 genes full orthologous matrix
+		* A 800 genes matrix with missing data
+	* Another study puts it in deuterostomia by taking into account compositional eterogeneity (CAT model)
+	* Still deuterostomia using a set including miRNAs
+	* Explanation: long branch attraction from protostomia outgroups when many of them are included
+	* 2016 study with no LBA puts it again in protostomia
+		* It was caused by a cluster of non congruent genes
+		* Removing these genes it was placed again in deuterostomia
+		* These were all ribosomial protein genes
+* Molluscs are really interesting for phylogenetics
+	* They have all really similar coalescent times near the Cambrian explosion
+	* Mithocondrial DNA has uniparental inheritance but
+		* In higher animals is always maternal
+		* In molluscs in some cases is maternal, in others parental
+	* There is huge disagreement among mithocondrial and nuclear phylogeny!
+		* Also nuclear genes that code for mithocondrial proteins are in agreement with mtDNA!
+		* Different evolutionary history for nDNA and mtDNA!
+* Most uncertainty in phylogenetics inference can derive from a set of non-congruent genes!
+* The problem of missing data: I don't have orthologs for all the species I want!
+	* A huge bias: we have a lot of genes for some species and very few for others
+	* If I want to include many genes I will have many missing data
+	* Genes can be lacking because they are lost in evolution
+	* There can be a sequencing problem (i.e. gene broken up in different unassembled scaffolds)
+	* Some studies show that we tend to obtain the same topology if we include missing data
+		* Usually the result is even better if we include the missing data
+	* If there are partial genes is it is better to exclude them
+		* I can have different partials in different species, and this can induce false similarities
+* Partitioning means to find the best fitting model for each portion of the supermatrix
+	* Different genes evolve under different constraints!
+	* Not necessarily my partition overlap with the genes
+		* I can have a partition including all the 3rd codon posititons of all genes
+	* They are found by the software with a best fit approach
+	* I can also have different partitions that use the same model but with different parameters
+
+# Supertree approach
+* A supertree is a tree obtained by joining toghether different trees from different datasets
+	* Informal construction:just join manually different trees
+	* Formal construction: follows a mathematical approach
+* It is used to bring together different studies, or when I do not have the possibility to do a supermatrix
+* Usually trees are joined formally when they have the same OTUs
+	* From MP I can get many different shortest trees, and I need to reconcile this by building a consensus tree
+* Consensus method: just report nodes that are in all trees
+	* If the trees are not compatible I cannot do this
+	* I can have many polytomies
+	* It is very fast
+* MPR approach: maximum representation with parsimony
+	* I build a matrix where each column represents a node and each row an OTU
+	* I put 1 if an OTU is included in a node, 0 otherwise
+	* In the matrix I put nodes and OTUs from different trees
+		* I label differently nodes from different trees
+	* If an OTU is absent from I tree I don't put 0, but '?'
+	* I create the supertree with MP from the matrix
+		* I consider the 1, 0 and '?' as charachters and just minimize their changes
+	* I can see hidden support emerging
+		* A node absent from all the source trees can appear
+* A supertree is built by ignoring the underlying evidence for the single trees!
+* Disk covering approach: a faster way to elaborate big supermatrices
+	* I create a rough tree with NJ
+	* I split the tree in pieces and I use MPR to reconstruct the supertree
+* Biclique approach: for incomplete datasets
+	* I select bicliques in the dataset containing groups of orthologs
+	* I get a tree for each orthologous group
+	* I join the trees with MPR
+* Integrative supertree/supermatrix: sometimes pipelines are complicated
+	* I create a tree with the supermatrix
+	* I create the single gene trees and I create the suprtree with them
+	* I can compare them and build the consensus tree/majority rule tree
+	* I can evaluate the likelyhood of the supertree with the supermatrix data
+		* It could be better than thedirect supermatrix tree!
+* Something huge: the super time tree (time tree of life, TTOF)
+	* It includes almost all the known organinsm!
+	* It is a normal supertree built with time trees
+	* `timetree.org` is an amazing website for getting phylogeny of everithing
+		* There is also a nice book in the website, if you have time give a look
 
 # DNA sequence databases
 * Databases are useful for making sequences freely available and for independent validation
-* If I take a sequence from a database, I have a reference for it (!)
+* If I take a sequence from a database, I have a reference for it!
 * I can find information about the taxonomy related to a sequence
 	* NCBI is not autoritative for taxonomy, but still gives an useful indication
 * I can find metadata about the sequence
 	* In some cases I can also find in which museum the original speciment is conserved (!)
 * The BOLD database contains a DNA barcode for many species
+* RepBase is a database of repetitive sequences
 * RNAcentral was a database about RNA sequences that now is discontinued
 	* There are many alternatives for studying non-conding RNA sequences
-* NCBI has many resources
-	* Genbank is directly submitted by the user and not validated by NCBI staff
-	* Refseq is reviewed and annotated by NCBI staff
-	* Pubmed is good for biomedical papers
-
+* When you sequence something always BLAST it to see if you sequenced the right organism!
