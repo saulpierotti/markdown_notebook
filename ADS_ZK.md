@@ -1,4 +1,4 @@
-% Algorthms and Data Structures
+% Algorthms and Data Structures - Zeynep Kizyltan module
 % Saul Pierotti
 % \today
 
