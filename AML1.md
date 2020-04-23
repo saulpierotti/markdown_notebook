@@ -165,4 +165,3 @@
 	* I can 2 a 3-partition: I set aside the test set at the beginning and I do cross validation in the remaining part
 		* I choose the best model and then test it on the test set that I set aside
 		* A typical split is 60/20/20
-
