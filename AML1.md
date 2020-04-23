@@ -1,8 +1,6 @@
-% Applied Machine Learning
-% Saul Pierotti
-% \today
+# Applied Machine Learning
 
-# Introduction
+## Introduction
 * Professor is a physicist in high-energy physics
 * We will not go so much into theory
 * The exam will be a ML project
@@ -23,7 +21,7 @@
 	* I want to find some structure in the data
 	* I can get groups, but I don't know the meaning of these groups
 
-# Univariate linear regression
+## Univariate linear regression
 * I can define a cost function that measures the average distance of the real outcomes from my regression
 * I want to choose the parameters $\theta$s that minimize the cost function $J(\theta_1,\theta_2,...,\theta_n)$
 	* In a linear regression the cost function has 2 parameters (!)
@@ -48,7 +46,7 @@
 * Batch GD: start from any point and apply GD until I get to a minimum
 	* It is batch since at every iteration I evaluate the cost function for the whole batch of datapoints
 
-# Multivariate linear regression
+## Multivariate linear regression
 * The real world is multivariate (!)
 	* Nonetheless, unuvariate is useful for understanding concepts
 * I have one $\theta$ for each x, plus $\theta_0$
@@ -68,7 +66,7 @@
 * A different way can be to do mean normalisation
 	* I subtract the mean and divide for the range (max-min) or stdev
 
-# Learning rate
+## Learning rate
 * The selection of $\alpha$ is important for determining if the GD converges, and if it does how much does it take
 * How do I determine if the GD has converged?
 	* I can decide a threshold decrese, i.e. if J decreses of less than $10^{-3}$ in one iteration I stop
@@ -77,14 +75,14 @@
 	* First try in factor 10 steps: 0.0001, 0.001, 0.01, 1, 10, ...
 	* Then go to a factor 3
 
-# Polynomial regression
+## Polynomial regression
 * It is the simplest non-linear model but it can fit really complicated behaviours
 * I can create features: instead of using x, why not $e^x$?
 	* I can make linear dependencies which are not linear
 * I can reduce any polynomial regression to a linear by adding new features (!)
 	* I can use $x$ and $x^2$ instead of only $x$
 
-# Classification
+## Classification
 * Classification problems can be binary or multiclass
 * Linear regression is not good for pure classification problems
 	* My problem is in nature not linear
@@ -116,11 +114,11 @@
 	* The only difference is the h itself, so our hypothesis
 	* The process for optimizing the descent is the same
 
-# Alternatives to GD
+## Alternatives to GD
 * GD is not the only possibility, there is also conjugate gradients and other approaches
 * Other approaches are more opaque, there are libraries that provide them but they are difficult to understand
 
-# Multiclass classification
+## Multiclass classification
 * One-vs-all approach: I decompose the problem in several binary classifications
 	* I assign a class to 1 and all the other datapoints to 0
 	* I determine the decision boundary
@@ -128,7 +126,7 @@
 	* Now we know the probability that a datapoint belongs to each of the classes
 	* Our prediction is the class that gives me the highest probability
 
-# Overfitting
+## Overfitting
 * I have overfitting when my model does not generalize
 * How to reduce overfitting
 	* Reduce the number of features
@@ -148,3 +146,23 @@
 * By tuning $\lambda$ I can modify the behaviour of my model
 	* When $\lambda$ is really large I go towards underfitting
 	* When it is too small I have overfitting
+
+## Improving performance
+* Do not over-optimize the model: if needed try to increase the amount of data
+	* Not always easy!
+* Another possibility: tune down or remove features!
+* Maybe your dataset is not descriptive enough: more features!
+* In general, you need experience and gut feeling
+
+## Training and testing
+* Typically I split in 70/30 or 80/20
+* The training set should be larger than the test set
+* If there is structure in your data shuffle them!
+* When checking performance in the testing set, not always I use the same cost function used in the training
+	* For logistic regression I can just count the number of correct predictions
+* I can train my model and test it n times, and then chose the one that performs better in the test set
+	* In this case I am actually using the test set to choose the best model, so I cannot use it for testing performance!
+	* I can 2 a 3-partition: I set aside the test set at the beginning and I do cross validation in the remaining part
+		* I choose the best model and then test it on the test set that I set aside
+		* A typical split is 60/20/20
+
