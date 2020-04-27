@@ -15,3 +15,5 @@
 
 ## Big data
 * They tend to be non structured
+* They are characterized by 4 Vs: Volume, Variety, Veracity (can I trust them?), Velocity
+* Another important point is Value, what I want to extract from the data
