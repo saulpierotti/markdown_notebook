@@ -8,3 +8,10 @@
 * Of course we will make a project and an oral exam
 * Prof of course is a physicist of the IIFN
 * The IIFN-CNAF hosts the Tier-1 datacenter in Bologna
+
+## Setting up AWS
+* It is a pay for use model
+* You have at the beginning a 50\$ credit
+
+## Big data
+* They tend to be non structured
