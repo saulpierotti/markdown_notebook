@@ -616,3 +616,28 @@
 * Note: there will still be a final exam
 * Deadline: May 18 and then 3 weeks after it for the final version
 * To be sent by mail at emidio.capriotti@unibo.it with object should be "project lb1b - Saul Pierotti"
+
+# Threading and fold recognition
+* Proteins with different sequences can have similar structures
+* I can fit (thread) a sequence of unknown structure onto a known structure and evaluate the goodness of fit with a scoring function
+* It is a generalization of comparative modelling
+	* I try to model against a database of knwon basic folds
+* I align to a whole set of structures instead of just 1
+* The goodness of fit for each aminoacid is evaluated from observed preferences in known structures
+* It is possible beacause
+	* There is a limited number of folds in nature
+	* Aminoacid preferences for different structural environments allow to choose the best fit
+* Fold recognition: even if I cannot align the sequences I can still align secodary structure elements and other features
+
+# Prediction of secondary structure
+* It is a mapping problem: from a sequence of aminoacids to a sequence of secondary structures
+	* I am mapping a 20-letter alphabet to a 3-letter alphabet
+
+# Prediction of transmembrane regions
+* It is a mapping problem: I want to map the sequence to the states in the membrane/out of the membrane
+
+* The simplest approach is to use a propensity scale for each residue
+	* The AAindex is a database of propensity scales for residues
+		* AAindex1 contains properties at the residue level (hydrophobicity, ecc...)
+		* AAindex2 contains substitution matrices
+		* AAindex3 contains propensities for interactions among aminoacids
