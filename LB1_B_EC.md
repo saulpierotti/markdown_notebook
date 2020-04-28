@@ -617,6 +617,9 @@
 * Deadline: May 18 and then 3 weeks after it for the final version
 * To be sent by mail at emidio.capriotti@unibo.it with object should be "project lb1b - Saul Pierotti"
 
+# Ab initio structural predictions
+* see record
+
 # Threading and fold recognition
 * Proteins with different sequences can have similar structures
 * I can fit (thread) a sequence of unknown structure onto a known structure and evaluate the goodness of fit with a scoring function
@@ -628,16 +631,29 @@
 	* There is a limited number of folds in nature
 	* Aminoacid preferences for different structural environments allow to choose the best fit
 * Fold recognition: even if I cannot align the sequences I can still align secodary structure elements and other features
-
-# Prediction of secondary structure
-* It is a mapping problem: from a sequence of aminoacids to a sequence of secondary structures
-	* I am mapping a 20-letter alphabet to a 3-letter alphabet
-
-# Prediction of transmembrane regions
-* It is a mapping problem: I want to map the sequence to the states in the membrane/out of the membrane
-
+* For threading I need to first align the sequences through fold recognition
+* For doing fold recognition I need to assess the features of the sequence
+* Predicting seqence properties is a mapping problem
+	* Secodary structure prediction: from a sequence of aminoacids to a sequence of secondary structures
+		* I am mapping a 20-letter alphabet to a 3-letter alphabet
+	* Transmembrane regions: I want to map the sequence to the states in the membrane/out of the membrane
 * The simplest approach is to use a propensity scale for each residue
-	* The AAindex is a database of propensity scales for residues
-		* AAindex1 contains properties at the residue level (hydrophobicity, ecc...)
-		* AAindex2 contains substitution matrices
-		* AAindex3 contains propensities for interactions among aminoacids
+* The AAindex is a database of propensity scales for residues
+	* AAindex1 contains properties at the residue level (hydrophobicity, ecc...)
+	* AAindex2 contains substitution matrices
+	* AAindex3 contains propensities for interactions among aminoacids
+	* It shows for each entry also the correlation with other scales
+* The propensity scale for secondary structure is the Chou-Fasman:
+	* First they calculated how frequently a certain residue was found in each secondary structure ($P(A,h)$ with A being the residue and h the seocndary structure)
+	* Then they corrected it for the independent probabilities for the residue and for the structure ($P(A), P(h)$)
+	* The propensity is therefore $P(A,h)/(P(A)P(h))$
+		* If there is no correlation among $P(A)$ and $P(h)$, then $P(A,h) = P(A)P(h)$ and therefore the propensity is 1
+		* If the propensity is bigger than 1 the residue tends to be in that structure more than expected
+		* If it is smaller than 1 the residue tends to avoid that structure
+* The original Chou-Fasman was built with only 19 proteins, but the propensity scales did not change much also with the current dataset
+* An updated version is available at AAindex
+* The Chou-Fasman is not accurate, it is around 50/60%
+	* It is 3-class classification, so it is not so bad!
+	* It is possible to improve the result by evaluating the average propensity of a sliding window
+	* We can get better results with neural networks
+* The Kyte-Doolittle scale for hydrophobicity: partition coefficient octanol/water combined with the propensity for a residue to being found in a transmembrane helix
