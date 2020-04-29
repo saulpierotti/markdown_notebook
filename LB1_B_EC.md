@@ -622,20 +622,28 @@
 * Rosetta (David Becker) is the most used method
 	* It is based on short fragments that are used as building blocks of the global fold
 	* An energy landscape is built for these fragments
+	* All proteins in the PDB were collected and fragmented in blocks of 5 residues
+	* Similar fragments were clustered based on RMSD
+	* A sequence profile was built from each cluster
+	* When modelling a new sequence, this was broken in fragments and aligned to the profiles
+	* Some heuristcs were used for choosing the best match
+	* The structurewas refined with moelcular dynamics
 * Force fields are typically used with these methods
-	* CHARMM is a traditionally used force field for proteins
-		* It was developped by the Nobel prize winner Martin Carplus
+* CHARMM is a traditionally used force field for proteins
+	* It was developped by the Nobel prize winner Martin Carplus
 * The conformational space is huge and because of this it cannot be used above 150 aa
 	* Alphafold from Google seems to perform better
 * *Ab initio* ignores the action of chaperons
 * The CASP evaluation is for *Ab initio* methods
 
 # Threading and fold recognition
-* Proteins with different sequences can have similar structures
+* It is used for sequences that have a suitable templatye in the PDB but we cannot find it based on sequence alone
+	* Proteins with different sequences can have similar structures
+* Anna Tramontano was a researcher involved in evaluating the CASP challenge that died 2 years ago
 * I can fit (thread) a sequence of unknown structure onto a known structure and evaluate the goodness of fit with a scoring function
 * It is a generalization of comparative modelling
 	* I try to model against a database of knwon basic folds
-* I align to a whole set of structures instead of just 1
+	* I align to a whole set of structures instead of just 1
 * The goodness of fit for each aminoacid is evaluated from observed preferences in known structures
 * It is possible beacause
 	* There is a limited number of folds in nature
@@ -643,7 +651,7 @@
 * Fold recognition: even if I cannot align the sequences I can still align secodary structure elements and other features
 * For threading I need to first align the sequences through fold recognition
 * For doing fold recognition I need to assess the features of the sequence
-* Predicting seqence properties is a mapping problem
+* Predicting sequence properties is a mapping problem
 	* Secodary structure prediction: from a sequence of aminoacids to a sequence of secondary structures
 		* I am mapping a 20-letter alphabet to a 3-letter alphabet
 	* Transmembrane regions: I want to map the sequence to the states in the membrane/out of the membrane
@@ -663,7 +671,7 @@
 * The original Chou-Fasman was built with only 19 proteins, but the propensity scales did not change much also with the current dataset
 * An updated version is available at AAindex
 * The Chou-Fasman is not accurate, it is around 50/60%
-	* It is 3-class classification, so it is not so bad!
+	* It is 3-class classification, so it is not so bad but also not so useful in practice
 	* It is possible to improve the result by evaluating the average propensity of a sliding window
 	* We can get better results with neural networks
 * The Kyte-Doolittle scale for hydrophobicity: partition coefficient octanol/water combined with the propensity for a residue to being found in a transmembrane helix
