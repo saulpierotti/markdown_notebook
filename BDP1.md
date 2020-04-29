@@ -31,3 +31,12 @@
 	* You avoid vendor lockin and the approach can be scaled more easily
 * Creating a new approach from scratch is usually wrong
 	* You will not create a good system from scratch
+* Our challenge: align 554k sequences per patient against the human genome
+	* The aim of this course is creating a cloud based model for computing this
+	* I also want to estimate the time required
+
+## Some notes
+* A checksum is essential when we are moving data
+	* It is a small string used to detect error in data transmission or storage
+	* It is possible to set an extended file attribute with the checksum (if the file system allows it)
+* Files are moved compressed, moving uncompressed files is a crime
