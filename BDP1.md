@@ -63,4 +63,7 @@
 	* It is volatile and fast
 * We typically have a memory hierarchy
 	* L1, L2 and L3 cache in the processor
+	* L3 is shared among cores (in some cases), while L1 and L2 are core-specific
 	* Main system memory (RAM)
+	* Swap as a last resort
+	* Different pieaces of memory have different latency
