@@ -673,5 +673,7 @@
 * The Chou-Fasman is not accurate, it is around 50/60%
 	* It is 3-class classification, so it is not so bad but also not so useful in practice
 	* It is possible to improve the result by evaluating the average propensity of a sliding window
+		* The original algorithm used a 4 residue window
 	* We can get better results with neural networks
 * The Kyte-Doolittle scale for hydrophobicity: partition coefficient octanol/water combined with the propensity for a residue to being found in a transmembrane helix
+	* It is positive for hydrophobic residues and negative for hydrophilic ones
