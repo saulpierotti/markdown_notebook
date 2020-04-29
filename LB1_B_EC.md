@@ -637,7 +637,7 @@
 * The CASP evaluation is for *Ab initio* methods
 
 # Threading and fold recognition
-* It is used for sequences that have a suitable templatye in the PDB but we cannot find it based on sequence alone
+* It is used for sequences that have a suitable template in the PDB but we cannot find it based on sequence alone
 	* Proteins with different sequences can have similar structures
 * Anna Tramontano was a researcher involved in evaluating the CASP challenge that died 2 years ago
 * I can fit (thread) a sequence of unknown structure onto a known structure and evaluate the goodness of fit with a scoring function
@@ -669,7 +669,7 @@
 		* If the propensity is bigger than 1 the residue tends to be in that structure more than expected
 		* If it is smaller than 1 the residue tends to avoid that structure
 * The original Chou-Fasman was built with only 19 proteins, but the propensity scales did not change much also with the current dataset
-* An updated version is available at AAindex
+	* An updated version is available at AAindex
 * The Chou-Fasman is not accurate, it is around 50/60%
 	* It is 3-class classification, so it is not so bad but also not so useful in practice
 	* It is possible to improve the result by evaluating the average propensity of a sliding window
@@ -677,3 +677,6 @@
 	* We can get better results with neural networks
 * The Kyte-Doolittle scale for hydrophobicity: partition coefficient octanol/water combined with the propensity for a residue to being found in a transmembrane helix
 	* It is positive for hydrophobic residues and negative for hydrophilic ones
+* The GOR method was developped after Chou Fasman for the prediction of secondary structure
+	* It uses 8 residues sliding windows
+	* It is more accurate than Chou Fasman but it is still not comparable with modern methods
