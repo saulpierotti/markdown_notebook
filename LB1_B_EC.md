@@ -617,8 +617,18 @@
 * Deadline: May 18 and then 3 weeks after it for the final version
 * To be sent by mail at emidio.capriotti@unibo.it with object should be "project lb1b - Saul Pierotti"
 
-# Ab initio structural predictions
-* see record
+# *Ab initio* structural predictions
+* It is used when there are no structures in the PDB that can be used as templates in modelling my sequence
+* Rosetta (David Becker) is the most used method
+	* It is based on short fragments that are used as building blocks of the global fold
+	* An energy landscape is built for these fragments
+* Force fields are typically used with these methods
+	* CHARMM is a traditionally used force field for proteins
+		* It was developped by the Nobel prize winner Martin Carplus
+* The conformational space is huge and because of this it cannot be used above 150 aa
+	* Alphafold from Google seems to perform better
+* *Ab initio* ignores the action of chaperons
+* The CASP evaluation is for *Ab initio* methods
 
 # Threading and fold recognition
 * Proteins with different sequences can have similar structures
