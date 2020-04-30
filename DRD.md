@@ -17,3 +17,16 @@
 * High expression is associated with high gene metilation and low promoter metilation
 	* The causality is not so clear
 * The metaorganism: nDNA, mtDNA, microbiome
+* Astronauts could be ageing faster
+	* They want to check their DNA associated with nucleosomes before going, after landing and after a while after landing
+* I should do technical replicates
+* Coefficient of variability: (SD/mean)*100
+* The normal distribution
+* Biological variability: usually a lot
+* I can distinguish biological and experimental variability by carefully designing my experiment
+* Box plot: look at data distribution
+	* The central line is the median (quartile Q2)
+	* The sides of the box are the quartiles Q1 and Q3
+	* The lines are 1.5*IQR above/below Q1/Q3
+	* Interquartile range (IQR) is Q3-Q1
+	* Outliers outside of the lines are shown
