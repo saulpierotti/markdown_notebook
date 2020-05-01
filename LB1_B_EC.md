@@ -691,3 +691,9 @@
 		* The native structure is at the bottom of a funnel
 	* Kinetical accessibility: small kinetic barrier for reaching the folded state
 		* It should be possible to reach the folded state in reasonable time
+* The solution to protein folding: thermodynamics, kinetics and conformation
+* Thermodynamics: $\Delta G$ of folding is -5/-15 kcal/mol 
+	* It is less than the energy of a covalent bond!
+	* More or less the energy of a salt bridge
+* DSSP: obtain $\phy$ and $\psi$ angles from a structure and solvent accessibility
+	* It is both available as a web server and as a package
