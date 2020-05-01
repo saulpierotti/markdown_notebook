@@ -680,3 +680,14 @@
 * The GOR method was developped after Chou Fasman for the prediction of secondary structure
 	* It uses 8 residues sliding windows
 	* It is more accurate than Chou Fasman but it is still not comparable with modern methods
+
+# Protein structure analysis
+* Anfinsen's hypothesis: there is a native structure
+* Levinthal's paradox: the conformational space for a protein is huge and it cannot be explored by the protein in the age of the universe
+* Anfinsen's dogma
+	* Unicity of structure: same structure in the same condition
+		* I mean fluctuations, but in general it is like that
+	* Stability: the structure is conserved with small fluctuations of the environment
+		* The native structure is at the bottom of a funnel
+	* Kinetical accessibility: small kinetic barrier for reaching the folded state
+		* It should be possible to reach the folded state in reasonable time
