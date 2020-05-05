@@ -108,3 +108,34 @@
 * IPv6 has a 128 bit address space
 	* Actually it is much different from IPv4 in terms of routing
 	* Its size allows to reserve large address blocks for specific use
+* The loopback network device: a connection to the same machine
+	* It is typically 127.0.0.0/8 in IPv4
+	* localhost is mapped to it under IP
+* DNS is a decentralised mapping system between IP addresses and mnemonic names 
+* There are various kinds of bandwith
+	* Goodput is the actual data transmitted
+	* Channel bandwith includes also the overhead control information
+* Latency is measured as end-to-end delay (OWD) or round-trip-time (RTT)
+	* RTT is usually 2*OWD
+	* Latency cannot be smaller than what the speed of light requires!
+* Infiniband (Melanox) and Omnipath(Intel) are high bandwith and low latency network interfaces
+* Hub: it broadcast the same packet to all the ports
+* Switch: delivers a packet to a specific machine
+	* It knows the MAC of all the devices attached to it 
+	* It works at OSI2 (and in some case at OSI3)
+	* It does not increase significantly network response times
+* Router: delivers a packet to an IP address
+	* It can route to other LANs
+	* It works at OSI3
+* Top-of-the-rack switching: a switch that delievers packets to a rack of servers
+	* Usually there is also a switch that delivers to the right rack
+* Intel Xeon is used in datacenters
+	* It is reliable and can work continuously
+* The link between sockets in the same motherboard is called qlink
+* Servers are organised in hot islands which are separated by a cooling system
+* A computing farm is usually shared among paying customers
+	* The resources must be allocated effciently among users
+	* The batch scheduler manages resource access
+* A batch system takes care of scheduling non-interactive jobs
+	* There are many batch systems: HTCondor, OpenLava, LSF, ...
+
