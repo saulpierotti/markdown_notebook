@@ -94,3 +94,14 @@
 	* This corrects for different absolute intensities of the dyes
 	* I just scale M (the y) by subtracting the log2 of the constant k
 	* I can center the M to 0 by using c=log2k=median(M)
+* Normalising between arrays: use the same reference sample!
+	* Centering: just subtract from M the mean in log space so you center to 0 and divide by SD so that SDnew=1
+		* I can also center on the median and MAD
+		* It is preferable to use the median when there are outliers (it is less sensitive to outliers)
+	* Normalisation: make distributions identical
+		* First I need to center the data
+		* I compute a reference distribution with lowest value the average of the lowest values of each array
+			* I repeat this fo the second lowest and so on
+		* I replace each measurement with the corresponding average
+			* The highest measurement is replaced with the higest value of the reference distribution and so on
+* Coefficient of variability: VAR/mean*100
