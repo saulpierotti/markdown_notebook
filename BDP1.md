@@ -67,3 +67,44 @@
 	* Main system memory (RAM)
 	* Swap as a last resort
 	* Different pieaces of memory have different latency
+* Network topologies
+	* Bus: everithing connected to the backbone
+	* Star, ring, mesh
+* OSI (open system interconnection) model: a series of layers from physical to abstract
+	* Layer 1, physiscal layer: concerns the raw bit transmission
+	* Layer 2, data link:
+	* Layer 3, network layer:
+	* Layer 4, transport layer:
+	* Layer 7, application layer: human-computer interface
+* TCP/IP model (not the TCP/IP protocol!) is an alternative to OSI
+* LAN (local area network) are small and localised networks
+	* They are present in houses (made by a router), universities, businesses
+* WAN (wide area network) cover cities, nations, ecc.
+	* It is made up of connected LANs
+	* Routing a packet in a WAN means finding to whoch LAN it should go
+* LHCone network: the WAN of the LHC
+* Packets: organising data
+	* The alternative is to transmit bit streams
+	* It is a formatted list of bits of 10 bits to some kbs
+	* They include control information like destination, source, checksums
+	* The actual data transmitted is the payload
+	* Increasing the payload increases speed at the cost of accuracy
+* MTU (maximum transmission unit) is the size of the largest data unit that can be transmitted in a single network layer transaction
+* The MAC (media access control) address is a unique ID assigned to a NIC (network interface controller)
+	* It is at layer OSI 2
+* The IP (internet protocol) address is a numerical label assigned to the machine
+	* It is at layer OSI 3
+	* IPv4 is a 32 bit number
+* The IP is subdivided into a prefix and a subnet using the CIDR notation or the subnet mask
+	* The CIDR notation is represented with a slash after the IP
+	* The subnet mask (255.255.255.0)
+* IPv4 uses private adresses, that do not to be globally unique
+	* They are not exposed to the internet
+	* The private address is translated to/from a global address with NAT (network adress translation)
+* There are 3 overlapping adrress ranges reserved for private use
+	* 24 bit block: CIDR 10.0.0.0/8
+	* 20 bit block: CIDR 172.16.0.0/12
+	* 16 bit block: CIDR 192.168.0.0/16
+* IPv6 has a 128 bit address space
+	* Actually it is much different from IPv4 in terms of routing
+	* Its size allows to reserve large address blocks for specific use
