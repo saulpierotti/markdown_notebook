@@ -56,6 +56,13 @@
 	* Outliers outside of the lines are shown
 
 ## Microarrays
+* Tiling arrays cover an entire genome
+* I can also have protein arrays
+* For transcriptomics and DNA metilation I can use competitive or non competitive arrays
+* Production technologies
+	* Oligos can be separately synthesised and spotted
+	* DNA can be synthesized directly on the chip (GeneChip)
+	* Oligos can be separately synthesized and loaded on beads, which are then immobilised on the chip (beadChips)
 
 ### Competitive microarrays
 * They use 2 colors in the same chip
@@ -73,3 +80,17 @@
 	* Each pixel is a point of measure
 	* It uses false colors
 * I can address bias by swapping the dyes
+* Background fluorescence can be a problem
+	* The software filters it out but pixel with luminosity lower than the fluorescence are lost
+* For each spot I have a pixel distribution
+	* I can get the mean signal, SD, median, median absolute deviation (MAD)
+* The row data intensity is typically transformed in log_2 scale
+* The MA plot is useful for evaluating the distribution of data in a competitive array
+	* The x is the log average intensity (log(Cy3)+log(Cy5))/2)
+	* The y is log Cy3/Cy5 ratio
+	* It allows to see if the fold change is due to the intensity
+* If the MA plot is not horizontal I need to normalise my data
+	* Linear normalisation: I can assume that the fluorescence of one of the dyes is related to that of the other by a correction factor k
+	* This corrects for different absolute intensities of the dyes
+	* I just scale M (the y) by subtracting the log2 of the constant k
+	* I can center the M to 0 by using c=log2k=median(M)
