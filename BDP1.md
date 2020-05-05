@@ -138,4 +138,15 @@
 	* The batch scheduler manages resource access
 * A batch system takes care of scheduling non-interactive jobs
 	* There are many batch systems: HTCondor, OpenLava, LSF, ...
+	* It dynamically allocates jobs so to maximise cluster use, minimise latency and respect fairshare on a time window
+* Jobs are composed of
+	* Job type
+	* Prologue: initial checks
+	* Input sandbox: the list of needed files
+	* Requirements: the hardware required
+	* Executable: the actual code to run
+	* where stdout/stderr should be directed
+	* Output sandbox: the files that need to be produced
+	* Epilogue: final cleanup, file uploads, updates, ...
+	* Error recovery: what to do if the job fails
 
