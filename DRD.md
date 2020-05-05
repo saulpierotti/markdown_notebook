@@ -54,3 +54,22 @@
 	* The lines are 1.5*IQR above/below Q1/Q3
 	* Interquartile range (IQR) is Q3-Q1
 	* Outliers outside of the lines are shown
+
+## Microarrays
+
+### Competitive microarrays
+* They use 2 colors in the same chip
+* Invented 20 years ago at Stanford
+* Chip surface coated with aminosilane for binding oligos
+* Oligo binding is possible after UV exposure
+* Tipycally used with RNA
+	* I do retrotranscription using Cy3(green)/Cy5(red) marked nucleotides
+* Ibridisation is usually overnight, then I scan the array and acquire the image
+* Cy3 and 5 are N-hydroxi-succimidyl esters but Cy5 is bigger
+	* Possible bias during retrotrascription!
+	* To reverse this, I can retrotrascribe both samples with aminoallyl-dUTP and then couple the dyes via chemical reaction
+* ScanArray scans at 550nm for exciting Cy3 and at 649nm for Cy5
+	* Fluorescence is measured by PMT
+	* Each pixel is a point of measure
+	* It uses false colors
+* I can address bias by swapping the dyes
