@@ -20,6 +20,27 @@
 * High expression is associated with high gene metilation and low promoter metilation
 	* The causality is not so clear
 * The metaorganism: nDNA, mtDNA, microbiome
+	* Microbiome influences our phenotype
+* RNA are of many types
+	* lncRNAs are longer than 200 nt
+	* sncRNAs are shorter than 35 nt
+	* Middle-sized RNAs
+		* Structural: tRNA, rRNA, snRNA, snoRNA
+		* Regulatory: ncRNA, siRNA, miRNA, piRNA
+* Micro RNAs: pair with mRNA in an inextact way and block translation
+	* 18-25 nt
+	* They can have many targets
+	* They regulate 60% of the mRNAs
+	* Each locus can produce 2 miRNAs (5p and 3p)
+	* They are in intergenic regions or in introns or also exons!
+	* pri-miRNA transcribed by RNA-Pol2
+	* Cut by the microprocessor (Drosha/DGCR8) to pre-miRNA
+	* pre-miRNA exproted from the nucleus by exportin 5
+	* Dicer/TRBP trims it to a miRNA duplex
+	* The duplex is separated
+	* One miRNA takes part in the RISC complex and it silences mRNAs
+	* miRNAs can be found in vescicles/exosomes and go around the body
+		* They can act in different cells than the ones that produced them!
 * Astronauts could be ageing faster
 	* They want to check their DNA associated with nucleosomes before going, after landing and after a while after landing
 * I should do technical replicates
