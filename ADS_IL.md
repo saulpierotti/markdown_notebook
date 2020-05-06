@@ -312,3 +312,24 @@ def DFS(G, u):
 	* It cannot be solved with a greedy approach
 * In the fractional formulation fractions of items are allowed
 	* It can be solved with a greedy approach
+
+```python
+greeedy_knapsack_frac(weights, values, total_weight):
+	unitary_val = []
+	for i in indeces(weights):
+		unitary_val.append(values[i]/weights[i])
+	taken_index, taken_weight = [], []
+	while total_weight > 0:
+		for i in weights.indeces:
+			if unitary_val[i] > max_i and i not in taken_index:
+				max_i = i
+		if total_weigth > weigths[max_i]:
+			taken_index.append(i)
+			taken_weight.append(weights[max_i])
+			total_weight -= weights[max_i]
+		else:
+			taken_index.append(i)
+			taken_weight.append(total_weight)
+			total_weight = 0
+	return taken_index, taken weight
+```
