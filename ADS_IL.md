@@ -299,3 +299,16 @@ def DFS(G, u):
             DFS(G, v)
 ```
 * The time complexity is $O(n+m)$ with an adjacency list and $O(n^2)$ with an adjacency matrix
+
+## Greedy algorithms
+* It always makes the locally optimal choice
+* It is not guaranteed to give a globally optimal solution
+* It is normally easy to code
+* A problem that can be optimally solved with a greedy technique is said to have an optimal substructure
+
+### Knapsack problem
+* A thief can carry only a certain weight and he wants to maximise the value
+* In the 0-1 formulation, only integer items can be taken (no half items)
+	* It cannot be solved with a greedy approach
+* In the fractional formulation fractions of items are allowed
+	* It can be solved with a greedy approach
