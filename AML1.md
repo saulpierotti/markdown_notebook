@@ -165,3 +165,16 @@
 	* I can 2 a 3-partition: I set aside the test set at the beginning and I do cross validation in the remaining part
 		* I choose the best model and then test it on the test set that I set aside
 		* A typical split is 60/20/20
+
+## Exam
+* For the basic part only scikit learn can be used
+* For the advanced part Keras and Tensorflow
+* If I want to do a project for both I should use both
+* The project is end to end: data and goal
+* Option 1: a proposal (1 page or an email)
+* Option 2: data and problem given by him
+	* There are easy and difficult problems (but they are all quite easy)
+* Problems in python with code and documentation, possibly on github
+	* It can also be a notebook with both
+* It should be reproducible
+* You can copy but be clever!
