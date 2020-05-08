@@ -117,6 +117,8 @@
 * SPot intensities for Cy3 and Cy5 can be use for estimating the overall expression ratio
 
 ## Non competitive arrays
+
+### Affimetrix Genechip
 * Affimetrix Genechips is a closed platform (only usable with reagents and instruments supplied by them)
 * The new form of this kind of chips is called Next generation arrays
 * The chemistry was invented in 1991 by Stephen Fodor
@@ -126,3 +128,22 @@
 	* A UV sensitive reaction blocker is selsectively degraded by UV light
 * An oligo cluster is called as feature in arrays
 * 
+
+## Illumina Beadchip
+* It uses multi-sample arrays
+* The chips contains 3 um pits where beads can be held by VdW interactions
+* Each bead is coated with copies of the same oligo
+* Optic fibers are connected to each pit, so that they can collect the signal from one bead
+* The oligos of the beads contain a 29 nt barcode and a 50 nt target-specific portion
+* Illumina Infimium chips are used for methylation studies
+* In a single cell for a single position methylation can either be 0%, 50% or 100% in a diploid
+* DNA methilation islands have a terminology such as shelf, shore, open sea, north and south (upstrean and downstream) in relation with a real island
+* The first chips had 27K probes, more or less one in each CpG island
+* Newer ones have 450K probes
+* For each island I have a bead for the island, for the shore, the shelf, the open sea
+* The newest one, Infinium methilationRPIC, has 850K probes
+	* It contains also probes outside CpG islands, non-CpG methylated sites in stem cells, differentially methylated sites in tumors, FANTOM5 enhancers
+* Bisulphite conversion: I can deaminate only non-metilated cytosines to uracil
+	* The methyl group protects cytosine from deamination
+	* Be careful: PCR of course does not reatin methylation patterns!
+* Sequencing the DNA before and after bisulphite treatment I can see which sites are methylated by comparing the C/T differences
