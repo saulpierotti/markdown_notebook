@@ -114,3 +114,4 @@
 * This arrays are produced by photolotography chemistry
 	* It is used for in situ synthesis of oligos!
 	* A UV sensitive reaction blocker is selsectively degraded by UV light
+* An oligo cluster is called as feature in arrays
