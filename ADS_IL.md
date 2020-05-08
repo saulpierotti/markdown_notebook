@@ -354,3 +354,10 @@ greeedy_knapsack_frac(weights, values, total_weight):
 	* Among those 2 possibilities I choose the one that gives the highest value
 		* $v(i,j) = \max(v(i-1,j-w[i])+v[i],v(i-1,j)) \mbox{ if } j>=w[i]$
 	* Since I am subtracting the weight from j, it has to be integer!
+* In order to know which objects are in the best solution I need an additional table of booleans $k(i,j)$
+	* A cell is true if object i belongs to the object used for calculating V(i,j), false otehrwise
+	* $k(i,j)=1 \mbox{ if } v(i,j)!=v(i-1,j) \mbox{ else } 0$ 
+* From matrix k, I start from the bottom right and I procede by subtracting w[i] at each step (I go to k(i,j-w[i]))
+	* The included objects are the ones for which k is true in that position
+* The subset sum problem is a variant of the knapsack in which I request that the sack is completely full
+
