@@ -105,3 +105,12 @@
 		* I replace each measurement with the corresponding average
 			* The highest measurement is replaced with the higest value of the reference distribution and so on
 * Coefficient of variability: VAR/mean*100
+
+## Non competitive arrays
+* Affimetrix Genechips is a closed platform (only usable with reagents and instruments supplied by them)
+* The new form of this kind of chips is called Next generation arrays
+* The chemistry was invented in 1991 by Stephen Fodor
+* Affimetrix started in California as a startup and then it was acquired by Thermo Fisher
+* This arrays are produced by photolotography chemistry
+	* It is used for in situ synthesis of oligos!
+	* A UV sensitive reaction blocker is selsectively degraded by UV light
