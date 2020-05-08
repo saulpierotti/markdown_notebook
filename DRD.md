@@ -147,3 +147,18 @@
 	* The methyl group protects cytosine from deamination
 	* Be careful: PCR of course does not reatin methylation patterns!
 * Sequencing the DNA before and after bisulphite treatment I can see which sites are methylated by comparing the C/T differences
+* Infinium probes have as a last nucletide the one that pairs with the methylated site
+* A single-base reation extends the probe using the target sequence
+* Labelled nucleotides are used, so that the occurrence of extension can be seen by fluorescence
+* Infinium I assay: 1 color
+	* It uses a bead for unmethylated C (U probe) and one for methylated C (M probe)
+	* The U probe ends with A (and thus binds T) at the target site, the M probe ends in G
+	* U probes can extend only unmethylated sites and vice versa
+	* The methylation level $\beta$ is evaluated as the the ratio among M intensity and U+M intensity
+		* Usually 100 is added at the denominator to avoid 0/0 cases
+	* The color of the signal is not improtant here, just its intensity
+* Infinium II assay: 2 colors
+	* It uses just one bead per site, with the last position just before the target site
+	* Nucleotides are differently marked for methylated (C, G) and unmethylated (A, T)
+	* The methylation is evaluated in the same way as with Infinum I, but with the instensities coming from different channels of the same bead
+* Infinium II is less sensitive and more variable
