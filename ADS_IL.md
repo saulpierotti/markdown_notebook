@@ -338,12 +338,19 @@ greeedy_knapsack_frac(weights, values, total_weight):
 * Each dynamic programming algorithm has also a recursive solution, which is usually less efficient
 * For the 0-1 knapsack problem, I can try to find the optimal solution for a subset of the objects
 * I want to find the solution V of i objects with total weight less than the capacity of the sack j that maximises the value
-	* $V(i,j)$ is the maximum value that can be obtained with i objects in a sack of capacity j
+	* $V(i,j)$ is the maximum value that can be obtained with the first i objects in a sack of capacity j
 * In this algorithm the weights must be integers
 * I create a matrix with i=(number of objects) and j=capacity and for each cell I compute the value of the sack
 * The real solution (value) for the complete set is in the bottom right cell
-* The 0 capacity column (and any column with capacity lower than that of the smallest object) has always value 0
-* The 1 object row has the value of the single most valuable object that fits the knapsack, or 0 if no object can fit
-* Base case: v(1,0)=0, v(1,j)=v
+* Base cases
+	* $v(i,0)=0$, if capacity is 0 nothing fits
+	* $v(1,j)=v[1] \mbox{ if } j>=w[1]\mbox{, } 0 \mbox{ if } j<w[1]$, if I can put only object 1 if it fits I have its value, otherwise 0
 * For each cell and for each object, if it fits the maximum value selecting it is the maximum value of the knapsack with one object less plus the value of the object, if it does not fit is the maximum value of the knapsack with one object less
-* General case:
+* General case
+	* If object i does not fit, the value is the maximum value with j-1 objects (I am copying from the right)
+		* $v(i,j)=v(i-1,j) \mbox{ if } j<w[i]$
+	* If it fits and I decide to take, the value is the maximum value of the knapsack with just enough space for the object ($j-w[i]$) plus the value of the object
+	* If it fits but I do not take it, the value is the maximum value of the knapsack with i-1 objects
+	* Among those 2 possibilities I choose the one that gives the highest value
+		* $v(i,j) = \max(v(i-1,j-w[i])+v[i],v(i-1,j)) \mbox{ if } j>=w[i]$
+	* Since I am subtracting the weight from j, it has to be integer!
