@@ -154,7 +154,7 @@
 	* It uses a bead for unmethylated C (U probe) and one for methylated C (M probe)
 	* The U probe ends with A (and thus binds T) at the target site, the M probe ends in G
 	* U probes can extend only unmethylated sites and vice versa
-	* The methylation level $\beta$ is evaluated as the the ratio among M intensity and U+M intensity
+	* The methylation level (beta-value) is evaluated as the the ratio among M intensity and U+M intensity
 		* Usually 100 is added at the denominator to avoid 0/0 cases
 	* The color of the signal is not improtant here, just its intensity
 * Infinium II assay: 2 colors
@@ -162,3 +162,13 @@
 	* Nucleotides are differently marked for methylated (C, G) and unmethylated (A, T)
 	* The methylation is evaluated in the same way as with Infinum I, but with the instensities coming from different channels of the same bead
 * Infinium II is less sensitive and more variable
+* Beta-values tend to cluster around 0 and 1, but have a continuous (heteroscedastic) distribution
+* Another approach is to use M-values: it is the log2 of M/U
+	* It is homoscedastic
+* Comparing Infinium I and II experiments can be done with intra-array nomalisation
+	* I rescale the M-values using the peak summit
+	* Corrected M-values are rescaled again to match the Infinium I range
+	* At the end these M-values are converted back to beta-values
+	* This also reduced variance of Infinium II
+* Cytosine methylation can also be studied by bisulphite-WGS (WGBS) or methylated DNA immunoprecipitation (MeDIP)
+	* It uses 5mC-specific antibodies
