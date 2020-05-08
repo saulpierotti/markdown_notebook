@@ -309,7 +309,7 @@ def DFS(G, u):
 ### Knapsack problem
 * A thief can carry only a certain weight and he wants to maximise the value
 * In the 0-1 formulation, only integer items can be taken (no half items)
-	* It cannot be solved with a greedy approach
+	* It cannot be solved with a greedy approach, but it requires dynamic programming
 * In the fractional formulation fractions of items are allowed
 	* It can be solved with a greedy approach
 
@@ -333,3 +333,17 @@ greeedy_knapsack_frac(weights, values, total_weight):
 			total_weight = 0
 	return taken_index, taken weight
 ```
+
+## Dynamic programming
+* Each dynamic programming algorithm has also a recursive solution, which is usually less efficient
+* For the 0-1 knapsack problem, I can try to find the optimal solution for a subset of the objects
+* I want to find the solution V of i objects with total weight less than the capacity of the sack j that maximises the value
+	* $V(i,j)$ is the maximum value that can be obtained with i objects in a sack of capacity j
+* In this algorithm the weights must be integers
+* I create a matrix with i=(number of objects) and j=capacity and for each cell I compute the value of the sack
+* The real solution (value) for the complete set is in the bottom right cell
+* The 0 capacity column (and any column with capacity lower than that of the smallest object) has always value 0
+* The 1 object row has the value of the single most valuable object that fits the knapsack, or 0 if no object can fit
+* Base case: v(1,0)=0, v(1,j)=v
+* For each cell and for each object, if it fits the maximum value selecting it is the maximum value of the knapsack with one object less plus the value of the object, if it does not fit is the maximum value of the knapsack with one object less
+* General case:
