@@ -105,6 +105,16 @@
 		* I replace each measurement with the corresponding average
 			* The highest measurement is replaced with the higest value of the reference distribution and so on
 * Coefficient of variability: VAR/mean*100
+* The MIAME standard is used for uniformating microarray experiments and allowing comparisons
+* Image scanning is crucial for data quality
+	* Low laser intensity for reducng photobleach
+	* The photomultiplier shuold be set so to balance the Cy3 abd Cy5 channels
+* Segmentation is the process of identifying clusters in the image
+	* It is done with algoriths and manual inspection
+	* There is also an experimental approach that uses DAPI to color the clusters
+* Softwares also separate the image in background and foreground (the actual signal)
+	* The difference of foreground and background intensities is the spot intensity
+* SPot intensities for Cy3 and Cy5 can be use for estimating the overall expression ratio
 
 ## Non competitive arrays
 * Affimetrix Genechips is a closed platform (only usable with reagents and instruments supplied by them)
@@ -115,3 +125,4 @@
 	* It is used for in situ synthesis of oligos!
 	* A UV sensitive reaction blocker is selsectively degraded by UV light
 * An oligo cluster is called as feature in arrays
+* 
