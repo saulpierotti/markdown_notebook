@@ -388,10 +388,28 @@ greeedy_knapsack_frac(weights, values, total_weight):
 * Since letters have different frequency, I can exploit this and give shorter codes to the most frequent letters
 	* The problem here is that the code is ambiguous, since I do not know how long a letter is
 * Huffman codes are non-ambiguous variable-lenght codes
-	* They use a greedy approach based on a binary tree
+* They use a greedy approach based on a binary tree
+* First I calculate the frequency of each letter
+* I order the set of letters in non-increasing order
+* The 2 least frequent letters are selected and placed as children of a node, and assign a new cumulative symbol
+* I calculate again the frequencies with the new symbol and repeat the process
+* At the end I have a binary tree with the letters as leaves
+* I associate 1 to go left and 0 to go right
+* I start always from the root and I explore the tree until I reach a leave
+* Now I have one letter and I start again from the root
+* They can save 20% to 90% of space compared to a fixed lenght code!
+* An Huffman code is a prefix code: no codeword is part of the prefix of another
 
 ## Dynamic programming
-* Each dynamic programming algorithm has also a recursive solution, which is usually less efficient
+* It was developped in 1950 by Bellman
+* It is similar to divide et impera, but it stores the solution of subproblems (it has memoization)
+* It requires the problem to have optimal substructure
+* It can be implemented recursively (divide et impera with memoization) or iteratively (on a matrix)
+	* The iterative version requires to be able to sort the problems so that I can solve all the dependecies of a problem before solving it
+	* The recursive implementation is also called top-down and the iterative bottom-up
+	* The iterative version has usually smaller constant factor because I avoid the many function calls
+
+### Knapsack problem
 * For the 0-1 knapsack problem, I can try to find the optimal solution for a subset of the objects
 * I want to find the solution V of i objects with total weight less than the capacity of the sack j that maximises the value
 	* $V(i,j)$ is the maximum value that can be obtained with the first i objects in a sack of capacity j
@@ -417,5 +435,23 @@ greeedy_knapsack_frac(weights, values, total_weight):
 	* The included objects are the ones for which k is true in that position
 * The subset sum problem is a variant of the knapsack in which I request that the sack is completely full
 
-```python
+## Shortest Path
+* Given a weighted graph $G=(V,E)$ which each edge having an associated cost $w(x,y)$, the cost of path $\pi=(v_0,v_1,...,v_k)$ that connects node $v_0$ with node $v_k$ is the sum of the weights of each edge
+	* $w(\pi)=\sum_{i=1}^k w(v_{i-1}, v_i)$
+* The shortest path $\pi^*$ is the one with the minimal cost
+	* It does not exist when the 2 nodes are not reachable from each other
+	* Also cycles with negative costs make the target unreachable, since I will continuously go around the cycle getting lower and lower cost
+	* There can be more than one shortest path, with equal costs
+* The single source shortest path from the source s is the set of shortest paths from s to all the reachable nodes
+* The all-pairs shortest path is the set of shortest paths for all possible pairs of connected nodes
+* There is no known algorithm that solves the shortest path without solving the single source shortest paths in the worst case
+* The shortest path has optimal substructure: each subpath of it is by itself a shortest path
+* In a directed graph without negative cycles there is a shortest path between any pair of nodes
+* The shortest path tree $T$ of vertex s contains all the verteces rechable from s such that each path along $T$ is a shortest path
+	* Given the optimal substructure, it is always possible to grow the partial tree $T$ until I reach the node of interest
+* The distance between nodes $x$ and $y$ $d_{xy}$ is the cost of a shortest path connecting them if it exists, otherwise $+\infty$
+	* It always holds that $d_{xx}=0$ and the triangular inequality $d_{xz}<=d_{xy}+d_{yz}>$
 
+### Dijkstra Algrithm
+* It computes the shortest path from a single source provided that there are no negative edges
+* The central lemma of Dijkstra: given a partial shortest path tree $T$ of node $s$, a node $u$ in $T$ and a node $v$ not in $T$, the edge $(u,v)$ that minimizes $d_{su}+w(u,v)$ belongs to the shortest path $\pi^*_{sv}$
