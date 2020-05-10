@@ -308,12 +308,10 @@ def BFS(G, s):
 * Complexity analysis on an adjacency matrix
 	* Here there are the same considerations as above, but
 	* For computing the adjacency set I need to scan the respective row of the matrix, so $O(V)$
-* The time complexity is $O(n+m)$ in an adjacency list and $O(n^2)$ in an adjacency matrix
+	* I need to do this for all the V verteces so the toal complexity is $O(V^2)$
 
 #### Depth-first search (DFS)
-* I need an adjacency set for each node
-* The adjacency set has no particular order
-* When I go to a node, I recursively visit the unexplore neighbors of it
+* I visit recursively all the unexplored neighbors of the current node
 * At the end I backtrack to the original node
 
 ```python
@@ -323,13 +321,38 @@ def DFS(G, u):
 		if not IsVisited(v):
 			DFS(G, v)
 ```
-* The time complexity is $O(n+m)$ with an adjacency list and $O(n^2)$ with an adjacency matrix
+* The time complexity is $O(E+V)$ with an adjacency list and $O(V^2)$ with an adjacency matrix for the same considerations made in BFS
+
+### Topological sort
+* A dependency graph shows casual dependencies between tasks
+* I can arrange a series of tasks in a directed acyclic graph (DAG)
+* A topological sort of a DAG $G=(V,E)$ is a linear ordering of its vertices such that if there is an edge $(u,v)$ then u appears before v in the ordering
+* I can execute tasks in topological order without violating dependecies
+* Topological sort algorithm
+	* Nodes are added one by one at the start of a list
+	* One node can be added only after all of its dependecies
+
+```python
+TopoSort(G):
+	L = empty_list()
+	for u in verteces(G):
+		if u is not marked:
+			topoDFS(G,u,L)
+	return L
+
+topoDFS(G, u, L):
+	mark(u)
+	for v in AdjSet(G,u):
+		if v is not marked:
+			topoDFS(G, v, L)
+	addInFront(L,u) # u is added to L only after all the recursive calls have finished
+```
 
 ## Greedy algorithms
 * It always makes the locally optimal choice
 * It is not guaranteed to give a globally optimal solution
 * It is normally easy to code
-* A problem that can be optimally solved with a greedy technique is said to have an optimal substructure
+* A problem has optimal substructure if the solution contains the solution of its subproblems
 
 ### Knapsack problem
 * A thief can carry only a certain weight and he wants to maximise the value
@@ -359,6 +382,14 @@ greeedy_knapsack_frac(weights, values, total_weight):
 	return taken_index, taken weight
 ```
 
+### Huffman Codes
+* If we assume that our alphabet has 26 letters, I need to use 5 bits for each letter (32 possible combinations) to represent it
+* If I just assign a code to each letter, my message takes $n*5$ bits with n the number of letters in it
+* Since letters have different frequency, I can exploit this and give shorter codes to the most frequent letters
+	* The problem here is that the code is ambiguous, since I do not know how long a letter is
+* Huffman codes are non-ambiguous variable-lenght codes
+	* They use a greedy approach based on a binary tree
+
 ## Dynamic programming
 * Each dynamic programming algorithm has also a recursive solution, which is usually less efficient
 * For the 0-1 knapsack problem, I can try to find the optimal solution for a subset of the objects
@@ -385,4 +416,6 @@ greeedy_knapsack_frac(weights, values, total_weight):
 * From matrix k, I start from the bottom right and I procede by subtracting w[i] at each step (I go to k(i,j-w[i]))
 	* The included objects are the ones for which k is true in that position
 * The subset sum problem is a variant of the knapsack in which I request that the sack is completely full
+
+```python
 
