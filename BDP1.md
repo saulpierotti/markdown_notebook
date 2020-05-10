@@ -220,9 +220,10 @@
 * Top-of-the-rack switching: a switch that delievers packets to a rack of servers
 	* Usually there is also a switch that delivers to the right rack
 
-## aaa
-* Intel Xeon is used in datacenters
-	* It is reliable and can work continuously
+## Computing Infrastructures
+* A computing farm is a collection of servers and it can have millions of cores
+	* Network devices manage communication between servers and the interaction with users
+* Intel Xeon is used in datacenters since it is reliable and can work continuously
 * The link between sockets in the same motherboard is called qlink
 * Servers are organised in hot islands which are separated by a cooling system
 * A computing farm is usually shared among paying customers
@@ -231,6 +232,7 @@
 * A batch system takes care of scheduling non-interactive jobs
 	* There are many batch systems: HTCondor, OpenLava, LSF, ...
 	* It dynamically allocates jobs so to maximise cluster use, minimise latency and respect fairshare on a time window
+	* It provides a single point of control for jobs submitted to the CPU farm
 * Jobs are composed of
 	* Job type
 	* Prologue: initial checks
@@ -241,4 +243,12 @@
 	* Output sandbox: the files that need to be produced
 	* Epilogue: final cleanup, file uploads, updates, ...
 	* Error recovery: what to do if the job fails
-
+* A job can be a single batch job that occupyies a single slot and it is executed in one core
+* A DAG workfolow is a series of jobs dependent from each other described by a directed acyclic graph
+	* It is essentially a pipeline
+* A collection of jobs can be run in parallel
+* A parallel job needs more than 1 core to run
+* Reservation: the batch scheduler can reserve cores for 1 job that is waiting for something to be executed
+	* This is typical of parallel jobs that are waiting for enough cores to be available
+* Backfill: while the reserved core are idle they can be used by other jobs
+	* Only jobs that will finish before the job that reserved the cores will start are permitted
