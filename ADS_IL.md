@@ -230,6 +230,7 @@ def btree_search(v, k):
 ## Graphs
 * A graph is composed of a set of vertices and edges, $G=(V, E)$
 * An edge $e=(u,v)$ is a pair of vertices
+* The number of edges $E$ can at most be $V^2$
 * A graph can be directed or undirected
 * A simple path is one in which I never pass on the same vertex
 * A cycle is a symple path with the same start and end vertex
@@ -250,26 +251,39 @@ def btree_search(v, k):
 	* `AdjSet(G,v)` (return the set of adjacent vertices of $v$)
 
 ### Representations
-* I can represent a graph with a boolean matrix $M$ (adjacency matrix) of dimensions $n^2$ with $n$ being the number of nodes
+* I can represent a graph with an adjacency matrix of dimensions $V^2$ with $V$ being the number of nodes
 	* It is preferred when I need to quickly get information about gthe connectivity if 2 specific nodes, or when the graph is dense (a lot of edges)
-	* The space requires is $O(n^2)$
+	* The space requires is $O(V^2)$
+	* It can be a boolean matrix or contain weights for the respective edges
 * I can use an adjacency list
 	* It is formed by a list for each vertex containing all the adjacent vertices to it
-	* Space is $\Theta(n+\sum deg(v))=\Theta(n+m)$
+	* Space is $\Theta(V+\sum deg(v))=\Theta(E+V)$
 	* It is generally more used than the matrix, especially with sparse graphs (few edges)
+	* It can also support weights
 * I can use adjacency sets
 	* I have a vector for vertices and one for edges
 	* The edge vector is just a list of adjacent vertices for each node
 	* The node vector contains for each node the number of its adjacent vertices
 		* In low-level languages I also need to keep track of the end of the array, so I insert a fake node that starts at end of array + 1
 	* I can use the node vector to parse correctly the edge vector
-	* The space is $\Theta(n+m)$
+	* The space is $\Theta(E+V)$
 
 ### Graph trasversal
 * It refers to the problem of visiting all the vertices of a graph
+* The 2 most used graph trasversal algorithms are BFS and DFS
 
 #### Breath-first search (BFS)
 * I first explore closer vertices, and then far ones, starting from vertix $s$
+* At the beginning all the verteces are undiscovered (sometimes said WHITE)
+* I start from vertex s, I put it in the queue Q and I mark it as discovered
+	* Discovered vertexes are referred to as GREY
+* Until there is somenthing in Q
+	* I take one vertex v from Q
+	* I loop on the adjacency set of v
+		* If the vertex u in the set is not discovered (WHITE)
+			* I mark it as discovered (GREY)
+			* I put u in Q
+	* All the adjacenct set of v is GREY: I now mark v as BLACK
 
 ```python
 def BFS(G, s):
@@ -284,7 +298,16 @@ def BFS(G, s):
 				EnQueue(Q,nv)
 				nv.discovered = True
 ```
-
+* Complexity analysis on an adjacency list
+	* Each vertex is put in the queue once, since it is put in only when WHITE and it is marked as GREY before being put in
+	* The queue operations take $O(1)$, and I do V of them, so $O(V)$
+	* The adjacency list of v is scanned only when v is dequeued, so once
+	* The sum of the lenght of the adjacency lists is $\Theta(E)$ with E the number of edges
+	* The time spent scanning the adjacency lists is therefore $O(E)$
+	* The toal time is therefore $O(V+E)$
+* Complexity analysis on an adjacency matrix
+	* Here there are the same considerations as above, but
+	* For computing the adjacency set I need to scan the respective row of the matrix, so $O(V)$
 * The time complexity is $O(n+m)$ in an adjacency list and $O(n^2)$ in an adjacency matrix
 
 #### Depth-first search (DFS)
