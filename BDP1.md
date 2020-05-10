@@ -157,35 +157,58 @@
 	* Increasing the payload increases speed at the cost of accuracy
 * MTU (maximum transmission unit) is the size of the largest protocol data unit (PDU) that can be transmitted in a single network layer transaction
 	* Larger MTU reduces overhead but can increase delay
+	* It should be set so to respect the properties of the physical netwrok
 * The MAC (media access control) address is a unique ID assigned to a NIC (network interface controller)
 	* It is at OSI 2
+	* It is used for communications within a netwrok segment
 * The IP (internet protocol) address is a numerical label assigned to the machine
 	* It is at layer OSI 3
 	* IPv4 is a 32 bit number
-* The IP is subdivided into a prefix and a subnet using the CIDR notation or the subnet mask
-	* The CIDR notation is represented with a slash after the IP
-	* The subnet mask (255.255.255.0)
+	* To make it more human-readable, each byte is represented with a decimal number from 0 to 255
+* The IP is subdivided into a subnet and a rest field using the CIDR notation or the subnet mask
+	* The network prefix identifies the netwrok, while the rest field is host-specific
+	* The CIDR notation is represented with a slash after the IP that says the number of bits to be used for the subnet
+		* `192.168.1.1/24` means that the first 24 bits of the 32 total (`192.168.1`) are the subnet, while `1` is the rest field
+	* The subnet mask (255.255.255.0) means that the first 3 bytes are the subnet while the last one is the rest field
+		* The subnet is obtained with a bitwise AND between IP and subnet mask
 * IPv4 uses private adresses, that do not to be globally unique
 	* They are not exposed to the internet
 	* The private address is translated to/from a global address with NAT (network adress translation)
-* There are 3 overlapping adrress ranges reserved for private use
+* There are 3 non-overlapping adrress ranges reserved for private use
 	* 24 bit block: CIDR 10.0.0.0/8
+		* 8 bits is the subnet so 24 bits (8-32) is the rest field
 	* 20 bit block: CIDR 172.16.0.0/12
 	* 16 bit block: CIDR 192.168.0.0/16
+		* 8 bit block: CIDR 192.168.0.0/24
 * IPv6 has a 128 bit address space
 	* Actually it is much different from IPv4 in terms of routing
 	* Its size allows to reserve large address blocks for specific use
+	* The unique local address (ULA) is reserved for local use
+		* It is fc00::/7
+* `ifconfig` can be used to configure the network interface
 * The loopback network device: a connection to the same machine
-	* It is typically 127.0.0.0/8 in IPv4
-	* localhost is mapped to it under IP
+	* It is entirely managed by the OS and does not send any packet to network devices
+	* It is assigned to the block 127.0.0.0/8 in IPv4
+	* In practice it is used almost always 127.0.0.1
+	* `localhost` is mapped to 127.0.0.1
+	* It is used for diagnostic and by applications to reach resources on the same machine
 * DNS is a decentralised mapping system between IP addresses and mnemonic names 
+* A network protocol is a set of rules for exchanging packets over a network
+	* In a protocol stack each protocol uses services from the one below it
+	* HTTP runs over TCP which runs over IP
 * There are various kinds of bandwith
 	* Goodput is the actual data transmitted
 	* Channel bandwith includes also the overhead control information
 * Latency is measured as end-to-end delay (OWD) or round-trip-time (RTT)
-	* RTT is usually 2*OWD
+	* It can be assessed with `ping`
+	* RTT is usually 2*OWD, but not necessarily (upload and download can difffer)
 	* Latency cannot be smaller than what the speed of light requires!
-* Infiniband (Melanox) and Omnipath(Intel) are high bandwith and low latency network interfaces
+* Network adapters are physical devices that connects a computer to a network7
+	* They can be part of the motherboard or can be plugged in as expansion cards
+	* They implement OSI 1 and 2
+	* Netwrok adapters are Ethernet, WiFi, Fiber Channel
+	* There are also high-performace adapters used for high-performance computing like Omnipath and Infiniband
+		* Infiniband (Melanox) and Omnipath (Intel) are high bandwith and low latency network interfaces
 * Hub: it broadcast the same packet to all the ports
 * Switch: delivers a packet to a specific machine
 	* It knows the MAC of all the devices attached to it 
@@ -196,6 +219,8 @@
 	* It works at OSI3
 * Top-of-the-rack switching: a switch that delievers packets to a rack of servers
 	* Usually there is also a switch that delivers to the right rack
+
+## aaa
 * Intel Xeon is used in datacenters
 	* It is reliable and can work continuously
 * The link between sockets in the same motherboard is called qlink
