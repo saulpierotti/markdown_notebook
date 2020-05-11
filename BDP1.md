@@ -105,11 +105,6 @@
 		* 1 Gb can cost 50\$
 		* SDRAM is a DRAM which operates in sync with the clock
 		* DDR is a type of SDRAM
-* Disk storage is based on HDD or solid state drives
-* SSDs use NAND technology, it is much slower than RAM but non-volatile
-	* It can withstand a limited number of write cycles
-	* NAND SSDs use NAND logical gates
-	* The NAND used in USB drives tend to be less performant, cheaper and less durable than the one used in SSDs
 * Memory status can be seen with `free`
 
 ## Network
@@ -252,3 +247,57 @@
 	* This is typical of parallel jobs that are waiting for enough cores to be available
 * Backfill: while the reserved core are idle they can be used by other jobs
 	* Only jobs that will finish before the job that reserved the cores will start are permitted
+
+# Storage
+* The performance of a storage device is described in terms of bandwith and IOPS
+	* The bandwith is the data transfer speed
+	* The IOPS is the number of I/O operations per second
+		* It is importnat when operating on small files
+* SSDs use NAND technology, it is much slower than RAM but non-volatile
+	* It can withstand a limited number of write cycles
+	* NAND SSDs use NAND logical gates
+	* The NAND used in USB drives tend to be less performant, cheaper and less durable than the one used in SSDs
+	* Speed is 400/500 MB/s, 100k/400k IOPS
+	* Capacity 500 GB
+	* The biggest advantage of SSDs is in terms of IOPS
+* Hard disks are slow since they have moving parts
+	* Speed is 100/150 Mb and 100/200 IOPS
+	* Capacity 8 TB
+	* They have spinning disks and a moving head
+* Tape cartridge are expensive since they require an infrastructure (tape library) but really scalable
+	* Speed is 250 MB/s, sequential access (no IOPS)
+	* Capacity 8.5 TB
+* Data maintainance is a huge responsibility, since it could be impossible to recreate lost data
+* RAID (Redundant Array of Independent Disks) systems allow to virtualize data storage
+* RAID0: file striping
+	* A single file is stripped into several drives
+	* I collect n physical disks into 1 virtual disk
+	* I get higher performances but no redundancy
+	* Losing only 1 disk means losing all the data
+* RAID1: file mirroring
+	* Performances can imporove for reading
+	* 2 disk that operate as 1, mirroring theyr contents
+* RAID5: distributed parity
+	* It requires at least 3 disks
+	* 
+* A file system controls how data are stored and retrieved in the physical medium
+	* It can suppor file metadata like owner, permissions, access time
+* POSIX (Portable Operating System Interface) is a family of standards for maintaining compatibility between OS
+* A POSIX filesystem basically is one that supports open operations
+* Cables are important, especially for DAS (direct access storage) systems
+* A DAS system does not incorporate any network capability
+* A JBOD (just a bunch of disks) is a container containing disks that can be plugged into a server
+* A NAS (network access storage) is a storage device exposed to the network
+	* It has file level access for external clients
+	* It uses protocols like NFS and SAMBA
+* The storage area network (SAN) is a dedicated network for storage access at the block level
+	* I am not exposing the file system, but the disk itself
+* The SAN is composed of an host layer, a farbric layer and Storage layer
+	* The host layer is composed of servers that allow access to the SAN
+	* The gabric layer is composed of cables, routers, switches
+	* The storage layer is composed of the storage devices
+		* Every partition of every storage device is identified by a logic unit number (LUN)
+* Important data are backed up frequently and possibly moved to a different geographical location
+* Metadata are essential and cannot be lost: metadata servers have a lot of redundancy
+* A parallel filesystem is a single filesystem across multiple storage devices
+	* It usually supports mutliple clients (thousands of them!)
