@@ -449,8 +449,12 @@ greeedy_knapsack_frac(weights, values, total_weight):
 * In a directed graph without negative cycles there is a shortest path between any pair of nodes
 * The shortest path tree $T$ of vertex s contains all the verteces rechable from s such that each path along $T$ is a shortest path
 	* Given the optimal substructure, it is always possible to grow the partial tree $T$ until I reach the node of interest
-* The distance between nodes $x$ and $y$ $d_{xy}$ is the cost of a shortest path connecting them if it exists, otherwise $+\infty$
+* The distance between nodes $x$ and $y$ $d_{xy}$ is the cost of a shortest path connecting them if it exists, otherwise $+\infty$ if they are not connected and $-\infty$ if there is a negative weight cycle between them
 	* It always holds that $d_{xx}=0$ and the triangular inequality $d_{xz}<=d_{xy}+d_{yz}>$
+* A shortest path cannot contain cycles
+	* It could contain 0 weight cycles, but in this case it is always possible to find another shortest path without the cycle
+	* I can safely assume that in a graph with $V$ nodes, if a shortest path exists it has at most $V-1$ edges
+		* If there are no cycles I can at most visit $V$ nodes, and they will be connected by $V-1$ edges
 
 ### Dijkstra Algrithm
 * It computes the shortest path from a single source provided that there are no negative edges
@@ -458,3 +462,6 @@ greeedy_knapsack_frac(weights, values, total_weight):
 	* In practice it means that the shortest edge connecting a shortest path to the node of interest is part of the shortest path to that node
 	* If I take another route with more edges from the shortest path to the node I am guaranteed to not decrease the cost, sice weights are assumed to not be negative
 	* If an edge is negative this is not necessarily true since adding an edge can decrese the cost
+
+```python
+
