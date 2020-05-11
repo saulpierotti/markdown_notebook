@@ -301,3 +301,21 @@
 * Metadata are essential and cannot be lost: metadata servers have a lot of redundancy
 * A parallel filesystem is a single filesystem across multiple storage devices
 	* It usually supports mutliple clients (thousands of them!)
+	* It is built on a SAN, with block level access
+* A distibuted file system is built on a system with file-level access
+	* It is built on top of the file systems of the disks!
+	* They are typically slower than parallel file systems
+* The tape area network (TAN) is a subsection of a SAN dedicated to tape devices
+	* Tapes are organized in libraries containing tape drives and robotic arms that move the tape cartridges into the drives
+	* A tape library can have 85 PB capacity
+* Storage is organised in tiers according to their QoS
+	* Tier 1 storage is used for hot data (frequently used)
+		* It is composed of large RAID systems and SSDs 
+	* Tier 2 is used for warm data
+		* It is mainly old disks and small RAIDs
+	* Tier 3 is used for cold data like backups and rarely accessed data
+		* It is mainly tape storage
+* Moving a file to an higher QoS is call recall, moving it to a lower one migration
+* Tape storage is extremely safe: I can put the cartridge in a safe box and it is inaccesible
+* Nowadays datacenters are adopting the HyperConverged architecture
+	* Storage and computing happens on the same machines, no separate areas
