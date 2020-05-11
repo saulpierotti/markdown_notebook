@@ -455,3 +455,6 @@ greeedy_knapsack_frac(weights, values, total_weight):
 ### Dijkstra Algrithm
 * It computes the shortest path from a single source provided that there are no negative edges
 * The central lemma of Dijkstra: given a partial shortest path tree $T$ of node $s$, a node $u$ in $T$ and a node $v$ not in $T$, the edge $(u,v)$ that minimizes $d_{su}+w(u,v)$ belongs to the shortest path $\pi^*_{sv}$
+	* In practice it means that the shortest edge connecting a shortest path to the node of interest is part of the shortest path to that node
+	* If I take another route with more edges from the shortest path to the node I am guaranteed to not decrease the cost, sice weights are assumed to not be negative
+	* If an edge is negative this is not necessarily true since adding an edge can decrese the cost
