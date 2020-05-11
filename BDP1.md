@@ -269,7 +269,7 @@
 	* Capacity 8.5 TB
 * Data maintainance is a huge responsibility, since it could be impossible to recreate lost data
 * RAID (Redundant Array of Independent Disks) systems allow to virtualize data storage
-* RAID0: file striping
+* RAID0: file striping at the block level
 	* A single file is stripped into several drives
 	* I collect n physical disks into 1 virtual disk
 	* I get higher performances but no redundancy
@@ -277,7 +277,12 @@
 * RAID1: file mirroring
 	* Performances can imporove for reading
 	* 2 disk that operate as 1, mirroring theyr contents
-* RAID5: distributed parity
+* RAID2 is rarely used and involces stripping at the bit level
+	* It uses an Hamming code for error correction
+* RAID3 is rarely used and involces stripping at the byte level with a parity disk
+	* A parity disk contains parity bits for each block, that are used in error correction
+* RAID4: block-level stripping with parity disk
+* RAID5: block-level stripping with distributed parity
 	* It requires at least 3 disks
 	* 
 * A file system controls how data are stored and retrieved in the physical medium
