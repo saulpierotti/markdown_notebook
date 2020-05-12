@@ -248,7 +248,7 @@
 * Backfill: while the reserved core are idle they can be used by other jobs
 	* Only jobs that will finish before the job that reserved the cores will start are permitted
 
-# Storage
+## Storage
 * The performance of a storage device is described in terms of bandwith and IOPS
 	* The bandwith is the data transfer speed
 	* The IOPS is the number of I/O operations per second
@@ -332,3 +332,27 @@
 * Tape storage is extremely safe: I can put the cartridge in a safe box and it is inaccesible
 * Nowadays datacenters are adopting the HyperConverged architecture
 	* Storage and computing happens on the same machines, no separate areas
+
+## Cloud Computing
+* It is not the same as virtualization!
+* It is a pay-per-use model, an utility service
+* The infrastructure has a teorethical infinite capacity
+	* But you need infinite money to use it!
+* The model is focused on the concept of service, without the need of thinking about the underlying physical infrastructure
+* Infrastructure as a service (IaaS): the customer receives a machine with an OS
+* Platform as a service (PaaS): the customer manages data and software, but no direct access to the OS
+	* I can ask for a HTC-Condor cluster already functional, a parallel file system, an SQL database
+* Software as a service (SaaS): pre-formed environment entirely managed by the vendor
+	* Gmail infrastrucutre for companies
+* Deployment: public, hybrid private
+	* A private cloud is accessible only to insiders
+		* It is rarely with infinite resources
+	* A public cloud is AWS, which can be assumed infinite
+	* An hybrid system is a private system that redirects peak requests to a public system
+	* I can also manage only sensitive data on a private system and non-sensitive data in a public cloud
+* Isolation: the scope of the cloud
+	* A dedicated cloud is dedicated to a scope (es. Bioinformatics)
+	* A multi-tenant cloud is multi-purpose
+	* I can also consider a tenant as a group of customers (es. research group), that payed for a specifc QoS
+* Web hosting is one of the most common cloud use cases
+
