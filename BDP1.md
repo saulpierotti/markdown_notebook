@@ -281,10 +281,17 @@
 	* It uses an Hamming code for error correction
 * RAID3 is rarely used and involces stripping at the byte level with a parity disk
 	* A parity disk contains parity bits for each block, that are used in error correction
+	* It requires the rotation of disks to be in sync!
 * RAID4: block-level stripping with parity disk
 * RAID5: block-level stripping with distributed parity
+	* In each disk I have all the blocks but 1 plus the parity of the missing block
 	* It requires at least 3 disks
-	* 
+	* It is similar to RAID0 in term of performances (but a little bit less), but tolerant to the loss of an entire disk
+	* It is more reliable of RAID0 because of parity, but also less performant
+* RAID6: block-level stripping with double distributed parity
+	* It is similar to RAID5 but it uses 2 parity blocks
+	* It can tolarete the failure of 2 disks
+	* It requires a minimum of 4 disks
 * A file system controls how data are stored and retrieved in the physical medium
 	* It can suppor file metadata like owner, permissions, access time
 * POSIX (Portable Operating System Interface) is a family of standards for maintaining compatibility between OS
@@ -303,10 +310,11 @@
 	* The storage layer is composed of the storage devices
 		* Every partition of every storage device is identified by a logic unit number (LUN)
 * Important data are backed up frequently and possibly moved to a different geographical location
-* Metadata are essential and cannot be lost: metadata servers have a lot of redundancy
 * A parallel filesystem is a single filesystem across multiple storage devices
 	* It usually supports mutliple clients (thousands of them!)
 	* It is built on a SAN, with block level access
+	* It maintaines metadata servers with information about the location of the blocks for each file and their metadata
+* Metadata are essential and cannot be lost: metadata servers have a lot of redundancy
 * A distibuted file system is built on a system with file-level access
 	* It is built on top of the file systems of the disks!
 	* They are typically slower than parallel file systems

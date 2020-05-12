@@ -1,5 +1,11 @@
-# Algorithms and Data Structures - Ivan Lanese module
+---
+title: Algorithms and Data Structures - Ivan Lanese module
+author: Saul Pierotti
+header-includes:
+	\usepackage{algpseudocode}
+---
 
+# Introduction
 * Our main topic will be data structures (balanced trees, graphs) and algorithms (greedy, dynamic programming)
 * Recursion will be essential for exploring search trees
 
@@ -112,23 +118,28 @@ All the basic operations in AVL take $O(\log{n})$
 * The heigh of a 2-3 tree is $\Theta(\log{n})$
 
 ### Search in 2-3 trees
-```python
-def search23(v,k):
-	if v is None:
-		return None
-	if v is leaf:
-		if v.key == k:
-			return v
-		else:
-			return None
-	else:
-		if k <= v.L:
-			return search23(v.left, k)
-		elif (v.right != None) and (k > v.M):
-			return search23(v.right, k)
-		else:
-			return search23(v.mid, k)
-```
+\begin{algorithmic}
+\Function{SEARCH-23}{$v,k$}
+	\If{$v$ is None}:
+		\Return{None}
+	\ElsIf{$v$ is leaf}
+		\If{$v.key == k$}
+			\Return{$v$}
+		\Else
+			\Return{None}
+		\EndIf
+	\Else
+		\If{$k <= v.L$}
+			\Return{SEARCH-23}{$v.left, k$}
+		\ElsIf{$v.right != None$ \And $k > v.M$}:
+			\Return{SEARCH-23}{$v.right, k$}
+		\Else
+			\Return{SEARCH-23}{$v.mid, k$}
+		\EndIf
+	\EndIf
+\EndFunction
+\end{algorithmic}
+
 This operation takes $O(\log{n})$
 
 ### Insertion in 2-3 trees
@@ -456,13 +467,35 @@ greeedy_knapsack_frac(weights, values, total_weight):
 	* I can safely assume that in a graph with $V$ nodes, if a shortest path exists it has at most $V-1$ edges
 		* If there are no cycles I can at most visit $V$ nodes, and they will be connected by $V-1$ edges
 
+### Relaxation
+* It is a technique used by various shortest-path algorithms
+* For each vertex $v \in V$ I maintain an attribute $v.d$ which is an upper bound for the shortest path from the source $s$ to $v$
+	* $v.d$ is a shortest path estimate
+
+```python
+INITIALIZE-SINGLE-SOURCE(G,s):
+	for each v in G.V:
+		v.d = \infty
+		w.\pi = NIL
+	s.d = 0
+
+RELAX(u,v,w):
+```
+
 ### Dijkstra Algrithm
 * It computes the shortest path from a single source provided that there are no negative edges
+	* It is a greedy algorithm
+	* The similar Bellman-Ford algorithm solves the problem also for negative edges but it is slower and it is based on dynamic programming
 * The central lemma of Dijkstra: given a partial shortest path tree $T$ of node $s$, a node $u$ in $T$ and a node $v$ not in $T$, the edge $(u,v)$ that minimizes $d_{su}+w(u,v)$ belongs to the shortest path $\pi^*_{sv}$
 	* In practice it means that the shortest edge connecting a shortest path to the node of interest is part of the shortest path to that node
 	* If I take another route with more edges from the shortest path to the node I am guaranteed to not decrease the cost, sice weights are assumed to not be negative
 	* If an edge is negative this is not necessarily true since adding an edge can decrese the cost
+* Given the graph $G=(V,E)$ the algorithm maintains a subset of nodes $S \in V$ such that for each node in $S$ the shortest path from the source $s$ to that node has been determined
+* Repeatedly, it selects a node $u \in V-S$ (a node for which I do not know still the shortest path) and add it to $S$ with the minimum shortest path estimate and relaxes all the edges leaving $u$
+* I am here assuming that each weight $w(u,v) \geq 0$
 
 ```python
+DIJKSTRA(G, w, s):
+	INI
 ```
 
