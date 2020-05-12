@@ -355,4 +355,13 @@
 	* A multi-tenant cloud is multi-purpose
 	* I can also consider a tenant as a group of customers (es. research group), that payed for a specifc QoS
 * Web hosting is one of the most common cloud use cases
+* Public clouds can be adapted much quicker to the demand!
+* A stateless service does not store the state (non-interactive web server)
+* A stateful service stores information about user interaction (a shopping cart)
+	* It cannot be replicated easily!
+* A cloud-friendly application is stateless and distributed
+	* If there is a rise in requests I can just duplicate the system and create a new instance
+* Cloud risks: security, privacy, vendor lock-in, data loss
+	* In the terms of service for standard accounts there is no guarantee of continuity, reliability, ecc
+	* In many case cloud services are not completely mature
 
