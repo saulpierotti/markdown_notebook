@@ -117,30 +117,30 @@ All the basic operations in AVL take $O(\log{n})$
 	* $2^{h+1} -1 \leq n \leq \frac{3^{h+1}-1}{2}$
 * The heigh of a 2-3 tree is $\Theta(\log{n})$
 
-### Search in 2-3 trees
+The following searches a 2-3 tree in $O(\log{n})$ time
+
 \begin{algorithmic}
-\Function{SEARCH-23}{$v,k$}
+\vspace{1em}
+\Procedure{SEARCH-23}{$v,k$}
 	\If{$v$ is None}:
-		\Return{None}
+		\State \Return None
 	\ElsIf{$v$ is leaf}
 		\If{$v.key == k$}
-			\Return{$v$}
+			\State \Return $v$
 		\Else
-			\Return{None}
+			\State \Return None
 		\EndIf
 	\Else
 		\If{$k <= v.L$}
-			\Return{SEARCH-23}{$v.left, k$}
-		\ElsIf{$v.right != None$ \And $k > v.M$}:
-			\Return{SEARCH-23}{$v.right, k$}
+			\State \Return \Call{SEARCH-23}{$v.left, k$}
+		\ElsIf{$v.right \not= \mbox{None}$ \textbf{and} $k > v.M$}:
+			\State \Return \Call{SEARCH-23}{$v.right, k$}
 		\Else
-			\Return{SEARCH-23}{$v.mid, k$}
+			\State \Return \Call{SEARCH-23}{$v.mid, k$}
 		\EndIf
 	\EndIf
-\EndFunction
+\EndProcedure
 \end{algorithmic}
-
-This operation takes $O(\log{n})$
 
 ### Insertion in 2-3 trees
 * I create al leaf `v` with key `k`
@@ -198,18 +198,22 @@ Computing the height of a node recursively has complexity O(n)
 * If I don't find it I search it in the correct subtree
 * I visit $O(\log_t{n})$ nodes and each time I have a cost of $O(t)$, so the total cost is $O(t\log_t{n})$
 
-``` python
-def btree_search(v, k):
-	i = 1
-	while (i <= len(v) and key > v[i]):
-		i += 1
-	if (i <= len(v) and k==v[i]:
-		return v[i].data
-	elif (v is leaf):
-		return None
-	else:
-		return btree_search(v.child[i], k)
-```
+\begin{algorithmic}
+\vspace{1em}
+\Procedure{BTREE-SEARCH}{$v, k$}
+	\State $i = 1$
+	\While{$i <= len(v)$ \textbf{and} $key > v[i]$}:
+		\State $i += 1$
+	\EndWhile
+	\If{$i <= len(v)$ \textbf{and} $k==v[i]$}
+		\State \Return v[i].data
+	\ElsIf{$v$ is leaf}
+		\State \Return None
+	\Else
+		\State \Return \Call{BTREE-SEARCH}{$v.child[i], k$}
+	\EndIf
+\EndProcedure
+\end{algorithmic}
 
 * Note that the keys on a node are ordered: I can do a binary search instead of a linear search
 	* Binary search takes $O(\log{n})$
@@ -471,16 +475,30 @@ greeedy_knapsack_frac(weights, values, total_weight):
 * It is a technique used by various shortest-path algorithms
 * For each vertex $v \in V$ I maintain an attribute $v.d$ which is an upper bound for the shortest path from the source $s$ to $v$
 	* $v.d$ is a shortest path estimate
+* In this representation $v.\pi$ is the predecessor of $v$ in the shortest path tree
+* First I initialise everithing
+	* $s.d = 0$ and $v.d = \infty \mbox{ } \forall \mbox{ } v \in V- \{s\}$
+	* $v,\pi = \mbox{NIL}$ for all the nodes
+* Then I relax the edge $(u,v)$ by testing whether I can improve the shortest path to $v$ by passing through $u$
 
-```python
-INITIALIZE-SINGLE-SOURCE(G,s):
-	for each v in G.V:
-		v.d = \infty
-		w.\pi = NIL
-	s.d = 0
+\begin{algorithmic}
+\vspace{1em}
+\Procedure{INITIALIZE-SINGLE-SOURCE}{$G,s$}
+	\ForAll{$v \in G.V$}
+		\State $v.d = \infty$
+		\State $v.\pi = \mbox{NIL}$
+	\EndFor
+	\State $s.d = 0$
+\EndProcedure
 
-RELAX(u,v,w):
-```
+\vspace{1em}
+\Procedure{RELAX}{$u,v,w$}
+	\If{$v.d > u.d + w(u,v)$}
+		\State $v.d = u.d + w(u,v)$
+		\State $v.\pi = u$
+	\EndIf
+\EndProcedure
+\end{algorithmic}
 
 ### Dijkstra Algrithm
 * It computes the shortest path from a single source provided that there are no negative edges
@@ -493,9 +511,32 @@ RELAX(u,v,w):
 * Given the graph $G=(V,E)$ the algorithm maintains a subset of nodes $S \in V$ such that for each node in $S$ the shortest path from the source $s$ to that node has been determined
 * Repeatedly, it selects a node $u \in V-S$ (a node for which I do not know still the shortest path) and add it to $S$ with the minimum shortest path estimate and relaxes all the edges leaving $u$
 * I am here assuming that each weight $w(u,v) \geq 0$
+* This implementation uses a min priority queue $Q$ containing the nodes $v$ with keys equal to $v.d$
+	* Calling EXTRACT-MIN($Q$) means taking the node in the queue which is closest to the source $s$ in terms of shortest path estimate
+	* At the fist call $s$ itself is extracted since $s.d = 0$ while $v.d = \infty$ for all the other nodes
+* Running time
+	* The INITIALIZE-SINGLE-SOURCE call is a $\Theta(V)$ operation
+	* The queue is filled once with $V$ elements and since then always emptied
+	* Each iteration of the while loop removes one element from $Q$, so it iterates $V$ times
+		* EXTRACT-MIN is an $=\Theta(1)$ operation, as well as the assignment of $S$
+		* The for loop iterates a number of times equal to the lenght of the adjacency set of the current node
+			* The RELAX procedure is also $\Theta(1)$
+	* In general the number of total iteration of the for loop is the sum of all the adjacency lists, so it is $\Theta(E)$
+	* The total running time is $\Theta(V+E)$
 
-```python
-DIJKSTRA(G, w, s):
-	INI
-```
+\begin{algorithmic}
+\vspace{1em}
+\Procedure{DIJKSTRA}{$G, w, s$}
+	\State \Call{INITIALIZE-SINGLE-SOURCE}{$G,s$}
+	\State $S = \emptyset$
+	\State $Q = G.V$
+	\While{$Q \not= \emptyset$}
+		\State $u =$ \Call{EXTRACT-MIN}{$Q$}
+		\State $S = S \cup \{u\}$
+		\ForAll{$v \in G.Adj[u]$}
+			\State \Call{RELAX}{$u,v,w$}
+		\EndFor
+	\EndWhile
+\EndProcedure
+\end{algorithmic}
 
