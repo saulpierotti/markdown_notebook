@@ -1,4 +1,8 @@
-# DNA and RNA dynamics
+---
+title: DNA and RNA dynamics - part 2 doctormariagiuliabacalini
+author: Saul Pierotti
+date: \today
+---
 
 ## Introduction
 * Professor works in human aging

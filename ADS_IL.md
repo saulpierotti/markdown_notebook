@@ -482,7 +482,7 @@ greeedy_knapsack_frac(weights, values, total_weight):
 * Then I relax the edge $(u,v)$ by testing whether I can improve the shortest path to $v$ by passing through $u$
 
 \begin{algorithmic}
-\vspace{1em}
+\Statex
 \Procedure{INITIALIZE-SINGLE-SOURCE}{$G,s$}
 	\ForAll{$v \in G.V$}
 		\State $v.d = \infty$
@@ -490,8 +490,7 @@ greeedy_knapsack_frac(weights, values, total_weight):
 	\EndFor
 	\State $s.d = 0$
 \EndProcedure
-
-\vspace{1em}
+\Statex
 \Procedure{RELAX}{$u,v,w$}
 	\If{$v.d > u.d + w(u,v)$}
 		\State $v.d = u.d + w(u,v)$
@@ -525,7 +524,9 @@ greeedy_knapsack_frac(weights, values, total_weight):
 	* The total running time is $\Theta(V+E)$
 
 \begin{algorithmic}
-\vspace{1em}
+\Statex
+\Require{$v.d \geq 0 \mbox{ } \forall \mbox{ } v \in G.V$}
+\Statex
 \Procedure{DIJKSTRA}{$G, w, s$}
 	\State \Call{INITIALIZE-SINGLE-SOURCE}{$G,s$}
 	\State $S = \emptyset$
