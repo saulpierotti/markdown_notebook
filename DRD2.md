@@ -25,7 +25,7 @@
 * A factor is a categorical variable
 	* It is like a string but without quotes
 	* They can be put in a vector
-	* A list of strings can be converted in a vector of factors with `factor(list)`
+	* A list of strings can be converted in a vector of factors with `as.factor(list)`
 	* The function `levels(vector)` returns the possible categorical values
 * In dataframes all the strings are converted to factors
 	* This is memory effective since a single categorical variable is represented by just one integer irrespective of its lenght!
@@ -39,4 +39,5 @@
 	* A vector is indexed as `v[i]`
 	* A matrix or dataframe as `M[i,j]`
 * Exploratory functions are particularly useful for dataframes
+* Categorical values are ordered alphabetically
 
