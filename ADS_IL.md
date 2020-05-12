@@ -1,11 +1,9 @@
 ---
-title: Algorithms and Data Structures - Ivan Lanese module
-author: Saul Pierotti
 header-includes:
 	\usepackage{algpseudocode}
 ---
 
-# Introduction
+# Algorithms and Data Structures - Ivan Lanese module
 * Our main topic will be data structures (balanced trees, graphs) and algorithms (greedy, dynamic programming)
 * Recursion will be essential for exploring search trees
 
