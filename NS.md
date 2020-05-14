@@ -8,3 +8,4 @@
 * Half of the neurons are in the cerebellum
 * Microglial cells are monocites, with different embriological origin that all the other glial cells
 	* They are the only cells able to pass the BBB
+* Neuron signal speed is related to myelination and fiber diameter
