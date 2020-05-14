@@ -129,7 +129,7 @@
 * An oligo cluster is called as feature in arrays
 * 
 
-## Illumina Beadchip
+## Illumina Beadchip (Infinium)
 * It uses multi-sample arrays
 * The chips contains 3 um pits where beads can be held by VdW interactions
 * Each bead is coated with copies of the same oligo
@@ -150,6 +150,9 @@
 * Infinium probes have as a last nucletide the one that pairs with the methylated site
 * A single-base reation extends the probe using the target sequence
 * Labelled nucleotides are used, so that the occurrence of extension can be seen by fluorescence
+	* A and T are labeled with DNP
+	* C and G are labeled with biotin
+	* In the staining phase A/T is colore redwith anti-DNP-red and C/G green with straptavidin-green
 * Infinium I assay: 1 color
 	* It uses a bead for unmethylated C (U probe) and one for methylated C (M probe)
 	* The U probe ends with A (and thus binds T) at the target site, the M probe ends in G
@@ -157,10 +160,16 @@
 	* The methylation level (beta-value) is evaluated as the the ratio among M intensity and U+M intensity
 		* Usually 100 is added at the denominator to avoid 0/0 cases
 	* The color of the signal is not improtant here, just its intensity
+	* Since the probe is 50 nt, it can span multiple CpG sites
+		* The methilated probe is built with the assumption that all the included sites are methilated (C/G in C of CpG)
+		* The unmethilated probe is built with the assumption that all the included sites are not methilated (A/T in the C of CpG)
+		* This assumption is reasonable in islands but not so much in the open sea
 * Infinium II assay: 2 colors
 	* It uses just one bead per site, with the last position just before the target site
 	* Nucleotides are differently marked for methylated (C, G) and unmethylated (A, T)
 	* The methylation is evaluated in the same way as with Infinum I, but with the instensities coming from different channels of the same bead
+	* It does not make any assumption about the state of other CpGs included in the probe
+		* It uses degenerate R sites that bind both C and T
 * Infinium II is less sensitive and more variable
 * Beta-values tend to cluster around 0 and 1, but have a continuous (heteroscedastic) distribution
 * Another approach is to use M-values: it is the log2 of M/U

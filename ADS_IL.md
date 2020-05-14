@@ -443,7 +443,7 @@ greeedy_knapsack_frac(weights, values, total_weight):
 	* Since I am subtracting the weight from j, it has to be integer!
 * In order to know which objects are in the best solution I need an additional table of booleans $k(i,j)$
 	* A cell is true if object i belongs to the object used for calculating V(i,j), false otehrwise
-	* $k(i,j)=1 \mbox{ if } v(i,j)!=v(i-1,j) \mbox{ else } 0$ 
+	* $k(i,j)=1 \mbox{ if } v(i,j)!=v(i-1,j) \mbox{ else } 0$
 * From matrix k, I start from the bottom right and I procede by subtracting w[i] at each step (I go to k(i,j-w[i]))
 	* The included objects are the ones for which k is true in that position
 * The subset sum problem is a variant of the knapsack in which I request that the sack is completely full
@@ -538,4 +538,3 @@ greeedy_knapsack_frac(weights, values, total_weight):
 	\EndWhile
 \EndProcedure
 \end{algorithmic}
-
