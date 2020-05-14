@@ -169,7 +169,9 @@
 	* Nucleotides are differently marked for methylated (C, G) and unmethylated (A, T)
 	* The methylation is evaluated in the same way as with Infinum I, but with the instensities coming from different channels of the same bead
 	* It does not make any assumption about the state of other CpGs included in the probe
-		* It uses degenerate R sites that bind both C and T
+		* It uses degenerate R sites that bind both G and A
+		* The all or none approach is not possible since the same probe must bind both methylated and unmethilated sites!
+	* Since it uses just 1 bead per site with Infinium II I can include a double number of sites in the array
 * Infinium II is less sensitive and more variable
 * Beta-values tend to cluster around 0 and 1, but have a continuous (heteroscedastic) distribution
 * Another approach is to use M-values: it is the log2 of M/U
