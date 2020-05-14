@@ -515,11 +515,11 @@ greeedy_knapsack_frac(weights, values, total_weight):
 	* The INITIALIZE-SINGLE-SOURCE call is a $\Theta(V)$ operation
 	* The queue is filled once with $V$ elements and since then always emptied
 	* Each iteration of the while loop removes one element from $Q$, so it iterates $V$ times
-		* EXTRACT-MIN is an $=\Theta(1)$ operation, as well as the assignment of $S$
+		* EXTRACT-MIN is an $=O(\log{V})$ operation, as well as the assignment of $S$
 		* The for loop iterates a number of times equal to the lenght of the adjacency set of the current node
-			* The RELAX procedure is also $\Theta(1)$
+			* The RELAX procedure is $\Theta(1)$
 	* In general the number of total iteration of the for loop is the sum of all the adjacency lists, so it is $\Theta(E)$
-	* The total running time is $\Theta(V+E)$
+	* The total running time is $O(V*\log{V}+E)$
 
 \begin{algorithmic}
 \Statex

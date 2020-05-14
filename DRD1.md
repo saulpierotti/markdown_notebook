@@ -114,7 +114,7 @@
 	* There is also an experimental approach that uses DAPI to color the clusters
 * Softwares also separate the image in background and foreground (the actual signal)
 	* The difference of foreground and background intensities is the spot intensity
-* SPot intensities for Cy3 and Cy5 can be use for estimating the overall expression ratio
+* Spot intensities for Cy3 and Cy5 can be use for estimating the overall expression ratio
 
 ## Non competitive arrays
 
