@@ -127,7 +127,11 @@
 	* It is used for in situ synthesis of oligos!
 	* A UV sensitive reaction blocker is selsectively degraded by UV light
 * An oligo cluster is called as feature in arrays
-* 
+* Probes are redundant, in the sense that there are different probes that target different positions of the same mRNA to cross-check and average results
+* Mismatch probes: probes similar to normal probes but with a single base mutated in the middle
+	* They are used to quantify background and non-specific binding and remove it
+	* It is also a control for the actual binding: I expect to have a lower intensity that for the real probe but correlated to it
+* There are also complete 8-mer and 9-mer chips!
 
 ## Illumina Beadchip (Infinium)
 * It uses multi-sample arrays
