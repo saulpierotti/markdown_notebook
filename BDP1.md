@@ -365,3 +365,66 @@
 	* In the terms of service for standard accounts there is no guarantee of continuity, reliability, ecc
 	* In many case cloud services are not completely mature
 
+## Databases
+* Big data are typically stored in relational or non-relational databases
+	* Non-relational databases require little coding skills
+		* They include NoSQL databases like MongoDB
+	* Relational databases are massively parallel systems
+		* They typically require data scientists
+* There is a huge amount of software in the big data ecosystem
+* MapReduce is an algorithm developped by Google for parallel and decentralized processing and generation of big data
+	* It usually uses a distributed filesystem like Hadoop
+* It is based on the Map and Reduce actions
+	* Map: convert a set of data into another, described by key/value tuples
+		* I can take a document and form a dictionary with single words as keys and their count in the document as value
+	* Reduce: aggregate the data from a set of tuples
+		* I take several dictionaries from different documents and count the total word occurrence
+* Apache Hadoop is an open-source software ecosystem for big data analysis and storage
+	* It is designed to scale well from a single server to thousands
+	* It is highly fault tolerant
+	* It is typically run on low-grade hardware, but it is highly reliable because of the software-level failure handling
+	* New nodes can be added quickly without changing configurations
+	* It does not require any schema, it can accept any kind of data
+	* When a node fails the system just redirects the load on the remaining nodes, without halting
+* Hadoop is composed of
+	* Hadoop Common: a series of common utilities that support the other modules
+	* Hadoop Distributed File System (HDFS)
+	* Hadoop YARN: framework for job scheduling and resource management
+	* Hadoop MapReduce: a YARN-bases system for parallel processing based on the MapReduce approach
+	* Hadoop Ozone: object store
+	* Hadoop Submarine: machine learning engine
+* The Hadoop Distributed File System (HDFS) is the core component of the Hadoop ecosystem
+	* It abstracts resources and allows to see the whole HDFS as a single unit
+	* It stores data in the various nodes and mantains metadata
+	* It is composed of 2 core components: NameNode and DataNode
+	* NameNode is the metadata server: high computational requirements but low storage requirements
+	* DataNode: commodity hardware with more storage resources
+	* There is typically only 1 NameNode and many DataNode
+* Writing in an Hadoop cluster requires 2 essential pieces of information to be submitted with the data: block size and replication (number of copies of the block that I want)
+	* Typically a block size of 64 or 128 Mb and a replication of 3 are used
+	* The client sends the request to the NameNode, which returns a sorted list of DataNodes in order of distance from the client
+	* The client sends the data only to the first DataNode
+	* The first DataNode sends to the second and so on for the desired replication level
+	* All the DataNode send a confirmation for finished writing to the NameNode
+	* When all the blocks have been written the NameNode stores the file metadata
+	* The NameNode returns a success message to the client
+* Reading data from an Hadoop cluster
+	* The client request a file to the NameNode
+	* The NameNode returns a list of blocks and of DataNodes having them
+	* The client retrieves the blocks from the respective DataNodes
+* Node failure in Hadoop is handled by the NameNode
+	* The DataNodes every 3 seconds send and HEARTBEAT message to the NameNode, signaling their presence
+	* If the NameNode does not receive the HEARTBEAT from a DataNode (because it is dead or there is a network failure) it considers it dead
+* Network failure handling in Hadoop
+	* Whenever data is sent the receiver returns an ACK message
+	* If the ACK message is not received after several trials the sender assumes the receiver to be dead
+* Corrupted data in Hadoop
+	* Data always include a checksum when it is sent and when it is stored
+	* DataNodes periodically send a BLOCKREPORT to the NameNode, a list of all the blocks in the node
+		* Before sending the BLOCKREPORT a DataNode checks all the block checksums
+		* If a block is corrupted it is not sent to the NameNode, that assumes the missing one to be corrupted
+* The NameNode always mantains 2 essential tables: a list of blocks and a list of DataNodes
+* When a DataNode is dead or assumed dead, it is skept for all transactions both by client and NameNode
+	* If it is so the data will not reach the desired replication, but the NameNode will subsequently instruct the DataNodes to copy data from each other accordingly
+* In order to be as resilient as possible, block replicas are kept at most as 1 per datanode and 2 per server rack, if possible
+	* It is also possible to specify a custom placemnt algorithm
