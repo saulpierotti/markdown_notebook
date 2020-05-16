@@ -242,6 +242,11 @@
 		* This may not be desirable when I want to minimse just 1 kind of error
 
 # Neural Networks
+* Neural Networks (NN) are a family of ML algorithms
+* When possible it is better to avoid NN since they are really expensive
+	* They are expensive in terms of training time and computing resources
+	* They are hard debugging
+	* They lack explainability
 * Some times problems are intrinsically non-polynomial and cannot be solved in a traightforward manner with calssic ML algos
 
 # Feature crosses
@@ -269,13 +274,15 @@
 * It is probably the approach that will lead to the best performances with classic ML
 * There are different ensemble approaches: bagging, boosting, majority voting, stacking
 * Bagging: the learners learn independently and the results are then combined in a defined way
-	* The classification is done with a simple average of the predictions
 	* The single learners use random subsamples of the dataset with replacement for training
+	* The classification is done with a simple average of the predictions
 * Boosting: I use homogeneous learners that improve the work of each other
 	* The output of 1 model is the input of the next one
 	* A weak learner uses a random subsample with replacement of the dataset, with features weighted on the weights of the previous learners
 	* The classification is a weighted average of the predictions
-* Majority voting: 
+	* Each learner tries to mitigate the errors of the previous ones
+* Majority voting: similar to bagging but each learner uses the entire training set
+	* The classification is done with simple statistics (es. average)
 * Stacking: an advanced kind of voting that is difficult to implement with sklearn
 	* Heterogeneous weak learners are trained independently
 	* I create a meta-model that combines the predictions of the various models
