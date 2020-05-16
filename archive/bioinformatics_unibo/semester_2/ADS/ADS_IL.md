@@ -1,9 +1,14 @@
+% Algorithms and Data Structures - Ivan Lanese module
+% Saul Pierotti
+% \today
+
+
 ---
 header-includes:
 	\usepackage{algpseudocode}
 ---
 
-# Algorithms and Data Structures - Ivan Lanese module
+# Introduction
 * Our main topic will be data structures (balanced trees, graphs) and algorithms (greedy, dynamic programming)
 * Recursion will be essential for exploring search trees
 
@@ -34,7 +39,7 @@ def fib(n):
 fib(100)
 ```
 
-## Balanced search trees
+# Balanced search trees
 * A balanced tree is a bynary search tree (BST) that minimizes the height of the tree
 	* In a BST the left subtree contains elements smaller than the root, the right subtree bigger
 	* The BST property is useful for lookups and must be mantained by insertions and deletions
@@ -45,13 +50,13 @@ fib(100)
 	* A way to create a generally balanced tree is to randomly permutate the input data when constructing the tree
 * Modifications of BST have been developped for maintaining it as balanced as possible
 
-## AVL trees
+# AVL trees
 * AVL trees are almost balanced BST that support `insert()`, `delete()` and `lookup()` in $O(\log{n})$ time
 * AVL introduce a balancing factor for each node $\beta(n)$
 	* It is the difference in the height of the 2 subtrees of the node
 	* A tree is balanced if for each node $|\beta|$ is less than 1
 
-### Proof that for AVL $h=O(\log{n})$
+## Proof that for AVL $h=O(\log{n})$
 * The most unbalanced AVL (and therefore the longest one) is a fibonacci tree
 	* It puts everything on one side but it leaves on the other side only what is needed to make it AVL
 	* It is defined as a BST of height $h$ having a left subtree of heigh $h-1$ and a right subtree of heigh $h-2$
@@ -69,7 +74,7 @@ fib(100)
 		* $h=\Theta(\log{n_h})$
 * Since the height of the longest AVL tree is $\Theta(\log{n})$, the heigh of an AVL tree is $O(n)$
 
-### Operations in AVL trees
+## Operations in AVL trees
 * `search()` is the same as in a generic BST, since it does not modify the AVL property
 * `insert()` and `delete()` have to be modified so to maintain the AVL property
 * The AVL property is maintained through an operation called rotation
@@ -83,25 +88,25 @@ fib(100)
 * The LR case cannot be resolved with a single rotation
 	* I need 2 rotations, one to the left and one to the right
 
-### AVL insertion
+## AVL insertion
 * I insert a new value like in a normal BST
 * I recalculate $\beta$ for all nodes that contain the leaf
 	* In the worst case I need to calculate it for one node for each leavel from the leaf to the root, so it is $O(h)=O(\log{n})$
 * If at least 1 node has $|\beta| > 1$ I need to rebalance the tree with rotations from bottom to top, in $O(1)$
 * In total, an insertion in an AVL tree takes $O(\log{n})$
 
-### AVL deletion
+## AVL deletion
 * I remove like in a normal BST
 * I rebalance like for the insertion
 
 All the basic operations in AVL take $O(\log{n})$
 
-## Working on disk
+# Working on disk
 * Big data structures cannot be kept in memory but need to be partially loaded in memory from disk, when needed
 * Computational time is heavily dependent on the number of r/w operations into disk, since it is much slower than memory
 * There are data structures that minimize disk access
 
-## 2-3 trees
+# 2-3 trees
 * It is a tree in which all nodes have 2 or 3 children and all the leaves are at the same distance from the root
 * Keys and satellite data are stored in the leaves
 * Leaves are sorted in ascending order from left to right
@@ -140,7 +145,7 @@ The following searches a 2-3 tree in $O(\log{n})$ time
 \EndProcedure
 \end{algorithmic}
 
-### Insertion in 2-3 trees
+## Insertion in 2-3 trees
 * I create al leaf `v` with key `k`
 * I search for a node `u` at the penultimate level, that will become father of `v`
 * If possible I add `v` as a child of `u`
@@ -149,7 +154,7 @@ The following searches a 2-3 tree in $O(\log{n})$ time
 * In the worst case I do $O(\log{n})$ splits back until the root
 * The overall insertion cost is $O(\log{n})$
 
-### Deletion in 2-3 trees
+## Deletion in 2-3 trees
 * I search for a leaf `v` with key `k` to be deleted in $O(\log{n})$
 	* I detach it from its father `u`
 * If `u` had 2 children now it violates the 2-3 property, so I need to merge it with a neighbor
@@ -162,7 +167,7 @@ The following searches a 2-3 tree in $O(\log{n})$ time
 * In the worst case I do $O(\log{n})$ splits back until the root
 * The overall insertion cost is $O(\log{n})$
 
-## Exercise on recursion
+# Exercise on recursion
 Write a recursive function that computes the height of a node
 ```python
 def h(node):
@@ -173,7 +178,7 @@ def h(node):
 ```
 Computing the height of a node recursively has complexity O(n)
 
-## B-trees
+# B-trees
 * They are similar to 2-3 trees but used for even larger amounts of data, when also the keys are too many to be kept in memory
 * B-trees are used for indexing large storages with slow access
 	* They are used by many databases
@@ -191,7 +196,7 @@ Computing the height of a node recursively has complexity O(n)
 	* The keys stored in the first subtree are smaller than the first key of the node, the ones in the second subtree are between the first and the second key, and so on
 * The heigh of a B-tree with n keys is $h \leq \log_t{(n+1)/2}$
 
-### Search in B-trees
+## Search in B-trees
 * I check keys in the current node
 * If I don't find it I search it in the correct subtree
 * I visit $O(\log_t{n})$ nodes and each time I have a cost of $O(t)$, so the total cost is $O(t\log_t{n})$
@@ -217,7 +222,7 @@ Computing the height of a node recursively has complexity O(n)
 	* Binary search takes $O(\log{n})$
 	* In this case the total complexity will be $O(\log{t}\log_t{n})=O(\log{n})$
 
-### Insert in B-trees
+## Insert in B-trees
 * I search the leaf $f$ in which I can insert the key $k$
 * If the leaf is not full (less than 2t-1 keys) I insert $k$ in the correct position
 * If it is full I split the leaf $f$
@@ -227,7 +232,7 @@ Computing the height of a node recursively has complexity O(n)
 * I cannot use binary search in this case since I cannot split an array in that way, I need to copy half of its elements in $O(t)$
 * Total cost is $O(t \log_t{n})$
 
-### Delete in B-trees
+## Delete in B-trees
 * I want to delete key $k$
 * I first search it
 * If it is not in a leaf
@@ -240,7 +245,7 @@ Computing the height of a node recursively has complexity O(n)
 		* If not I make a fusion with one of the brothers
 * It has the same complexity of insertion, $O(t \log_t{n})$
 
-## Graphs
+# Graphs
 * A graph is composed of a set of vertices and edges, $G=(V, E)$
 * An edge $e=(u,v)$ is a pair of vertices
 * The number of edges $E$ can at most be $V^2$
@@ -263,7 +268,7 @@ Computing the height of a node recursively has complexity O(n)
 	* `DelEdge(G,v1,v2)`
 	* `AdjSet(G,v)` (return the set of adjacent vertices of $v$)
 
-### Representations
+## Representations
 * I can represent a graph with an adjacency matrix of dimensions $V^2$ with $V$ being the number of nodes
 	* It is preferred when I need to quickly get information about gthe connectivity if 2 specific nodes, or when the graph is dense (a lot of edges)
 	* The space requires is $O(V^2)$
@@ -281,11 +286,11 @@ Computing the height of a node recursively has complexity O(n)
 	* I can use the node vector to parse correctly the edge vector
 	* The space is $\Theta(E+V)$
 
-### Graph trasversal
+## Graph trasversal
 * It refers to the problem of visiting all the vertices of a graph
 * The 2 most used graph trasversal algorithms are BFS and DFS
 
-#### Breath-first search (BFS)
+### Breath-first search (BFS)
 * I first explore closer vertices, and then far ones, starting from vertix $s$
 * At the beginning all the verteces are undiscovered (sometimes said WHITE)
 * I start from vertex s, I put it in the queue Q and I mark it as discovered
@@ -323,7 +328,7 @@ def BFS(G, s):
 	* For computing the adjacency set I need to scan the respective row of the matrix, so $O(V)$
 	* I need to do this for all the V verteces so the toal complexity is $O(V^2)$
 
-#### Depth-first search (DFS)
+### Depth-first search (DFS)
 * I visit recursively all the unexplored neighbors of the current node
 * At the end I backtrack to the original node
 
@@ -336,7 +341,7 @@ def DFS(G, u):
 ```
 * The time complexity is $O(E+V)$ with an adjacency list and $O(V^2)$ with an adjacency matrix for the same considerations made in BFS
 
-### Topological sort
+## Topological sort
 * A dependency graph shows casual dependencies between tasks
 * I can arrange a series of tasks in a directed acyclic graph (DAG)
 * A topological sort of a DAG $G=(V,E)$ is a linear ordering of its vertices such that if there is an edge $(u,v)$ then u appears before v in the ordering
@@ -361,13 +366,13 @@ topoDFS(G, u, L):
 	addInFront(L,u) # u is added to L only after all the recursive calls have finished
 ```
 
-## Greedy algorithms
+# Greedy algorithms
 * It always makes the locally optimal choice
 * It is not guaranteed to give a globally optimal solution
 * It is normally easy to code
 * A problem has optimal substructure if the solution contains the solution of its subproblems
 
-### Knapsack problem
+## Knapsack problem
 * A thief can carry only a certain weight and he wants to maximise the value
 * In the 0-1 formulation, only integer items can be taken (no half items)
 	* It cannot be solved with a greedy approach, but it requires dynamic programming
@@ -395,7 +400,7 @@ greeedy_knapsack_frac(weights, values, total_weight):
 	return taken_index, taken weight
 ```
 
-### Huffman Codes
+## Huffman Codes
 * If we assume that our alphabet has 26 letters, I need to use 5 bits for each letter (32 possible combinations) to represent it
 * If I just assign a code to each letter, my message takes $n*5$ bits with n the number of letters in it
 * Since letters have different frequency, I can exploit this and give shorter codes to the most frequent letters
@@ -413,7 +418,7 @@ greeedy_knapsack_frac(weights, values, total_weight):
 * They can save 20% to 90% of space compared to a fixed lenght code!
 * An Huffman code is a prefix code: no codeword is part of the prefix of another
 
-## Dynamic programming
+# Dynamic programming
 * It was developped in 1950 by Bellman
 * It is similar to divide et impera, but it stores the solution of subproblems (it has memoization)
 * It requires the problem to have optimal substructure
@@ -422,7 +427,7 @@ greeedy_knapsack_frac(weights, values, total_weight):
 	* The recursive implementation is also called top-down and the iterative bottom-up
 	* The iterative version has usually smaller constant factor because I avoid the many function calls
 
-### Knapsack problem
+## Knapsack problem
 * For the 0-1 knapsack problem, I can try to find the optimal solution for a subset of the objects
 * I want to find the solution V of i objects with total weight less than the capacity of the sack j that maximises the value
 	* $V(i,j)$ is the maximum value that can be obtained with the first i objects in a sack of capacity j
@@ -448,7 +453,7 @@ greeedy_knapsack_frac(weights, values, total_weight):
 	* The included objects are the ones for which k is true in that position
 * The subset sum problem is a variant of the knapsack in which I request that the sack is completely full
 
-## Shortest Path
+# Shortest Path
 * Given a weighted graph $G=(V,E)$ which each edge having an associated cost $w(x,y)$, the cost of path $\pi=(v_0,v_1,...,v_k)$ that connects node $v_0$ with node $v_k$ is the sum of the weights of each edge
 	* $w(\pi)=\sum_{i=1}^k w(v_{i-1}, v_i)$
 * The shortest path $\pi^*$ is the one with the minimal cost
@@ -469,7 +474,7 @@ greeedy_knapsack_frac(weights, values, total_weight):
 	* I can safely assume that in a graph with $V$ nodes, if a shortest path exists it has at most $V-1$ edges
 		* If there are no cycles I can at most visit $V$ nodes, and they will be connected by $V-1$ edges
 
-### Relaxation
+## Relaxation
 * It is a technique used by various shortest-path algorithms
 * For each vertex $v \in V$ I maintain an attribute $v.d$ which is an upper bound for the shortest path from the source $s$ to $v$
 	* $v.d$ is a shortest path estimate
@@ -497,7 +502,7 @@ greeedy_knapsack_frac(weights, values, total_weight):
 \EndProcedure
 \end{algorithmic}
 
-### Dijkstra Algrithm
+## Dijkstra Algrithm
 * It computes the shortest path from a single source provided that there are no negative edges
 	* It is a greedy algorithm
 	* The similar Bellman-Ford algorithm solves the problem also for negative edges but it is slower and it is based on dynamic programming

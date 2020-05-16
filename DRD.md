@@ -1,6 +1,8 @@
-# DNA and RNA dynamics - part 1
+% DNA and RNA dynamics
+% Saul Pierotti
+% \today
 
-## Introduction
+# Introduction
 * Professor works in human aging
 * Module 1 has a written test, module 2 a report (of course)
 * Final score is 20 (module 1) + 10 (module 2)
@@ -55,7 +57,7 @@
 	* Interquartile range (IQR) is Q3-Q1
 	* Outliers outside of the lines are shown
 
-## Microarrays
+# Microarrays
 * Tiling arrays cover an entire genome
 * I can also have protein arrays
 * For transcriptomics and DNA metilation I can use competitive or non competitive arrays
@@ -64,7 +66,7 @@
 	* DNA can be synthesized directly on the chip (GeneChip)
 	* Oligos can be separately synthesized and loaded on beads, which are then immobilised on the chip (beadChips)
 
-### Competitive microarrays
+## Competitive microarrays
 * They use 2 colors in the same chip
 * Invented 20 years ago at Stanford
 * Chip surface coated with aminosilane for binding oligos
@@ -116,9 +118,9 @@
 	* The difference of foreground and background intensities is the spot intensity
 * Spot intensities for Cy3 and Cy5 can be use for estimating the overall expression ratio
 
-## Non competitive arrays
+# Non competitive arrays
 
-### Affimetrix Genechip
+## Affimetrix Genechip
 * Affimetrix Genechips is a closed platform (only usable with reagents and instruments supplied by them)
 * The new form of this kind of chips is called Next generation arrays
 * The chemistry was invented in 1991 by Stephen Fodor
@@ -187,3 +189,45 @@
 	* This also reduced variance of Infinium II
 * Cytosine methylation can also be studied by bisulphite-WGS (WGBS) or methylated DNA immunoprecipitation (MeDIP)
 	* It uses 5mC-specific antibodies
+
+# Practical part - doctormaragiuliabacalini
+* We will prepare a report (:/)
+* We will use mainly R
+* The CRAN repository has general statistics packages
+* Bioconductor is a repository for bioinformatics R packages
+* Contributed packages are not always reliable!
+
+## Workspaces, objects, syntax
+* Comments are rendered with `#`
+* Spaces are ignored except that in variable and function names
+* The R workspace contains
+* An R object is a variable
+	* It cannot contain special characters except for underscore and dot
+	* It needs to start with a letter
+	* It can be a good idea to always start variables with capital, so to not mix them up with function
+	* Objects are assigned with the assignment operator `<-` or `=`
+	* In R the operator `<-` is preferred since `=` can be mistaken by `==`
+* Data types can be symple or aggregated
+* Simple: integer, float, string, boolean, factors, NA (missing data)
+* Aggregated: vector (made of numbers or factors), list (made of any datatype), matrix (2 dimensional and numerical), dataframe (2 dimensional and of any type)
+* Even a number is actually a vector of lenght 1
+* In dataframes columns and rows have names
+* A factor is a categorical variable
+	* It is like a string but without quotes
+	* They can be put in a vector
+	* A list of strings can be converted in a vector of factors with `as.factor(list)`
+	* The function `levels(vector)` returns the possible categorical values
+* In dataframes all the strings are converted to factors
+	* This is memory effective since a single categorical variable is represented by just one integer irrespective of its lenght!
+* Logical operators
+	* Not x `!x`
+	* Or `|`
+	* And `&`
+	* `isTRUE(x)` returns True if the expression x is true
+	* `x %in% y` returns true if x is a subset of y
+* Indeces
+	* A vector is indexed as `v[i]`
+	* A matrix or dataframe as `M[i,j]`
+* Exploratory functions are particularly useful for dataframes
+* Categorical values are ordered alphabetically
+
