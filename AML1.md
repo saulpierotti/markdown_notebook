@@ -223,6 +223,8 @@
 	* It penalizes unbalances between the 2
 	* If $P=0$ or $R=0 \to F1=0$
 	* If $P=R=1 \to F1=1$
+* The F2 score is similar to the F1 score but with different weights
+	* $F2 = \frac{5*P*R}{4(P+R)}$
 * The ROC curve is a plot of true positive rate (recall) vs false positive rate
 	* It is note dependent on a specific threshold
 	* $TPR=R=\frac{tp}{tp+fn}$
@@ -244,7 +246,22 @@
 
 # Feature crosses
 * In many cases NN are useful, but costly in terms of resources and readability
+	* When dealing with a lot of data linear learners, if possible, are a better choice
 * I can try to attack a complex non-linear problem with feature crosses instead, using standard ML algos
+* In general I can take n features $x_1, x_2, ..., x_n$ and combine them in a new feature $x_a$
+	* In this way I can encode non-linearity in the new feature, which will be hopefully linear with the hypothesis!
+	* This is transparent for the ML algo, that treats $x_a$ just as another linear feature!
+* 1-hot feature vectors: I can have a feature which is actually a vector containing a 1 and all 0s
+	* It can encode any kind of information, like class belonging, a binned value, ...
+	* Binned value: I can subdivide a value range in bins and assign a number in the vecotrs to each of them
+		* All the values will be 0 except the one where my sample belongs, which will be 1
+* Feature crosses are usually done on 1-hot vectors
+	* The result is essentially a logical conjunction
+	* If I cross 2 5-class vectors I get a 25-class 1-hot vector encoding the combination of the original vectors
+	* There is a possible resulting vector status for each possible combination of the original features
+* Take away message: if you don't have millions of features probably you don't need a NN
+* However, NN are more flexible and can be applied to many cases
+* The Google AI playground is a nice visual tool for understanding feature crosses and neural networks
 
 # Infos for the exam
 * For the basic part only scikit learn can be used
