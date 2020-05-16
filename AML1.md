@@ -190,8 +190,19 @@
 * $J_{train}$ is small when the set is small and then increases and reaches a plateau when $m \to \infty$
 * $J_{cv}$ is high when the set is small and then decreases and reaches a plateau when $m \to \infty$
 * The larger $m$, the closer $J_{train}$ and $J_{cv}$ are
+* If $J_{train}$ and $J_{cv}$ are similar I can be in high bias
+	* In this case increasing the sample size is not likely to help
 * If $J_{train}$ is low but $J_{cv}$ is high (few training samples) I can be in high bias
-	* In this case increasing the sample size is likely to help
+	* In this case increasing the sample size will help
+
+# Classification metrics
+* In a classification problem I can define a confusion matrix
+	* It has the predicted classes as rows and the actual classes as columns
+	* In a 2-class positive/negative scenario $cm = \begin{bmatrix}tp & fp \\ fn & tn\end{bmatrix}$
+* Accuracy: general acceptable as a metric but it fails with skewed classes
+	* $ACC = \frac{\mbox{\# of correct predictions}}{\mbox{\# of samples}}$
+* Precision: fraction of the positives that are actually positives
+	* $\mbox{PRECISION} = \frac{\mbox{\# correctly predicted positives}{\mbox{\# total real positives}}$
 
 # Infos for the exam
 * For the basic part only scikit learn can be used
