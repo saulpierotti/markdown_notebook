@@ -263,6 +263,27 @@
 * However, NN are more flexible and can be applied to many cases
 * The Google AI playground is a nice visual tool for understanding feature crosses and neural networks
 
+# Ensemble learning
+* It means combining the predictions of many different algos
+* It is one of the most used approach in real ML
+* It is probably the approach that will lead to the best performances with classic ML
+* There are different ensemble approaches: bagging, boosting, majority voting, stacking
+* Bagging: the learners learn independently and the results are then combined in a defined way
+	* The classification is done with a simple average of the predictions
+	* The single learners use random subsamples of the dataset with replacement for training
+* Boosting: I use homogeneous learners that improve the work of each other
+	* The output of 1 model is the input of the next one
+	* A weak learner uses a random subsample with replacement of the dataset, with features weighted on the weights of the previous learners
+	* The classification is a weighted average of the predictions
+* Majority voting: 
+* Stacking: an advanced kind of voting that is difficult to implement with sklearn
+	* Heterogeneous weak learners are trained independently
+	* I create a meta-model that combines the predictions of the various models
+* If I have many weak learners with high variance and low bias, bagging is the best choice
+	* Bagging fights the variance
+* If I have many weak learners with high bias and low variance, boosting is the best choice
+	* Boosting can fight both variance and bias
+
 # Infos for the exam
 * For the basic part only scikit learn can be used
 * For the advanced part Keras and Tensorflow
