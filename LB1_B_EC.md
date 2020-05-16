@@ -695,5 +695,19 @@
 * Thermodynamics: $\Delta G$ of folding is -5/-15 kcal/mol 
 	* It is less than the energy of a covalent bond!
 	* More or less the energy of a salt bridge
-* DSSP: obtain $\phy$ and $\psi$ angles from a structure and solvent accessibility
+* The alpha-helix is right handed, with $\phi-60$° and $\psi=-50$°
+	* Side chains are projected backwards and outwards
+	* The pitch of the helix is $5.4 \AA$
+	* There are 3.65 residues per turn
+	* The core is tightly packed
+	* The N-H of one aminoacid forms an H nond with the C=O of 4 residues earlier
+	* The H bonding pattern gives to the helix a dipole moment
+* The beta-strand has $\phi=140$° and $\psi=-130$°
+	* The side chains project alternating above and below the strand
+	* The conformation is more extended than in helices
+	* Beta-strands can form parallel or anti-parallel beta-sheets
+	* Parallel beta-sheets are less stable than the anti-parallel ones
+* DSSP: obtain $\phi$ and $\psi$ angles from a structure and solvent accessibility
 	* It is both available as a web server and as a package
+	* For each residue in a PDB structure it calculates the dihedral angles and the solvent accessibility
+		* From these pieces of information I can determine the secondary structure using the Ramachandran plot
