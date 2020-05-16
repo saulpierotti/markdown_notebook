@@ -372,6 +372,8 @@
 	* Relational databases are massively parallel systems
 		* They typically require data scientists
 * There is a huge amount of software in the big data ecosystem
+
+### MapReduce
 * MapReduce is an algorithm developped by Google for parallel and decentralized processing and generation of big data
 	* It usually uses a distributed filesystem like Hadoop
 * It is based on the Map and Reduce actions
@@ -379,6 +381,8 @@
 		* I can take a document and form a dictionary with single words as keys and their count in the document as value
 	* Reduce: aggregate the data from a set of tuples
 		* I take several dictionaries from different documents and count the total word occurrence
+
+### Hadoop
 * Apache Hadoop is an open-source software ecosystem for big data analysis and storage
 	* It is designed to scale well from a single server to thousands
 	* It is highly fault tolerant
@@ -428,3 +432,39 @@
 	* If it is so the data will not reach the desired replication, but the NameNode will subsequently instruct the DataNodes to copy data from each other accordingly
 * In order to be as resilient as possible, block replicas are kept at most as 1 per datanode and 2 per server rack, if possible
 	* It is also possible to specify a custom placemnt algorithm
+* YARN performs allocates resources and schedules jobs in the Hadoop cluster
+* It is composed of 2 major components: ResourceManager and NodeManager
+* The ResourceManager is the central node of the cluster
+	* It receives requests and dispatches them to the relevant NodeManagers
+* The NodeManagers are installed onto each DataNode and manages task execution of that node
+* ApplicationManagers accept job submission and forwards them to the respective ApplicationMaster on the DataNode
+* Hadoop MapReduce is the core processing component of the ecosystem
+	* It is a software framework for writing applications that process large datasets using distributed and parallel algorithms in an Hadoop environment
+
+### SQL
+* It is a relational DBMS based on tables
+* It works with a specific schema
+* It uses the powerfull SQL query language
+* Implementations are MySQL, Oracle, Sqlite, Postgres
+* It is typically commercially supported
+* It focuses mostly on consistency: the database of a bank
+	* We can say that it focuses on the ACID properties: atomicity, consistency, isolation, durability
+* Scalability is vertical
+
+### NoSQL
+* In is non-relational and document-based
+* It can consist in key-value pairs, graphs, wide-columns
+* The schema is flexible and it can also host unstructured data
+* Scalability is horizontal: I can just increase the number of servers in the pool
+* It uses the non-standard UnQL query language (unstructured query)
+* Implementations are MongoDB, Cassandra
+* It is typically supported by the community
+* It focuses on availability: it does everything possible to remain operational also in case of errors
+* Consistency is eventual: it is not guaranteed at the end of each transaction but eventually it is restored when there is time available for the operation
+* Apache Cassandra is open-source, distributed
+	* There is no central node, so no single point of failure
+	* It works with wide-columns
+	* It was initially developped at Facebook
+	* It supports Hadoop integration and MapReduce
+	* It uses the novel query language CQL
+* Apache Kafka is a distributed streaming platform
