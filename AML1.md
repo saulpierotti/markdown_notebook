@@ -190,6 +190,8 @@
 * $J_{train}$ is small when the set is small and then increases and reaches a plateau when $m \to \infty$
 * $J_{cv}$ is high when the set is small and then decreases and reaches a plateau when $m \to \infty$
 * The larger $m$, the closer $J_{train}$ and $J_{cv}$ are
+* If $J_{train}$ is low but $J_{cv}$ is high (few training samples) I can be in high bias
+	* In this case increasing the sample size is likely to help
 
 # Infos for the exam
 * For the basic part only scikit learn can be used
