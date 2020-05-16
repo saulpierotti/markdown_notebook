@@ -200,9 +200,51 @@
 	* It has the predicted classes as rows and the actual classes as columns
 	* In a 2-class positive/negative scenario $cm = \begin{bmatrix}tp & fp \\ fn & tn\end{bmatrix}$
 * Accuracy: general acceptable as a metric but it fails with skewed classes
-	* $ACC = \frac{\mbox{\# of correct predictions}}{\mbox{\# of samples}}$
-* Precision: fraction of the positives that are actually positives
-	* $\mbox{PRECISION} = \frac{\mbox{\# correctly predicted positives}{\mbox{\# total real positives}}$
+	* $ACC = \frac{tp+tn}{tp+fp+fn+tn}$
+* Precision: fraction of the predicted positives that are actually positives
+	* $P = \frac{tp}{tp+fp}$
+	* It is the ability of not labeling as negative a positive sample
+* Recall: fraction of the true positives that were predicted as positives
+	* $R = \frac{tp}{tp+fn}$
+	* It is the ability to find all the positve samples
+* Precision and recall are resistant to skewed classes: if $tp = 0 \to P=R=0$
+* Usually it is used the convention of assigning the label 1 to the rarest class in a binary classification
+	* Precision and recall are evaluated on the rare class (the positives are the rare class)
+* In most cases we have a tradeoff between precision and recall
+* In some setting I may want to not miss any true positive at the cost of labeling as positive a lot of negatives
+	* This can be the case for identifying cancer: I want all the cancer patients to be identified and tested, even if I will mislabel some healty patient that will be tested without need
+	* I want high recall at the cost of low precision
+* I can plot a PR curve with recall on the x axis and precision on the y axis
+	* The curve goes from $x=0 \to y=1$ to $x=1 \to y=0$
+* I can want a single metric that evaluated my algo by combining precision and recall
+	* The average of precision and recall is not a good metric
+* F1 score: a weighted armonic mean of precision and recall
+	* $F1 = 2*\frac{P*R}{P+R}$
+	* It penalizes unbalances between the 2
+	* If $P=0$ or $R=0 \to F1=0$
+	* If $P=R=1 \to F1=1$
+* The ROC curve is a plot of true positive rate (recall) vs false positive rate
+	* It is note dependent on a specific threshold
+	* $TPR=R=\frac{tp}{tp+fn}$
+	* $FPR=R=\frac{fp}{fp+tn}$
+	* The ROC curve could be evaluated by testing the model with many different thresholds, but it would be inefficient
+	* There is a sorting-based algortihm, AUC that can compute the ROC curve
+	* AUC measures the 2d area under the ROC curve
+	* A perfect classifier has $AUC=1$, a random classifier $AUC=0.5$
+	* AUC can be interpreted as the probability that the model will rank a random positive sample higher than a random negative sample
+	* AUC is threshold invariant and scale-invariant
+	* Scale invariance: it measures how well predictions are ranked, not their absolute values
+		* This could be desirable or not depending on context
+		* If I want a precise probability output from my model instead of a discrete binary classification, this is not good
+	* Threshold invariance: it is a single metric for every threshold
+		* This may not be desirable when I want to minimse just 1 kind of error
+
+# Neural Networks
+* Some times problems are intrinsically non-polynomial and cannot be solved in a traightforward manner with calssic ML algos
+
+# Feature crosses
+* In many cases NN are useful, but costly in terms of resources and readability
+* I can try to attack a complex non-linear problem with feature crosses instead, using standard ML algos
 
 # Infos for the exam
 * For the basic part only scikit learn can be used
