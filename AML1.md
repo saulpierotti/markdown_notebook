@@ -1,4 +1,4 @@
-% Applied Machine Learning
+% Applied Machine Learning 1
 % Saul Pierotti
 % \today
 
@@ -243,6 +243,13 @@
 
 # Neural Networks
 * Neural Networks (NN) are a family of ML algorithms
+	* They are an actually old idea, widely used in 1980's and 1990's
+	* They became less popular after 1990
+	* They had a resurrection when more computing resources became available, together with big data and better algos
+	* Another factor for theur reapperance is the availability of cloud computing resources, which democratized the access to computing power
+* NN are used when we need to learn heavily non-linear patterns
+	* In image recognition each pixel is 3 1-hot feature vectors with 255 levels each!
+	* It is practically impossible to train a classic ML model on this amount of feature in reasonable time
 * When possible it is better to avoid NN since they are really expensive
 	* They are expensive in terms of training time and computing resources
 	* They are hard debugging
