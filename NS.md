@@ -70,6 +70,18 @@
 * The duration of the input signal determines the number of action potentials, while the strenght of the signal determines their frequency
 * The pattern of action potentials determines the amount of neurotrasmitter released
 * Some interneurons do not generate action potentials: they are small ans signals spread passively
+* In some invertebrates a complex behaviour is initiated by a single cell firing, while in vertebrates it is likely that groups of neurons govern some behaviour
+* There is widespread parallel signaling and processing in neuronal pathways
+* Feedback circuits allow the brain to function also in the absence of sensory input
+* Synaptic terminals show functional plasticity
+	* There are short-term adaptations that last seconds to hours
+	* Long-term adaptations involve anatomical alterations
+* The circadian rithm is reset by light but persists also in the absence of stimuli
+	* It governs sleep and other behavioural patterns
+* In flies the $per$ (period) gene is essential for the circadian rithm
+	* Some mutants do not have any rithm, some have a longer duration of the period and some have a shorter duration
+	* There are no other effects on phenotype besides rithm changes in $per$ mutants
+	* The PER protein is a trascription factor 
 
 
 * Most of the neuronal disease are sporadic and not genetic
