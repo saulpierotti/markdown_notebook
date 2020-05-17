@@ -54,6 +54,22 @@
 	* They release neuron growth factors
 * The resting potential of neurons is around -65 mV (-40 to -80 mV)
 	* In muscle cells it is greater, around -90 mV
+* The action potential reaches +40 mV, mostly because of $Na^+$ influx
+	* It lasts for about 1 ms
+* In addition to long-range action potentials neurons experience local receptor potentials and synaptic potentials, which are not propagated
+* There can also be long-range hyperpolarizations
+* Receptor potentials and synaptic potentials are graded, not all or none like action potentials
+	* An example is a stretch-sensitive sensory neuron in a muscle that opens $Na^+$ channels when its membrane is stretched
+		* The $Na^+$ influx causes an excitatory receptor potential
+	* Receptor potentials are usually excitatory but there are inhibitory receptor potentials in the retina
+	* These potential travel at most for 1-2 mm since they are passive
+	* If a receptor potential is able to reach the first Ranvier node, it generates an action potential
+* The trigger zone of the axon has the highest concentration of voltage-gated $Na^+$
+* Information is coded in the number of action potentials and in the time interval between them
+	* The waveform of an action potential is highly stereotyped
+* The duration of the input signal determines the number of action potentials, while the strenght of the signal determines their frequency
+* The pattern of action potentials determines the amount of neurotrasmitter released
+* Some interneurons do not generate action potentials: they are small ans signals spread passively
 
 
 * Most of the neuronal disease are sporadic and not genetic
