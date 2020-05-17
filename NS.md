@@ -29,6 +29,7 @@
 * The organization of brain areas for language is not complete until 7-8 years old
 	* A child with left hemisphere damage can develop normal language but at the cost of other abilities like spatial reasoning
 * The 2 hemispheres seem to have each its own consiuosness that became evident in split brains
+* Neuron action potentials travel at 1 to 100 m/s
 * The information conveyed by an action potential is determined not by the form of the signal but by the pathway the signal travels in the brain
 * Unipolar neurons are the most frequent in invertebrate while in vertebrates they form the autonomous nervous system
 	* They have a single main process that gives rise to axon and dendrites
@@ -43,7 +44,17 @@
 * In the human brain 80% of the cells are macroglia, half of them oligodendrocytes and half astrocytes
 * Schwann cells and oligodendrocytes for the myelin sheet in the PNS and CNS
 * Schwann cells surround a single neuron while oligodendrocytes surround 1 to 30 axons
-* Node of Ranvier: where ion channels are
+* Node of Ranvier are the gaps between Schwann cells or oligodendrocytes
+	* Ion channels are concentrated here
+* There are protoplasmic astrocytes in the grey matter and fibrous astrocytes in the white matter
+* Astrocytes are not essential for signal processing but support neurons
+	* They insulate nearby cells
+	* They take up excess $K^+$ released by neurons when they fire
+	* They clean-up neurotransmitters after release from the synaptic cleft
+	* They release neuron growth factors
+* The resting potential of neurons is around -65 mV (-40 to -80 mV)
+	* In muscle cells it is greater, around -90 mV
+
 
 * Most of the neuronal disease are sporadic and not genetic
 * It is difficult to develop an animal model for a sporadic disease
