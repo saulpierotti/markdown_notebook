@@ -130,6 +130,27 @@
 	* In its ventral part it contains the pontine nucleai, which relay information to the cerebellum
 	* The dorsal portion contains centers that govern respiration, taste and sleep
 * The midbrain is rostral to the pons and it connects cerebellum, basal ganglia and cerebral emispheres
+	* The substantia nigra provides is importantfor volontary movement
+* There are 12 cranial nerves, that originate from the brain stem and are functionally analogous to the spinal nerves
+* The brain stem is the point of entry for all the specialised senses (sight, hearing, balance, taste)
+* Specialised neurons in the brain stem mediate parasympathetic refelxes
+* A diffuse network in the brain stem, the reticular formation, is involved in arousal and receives most of the sensory input
+* The cerebellum is involved in balance and fine motor output
+* Half of the neurons of the brain are in the cerebellum, but its structure is quite well understood since it has few types of neurons
+	* It receives somatic sensations from the spinal cord, balance from the the vestibular organs, and motor and sensory information from the cerebral cortex via  the pontine nuclei
+* The dienacephalon is composed of thalamus and hypothalamus
+* The thalamus collects information from all the sensory organs (except olfactory receptors) and relays them to the cerebral emispheres
+	* It is not a simple realy, but it also filters information
+	* It also connects the cerebellum and basal ganglia with regions of the cortex involved in movement and cognition
+	* Like the reticular formation, it is involved in alertness and consciousness
+* The hypothalamus is ventral to the thalamus and regulates homeostasys and reproductive behaviors
+	* It is connected to the pituitary gland
+	* It connects with practically every region of the brain and it is essential in reward and aversion
+	* The superchiasmatic nucleus regulates the circadian rithm
+* The cerebral emispheres consist of the cortex, the underlying white matter, the basal ganglia, the amygdala, and hyppocampus
+* The 2 emispheres are connected by the corpus callosum
+* The amygdala regulates emotions, the hyppocampus memory formation, and the basal ganglia with the control of movement and motor learning
+
 
 # From lecture
 * Most of the neuronal disease are sporadic and not genetic
@@ -138,7 +159,6 @@
 * We are not able to obtain iPSCs from microglia and some interneurons
 * Most of our models are 2D, but using 3D models is really important (organoids)
 * Brain organoids are good for studying brain development
-* Half of the neurons are in the cerebellum
 * Microglial cells are monocites, with different embriological origin that all the other glial cells
 	* They are the only cells able to pass the BBB
 * Neuron signal speed is related to myelination and fiber diameter
