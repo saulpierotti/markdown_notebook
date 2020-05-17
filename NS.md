@@ -105,7 +105,31 @@
 * Mutations in FOXP2 may be a key factor in developping language in humans
 * Parental imprinting effects seems to be more common in the brain than in other tissues
 
-# Cells of the nervous system
+# Anatomical organization
+
+## Spinal cord
+* The spinal cord innervates the trunk and limbs and connects them to the brain
+* It is composed of sensory neurons, motor neurons, and interneurons
+* It is ticker where the innervation of the limbs is located
+* It is formed by a core of grey matter surrounded by white matter
+* The grey matter contains cell bodies and it is subdivided in dorsal and ventral horns
+* The dorsal horns receive sensory stimuli
+* The ventral horns generate motor stimuli and contain also interneurons
+* The white matter is formed by rostro-caudal ascending and descending tracts
+* There are 31 spinal nerves, each composed of a motor and a sensory division
+* The sensory division is called dorsal root since it originates from the dorsal horns, while the motor division is called ventral root
+* The ventral root at certain levels contains also sympathetic and parasympathetic fibers
+
+# Brain
+* It is composed of 6 regions: medulla, pons, midbrain, cerebellum, diencephalon, telencephalon
+* The 6 regions are found in both emispheres with slight divergences
+* Medulla, pons and midbrain toghether form the brain stem
+* The medulla is a physical extension of the spinal cord and it resembles to it
+	* It also contains low-level centers for taste, hearing, balance, neck and facial muscles
+* The pons protrudes ventrally to the brain stem
+	* In its ventral part it contains the pontine nucleai, which relay information to the cerebellum
+	* The dorsal portion contains centers that govern respiration, taste and sleep
+* The midbrain is rostral to the pons and it connects cerebellum, basal ganglia and cerebral emispheres
 
 # From lecture
 * Most of the neuronal disease are sporadic and not genetic
