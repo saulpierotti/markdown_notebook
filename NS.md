@@ -1,6 +1,10 @@
-# Neuroscience
+% Neurosciences
+% Saul Pierotti
+% \today
 
-# Introduction
+# General overview
+
+## The brain
 * The human brain has more that $1*10^{11}$ neurons
 * Neuroscience started in 1800 with Golgi and Cajal with their accurate description of nerve cells
 * Golgi developped silver staining of neurons, which was then used by Cajal to prove the existence of neurons
@@ -29,6 +33,8 @@
 * The organization of brain areas for language is not complete until 7-8 years old
 	* A child with left hemisphere damage can develop normal language but at the cost of other abilities like spatial reasoning
 * The 2 hemispheres seem to have each its own consiuosness that became evident in split brains
+
+## Neurons and neural circuits
 * Neuron action potentials travel at 1 to 100 m/s
 * The information conveyed by an action potential is determined not by the form of the signal but by the pathway the signal travels in the brain
 * Unipolar neurons are the most frequent in invertebrate while in vertebrates they form the autonomous nervous system
@@ -76,14 +82,32 @@
 * Synaptic terminals show functional plasticity
 	* There are short-term adaptations that last seconds to hours
 	* Long-term adaptations involve anatomical alterations
+
+## Genetics
 * The circadian rithm is reset by light but persists also in the absence of stimuli
 	* It governs sleep and other behavioural patterns
 * In flies the $per$ (period) gene is essential for the circadian rithm
 	* Some mutants do not have any rithm, some have a longer duration of the period and some have a shorter duration
 	* There are no other effects on phenotype besides rithm changes in $per$ mutants
-	* The PER protein is a trascription factor 
+	* The PER protein is a trascription factor
+	* Its expression is low in the morning, and then it accumulates during the day until it peaks at night and then decreases until the morning
+* Another important gene for the circadian rithm was identified in mice: $clk$ (clock)
+	* It functions similarly to $per$
+* Both $clk$ and $per$ have a PAS domain, which is a TF domain
+* Actually both mice and flies have both $clock$ and $per$, which together regulate the circadian rithm
+	* CLK together with its partner CYC (cycle) is the effector TF that directly acts on genes modulating behavior
+	* CLK also stimulates $per$ trascription, but PER inhibits $clk$ expression
+	* In the morning PER is low and CLK is high
+	* This makes CLK stimulate the trascription of $per$, which steadly increases
+	* PER takes time to become active, since it need to be phosphorylated and interact with other proteins
+	* When at night PER peaks, it makes CLOCK decrease and therefore PER itself decreases
+	* This mechanism is conserved also in humans
+* Mutations in FOXP2 may be a key factor in developping language in humans
+* Parental imprinting effects seems to be more common in the brain than in other tissues
 
+# Cells of the nervous system
 
+# From lecture
 * Most of the neuronal disease are sporadic and not genetic
 * It is difficult to develop an animal model for a sporadic disease
 * iPSCs from patients are a good alternative
