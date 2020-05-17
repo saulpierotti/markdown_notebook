@@ -150,6 +150,44 @@
 * The cerebral emispheres consist of the cortex, the underlying white matter, the basal ganglia, the amygdala, and hyppocampus
 * The 2 emispheres are connected by the corpus callosum
 * The amygdala regulates emotions, the hyppocampus memory formation, and the basal ganglia with the control of movement and motor learning
+* The cortex is divided in frontal, parietal, temporal and occipital lobes
+* The cingulate cortex is the porsion right next to the corpus callosum
+* The insula is buried under the frontal, parietal and temporal lobes
+* Information is transformed at each synaptic relay
+	* The arousal level of the animal influences the magnitude and susceptibility of neurons
+* The sensory areas that process the signal from peripheral organs are arranged topographically simulating the original distribution
+	* This topography is maintained at different stages of processing
+	* The same is true for motor pathways
+* Each functional system is hierarchically organised in primary, secondary, tertiary areas and so on
+* The primary auditory cortex is in the tempral lobe, close to the lateral sulcus
+* The primary visual cortex is in the occipital lobe, close to the calcarine sulcus
+* The primary sensory cortex is posterion to the central sulcus, in the parietal lobe (postcentral gyrus)
+* Information is processed in stages to higher order structures, and then down to lower order motor structures
+* Most pathways act on the controlater side of the body
+	* The cross to the opposite side of the brain is called decussation
+	* The decussation of different systems happens at different levels (in the spinal cord, in the thalamus, ...)
+* The neocortex is organised in layers and columns, while subcortical regions are organised in nuclei
+* Most of the cortex contains 6 layers, numbered from the pia madre to the white matter
+* Layer 1 (molecular layer) is formed by dendrites of cells located in deeper layers and axon that travel to other areas of the cortex
+* Layer 2 (external granular cell layer) and 3 (external pyramidal cell layer) contain small pyramidal neurons that project axons locally and to other cortical areas
+* Layer 4 (internal granular cell layer) contains a large number of small spherical neurons
+	* It is the main recipient of sensory pathways from the thalamus and it is most developped in the sensory cortex
+	* Areas with a prominent layer 4 are colled granular cortex cortex
+	* It is almost absent in the primary motor cortex, which is called agranular frontal cortex
+* Layer 5 (internal pyramidal cell layer) contains pyramidal cells larger that those of layer 3
+	* Cells in this layer are responsible for the major output pathways
+* Layer 6 (polymorphic layer) is hetergeneous and blends with the white matter
+* All the layers also contain dendrites from neurons in other areas
+* Neurons in the neocortex are organised in columns from the white matter to the pia, and these are thought to be the fundamental processing unit of the neocrtex
+* Also in the cortex there are interneurons with short axons and principal neurons with long axons
+* Interneurons are usually inhibitory and GABAergic
+* There is also a population of excitatory glutamergic interneurons
+
+# Functional organization
+* The central axons of the dorsal root ganglion are arranged topographically
+	* The axons that bring sensory stimuly from the lower libs and abdomen are medial to those bringing input from upper limbs and torso at the cervical level
+* Pain, temperature, touch and propioception are processed in distinct brain areas
+* The thalamus filters all the sensory stimuly except olfaction in accordance to the behavioural state of the animal
 
 
 # From lecture
