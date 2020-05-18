@@ -43,3 +43,69 @@ header-includes:
 	\EndIf
 \EndProcedure
 \end{algorithmic}
+
+* A disjoint set can be implemented naively with a linked list
+	* Each set is represented by a linked list
+	* Each element of the list stores
+		* The object itself
+		* A pointer to the next element
+		* A pointer to the set representative
+	* The first object of the list is taken as representative
+	* In this case MAKE-SET and FIND-SET are easy to implement and cost O(1)
+		* MAKE-SET just creates a new list with the object
+		* FIND-SET follows the pointer back to the representative
+	* UNION is implemented by appending 2 lists and updating the pointers
+		* Updating the pointers costs $\Theta(|L_y|)$! ($|L_y|$ is the lenght of the second list)
+* A disjoint-set forest is a better representation
+	* Each set is a rooted tree
+	* Each node contains an element and a pointer to its parent
+		* The root points to itself
+	* FIND-SET needs to trasverse the tree until the root and costs O(n) in the worst case
+	* UNION is easy: I just make the root of one tree point to the root of another
+		* However, I need to call 2 times FIND-SET to find the 2 roots if I am not storing them!
+	* We can improve average performances by doing union by rank and path compression
+	* Union by rank: the smaller tree should point to the bigger, not vice-versa
+		* In this way I minimize the height of the resulting tree
+		* To do this I store a property x.rank for each node
+		* The rank is the heigh of the subtree rooted in the current node
+	* Path compression: I redirect to the root each node so that I do not need to transverse the entire tree each time
+	* If I am using both path compression and union by rank, the rank is not any more the exact heigh, but its upper bound
+	* Path compression and union by rank are dynamically applied and maintained by FIND-SET and UNION
+
+\begin{algorithmic}
+\Statex
+\Statex
+\Procedure{MAKE-SET}{$x$}
+	\State $x.p = x$
+	\State $x.rank = 0$
+\EndProcedure
+\Statex
+\Statex
+\Procedure{UNION}{$x, y$}
+	\State $x.root =$\Call{FIND-SET}{$x$}
+	\State $y.root =$\Call{FIND-SET}{$y$}
+	\State \Call{LINK}{$x.root, y.root$}
+\EndProcedure
+\Statex
+\Statex
+\Procedure{LINK}{$x, y$}
+	\If{$x.rank > y.rank$}
+		\State $y.p = x$
+	\Else
+		\State $x.p = y$
+		\If{$x.rank == y.rank$}
+			\State $y.rank = y.rank + 1$ // if the ranks are different adding the subtree cannot change either rank!
+		\EndIf
+	\EndIf
+\EndProcedure
+\Statex
+\Statex
+\Procedure{FIND-SET}{$x$}
+	\If{$x.p \neq x$} // x is not a root
+		\State $x.p =$ \Call{FIND-SET}{$x.p$}
+	\EndIf
+	\State \Return $x.p$
+\EndProcedure
+\Statex
+\Statex
+\end{algorithmic}

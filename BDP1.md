@@ -478,7 +478,7 @@
 ## HTC
 * HTC infrastructures are PC clusters, server clusters, distributed systems and grids
 * A Grid is an hardware and software infrastructure that provides inexpensive access to high-end computational capabilities
-	* It is NOT subject to centralised control7
+	* It is NOT subject to centralised control
 	* Uses standard and general-purpose interfaces
 	* Delivers non-trivial QoS
 * The user of a Grid is a virtual organization
