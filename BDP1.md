@@ -504,3 +504,29 @@
 	* It uses many standard processors connected in the same machine
 * In MPP processors need to communicate, since they are operating together on a single job
 	* There are low-latency connections between them and specialized netwroks
+* In time many dedicated MPP supercomputers were produced
+* It is also possible to use a cluster of commercial-grade servers for HPC
+	* In this case I need a really low-latency network to make them cooperate effectively
+* Most HPC systems are built for the industry, not for research
+* The speedup of an application when it runs in parallel on P processors is the ratio among the running time on a sequential system and that on the parallel system
+	* If the speedup is equal to the number of processors it means that there is no overhead for the parallism: perfect linear speedup
+* The efficiency of a parallel system is the ratio among the speedup and the number of processors
+	* It is 1 in case of perfect linear speedup
+* In rare cases the speedup can be superlinear, usually because of memory caching
+* Amdahl's law predicts the speedup of a computation by assuming linear speedup
+	* It leaves the serial processing part of the job untouched while it divides the parallel computation by the number of nodes
+	* The maximum possible speedup is $S= 1/\alpha$ where $\alpha$ is the serial fraction of the computation
+* HPC systems can use shared memory (RAM) in order to share information among threads and processes
+* In uniform memory access (UMA) all the processors share uniformly the same RAM
+* In non-uniform memory access (NUMA) the memory access time depends on the location of the memory relatively to the processor
+* When I am using shared memory I need to ensure that also the CPU caches are syncronised!
+* libnuma can be used for setting up a NUMA environment
+* OpenMP is another API used for writing multithreaded applications
+	* It shares variables among threads and greatly simplifies parallel programming in C/C++/Fortran
+	* It can cause a Race condition
+* A Race condition is when the output of a parallel program changes by changing the order of execution of its threads
+* Distributed memory refers to a multiprocessor system where each CPU has its own memory
+	* In this case the communication among threads in mediated by explicit send/receive calls
+* MP is an API used for creating distributed HPC
+* Hardware coprocessors can be used for accelerating FLOPS
+	* The GPU is the most used coprocessor
