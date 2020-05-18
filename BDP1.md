@@ -474,3 +474,33 @@
 * High throughput computing (HTC) I want to maximise the number of jobs executed, not speed up the single job
 * High performance computing (HPC): I want to speed up the execution time of the single jobs
 * FLOP: number of floating poin operations per second
+
+## HTC
+* HTC infrastructures are PC clusters, server clusters, distributed systems and grids
+* A Grid is an hardware and software infrastructure that provides inexpensive access to high-end computational capabilities
+	* It is NOT subject to centralised control7
+	* Uses standard and general-purpose interfaces
+	* Delivers non-trivial QoS
+* The user of a Grid is a virtual organization
+	* It is a set of individuals that share the resources under certain rules
+	* Sharing of resources is highly controlled and well-defined
+	* The owner of the individual resources decides who can access them
+* 95% of the Grid is agreement on protocols between participating institutions
+* There is no Grid owner and the network is distributed: I do not know which machine is processing my data
+* Grids can be based on supercomputers, servers, or volunteers that share desktop PC power
+* Grids are really complex, and they often fail
+* The Grid implements a single sign on policy (one access system grants all the resources available)
+* The Grid should allow for delegation (automatic access by programs)
+* The X509 certificate is used for signing into a Grid
+	* It contains the Public key of the owner, its identity
+	* It is sgned by a certification authority
+* The certification signs the authorization for the user
+* The user can in turn sign a proxy authorization for allowing delegation
+
+## HPC
+* The first machines for HPC were Vector machines
+* They were using single powerfull processors (small for now!)
+* Subsequently they shifted to massively parallel processors (MPP)
+	* It uses many standard processors connected in the same machine
+* In MPP processors need to communicate, since they are operating together on a single job
+	* There are low-latency connections between them and specialized netwroks
