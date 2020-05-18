@@ -496,6 +496,7 @@
 	* It is sgned by a certification authority
 * The certification signs the authorization for the user
 * The user can in turn sign a proxy authorization for allowing delegation
+* Each job on the Grid is identified by an URL containing the address of the server who accepted it and a random string
 
 ## HPC
 * The first machines for HPC were Vector machines
