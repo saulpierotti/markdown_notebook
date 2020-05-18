@@ -33,4 +33,13 @@ header-includes:
 		\EndIf
 	\EndFor
 \EndProcedure
+\Statex
+\Statex
+\Procedure{SAME-COMPONETS}{$u,v$}
+	\If{\Call{FIND-SET}{u} $\neq$ \Call{FIND-SET}{v}}
+		\State \Return TRUE
+	\Else
+		\State \Return FALSE
+	\EndIf
+\EndProcedure
 \end{algorithmic}

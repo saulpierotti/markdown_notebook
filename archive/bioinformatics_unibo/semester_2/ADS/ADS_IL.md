@@ -534,7 +534,7 @@ greeedy_knapsack_frac(weights, values, total_weight):
 	\State \Call{INITIALIZE-SINGLE-SOURCE}{$G,s$}
 	\State $S = \emptyset$
 	\State $Q = G.V$
-	\While{$Q \not= \emptyset$}
+	\While{$Q \neq \emptyset$}
 		\State $u =$ \Call{EXTRACT-MIN}{$Q$}
 		\State $S = S \cup \{u\}$
 		\ForAll{$v \in G.Adj[u]$}
