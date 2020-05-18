@@ -468,3 +468,9 @@
 	* It supports Hadoop integration and MapReduce
 	* It uses the novel query language CQL
 * Apache Kafka is a distributed streaming platform
+
+# Parallel computing
+* The distributed infrastructures we saw until now were localised in the same WAN
+* High throughput computing (HTC) I want to maximise the number of jobs executed, not speed up the single job
+* High performance computing (HPC): I want to speed up the execution time of the single jobs
+* FLOP: number of floating poin operations per second
