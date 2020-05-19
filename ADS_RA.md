@@ -109,3 +109,6 @@ header-includes:
 \Statex
 \Statex
 \end{algorithmic}
+
+# Longest common subsequence (LCA)
+* The LCA problem is a classical problem that can be solved with dynamic programming
