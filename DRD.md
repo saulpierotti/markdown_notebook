@@ -230,10 +230,48 @@
 	* A matrix or dataframe as `M[i,j]`
 * Exploratory functions are particularly useful for dataframes
 * Categorical values are ordered alphabetically
-* OO S3 S4
+* Objects in R can be of various types
+	* S3 objects are more casual while S4 objects are more structured
+	* An S4 object contains slots, that can be extracted with the operator @
+		* Slots are not meant to be accessed by the user
+		* Helper functions (`get_something()`) should be used to access the relavant information stored in an object
 
 # Minfi
 * Infinium data can be analised with the GUI tool GenomeStudio from Illumina or with one of the many open source R packages
 * Minfi is a bioconductor package for Infinium data analysis
 	* It uses an S4 indexing structure
-* Infinium raw data are in the binary IDAT format
+* Infinium raw data are in the binary IDAT format (one file per sample)
+* Minfi imports raw data from a folder containing a series of IDAT files and a SampleSheet, which is the output of the Illumina reader
+	* `targets <- read.metharray.sheet(base_dir)` extracts the SampleSheet object from `base_dir`, where there are the IDAT files and the SampleSheet
+* Raw data from the experiment are extracted in an RGChannelSet object by using the SampleSheet object
+	* `RGset <- read.metharray.exp(targets = targets)`
+	* This object contains the raw Red and Green intensities for each probe
+	* It is organised at the probe, not target level
+	* `Red <- getRed(RGset)` and `Green <- getGreen(RGset)` are helper functions that extract a matrix of channel intesities per probe per sample in the SampleSheet
+	* There are various functions that extrac and summarise information from the RGSet
+* The `MSet.raw <- preprocessRaw(RGset)` function converts the RGSet in a MethilSet object
+	* It is organised at the target level
+	* For each locus the methilated and unmethilated signal is reported, idependently of the original channel
+	* The helper functions `Meth <- GetMeth(MSet.raw)` and `Unmeth <- GetUnmeth(MSet.raw)` return the respective matrices organised per IlmnID (target locus)
+* The `GenMetSet <- GenomicMethilSet(MSet.raw)` function converts the MethilSet into a GenMetSet object
+	* It is like the MetSet.raw, but mapped to a genome
+* The `RatioSet <- RatioSet(MSet.raw)` function converts the MethilSet into a RatioSet object
+	* It includes for each target the $\beta$ or $M$ value and, optionally, the copy number
+* Applying either `RatioSet(GenMetSet)` or `GenomicMethilSet(RatioSet)` converts the data to a GenomicRatioSet object
+	* It is like the RatioSet object but mapped to a genome
+* For each Type I probe not only the relevant channel is stored, the instrument measures both Red and Green everywhere
+	* The opposite channel is useful for estimating background and it is called out of band probe
+* I can create a QC plot for checking the quality of the experiment
+	* `qc <- getQC(MSet.raw)` generates a dataframe with a row per sample
+		* For each sample the median methilated and unmethilated signal is reported
+	* `plotQC(qc)` plots the medians in a log plot
+		* Bad samples with low medians are highlighted
+* Control probes are present in the array and they can be queried
+	* Sample independent controls allow to determine the quality of the processing steps
+		* These are staining, extension, target removal and hybridization controls
+	* Sample dependent controls allow to determine the quality across different samples
+	* These are bisulphite conversion I and II, Specificity I and II, nonpolimorphic and negative controls
+* Negative control probes are random permutations of existing probes that should not bind in the genome
+	* Their signal should be in the 100-1000 range
+	* If they show high signal this could indicate poor sample quality
+* Staining control probes 
