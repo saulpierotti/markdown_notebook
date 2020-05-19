@@ -274,4 +274,26 @@
 * Negative control probes are random permutations of existing probes that should not bind in the genome
 	* Their signal should be in the 100-1000 range
 	* If they show high signal this could indicate poor sample quality
-* Staining control probes 
+* Staining control probes have bioitin/DNP already attached and measure the efficiency and sensitivity of the staining step
+	* They should give red/green signal according to the marjer they have (biotin/DNP)
+* Extension control probes have a final hairpin and therefore they are extended without any target
+* Hybridization controls measure the efficiency of binding to sybthetic targets
+	* The targets are available in medium, high and low concentrations
+	* They should give only green signal
+* Target removal controls are not-extendible probes which hybridise with a synthetic target
+	* The target is extensible, but if it is correctly removed it should not give any signal
+	* The target gives green signal, and there should be no signal
+* Bisulphite conversion controls query a non-CpG C/T polimorphism created by the conversion
+	* There are both of type I and type II
+	* They should give UnMeth signal in type I and Red in type II
+* Specificity controls check non-specific extension by querying non-polimorphic sites (always a T)
+	* There are both of type I and type II
+	* They always should give only Red signal in type II, and non methilated signal in type I
+* Non-polimorphic controls also query a non-polimorphic site (but A, T, C, or G)
+	* They check the performance of amplification
+	* They are of a single type
+	* They should give signal according to the queried position
+* The p-value of a probe is measured from the background model
+	* Low-scoring probes should be filtered out
+* A SNP on the target site of a probe or on the flanking base (for type I) alters the results!
+* A SNP near the 3' of a probe can alter the result, depending on how close it is to the 3'
