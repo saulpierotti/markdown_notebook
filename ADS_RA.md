@@ -110,5 +110,34 @@ header-includes:
 \Statex
 \end{algorithmic}
 
-# Longest common subsequence (LCA)
-* The LCA problem is a classical problem that can be solved with dynamic programming
+# Longest common subsequence (LCA) 
+* The LCA problem is a classical problem that can be solved with dynamic programmin
+* In this context an LCA is considered as a possibly gapped subsequence
+* The algorithm is essentially the NW withouth gap penalties
+* I can make it more space-efficient by not storing the backtrack matrix
+	* I can always compute it from the scores
+* I can also only store the last 2 rows, instead of the entire matrix
+	* In this case I cannot do bactrack!
+* The cost is O(nm) for building the matrx and O(n+m) for the backtrack
+
+# Approzimate string matching (ASM)
+* I want to serch a query string $P$ of lenght $m$ in a target string $T$ of lenght $n$ with $m < n$
+* In some cases I may want to allow inexact matches
+* A k-approximation of $P$ in $T$ is a string $P'$ shorter or equal to $P$ itself which occurs in $T$ and can be obtained from $P$ in $0 \leq k \leq m$ edit operations
+* An edit operation is a substitution, insertion or deletion
+* ASM takes in input $P$ and $T$ and returns the k-approximation $P'$ with minimum $k$
+	* It returns the approximation with minimum edit distance, without aatention to its lenght!
+* I define a table $D$ that stores the minimum edit distance between the $P[1:i]$ and $T[1:j]$
+* I initialise the first row and column
+	* $D[0,j] = 0$ since I can match an empty $P$ everywhere in $T$ without any edit
+	* $D[i,0] = i$ since to match a string of lenght $i$ to an empty string I need to delete $i$ charachters
+* Then I fill iteratively or recursively
+	* If $p_i = t_j \implies D[i,j] = D[i-1,j-1]$ since I don't need to do any additional edit
+	* If $p_i \neq t_j$ I increment $k$ by assigning to $D[i,j]$ the minimum between
+		* $D[i-1,j-1] + 1$
+		* $D[i-1,j] + 1$
+		* $D[i,j-1] + 1$
+* The minimum $k$ can be retrieved from the smallest value of the last row
+* I can backtrack to rebuild the match
+* The cost is O(nm) for building the matrix
+* Backtracking costs O(n+m) in the worst case (if I need tro tranverse all the table)

@@ -230,4 +230,10 @@
 	* A matrix or dataframe as `M[i,j]`
 * Exploratory functions are particularly useful for dataframes
 * Categorical values are ordered alphabetically
+* OO S3 S4
 
+# Minfi
+* Infinium data can be analised with the GUI tool GenomeStudio from Illumina or with one of the many open source R packages
+* Minfi is a bioconductor package for Infinium data analysis
+	* It uses an S4 indexing structure
+* Infinium raw data are in the binary IDAT format
