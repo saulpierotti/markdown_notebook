@@ -175,6 +175,8 @@ header-includes:
 ## Kruscal algorithm
 * I incrementally grow and merge a forest of MSTs by adding light edges intil I have the complete MST
 * I use disjoint sets to represent the forest, one set per tree
+* It's complexity is $O=(n \log{m})$
+* It is not the fastes algo, there are MST algos in $O(n+m)$
 
 \begin{algorithmic}
 \Statex
@@ -183,8 +185,20 @@ header-includes:
 	\ForAll $v \in G.V$
 		\State MAKE-SET($v$)
 	\EndFor 
-	\State $S =$ \Call{SORT}{$G.E, w$}
+	\State $S =$ \Call{SORT}{$G.E, w$} // sort edges non-decreasingly according to weight
 	\ForAll $(u,v) \in S$
-		\If \Call{FIND-SET}{$u$} \neq \Call{FIND-SET}{$v$}
+		\If{\Call{FIND-SET}{$u$} $\neq$ \Call{FIND-SET}{$u$}} // if u and v are on different trees
+			\State $A = A \cup {(u,v)}$
+			\State \Call{UNION}{$(u,v)$}
+		\EndIf
+	\EndFor
+	\State \Return $A$
 \EndProcedure
 \end{algorithmic}
+
+## Local search (LS)
+* It is an apporach for solving optimization problems
+* It starts from a sub-optimal solution $S$ and seraches for a better solution $S'$ in the neighborhood of $S$ $N(S)$ in an iterative way
+* It finds a local optimum in the solution space
+* We can use LS to solve the MST problem
+
