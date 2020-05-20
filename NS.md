@@ -242,3 +242,12 @@
 
 # Perception
 * Sensation happens in the perifery, perception in the brain
+* Each sense has a threshold for sensation, usually defined as the stimuls level that causes a sensation 50% of the times
+* Humans can detect electromagnetic radiation at 400 to 700 nm wavelenght
+* The cortical representation of the sensory areas is plastic and can adapt
+	* If you cut some of the vibrissae to a rat, the relative brain areas will be recruited by the remaining vibrissae
+
+## Chemical senses
+* They are smell and taste in humans
+* The olphactory bulb is part of the CNS
+* Olphactory receptors are GPCRs
