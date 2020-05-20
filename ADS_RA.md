@@ -141,3 +141,50 @@ header-includes:
 * I can backtrack to rebuild the match
 * The cost is O(nm) for building the matrix
 * Backtracking costs O(n+m) in the worst case (if I need tro tranverse all the table)
+
+# Minimum Spanning Tree (MST)
+* Given an undirected weighted graph $G = (V, E)$ I want to find an MST with $T \subseteq E$ such that
+	* $T$ is a tree (undirected, connected, acyclic)
+	* $T$ is connects all the nodes in $V$ (it is a spanning tree)
+	* $w(T) = \sum_{(u,v) \in T}w(u,v)$ is the minimal possible
+		* I want the tree with the minimum total weight
+* It can be applied to designing electric circuits with the minimum amount of wire and to construct minimum ultrametric trees
+* The MST problem can be solved with a greedy strategy
+* An MST always exists for connected undirected graphs but may not be unique
+* For designing an MST algo is important the concept of safe edge
+	* It is an edge that when added to a subset $A \subseteq T$ makes $A$ still a subset of $T$
+* It is said that a cut respects a set of edges if there is no edge crossing the cut
+* An edge crossing the cut is called light edge if its weight is minimum among all the edges that cross the cut
+* **Safe edge theorem**
+	* $A \subseteq T$ is the subset of some MST $T$ for the graph $G = (V,E)$
+	* If $(S, V-S)$ is a cut respecting A and $(u,v)$ is a light edge crossing that cut, then $(u,v)$ is safe for $A$
+
+\begin{algorithmic}
+\Statex
+\Procedure{GENERIC-MST}{$G$}
+	\State $T_0 = \emptyset$
+	\While{$T_i$ is not an MST for $G$}
+		\State Find $(u,v) \in G.E - T_i$ which is $\textbf{safe}$ for $T_i$
+		\State i = i + 1
+		\State $T_i = T_{i-1} \cup \{(u,v)\}$
+	\EndWhile
+	\State \Return $T_i$
+\EndProcedure
+\end{algorithmic}
+
+## Kruscal algorithm
+* I incrementally grow and merge a forest of MSTs by adding light edges intil I have the complete MST
+* I use disjoint sets to represent the forest, one set per tree
+
+\begin{algorithmic}
+\Statex
+\Procedure{KRUSCAL-MST}{$G$}
+	\State $A = \emptyset$
+	\ForAll $v \in G.V$
+		\State MAKE-SET($v$)
+	\EndFor 
+	\State $S =$ \Call{SORT}{$G.E, w$}
+	\ForAll $(u,v) \in S$
+		\If \Call{FIND-SET}{$u$} \neq \Call{FIND-SET}{$v$}
+\EndProcedure
+\end{algorithmic}
