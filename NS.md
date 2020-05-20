@@ -217,7 +217,7 @@
 	* Is this representative?
 * Axo-axonic synapses are involved in neural modulation
 
-## Ionotropic receptors
+## Receptors
 * Ionotropic receptors give fast and short-acting receptor potentials
 	* They are found at the center of the synapsis
 * Ionotropic receptors usually do not influence gene expression
@@ -233,10 +233,12 @@
 	* An $Mg^{++}$ ion clogs the pore and needs depolarization to be removed
 	* Glutamate is required for opening the channel, together with a co-ligand like glycine or serine
 	* This means that glycine can be excitatory!
-
-## Metabotropic receptors
 * Metabotropic receptors are always GPCRs and they tend to be on the side of the synapsis
 	* They can also influence gene expression!
 * Muscarininc ACh receptors are GPCRs
 * Glutamate receptors are the basis of neuronal plasticity
 * There are several isoforms of metabotropic glutamate receptor
+* GABA receptors can be also modulated by steroid hormones!
+
+# Perception
+* Sensation happens in the perifery, perception in the brain
