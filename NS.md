@@ -250,4 +250,9 @@
 ## Chemical senses
 * They are smell and taste in humans
 * The olphactory bulb is part of the CNS
-* Olphactory receptors are GPCRs
+* Olphactory receptors are GPCRs and they use a specific A subunit of the G protein, called olphactory
+	* Phosphorilation of the receptor is associated to desensitization
+* The olphactory epithelium shows a huge variety of cell types
+	* These neurons are able to regenerate thanks to neural stem cells
+* Humanse can detect 5 tastes: sweet, sour, salty, bitter, umami
+* Flavor perception is an integrated sensation of vision, taste, smell
