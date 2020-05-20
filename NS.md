@@ -200,3 +200,43 @@
 * Microglial cells are monocites, with different embriological origin that all the other glial cells
 	* They are the only cells able to pass the BBB
 * Neuron signal speed is related to myelination and fiber diameter
+
+## Neurotransmitters
+* They can be biologic amines (dopamine, serotonine), aminacids (glutamate, glycine), ATP, acetilcholine, ...
+* Different post-synaptic cells can have different receptors and respond differently to the same neurotransmitter
+* Neurotrasmitters need to be removed after excretion
+	* They can be degraded by enzymes
+	* They can be re-absarbed by the pre-synaptic cell or by the microglia
+* Neurotrasmitters act only on the postsynaptic cell while neuromodulators can act both pre- and post-synaptically
+	* Neuromodulators are usually neuropeptides
+* The action of neuropeptides in the pre-synaptic cell can regulate gene expression of the peptide itself in a negative loop
+
+## Synapses and neural circuits
+* Neuronal networks can be convergent or divergent
+* Usually our knowledge about neuronal networks comes from the study of invertebrates
+	* Is this representative?
+* Axo-axonic synapses are involved in neural modulation
+
+## Ionotropic receptors
+* Ionotropic receptors give fast and short-acting receptor potentials
+	* They are found at the center of the synapsis
+* Ionotropic receptors usually do not influence gene expression
+	* $Ca^{++}$ receptor channels can since they generate a signal cascade
+* Nicotinic ACh receptors are iomnotropic receptors located in the neuromuscolar junction 
+	* They allow the flow of $K^+$ and $Na^+$
+* Ionotropic glutamate receptors are AMPA, Kainate and NMDA
+	* They are non-selective ion channels formed by many subunits
+* AMPA receptors can undergo RNA editing in the internal loop
+	* Without editing the receptor is permable only to $Na^+$ and $K^+$
+	* When edited it allows also the flow of $Ca^{++}$, changing its biological effect
+* NMDA receptors are both ligand and voltage-gated
+	* An $Mg^{++}$ ion clogs the pore and needs depolarization to be removed
+	* Glutamate is required for opening the channel, together with a co-ligand like glycine or serine
+	* This means that glycine can be excitatory!
+
+## Metabotropic receptors
+* Metabotropic receptors are always GPCRs and they tend to be on the side of the synapsis
+	* They can also influence gene expression!
+* Muscarininc ACh receptors are GPCRs
+* Glutamate receptors are the basis of neuronal plasticity
+* There are several isoforms of metabotropic glutamate receptor
