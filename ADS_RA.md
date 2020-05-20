@@ -152,7 +152,7 @@ header-includes:
 * The MST problem can be solved with a greedy strategy
 * An MST always exists for connected undirected graphs but may not be unique
 * For designing an MST algo is important the concept of safe edge
-	* It is an edge that when added to a subset $A \subseteq T$ makes $A$ still a subset of $T$
+	* It is an edge that when added to a subset $A \subseteq T$ makes $A'$ still a subset of $T$
 * It is said that a cut respects a set of edges if there is no edge crossing the cut
 * An edge crossing the cut is called light edge if its weight is minimum among all the edges that cross the cut
 * **Safe edge theorem**
@@ -172,7 +172,7 @@ header-includes:
 \EndProcedure
 \end{algorithmic}
 
-## Kruscal algorithm
+## Kruskal algorithm
 * I incrementally grow and merge a forest of MSTs by adding light edges intil I have the complete MST
 * I use disjoint sets to represent the forest, one set per tree
 * It's complexity is $O=(n \log{m})$
@@ -201,4 +201,54 @@ header-includes:
 * It starts from a sub-optimal solution $S$ and seraches for a better solution $S'$ in the neighborhood of $S$ $N(S)$ in an iterative way
 * It finds a local optimum in the solution space
 * We can use LS to solve the MST problem
+
+## LS sorting
+* I can frame a sorting problem as an optimization problem
+* Given a set of elements $A$ we say that $a_j$ and $a_i$ are misplaced if they are in the wrong order
+* If $a_i$ and $a_j$ are misplaced we say that $(i,j)$ is a conflict for $A$
+* $A$ is sorted when there are no conflicts
+* I can sort $A$ by minimising the number of conflicts
+* The neighborhood of $A$ is the set of all the possible permutations oof $A$ that can be obtained by swapping 2 elements
+* INSERTION-SORT can be seen as an LS algo however
+	* It only swaps contiguous elements
+	* At each step it solves just 1 conflict
+* SHELL-SORT was proposed by D. L. Shell to overcome this problems
+	* It is a generalization of INSERTION-SORT
+	* It considers elements at distance $h \geq 1$
+	* $h$ is decreased at each iteration until $h = 1$
+	* The algorthm is correct if at a certain point I use $h = 1$
+	* The series of $h$ used is called gap sequence
+		* For instance I can use $h = ..., 1093, 363, 32, 1$
+	* When $h = 1$ SHELL-SORT is exactly equivalent to INSERTION-SORT
+	* It is empirically one of the fastest sorting algorithms when the sequence is small (~5000 elements)
+
+\begin{algorithmic}
+\Statex
+\Procedure{SHELL-SORT}{$A$}
+	\State $h = 1$
+	\While{$h \leq A.lenght$} // I am generating a series of h, this can vary
+		\State $h = 3*h+1$
+	\EndWhile 
+	\State $h = \lfloor h/3 \rfloor$
+	\While{$h \geq 1$}
+		\For{$i = h+1$ to $A.lenght$}
+		\State $k = A[i]$
+		\State $j = i$
+			\While{$j > h$ and $A[j-h] > k$}
+				\State $A[j] = A[j-h]$
+				\State $j = j - h$
+			\EndWhile
+		\State $A[j] = k$
+		\EndFor
+	\State $h =\lfloor h/3 \rfloor$
+	\EndWhile
+\EndProcedure
+\end{algorithmic}
+
+# Backtracking
+* Try a solution, if it is not good go back and try a different one
+* It can be used for decision and optimization problems
+* These algorithms are usually really expensive, exponential or super-exponential
+	* This is due to the magnitude of the search space
+* It can be recursively or iteratively implemented
 
