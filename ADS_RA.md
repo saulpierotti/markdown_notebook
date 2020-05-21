@@ -317,3 +317,12 @@ header-includes:
 
 ## Branch and bound
 * It is a smart enumeration method that avoids evaluating decisions that cannot lead to an optimal solution
+	* Branch refers to the branching of possibilities at each step, bound to the application of a lower bound to their cost
+* I have a minimization problem where $\phi(S)$ is the cost function for solution $S$
+* I define the function LB that estimates a lower bound on the cost of any feasible solution from a partial solution 
+	* This function depends on the specific problem!
+* I define $S^*$ as the best known solution at any given node of the search tree and $z^*$ its cost
+* At any point if $LB(S,i) \geq z^*$ I can prune that branch of the tree and avoid evaluating it
+	* No need to evaluate a branch that will lead to a worse solution than those I already found
+* In general I need an initial solution to be used as a first $z^*$
+	* I can choose it randomly or with heuristics
