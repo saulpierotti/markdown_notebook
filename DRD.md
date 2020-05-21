@@ -190,6 +190,30 @@
 * Cytosine methylation can also be studied by bisulphite-WGS (WGBS) or methylated DNA immunoprecipitation (MeDIP)
 	* It uses 5mC-specific antibodies
 
+# Statistical inference
+* We do not know the level of population variability from which we draw samples
+* Claiming differential expression of a gene means that the expression level of a gene changes systematically between different samples
+	* The magnitude of the difference is not relevant
+* In experiments I usually want to reject or not the null hypothesis $H_0$
+* $\alpha$ is the probability of rejecting $H_0$ when it is true
+* $\beta$ is the probability of not rejecting a false $H_0$
+* A stringent significance threshold (p-value) increases $\alpha$ and decreases $\beta$
+* When I am doing multiple testing I need to restrict the p-value otherwise I get an unacceptably high number of flase positives
+* Parametric staistics assumes that the population follows a type of probabilioty distribution
+	* That is, it infers parameters of the putative distribution
+	* It is usually more powerfull than non-parametric statistics but it makes more assumptions
+* Parametric statistics assumes that
+	* Measurements are all independent from each other
+		* If some measurement are not independent I need to group them in a single variable
+	* The measurement are normally distributed
+	* The variance is uniform
+* An experiment can be designed with paired or unpaired groups
+	* A paired group is the same cohort measured before and after a treatment
+	* An unpaired group is 2 different cohorts, one to which I gave a treatment and one control
+* The t-test is a parametric test which is different for paired and unpaired data
+* Paired t-test: $t =\frac{\bar{X}}{\sigma/\sqrt{n}}$
+	* It is the mean divided by the standard error of the mean
+
 # Practical part - doctormaragiuliabacalini
 * We will prepare a report (:/)
 * We will use mainly R
