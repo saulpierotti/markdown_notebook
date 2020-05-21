@@ -258,7 +258,17 @@ header-includes:
 * NP is the set of problems verifyable in polynomial time
 * A problem in P is always also in NP, so $P \subseteq NP$
 	* This is beacause If I can find a solution in polynomial time, I do not need to check it!
-* The open question: Is $P=NP$?
+* NP-hard problems are at least as hard or harder than any problem in NP
+	* An NP-hard problem does not necessarily belong to NP
+	* It could be not possible to verify it in polynomial time
+* NP-complete problems are NP-hard problems that are in NP
+	* They are NP problems (so verifyable in polynomial time) that are by definition the hardest in NP
+* Any given NP problem is either NP-complete itself, or easier than an NP-complete problem
+* If I can find a polynomial solution for one NP-complete probelm, then by definition all the NP porblems have a polynomial solution
+* The open questionthen is: Is $P=NP$?
+	* Are all the NP problems solvable in polynomial time?
+	* If I can solve an NP-hard problem in polynomial time, then all the NP problems are polynomial
+	* This means than $P=NP$
 * I have a decision problem for which
 	* I have a polynomial algo for verifying a solution to it
 		* A verifyer given a solution returns True if the solution is feasible, Fasle otherwise
@@ -266,6 +276,11 @@ header-includes:
 	* I have an exponential algo for finding a solution with exhaustive search
 	* We don't know any polynomial algorithm to find a solution to it
 * If I can find a polynomial algorithm for this problem, then I found a polynomiam algortihm for all the problems of this class!
+* If I have an NP-hard problem I can
+	* Solve a special case
+	* Find a good enough solution
+	* I can use an exponential algorithm but in a clever way (branch and bound)
+	* I use an heuristic algorithm (one that is not guaranteed to be correct)
 
 ## Graph coloring
 * Can I color all the nodes of a graph with $k$ colors, without having any neighbor node with the same color?
@@ -299,3 +314,6 @@ header-includes:
 * I have a boolean formula in conjunctive normal form (CNF)
 * A CNF is a conjunction of disjunctions clauses
 * Can I assign its variables so that it evaluates to True?
+
+## Branch and bound
+* It is a smart enumeration method that avoids evaluating decisions that cannot lead to an optimal solution
