@@ -252,3 +252,50 @@ header-includes:
 	* This is due to the magnitude of the search space
 * It can be recursively or iteratively implemented
 
+
+# Hard problems
+* P is the set of problems solvable in polynomial time
+* NP is the set of problems verifyable in polynomial time
+* A problem in P is always also in NP, so $P \subseteq NP$
+	* This is beacause If I can find a solution in polynomial time, I do not need to check it!
+* The open question: Is $P=NP$?
+* I have a decision problem for which
+	* I have a polynomial algo for verifying a solution to it
+		* A verifyer given a solution returns True if the solution is feasible, Fasle otherwise
+		* A solution $S$ is also called certificate or witness for the problem
+	* I have an exponential algo for finding a solution with exhaustive search
+	* We don't know any polynomial algorithm to find a solution to it
+* If I can find a polynomial algorithm for this problem, then I found a polynomiam algortihm for all the problems of this class!
+
+## Graph coloring
+* Can I color all the nodes of a graph with $k$ colors, without having any neighbor node with the same color?
+* I can easily verify this by checking the size of the maximal clique of the graph
+	* A clique is a set of completely interconnected nodes
+
+\begin{algorithmic}
+\Statex
+\Procedure{VERIFY-CLIQUE}{$G, k, S$}
+	\If{$|S| < k$}
+		\State \Return{FALSE}
+	\EndIf
+	\For{$u \in S$}
+		\For{$v \in S - \{u\}$}
+			\If{$(u,v) \not\in G.E$}
+				\State \Return{FALSE}
+			\EndIf
+		\EndFor
+	\EndFor
+	\State \Return{TRUE}
+\EndProcedure
+\end{algorithmic}
+
+## Traveling salesperson
+
+## Integer linear programming
+* I have an integer matrix $A$ and an integer vector $b$
+* Is there a boolean vector $x$ such that $Ax \leq b$?
+
+## Boolean satisfiability
+* I have a boolean formula in conjunctive normal form (CNF)
+* A CNF is a conjunction of disjunctions clauses
+* Can I assign its variables so that it evaluates to True?
