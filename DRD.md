@@ -211,8 +211,16 @@
 	* A paired group is the same cohort measured before and after a treatment
 	* An unpaired group is 2 different cohorts, one to which I gave a treatment and one control
 * The t-test is a parametric test which is different for paired and unpaired data
+	* I compute a $t$ statistic from the data and I compare it with the appropriate $t$ distribution
+	* There is a $t$ distribution for each degree of freedom
+	* When $df \to \infty$ the t distribution approximates a normal distribution
+	* For lower df the t distribution has fatter tails than the normal distribution
 * Paired t-test: $t =\frac{\bar{X}}{\sigma/\sqrt{n}}$
 	* It is the mean divided by the standard error of the mean
+* The Shapiro-Wilk test returns the p-value for the null hypothesis that the data are normally distributed
+	* It should not be significant!
+* Unpaired t-test
+	* There are 2 different forms, dependig to the fact that the 2 groups have the same variance or not
 
 # Practical part - doctormaragiuliabacalini
 * We will prepare a report (:/)
