@@ -221,6 +221,15 @@
 	* It should not be significant!
 * Unpaired t-test
 	* There are 2 different forms, dependig to the fact that the 2 groups have the same variance or not
+* Non-parametric method should be used when I have outliers, noisy data, or non-normally distributed data
+	* In some cases if I have many measurment it can be difficult to assert normality for all of them
+* The Wilcoxon sign-rank test is the non-parametric equivalent of the paired t-test
+	* It is based on a ranking of the measuremnts
+	* I replace the data with its rank
+	* It has a lower power than the paired t-test
+* The Mann-Whithney U test (Wilcoxon rank-sum) is the non-parametric equivalent of the unpaired t-test
+	* It is also based on ranks
+	* I obtain the statistics U and I compare it to a pre-computed distribution
 
 # Practical part - doctormaragiuliabacalini
 * We will prepare a report (:/)
