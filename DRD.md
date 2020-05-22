@@ -231,6 +231,18 @@
 	* It is also based on ranks
 	* I obtain the statistics U and I compare it to a pre-computed distribution
 
+## Bootstrap
+* I do resampling with replacement and evaluate the $t$ statistics in each bootstrap
+* I produce a distribution of $t$ after thousand of bootstraps
+
+## ANOVA
+* It is a generalization of the t test for more than 2 groups
+
+## Kruskal-Wallis test
+* It is a non-parametric test that estends the Mann-Whitney U test
+
+
+
 # Practical part - doctormaragiuliabacalini
 * We will prepare a report (:/)
 * We will use mainly R
