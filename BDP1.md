@@ -531,3 +531,30 @@
 * MP is an API used for creating distributed HPC
 * Hardware coprocessors can be used for accelerating FLOPS
 	* The GPU is the most used coprocessor
+
+# Containers
+* A container is a framework used on top of other infrastructures, typically a cloud
+* Virtualization is the creation of a virtual version of something
+	* It can be anything: storage, network device, OS, ...
+	* A virtual machine is a virtual copy of a real machine
+* KVM is a linux kernel module used for virtualization
+* The host is also called hypervisor
+* A VM includes a guest OS, so it has a lot of overhead
+* A (docker) container does not include an OS, it is based on the host OS
+	* It operates at the application level
+	* It has the same pros without many of the cons of VMs
+	* It emulates binaries and libraries needed for the application
+	* It is an extended version of `chroot`
+* The docker engine manages resources for the different containers
+* They make software deployment (distribution) much easier
+	* I can create a container with an application and its dependecies and just distribute it
+* They can be compared to shipping containers for goods
+* In order to execute a container I just need the right kernel, without worrying about libraries and binaries
+	* I also need the docker engine!
+* Docker is a software used to manage and create containers
+	* It provides also a git-like versioning system
+	* You build a container image and push it to a container image repository
+	* From another host I pull the container image and just run
+		* Need to have the same kernel!
+* There are many container engines, but they are usually compatible
+	* You can build with a manager and then run with another
