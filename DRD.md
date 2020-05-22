@@ -241,7 +241,9 @@
 ## Kruskal-Wallis test
 * It is a non-parametric test that estends the Mann-Whitney U test
 
-
+## Multiple testing
+* Bonferroni correction: just divide by the number of tests
+* Benjamin Hunger correction
 
 # Practical part - doctormaragiuliabacalini
 * We will prepare a report (:/)
