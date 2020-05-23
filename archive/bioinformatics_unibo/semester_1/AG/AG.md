@@ -127,6 +127,7 @@
 	* In the digestion, I can choose a restriction enzyme with a long target sequence if I want longer fragments (cut site less probable!) and vice versa
 * Fastq is similar to fasta but it has additional information on it
 	* It uses ASCII symbols to code a quality score (PHRED score, from the homonimous software) in a separate line from the one where the bases are stored
+		* PHRED uses hard-code lookup tables of peak charachteristics to estimate quality
 	* The quality score is the ASCII code of the charachter (!)
 	* The highest quality is 90 for fastq
 	* The quality score rarely exceeds 60 in raw data, but can be higher in assemblies
