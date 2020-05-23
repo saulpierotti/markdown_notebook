@@ -101,6 +101,8 @@
 	* ssDNA hairpins are a serious probelm for lenght resolution
 	* A denaturing polyacrilamide-urea gel is used
 * In dye-terminator sequencing an electropherogram is produced, showing fluorescent intensity peaks for each of the 4 channels
+* Sanger sequencing primers are designed according to the region that I want to sequence
+	* In general I use Sanger when I have a reference!
 
 # Next generation sequencing
 * NGS platforms: Illumina, Ion torrent (Thermo fisher), PacBio, Nanopore, 454
@@ -127,7 +129,7 @@
 	* It uses ASCII symbols to code a quality score (PHRED score, from the homonimous software) in a separate line from the one where the bases are stored
 	* The quality score is the ASCII code of the charachter (!)
 	* The highest quality is 90 for fastq
-	* The quality score rarely exceeds 60 in row data, but can be higher in assemblies
+	* The quality score rarely exceeds 60 in raw data, but can be higher in assemblies
 	* The threshold quality score now accepted for base calling is 30
 * Allignments are saved in .sam format, a tab-delimited text file that can be converted in a binary .bam file
 	* samtools is used for working with sam files
@@ -137,7 +139,7 @@
 * The sequencing device is a semiconductor chip with millions of nano-wells
 	* Each well is represented as a pixel
 * DNA fragments are clonally amplified on beads that are poured on the chip and go in the wells, one for each well
-* The chip is sequentially flod with the 4 nucleotides, allowing a stepwise progression of DNA synthesis
+* The chip is sequentially flodded with the 4 nucleotides, allowing a stepwise progression of DNA synthesis
 * The addition of a nucleotide releases a proton, changing the pH of the well
 * The drop in pH is recorded as a base call for the well
 * I have clonal amplification on positively charged spheres
