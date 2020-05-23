@@ -84,6 +84,24 @@
 * A human chromosome is on average 80-100 Mb
 * Penetrance is the proportion of individual with a given genotype that manifest the associated phenotype
 
+# Sanger sequencing
+* Sanger sequencing was developped by F. Sanger in 1977
+* It uses DNA polymerase to extend a primer using genomic DNA as a template
+* ddNTPs are incorporated in the reaction mixture in a controlled ratio
+	* ddNTPs lack a 3'-OH and thus cannot be used for extending the DNA chain
+	* The ration ddNTP/dNTP is typically around 1/100, but it depends on the lenght of the desired sequence
+	* When a ddNTP is incorporated the extension reaction is interrupted
+* In the original Sanger publication and in the first approaches radioactive labels were used
+	* Either the primers were labeled, or a single dNTP (not ddNTP!) in the mixture
+	* 4 different reaction were performed and separately processed, each with a single ddNTP type
+* In the current approach, dye-terminator sequencing, the 4 different ddNTPs are labeled with different fluorophores
+	* The strand itself and the primers are not labeled
+	* A single reaction is done with all the 4 labeled ddNTPs and run together on the capillary gel
+* The ssDNA fragments are run in a capillary electrophoretic apparatus
+	* ssDNA hairpins are a serious probelm for lenght resolution
+	* A denaturing polyacrilamide-urea gel is used
+* In dye-terminator sequencing an electropherogram is produced, showing fluorescent intensity peaks for each of the 4 channels
+
 # Next generation sequencing
 * NGS platforms: Illumina, Ion torrent (Thermo fisher), PacBio, Nanopore, 454
 	* PacBio was going to be acquired by Illumina, but the antitrust opposed and the merger was canceled
