@@ -83,6 +83,16 @@
 * The quality score of an assembly (n50) is the minimum size of scaffolds that contain 50% of the assembled genome
 * A human chromosome is on average 80-100 Mb
 * Penetrance is the proportion of individual with a given genotype that manifest the associated phenotype
+* ChiPseq (chromatine immunoprecipitation) is a method used to analyse DNA-protein interactions
+	* The output is a library of sequences that bind the protein of interest
+	* The first step is to fix the proteins with DNA using formaldehyde
+	* Subsequently, cells are lised and DNA fragmented
+	* The sequences of interest are recovered with Ab against the protein of interest
+	* I reverse the DNA-protein binding and sequence the fragments 
+* If I want to reduce cost, I can sequence only the part of interest, for instance the exome
+	* In order to sequence the exom I need a capturing system
+	* If not commercially available I have to evaluate if developping a capturing system is worth it 
+	* In order to enrich for the exome, I need to have specific probes that bind to exon regions, either in solution (on beads) or in microarrays
 
 # Sanger sequencing
 * Sanger sequencing was developped by F. Sanger in 1977
@@ -128,18 +138,22 @@
 * Fastq is similar to fasta but it has additional information on it
 	* It uses ASCII symbols to code a quality score (PHRED score, from the homonimous software) in a separate line from the one where the bases are stored
 		* PHRED uses hard-code lookup tables of peak charachteristics to estimate quality
+	* The highest quality is 93 for fastq
 	* The quality score is the ASCII code of the charachter (!)
-	* The highest quality is 90 for fastq
+		* ASCII 33 to 126 are used, encoding scores from 0 to 93
 	* The quality score rarely exceeds 60 in raw data, but can be higher in assemblies
 	* The threshold quality score now accepted for base calling is 30
+* Illumina reads file looks like a fastq, but quality scores have a different scale
+	* If my file has scores higher than 90, it is an Illumina file
 * Allignments are saved in .sam format, a tab-delimited text file that can be converted in a binary .bam file
+	* The sam file contains the sequence of reads, their genomic alignment coordinate, contig, mate read name
 	* samtools is used for working with sam files
 
 # Ion torrent
 * There are many sequencing chips, with different throughputs
 * The sequencing device is a semiconductor chip with millions of nano-wells
 	* Each well is represented as a pixel
-* DNA fragments are clonally amplified on beads that are poured on the chip and go in the wells, one for each well
+* DNA fragments are clonally amplified on acrylamide beads that are poured on the chip and go in the wells, one for each well
 * The chip is sequentially flodded with the 4 nucleotides, allowing a stepwise progression of DNA synthesis
 * The addition of a nucleotide releases a proton, changing the pH of the well
 * The drop in pH is recorded as a base call for the well
@@ -165,29 +179,21 @@
 * It will take forever with standard PCR, so I do emulsion PCR where every drop harbours a reaction
 * I then do an electrophoresis to get only the fragments of a certain size
 * NGS can typically sequence from 25 up to 400 nucleotides, but the highest throughput is around 100 BP per read
-* In emulsion PCR I use a bead, different from the one used in sequencing
 * The ideal case is that in a droplet I have a bead and a single DNA fragment
-* The bead is used to retrieve my sample after the PCR
-* If 2 different fragments are amplified together I get mixed reads, and they give me false sequences as output
-* I need to ignore the mixed reads, but they will waste some of my sequencing wells
-* The same for 2 beads with the same fragment: duplicate reads
-* The real throughput of my sequencing system is lower than the theoretical one
+* The DNA attached to the acrylamide beads after emulsion PCR is retrieved with the ion sphere particle enhancement technique
+	* I use magnetic beads with streptavidin to capture the amplified acrylamide beads
+	* The beads bind biotin-labeled nucleotides on the beads, so this will select only sucessfully amplified beads
+	* After magnetic pull I denature the streptavidin and release the acrylamide template beads
 * To increase my output, I can regolate my flow (nucleotides added) considering gc content of my target
+	* One flow is the addition of 1 nucleotide to the chip
+* The real throughput of my sequencing system is lower than the theoretical one
+	* If 2 different fragments are amplified together I get mixed reads, and they give me false sequences as output
+	* I need to ignore the mixed reads, but they will waste some of my sequencing wells
+	* The same for 2 beads with the same fragment: duplicate reads
+* The ionogram is expected to show on average a peak every 4 flows
+	* If I see too many peaks close to each other, I probably have mixed reads
 * I have a reference sequence known, and if this sequence reaches a threshold signal I keep my read, otherwise I discard it
 * In missed reads I have too many empty spaces in each read, more than statistically reasonable
-* ChiPseq (chromatine immunoprecipitation) is a method used to analyse DNA-protein interactions
-	* The output is a library of sequences that bind the protein of interest
-	* The first step is to fix the proteins with DNA using formaldehyde
-	* Subsequently, cells are lised and DNA fragmented
-	* The sequences of interest are recovered with Ab against the protein of interest
-	* I reverse the DNA-protein binding and sequence the fragments 
-* If I want to reduce cost, I can sequence only the part of interest, for instance the exome
-	* In order to sequence the exom I need a capturing system
-	* If not commercially available I have to evaluate if developping a capturing system is worth it 
-	* In order to enrich for the exome, I need to have specific probes that bind to exon regions, either in solution (on beads) or in microarrays
-* In order to reduce cost, I can run more samples in the same lane by using a barcode attached to my fragments
-* MySeq can be used for metagenomics (16S sequencing, 24 samples per lane) and for microbial WGS
-* HiSeq can be used for WGS (3-4 lanes per genome) and exome capture (4 samples per lane)
 
 # Roche 454
 * It works in similar way to Ion Torrent, but it senses the release of pyrophosphate during elongation
@@ -214,6 +220,9 @@
 	* I can play with fragment size to obtain my contigs
 * When I sequence a genome, I need to consider sequencing depth and coverage
 	* Sequencing depth is the average number of times that a nucleotide in my reference genome is represented in a read
+* In order to reduce cost, I can run more samples in the same lane by using a barcode attached to my fragments
+* MySeq can be used for metagenomics (16S sequencing, 24 samples per lane) and for microbial WGS
+* HiSeq can be used for WGS (3-4 lanes per genome) and exome capture (4 samples per lane)
 
 # AB SOLiD
 * It is dead by now, but could be potentially great because it gives the highest throughput
