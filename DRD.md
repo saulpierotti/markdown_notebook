@@ -107,19 +107,47 @@
 ## Competitive microarrays
 * They use 2 colors in the same chip and they were invented 20 years ago at Stanford by Patrick O'Reilly Brown
 * Spotting technique: the oldest approach
-	* The glass chip surface is coated with aminosilane or other amino-modified groups for binding oligos
-	* UV exposure activates the chemical groups
-	* Oligo binding is possible only on the UV-exposed surface, so I can determine where a certain oligo will bind
+	* A spotting robot with pins spots oligos in the slide
+	* The glass chip surface can be coated with aminosilane or other amino-modified groups for binding oligos
+		* This is feasible with longer oligos, that are long enogh to interact strongly with the support
+	* I can use oligos with a 5' alifatic amine that binds to the glass
+		* This is typically used for shorter oligos
+* In situ synthesis of oligos
+	* I synthesize oligos on the slide itself base by base
+	* I use dNTPs with a protective group at the 5' that inhibits elongation
+	* I selectively deprotect the 5' in different ways
+* I can use UV exposure to deprotect the 5', so that sinthesis can continue (Affimetrix)
+	* I can determine the sequence of each probe by using photolitographic masks to selectively expose probes to UV light
+	* UV masks are expensive to produce, but once produced they can be used for many arrays
+	* This technique is highly scalable and it is suityed for standardized (non-custom) arrays
+* Affimetrix mask deprotection generates rectangular features
+	* There is refraction of UV light in the mask, so there is bleeding among adjacent features
+	* The Affimetrix software corrects this by using only the central pixels of each feature
+* Other approaches are more suited for custom arrays
+	* I can unse maskless photodeprotection with micromirrors
+	* I can use inkject chemical deprotection
+		* This gives the highest-quality features
 * Tipycally they are used with mRNAs: I do retrotranscription using Cy3(green)/Cy5(red) marked nucleotides for different samples
-	* Ibridisation is usually overnight, then I scan the array and acquire the image
+	* Ibridization is usually overnight, then I scan the array and acquire the image
 	* I can then compare expression level by comparing Cy3/Cy5 intensity at each spot
 * Cy3 and 5 are both N-hydroxy-succimidyl esters but Cy5 is bigger
 	* Possible bias during retrotrascription!
 	* To reverse this, I can retrotrascribe both samples with aminoallyl-dUTP and then couple the dyes via chemical reaction
-* ScanArray scans at 550nm (green) for exciting Cy3 and at 649nm (red) for Cy5
-	* Fluorescence is measured by a photomultiplier tube (PMT) 
+* The array scanner (ScanArray) scans at 550nm (green) for exciting Cy3 and at 649nm (red) for Cy5
+	* A feature is usually represented by ~50 pixels
+	* The laser is separately focused in each pixel
+		* This is done by optics or by moving the slide
+	* Fluorescence is measured by a photomultiplier tube (PMT) for each pixel
+	* I do not read the whole array toghether, I read 1 pixel at a time!
+	* Each laser spot size is represented by 1 pixel, or by more than 1
+		* If a the pixel size is smaller than the laser spot, I blur the image and reduce irregularities
 	* Each pixel of the image is a point of measure
 	* The 2 channels are then merged in silico
+* For each channel a 16-bit monochromatic TIFF image is acquired
+	* A single image can be 32 Mb, so if I scan many arrays storage is an issue
+* Each channel TIFF image is processed so to obtain a table of intensities for each feature
+	* I first need to find the features
+	* Then, for each feature I need to segment it: determine which pixels belong to the feature and wich to the background
 * For each spot in the final image, the software uses false colors
 	* A white spot is saturated
 	* A blue spot is absence of signal
@@ -128,15 +156,18 @@
 	* A yellow spot has the same levels of Cy3 and Cy5 intesities
 * I can address any possible dye bias by swapping the dyes and repeating the experiment
 * Background fluorescence can be a problem
-	* The software filters it out but pixel with luminosity lower than the fluorescence are lost
+	* The usual approach is to subract the local background from the feature intensity
+		* If the result is negative (backgroud is broghter than the feature) I flag the feature as unreliable and filter it out
+	* I can assign the arbitrary value 1 to all the features with intensity lower than the background
 * For each spot I have a pixel distribution
 	* I can get the mean signal, SD, median, median absolute deviation (MAD)
-	* $MAD = \frac{1}{N}\sum_{i=1}^N |x_i - Median_x|$
+	* $MAD = Median(|x_i - \tilde{x}|)$, where $\tilde{x} = Median(x)$
+	* The MAD is the median of the absolute deviations from the median of the dataset!
 * The row data intensity is typically transformed in log_2 scale
 * The MA plot is useful for evaluating the distribution of data in a competitive array
-	* The x is the log average intensity (log(Cy3)+log(Cy5))/2)
-	* The y is log Cy3/Cy5 ratio
-	* It allows to see if the fold change is due to the intensity
+	* The x is the log average intensity $(\log{Cy3}+\log{Cy5})/2$
+	* The y is $\log{Cy3}/\log{Cy5}$ ratio
+	* It allows to see if the fold change is due to variations in absolute intensity
 * If the MA plot is not horizontal I need to normalise my data
 	* Linear normalisation: I can assume that the fluorescence of one of the dyes is related to that of the other by a correction factor k
 	* This corrects for different absolute intensities of the dyes
