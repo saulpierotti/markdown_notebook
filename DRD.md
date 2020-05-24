@@ -103,9 +103,6 @@
 * Microarray supports can be made of glass, silicon, quartz, nylon
 * Competitive microarrays use 2 color channels in order to quantify the relative abundance of 2 different species
 * Non-competitive microarrays use just 1 color channel to give an absolute estimate of a species
-
-## Competitive microarrays
-* They use 2 colors in the same chip and they were invented 20 years ago at Stanford by Patrick O'Reilly Brown
 * Spotting technique: the oldest approach
 	* A spotting robot with pins spots oligos in the slide
 	* The glass chip surface can be coated with aminosilane or other amino-modified groups for binding oligos
@@ -127,6 +124,9 @@
 	* I can unse maskless photodeprotection with micromirrors
 	* I can use inkject chemical deprotection
 		* This gives the highest-quality features
+
+## Competitive microarrays
+* They use 2 colors in the same chip and they were invented 20 years ago at Stanford by Patrick O'Reilly Brown
 * Tipycally they are used with mRNAs: I do retrotranscription using Cy3(green)/Cy5(red) marked nucleotides for different samples
 	* Ibridization is usually overnight, then I scan the array and acquire the image
 	* I can then compare expression level by comparing Cy3/Cy5 intensity at each spot
@@ -234,10 +234,15 @@
 * Variability in a dataset can be estimated with the coefficient of variation CV
 	* In the log-normal model $CV = \sqrt{\exp{\sigma^2}-1}$ for the natural logarithm when I am using the standard deviation of the logged intensities
 	* If I am using logarithms in base 2 I need to correct as $CV = \sqrt{\exp{(\sigma*\ln{2})^2}-1}$
+* Replicate feature variability is the variability among identical features in different physical positions in the array
+* Cy3 to Cy5 variability is best evaluated by self-self hybridization or by swapping dyes
+	* Self hybridization means to labele with both dyes the same sample and hybridise it in the same array
 * Hybridization variability is the confounded measurement of the variability among hybridization reactions and among arrays
 	* I cannot distinguish these 2 variabilities, so they are confounded
 	* I can use an identical reference sample in all the arrays to estimate it
 	* The distribution of the reference sample is centered in each array
+	* I usually filter only features for which data is complete
+* Sample (biological) variability tends to be the biggest source of variability, and it is also what we are usually interested in!
 * The MIAME standard is used for uniformating microarray experiments and allowing comparisons
 
 # Non competitive arrays
@@ -250,7 +255,17 @@
 * This arrays are produced by photolotography chemistry
 	* It is used for in situ synthesis of oligos!
 	* A UV sensitive reaction blocker is selsectively degraded by UV light
-* An oligo cluster is called as feature in arrays
+	* A UV-sensitive blocker is also used on the glass surface to modulate the addition of the first base
+	* It uses also side protections in nucleotides to avoid the formation of branched chains
+	* Features are rectangular
+* Genechips for the following species are available: *B. subtilis*, barley, cow, *C. elegans*, dog, chicken, *Drosophila*, *E. coli*, human, maize, mouse, *P. aeruginosa*
+* The human HG-U133 Genechip contains 1.3 million features in a 1 cm*1 cm area
+* The Genechip 1° array had features for 47400 transcripts on 38000 genes
+	* Gene sequences were obtained from public sources
+	* They had internal control probes
+	* 11 probes at the 3' of each gene to measure the level of transcript
+* Probes are typically at the 3' of transcripts so that I can rexognize also partial mRNAs
+* Housekeeping genes have probes both at the 3' and 5' so that I can compare tjeir intensities and estimate sample degradation
 * Probes are redundant, in the sense that there are different probes that target different positions of the same mRNA to cross-check and average results
 * Mismatch probes: probes similar to normal probes but with a single base mutated in the middle
 	* They are used to quantify background and non-specific binding and remove it
