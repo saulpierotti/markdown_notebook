@@ -7,7 +7,6 @@
 * Module 1 has a written test, module 2 a report (of course)
 * Final score is 20 (module 1) + 10 (module 2)
 * Experimental questions should be focused
-* Again omics
 * In an experiment I have to consider experimental and biological variability
 * We can find nucleosomes in blood deriving from apoptotic bodies
 	* They are found in microvescicoles
@@ -15,8 +14,18 @@
 * In the lab of prof. Capri they tryed to see if the nucleosome-associated DNA in blood is different in young, old people and centenarians
 	* They work a lot with centenarians and they are so proud of it
 * We have about 28 millions CpGs in our genome
-* CpG metilating/demetilating enzymes: TET (Ten Eleven Translocation), DNMTs
-* CpG metilation happens at position 5 of C
+* Histones are octamers
+	* H2a and H2b form a dimer
+	* 2 H3 and H4 form a tetramer
+	* A tetramer binds 2 dimers forming the histone octamer
+	* Toghether with 148 bp of DNA they form nucleosomes
+	* The DNA between nucleosome is called linker DNA
+	* H1 is the linker histone which binds incoming and outgoing DNA from the nucleosome
+* Histone modifications are one of the essential epigenetic modifications
+	* They usually happen in K, R, S, or T of histone tails
+* TET (Ten Eleven Translocation) is the principal CpG demetylating enzyme
+* DNMT
+* In mammals metilation happens mostly at position 5 of C in a CpG dinucleotide
 * Histone modifications: metilation, acetilation, posphorylation
 	* H3k4me3: active promoters
 * High expression is associated with high gene metilation and low promoter metilation
@@ -45,17 +54,30 @@
 		* They can act in different cells than the ones that produced them!
 * Astronauts could be ageing faster
 	* They want to check their DNA associated with nucleosomes before going, after landing and after a while after landing
-* I should do technical replicates
-* Coefficient of variability: (SD/mean)*100
-* The normal distribution
-* Biological variability: usually a lot
 * I can distinguish biological and experimental variability by carefully designing my experiment
+	* Biological variability is usually a lot
+	* I should always do technical replicates
+
+# Basic statistics
+* $\mu$ and $\sigma$ refer to population parameters, while $\bar{X}$ and $S$ are sample parameters
+* Coefficient of variability: $CV = (SD/\bar{X})*100$
+* Population standard deviation: $\sigma = \sqrt{\frac{1}{N}\sum_{i=1}^N (x_i - \mu)^2}$
+* Unbiased Sample standard deviation: $S = \sqrt{\frac{1}{N-1}\sum_{i=1}^N (x_i - \mu)^2}$
+	* The standard deviation estimated from a sample must divide by the degrees of freedom!
+	* I already estimate the mean using the data so I loose 1 df
+	* The mean of the sample is likely to be closer to the values in the sample than to the general population since it was estimated from them!
+	* I consistently underestimate the variance if I divide by N!
+* The standard normal distribution has mean $\mu = 0$ and standard deviation and variance  $\sigma = \sigma^2 = 1$
+	* $\mu \pm 1 \sigma$ are the inflection points of the curve and include 68.2% of the population
+	* $\mu \pm 2 \sigma$ includes 95.4% of the population
+	* $\mu \pm 3 \sigma$ includes 99.6% of the population
+	* The Z score is the number of $\sigma$ away from the mean in the standard normal curve that my measurement is
 * Box plot: look at data distribution
 	* The central line is the median (quartile Q2)
 	* The sides of the box are the quartiles Q1 and Q3
-	* The lines are 1.5*IQR above/below Q1/Q3
-	* Interquartile range (IQR) is Q3-Q1
-	* Outliers outside of the lines are shown
+	* The interquartile range (IQR) is Q3-Q1 and contains 50% of the distribution
+	* The wiskers are 1.5*IQR above/below Q1/Q3
+	* Outliers are the datapoints outside of the wiskers
 
 # Microarrays
 * Tiling arrays cover an entire genome

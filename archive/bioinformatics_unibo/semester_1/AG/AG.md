@@ -241,7 +241,9 @@
 	* Sequencing depth is the average number of times that a nucleotide in my reference genome is represented in a read
 * In order to reduce cost, I can run more samples in the same lane by using a barcode attached to my fragments
 * MySeq can be used for metagenomics (16S sequencing, 24 samples per lane) and for microbial WGS
+	* It can procduce 3-7 million reads per lane
 * HiSeq can be used for WGS (3-4 lanes per genome) and exome capture (4 samples per lane)
+	* It can procduce 100-160 million reads per lane
 
 # AB SOLiD
 * It is dead by now, but could be potentially great because it gives the highest throughput
