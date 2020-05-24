@@ -93,34 +93,45 @@
 
 # Microarrays
 * Tiling arrays cover an entire genome
+	* They can be designed so to study gene variants, transcripts, DNA methylation, chromatine immunoprecipitation, ecc...
 * There are DNA and protein arrays (Ab arrays!)
 * For transcriptomics and DNA metilation I can use competitive or non competitive arrays
 * Production technologies
-	* Oligos can be separately synthesised and spotted
+	* Oligos can be separately synthesised and spotted (various companies do this)
 	* DNA can be synthesized directly on the chip (GeneChip)
-	* Oligos can be separately synthesized and loaded on beads, which are then immobilised on the chip (beadChips)
+	* Oligos can be separately synthesized and loaded on beads, which are then immobilised on the chip (BeadChips)
 * Microarray supports can be made of glass, silicon, quartz, nylon
+* Competitive microarrays use 2 color channels in order to quantify the relative abundance of 2 different species
+* Non-competitive microarrays use just 1 color channel to give an absolute estimate of a species
 
 ## Competitive microarrays
-* They use 2 colors in the same chip
-* Invented 20 years ago at Stanford
-* Chip surface coated with aminosilane for binding oligos
-* Oligo binding is possible after UV exposure
-* Tipycally used with RNA
-	* I do retrotranscription using Cy3(green)/Cy5(red) marked nucleotides
-* Ibridisation is usually overnight, then I scan the array and acquire the image
-* Cy3 and 5 are N-hydroxi-succimidyl esters but Cy5 is bigger
+* They use 2 colors in the same chip and they were invented 20 years ago at Stanford by Patrick O'Reilly Brown
+* Spotting technique: the oldest approach
+	* The glass chip surface is coated with aminosilane or other amino-modified groups for binding oligos
+	* UV exposure activates the chemical groups
+	* Oligo binding is possible only on the UV-exposed surface, so I can determine where a certain oligo will bind
+* Tipycally they are used with mRNAs: I do retrotranscription using Cy3(green)/Cy5(red) marked nucleotides for different samples
+	* Ibridisation is usually overnight, then I scan the array and acquire the image
+	* I can then compare expression level by comparing Cy3/Cy5 intensity at each spot
+* Cy3 and 5 are both N-hydroxy-succimidyl esters but Cy5 is bigger
 	* Possible bias during retrotrascription!
 	* To reverse this, I can retrotrascribe both samples with aminoallyl-dUTP and then couple the dyes via chemical reaction
-* ScanArray scans at 550nm for exciting Cy3 and at 649nm for Cy5
-	* Fluorescence is measured by PMT
-	* Each pixel is a point of measure
-	* It uses false colors
-* I can address bias by swapping the dyes
+* ScanArray scans at 550nm (green) for exciting Cy3 and at 649nm (red) for Cy5
+	* Fluorescence is measured by a photomultiplier tube (PMT) 
+	* Each pixel of the image is a point of measure
+	* The 2 channels are then merged in silico
+* For each spot in the final image, the software uses false colors
+	* A white spot is saturated
+	* A blue spot is absence of signal
+	* A red spot has Cy5 upregulation
+	* A green spot has Cy3 upregulation
+	* A yellow spot has the same levels of Cy3 and Cy5 intesities
+* I can address any possible dye bias by swapping the dyes and repeating the experiment
 * Background fluorescence can be a problem
 	* The software filters it out but pixel with luminosity lower than the fluorescence are lost
 * For each spot I have a pixel distribution
 	* I can get the mean signal, SD, median, median absolute deviation (MAD)
+	* $MAD = \frac{1}{N}\sum_{i=1}^N |x_i - Median_x|$
 * The row data intensity is typically transformed in log_2 scale
 * The MA plot is useful for evaluating the distribution of data in a competitive array
 	* The x is the log average intensity (log(Cy3)+log(Cy5))/2)
