@@ -164,6 +164,13 @@
 	* I can get the mean signal, SD, median, median absolute deviation (MAD)
 	* $MAD = Median(|x_i - \tilde{x}|)$, where $\tilde{x} = Median(x)$
 	* The MAD is the median of the absolute deviations from the median of the dataset!
+* Image scanning is crucial for data quality
+	* Low laser intensity for redcing photobleach
+	* The photomultiplier shuold be set so to balance the Cy3 abd Cy5 channels
+* Segmentation is the process of identifying clusters in the image
+	* It is done with algoriths and manual inspection
+	* There is also an experimental approach that uses DAPI to color the clusters
+* Spot intensities for Cy3 and Cy5 can be use for estimating the overall expression ratio
 * The row data intensity is typically transformed in log_2 scale
 	* In this way a signal of 1 means a 2-fold upregulation
 	* Raw data tend to be highly skewed towards 0, while log data are more normally distributed
@@ -200,7 +207,6 @@
 		* The LOESS regression fits locally a polynomial and then smooths the curve
 	* Spatial effects can be due to the array being not horizontal during the scan
 		* Some regions can be in focus, others not
-* When the assumption of non-differential expression is not reasonable I can use a reference sample for normalization
 * Inter-array normalization: comparing different samples
 	* Different arrays can have different data distributions
 	* These methods all make the same central assumption: the variations in the distributions between arrays are a result of experimental conditions and do not represent biological variability
@@ -218,17 +224,21 @@
 		* I replace each measurement with the corresponding average
 			* The highest measurement is replaced with the higest value of the reference distribution and so on
 		* The resulting distributions are identical and have mean 0 and standard deviation 1
-* Coefficient of variability: VAR/mean*100
+		* I am NOT making all the data equal
+			* A certain feature can be first on one array and 15th on another, and so it will have different values
+			* The first features of 2 arrays will have the same values, but they can be different features!
+* When the assumption of non-differential expression is not reasonable I can use a reference sample for normalization
+* In the lognormal model the errors are normally distributed
+	* In real data errors tend to have sharper peaks and heavier tails than what the distribution predict
+	* The log-normal distribution for microarray data is an approximation!
+* Variability in a dataset can be estimated with the coefficient of variation CV
+	* In the log-normal model $CV = \sqrt{\exp{\sigma^2}-1}$ for the natural logarithm when I am using the standard deviation of the logged intensities
+	* If I am using logarithms in base 2 I need to correct as $CV = \sqrt{\exp{(\sigma*\ln{2})^2}-1}$
+* Hybridization variability is the confounded measurement of the variability among hybridization reactions and among arrays
+	* I cannot distinguish these 2 variabilities, so they are confounded
+	* I can use an identical reference sample in all the arrays to estimate it
+	* The distribution of the reference sample is centered in each array
 * The MIAME standard is used for uniformating microarray experiments and allowing comparisons
-* Image scanning is crucial for data quality
-	* Low laser intensity for reducng photobleach
-	* The photomultiplier shuold be set so to balance the Cy3 abd Cy5 channels
-* Segmentation is the process of identifying clusters in the image
-	* It is done with algoriths and manual inspection
-	* There is also an experimental approach that uses DAPI to color the clusters
-* Softwares also separate the image in background and foreground (the actual signal)
-	* The difference of foreground and background intensities is the spot intensity
-* Spot intensities for Cy3 and Cy5 can be use for estimating the overall expression ratio
 
 # Non competitive arrays
 
