@@ -159,30 +159,65 @@
 	* The usual approach is to subract the local background from the feature intensity
 		* If the result is negative (backgroud is broghter than the feature) I flag the feature as unreliable and filter it out
 	* I can assign the arbitrary value 1 to all the features with intensity lower than the background
+	* I can use a Bayesian approach to estimate the true feature intensity
 * For each spot I have a pixel distribution
 	* I can get the mean signal, SD, median, median absolute deviation (MAD)
 	* $MAD = Median(|x_i - \tilde{x}|)$, where $\tilde{x} = Median(x)$
 	* The MAD is the median of the absolute deviations from the median of the dataset!
 * The row data intensity is typically transformed in log_2 scale
+	* In this way a signal of 1 means a 2-fold upregulation
+	* Raw data tend to be highly skewed towards 0, while log data are more normally distributed
+		* This is beacuse raw data has a lognormal distribution ($Y\sim\log{N}$)
 * The MA plot is useful for evaluating the distribution of data in a competitive array
-	* The x is the log average intensity $(\log{Cy3}+\log{Cy5})/2$
-	* The y is $\log{Cy3}/\log{Cy5}$ ratio
+	* The x (called A) is the log average intensity $(\log{Cy3}+\log{Cy5})/2$
+	* The y (called M) is $\log{Cy3}/\log{Cy5}$ ratio
 	* It allows to see if the fold change is due to variations in absolute intensity
 * If the MA plot is not horizontal I need to normalise my data
 	* Linear normalisation: I can assume that the fluorescence of one of the dyes is related to that of the other by a correction factor k
 	* This corrects for different absolute intensities of the dyes
 	* I just scale M (the y) by subtracting the log2 of the constant k
 	* I can center the M to 0 by using c=log2k=median(M)
-* Normalising between arrays: use the same reference sample!
-	* Centering: just subtract from M the mean in log space so you center to 0 and divide by SD so that SDnew=1
-		* I can also center on the median and MAD
-		* It is preferable to use the median when there are outliers (it is less sensitive to outliers)
-	* Normalisation: make distributions identical
-		* First I need to center the data
+* Intra-array normalization: use the same reference sample!
+	* Variability can derive not only from differential expression
+		* Different response of the Cy dyes and of the apparatus at different wavelenghts
+		* Different response in different parts of the array (spatial variability)
+* All the following methods for intra-array normalization rely on the assumption that the majority of features are NOT differentially expressed
+	* Because of the assumption, most of the gross variability is techinical
+	* Cy5 to Cy3 linear regression
+		* If the 2 dyes are behaving equally, I expect to observe an equally spaced straight line with $m=1$ and $q=0$ when plotting in log space
+		* A non-0 intercept means that one channel is systematically brighter
+		* A non-1 coefficient means that one channel is more responsive to high intensities
+			* Usually Cy3 is stronger at high intensity and Cy5 is stronger at low intensity
+		* There can be deviation from linearity
+		* I can apply this correction by fitting a linear regression to the data and subtracting the fitted Cy3 values from the raw Cy3 values
+		* In this way I am treating Cy3 and CY5 differently so the method is not reversible!
+	* MA plot linear regression
+		* If the channels are behaving equally I expect an horizontal regression line centerd in $y = 0$
+		* This regression treats both channels equally
+		* For each datapoint I subtract the fitted log ratio to the raw log ratio
+		* This processing makes the linear regression horizontal and centered at $y = 0$
+	* In each case when the dependence is not linear I can fit a non-linear model
+		* The LOESS regression fits locally a polynomial and then smooths the curve
+	* Spatial effects can be due to the array being not horizontal during the scan
+		* Some regions can be in focus, others not
+* When the assumption of non-differential expression is not reasonable I can use a reference sample for normalization
+* Inter-array normalization: comparing different samples
+	* Different arrays can have different data distributions
+	* These methods all make the same central assumption: the variations in the distributions between arrays are a result of experimental conditions and do not represent biological variability
+	* Data scaling is used to make the means of different distributions equal
+		* I just subtract the mean log ratio of the distribution from each datapoint in the distribution
+		* An alternative is to use the median instead of the mean
+			* The median is less sensitive to outliers and it is more adequate when data is not normally distributed
+	* Data centering is used for making the means and standard deviations of the distributions equal
+		* It is similar to scaling but in addition I also divide for the standard deviation (or MAD in case of median)
+		* All the resulting distributions have a mean of 0 and a standard deviation of 1
+	* Data normalisation is used for makeing the distributions identical
+		* First I need to center the data and I order, for each array, the centered data from lowest to highest
 		* I compute a reference distribution with lowest value the average of the lowest values of each array
 			* I repeat this fo the second lowest and so on
 		* I replace each measurement with the corresponding average
 			* The highest measurement is replaced with the higest value of the reference distribution and so on
+		* The resulting distributions are identical and have mean 0 and standard deviation 1
 * Coefficient of variability: VAR/mean*100
 * The MIAME standard is used for uniformating microarray experiments and allowing comparisons
 * Image scanning is crucial for data quality
