@@ -22,34 +22,45 @@
 	* The DNA between nucleosome is called linker DNA
 	* H1 is the linker histone which binds incoming and outgoing DNA from the nucleosome
 * Histone modifications are one of the essential epigenetic modifications
+	* Histone modifications: metilation, acetilation, posphorylation, ubiquitinilation
 	* They usually happen in K, R, S, or T of histone tails
+	* Histone variants (es. H2ax) mediate also functional alterations
+	* H3k4me3 is typical of active promoters
 * TET (Ten Eleven Translocation) is the principal CpG demetylating enzyme
-* DNMT
+* DNMT1, DNMT3a and DNMT3b are the principal methylating enzymes
+	* DNMT1 mainly methylates hemimethylated CpGs
+	* DNMT3 performs mainly de novo methylation
 * In mammals metilation happens mostly at position 5 of C in a CpG dinucleotide
-* Histone modifications: metilation, acetilation, posphorylation
-	* H3k4me3: active promoters
 * High expression is associated with high gene metilation and low promoter metilation
 	* The causality is not so clear
+* The inheritance of mathylation patterns is not clear
+* CpG methylation can be used as a marker of ageing and pathology
 * The metaorganism: nDNA, mtDNA, microbiome
 	* Microbiome influences our phenotype
+* The Human Microbiome Project (HMP) aimed at sequencinge the microbiome genome
+	* The microbiome genome was shown to have more than 33 million genes
+* RNA expression changes in response to stimuli
 * RNA are of many types
 	* lncRNAs are longer than 200 nt
 	* sncRNAs are shorter than 35 nt
 	* Middle-sized RNAs
 		* Structural: tRNA, rRNA, snRNA, snoRNA
 		* Regulatory: ncRNA, siRNA, miRNA, piRNA
+		* tRNA derived fragments (tRF) are involved in several functions like stress response
 * Micro RNAs: pair with mRNA in an inextact way and block translation
-	* 18-25 nt
-	* They can have many targets
+	* miRNAs are 18-25 nt long
+	* They can have many targets, that they recognize through pairing of their seed sequence
 	* They regulate 60% of the mRNAs
-	* Each locus can produce 2 miRNAs (5p and 3p)
+	* Humans probably have around 600 miRNAs
+	* Each locus can produce 2 miRNAs (5p and 3p), complementary to each other
 	* They are in intergenic regions or in introns or also exons!
-	* pri-miRNA transcribed by RNA-Pol2
-	* Cut by the microprocessor (Drosha/DGCR8) to pre-miRNA
-	* pre-miRNA exproted from the nucleus by exportin 5
-	* Dicer/TRBP trims it to a miRNA duplex
-	* The duplex is separated
-	* One miRNA takes part in the RISC complex and it silences mRNAs
+	* pri-miRNAs are transcribed by RNA-Pol-II under the control of specific promoters
+		* They form a carachteristic hairpin structure
+	* pri-miRNAs are cut by the microprocessor (Drosha(Pasha)/DGCR8) to pre-miRNA
+		* Drosha is a type III class II RNAse
+	* pre-miRNA are exported from the nucleus by the Ran-GTPase Exportin 5
+	* Dicer/TRBP trims the pre-miRNA in the cytosol to a miRNA duplex and separates the 5p and 3p miRNAs
+	* The miRNA takes part in the RISC complex and it silences mRNAs
 	* miRNAs can be found in vescicles/exosomes and go around the body
 		* They can act in different cells than the ones that produced them!
 * Astronauts could be ageing faster
@@ -57,6 +68,7 @@
 * I can distinguish biological and experimental variability by carefully designing my experiment
 	* Biological variability is usually a lot
 	* I should always do technical replicates
+* When planning an experiment it is essential to know the underlying biology in order to select the correct variables
 
 # Basic statistics
 * $\mu$ and $\sigma$ refer to population parameters, while $\bar{X}$ and $S$ are sample parameters
@@ -81,12 +93,13 @@
 
 # Microarrays
 * Tiling arrays cover an entire genome
-* I can also have protein arrays
+* There are DNA and protein arrays (Ab arrays!)
 * For transcriptomics and DNA metilation I can use competitive or non competitive arrays
 * Production technologies
 	* Oligos can be separately synthesised and spotted
 	* DNA can be synthesized directly on the chip (GeneChip)
 	* Oligos can be separately synthesized and loaded on beads, which are then immobilised on the chip (beadChips)
+* Microarray supports can be made of glass, silicon, quartz, nylon
 
 ## Competitive microarrays
 * They use 2 colors in the same chip
