@@ -197,25 +197,44 @@
 
 # Roche 454
 * It works in similar way to Ion Torrent, but it senses the release of pyrophosphate during elongation
+	* NUcleotides are added in flows like for ion torrent
+	* PPi and adenylil-sulfate are converted to ATP and sulfate by sulfurylase (Sulfate adenylyltransferase)
+	* ATP is used by luciferase releasing a photon
+	* APyrase continously removes excess NTPs that are not incorporated
 * It was the first NGS to be developped, but also the first one to become obsolete
 * Like Ion Torrent, it uses beads on a chip and the target is amplified by emulsion PCR
 * $PP_i$ is used by sulphurylase to synthetize ATP, ATP is used by luciferase to produce light
 * Light emission is sensed by a CCD camera producing a pyrogram
 * This technique was abandoned because it is too expensive
-	* The cost is mainly due to the many enzymes used (sulphurylase, luciferase)
+	* The cost is mainly due to the many enzymes used (sulphurylase, luciferase, apyrase)
 	* The CCD camera is expensive
 * It has revolutionized bacterial taxonomy because it allowed to sequence the rRNA 16s
 	* This is because it can produce longer reads than other NGS techniques
 
 # Illumina
-* Adapters are ligated to my fragments
-* In a flowcell, I have many oligos that can anneal with the adapters
+* Library preparation
+	* DNA is fragmented by sonication
+	* Overhangs are blunted or repaired
+		* I use T4 polymerase and Klenow fragment for repair and blunting
+		* Polymerase activity fills the 5' overhangs and exonuclease activity removes the 3' overhangs
+	* All the 5' ends are poshporylated, since their status is unknown after sonication
+		* I use T4 PNK
+	* A single A is added at the 3' of the fragments to avoid ligation of different fragments in the blunt ligation step
+		* Adapter on the contrary have a single T 3' overhang to facilitate ligation with the fragments
+	* Adapters are ligated to fragments with ligase
+	* PCR is used for selectively amplifying fragments that have been correctly ligated to adapters
+		* The primers anneal to the end of the adapter and have a tail that adds sequences used for the library amplification in the flowcell
+* In a flowcell, I have many oligos that can anneal with the inserted sequences at the end of the adapters
+* Bridge amplification amplifyes the fragments in the flowcell
 * After bridge-amplification, I get clonal clusters of fragments
-* In the elongation step I add all the nucleotides together, marked with fluorophores
+* In the elongation step I add all the nucleotides together, marked with fluorophores and reversibly inhibited at their 3'
+	* These modified nucleotides are called reversible dye terminator chemistry
+	* The primers used anneal to the adapter that is not part of the flowcell
 * The elongation is stepwise because there is a block in 3' that inhibits elongation
 	* I can easily deal with homoplimeric regions (!)
 	* Because of this the error rate is much lower
-* There is an enzimatic step that cleaves the 3' block and the fluorophore
+* After nucleotide incorporation I excite the flowcell with laser and capture the resulting fluorescence with a CCD camera
+* An enzimatic step that cleaves the 3' block and the fluorophore
 * I can sequence both ends of my fragments, and this is really useful for the assembly step
 	* I can play with fragment size to obtain my contigs
 * When I sequence a genome, I need to consider sequencing depth and coverage
