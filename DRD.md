@@ -303,6 +303,7 @@
 	* This is usually discarded and data are analysed manually
 * The information about the probes in the array are contained in a .cdf file, that can be obtained from affimetrix
 	* A .msk file is also provided that allows to celect certain groups of probes for normalization and scaling purposes
+* Affimetrix data can also be analysed with bioconductor packages
 * Probes are typically at the 3' of transcripts so that they can recognize also partial mRNAs
 * Housekeeping genes have probes both at the 3' and 5' so that I can compare their intensities and estimate sample degradation
 * Probes are redundant, in the sense that there are different probes that target different positions of the same mRNA to cross-check and average results
