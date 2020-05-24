@@ -258,14 +258,53 @@
 	* A UV-sensitive blocker is also used on the glass surface to modulate the addition of the first base
 	* It uses also side protections in nucleotides to avoid the formation of branched chains
 	* Features are rectangular
-* Genechips for the following species are available: *B. subtilis*, barley, cow, *C. elegans*, dog, chicken, *Drosophila*, *E. coli*, human, maize, mouse, *P. aeruginosa*
-* The human HG-U133 Genechip contains 1.3 million features in a 1 cm*1 cm area
-* The Genechip 1° array had features for 47400 transcripts on 38000 genes
+* Genechips for the following species are available: *B. subtilis*, barley, cow, *C. elegans*, dog, chicken, *Drosophila*, *E. coli*, human, maize, mouse, *P. aeruginosa*, and many other
+* The human HG-U133 Genechip (1 ST) contains 1.3 million features in a 1 cm*1 cm area
+	* It has features for 47400 transcripts on 38000 genes
 	* Gene sequences were obtained from public sources
-	* They had internal control probes
+	* It has internal control probes
 	* 11 probes at the 3' of each gene to measure the level of transcript
-* Probes are typically at the 3' of transcripts so that I can rexognize also partial mRNAs
-* Housekeeping genes have probes both at the 3' and 5' so that I can compare tjeir intensities and estimate sample degradation
+	* More than 54647 probe sets (cluster of probes in adjacent regions of the gene)
+	* Some genes had more than 1 probe set
+	* It is a perfect match-only design: there are no mismatch probes
+	* The background is estimated with 20k background probes that do not bind anything
+	* It includes poly-A control probes and hybridization controls
+* The Genechip whole-transcript sense target labeling assay can be used for target preparation
+	* Targets are sense cDNAs obtained from mRNAs
+	* It usually requires 1 ug of RNA
+		* The latest kits can work with as little as 100 ng
+	* rRNA is first selectively removed
+	* First mRNA is reverse-trascribed and then the antisense cDNA made double strand
+		* At this step poly-A controls are added
+			* They are artificial transcript at precise concentrations with a poly-A to be used for reference
+		* I can also amplify the dsDNA at this point
+	* The cDNA is in vitro trascribed to cRNA
+	* The cRNA is retrotrascribed again to sense cDNA using random primers and dUTP instead of dTTP
+	* cRNA is degraded and cDNA fragmented and terminally labeled with biotin
+		* The fragmentation happens at dUDPs with UDG and APE1
+		* The labeled nucleotide is added with TdT
+	* At this step hybridization controls are added
+	* After hybridization the array is stained with an avidin-containing dye (streptavidin-phyocoerythrin)
+* After staining the array image can be visually inspected
+	* The image can be greyscale or in false colors
+	* The positive probe sets are in specific locations in the array
+		* They can be at the edges are also form words in the array!
+	* I can check the shape of features
+	* I can check if features are correctly aligned to the grid by the software
+	* I can see if there are scratches, dust, washing not complete
+* The software used for acquiring and elaborating Genechip data is called AGCC
+* The raw image of the array is saved in a .dat file
+* For each feature I retain only pixel above the 75 percentile value
+	* This usually means that I remove pixels at the border
+	* The intensity for a feature is the average of the respective pixel intensities
+* The elaborated image has a pixel per feature with intensity that is the average of the pixel above the 75 percentile for that feature
+	* This image is saved in a .cel file
+* The software does also an automatic data analysis producing a .chp file
+	* This is usually discarded and data are analysed manually
+* The information about the probes in the array are contained in a .cdf file, that can be obtained from affimetrix
+	* A .msk file is also provided that allows to celect certain groups of probes for normalization and scaling purposes
+* Probes are typically at the 3' of transcripts so that they can recognize also partial mRNAs
+* Housekeeping genes have probes both at the 3' and 5' so that I can compare their intensities and estimate sample degradation
 * Probes are redundant, in the sense that there are different probes that target different positions of the same mRNA to cross-check and average results
 * Mismatch probes: probes similar to normal probes but with a single base mutated in the middle
 	* They are used to quantify background and non-specific binding and remove it
