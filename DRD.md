@@ -259,12 +259,20 @@
 	* It uses also side protections in nucleotides to avoid the formation of branched chains
 	* Features are rectangular
 * Genechips for the following species are available: *B. subtilis*, barley, cow, *C. elegans*, dog, chicken, *Drosophila*, *E. coli*, human, maize, mouse, *P. aeruginosa*, and many other
+* Probes are typically at the 3' of transcripts so that they can recognize also partial mRNAs
+* Housekeeping genes have probes both at the 3' and 5' so that I can compare their intensities and estimate sample degradation
+* Probes are redundant, in the sense that there are different probes that target different positions of the same mRNA to cross-check and average results
+* The set of probes targeting the same genes is called probe set for that gene
+* Mismatch probes are probes similar to normal probes but with a single base mutated in the middle
+	* They are used to quantify background and non-specific binding and remove it
+	* It is also a control for the actual binding: I expect to have a lower intensity that for the real probe but correlated to it
+* There are also complete 8-mer and 9-mer chips!
 * The human HG-U133 Genechip (1 ST) contains 1.3 million features in a 1 cm*1 cm area
 	* It has features for 47400 transcripts on 38000 genes
 	* Gene sequences were obtained from public sources
 	* It has internal control probes
 	* 11 probes at the 3' of each gene to measure the level of transcript
-	* More than 54647 probe sets (cluster of probes in adjacent regions of the gene)
+	* More than 54647 probe sets
 	* Some genes had more than 1 probe set
 	* It is a perfect match-only design: there are no mismatch probes
 	* The background is estimated with 20k background probes that do not bind anything
@@ -305,19 +313,13 @@
 	* A .msk file is also provided that allows to celect certain groups of probes for normalization and scaling purposes
 * Affimetrix data can also be analysed with bioconductor packages
 	* I can use YAQCStats to get a QC plot, a frequency histogram of the log_2 intensities
-* Probes are typically at the 3' of transcripts so that they can recognize also partial mRNAs
-* Housekeeping genes have probes both at the 3' and 5' so that I can compare their intensities and estimate sample degradation
-* Probes are redundant, in the sense that there are different probes that target different positions of the same mRNA to cross-check and average results
-* Mismatch probes: probes similar to normal probes but with a single base mutated in the middle
-	* They are used to quantify background and non-specific binding and remove it
-	* It is also a control for the actual binding: I expect to have a lower intensity that for the real probe but correlated to it
-* There are also complete 8-mer and 9-mer chips!
 * Probes that bind the same transcript can show 2 or more orders of magnitude differences in intensity
 	* Probe binding strenght depends on the GC content
 	* Match probes can even be weaker than mismatch probes!
 	* Variability among arrays for the same probe is orders of magnitude smaller than variations among probes in the same array for probes against the same transcripts!
 * Data preprocessing typically involves background correction, normalization and summarization (getting a single value from a probe set across multiple arrays)
 * The RMA (robust multichip average) is a normalization procedure based on quantile normalization
+	* This is used for treating data from a probe set, not whole arrays!
 	* The first step is background correction
 	* The log_2 of each perfect match probe intensity is calculated
 	* These values are quantile-normalized
@@ -336,6 +338,8 @@
 	* I subtract the obtained values from the original ones to get the fitted values
 	* I can then average across probe sets to obtain the RMA average for each chip (row average)
 	* This is the final value for the trascript in a given chip
+	* If I subtract the row average from the fitted values I get the probe effect values
+		* This value is the same for all the chips since the values are quantile normalized!
 
 ## Illumina Beadchip (Infinium)
 * It uses multi-sample arrays
