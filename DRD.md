@@ -304,6 +304,7 @@
 * The information about the probes in the array are contained in a .cdf file, that can be obtained from affimetrix
 	* A .msk file is also provided that allows to celect certain groups of probes for normalization and scaling purposes
 * Affimetrix data can also be analysed with bioconductor packages
+	* I can use YAQCStats to get a QC plot, a frequency histogram of the log_2 intensities
 * Probes are typically at the 3' of transcripts so that they can recognize also partial mRNAs
 * Housekeeping genes have probes both at the 3' and 5' so that I can compare their intensities and estimate sample degradation
 * Probes are redundant, in the sense that there are different probes that target different positions of the same mRNA to cross-check and average results
@@ -311,6 +312,30 @@
 	* They are used to quantify background and non-specific binding and remove it
 	* It is also a control for the actual binding: I expect to have a lower intensity that for the real probe but correlated to it
 * There are also complete 8-mer and 9-mer chips!
+* Probes that bind the same transcript can show 2 or more orders of magnitude differences in intensity
+	* Probe binding strenght depends on the GC content
+	* Match probes can even be weaker than mismatch probes!
+	* Variability among arrays for the same probe is orders of magnitude smaller than variations among probes in the same array for probes against the same transcripts!
+* Data preprocessing typically involves background correction, normalization and summarization (getting a single value from a probe set across multiple arrays)
+* The RMA (robust multichip average) is a normalization procedure based on quantile normalization
+	* The first step is background correction
+	* The log_2 of each perfect match probe intensity is calculated
+	* These values are quantile-normalized
+	* The normalized values are summarized across arrays and probes
+* I fit a multichip linear model to the data
+	* $\log_2{PM_{ij}} = \alpha_i + \beta_j + \epsilon_{ij}$
+	* $PM_{ij}$ is the intensity of the perfect match probe $i$ in array $j$
+	* $\alpha_i$ is the intensity due to the carachteristics of probe $i$ (i.e. GC content)
+	* $\beta_j$ is the intensity due to true expression of the trascript in array $j$
+	* $\epsilon_{ij}$ is the error in the measurment of probe $i$ in array $j$
+* Fitting is done using the Tukey's medianpolish algorithm
+	* It produces a two-way layout table where of probes against arrays, filled with the respective intesities
+	* It calculates the median of each row (all measurements in one array) and subtracts it from the values
+	* It calculates the median of each column (all measurements of the same probe across arrays) and subtracts it from the values
+	* It iterates again for rows and columns until all the row and column medians are 0 (or under a threshold)
+	* I subtract the obtained values from the original ones to get the fitted values
+	* I can then average across probe sets to obtain the RMA average for each chip (row average)
+	* This is the final value for the trascript in a given chip
 
 ## Illumina Beadchip (Infinium)
 * It uses multi-sample arrays
