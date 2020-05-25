@@ -355,36 +355,51 @@
 	* It contains also probes for SNPs, alternatively spliced trancripts, ...
 * For each GeneChip I can obtain the relative probset ID and annotation on the ThermoFisher website
 
-## Illumina Beadchip (Infinium)
-* It uses multi-sample arrays
-* The chips contains 3 um pits where beads can be held by VdW interactions
+## Illumina Beadchip
+* It uses multi-sample arrays, usually for 8 samples
+* It is possible to order custom arrays in the format of a microscope slide (Sentrix BeadChip)
+* There are also grids of arrays arranged like a 96-wells plate (Sentrix Martrix Array)
+	* In this case each sub-array is etched in the surface of glass fibers for easier reading
+* In any format, the array contains 3 um pits where silica beads can be held by VdW and electrostatic interactions
 * Each bead is coated with copies of the same oligo
-* Optic fibers are connected to each pit, so that they can collect the signal from one bead
+* The beads are assembled randomly on the chip, so a priori their adress is unknown
 * The oligos of the beads contain a 29 nt barcode and a 50 nt target-specific portion
-* Illumina Infimium chips are used for methylation studies
+	* The barcode is used for bead identification
+
+### Infimium methylation arrays
+* Illumina Infimium chips are standard BeadChips used for methylation studies
 * In a single cell for a single position methylation can either be 0%, 50% or 100% in a diploid
+	* When I evaluate methilation with an array I do NOT work on single cells!
+	* Methilation can take any value between 0% and 100%
+	* Nonetheless, usually I observe a bimodal distribution clustered around 0% and 100%
 * DNA methilation islands have a terminology such as shelf, shore, open sea, north and south (upstrean and downstream) in relation with a real island
-* The first chips had 27K probes, more or less one in each CpG island
-* Newer ones have 450K probes
-* For each island I have a bead for the island, for the shore, the shelf, the open sea
-* The newest one, Infinium methilationRPIC, has 850K probes
-	* It contains also probes outside CpG islands, non-CpG methylated sites in stem cells, differentially methylated sites in tumors, FANTOM5 enhancers
+	* The methilation level of shores seems more correlated with gene expression than the island itself
+	* In general, one element of a CpG region (i.e. its shore) is considered a functional unit and it is expected to be coherently methylated
+* The first chips had 27K probes, more or less one in each CpG island, while newer ones have 450K probes
+	* For each island I have a bead for the island, for the shore, the shelf, the open sea
+* The last chip, the Infinium methylation EPIC, has 850k probes
+	* It contains also probes outside CpG islands, non-CpG methylated sites in stem cells (CHH sites), differentially methylated sites in tumors, FANTOM5 (functional annotation of mammals project) enhancers, ENCODE enhancers and open chromatine, DNAse hypersensitive sites, miRNA promoters
+	* It retains 90% of the probes in the Human Methylation 450k beadchip
 * Bisulphite conversion: I can deaminate only non-metilated cytosines to uracil
 	* The methyl group protects cytosine from deamination
-	* Be careful: PCR of course does not reatin methylation patterns!
-* Sequencing the DNA before and after bisulphite treatment I can see which sites are methylated by comparing the C/T differences
-* Infinium probes have as a last nucletide the one that pairs with the methylated site
-* A single-base reation extends the probe using the target sequence
+	* PCR does not reatin methylation patterns so I cannot amplify my sample!
+* Genotyping or sequencing the DNA before and after bisulphite treatment I can see which sites are methylated by comparing the C/T differences
+* Infinium probes have as a last nucletide the one that pairs with the methylated site (Infinium I) or just before it (Infinium II)
+* A single-base reaction extends the probe using the target sequence
 * Labelled nucleotides are used, so that the occurrence of extension can be seen by fluorescence
 	* A and T are labeled with DNP
+		* A/T is colored red with anti-DNP-red
 	* C and G are labeled with biotin
-	* In the staining phase A/T is colore redwith anti-DNP-red and C/G green with straptavidin-green
+		* C/G is colored green with straptavidin-green
+* The raw R/G channel intensities are converted to M values or $\beta$ values
+* The $\beta$ value is evaluated as the the ratio among methilated intensity and methylated and unmethylated intensity
+	* $\beta = \frac{M}{M+U+100}$
+	* 100 is added at the denominator to avoid division by 0
+	* Beta-values tend to cluster around 0 and 1, but have a continuous (heteroscedastic) distribution
 * Infinium I assay: 1 color
 	* It uses a bead for unmethylated C (U probe) and one for methylated C (M probe)
 	* The U probe ends with A (and thus binds T) at the target site, the M probe ends in G
 	* U probes can extend only unmethylated sites and vice versa
-	* The methylation level (beta-value) is evaluated as the the ratio among M intensity and U+M intensity
-		* Usually 100 is added at the denominator to avoid 0/0 cases
 	* The color of the signal is not improtant here, just its intensity
 	* Since the probe is 50 nt, it can span multiple CpG sites
 		* The methilated probe is built with the assumption that all the included sites are methilated (C/G in C of CpG)
@@ -393,15 +408,14 @@
 * Infinium II assay: 2 colors
 	* It uses just one bead per site, with the last position just before the target site
 	* Nucleotides are differently marked for methylated (C, G) and unmethylated (A, T)
+		* Methilated sites are GREEN, unmethilated sites are RED
 	* The methylation is evaluated in the same way as with Infinum I, but with the instensities coming from different channels of the same bead
 	* It does not make any assumption about the state of other CpGs included in the probe
 		* It uses degenerate R sites that bind both G and A
 		* The all or none approach is not possible since the same probe must bind both methylated and unmethilated sites!
 	* Since it uses just 1 bead per site with Infinium II I can include a double number of sites in the array
 * Infinium II is less sensitive and more variable
-* Beta-values tend to cluster around 0 and 1, but have a continuous (heteroscedastic) distribution
-* Another approach is to use M-values: it is the log2 of M/U
-	* It is homoscedastic
+* Another approach is to use M-values, the log2 of M/U, which is homoscedastic
 * Comparing Infinium I and II experiments can be done with intra-array nomalisation
 	* I rescale the M-values using the peak summit
 	* Corrected M-values are rescaled again to match the Infinium I range
