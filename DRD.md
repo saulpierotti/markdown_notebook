@@ -244,6 +244,8 @@
 	* I usually filter only features for which data is complete
 * Sample (biological) variability tends to be the biggest source of variability, and it is also what we are usually interested in!
 * The MIAME standard is used for uniformating microarray experiments and allowing comparisons
+	* Many publishers require MIAME compliance!
+	* The GEO (Gene Expression Omnibus) database supports MIAME-compliant data!
 
 # Non competitive arrays
 
@@ -267,16 +269,20 @@
 	* They are used to quantify background and non-specific binding and remove it
 	* It is also a control for the actual binding: I expect to have a lower intensity that for the real probe but correlated to it
 * There are also complete 8-mer and 9-mer chips!
-* The human HG-U133 Genechip (1 ST) contains 1.3 million features in a 1 cm*1 cm area
+* The human HG-U133 Genechip is a gene array
+	* It contains 1.3 million features in a 1 cm*1 cm area
 	* It has features for 47400 transcripts on 38000 genes
 	* Gene sequences were obtained from public sources
 	* It has internal control probes
 	* 11 probes at the 3' of each gene to measure the level of transcript
 	* More than 54647 probe sets
 	* Some genes had more than 1 probe set
+* The GeneChip 1 ST array is an exon array
 	* It is a perfect match-only design: there are no mismatch probes
+	* It has probes on each exon of a gene
 	* The background is estimated with 20k background probes that do not bind anything
 	* It includes poly-A control probes and hybridization controls
+
 * The Genechip whole-transcript sense target labeling assay can be used for target preparation
 	* Targets are sense cDNAs obtained from mRNAs
 	* It usually requires 1 ug of RNA
@@ -336,10 +342,18 @@
 	* It calculates the median of each column (all measurements of the same probe across arrays) and subtracts it from the values
 	* It iterates again for rows and columns until all the row and column medians are 0 (or under a threshold)
 	* I subtract the obtained values from the original ones to get the fitted values
+		* In this way I am scaling all the arrays to the same range with the same distribution!
 	* I can then average across probe sets to obtain the RMA average for each chip (row average)
 	* This is the final value for the trascript in a given chip
 	* If I subtract the row average from the fitted values I get the probe effect values
-		* This value is the same for all the chips since the values are quantile normalized!
+		* This value is the same for all the chips since they have the same distribution and distances from their respective mean!
+* I can do an MA plot also for Affimetrix arrays!
+	* I can plot 2 chips agaist each other
+* The development of GeneChip array was strongly dirven by the competition with NGS techniques
+* The GeneChip Human Trascriptome array 2.0 contains more than 6 millions probes covering coding and non-conding transcripts
+	* It is also colled GG-H (Glue Grant human) array
+	* It contains also probes for SNPs, alternatively spliced trancripts, ...
+* For each GeneChip I can obtain the relative probset ID and annotation on the ThermoFisher website
 
 ## Illumina Beadchip (Infinium)
 * It uses multi-sample arrays
