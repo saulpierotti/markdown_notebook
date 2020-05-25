@@ -356,15 +356,18 @@
 * For each GeneChip I can obtain the relative probset ID and annotation on the ThermoFisher website
 
 ## Illumina Beadchip
-* It uses multi-sample arrays, usually for 8 samples
-* It is possible to order custom arrays in the format of a microscope slide (Sentrix BeadChip)
-* There are also grids of arrays arranged like a 96-wells plate (Sentrix Martrix Array)
-	* In this case each sub-array is etched in the surface of glass fibers for easier reading
-* In any format, the array contains 3 um pits where silica beads can be held by VdW and electrostatic interactions
-* Each bead is coated with copies of the same oligo
+* Illumina BeadChip is a technology for producing high density microarrays
+	* These are denser than photolithography
+* The array contains 3 um pits where silica beads can be held by VdW and electrostatic interactions
+* Each bead is coated with millions of copies of the same oligo
 * The beads are assembled randomly on the chip, so a priori their adress is unknown
+	* Typically more than 1 bead (14-30) with the same oligo are added to each array
 * The oligos of the beads contain a 29 nt barcode and a 50 nt target-specific portion
 	* The barcode is used for bead identification
+* Illumina produces standard BeadChips arrays for various applications, and also custom arrays
+* It is possible to order custom arrays in the format of a microscope slide (Sentrix BeadChip)
+* It is also possible to order custom arrays in the format of grids of arrays arranged like a 96-wells plate (Sentrix Martrix Array)
+	* In this case each sub-array is etched in the surface of glass fibers for easier reading
 
 ### Infimium methylation arrays
 * Illumina Infimium chips are standard BeadChips used for methylation studies
@@ -385,22 +388,19 @@
 	* PCR does not reatin methylation patterns so I cannot amplify my sample!
 * Genotyping or sequencing the DNA before and after bisulphite treatment I can see which sites are methylated by comparing the C/T differences
 * Infinium probes have as a last nucletide the one that pairs with the methylated site (Infinium I) or just before it (Infinium II)
+	* An Infinuim array contains both probe types, aiming at different loci
 * A single-base reaction extends the probe using the target sequence
 * Labelled nucleotides are used, so that the occurrence of extension can be seen by fluorescence
 	* A and T are labeled with DNP
 		* A/T is colored red with anti-DNP-red
 	* C and G are labeled with biotin
 		* C/G is colored green with straptavidin-green
-* The raw R/G channel intensities are converted to M values or $\beta$ values
-* The $\beta$ value is evaluated as the the ratio among methilated intensity and methylated and unmethylated intensity
-	* $\beta = \frac{M}{M+U+100}$
-	* 100 is added at the denominator to avoid division by 0
-	* Beta-values tend to cluster around 0 and 1, but have a continuous (heteroscedastic) distribution
 * Infinium I assay: 1 color
 	* It uses a bead for unmethylated C (U probe) and one for methylated C (M probe)
 	* The U probe ends with A (and thus binds T) at the target site, the M probe ends in G
 	* U probes can extend only unmethylated sites and vice versa
 	* The color of the signal is not improtant here, just its intensity
+		* Depending on the base following the CpG, there are RED and GREEN probes emitting on the respective channels
 	* Since the probe is 50 nt, it can span multiple CpG sites
 		* The methilated probe is built with the assumption that all the included sites are methilated (C/G in C of CpG)
 		* The unmethilated probe is built with the assumption that all the included sites are not methilated (A/T in the C of CpG)
@@ -414,15 +414,42 @@
 		* It uses degenerate R sites that bind both G and A
 		* The all or none approach is not possible since the same probe must bind both methylated and unmethilated sites!
 	* Since it uses just 1 bead per site with Infinium II I can include a double number of sites in the array
-* Infinium II is less sensitive and more variable
-* Another approach is to use M-values, the log2 of M/U, which is homoscedastic
-* Comparing Infinium I and II experiments can be done with intra-array nomalisation
-	* I rescale the M-values using the peak summit
-	* Corrected M-values are rescaled again to match the Infinium I range
-	* At the end these M-values are converted back to beta-values
-	* This also reduced variance of Infinium II
+* The raw R/G channel intensities are converted to $\beta$ values
+* The $\beta$ value is evaluated as the the ratio among methilated intensity and methylated and unmethylated intensity
+	* $\beta = \frac{m}{m+u+100}$
+	* $\beta$ values can go from 0 to ~1
+	* 100 is added at the denominator to avoid division by 0
+* Infinium II is less sensitive to extreme methilation values and less precise
+	* Infinium II $\beta$ values have a smaller range than in Infinium I
+	* Infinium II $\beta$ values are more shifted toward the center (the distribution is less bimodal)
+	* Infinium II $\beta$ values have higher variance between replicates
+* When possible, it is better to use Infinium I probes!
+* $\beta$ values have an heteroscedastic distribution
+	* Its variability (error!) is unequal across its range
+	* Middle values tend to be more variable than values close to 0 or 1
+	* Many regression models assume a constant error rate across the range (homoscedasticity) so this is a problem!
+* The M value is the logarithm of the ratio of methilated and unmethilated signal
+	* $M = \log_2{\frac{m}{u}}$
+	* It is homoscedastic since the central, more variable region is condensed and the less variable extreme regions are streched
+	* It can take any real value, and when $m=u \implies M=0$
+	* If $m=0$ or $u=0$ $M$ is considered $-\infty$ or $+\infty$
+* Comparing Infinium I and II experiments can be done with intra-array nomalisation (peak-based correction, PBC)
+	* Peaks for the Infinium I and II M values are determined using kernel density estimation
+	* I rescale the M-values using the respective peak summits as references
+	* Rescaled Infinium II M values are rescaled again to match the Infinium I range and converted back to $\beta$ values
+	* This makes Infinum I and II data comparable and reduces the variance of Infinium II data
+	* PBC depends on the bimodal distribution of the results and breaks down when this is not well-defined!
+* I can also normalize Infinium data for addressing dye bias and other sources of technical variability
+* Between array normalization can be done using quantile normalization
+* If the variance observed is not due to technical errors but to true biological variability, do not normalize!
+* Normalization in general assumes that most of the observed variability is error
+* It is ok to normalize when I am interested in subtle biological differences
 * Cytosine methylation can also be studied by bisulphite-WGS (WGBS) or methylated DNA immunoprecipitation (MeDIP)
-	* It uses 5mC-specific antibodies
+	* MeDIP uses 5mC-specific antibodies
+* The prof published a paper about the use of the methylation levels of the gene ELOVL2 as an ageing marker
+* Peripheral blood mononuclear cells (PBMCs) are a vast range of immune cells
+	* They include mainly linfocytes and monocites
+* In another paper the prof observed that semi-supercentenarians and their offspring have a decreased PBMC epigenetic age
 
 # Statistical inference
 * We do not know the level of population variability from which we draw samples
