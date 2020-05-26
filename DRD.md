@@ -371,6 +371,10 @@
 
 ### Infimium methylation arrays
 * Illumina Infimium chips are standard BeadChips used for methylation studies
+* In humans 70% of CpG dinucleotides are methilated as 5mCpG
+* Short regions of high CpG density, CpG islands, are unusually unmethylated
+	* They are found on 60% of gene promoters
+	* Cancer cells tend to be globally hypomethylated but with tumor suppressor promoters hypermethylated
 * In a single cell for a single position methylation can either be 0%, 50% or 100% in a diploid
 	* When I evaluate methilation with an array I do NOT work on single cells!
 	* Methilation can take any value between 0% and 100%
@@ -378,11 +382,18 @@
 * DNA methilation islands have a terminology such as shelf, shore, open sea, north and south (upstrean and downstream) in relation with a real island
 	* The methilation level of shores seems more correlated with gene expression than the island itself
 	* In general, one element of a CpG region (i.e. its shore) is considered a functional unit and it is expected to be coherently methylated
-* The first chips had 27K probes, more or less one in each CpG island, while newer ones have 450K probes
+* HumanMethylation27 BeadChip was the first Infinium array 
+	* It had 27K probes, more or less one in each CpG island
+	* It had only Infinium I chemistry
+* HumanMethylation450 BeadChip has 450K probes
 	* For each island I have a bead for the island, for the shore, the shelf, the open sea
-* The last chip, the Infinium methylation EPIC, has 850k probes
+	* It has both Infinium I and Infinium II probes
+	* Infinium I is mostly used in CpG islands (CGIs), while Infinium II in intergenic regions
+	* In a single chip 12 samples can be run in parallel
+* The last chip, the HumanMethylationEPIC, has 850k probes
 	* It contains also probes outside CpG islands, non-CpG methylated sites in stem cells (CHH sites), differentially methylated sites in tumors, FANTOM5 (functional annotation of mammals project) enhancers, ENCODE enhancers and open chromatine, DNAse hypersensitive sites, miRNA promoters
 	* It retains 90% of the probes in the Human Methylation 450k beadchip
+	* It has Infinium I and II chemistry
 * Bisulphite conversion: I can deaminate only non-metilated cytosines to uracil
 	* The methyl group protects cytosine from deamination
 	* PCR does not reatin methylation patterns so I cannot amplify my sample!
@@ -434,10 +445,11 @@
 	* It can take any real value, and when $m=u \implies M=0$
 	* If $m=0$ or $u=0$ $M$ is considered $-\infty$ or $+\infty$
 * Comparing Infinium I and II experiments can be done with intra-array nomalisation (peak-based correction, PBC)
+	* This is an approximation method, but it reduces the variance of Infinium II data and it makes the Infinium I and II peaks superimposable
 	* Peaks for the Infinium I and II M values are determined using kernel density estimation
 	* I rescale the M-values using the respective peak summits as references
 	* Rescaled Infinium II M values are rescaled again to match the Infinium I range and converted back to $\beta$ values
-	* This makes Infinum I and II data comparable and reduces the variance of Infinium II data
+	* This makes Infinum I and II data ($\beta$ values) comparable and reduces the variance of Infinium II data
 	* PBC depends on the bimodal distribution of the results and breaks down when this is not well-defined!
 * I can also normalize Infinium data for addressing dye bias and other sources of technical variability
 * Between array normalization can be done using quantile normalization
@@ -450,6 +462,8 @@
 * Peripheral blood mononuclear cells (PBMCs) are a vast range of immune cells
 	* They include mainly linfocytes and monocites
 * In another paper the prof observed that semi-supercentenarians and their offspring have a decreased PBMC epigenetic age
+* It is notable that Infinium arrays are not able to distinguish methylation (5mC) from hydroxymethylation (5hmC)
+	* It would be useful to develop a new assay able to distinguish them
 
 # Statistical inference
 * We do not know the level of population variability from which we draw samples
