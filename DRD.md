@@ -597,23 +597,31 @@ v_2 = n_2 - 1
 	* Bootstrap tests are more modern and can be applied to a wide range of analyses
 * When to use non-parametric statistics
 	* Data better represented by the median
-	* Small sample size, so the distribution is diffuclt to evaluate
+	* Small sample size, so the distribution is diffucult to evaluate
 	* I have ordinal or ranked data
 	* There are outliers that I cannot or don't want to remove
 
 ### Classical non-parametric statistics
 * These tests are implemented in R, but not in Excel
-* The non-parametric equivalent of the paired *t*-test is the Wilcoxon sing-rank test
-	* It replaces the true log ratio data with ranks according to the magnitude of the log ratio
-		* The smallest log ratio has rank 1, the largest has rank $n$
-	* The sum of the ranks for the positive log ratios (upregulated genes) is compared against a table to obtaine a p-value
-	* Albeit not requiring normality of the data, it requires them to be symmetric
+* They are less powerful than parametric and bootstrap methods
+	* Because of this, for microarray data bootstrap methods are preferred
+
+#### Wilcoxon sign-rank test
+* The Wilcoxon sing-rank test is the non-parametric equivalent of the paired *t*-test
+* The $H_0$ is that the median of the dataset is 0
+	* This is a paired test, so the dataset is the difference among pairs of data!
+* It replaces the true log ratio data with ranks according to the magnitude of the log ratio
+	* The smallest log ratio has rank 1, the largest has rank $n$, and so on
+* The sum of the ranks for the positive log ratios (upregulated genes) and negative log rations is separately compared against the W distribution to obtaine a p-value
+* The maximum possible value of the $W$ statistic is the sum of the ranks, which is $n(n+1)/2$
+* The minimum possible value of the $W$ statistic is the negative of the sum of the ranks, which is $-n(n+1)/2$
+* Albeit not requiring normality of the data, it requires them to be symmetric
+
+#### Mann-Whitney test
 * The non-parametric equivalent of the unpaired *t*-test is the Mann-Whitney test, also called Wilcoxon rank-sum test
 	* It is similar to the Wilcoxon rank-sign test
 	* Data from the 2 groups are combined and ranked together
 	* The ranks of the larger group are summed and compared against a table to obtain a p-value
-* These tests are less powerful than parametric and bootstrap methods
-	* Because of this, for microarray data bootstrap methods are preferred
 
 
 
