@@ -498,6 +498,8 @@ $$ FC = x_1/x_2 = 2^{L2R}, \quad L2R = \log_2{FC}$$
 	* $\beta$ is the probability of not rejecting a false $H_0$ (type II error)
 	* A stringent significance threshold (p-value) increases $\alpha$ and decreases $\beta$
 	* Actually, the p-value threshold is by definition my $\alpha$!
+	* The power of a test is defined as the probability of observing a real positive
+		* It is $1 - \beta$!
 
 \begin{align*}
 p \leq \alpha \implies \mbox{ reject } H_0 \\
@@ -524,6 +526,13 @@ not give information about the value of the other
 * The paired *t*-test is also referred to as one-sample *t*-test
 * It is used for paired data since those are not independent and need to be combined in a single variable
 	* Instead of using each measurement as a datapoint, for each patient I have just 1 datapoint which is the difference among the measurement before and after treatment
+*  Central idea
+	* I assume that there is no difference among pairs of data, so the average of the datapoints is assumed to be 0
+		* Datapoints are the differences of paired measurements!
+	* If I assume the true average to be 0 but I observe an actual average which is $\bar{x} \not= 0$, I want to know how likely it is to observe that average under the assumption
+	* The $t$ statistics that I evaluate is $\bar{x}$ itself corrected for sample size and variance
+		* If the sample size $n$ is bigger the result is more significant
+		* If the variance $s^2$ is smaller the result is more significant
 * From this single column of data I calculate the $t$ statistics
 $$t = \frac{\bar{x}}{s/\sqrt{n}}$$
 	* $n$ is the number of samples
@@ -543,13 +552,41 @@ $$df = n - 1$$
 * It is really similar to the paried *t*-test, only changing the exprimental design
 * In this case my $H_0$ is that the mean of the 2 patient groups is equal
 $$H_0:~ \bar{x_1}-\bar{x_2} = 0$$
+* Central idea
+	* The same concept as for the paired *t*-test, but in this case I explicitly assume the difference of the sample means to be 0
+		* I do not have a condensed variable as before!
+	* The difference of means is corrected for squared root of the weighted average of the variances of the samples, weighted on sample size
 * The $t$ statistics is calculated with a formula similar to the paired *t*-test
-$$ t = \frac{\bar{x_1}-\bar{x_2}}{(\frac{s_1^2}{n_1} + \frac{s_2^2}{n_2})}$$
+$$ t = \frac{\bar{x_1}-\bar{x_2}}{\sqrt{\frac{s_1^2}{n_1} + \frac{s_2^2}{n_2}}}$$
 * There are actually two variations of the unpaired *t*-test
 	* The one presented here (Welch's *t*-test) allows for different $s$ for the groups and it is better for microarray data
 	* There is a variation that assumes a single $s$ (Student *t*-test)
 * The number of degrees of freedom in the caseof unequal variance is calculated with a complicated formula
 * This test requires that both datasets be normally distributed
+
+## Non-parametric statistics
+* These method do not make any assumption about the distribution of data
+	* They are preferred in presence of outliers and noisy data
+		* Microarray data is noisy!
+* Microarray data analysis is high throughput, so it can be unpractical to check for normality
+* There are 2 types of non-parametric tests
+	* Classical non-parametric tests are equivalent to parametric tests but use ranks instead of actual data
+	* Bootstrap tests are more modern and can be applied to a wide range of analyses
+
+### Classical non-parametric statistics
+* These tests are implemented in R, but not in Excel
+* The non-parametric equivalent of the paired *t*-test is the Wilcoxon sing-rank test
+	* It replaces the true log ratio data with ranks according to the magnitude of the log ratio
+		* The smallest log ratio has rank 1, the largest has rank $n$
+	* The sum of the ranks for the positive log ratios (upregulated genes) is compared against a table to obtaine a p-value
+	* Albeit not requiring normality of the data, it requires them to be symmetric
+* The non-parametric equivalent of the unpaired *t*-test is the Mann-Whitney test, also called Wilcoxon rank-sum test
+	* It is similar to the Wilcoxon rank-sign test
+	* Data from the 2 groups are combined and ranked together
+	* The ranks of the larger group are summed and compared against a table to obtain a p-value
+* These tests are less powerful than parametric and bootstrap methods
+	* Because of this, for microarray data bootstrap methods are preferred
+
 
 
 * When I am doing multiple testing I need to restrict the p-value otherwise I get an unacceptably high number of flase positives
