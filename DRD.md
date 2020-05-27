@@ -465,26 +465,70 @@
 * It is notable that Infinium arrays are not able to distinguish methylation (5mC) from hydroxymethylation (5hmC)
 	* It would be useful to develop a new assay able to distinguish them
 
-# Statistical inference
-* We do not know the level of population variability from which we draw samples
+# Analysis of differentially expressed genes
+* Data analysis is the most important part in microarrays bioinformatics
+* The questions that we want to answer generally are
+	* Which genes are differentially expressed among samples?
+	* What are the relationships between the genes or samples being measured?
+	* Can we classify samples based on gene expression?
+* In general all the statistical test that we will see in this section look in parallel at one gene at a time and draw conclusions for each gene
+* Data can be paired or unpaired
+	* In unpaired data different samples have no relationship to each other
+	* In paired data I typically have the same sample twice before and after a certain treatment, or in different conditions
+	* In paired data I am interested in the expression changes among samples in a pair, while in unpaired data I am interested in changes in the expression of the whole groups
+* I can also have complex data, with many groups of different cardinality
+* In statistical inference I infere parameters of the population from sample parameters
+	* It is important that my sample captures the full variability of the population, so I may want to include different age groups, conditions, ecc.
+	* We do not know the level of population variability from which we draw samples
+* In order to claim differential expression, in the old days of microarray experiment would choose a fixed threshold of log expression change
+	* This does not take into account the variability of the measurement and the sample size
+* Hypothesis testing is a more robust way to determine the significance of a variation in expression
+	* It assumes the null hypothesis $H_0$ that there is no real biological variation among the samples
+	* I can calculate the probability of observing a measurement at least as extreme as the one observed when assuming $H_0$
+		* This probability is the p-value
+	* Differentially expressed genes are then selected on the basis of a p-value threshold, not according to fold change
 * Claiming differential expression of a gene means that the expression level of a gene changes systematically between different samples
 	* The magnitude of the difference is not relevant
-* In experiments I usually want to reject or not the null hypothesis $H_0$
+* Two measurements are independent if knowing the value of one measurement does
+not give information about the value of the other
+	* Measurements of the same gene in different patients are independent
+	* Replicate measurements of the same gene in the same patient in the same condition are not independent
+* All the statistical tests here described require independence of measurements
+	* If I have dependent measurements I need to combine them in a single variable
+* Note: in these tests I am not using data from the whole array, but only 1 gene across all the samples!
+
+## Parametric statistics
+* Parametric staistics assumes that the population follows a type of probabilioty distribution
+	* That is, it infers parameters of the putative distribution
+	* It also assume homoscedasticity (uniform variance)
+* It is usually more powerfull than non-parametric statistics but it makes more assumptions
+
+### Paired *t*-test
+* The paired *t*-test is also referred to as one-sample *t*-test
+* It is used for paired data since those are not independent and need to be combined in a single variable
+	* Instead of using each measurement as a datapoint, for each patient I have just 1 datapoint which is the difference among the measurement before and after treatment
+* From this single column of data I calculate the $t$ statistics
+	* $t = \frac{\bar{x}}{s/\sqrt{n}}$
+	* $n$ is the number of samples
+	* $\bar{x}$ is the sample mean
+	* $s$ is the sample standard deviation
+* The $t$ statistics is then used to calculate a p-value using the *t*-distribution with appropriates degrees of freedom
+* The degree of freedom is the muber of independent variables in the analysis
+	* in the paired *t*-test it is the number of patients - 1
+	* $df = n - 1$
+* The *t*-test is available in all the major software packages and libraries
+
+### Umpaired *t*-test
+* It is really similar to the paried *t*-test, only changing the exprimental design
+* In this case my $H_0$ is that the mean of the 2 patient groups is equal
+	* This is, $H_0: \bar{x_1}-\bar{x_2} = 0$
+
+
 * $\alpha$ is the probability of rejecting $H_0$ when it is true
 * $\beta$ is the probability of not rejecting a false $H_0$
 * A stringent significance threshold (p-value) increases $\alpha$ and decreases $\beta$
 * When I am doing multiple testing I need to restrict the p-value otherwise I get an unacceptably high number of flase positives
-* Parametric staistics assumes that the population follows a type of probabilioty distribution
-	* That is, it infers parameters of the putative distribution
-	* It is usually more powerfull than non-parametric statistics but it makes more assumptions
-* Parametric statistics assumes that
-	* Measurements are all independent from each other
-		* If some measurement are not independent I need to group them in a single variable
-	* The measurement are normally distributed
-	* The variance is uniform
 * An experiment can be designed with paired or unpaired groups
-	* A paired group is the same cohort measured before and after a treatment
-	* An unpaired group is 2 different cohorts, one to which I gave a treatment and one control
 * The t-test is a parametric test which is different for paired and unpaired data
 	* I compute a $t$ statistic from the data and I compare it with the appropriate $t$ distribution
 	* There is a $t$ distribution for each degree of freedom
