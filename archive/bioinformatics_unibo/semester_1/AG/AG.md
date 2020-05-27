@@ -323,12 +323,12 @@
 * Illumina can produce customized genotyping chips
 
 # Plink
-* A pedigree is a representation of individuals and relationships among them
+* A pedigree is a standardised representation of individuals in a population and relationships among them
 	* It can be represented in plane text or in binary form
 * Plink is an important tool for working with reference genomes
 	* It can work with text files (`--file` parameter, without extension for homonimous .ped and .map files)
 	* It can work with binaries (`--bfile` option)
-* PED and MAP file work in pairs: I typically have a file.ped and file.map with the same root name and referring to the same data
+* PED and MAP file work in pairs: I typically have my_file.ped and my_file.map with the same root name and referring to the same data
 * The PED (pedigree) file is a text file with a row for each individual
 	* It stores the pedigree of the population
 	* This format is standard and it is used by different tools
@@ -336,13 +336,13 @@
 	* Missing data are usually reported with 0
 * The MAP (map on the genome) file is a text file that has a line for each SNP
 	* It reports chromosome number, SNP ID, position, distance from other SNPs
-	* It is produced from the output of a genotyping platform
-* A polymorphism has a frequency higher than 1%
+	* It is produced processing the raw output of a genotyping platform
+* A polymorphism is such if it has a frequency higher than 1%
 * Before doing data analysis, check your data (!)
 	* I want to exclude faulty individuals and faulty loci
-	* Plink can filter out data given a threshold
+	* Plink can filter out data at a given threshold
 	* I want to exclude low-frequency alleles: my focus is the population, not the individual
-	* I can exclude SNPs that violate HW
+	* I can exclude SNPs that violate the HW equilibrium
 	* I can exclude mendelian errors: genotypes that are impossible given the parents
 * Basic usage
 	* `--freq` gives the frequency of a SNP
@@ -351,7 +351,6 @@
 	* If I am working with non-human or I have partially assembled scaffolds, I need to specify `--allow-extra-chromosomes` or the species, if available in plink (es. `--sheep`)
 	* `--out` specifies the root filename of the output
 	* `--noweb` is usually required otherwise it checks forever for updates
-	
 
 # De novo sequencing
 * The human genome is repeat rich
