@@ -248,29 +248,55 @@
 # AB SOLiD
 * It is dead by now, but could be potentially great because it gives the highest throughput
 * Its reads are really short (30 bp) so it is computationally heavy to asseble the reads and it is impossible to use with repetitive regions
+* It is based on sequencing by oligo ligation detection
+* DNA is fragmented and ligated to P1 and P2 adapters
+	* I can prepare simple or mate-paired libraries
+	* Mate-paired libraries use also an internal adapter
+* A clonal population of beads is created from the fragments by emulsion PCR
+* Beads are covalently attached to a glass slide
+* The slide is incubated with an universal sequencing primer, di-base probes and DNA ligase
+* The primer has its 5'P oriented towards the fragment (away from the bead)
+* There are 16 (all the possible $4^2$ 2-mers) different dibase probes, marked with 4 different fluorophores
+	* Each dye could correspond to 4 of the 16 di-base probes
+	* The probes have the di-base specific sequence at the 3' and 6 additional aspecific positions at their 5'
+* The fluorescent signal is acquired
+* 3 bases at the 5' of the probes are cleaved, removing the dye
+* Phosphatase is also used so to cap eventual unextended fragments
+* The step is repeated until needed by ligating another di-base probe at the 5' of the previous one
+* Since each probe is 8 nucleotides long but 3 nucleotides are cleaved, the system interrogates 2 bases every 5 (2 interrogated and 3 no, then 2 interrogated and so on)
+* Everithing melted and repeated with different primers that have an offset of -1, -2 , -3, and -4 bases
+	* In this way I get a reading for the missing positions
+	* I get 2 reads from 2 different probes at each position
+* There is an unique conbination of bases that can give the combination of reads, so I can reconstruct the original sequence
+	* Each ordered combination of colors corresponds to a base
 
 # Complete genomics
 * It is used for re-sequencing common genomes
 * Fragments are made circular and then amplified by rolling circle amplification, obtaining DNA nanoballs (DNBs)
 * DNBTMs are around 200 nm in size
-* They are anchored in a chip obtain by photolitography
+* They are anchored in a chip obtained by photolitography
 * The chip is made so to have a grid pattern of sticky spots
+	* A sticky spot is just a small well in the surface of the chip
 * Each sticky spot recives exactly one nanoball, thanks to proprietary technology
 * Sequencing is done by combinatorial probe-anchor ligation (cPAL)
-	* The DNB contains genomic DNA and an adapter sequence
-	* An anchor probe binds to the adapter
-	* Fluorescent nucleotides are incorporated by ligase
-* This company was acquired by BGI and it does not sell sequencing equipment
+* The DNB contains genomic DNA and an initial adapter sequence
+* 1 of 4 labeled anchor probes made of a specific position and 8 aspecific positions binds to the adapter and it is ligated with ligase (similar to AB SOLiD)
+* Complete genomics was acquired by BGI and it does not sell sequencing equipment
 * You send samples to them and they produce data in ~100 days
 
 # PacBio
 * It is really a promising technology
 * Reads are long, up to a 6-10 kb, but troughput is low
-* The error rate is quite high, and probably it cannot be reduced under 5%
+* The long reads make assembly easy and don't require really high depth of coverage
+* The error rate is quite high (15%), and probably it cannot be reduced under 5%
 * It is costly, 40k€ for 10x in mammalian genomes
+* It does not require amplification, so no bias is introduced
 * It is a golden standard for new sequencing projects, usually matched with Illumina
 	* PacBio facilitates assembly, Illumina gives a low error rate
 * PacBio was going to be bought by Illumina, but the anti-trust opposed it and themerger was canceled
+* It is based on Single Molecule Real Time (SMRT) Sequencing
+* Hairpin adapters are ligated to both ends of dsDNA, so to create a circular molecule
+* A sequencing primer and DNA polymerase are added and bind the DNA molecules
 
 # Oxford nanopore
 * Long reads, but high error rate and low thorughput
