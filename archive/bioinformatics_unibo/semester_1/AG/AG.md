@@ -149,6 +149,7 @@
 	* The sam file contains the sequence of reads, their genomic alignment coordinate, contig, mate read name
 	* samtools is used for working with sam files
 * Sequencers are actually high-performance PCs with Intel Xeon CPUs and 48 Gb of RAM!
+* The NGS platforms that are not portable are so because the optics cannot be miniaturized
 
 ## Ion torrent
 * There are many sequencing chips, with different throughputs
@@ -338,7 +339,7 @@
 	* It claims a sensitivity 1-2 orders of magnitude greater than Oxford Nanopore, with as many as 100k pores per chip, with as many as 100k pores per chip
 	* Planned sample cost less than 100 \$
 
-# Aplotypes
+# Aplotypes and linkage disequilibrium
 * We can detect crossing-over by looking for the association of genetic markers
 * An aplotype is a cluster of genes that are usually eredited toghether
 * The probability of CO between 2 genes is measured in cM
@@ -356,6 +357,7 @@
 	* We need information on aplotype frequencies or on the parents
 * PHASE is a website for analyzing aplotypes
 * I cannot determine the aplotype by only looking at the genotype: I need data on the population
+* A selective sweep is the reduction or elimination of variation among the nucleotides in neighboring DNA of a mutation as the result of recent and strong positive natural or artificial selection
 
 # Genotyping
 * Genotyping means to determine the genotype at one locus
