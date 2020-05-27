@@ -73,8 +73,8 @@
 # Basic statistics
 * $\mu$ and $\sigma$ refer to population parameters, while $\bar{X}$ and $S$ are sample parameters
 * Coefficient of variability: $CV = (SD/\bar{X})*100$
-* Population standard deviation: $\sigma = \sqrt{\frac{1}{N}\sum_{i=1}^N (x_i - \mu)^2}$
-* Unbiased Sample standard deviation: $S = \sqrt{\frac{1}{N-1}\sum_{i=1}^N (x_i - \mu)^2}$
+* Population standard deviation: $$\sigma = \sqrt{\frac{1}{N}\sum_{i=1}^N (x_i - \mu)^2}$$
+* Unbiased Sample standard deviation: $$S = \sqrt{\frac{1}{N-1}\sum_{i=1}^N (x_i - \mu)^2}$$
 	* The standard deviation estimated from a sample must divide by the degrees of freedom!
 	* I already estimate the mean using the data so I loose 1 df
 	* The mean of the sample is likely to be closer to the values in the sample than to the general population since it was estimated from them!
@@ -162,7 +162,7 @@
 	* I can use a Bayesian approach to estimate the true feature intensity
 * For each spot I have a pixel distribution
 	* I can get the mean signal, SD, median, median absolute deviation (MAD)
-	* $MAD = Median(|x_i - \tilde{x}|)$, where $\tilde{x} = Median(x)$
+$$MAD = Median(|x_i - \tilde{x}|), \qquad \tilde{x} = Median(x)$$
 	* The MAD is the median of the absolute deviations from the median of the dataset!
 * Image scanning is crucial for data quality
 	* Low laser intensity for redcing photobleach
@@ -232,8 +232,10 @@
 	* In real data errors tend to have sharper peaks and heavier tails than what the distribution predict
 	* The log-normal distribution for microarray data is an approximation!
 * Variability in a dataset can be estimated with the coefficient of variation CV
-	* In the log-normal model $CV = \sqrt{\exp{\sigma^2}-1}$ for the natural logarithm when I am using the standard deviation of the logged intensities
-	* If I am using logarithms in base 2 I need to correct as $CV = \sqrt{\exp{(\sigma*\ln{2})^2}-1}$
+	* In the log-normal model for the natural logarithm when I am using the standard deviation of the logged intensities
+$$CV = \sqrt{\exp{\sigma^2}-1}$$
+	* If I am using logarithms in base 2 I need to correct the standard deviation by $\ln{2}$
+$$CV = \sqrt{\exp{(\sigma*\ln{2})^2}-1}$$
 * Replicate feature variability is the variability among identical features in different physical positions in the array
 * Cy3 to Cy5 variability is best evaluated by self-self hybridization or by swapping dyes
 	* Self hybridization means to labele with both dyes the same sample and hybridise it in the same array
@@ -331,7 +333,7 @@
 	* These values are quantile-normalized
 	* The normalized values are summarized across arrays and probes
 * I fit a multichip linear model to the data
-	* $\log_2{PM_{ij}} = \alpha_i + \beta_j + \epsilon_{ij}$
+$$\log_2{PM_{ij}} = \alpha_i + \beta_j + \epsilon_{ij}$$
 	* $PM_{ij}$ is the intensity of the perfect match probe $i$ in array $j$
 	* $\alpha_i$ is the intensity due to the carachteristics of probe $i$ (i.e. GC content)
 	* $\beta_j$ is the intensity due to true expression of the trascript in array $j$
@@ -427,7 +429,7 @@
 	* Since it uses just 1 bead per site with Infinium II I can include a double number of sites in the array
 * The raw R/G channel intensities are converted to $\beta$ values
 * The $\beta$ value is evaluated as the the ratio among methilated intensity and methylated and unmethylated intensity
-	* $\beta = \frac{m}{m+u+100}$
+$$\beta = \frac{m}{m+u+100}$$
 	* $\beta$ values can go from 0 to ~1
 	* 100 is added at the denominator to avoid division by 0
 * Infinium II is less sensitive to extreme methilation values and less precise
@@ -440,7 +442,7 @@
 	* Middle values tend to be more variable than values close to 0 or 1
 	* Many regression models assume a constant error rate across the range (homoscedasticity) so this is a problem!
 * The M value is the logarithm of the ratio of methilated and unmethilated signal
-	* $M = \log_2{\frac{m}{u}}$
+$$M = \log_2{\frac{m}{u}}$$
 	* It is homoscedastic since the central, more variable region is condensed and the less variable extreme regions are streched
 	* It can take any real value, and when $m=u \implies M=0$
 	* If $m=0$ or $u=0$ $M$ is considered $-\infty$ or $+\infty$
@@ -480,6 +482,8 @@
 * In statistical inference I infere parameters of the population from sample parameters
 	* It is important that my sample captures the full variability of the population, so I may want to include different age groups, conditions, ecc.
 	* We do not know the level of population variability from which we draw samples
+* The fold change ($FC$) is calculated as 2 to the power of the log_2 ratio ($L2R$) of expression
+$$ FC = x_1/x_2 = 2^{L2R}, \quad L2R = \log_2{FC}$$
 * In order to claim differential expression, in the old days of microarray experiment would choose a fixed threshold of log expression change
 	* This does not take into account the variability of the measurement and the sample size
 * Hypothesis testing is a more robust way to determine the significance of a variation in expression
@@ -487,6 +491,19 @@
 	* I can calculate the probability of observing a measurement at least as extreme as the one observed when assuming $H_0$
 		* This probability is the p-value
 	* Differentially expressed genes are then selected on the basis of a p-value threshold, not according to fold change
+	* Note: all the probability statements are referred to $H_0$!
+		* Evidnece against $H_0$ is not evidence in favor of any particular $H_A$
+		* Bayes!
+	* $\alpha$ is the probability of rejecting $H_0$ when it is true (type I error)
+	* $\beta$ is the probability of not rejecting a false $H_0$ (type II error)
+	* A stringent significance threshold (p-value) increases $\alpha$ and decreases $\beta$
+	* Actually, the p-value threshold is by definition my $\alpha$!
+
+\begin{align*}
+p \leq \alpha \implies \mbox{ reject } H_0 \\
+p > \alpha \implies \mbox{ not reject } H_0
+\end{align*}
+
 * Claiming differential expression of a gene means that the expression level of a gene changes systematically between different samples
 	* The magnitude of the difference is not relevant
 * Two measurements are independent if knowing the value of one measurement does
@@ -508,32 +525,38 @@ not give information about the value of the other
 * It is used for paired data since those are not independent and need to be combined in a single variable
 	* Instead of using each measurement as a datapoint, for each patient I have just 1 datapoint which is the difference among the measurement before and after treatment
 * From this single column of data I calculate the $t$ statistics
-	* $t = \frac{\bar{x}}{s/\sqrt{n}}$
+$$t = \frac{\bar{x}}{s/\sqrt{n}}$$
 	* $n$ is the number of samples
 	* $\bar{x}$ is the sample mean
 	* $s$ is the sample standard deviation
 * The $t$ statistics is then used to calculate a p-value using the *t*-distribution with appropriates degrees of freedom
 * The degree of freedom is the muber of independent variables in the analysis
+$$df = n - 1$$
 	* in the paired *t*-test it is the number of patients - 1
-	* $df = n - 1$
+* When $df \to \infty$ the t distribution approximates a normal distribution
+* For lower df the t distribution has heavuer tails than the normal distribution
 * The *t*-test is available in all the major software packages and libraries
+* This test requires that the differences among the paired samples (the distribution tested!) be normally distributed
 
-### Umpaired *t*-test
+### Welch's unpaired *t*-test
+* The unpaired *t*-test is also called two-sample *t*-test
 * It is really similar to the paried *t*-test, only changing the exprimental design
 * In this case my $H_0$ is that the mean of the 2 patient groups is equal
-	* This is, $H_0: \bar{x_1}-\bar{x_2} = 0$
+$$H_0:~ \bar{x_1}-\bar{x_2} = 0$$
+* The $t$ statistics is calculated with a formula similar to the paired *t*-test
+$$ t = \frac{\bar{x_1}-\bar{x_2}}{(\frac{s_1^2}{n_1} + \frac{s_2^2}{n_2})}$$
+* There are actually two variations of the unpaired *t*-test
+	* The one presented here (Welch's *t*-test) allows for different $s$ for the groups and it is better for microarray data
+	* There is a variation that assumes a single $s$ (Student *t*-test)
+* The number of degrees of freedom in the caseof unequal variance is calculated with a complicated formula
+* This test requires that both datasets be normally distributed
 
 
-* $\alpha$ is the probability of rejecting $H_0$ when it is true
-* $\beta$ is the probability of not rejecting a false $H_0$
-* A stringent significance threshold (p-value) increases $\alpha$ and decreases $\beta$
 * When I am doing multiple testing I need to restrict the p-value otherwise I get an unacceptably high number of flase positives
 * An experiment can be designed with paired or unpaired groups
 * The t-test is a parametric test which is different for paired and unpaired data
 	* I compute a $t$ statistic from the data and I compare it with the appropriate $t$ distribution
 	* There is a $t$ distribution for each degree of freedom
-	* When $df \to \infty$ the t distribution approximates a normal distribution
-	* For lower df the t distribution has fatter tails than the normal distribution
 * Paired t-test: $t =\frac{\bar{X}}{\sigma/\sqrt{n}}$
 	* It is the mean divided by the standard error of the mean
 * The Shapiro-Wilk test returns the p-value for the null hypothesis that the data are normally distributed
