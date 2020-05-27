@@ -547,7 +547,7 @@ $$df = n - 1$$
 * The *t*-test is available in all the major software packages and libraries
 * This test requires that the differences among the paired samples (the distribution tested!) be normally distributed
 
-### Welch's unpaired *t*-test
+### Unpaired *t*-test
 * The unpaired *t*-test is also called two-sample *t*-test
 * It is really similar to the paried *t*-test, only changing the exprimental design
 * In this case my $H_0$ is that the mean of the 2 patient groups is equal
@@ -556,13 +556,36 @@ $$H_0:~ \bar{x_1}-\bar{x_2} = 0$$
 	* The same concept as for the paired *t*-test, but in this case I explicitly assume the difference of the sample means to be 0
 		* I do not have a condensed variable as before!
 	* The difference of means is corrected for squared root of the weighted average of the variances of the samples, weighted on sample size
-* The $t$ statistics is calculated with a formula similar to the paired *t*-test
-$$ t = \frac{\bar{x_1}-\bar{x_2}}{\sqrt{\frac{s_1^2}{n_1} + \frac{s_2^2}{n_2}}}$$
 * There are actually two variations of the unpaired *t*-test
-	* The one presented here (Welch's *t*-test) allows for different $s$ for the groups and it is better for microarray data
-	* There is a variation that assumes a single $s$ (Student *t*-test)
-* The number of degrees of freedom in the caseof unequal variance is calculated with a complicated formula
+	* Welch's *t*-test allows for different variances for the groups and it is better for microarray data
+	* Student *t*-test assumes uniform variance and it is best suited for groups of the same size
 * This test requires that both datasets be normally distributed
+* The $t$ statistics is calculated with a formula similar to the paired *t*-test
+	* The formula is different for Welch's and Student's tests
+	* Also the degrees of freedom ar calculated differently
+
+#### Student's unpaired *t*-test
+* This variant calculates a single variance $s^2$, which is essentially the standard error of the 2 sample means
+\begin{align*}
+t = \frac{\bar{x_1}-\bar{x_2}}{\sqrt{s^2(\frac{1}{n_1} + \frac{1}{n_2})}}\\[2em]
+s^2 = \frac{\sum_{j=1}^{n_1}(x_j-\bar{x_1})^2 + \sum_{i=1}^{n_2}(x_i-\bar{x_2})^2}{n_1+n_2 - 2}\\[2em]
+df = 2n-2
+\end{align*}
+
+#### Welch's unpaired *t*-test
+* In this case I am using the real variances of the samples $s_1$ and $s_2$
+
+$$
+t = \frac{\bar{x_1}-\bar{x_2}}{\sqrt{\frac{s_1^2}{n_1} + \frac{s_2^2}{n_2}}}
+$$
+
+* The degrees of freedom are calculated with the complicated Welch–Satterthwaite approximation
+
+\begin{align*}
+df \approx \frac{(\frac{s_1^2}{n_1} + \frac{s_2^2}{n_2})^2}{\frac{s_1^4}{n_1^2*v_1}\frac{s_2^4}{n_2^2*v_2}} && \mbox{ where }&&
+v_1 = n_1 - 1 &&
+v_2 = n_2 - 1
+\end{align*}
 
 ## Non-parametric statistics
 * These method do not make any assumption about the distribution of data
@@ -572,6 +595,11 @@ $$ t = \frac{\bar{x_1}-\bar{x_2}}{\sqrt{\frac{s_1^2}{n_1} + \frac{s_2^2}{n_2}}}$
 * There are 2 types of non-parametric tests
 	* Classical non-parametric tests are equivalent to parametric tests but use ranks instead of actual data
 	* Bootstrap tests are more modern and can be applied to a wide range of analyses
+* When to use non-parametric statistics
+	* Data better represented by the median
+	* Small sample size, so the distribution is diffuclt to evaluate
+	* I have ordinal or ranked data
+	* There are outliers that I cannot or don't want to remove
 
 ### Classical non-parametric statistics
 * These tests are implemented in R, but not in Excel
