@@ -148,8 +148,9 @@
 * Allignments are saved in .sam format, a tab-delimited text file that can be converted in a binary .bam file
 	* The sam file contains the sequence of reads, their genomic alignment coordinate, contig, mate read name
 	* samtools is used for working with sam files
+* Sequencers are actually high-performance PCs with Intel Xeon CPUs and 48 Gb of RAM!
 
-# Ion torrent
+## Ion torrent
 * There are many sequencing chips, with different throughputs
 * The sequencing device is a semiconductor chip with millions of nano-wells
 	* Each well is represented as a pixel
@@ -195,7 +196,7 @@
 * I have a reference sequence known, and if this sequence reaches a threshold signal I keep my read, otherwise I discard it
 * In missed reads I have too many empty spaces in each read, more than statistically reasonable
 
-# Roche 454
+## Roche 454
 * It works in similar way to Ion Torrent, but it senses the release of pyrophosphate during elongation
 	* NUcleotides are added in flows like for ion torrent
 	* PPi and adenylil-sulfate are converted to ATP and sulfate by sulfurylase (Sulfate adenylyltransferase)
@@ -210,6 +211,7 @@
 	* The CCD camera is expensive
 * It has revolutionized bacterial taxonomy because it allowed to sequence the rRNA 16s
 	* This is because it can produce longer reads than other NGS techniques
+* It can produce 500 Mb per run with a read lenght of 400-600 bp
 
 # Illumina
 * Library preparation
@@ -245,7 +247,7 @@
 * HiSeq can be used for WGS (3-4 lanes per genome) and exome capture (4 samples per lane)
 	* It can procduce 100-160 million reads per lane
 
-# AB SOLiD
+## AB SOLiD
 * It is dead by now, but could be potentially great because it gives the highest throughput
 * Its reads are really short (30 bp) so it is computationally heavy to asseble the reads and it is impossible to use with repetitive regions
 * It is based on sequencing by oligo ligation detection
@@ -269,8 +271,10 @@
 	* I get 2 reads from 2 different probes at each position
 * There is an unique conbination of bases that can give the combination of reads, so I can reconstruct the original sequence
 	* Each ordered combination of colors corresponds to a base
+* It can produce more than 100 Gb per run!
+* Unfortunately read lenght is around 50-100 bp
 
-# Complete genomics
+## Complete genomics
 * It is used for re-sequencing common genomes
 * Fragments are made circular and then amplified by rolling circle amplification, obtaining DNA nanoballs (DNBs)
 * DNBTMs are around 200 nm in size
@@ -284,7 +288,7 @@
 * Complete genomics was acquired by BGI and it does not sell sequencing equipment
 * You send samples to them and they produce data in ~100 days
 
-# PacBio
+## PacBio
 * It is really a promising technology
 * Reads are long, up to a 6-10 kb, but troughput is low
 * The long reads make assembly easy and don't require really high depth of coverage
@@ -292,20 +296,47 @@
 * It is costly, 40k€ for 10x in mammalian genomes
 * It does not require amplification, so no bias is introduced
 * It is a golden standard for new sequencing projects, usually matched with Illumina
-	* PacBio facilitates assembly, Illumina gives a low error rate
+	* Assembling PacBio reads can be difficult due to the high error rate
+	* Single Illumina reads are around 1% error, so assembling Illumina reads to PacBio reads is much easier
+	* I can use PacBio to resolve repetitive regions and difficult-to-amplify regions, and Illumina for depth of coverage and accuracy
 * PacBio was going to be bought by Illumina, but the anti-trust opposed it and themerger was canceled
 * It is based on Single Molecule Real Time (SMRT) Sequencing
 * Hairpin adapters are ligated to both ends of dsDNA, so to create a circular molecule
-* A sequencing primer and DNA polymerase are added and bind the DNA molecules
+* A sequencing primer and DNA polymerase are added and bind the DNA molecules, but do not extend it since nucleotides are not added
+* The DNA fragments with bound primer and polymerase are inserted in a SMRT cell
+* The SMRT cell contains millions of wells on its surface, called Zero-mode waveguides (ZMWs)
+* Each ZMW hosts a single DNA molecule with a single DNA polymerase and primer
+* Labeled nucleotides are added and their addition is detected in each ZMW
+* 2 modes of operation are possible: Circular consensus Sequencing (CCS) and Continuous Long Reads (CLR)
+* In CCS the circular DNA is read again and again generating an high-fidelity (HiFi) read, with 99% accuracy
+* In CLR the molecule is as long as possible and it is read for as many nucleotides as possible, so to generate long reads
 
-# Oxford nanopore
+## Oxford nanopore
 * Long reads, but high error rate and low thorughput
 * The reads can potentially be very long, up to 100kb depending on library preparation
-* DNA passes trough an hemolysine pore altering the ion flow thorugh the pore
+* DNA passes trough a modified hemolysine pore altering the ion flow thorugh the pore
+	* The pore is around 1 nm in diameter (half the widdht of DNA!)
+* A motor protein pre-loaded on an adapter oligo regulates the speed at which DNA moves through the pore and acts as an helicase
+* Many DNA molecule pass in parallel through many nanopores (around 500 in MinION, 2000 in GridION) placed on a membrane
+* Each nanopore has its own sensor and it is placed in a nanowell
+* Bases are read in 4-mers and then the signal of subsequent reads is interpolated by a Recurrent Neural Network (RNN)
 * Interpretation of the raw data is difficult, because the meaning of reads depends on the sequence context
-	* Machine learning (!)
+	* Error rate is around 4%
+	* I can recognise not only ATCG, but also U, 5mC, and other modified bases
+	* Machine learning!
 * The platform is cheap (~5000€, sometimes given for free) but adapters and accessories are expensive
 * It is invaluable when I have to work on-site, since it is small and portable
+* MinION can produce 150 Mb per run with 48kb reads
+* Oxford Nanopore can be used not only for sequencing, but also for detecting protein-DNA interactions, small molecules
+
+## Other NGS techniques
+* Intelligent BioSystems Mini20 is a sequencing by synthesis platform designed for clinical use
+	* It has 100 nt long reads, but it is expected to be able to compete with Sanger sequencing
+	* It is sensitive to repeats
+	* Full costs are still not clear, but the instrument costs 120k \$ and the disposable flow cell 150 \$
+* Genia Technologies is an early stage announcment for a system that should combine Ion Torrent and Oxford Nanopore
+	* It claims a sensitivity 1-2 orders of magnitude greater than Oxford Nanopore, with as many as 100k pores per chip, with as many as 100k pores per chip
+	* Planned sample cost less than 100 \$
 
 # Aplotypes
 * We can detect crossing-over by looking for the association of genetic markers
