@@ -342,6 +342,41 @@
 	* If I see definite bands in the gel, these probably come from repeated regions that are cut at the same lenght
 		* I want to exclude this (!)
 	* In the digestion, I can choose a restriction enzyme with a long target sequence if I want longer fragments (cut site less probable!) and vice versa
+* RNA-seq is an NGS application used for revealing the presence and quantity of RNA in a biological sample at a given moment
+	* It can be used to asses alternative splicing events, post-trascriptional modifications
+	* It can be used to identify exon-intron boundaries
+	* In general, RNA is isolated and eventually enriched for the species of interest (mRNA, tRNA, ...)
+		* rRNA usually needs to be depleted since it represent 90% of the total rRNA content
+	* cDNA is synthesised from the RNA library, fragmented and size-selected
+		* Biases can be introduced at this step
+		* Direct RNA sequencing has been tried by several companies
+* NGS has several applications in cancer research
+	* It can be used for detecting not only SNPs but also large indels, by looking at differential depth of coverage
+	* I can detect cromosomal translocation by looking for reads that span 2 chromosomes
+	* I can detect viruses and aother pathogen's genomes
+* A CNV is a 1 kb or longer DNA segment present at variable copy number
+* They can be discovered by analizing the depth of coverage of the region
+	* This does not tell me in which allele the copies are (!)
+* Array competitive genomic hybridization (aCGH) was once a golden standard for CNVs, now it is not
+	* It is used for the identification of tumors
+	* It is performed on a DNA microarray
+	* Single probes are 50-75 nucleotides long and they are syntetized
+		* They are selected so to be spaced around 20 kb apart and to have a specific GC content
+		* I need to have a certain GC content so to be able to do the annealing step for all the microarray at the same temperature
+		* I do not want probes on repeated sequences
+	* I do the hybridization with a reference DNA and the sample mixed and marked with different fluorophores
+	* I measure the log_2 of the ratio of the intensities in order to call CNVs
+		* 0 means that I have the same number of copies, 1 that I have the double number of copies
+	* If I want to decrease the noise I can decide to call only more than 5 (es) sequential calls at the same level
+		* In this way I loose resolution (!)
+	* Note that if I compare the X chromosome in males and females, I get double the reads in females (!)
+	* It is a good complement for cytogenetics
+* High density SNP arrays are the most common method used for CNV detection
+	* CNV alters the signal intesity of certain probes due to the differential amount of DNA present
+	* I can also detect a concerted pattern of intensity alteration in neighboring SNPs
+	* Various algorithms are availabe for calling CNVs from SNP array data
+
+# Genome assembly
 
 # Aplotypes and linkage disequilibrium
 * We can detect crossing-over by looking for the association of genetic markers
@@ -369,14 +404,22 @@
 $$ H_p = 2 \sum n_{MAJ} * \sum n_{MIN} / (\sum n_{MAJ} + \sum n_{MIN})^2$$
 		* $\sum n_{MAJ}$ and $\sum n_{MIN}$ are respectively the sums of the number of reads for each category for all the SNPs in the window
 		* If I have an homozigous region all the SNPs there will have their major allele more frequent!
-		* $H_p$ is maximised when the 2 alleles have equal frequency
+		* $H_p=1$ is when the 2 alleles have equal frequency ($\sum n_{MAJ} = \sum n_{MIN}$)
+		* $H_p=0$ when $\sum n_{MIN}=0$
 	* The $H_p$ value is then normalized as
 $$ Z_{H_p} = (H_p-\mu_{H_p})/\sigma_{H_p}$$
+	* I can set a $Z_{H_p}$ threshold and call a selective sweep when the threshold is passed for a window position
+	* Data is usually presented with a Manhattan plot with th $Z_{H_p}$ score of each window position plotted along the genome axis
+		* Colors are used to distinguish where a cromosome ends and another start
+* There are portions of mithocondrial DNA integrated in the nuclear genome
+	* These are called NUMTS and they are mostly pseudogenes, but maybe some of them are functional
+	* They are still being integrated, so they tend to be quite variable
+	* The ones integrated most recently tend to be really similar to the mithocondrial sequences
 
 # Genotyping
 * Genotyping means to determine the genotype at one locus
 * I can perform high throughput genotyping with beadchips
-	* I have beads with primers that anneal in different positions in the genome, so to be evenly spaced and belowe the linkage disequilibrium lenght
+	* I have beads with primers that anneal in different positions in the genome, so to be evenly spaced and below the linkage disequilibrium lenght
 	* The output of a beadchip is essentially a .map file with additional experimental information (signal intensity for the SNP)
 	* The position of some probes in the genome is unknown, so the row of their SNP starts with 0 (chromosome) and ends with 0 (position)
 * The main genotyping platforms are from Illumina and Affimetrix
@@ -394,36 +437,6 @@ $$ Z_{H_p} = (H_p-\mu_{H_p})/\sigma_{H_p}$$
 	* Polimorphic sites are more informative than sites with rare variants, so I tend to focus on them for determining an aplotype
 * Genotyping by sequencing (GBS) allows to detect unknown SNPs and it is typically done with pooled reduced representation libraries
 * Illumina can produce customized genotyping chips
-
-# Plink
-* A pedigree is a standardised representation of individuals in a population and relationships among them
-	* It can be represented in plane text or in binary form
-* Plink is an important tool for working with reference genomes
-	* It can work with text files (`--file` parameter, without extension for homonimous .ped and .map files)
-	* It can work with binaries (`--bfile` option)
-* PED and MAP file work in pairs: I typically have my_file.ped and my_file.map with the same root name and referring to the same data
-* The PED (pedigree) file is a text file with a row for each individual
-	* It stores the pedigree of the population
-	* This format is standard and it is used by different tools
-	* It is Tab-separated and there are fields for the father, mother, sex, family, phenotype, SNPs
-	* Missing data are usually reported with 0
-* The MAP (map on the genome) file is a text file that has a line for each SNP
-	* It reports chromosome number, SNP ID, position, distance from other SNPs
-	* It is produced processing the raw output of a genotyping platform
-* A polymorphism is such if it has a frequency higher than 1%
-* Before doing data analysis, check your data (!)
-	* I want to exclude faulty individuals and faulty loci
-	* Plink can filter out data at a given threshold
-	* I want to exclude low-frequency alleles: my focus is the population, not the individual
-	* I can exclude SNPs that violate the HW equilibrium
-	* I can exclude mendelian errors: genotypes that are impossible given the parents
-* Basic usage
-	* `--freq` gives the frequency of a SNP
-	* If I don't trust the data provider about the sexes, I can check for absolute homozigosity at X loci: in this case I have a male
-	* I can want to filter out duplicates due to sampling errors
-	* If I am working with non-human or I have partially assembled scaffolds, I need to specify `--allow-extra-chromosomes` or the species, if available in plink (es. `--sheep`)
-	* `--out` specifies the root filename of the output
-	* `--noweb` is usually required otherwise it checks forever for updates
 
 # De novo sequencing
 * The human genome is repeat rich
@@ -464,36 +477,12 @@ $$ Z_{H_p} = (H_p-\mu_{H_p})/\sigma_{H_p}$$
 * Masking means to substitute a sequence with a stretch of NNNN of the same length
 * Pseudogenes can be processed or non processed (with introns) and they are not recognised by repeatmasker
 
-
 # DNA chips
 * In human the average linkage disequilibrium is low, around 1kb
 * When effective population size is low, likage disequilibrium is large
 	* This is true for lifestock
 * In DNA sequencing chips, I detect a series of SNPs distanced about the linkage disequilibrium
 	* If 2 SNPs are close enough, I can infer that the sequence in between is what I would expect from the aplotype
-
-# Copy number variation
-* A CNV is a 1 kb or longer DNA segment present at variable copy number
-* They can be discovered by analizing the depth of coverage of the region
-	* This does not tell me in which allele the copies are (!)
-* There are portions of mithocondrial DNA integrated in the nuclear genome
-	* These are called NUMTS and they are mostly pseudogenes, but maybe some of them are functional
-	* They are still being integrated, so they tend to be quite variable
-	* The ones integrated most recently tend to be really similar to the mithocondrial sequences
-* Array competitive genomic hybridization (aCGH) was once a golden standard for CNVs, now it is not
-	* It is used for the identification of tumors
-	* It is performed on a DNA microarray
-	* Single probes are 50-75 nucleotides long and they are syntetized
-		* They are selected so to be spaced around 20 kb apart and to have a specific GC %
-		* I need to have a certain GC % so to be able to do the annealing step for all the microarray at the same temperature
-		* I do not want probes on repeated sequences
-	* I do the hybridization with a reference DNA and the sample mixed and marked with different fluorophores
-	* I measure the log_2 of the ratio of the intensities in order to call CNVs
-		* 0 means that I have the same number of copies, 1 that I have the double number of copies
-	* If I want to decrease the noise I can decide to call only more than 5 (es) sequential calls at the same level
-		* In this way I loose resolution (!)
-	* Note that if I compare the X chromosome in males and females, I get double the reads in females (!)
-	* It is a good complement for cytogenetics
 
 # GWAS
 * I want to find the association between a phenotype and a genomic locus
@@ -516,3 +505,34 @@ $$ Z_{H_p} = (H_p-\mu_{H_p})/\sigma_{H_p}$$
 * Runs of homozigosity (ROH) refer to stretches of chromosome which are completely homozygus
 	* This could mean that the 2 stretches are identical by descent (!)
 	* The ROH % is equivalent to the coefficient of inbreeding
+
+# Plink
+* A pedigree is a standardised representation of individuals in a population and relationships among them
+	* It can be represented in plane text or in binary form
+* Plink is an important tool for working with reference genomes
+	* It can work with text files (`--file` parameter, without extension for homonimous .ped and .map files)
+	* It can work with binaries (`--bfile` option)
+* PED and MAP file work in pairs: I typically have my_file.ped and my_file.map with the same root name and referring to the same data
+* The PED (pedigree) file is a text file with a row for each individual
+	* It stores the pedigree of the population
+	* This format is standard and it is used by different tools
+	* It is Tab-separated and there are fields for the father, mother, sex, family, phenotype, SNPs
+	* Missing data are usually reported with 0
+* The MAP (map on the genome) file is a text file that has a line for each SNP
+	* It reports chromosome number, SNP ID, position, distance from other SNPs
+	* It is produced processing the raw output of a genotyping platform
+* A polymorphism is such if it has a frequency higher than 1%
+* Before doing data analysis, check your data (!)
+	* I want to exclude faulty individuals and faulty loci
+	* Plink can filter out data at a given threshold
+	* I want to exclude low-frequency alleles: my focus is the population, not the individual
+	* I can exclude SNPs that violate the HW equilibrium
+	* I can exclude mendelian errors: genotypes that are impossible given the parents
+* Basic usage
+	* `--freq` gives the frequency of a SNP
+	* If I don't trust the data provider about the sexes, I can check for absolute homozigosity at X loci: in this case I have a male
+	* I can want to filter out duplicates due to sampling errors
+	* If I am working with non-human or I have partially assembled scaffolds, I need to specify `--allow-extra-chromosomes` or the species, if available in plink (es. `--sheep`)
+	* `--out` specifies the root filename of the output
+	* `--noweb` is usually required otherwise it checks forever for updates
+
