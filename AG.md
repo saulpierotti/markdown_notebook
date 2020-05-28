@@ -110,16 +110,10 @@
 	* NOVOGENE is from South Korea
 	* If I chose to use these services, I need to consider shipping restrictions, costs, and product degradation
 * In sequencing, if we are not sure about a variant we exclude it
-* Wen I do genotyping by sequencing, the regions of interest have a very high depth of coverage so I can trust the results
+* When I do genotyping by sequencing, the regions of interest have a very high depth of coverage so I can trust the results
 * We have tools for allignment of reads to a reference like bowtie
 	* They produce a BAM file
 * There are tools for calling mutations, Indels, ecc.
-* If I do not have enough money to sequence any individual, I can pool DNA samples in group (i.e. breed) and do a sequencing for each group
-* A reduced representation library is obtained by digestion of the genome
-	* I run the digest on agarose and retrieve only a specific subset of MW
-	* If I see definite bands in the gel, these probably come from repeated regions that are cut at the same lenght
-		* I want to exclude this (!)
-	* In the digestion, I can choose a restriction enzyme with a long target sequence if I want longer fragments (cut site less probable!) and vice versa
 * Fastq is similar to fasta but it has additional information on it
 	* It uses ASCII symbols to code a quality score (PHRED score, from the homonimous software) in a separate line from the one where the bases are stored
 		* PHRED uses hard-code lookup tables of peak charachteristics to estimate quality
@@ -336,10 +330,18 @@
 	* Subsequently, cells are lised and DNA fragmented
 	* The sequences of interest are recovered with Ab against the protein of interest
 	* I reverse the DNA-protein binding and sequence the fragments 
-* If I want to reduce cost, I can sequence only the part of interest, for instance the exome
-	* In order to sequence the exom I need a capturing system
+* If I want to reduce cost, I can sequence only the exome
+	* The exome is around 1% of the genome in humans!
+	* In order to sequence the exome I need a capturing system
 	* If not commercially available I have to evaluate if developping a capturing system is worth it 
 	* In order to enrich for the exome, I need to have specific probes that bind to exon regions, either in solution (on beads) or in microarrays
+	* Probes are typically obtained from cDNA
+* If I do not have enough money to sequence every individual, I can pool DNA samples in group (i.e. breed) and do a sequencing for each group
+* A reduced representation library is obtained by digestion of the genome
+	* I run the digest on agarose and retrieve only a specific subset of MW
+	* If I see definite bands in the gel, these probably come from repeated regions that are cut at the same lenght
+		* I want to exclude this (!)
+	* In the digestion, I can choose a restriction enzyme with a long target sequence if I want longer fragments (cut site less probable!) and vice versa
 
 # Aplotypes and linkage disequilibrium
 * We can detect crossing-over by looking for the association of genetic markers
@@ -360,6 +362,16 @@
 * PHASE is a website for analyzing aplotypes
 * I cannot determine the aplotype by only looking at the genotype: I need data on the population
 * A selective sweep is the reduction or elimination of variation among the nucleotides in neighboring DNA of a mutation as the result of recent and strong positive natural or artificial selection
+	* The DNA sequence is analysed in a 40 kbp sliding window in pooled sequence data
+	* The number of reads corresponding to the 2 alleales is evaluated for each SNP
+		* I count the number of reads with the major allele ($n_{MAJ}$) and with the minor allele ($n_{MIN}$)
+	* This leads to estimating an heterozygosity score for each window position for each pool
+$$ H_p = 2 \sum n_{MAJ} * \sum n_{MIN} / (\sum n_{MAJ} + \sum n_{MIN})^2$$
+		* $\sum n_{MAJ}$ and $\sum n_{MIN}$ are respectively the sums of the number of reads for each category for all the SNPs in the window
+		* If I have an homozigous region all the SNPs there will have their major allele more frequent!
+		* $H_p$ is maximised when the 2 alleles have equal frequency
+	* The $H_p$ value is then normalized as
+$$ Z_{H_p} = (H_p-\mu_{H_p})/\sigma_{H_p}$$
 
 # Genotyping
 * Genotyping means to determine the genotype at one locus
