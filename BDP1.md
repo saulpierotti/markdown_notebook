@@ -565,4 +565,6 @@
 * ARM was born in the UK, but now it is owned by a japanese firm
 	* It is the main SoC producer
 
-# 
+# Internet of Things (IoT)
+* The IoT is the network of connected physical devices through their electronic components
+* Each 'Thing' can be identified via its MAC address
