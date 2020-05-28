@@ -1,4 +1,4 @@
-% Applied Machine Learning 1
+% Applied Machine Learning basic and advanced
 % Saul Pierotti
 % \today
 
@@ -310,3 +310,14 @@
 	* It can also be a notebook with both
 * It should be reproducible
 * You can copy but be clever!
+
+# Tools for the advanced part
+* We will still use sklearn for preprocessing, but not for the main analysis
+* Keras, with TensorFlow as a backend, will be our main tool
+	* We could also touch PyTorch
+* CPU will NOT be enough for this part, we need a GPU or TPU (in Colab)
+
+# Decision trees
+* Decision trees are implemented in sklearn as `DecisionTreeClassifier()`
+	* It is possible to specify the maximum depth of the tree with the `max_depth` argument
+* They are binary decision trees which cut the dataset at a threshold
