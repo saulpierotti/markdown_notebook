@@ -317,7 +317,7 @@
 	* We could also touch PyTorch
 * CPU will NOT be enough for this part, we need a GPU or TPU (in Colab)
 
-# Decision trees (DT)
+# Decision Trees (DT)
 * Decision trees are implemented in sklearn as `DecisionTreeClassifier()`
 	* It is possible to specify the maximum depth of the tree with the `max_depth` argument
 * They are binary decision trees which cut the dataset at a threshold for a feature at each level
@@ -350,3 +350,17 @@
 * A random forest improves performances by avergaing the prediction of many trees
 	* They are more stable but more opaque (grey box)!
 
+# Support Vector Machines (SVM)
+* They are good for complex (non-linear) but small and medium size datasets
+* They do not require the computational resources needed for NNs
+* It build a decision boundary which is as far as possible from the datapoints
+	* This is a good thing, whatch the images in the slides!
+* SVMs are also known as large margin classifiers
+	* They try to find a line which splits the dataset well and with the widest margins (distance) from the datapoints
+* The surface between the 2 margins is called road or street, and it includes the decision boundary
+* SVMs are really sensitive to feature scaling and preparation
+* SMV margins can be hard or soft
+* With hard margins I do not accept misclassified data
+	* This is very sensitive to outliers and it can be impossible!
+* Soft margins try to keep the strit as wide as possible while minimising margin violation
+* The C hyperparameter tunes the balance between street width and margin violations in in soft margins
