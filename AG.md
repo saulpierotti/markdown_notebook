@@ -146,6 +146,10 @@
 	* If I see too many peaks close to each other, I probably have mixed reads
 * I have a reference sequence known, and if this sequence reaches a threshold signal I keep my read, otherwise I discard it
 * In missed reads I have too many empty spaces in each read, more than statistically reasonable
+* Ion torrent reads are longer than Illumina, around 400 bp, and it runs in a shorter time (2 to 7 hours)
+* A single run produces 50 Mb to 15 Gb raw
+* Ion torrent is now specialising in clinical applications with the PGM machine
+* Usually it does not support paired-end sequencing, but the PGM sequencer does
 
 ## Roche 454
 * It works in similar way to Ion Torrent, but it senses the release of pyrophosphate during elongation
@@ -257,7 +261,11 @@
 * The DNA fragments with bound primer and polymerase are inserted in a SMRT cell
 * The SMRT cell contains millions of wells on its surface, called Zero-mode waveguides (ZMWs)
 * Each ZMW hosts a single DNA molecule with a single DNA polymerase and primer
+* The DNA polymerase is fixed at the botton of the ZMW, making the single-molecule signal detectable
 * Labeled nucleotides are added and their addition is detected in each ZMW
+	* The systhesis is continuous, not stepwise like in Illumina
+	* Detection is possible since the nucleotide pauses for some time at the bottom of the ZMW while it is added
+	* AFter addition the dye is cleaved and diffuses away
 * 2 modes of operation are possible: Circular consensus Sequencing (CCS) and Continuous Long Reads (CLR)
 * In CCS the circular DNA is read again and again generating an high-fidelity (HiFi) read, with 99% accuracy
 * In CLR the molecule is as long as possible and it is read for as many nucleotides as possible, so to generate long reads
@@ -265,9 +273,12 @@
 ## Oxford nanopore
 * Long reads, but high error rate and low thorughput
 * The reads can potentially be very long, up to 100kb depending on library preparation
+* Libraries are prepared with double strand fragments in which are joined at one end by an hairpin adaptor
 * DNA passes trough a modified hemolysine pore altering the ion flow thorugh the pore
 	* The pore is around 1 nm in diameter (half the widdht of DNA!)
 * A motor protein pre-loaded on an adapter oligo regulates the speed at which DNA moves through the pore and acts as an helicase
+* After all the molecule has passed through the pore, since the adaptor is an hairpin the reverse strand is sequenced
+	* In this way I have 2 reads per fragment
 * Many DNA molecule pass in parallel through many nanopores (around 500 in MinION, 2000 in GridION) placed on a membrane
 * Each nanopore has its own sensor and it is placed in a nanowell
 * Bases are read in 4-mers and then the signal of subsequent reads is interpolated by a Recurrent Neural Network (RNN)
