@@ -558,3 +558,8 @@
 		* Need to have the same kernel!
 * There are many container engines, but they are usually compatible
 	* You can build with a manager and then run with another
+
+# Systems on Chips (SoC)
+* Europe is leader in the production of SoCs and low-power devices
+* ARM was born in the UK, but now it is owned by a japanese firm
+	* It is the main SoC producer
