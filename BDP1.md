@@ -559,7 +559,10 @@
 * There are many container engines, but they are usually compatible
 	* You can build with a manager and then run with another
 
-# Systems on Chips (SoC)
+# Low power devices
+* Exascale computing with traditional means requires a nuclear reactor for power!
 * Europe is leader in the production of SoCs and low-power devices
 * ARM was born in the UK, but now it is owned by a japanese firm
 	* It is the main SoC producer
+
+# 
