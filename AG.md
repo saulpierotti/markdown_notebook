@@ -77,22 +77,7 @@
 * Mendel's third law: some alleles are dominant on others
 * We reviewed PCR, agarose gel electrophoresys and Sanger sequencing basics
 * Reference genomes can be found in the Ensemble database
-* A genome assembly can be done in chromosomes or in scaffolds
-* Scaffolds are assembled from contigs
-* Sometimes it is not possible to assemble entire chromosomes
-* The quality score of an assembly (n50) is the minimum size of scaffolds that contain 50% of the assembled genome
-* A human chromosome is on average 80-100 Mb
 * Penetrance is the proportion of individual with a given genotype that manifest the associated phenotype
-* ChiPseq (chromatine immunoprecipitation) is a method used to analyse DNA-protein interactions
-	* The output is a library of sequences that bind the protein of interest
-	* The first step is to fix the proteins with DNA using formaldehyde
-	* Subsequently, cells are lised and DNA fragmented
-	* The sequences of interest are recovered with Ab against the protein of interest
-	* I reverse the DNA-protein binding and sequence the fragments 
-* If I want to reduce cost, I can sequence only the part of interest, for instance the exome
-	* In order to sequence the exom I need a capturing system
-	* If not commercially available I have to evaluate if developping a capturing system is worth it 
-	* In order to enrich for the exome, I need to have specific probes that bind to exon regions, either in solution (on beads) or in microarrays
 
 # Sanger sequencing
 * Sanger sequencing was developped by F. Sanger in 1977
@@ -338,6 +323,23 @@
 * Genia Technologies is an early stage announcment for a system that should combine Ion Torrent and Oxford Nanopore
 	* It claims a sensitivity 1-2 orders of magnitude greater than Oxford Nanopore, with as many as 100k pores per chip, with as many as 100k pores per chip
 	* Planned sample cost less than 100 \$
+
+# Applications of NGS
+* A genome assembly can be done in chromosomes or in scaffolds
+* Scaffolds are assembled from contigs
+* Sometimes it is not possible to assemble entire chromosomes
+* The quality score of an assembly (n50) is the minimum size of scaffolds that contain 50% of the assembled genome
+* A human chromosome is on average 80-100 Mb
+* ChiPseq (chromatine immunoprecipitation) is a method used to analyse DNA-protein interactions
+	* The output is a library of sequences that bind the protein of interest
+	* The first step is to fix the proteins with DNA using formaldehyde
+	* Subsequently, cells are lised and DNA fragmented
+	* The sequences of interest are recovered with Ab against the protein of interest
+	* I reverse the DNA-protein binding and sequence the fragments 
+* If I want to reduce cost, I can sequence only the part of interest, for instance the exome
+	* In order to sequence the exom I need a capturing system
+	* If not commercially available I have to evaluate if developping a capturing system is worth it 
+	* In order to enrich for the exome, I need to have specific probes that bind to exon regions, either in solution (on beads) or in microarrays
 
 # Aplotypes and linkage disequilibrium
 * We can detect crossing-over by looking for the association of genetic markers
