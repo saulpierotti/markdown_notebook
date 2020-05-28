@@ -2,37 +2,6 @@
 % Saul Pierotti
 % \today
 
-# Course structure
-* Population genetics
-* Genome structure and variability in vertebrates (we may mention plants and bacteria)
-* High throughput genomic platforms
-* Applications of NGS
-* Array comparative genome hybridization 
-* PLINK, genetic data analysis. How to use this software and apply some design using this tool
-* Linkage analysis and genetic mapping
-* QTL analysis
-
-# Examination mode
-* Final exam has 2 levels
-	* Preparation of a genomic project
-		* A text should be written including an appropriate introduction to the problem/question that the experiment or project would like to analyse or answer, aim of the project, a section with materials and methods, expected results and impact
-		* The project should be submitted to the professor one week before the interview
-		* We should specify what is the aim of the project and what I’d like to solve with it
-			* If it makes sense, we can undergo a discussion with him
-		* The project is based on money: we’ll have a budget
-	* Interview based on the project submitted and other two questions
-		* Only students that are positively evaluated at the first level are admitted at the second level
-		* Evaluation of basic knowledge
-* We get one extra point if we pass at the first attempt
-* It is important to follow him
-* We’ll have an example of a project, the topic of the project it’s up to us
-* We need to choose a complex genome/organism
-* Each one will have a different budget
-* It’s better to do the project according to what we discuss in the lectures
-* It has to be something new
-* The first date would be in February after Winter School and another one in March
-* Near to the end of the course we’ll have a test with 30 questions to test our level (it won’t count for the final score)
-
 # Introduction
 * Genomics is the study of genome structure and function
 * The genome is the entire genetic content of an organism
@@ -78,6 +47,8 @@
 * We reviewed PCR, agarose gel electrophoresys and Sanger sequencing basics
 * Reference genomes can be found in the Ensemble database
 * Penetrance is the proportion of individual with a given genotype that manifest the associated phenotype
+
+# Genome structure and variability in vertebrates
 
 # Sanger sequencing
 * Sanger sequencing was developped by F. Sanger in 1977
@@ -376,69 +347,37 @@
 	* I can also detect a concerted pattern of intensity alteration in neighboring SNPs
 	* Various algorithms are availabe for calling CNVs from SNP array data
 
+# Plink
+* A pedigree is a standardised representation of individuals in a population and relationships among them
+	* It can be represented in plane text or in binary form
+* Plink is an important tool for working with reference genomes
+	* It can work with text files (`--file` parameter, without extension for homonimous .ped and .map files)
+	* It can work with binaries (`--bfile` option)
+* PED and MAP file work in pairs: I typically have my_file.ped and my_file.map with the same root name and referring to the same data
+* The PED (pedigree) file is a text file with a row for each individual
+	* It stores the pedigree of the population
+	* This format is standard and it is used by different tools
+	* It is Tab-separated and there are fields for the father, mother, sex, family, phenotype, SNPs
+	* Missing data are usually reported with 0
+* The MAP (map on the genome) file is a text file that has a line for each SNP
+	* It reports chromosome number, SNP ID, position, distance from other SNPs
+	* It is produced processing the raw output of a genotyping platform
+* A polymorphism is such if it has a frequency higher than 1%
+* Before doing data analysis, check your data (!)
+	* I want to exclude faulty individuals and faulty loci
+	* Plink can filter out data at a given threshold
+	* I want to exclude low-frequency alleles: my focus is the population, not the individual
+	* I can exclude SNPs that violate the HW equilibrium
+	* I can exclude mendelian errors: genotypes that are impossible given the parents
+* Basic usage
+	* `--freq` gives the frequency of a SNP
+	* If I don't trust the data provider about the sexes, I can check for absolute homozigosity at X loci: in this case I have a male
+	* I can want to filter out duplicates due to sampling errors
+	* If I am working with non-human or I have partially assembled scaffolds, I need to specify `--allow-extra-chromosomes` or the species, if available in plink (es. `--sheep`)
+	* `--out` specifies the root filename of the output
+	* `--noweb` is usually required otherwise it checks forever for updates
+
 # Genome assembly
-
-# Aplotypes and linkage disequilibrium
-* We can detect crossing-over by looking for the association of genetic markers
-* An aplotype is a cluster of genes that are usually eredited toghether
-* The probability of CO between 2 genes is measured in cM
-	* 1 cM is a genetic distance such that in 100 meiosis I expect 1 CO
-	* It is around $10^6$ nucleotides for mammals
-* If I have a simple dominant trait, I am certain only about the allele frequency of the recessive
-	* I can recover it by $recessive\ allele = \sqrt{recessive\ phenotype}$
-	* Doing this, I am assuming that the population is infinite, there is no mutation, no selection, no genetic drift, no migration, random mating
-* If the observed genotype frequencies are different from the ones expected from HW equilibrium, It means that there are factors at play that perturbate the equilibrium
-	* There can also be genotyping problems (my region is difficult to sequence and I do not get the right sequence)
-* Two loci are in linkage disequilibrium if they do not occur randomly with respect to each other
-* Aplotypes are patterns of genetic variation in populations
-* The genotype is not sufficient for predicting the aplotypes
-	* I cannot differentiate if a variation is in one chromosome or the other (!)
-	* We need information on aplotype frequencies or on the parents
-* PHASE is a website for analyzing aplotypes
-* I cannot determine the aplotype by only looking at the genotype: I need data on the population
-* A selective sweep is the reduction or elimination of variation among the nucleotides in neighboring DNA of a mutation as the result of recent and strong positive natural or artificial selection
-	* The DNA sequence is analysed in a 40 kbp sliding window in pooled sequence data
-	* The number of reads corresponding to the 2 alleales is evaluated for each SNP
-		* I count the number of reads with the major allele ($n_{MAJ}$) and with the minor allele ($n_{MIN}$)
-	* This leads to estimating an heterozygosity score for each window position for each pool
-$$ H_p = 2 \sum n_{MAJ} * \sum n_{MIN} / (\sum n_{MAJ} + \sum n_{MIN})^2$$
-		* $\sum n_{MAJ}$ and $\sum n_{MIN}$ are respectively the sums of the number of reads for each category for all the SNPs in the window
-		* If I have an homozigous region all the SNPs there will have their major allele more frequent!
-		* $H_p=1$ is when the 2 alleles have equal frequency ($\sum n_{MAJ} = \sum n_{MIN}$)
-		* $H_p=0$ when $\sum n_{MIN}=0$
-	* The $H_p$ value is then normalized as
-$$ Z_{H_p} = (H_p-\mu_{H_p})/\sigma_{H_p}$$
-	* I can set a $Z_{H_p}$ threshold and call a selective sweep when the threshold is passed for a window position
-	* Data is usually presented with a Manhattan plot with th $Z_{H_p}$ score of each window position plotted along the genome axis
-		* Colors are used to distinguish where a cromosome ends and another start
-* There are portions of mithocondrial DNA integrated in the nuclear genome
-	* These are called NUMTS and they are mostly pseudogenes, but maybe some of them are functional
-	* They are still being integrated, so they tend to be quite variable
-	* The ones integrated most recently tend to be really similar to the mithocondrial sequences
-
-# Genotyping
-* Genotyping means to determine the genotype at one locus
-* I can perform high throughput genotyping with beadchips
-	* I have beads with primers that anneal in different positions in the genome, so to be evenly spaced and below the linkage disequilibrium lenght
-	* The output of a beadchip is essentially a .map file with additional experimental information (signal intensity for the SNP)
-	* The position of some probes in the genome is unknown, so the row of their SNP starts with 0 (chromosome) and ends with 0 (position)
-* The main genotyping platforms are from Illumina and Affimetrix
-* The probe is designed so to
-	* Bind to a unique region (it has to be long enough!)
-	* It has to have standard GC content, so I can melt all the chip at the same temperature
-* The specific fragments to be genotyped are detected by primer extension
-	* I have a primer right in front of a SNP
-	* I add the 2 possible nucleotides for the SNP labeled with different fluorophores and blocked
-	* I see what happens
-* The minor allele frequency (MAF) is the frequency of the rarer variant of a SNP
-	* It can go from 0 to 0.5
-* I do not need to genotype all the SNPs
-	* I can take advantage of linkage disequilibrium to detect aplotypes
-	* Polimorphic sites are more informative than sites with rare variants, so I tend to focus on them for determining an aplotype
-* Genotyping by sequencing (GBS) allows to detect unknown SNPs and it is typically done with pooled reduced representation libraries
-* Illumina can produce customized genotyping chips
-
-# De novo sequencing
 * The human genome is repeat rich
 * The main approaches are whole genome shotgun and hierarchical shotgun approach (BAC based)
 * Hierarchical shotgun allows to resolve repetitive regions by building bigger contigs (!)
@@ -471,20 +410,86 @@ $$ Z_{H_p} = (H_p-\mu_{H_p})/\sigma_{H_p}$$
 	* In this way, I can say that the unallocated contig is physically linked to a tag of known position
 	* The distance from between tags defined in this way is defined in cRay
 
-# Repeated sequences
+# Study of genomes
+
+## Linkage disequilibrium and aplotypes
+* We can detect crossing-over by looking for the association of genetic markers
+* An aplotype is a cluster of genes that are usually eredited toghether
+* The probability of CO between 2 genes is measured in cM
+	* 1 cM is a genetic distance such that in 100 meiosis I expect 1 CO
+	* It is around $10^6$ nucleotides for mammals
+* If I have a simple dominant trait, I am certain only about the allele frequency of the recessive
+	* I can recover it by $recessive\ allele = \sqrt{recessive\ phenotype}$
+	* Doing this, I am assuming that the population is infinite, there is no mutation, no selection, no genetic drift, no migration, random mating
+* If the observed genotype frequencies are different from the ones expected from HW equilibrium, It means that there are factors at play that perturbate the equilibrium
+	* There can also be genotyping problems (my region is difficult to sequence and I do not get the right sequence)
+* Two loci are in linkage disequilibrium if they do not occur randomly with respect to each other
+* Aplotypes are patterns of genetic variation in populations
+* The genotype is not sufficient for predicting the aplotypes
+	* I cannot differentiate if a variation is in one chromosome or the other (!)
+	* We need information on aplotype frequencies or on the parents
+* PHASE is a website for analyzing aplotypes
+* I cannot determine the aplotype by only looking at the genotype: I need data on the population
+
+## Signatures of selection
+* A selective sweep is the reduction or elimination of variation among the nucleotides in neighboring DNA of a mutation as the result of recent and strong positive natural or artificial selection
+	* The DNA sequence is analysed in a 40 kbp sliding window in pooled sequence data
+	* The number of reads corresponding to the 2 alleales is evaluated for each SNP
+		* I count the number of reads with the major allele ($n_{MAJ}$) and with the minor allele ($n_{MIN}$)
+	* This leads to estimating an heterozygosity score for each window position for each pool
+$$ H_p = 2 \sum n_{MAJ} * \sum n_{MIN} / (\sum n_{MAJ} + \sum n_{MIN})^2$$
+		* $\sum n_{MAJ}$ and $\sum n_{MIN}$ are respectively the sums of the number of reads for each category for all the SNPs in the window
+		* If I have an homozigous region all the SNPs there will have their major allele more frequent!
+		* $H_p=1$ is when the 2 alleles have equal frequency ($\sum n_{MAJ} = \sum n_{MIN}$)
+		* $H_p=0$ when $\sum n_{MIN}=0$
+	* The $H_p$ value is then normalized as
+$$ Z_{H_p} = (H_p-\mu_{H_p})/\sigma_{H_p}$$
+	* I can set a $Z_{H_p}$ threshold and call a selective sweep when the threshold is passed for a window position
+	* Data is usually presented with a Manhattan plot with th $Z_{H_p}$ score of each window position plotted along the genome axis
+		* Colors are used to distinguish where a cromosome ends and another start
+* There are portions of mithocondrial DNA integrated in the nuclear genome
+	* These are called NUMTS and they are mostly pseudogenes, but maybe some of them are functional
+	* They are still being integrated, so they tend to be quite variable
+	* The ones integrated most recently tend to be really similar to the mithocondrial sequences
+
+## QTL mapping
+
+## Genotyping
+* Genotyping means to determine the genotype at one locus
+* I can perform high throughput genotyping with beadchips
+	* I have beads with primers that anneal in different positions in the genome, so to be evenly spaced and below the linkage disequilibrium lenght
+	* The output of a beadchip is essentially a .map file with additional experimental information (signal intensity for the SNP)
+	* The position of some probes in the genome is unknown, so the row of their SNP starts with 0 (chromosome) and ends with 0 (position)
+* The main genotyping platforms are from Illumina and Affimetrix
+* The probe is designed so to
+	* Bind to a unique region (it has to be long enough!)
+	* It has to have standard GC content, so I can melt all the chip at the same temperature
+* The specific fragments to be genotyped are detected by primer extension
+	* I have a primer right in front of a SNP
+	* I add the 2 possible nucleotides for the SNP labeled with different fluorophores and blocked
+	* I see what happens
+* The minor allele frequency (MAF) is the frequency of the rarer variant of a SNP
+	* It can go from 0 to 0.5
+* I do not need to genotype all the SNPs
+	* I can take advantage of linkage disequilibrium to detect aplotypes
+	* Polimorphic sites are more informative than sites with rare variants, so I tend to focus on them for determining an aplotype
+* Genotyping by sequencing (GBS) allows to detect unknown SNPs and it is typically done with pooled reduced representation libraries
+* Illumina can produce customized genotyping chips
+
+## Dealing with repeated sequences
 * They can be spotted with repeat masker
 * This tool can mark SINE, LINE, Alu and will mask it in my sequence
 * Masking means to substitute a sequence with a stretch of NNNN of the same length
 * Pseudogenes can be processed or non processed (with introns) and they are not recognised by repeatmasker
 
-# DNA chips
+## DNA chips
 * In human the average linkage disequilibrium is low, around 1kb
 * When effective population size is low, likage disequilibrium is large
 	* This is true for lifestock
 * In DNA sequencing chips, I detect a series of SNPs distanced about the linkage disequilibrium
 	* If 2 SNPs are close enough, I can infer that the sequence in between is what I would expect from the aplotype
 
-# GWAS
+## GWAS
 * I want to find the association between a phenotype and a genomic locus
 * I can genotype individuals with a SNPs array and see if there is association with the phenotype
 	* I check allele frequencies that differ in the different cohorts
@@ -499,40 +504,40 @@ $$ Z_{H_p} = (H_p-\mu_{H_p})/\sigma_{H_p}$$
 	* I measure the genotype of each individual and its continuous trait
 	* I take the means of the groups for each genotype and I perform a statistical test on means, like ANOVA
 
-# Detect inbreeding
+## Runs of Homozigosity
 * The inbreeding coefficient indicates the probability that random positions among 2 individuals are equal by descent
 	* It is calculated by tracing a close path on the pedigree of an individual
 * Runs of homozigosity (ROH) refer to stretches of chromosome which are completely homozygus
 	* This could mean that the 2 stretches are identical by descent (!)
 	* The ROH % is equivalent to the coefficient of inbreeding
 
-# Plink
-* A pedigree is a standardised representation of individuals in a population and relationships among them
-	* It can be represented in plane text or in binary form
-* Plink is an important tool for working with reference genomes
-	* It can work with text files (`--file` parameter, without extension for homonimous .ped and .map files)
-	* It can work with binaries (`--bfile` option)
-* PED and MAP file work in pairs: I typically have my_file.ped and my_file.map with the same root name and referring to the same data
-* The PED (pedigree) file is a text file with a row for each individual
-	* It stores the pedigree of the population
-	* This format is standard and it is used by different tools
-	* It is Tab-separated and there are fields for the father, mother, sex, family, phenotype, SNPs
-	* Missing data are usually reported with 0
-* The MAP (map on the genome) file is a text file that has a line for each SNP
-	* It reports chromosome number, SNP ID, position, distance from other SNPs
-	* It is produced processing the raw output of a genotyping platform
-* A polymorphism is such if it has a frequency higher than 1%
-* Before doing data analysis, check your data (!)
-	* I want to exclude faulty individuals and faulty loci
-	* Plink can filter out data at a given threshold
-	* I want to exclude low-frequency alleles: my focus is the population, not the individual
-	* I can exclude SNPs that violate the HW equilibrium
-	* I can exclude mendelian errors: genotypes that are impossible given the parents
-* Basic usage
-	* `--freq` gives the frequency of a SNP
-	* If I don't trust the data provider about the sexes, I can check for absolute homozigosity at X loci: in this case I have a male
-	* I can want to filter out duplicates due to sampling errors
-	* If I am working with non-human or I have partially assembled scaffolds, I need to specify `--allow-extra-chromosomes` or the species, if available in plink (es. `--sheep`)
-	* `--out` specifies the root filename of the output
-	* `--noweb` is usually required otherwise it checks forever for updates
+# Selected papers
 
+## Strong signatures of selection in the domestic pig genome - Rubin et al. 2012
+
+## High-throughput SNP discovery in the rabbit (*Oryctolagus cuniculus*) genome by next-generation semiconductor-based sequencing - Fontanesi et al. 2014
+
+## Design of a High Density SNP Genotyping Assay in the Pig Using SNPs Identified and Characterized by Next Generation Sequencing Technology - Ramos et al. 2009
+
+## Whole-genome resequencing reveals loci under selection during chicken domestication - Rubin et al. 2010
+
+# Examination mode
+* Final exam has 2 levels
+	* Preparation of a genomic project
+		* A text should be written including an appropriate introduction to the problem/question that the experiment or project would like to analyse or answer, aim of the project, a section with materials and methods, expected results and impact
+		* The project should be submitted to the professor one week before the interview
+		* We should specify what is the aim of the project and what I’d like to solve with it
+			* If it makes sense, we can undergo a discussion with him
+		* The project is based on money: we’ll have a budget
+	* Interview based on the project submitted and other two questions
+		* Only students that are positively evaluated at the first level are admitted at the second level
+		* Evaluation of basic knowledge
+* We get one extra point if we pass at the first attempt
+* It is important to follow him
+* We’ll have an example of a project, the topic of the project it’s up to us
+* We need to choose a complex genome/organism
+* Each one will have a different budget
+* It’s better to do the project according to what we discuss in the lectures
+* It has to be something new
+* The first date would be in February after Winter School and another one in March
+* Near to the end of the course we’ll have a test with 30 questions to test our level (it won’t count for the final score)
