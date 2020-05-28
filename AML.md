@@ -317,7 +317,36 @@
 	* We could also touch PyTorch
 * CPU will NOT be enough for this part, we need a GPU or TPU (in Colab)
 
-# Decision trees
+# Decision trees (DT)
 * Decision trees are implemented in sklearn as `DecisionTreeClassifier()`
 	* It is possible to specify the maximum depth of the tree with the `max_depth` argument
-* They are binary decision trees which cut the dataset at a threshold
+* They are binary decision trees which cut the dataset at a threshold for a feature at each level
+* I have a root layer and layers at different depth levels
+* Nodes can be leaf nodes or non-leaf nodes
+* The `gini` parameter is a property of nodes
+	* It is a measure of how often a randomly chosen element from the set would be incorrectly labeled if it was randomly labeled according to the distribution of labels in the subset
+* With decision trees data preparation is not needed, I just need to decide the depth
+* Decision boundaries are always orthgonal to each other (e.g. they operate on a feature different from the previous one!)
+* If I use a high depth I risk overfiting!
+* It is possible to estimate class probabilities for a DT algo prediction
+	* I first traverse the tree and I go the the relevant leave
+	* I return the proportion of classes that ends up in that given leaf
+* DTs are operating like white boxes: I know what is happening inside and I can debug it easily
+* DTs in sklearn are trained with the classification and regression tree (CART) algo
+	* The produced trees are alway binary
+	* It splits the dataset according to a single threshold $t_k$ and a single feature $k$
+	* It searches the $k, t_k$ pair that best splits the dataset
+* DTs can also be used for regression (`DecisionTreeRegressor()` in sklearn)
+	* In this case I am not predicting a class, but a value!
+	* The value predicted for each region is the average of the instances of the dataset in the region!
+* The main hyperparameter for DTs is the maximum depth
+* There are also other possible hyperparameters, linke the minimum number of samples in a single leaf (I do not want a leaf for each sample otherwise I do overfitting!)
+* The cost functions of regression and classification DTs tries to minimize MSE (sample impurity)
+* DTs are quick to train and powerful, and they are whiteboxes, but
+	* Really sensitive to small changes in training data
+* Since splits are orthogonal, they do not cope well with rotation of the training set
+	* I could use feature crosses, but then why don't I do PCA or something else?
+* The CART algo is stochastic, so if I want my tree to be reproducible and comparable I need to specify a random seed!
+* A random forest improves performances by avergaing the prediction of many trees
+	* They are more stable but more opaque (grey box)!
+
