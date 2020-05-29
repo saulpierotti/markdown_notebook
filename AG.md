@@ -393,18 +393,22 @@
 	* `--noweb` is usually required otherwise it checks forever for updates
 
 # Genome assembly
-* The human genome is repeat rich
-* The main approaches are whole genome shotgun and hierarchical shotgun approach (BAC based)
-* Hierarchical shotgun allows to resolve repetitive regions by building bigger contigs (!)
+* The main approaches for sequencing large repeat-rich genomes are whole genome shotgun and hierarchical shotgun (BAC based)
+	* The human genome is repeat rich
+* Hierarchical shotgun allows to resolve repetitive regions by dividing the genome in 100-200 kb chunks and sequencing these separately
+	* This makes long-range assembly errors unlikely and it reduces the incidence of short-range errors
+	* The single chunks are then sequenced by shotgun
+* It is possible that some of these chunks suffer rearrangement in the library preparation process
 * At the time of the first human genome, sequencing was expensive so we could not sequence BACs and then assemble them, we needed to select non-duplicate BACs beforehand
 * I start from a gene in a known position in a chromosome, and check which BACs contain it by PCR
 	* This links my assembly to the physical chromosome
+* Reads are assembled in contigs, which are joined in scaffolds
+* At the scaffold level I can now the gap size among scaffolds thanks to paired reads
 * Genetic maps are linkage maps, and they can be used for assembling genomes
 * Physical maps refer to the position of a gene in the chromosome
 * A strategy to select overlapping BACs is to digest them with restriction enzymes and search for common fragments among different BACs
 * The main problems of hierarchical shotgun are that it is slow and assembly is problematic if some BACs contain chimeric DNA
 	* Chimeric DNA is a fragment that is created by the association of fragments from different chromosomes during the construction of the library
-* The alternative to hierarchical shotgun is whole genome shotgun
 * N50 is a statistics that defines assembly quality in terms of contiguity
 	* It is the lenght of the sorterst contig that allows to surpass 50% coverage of the genome
 * The state of the art is to do a first PacBio sequencing to get a rough map to which I can attach subsequent precise Illumina paired-end reads
@@ -440,8 +444,6 @@ $$ D_{AB}(t+1) = (1-c)*D_{AB}(t)$$
 $$ D' = D/D_{max}$$
 * Another often used metric is $r^2$, which is related to $D$ and is the correlation coefficient of the 2*2 genotype matrix
 $$r^2 = \frac{D^2}{p_A(1- p_A)*p_B(1-p_B)}$$
-
-
 * We can detect crossing-over by looking for the association of genetic markers
 * An aplotype is a cluster of genes that are usually eredited toghether
 * The probability of CO between 2 genes is measured in cM
@@ -459,6 +461,11 @@ $$r^2 = \frac{D^2}{p_A(1- p_A)*p_B(1-p_B)}$$
 	* We need information on aplotype frequencies or on the parents
 * PHASE is a website for analyzing aplotypes
 * I cannot determine the aplotype by only looking at the genotype: I need data on the population
+* In human the average linkage disequilibrium is low, around 1kb
+* When effective population size is low, likage disequilibrium is large
+	* This is true for lifestock
+* In DNA sequencing chips, I detect a series of SNPs distanced about the linkage disequilibrium
+	* If 2 SNPs are close enough, I can infer that the sequence in between is what I would expect from the aplotype
 
 ## Signatures of selection
 * A selective sweep is the reduction or elimination of variation among the nucleotides in neighboring DNA of a mutation as the result of recent and strong positive natural or artificial selection
@@ -476,10 +483,6 @@ $$ Z_{H_p} = (H_p-\mu_{H_p})/\sigma_{H_p}$$
 	* I can set a $Z_{H_p}$ threshold and call a selective sweep when the threshold is passed for a window position
 	* Data is usually presented with a Manhattan plot with th $Z_{H_p}$ score of each window position plotted along the genome axis
 		* Colors are used to distinguish where a cromosome ends and another start
-* There are portions of mithocondrial DNA integrated in the nuclear genome
-	* These are called NUMTS and they are mostly pseudogenes, but maybe some of them are functional
-	* They are still being integrated, so they tend to be quite variable
-	* The ones integrated most recently tend to be really similar to the mithocondrial sequences
 
 ## QTL mapping
 
@@ -505,18 +508,56 @@ $$ Z_{H_p} = (H_p-\mu_{H_p})/\sigma_{H_p}$$
 * Genotyping by sequencing (GBS) allows to detect unknown SNPs and it is typically done with pooled reduced representation libraries
 * Illumina can produce customized genotyping chips
 
-## Dealing with repeated sequences
+## Genome structure
+* LINEs are autonomous repetitive sequences of 6-8 kb
+	* The LINE1 family is the most abundant
+	* There are around 50k LINEs in a genome
+* SINEs are depend on LINEs for transposition and are 100-300 bp long
+	* They are derived from the 7SL RNA
+	* The 7SL RNA is involved in the signal recognition particle that guides protein translation to the ER
+* Alu is a SINE and it is the most abundant repeat in primates (1M copies)
+* LINEs and SINEs are retrotransposons, transposons that move via an RNA intermediate
+* MIRs(mammalian interspersed repeats) are a type of SINE found in mammals
+* LTRs are retroviral elements and they are 1.5-3 kb long
+* DNA transposons are 2-3 kb long and code for a trasposase
 * They can be spotted with repeat masker
 * This tool can mark SINE, LINE, Alu and will mask it in my sequence
 * Masking means to substitute a sequence with a stretch of NNNN of the same length
 * Pseudogenes can be processed or non processed (with introns) and they are not recognised by repeatmasker
-
-## DNA chips
-* In human the average linkage disequilibrium is low, around 1kb
-* When effective population size is low, likage disequilibrium is large
-	* This is true for lifestock
-* In DNA sequencing chips, I detect a series of SNPs distanced about the linkage disequilibrium
-	* If 2 SNPs are close enough, I can infer that the sequence in between is what I would expect from the aplotype
+* Cot curves are obtained by melting the genome and observing the re-annealing process
+	* Before melting the genome is sheared in 1kb chunks
+	* The rate limiting step of reassociation is the collision of complementary strands, a second order kinetic
+* The copy number of a sequence influences the time needed for re-annealing
+* In simple genomes the cot curves are sigmoids, while in eucariots they are complex
+* Eukariotic cot curves can usually be resolved in 3 sections
+	* An highly repetitive portion of DNA re-anneals quickly
+	* A moderately repetitive region
+	* Unique sequences
+* To put in perspective in a human genome
+	* Coding regions represent 1.5% of the genome
+	* Conserved regions represent 3%
+	* Non conserved unique regions 44%
+	* Transposons are 45%
+	* Constitutive heterochromatine 6.6%
+	* Microsatellites 2%
+* Constitutive heterochromatine is highly repetitive with short tandem repeats
+	* It is typically centromeric or on the short arm of acrocentric chromosomes, where it forms constrictions
+* Satellite DNA is that portion of the genome that when it is centrifuged it forms thin bands that are lighter than the bulk genome
+	* Sequence density depends only on GC content
+* Minisatellites are 10-30 bp long and are usuallyu near telomeres
+	* Some of them are hypervariable (VNTRs), so they are useful for the identification of individuals
+* Microsatellites (SSRs) are 2-5 bp and they are found everywhere in the genome
+* Genes are probably around 20k, most of them protein coding
+* Histone genes don't have introns
+* More than 99% of genes is represented by introns
+* Exons are around 200 bp on average
+* Intron size is really variable, from 100 bp to several Mb
+* There are portions of mithocondrial DNA integrated in the nuclear genome
+	* These are called NUMTS and they are mostly pseudogenes, but maybe some of them are functional
+	* They are still being integrated, so they tend to be quite variable
+	* The ones integrated most recently tend to be really similar to the mithocondrial sequences
+* Gene families can be in tandem or interspersed
+* Instersped genes could have been moved by transposons
 
 ## GWAS
 * I want to find the association between a phenotype and a genomic locus
