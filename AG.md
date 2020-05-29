@@ -49,6 +49,56 @@
 * Penetrance is the proportion of individual with a given genotype that manifest the associated phenotype
 
 # Genome structure and variability in vertebrates
+* LINEs are autonomous repetitive sequences of 6-8 kb
+	* The LINE1 family is the most abundant
+	* There are around 50k LINEs in a genome
+* SINEs are depend on LINEs for transposition and are 100-300 bp long
+	* They are derived from the 7SL RNA
+	* The 7SL RNA is involved in the signal recognition particle that guides protein translation to the ER
+* Alu is a SINE and it is the most abundant repeat in primates (1M copies)
+* LINEs and SINEs are retrotransposons, transposons that move via an RNA intermediate
+* MIRs(mammalian interspersed repeats) are a type of SINE found in mammals
+* LTRs are retroviral elements and they are 1.5-3 kb long
+* DNA transposons are 2-3 kb long and code for a trasposase
+* They can be spotted with repeat masker
+* This tool can mark SINE, LINE, Alu and will mask it in my sequence
+* Masking means to substitute a sequence with a stretch of NNNN of the same length
+* Pseudogenes can be processed or non processed (with introns) and they are not recognised by repeatmasker
+* Cot curves are obtained by melting the genome and observing the re-annealing process
+	* Before melting the genome is sheared in 1kb chunks
+	* The rate limiting step of reassociation is the collision of complementary strands, a second order kinetic
+* The copy number of a sequence influences the time needed for re-annealing
+* In simple genomes the cot curves are sigmoids, while in eucariots they are complex
+* Eukariotic cot curves can usually be resolved in 3 sections
+	* An highly repetitive portion of DNA re-anneals quickly
+	* A moderately repetitive region
+	* Unique sequences
+* To put in perspective in a human genome
+	* Coding regions represent 1.5% of the genome
+	* Conserved regions represent 3%
+	* Non conserved unique regions 44%
+	* Transposons are 45%
+	* Constitutive heterochromatine 6.6%
+	* Microsatellites 2%
+* Constitutive heterochromatine is highly repetitive with short tandem repeats
+	* It is typically centromeric or on the short arm of acrocentric chromosomes, where it forms constrictions
+* Satellite DNA is that portion of the genome that when it is centrifuged it forms thin bands that are lighter than the bulk genome
+	* Sequence density depends only on GC content
+* Minisatellites are 10-30 bp long and are usuallyu near telomeres
+	* Some of them are hypervariable (VNTRs), so they are useful for the identification of individuals
+* Microsatellites (SSRs) are 2-5 bp and they are found everywhere in the genome
+* Genes are probably around 20k, most of them protein coding
+* Histone genes don't have introns
+* More than 99% of genes is represented by introns
+* Exons are around 200 bp on average
+* Intron size is really variable, from 100 bp to several Mb
+* There are portions of mithocondrial DNA integrated in the nuclear genome
+	* These are called NUMTS and they are mostly pseudogenes, but maybe some of them are functional
+	* They are still being integrated, so they tend to be quite variable
+	* The ones integrated most recently tend to be really similar to the mithocondrial sequences
+* Gene families can be in tandem or interspersed
+* Instersped genes could have been moved by transposons
+
 
 # Sanger sequencing
 * Sanger sequencing was developped by F. Sanger in 1977
@@ -484,7 +534,10 @@ $$ Z_{H_p} = (H_p-\mu_{H_p})/\sigma_{H_p}$$
 	* Data is usually presented with a Manhattan plot with th $Z_{H_p}$ score of each window position plotted along the genome axis
 		* Colors are used to distinguish where a cromosome ends and another start
 
-## QTL mapping
+## Quantitative trait loci (QTLs)
+* A quantitative trait locus (QTL) is a locus (section of DNA) that correlates with variation of a quantitative trait in the phenotype of a population of organisms
+* They are mapped by identifying which molecular markers are correlated to the observed phenotype
+* Expression quantitative trait loci (eQTLs) are genomic loci that explain variation in expression levels of mRNAs
 
 ## Genotyping
 * Genotyping means to determine the genotype at one locus
@@ -507,57 +560,6 @@ $$ Z_{H_p} = (H_p-\mu_{H_p})/\sigma_{H_p}$$
 	* Polimorphic sites are more informative than sites with rare variants, so I tend to focus on them for determining an aplotype
 * Genotyping by sequencing (GBS) allows to detect unknown SNPs and it is typically done with pooled reduced representation libraries
 * Illumina can produce customized genotyping chips
-
-## Genome structure
-* LINEs are autonomous repetitive sequences of 6-8 kb
-	* The LINE1 family is the most abundant
-	* There are around 50k LINEs in a genome
-* SINEs are depend on LINEs for transposition and are 100-300 bp long
-	* They are derived from the 7SL RNA
-	* The 7SL RNA is involved in the signal recognition particle that guides protein translation to the ER
-* Alu is a SINE and it is the most abundant repeat in primates (1M copies)
-* LINEs and SINEs are retrotransposons, transposons that move via an RNA intermediate
-* MIRs(mammalian interspersed repeats) are a type of SINE found in mammals
-* LTRs are retroviral elements and they are 1.5-3 kb long
-* DNA transposons are 2-3 kb long and code for a trasposase
-* They can be spotted with repeat masker
-* This tool can mark SINE, LINE, Alu and will mask it in my sequence
-* Masking means to substitute a sequence with a stretch of NNNN of the same length
-* Pseudogenes can be processed or non processed (with introns) and they are not recognised by repeatmasker
-* Cot curves are obtained by melting the genome and observing the re-annealing process
-	* Before melting the genome is sheared in 1kb chunks
-	* The rate limiting step of reassociation is the collision of complementary strands, a second order kinetic
-* The copy number of a sequence influences the time needed for re-annealing
-* In simple genomes the cot curves are sigmoids, while in eucariots they are complex
-* Eukariotic cot curves can usually be resolved in 3 sections
-	* An highly repetitive portion of DNA re-anneals quickly
-	* A moderately repetitive region
-	* Unique sequences
-* To put in perspective in a human genome
-	* Coding regions represent 1.5% of the genome
-	* Conserved regions represent 3%
-	* Non conserved unique regions 44%
-	* Transposons are 45%
-	* Constitutive heterochromatine 6.6%
-	* Microsatellites 2%
-* Constitutive heterochromatine is highly repetitive with short tandem repeats
-	* It is typically centromeric or on the short arm of acrocentric chromosomes, where it forms constrictions
-* Satellite DNA is that portion of the genome that when it is centrifuged it forms thin bands that are lighter than the bulk genome
-	* Sequence density depends only on GC content
-* Minisatellites are 10-30 bp long and are usuallyu near telomeres
-	* Some of them are hypervariable (VNTRs), so they are useful for the identification of individuals
-* Microsatellites (SSRs) are 2-5 bp and they are found everywhere in the genome
-* Genes are probably around 20k, most of them protein coding
-* Histone genes don't have introns
-* More than 99% of genes is represented by introns
-* Exons are around 200 bp on average
-* Intron size is really variable, from 100 bp to several Mb
-* There are portions of mithocondrial DNA integrated in the nuclear genome
-	* These are called NUMTS and they are mostly pseudogenes, but maybe some of them are functional
-	* They are still being integrated, so they tend to be quite variable
-	* The ones integrated most recently tend to be really similar to the mithocondrial sequences
-* Gene families can be in tandem or interspersed
-* Instersped genes could have been moved by transposons
 
 ## GWAS
 * I want to find the association between a phenotype and a genomic locus
