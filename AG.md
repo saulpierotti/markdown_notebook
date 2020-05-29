@@ -427,7 +427,21 @@
 
 # Study of genomes
 
-## Linkage disequilibrium and aplotypes
+## Linkage disequilibrium
+* Linkage disequilibrium (LD) is the nonrandom association of alleles at different loci
+* I can define the LD coefficient $D_{AB}$ as the difference among the frequency of gametes carrying the combination of alleles AB, and the product of the independent frequencies of gametes with alleles A and B
+$$ D_{AB} = p_{AB} - p_A*p_B $$
+* If $D=0$ I am in linkage equilibrium (LE): the fequency of occurence of the AB aplotype is that expected from allele frequencies
+* $D$ decreases in generations at a rate that depends on the frequency of recombination among the 2 loci
+$$ D_{AB}(t+1) = (1-c)*D_{AB}(t)$$
+* LE will always be reached, albeit usually really slowly
+	* Even in loci in unlinked loci, $D$ only halves each generation
+* The normalised version of $D$, called $D'$, is the ration with its maximum possible value
+$$ D' = D/D_{max}$$
+* Another often used metric is $r^2$, which is related to $D$ and is the correlation coefficient of the 2*2 genotype matrix
+$$r^2 = \frac{D^2}{p_A(1- p_A)*p_B(1-p_B)}$$
+
+
 * We can detect crossing-over by looking for the association of genetic markers
 * An aplotype is a cluster of genes that are usually eredited toghether
 * The probability of CO between 2 genes is measured in cM
