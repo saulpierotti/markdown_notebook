@@ -335,7 +335,14 @@
 * DTs in sklearn are trained with the classification and regression tree (CART) algo
 	* The produced trees are alway binary
 	* It splits the dataset according to a single threshold $t_k$ and a single feature $k$
-	* It searches the $k, t_k$ pair that best splits the dataset
+	* It searches the $k, t_k$ pair that gives the pures subsets, weighted by size
+	* The parameter pair is choosen by minimizing the following cost function
+$$J(k, t_k) = \frac{n_l}{n}G_l+\frac{n_r}{n}G_r$$
+		* $n_l, n_r$ are the number of instances in the right and left subsets
+		* $G_r, G_l$ is a mesure of the purity of the respective subsets
+	* It then recursively splits the subsets until it reaches the `max_depth` hyperparameter
+	* Note: CART is a greedy algo that split in the best LOCAL way! No guarantee of optimal solution!
+	* The CART algo is stochastic, so if I want my tree to be reproducible and comparable I need to specify a random seed!
 * DTs can also be used for regression (`DecisionTreeRegressor()` in sklearn)
 	* In this case I am not predicting a class, but a value!
 	* The value predicted for each region is the average of the instances of the dataset in the region!
@@ -346,18 +353,22 @@
 	* Really sensitive to small changes in training data
 * Since splits are orthogonal, they do not cope well with rotation of the training set
 	* I could use feature crosses, but then why don't I do PCA or something else?
-* The CART algo is stochastic, so if I want my tree to be reproducible and comparable I need to specify a random seed!
+	* PCA is the best approach to correctly orient the dataset
 * A random forest improves performances by avergaing the prediction of many trees
 	* They are more stable but more opaque (grey box)!
+	* It is among the most powerful ML algos available!
 
 # Support Vector Machines (SVM)
 * They are good for complex (non-linear) but small and medium size datasets
-* They do not require the computational resources needed for NNs
-* It build a decision boundary which is as far as possible from the datapoints
-	* This is a good thing, whatch the images in the slides!
-* SVMs are also known as large margin classifiers
-	* They try to find a line which splits the dataset well and with the widest margins (distance) from the datapoints
-* The surface between the 2 margins is called road or street, and it includes the decision boundary
+	* SVMs are good for linear an non-linear classification tasks, even in presence of outliers
+	* They don't cope well with large datasets
+	* They do not require the computational resources needed for NNs
+* It build a decision boundary which splits the classes and is as far as possible from the datapoints
+	* This improves generalization!
+* SVMs are also known as large margin classifiers: they try to find a line which splits the dataset well and with the widest margins (distance) from the datapoints
+	* I want to fit the widest possible strip of plane (road) between the classes
+	* The surface between the 2 margins is called road or street, and it includes the decision boundary at its center
+* SVMs are so called since they are machines that find a boundary which is fully supported by the support vectors of the dataset, the datapoints outside of the margins
 * SVMs are really sensitive to feature scaling and preparation
 * SMV margins can be hard or soft
 * With hard margins I do not accept misclassified data

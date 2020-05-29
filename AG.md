@@ -518,6 +518,8 @@ $$ Z_{H_p} = (H_p-\mu_{H_p})/\sigma_{H_p}$$
 	* On a SNPs A/G I can have 3 possible genotypes: AA, AG, GG
 	* I measure the genotype of each individual and its continuous trait
 	* I take the means of the groups for each genotype and I perform a statistical test on means, like ANOVA
+* In order to maximize the differences between pools, I can take samples from the extreme ends of the phenotype distribution
+	* This is called extreme phenotype study
 
 ## Runs of Homozigosity
 * The inbreeding coefficient indicates the probability that random positions among 2 individuals are equal by descent
