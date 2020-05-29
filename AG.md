@@ -269,6 +269,8 @@
 * 2 modes of operation are possible: Circular consensus Sequencing (CCS) and Continuous Long Reads (CLR)
 * In CCS the circular DNA is read again and again generating an high-fidelity (HiFi) read, with 99% accuracy
 * In CLR the molecule is as long as possible and it is read for as many nucleotides as possible, so to generate long reads
+* It is teoretically possible to detect modified bases with PacBio but this is not still done in practice
+	* Modified bases tend to spend more time in the polymerase
 
 ## Oxford nanopore
 * Long reads, but high error rate and low thorughput
@@ -357,6 +359,8 @@
 	* CNV alters the signal intesity of certain probes due to the differential amount of DNA present
 	* I can also detect a concerted pattern of intensity alteration in neighboring SNPs
 	* Various algorithms are availabe for calling CNVs from SNP array data
+* ATAC-seq (Assay for Transposase-Accessible Chromatin) uses a transposase to generate fragments in open chromatine regions, outside of nucleosomes
+* Bisulphite sequencing is used to detect methylated regions by converting C but not 5mC to T with bisulphite
 
 # Plink
 * A pedigree is a standardised representation of individuals in a population and relationships among them
