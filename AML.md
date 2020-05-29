@@ -241,21 +241,6 @@
 	* Threshold invariance: it is a single metric for every threshold
 		* This may not be desirable when I want to minimse just 1 kind of error
 
-# Neural Networks
-* Neural Networks (NN) are a family of ML algorithms
-	* They are an actually old idea, widely used in 1980's and 1990's
-	* They became less popular after 1990
-	* They had a resurrection when more computing resources became available, together with big data and better algos
-	* Another factor for theur reapperance is the availability of cloud computing resources, which democratized the access to computing power
-* NN are used when we need to learn heavily non-linear patterns
-	* In image recognition each pixel is 3 1-hot feature vectors with 255 levels each!
-	* It is practically impossible to train a classic ML model on this amount of feature in reasonable time
-* When possible it is better to avoid NN since they are really expensive
-	* They are expensive in terms of training time and computing resources
-	* They are hard debugging
-	* They lack explainability
-* Some times problems are intrinsically non-polynomial and cannot be solved in a traightforward manner with calssic ML algos
-
 # Feature crosses
 * In many cases NN are useful, but costly in terms of resources and readability
 	* When dealing with a lot of data linear learners, if possible, are a better choice
@@ -274,29 +259,6 @@
 * Take away message: if you don't have millions of features probably you don't need a NN
 * However, NN are more flexible and can be applied to many cases
 * The Google AI playground is a nice visual tool for understanding feature crosses and neural networks
-
-# Ensemble learning
-* It means combining the predictions of many different algos
-* It is one of the most used approach in real ML
-* It is probably the approach that will lead to the best performances with classic ML
-* There are different ensemble approaches: bagging, boosting, majority voting, stacking
-* Bagging: the learners learn independently and the results are then combined in a defined way
-	* The single learners use random subsamples of the dataset with replacement for training
-	* The classification is done with a simple average of the predictions
-* Boosting: I use homogeneous learners that improve the work of each other
-	* The output of 1 model is the input of the next one
-	* A weak learner uses a random subsample with replacement of the dataset, with features weighted on the weights of the previous learners
-	* The classification is a weighted average of the predictions
-	* Each learner tries to mitigate the errors of the previous ones
-* Majority voting: similar to bagging but each learner uses the entire training set
-	* The classification is done with simple statistics (es. average)
-* Stacking: an advanced kind of voting that is difficult to implement with sklearn
-	* Heterogeneous weak learners are trained independently
-	* I create a meta-model that combines the predictions of the various models
-* If I have many weak learners with high variance and low bias, bagging is the best choice
-	* Bagging fights the variance
-* If I have many weak learners with high bias and low variance, boosting is the best choice
-	* Boosting can fight both variance and bias
 
 # Infos for the exam
 * For the basic part only scikit learn can be used
@@ -369,9 +331,65 @@ $$J(k, t_k) = \frac{n_l}{n}G_l+\frac{n_r}{n}G_r$$
 	* I want to fit the widest possible strip of plane (road) between the classes
 	* The surface between the 2 margins is called road or street, and it includes the decision boundary at its center
 * SVMs are so called since they are machines that find a boundary which is fully supported by the support vectors of the dataset, the datapoints outside of the margins
+	* Adding datapoints of the right class outside of the margins does not affect the decision boundary
 * SVMs are really sensitive to feature scaling and preparation
 * SMV margins can be hard or soft
-* With hard margins I do not accept misclassified data
+* With hard margins I strictly impose that all the datapoints be outside the margins
 	* This is very sensitive to outliers and it can be impossible!
-* Soft margins try to keep the strit as wide as possible while minimising margin violation
-* The C hyperparameter tunes the balance between street width and margin violations in in soft margins
+	* In the best case, it forces me to have very narrow margins
+* Soft margins try to keep the margins as wide as possible while minimising margin violation
+	* The C hyperparameter tunes the balance between margin width and margin violations
+* In sklearn a linear SVM classifier is found in `sklearn.svm` as `LinearSVC`
+	* There are also other non-linear classes, useful in different scenarios
+	* Read the documentation!
+* I can classify a non-linear dataset by using a linear SVC with feature crosses!
+	* Too few feature tend to not deal well with complex datasets
+	* Too many feature make the model expensive to train
+* It is possible to apply a mathematical technique called kernel trick to deal with complex datasets without actually adding polynomial features
+* Regression with SVM is basically the opposite of SVM classification
+	* Instead of finding the margins that best split the dataset, I find the margins that best include the dataset
+	* In this case I have the hyperparameter $\epsilon$ that controls the width of the margins
+
+# Ensemble learning
+* It means combining the predictions of many different algos
+* It is one of the most used approach in real ML
+* It is probably the approach that will lead to the best performances with classic ML
+* I tend to get similar bias but lower variance from ensemble learning
+* There are different ensemble approaches: bagging, boosting, majority voting, stacking
+* Bagging: the learners learn independently and the results are then combined in a defined way
+	* The single learners use random subsamples of the dataset with replacement for training
+	* The classification is done with a simple average of the predictions
+	* If I use resampling without replacement it is called pasting
+* Boosting: I use homogeneous learners that improve the work of each other
+	* The output of 1 model is the input of the next one
+	* A weak learner uses a random subsample with replacement of the dataset, with features weighted on the weights of the previous learners
+	* The classification is a weighted average of the predictions
+	* Each learner tries to mitigate the errors of the previous ones
+* Majority voting: similar to bagging but each learner uses the entire training set
+	* It is based on the wisdom of the corwd paradigm
+	* The classification is done with simple statistics (es. average)
+	* In hard voting I just average the predicted classes
+	* In soft voting I average the predicted probabilities for the classes
+* Stacking: an advanced kind of voting that is difficult to implement with sklearn
+	* Heterogeneous weak learners are trained independently
+	* I create a meta-model that combines the predictions of the various models
+* If I have many weak learners with high variance and low bias, bagging is the best choice
+	* Bagging fights the variance
+* If I have many weak learners with high bias and low variance, boosting is the best choice
+	* Boosting can fight both variance and bias
+
+# Neural Networks
+* Neural Networks (NN) are a family of ML algorithms
+	* They are an actually old idea, widely used in 1980's and 1990's
+	* They became less popular after 1990
+	* They had a resurrection when more computing resources became available, together with big data and better algos
+	* Another factor for theur reapperance is the availability of cloud computing resources, which democratized the access to computing power
+* NN are used when we need to learn heavily non-linear patterns
+	* In image recognition each pixel is 3 1-hot feature vectors with 255 levels each!
+	* It is practically impossible to train a classic ML model on this amount of feature in reasonable time
+* When possible it is better to avoid NN since they are really expensive
+	* They are expensive in terms of training time and computing resources
+	* They are hard debugging
+	* They lack explainability
+* Some times problems are intrinsically non-polynomial and cannot be solved in a traightforward manner with calssic ML algos
+
