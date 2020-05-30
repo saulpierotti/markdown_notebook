@@ -516,6 +516,8 @@ not give information about the value of the other
 	* If I have dependent measurements I need to combine them in a single variable
 * Note: in these tests I am not using data from the whole array, but only 1 gene across all the samples!
 
+## Shapiro-Wilk normality test
+
 ## Parametric statistics
 * Parametric staistics assumes that the population follows a type of probabilioty distribution
 	* That is, it infers parameters of the putative distribution
@@ -610,11 +612,20 @@ v_2 = n_2 - 1
 * The Wilcoxon sing-rank test is the non-parametric equivalent of the paired *t*-test
 * The $H_0$ is that the median of the dataset is 0
 	* This is a paired test, so the dataset is the difference among pairs of data!
-* It replaces the true log ratio data with ranks according to the magnitude of the log ratio
-	* The smallest log ratio has rank 1, the largest has rank $n$, and so on
-* The sum of the ranks for the positive log ratios (upregulated genes) and negative log rations is separately compared against the W distribution to obtaine a p-value
-* The maximum possible value of the $W$ statistic is the sum of the ranks, which is $n(n+1)/2$
+* It replaces the real data with ranks according to the absolute magnitude of their difference (or log ratio for microarrays)
+	* I first compute the differrences among pairs of data, and I take the absolute value of this difference
+		* If the difference is 0 I exclide the pair of data
+	* In the meantime I note down which differences were positive and which negative (the sign!)
+	* I perform the ranking on the absolute differences among pairs of data
+	* The smallest datapoint has rank 1, the largest has rank $n$, and so on
+		* If 2 values are the same I take the ranks available (i.e. 2 and 3) and assign to both datapoints their average (i.e. 2.5)
+* I compute the sum of all the positive and negative ranks
+	* The sum of positive ranks is called $W_+$, the sum of negative ranks $W_-$
+* The $W$ test statistic is the smallest value among $W_+$ and $W_-$
+* The $W$ statistic is compared against the W distribution to obtaine a p-value
+* The maximum possible value of the $W$ statistic is the sum of all the ranks, which is $n(n+1)/2$
 * The minimum possible value of the $W$ statistic is the negative of the sum of the ranks, which is $-n(n+1)/2$
+* The expected value of $W$ under $H_0$ is 0 (the medians are the same!)
 * Albeit not requiring normality of the data, it requires them to be symmetric
 
 #### Mann-Whitney test
