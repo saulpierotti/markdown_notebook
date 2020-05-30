@@ -758,6 +758,7 @@ H_{adj} = \frac{H}{D}, && \mbox{where} \quad D = 1 - \frac{\sum (t^3 - t)}{(n-1)
 * I reject the null hypothesis if $H > \chi^2_\alpha$
 
 # Analysis of relationships between genes and samples
+*
 
 <!---
 # Practical part - doctormaragiuliabacalini
