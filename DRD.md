@@ -517,6 +517,12 @@ not give information about the value of the other
 * Note: in these tests I am not using data from the whole array, but only 1 gene across all the samples!
 
 ## Shapiro-Wilk normality test
+* The Shapiro-Wilk test returns the p-value for the null hypothesis that the data are drawn from a normally distributed population
+* It should not be significant in order to apply parametric tests!
+* It calculates the $W$ statistics, that does not have a defined analytical distribution
+	* The cutoff values are obtained by MonteCarlo simulations
+
+$$ W = \frac{(\sum_{i=1}^n a_i*x_(i))^2}{\sum_{i=1}^n (x_i - \bar{x})^2} $$
 
 ## Parametric statistics
 * Parametric staistics assumes that the population follows a type of probabilioty distribution
@@ -640,30 +646,7 @@ v_2 = n_2 - 1
 $$U = R - \frac{n(n+1)}{2}$$
 	* $n$ is the number of samples in the respective group
 * The final value of the $U$ test statistic is the smaller value among $U_A$ and $U_B$
-* I then compare $U$ against a pre-computed $U$ distribution
-
-
-
-* When I am doing multiple testing I need to restrict the p-value otherwise I get an unacceptably high number of flase positives
-* An experiment can be designed with paired or unpaired groups
-* The t-test is a parametric test which is different for paired and unpaired data
-	* I compute a $t$ statistic from the data and I compare it with the appropriate $t$ distribution
-	* There is a $t$ distribution for each degree of freedom
-* Paired t-test: $t =\frac{\bar{X}}{\sigma/\sqrt{n}}$
-	* It is the mean divided by the standard error of the mean
-* The Shapiro-Wilk test returns the p-value for the null hypothesis that the data are normally distributed
-	* It should not be significant!
-* Unpaired t-test
-	* There are 2 different forms, dependig to the fact that the 2 groups have the same variance or not
-* Non-parametric method should be used when I have outliers, noisy data, or non-normally distributed data
-	* In some cases if I have many measurment it can be difficult to assert normality for all of them
-* The Wilcoxon sign-rank test is the non-parametric equivalent of the paired t-test
-	* It is based on a ranking of the measuremnts
-	* I replace the data with its rank
-	* It has a lower power than the paired t-test
-* The Mann-Whithney U test (Wilcoxon rank-sum) is the non-parametric equivalent of the unpaired t-test
-	* It is also based on ranks
-	* I obtain the statistics U and I compare it to a pre-computed distribution
+* I then compare $U$ against a pre-computed $U$ distribution and I reject $H_0$ if $U$ is smaller than a threshold
 
 ## Bootstrap
 * I do resampling with replacement and evaluate the $t$ statistics in each bootstrap
