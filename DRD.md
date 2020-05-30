@@ -679,13 +679,26 @@ $$ p = \frac{count(|t_{bootstrap}| > |t_{real}|)}{n_{bootstraps}}$$
 
 ## Multiple testing
 * If I am testing multiple times the same dataset I risk to get an unacceptably high number of false positives
+* The false discovery rate (FDR) is the percentage of rejected $H_0$ that were true
+$$ FDR = \frac{FP}{FP+TP}$$
 * I can decrease the p-value threshold, but this is a tradeoff: I will decrease the false posiitve rate but increase the false negative rate
 * The only way to decrease the false positive rate and also the false negative rate is to increase the sample size
 
+### Bonferroni correction
 * The Bonferroni correction for multiple testing is simple: just divide the desired p-value threshold on a single test by the number of tests
 	* An equivalent approach is to retain the desired p-value threshold but multiply the obtained p-value by the number of tests
 	* It is usually too stringent for microarray analysis, not yelding any significant result
-* Benjamin Hunger correction
+
+### Benjamini Hochberg q-value correction
+* The Benjamini-Hochberg correction for multiple testing is based on the FDR
+* I frist rank all the p-values in ascending order
+* I calculate from the p-values the respective q-values
+$$ q_i = \frac{p_i*N}{i}$$
+* The numerator $p_i*N$ is the ith smallest p-value observed times the number of tests done (and so the number of p-values)
+	* It is essentially the expected number of unjustified rejections of $H_0$
+	* It is the number of false positives
+* The denominator is the actual number of results accepted for that p-value
+* If the denominator is bigger than the numerator, I have more significant results than expected by chance, so some of them are probably actually true
 
 ## ANOVA
 * With microarray data I can want to compare more than 2 groups, or more than 1 variable
@@ -700,7 +713,7 @@ $$ p = \frac{count(|t_{bootstrap}| > |t_{real}|)}{n_{bootstraps}}$$
 	* It does not tell me which group is different if the result is significant!
 * It is based on the $F$ statistic, compared against the F-distribution
 * I assume that all the variance inside a group is due to error, and all the variance between group which does not depend on the internal variance of the groups is real biological variability
-$$ F = \frac{SS_b}{SS_w} = \frac{\sum_{j=1}^{m}n_j(\bar{x}_j-\bar{x})^2}{\sum_{i=1}^m \sum_{i=1}^{n_j} (x_{ij}-\bar{x}_j)^2}$$
+$$ F = \frac{SS_b}{SS_w} = \frac{\sum_{j=1}^{m}n_j(\bar{x}_j-\bar{x})^2}{\sum_{j=1}^m \sum_{i=1}^{n_j} (x_{ij}-\bar{x}_j)^2}$$
 * $SS_b$ is the sum of squares in between the groups and $SS_w$ is the sum of squares within the groups
 * $i$ is the index of samples in a group, $j$ the index of groups
 * $n_j$ is the number of samples in group $j$
@@ -721,6 +734,28 @@ $$ F = \frac{SS_b}{SS_w} = \frac{\sum_{j=1}^{m}n_j(\bar{x}_j-\bar{x})^2}{\sum_{i
 * It is the non-parametric version of the one-way ANOVA, operating on ranks instead of actual data
 * The null hypothesis is that no group stochastically dominates on the others
 	* If I can assume the same distribution (non necessarily normal) for all groups, then the null hypothesis is a statement about the equivalence of group medians
+* The data from all groups are ranked like in the Mann-Whitney U test
+* The test statistic $H$ is calculated as
+$$ H = (N - 1) \frac{\sum_{j=1}^m n_j (\bar{r}_j - \bar{r})^2}{\sum_{j=1}^m \sum_{i=1}^{n_j} (r_{ij} - \bar{r})^2} $$
+* $n_j$ is the number of observations in group $j$
+* $r_{ij}$ is the general rank (across the entire dataset) of obervation $i$ from group $j$
+* $N$ is the total number of observations
+* $\bar{r}_j$ is the avergae rank of all the observations in group $j$
+* $\bar{r}$ is the average of all the ranks
+* There is also a simplified formula for when there are no ties
+$$ H = \left(\frac{12}{n(n+1)}\sum_{j=1}^m \frac{T_j^2}{n_j}\right) -3(n+1)$$
+* If using the simplified formula in presence of ties an adjustment is needed, according to the number of ties $t$
+
+\begin{align*}
+H_{adj} = \frac{H}{D}, && \mbox{where} \quad D = 1 - \frac{\sum (t^3 - t)}{(n-1)n(n+1)}
+\end{align*}
+
+* The $H$ statistics has an approximate $\chi^2$ distribution with $m-1$ degrees of freedom
+	* Calculating the exact distribution of $H$ is computationally complex
+		* Tables are available up to 105 samples
+	* If possible is better to use computed $H$ thresholds instead of the $\chi^2$ distribution
+		* The 2 distributions diverge sensibly when there are small groups
+* I reject the null hypothesis if $H > \chi^2_\alpha$
 
 # Practical part - doctormaragiuliabacalini
 * We will prepare a report (:/)
