@@ -689,16 +689,16 @@ $$ FDR = \frac{FP}{FP+TP}$$
 	* An equivalent approach is to retain the desired p-value threshold but multiply the obtained p-value by the number of tests
 	* It is usually too stringent for microarray analysis, not yelding any significant result
 
-### Benjamini Hochberg q-value correction
-* The Benjamini-Hochberg correction for multiple testing is based on the FDR
-* I frist rank all the p-values in ascending order
-* I calculate from the p-values the respective q-values
-$$ q_i = \frac{p_i*N}{i}$$
-* The numerator $p_i*N$ is the ith smallest p-value observed times the number of tests done (and so the number of p-values)
-	* It is essentially the expected number of unjustified rejections of $H_0$
-	* It is the number of false positives
-* The denominator is the actual number of results accepted for that p-value
-* If the denominator is bigger than the numerator, I have more significant results than expected by chance, so some of them are probably actually true
+### Benjamini Hochberg correction
+* The Benjamini-Hochberg correction for multiple testing is based on a given FDR
+	* I choose the FDR I want
+* I first rank all the p-values in ascending order
+* I calculate the critical BH values for each p-value as $\frac{i*FDR}{M}$, with $m$ total number of tests and $i$ the rank of the p-value
+	* FDR is the FDR that I want
+* I select as a p-value threshold the largest p-value that is smaller than the respectibe BH threshold
+* Intuiton: the p-values are uniformly distributed if data comes from the same distribution, and skewed towards low values if from different distributions
+* In multiple testing I can have some true positives (data from different distributions) and many false positives (data from the same distribution)
+* I am selecting all the smallest p-values up to a certain FDR: they are the most likely to be true
 
 ## ANOVA
 * With microarray data I can want to compare more than 2 groups, or more than 1 variable
@@ -757,6 +757,9 @@ H_{adj} = \frac{H}{D}, && \mbox{where} \quad D = 1 - \frac{\sum (t^3 - t)}{(n-1)
 		* The 2 distributions diverge sensibly when there are small groups
 * I reject the null hypothesis if $H > \chi^2_\alpha$
 
+# Analysis of relationships between genes and samples
+
+<!---
 # Practical part - doctormaragiuliabacalini
 * We will prepare a report (:/)
 * We will use mainly R
@@ -864,3 +867,5 @@ H_{adj} = \frac{H}{D}, && \mbox{where} \quad D = 1 - \frac{\sum (t^3 - t)}{(n-1)
 	* Low-scoring probes should be filtered out
 * A SNP on the target site of a probe or on the flanking base (for type I) alters the results!
 * A SNP near the 3' of a probe can alter the result, depending on how close it is to the 3'
+-->
+
