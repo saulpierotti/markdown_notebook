@@ -710,13 +710,17 @@ $$ F = \frac{SS_b}{SS_w} = \frac{\sum_{j=1}^{m}n_j(\bar{x}_j-\bar{x})^2}{\sum_{i
 * Under $H_0$ $F$ has a mean of about 1
 * If I have only 2 groups the one-way ANOVA reduces to the *t*-test with $F=t^2$
 * The $F$ distribution has 2 parameters, the degrees of freedom for numerator and denominator
-	* The degrees of freedom of the numerator ($SS_b$) is $n-1$, with $n$ being the number of total samples
+	* The degrees of freedom of the numerator ($SS_b$) is $m-1$, with $m$ being the number of groups
+		* I have $m$ groups, and from them I estimate the grand mean
 	* The degrees of freedom of the denominator ($SS_w$) is $n-m$, with $n$ being the number of total samples and $m$ the number of groups
 		* I loose one degree of freedom for each group since I estimate the mean
 		* I have $n$ samples amnd estimate $m$ means (1 per group), so I have $n-m$ degrees of freedom
 
-## Kruskal-Wallis test
+## Kruskal-Wallis H test
 * It is a non-parametric test that estends the Mann-Whitney U test
+* It is the non-parametric version of the one-way ANOVA, operating on ranks instead of actual data
+* The null hypothesis is that no group stochastically dominates on the others
+	* If I can assume the same distribution (non necessarily normal) for all groups, then the null hypothesis is a statement about the equivalence of group medians
 
 # Practical part - doctormaragiuliabacalini
 * We will prepare a report (:/)
