@@ -677,16 +677,46 @@ $$ p = \frac{count(|t_{bootstrap}| > |t_{real}|)}{n_{bootstraps}}$$
 * I the real $t$ is on the edges of the empirical $t$ distribution, then it is probably not due by chance
 * Basically I evaluate the p-value from the empirical $t$ distribution instead than on the theoretical ones (which are calculated on normally distributed data!
 
+## Multiple testing
+* If I am testing multiple times the same dataset I risk to get an unacceptably high number of false positives
+* I can decrease the p-value threshold, but this is a tradeoff: I will decrease the false posiitve rate but increase the false negative rate
+* The only way to decrease the false positive rate and also the false negative rate is to increase the sample size
+
+* The Bonferroni correction for multiple testing is simple: just divide the desired p-value threshold on a single test by the number of tests
+	* An equivalent approach is to retain the desired p-value threshold but multiply the obtained p-value by the number of tests
+	* It is usually too stringent for microarray analysis, not yelding any significant result
+* Benjamin Hunger correction
+
 ## ANOVA
-* It is a generalization of the t test for more than 2 groups
+* With microarray data I can want to compare more than 2 groups, or more than 1 variable
+* The analysis of variance (ANOVA) test is a generalization of the t test for more than 2 groups
+* The one-way ANOVA is used for comparing ONE variable across more than 2 groups
+* The two-ways ANOVA is used for comparing 2 variables across more than 2 groups
+* ANOVA is parametric and it assumes normal distribution with equal variance
+* I can do bootstrap when these assumptions are not true
+
+## One-way ANOVA
+* It returns a single p-value for the null hypothesis that there is no difference among the means of all the groups
+	* It does not tell me which group is different if the result is significant!
+* It is based on the $F$ statistic, compared against the F-distribution
+* I assume that all the variance inside a group is due to error, and all the variance between group which does not depend on the internal variance of the groups is real biological variability
+$$ F = \frac{SS_b}{SS_w} = \frac{\sum_{j=1}^{m}n_j(\bar{x}_j-\bar{x})^2}{\sum_{i=1}^m \sum_{i=1}^{n_j} (x_{ij}-\bar{x}_j)^2}$$
+* $SS_b$ is the sum of squares in between the groups and $SS_w$ is the sum of squares within the groups
+* $i$ is the index of samples in a group, $j$ the index of groups
+* $n_j$ is the number of samples in group $j$
+* $m$ is the number of groups
+* $\bar{x_j}$ is the mean of group $j$, $\bar{x}$ is the grand mean of the whole dataset
+* $F$ is large (more significant) if the variance within the groups is small while the variance among groups is large
+* Under $H_0$ $F$ has a mean of about 1
+* If I have only 2 groups the one-way ANOVA reduces to the *t*-test with $F=t^2$
+* The $F$ distribution has 2 parameters, the degrees of freedom for numerator and denominator
+	* The degrees of freedom of the numerator ($SS_b$) is $n-1$, with $n$ being the number of total samples
+	* The degrees of freedom of the denominator ($SS_w$) is $n-m$, with $n$ being the number of total samples and $m$ the number of groups
+		* I loose one degree of freedom for each group since I estimate the mean
+		* I have $n$ samples amnd estimate $m$ means (1 per group), so I have $n-m$ degrees of freedom
 
 ## Kruskal-Wallis test
 * It is a non-parametric test that estends the Mann-Whitney U test
-
-## Multiple testing
-* If I am testing multiple times the same dataset I risk to get an unacceptably high number of false positives
-* Bonferroni correction: just divide by the number of tests
-* Benjamin Hunger correction
 
 # Practical part - doctormaragiuliabacalini
 * We will prepare a report (:/)
