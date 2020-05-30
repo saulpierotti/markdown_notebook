@@ -621,18 +621,26 @@ v_2 = n_2 - 1
 		* If 2 values are the same I take the ranks available (i.e. 2 and 3) and assign to both datapoints their average (i.e. 2.5)
 * I compute the sum of all the positive and negative ranks
 	* The sum of positive ranks is called $W_+$, the sum of negative ranks $W_-$
-* The $W$ test statistic is the smallest value among $W_+$ and $W_-$
+* The $W$ test statistic is the smallest absolute value among $W_+$ and $W_-$
+* Intuition: a small $W$ means that the distributio of ranks is heavily skewed towards the positive or negatives
+	* If positives and negatives are balanced, $W$ is at its maximum
+	* If all the ranks are positive/negative (and so there is a systematic effect) $W=0$ since one of the classes is empty
 * The $W$ statistic is compared against the W distribution to obtaine a p-value
-* The maximum possible value of the $W$ statistic is the sum of all the ranks, which is $n(n+1)/2$
-* The minimum possible value of the $W$ statistic is the negative of the sum of the ranks, which is $-n(n+1)/2$
-* The expected value of $W$ under $H_0$ is 0 (the medians are the same!)
+	* The $W$ is significant if smaller than a threshold value
 * Albeit not requiring normality of the data, it requires them to be symmetric
 
-#### Mann-Whitney test
+#### Mann-Whitney U test
 * The non-parametric equivalent of the unpaired *t*-test is the Mann-Whitney test, also called Wilcoxon rank-sum test
 	* It is similar to the Wilcoxon rank-sign test
-	* Data from the 2 groups are combined and ranked together
-	* The ranks of the larger group are summed and compared against a table to obtain a p-value
+* The $H_0$ is that the median of the 2 datasets is equal
+* Data from the 2 groups are combined and ranked together
+	* Ties are treated in the same way as in the Wilcoxon sign rank test
+* I sum separately all the ranks for the 2 groups getting the repsective rank sums ($R$)
+* I calculate the $U_A$ and $U_B$ statistics separately for the 2 groups
+$$U = R - \frac{n(n+1)}{2}$$
+	* $n$ is the number of samples in the respective group
+* The final value of the $U$ test statistic is the smaller value among $U_A$ and $U_B$
+* I then compare $U$ against a pre-computed $U$ distribution
 
 
 
