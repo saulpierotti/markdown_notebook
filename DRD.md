@@ -521,7 +521,11 @@ not give information about the value of the other
 * It should not be significant in order to apply parametric tests!
 * It calculates the $W$ statistics, that does not have a defined analytical distribution
 	* The cutoff values are obtained by MonteCarlo simulations
-
+* $W$ is the ratio between 2 values
+	* The numerator is the square of the sum of the products of
+		* $a_i$, a coefficient made of strange vector operations
+		* $x_i$, the datapoint of rank $i$
+	* The denominator is the sum of squared distances from the mean of all the datapoints
 $$ W = \frac{(\sum_{i=1}^n a_i*x_(i))^2}{\sum_{i=1}^n (x_i - \bar{x})^2} $$
 
 ## Parametric statistics
@@ -648,9 +652,30 @@ $$U = R - \frac{n(n+1)}{2}$$
 * The final value of the $U$ test statistic is the smaller value among $U_A$ and $U_B$
 * I then compare $U$ against a pre-computed $U$ distribution and I reject $H_0$ if $U$ is smaller than a threshold
 
-## Bootstrap
-* I do resampling with replacement and evaluate the $t$ statistics in each bootstrap
+## Bootstrap analyses
+* Bootstrap is based on resampling with or without replacement
+	* In general both variants give really similar results, there is debate on which one is better
+* Bootstrap analyses are non-parametric tests so they do not make any assumption on the distribution of the data
+* They are more powerfull than classical non-parametric tests
+* They should be preferred on microarray data than either parametric and classical non-parametric tests
+* They are quite computationally expensive
+* There are bootstrap equivalents for paired and unpaired tests, and also for ANOVA, cluster analysis and other more complex tests
+* I do resampling and evaluate the $t$ statistics in each bootstrap
 * I produce a distribution of $t$ after thousand of bootstraps
+* It is recommended to do a number of bootstraps which is at least 10 times the number of genes in the array
+
+### Unpaired *t*-test bootstrap
+* This is the easiest bootstrap implementation
+* The $H_0$ is the usual for the unpaired *t*-test: no difference among the mean of the groups
+* If the $H_0$ holds, any of the measurement in the data could have been obtained from any of the individuals
+	* I create thousands of random datasets by resampling the original data but redistributing randomly the measurements among indivduals of BOTH groups
+	* If I use replacent the same datapoint can be assigned to 2 different individuals
+* I calculate the $t$ statistic from each of the randomized datasets, without correlating it to a p-value
+* I then compare the $t$ from the real data with the bootstrap $t$s
+* I determine the p-value according to the proportion of bootstrap $t$s that are more extreme than the actual dataset $t$
+$$ p = \frac{count(|t_{bootstrap}| > |t_{real}|)}{n_{bootstraps}}$$
+* I the real $t$ is on the edges of the empirical $t$ distribution, then it is probably not due by chance
+* Basically I evaluate the p-value from the empirical $t$ distribution instead than on the theoretical ones (which are calculated on normally distributed data!
 
 ## ANOVA
 * It is a generalization of the t test for more than 2 groups
@@ -659,6 +684,7 @@ $$U = R - \frac{n(n+1)}{2}$$
 * It is a non-parametric test that estends the Mann-Whitney U test
 
 ## Multiple testing
+* If I am testing multiple times the same dataset I risk to get an unacceptably high number of false positives
 * Bonferroni correction: just divide by the number of tests
 * Benjamin Hunger correction
 
