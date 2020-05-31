@@ -820,6 +820,33 @@ $$ d(x,y) = \sqrt{\sum_{i=1}^n (x_i-y_i)^2}$$
 	* This can be solved by centering the profiles before calculating the euclidean distance
 
 ## Hierarchical clustering
+* It is a methodology that arranges genes or samples profiles in a tree, so that similar profiles are close to each other
+* It is useful since it can reduce data complexity and reveal clusters of genes acting together
+* I first compute a distance matrix among the profiles, using any of the distance metrics examined
+	* The matrix is triangular, since $d(A,B)=d(B,A)$
+* I join similar profiles together and compute the distance from all the remaining profiles to the new cluster and iterate until only 1 cluster remains
+* Usually the lenght of the branches is made so to refelect pairwise distance
+* With $n$ profiles I have $n-1$ nodes and $2^{n-1}$ possible dendrograms
+* The distance between the new cluster and the remaining genes isevaluated using a linkage method
+* The 3 most commonly used linkage methods are single linkage, complete linkage, and average linkage
+	* They give different results, so it is important to choose them carefully
+* Since clustering is method-dependent, it is better to not infer too much from observed clusters
+
+### Single linkage
+* In single linkage the distance between 2 clusters is defined as the distance between the nearest points in the respective clusters
+* In this case I tend to have an effect called chaining: genes are added to a cluster one at a time
+* This method is useful when data have natural clusters that are well defined but with irregular shapes
+* In general this is NOT recommended for microarray data
+
+### Complete linkage
+* In complete linkage the distance between 2 clusters is defined as the distance between the farthest points in the clusters
+* This produces many small, compact and well defined clusters
+* It performs well with well-defined data and not so well with fuzzy data
+
+### Average linkage
+* In average linkage the distance between 2 clusters is defined as the average distance between the all the pairs of points in the clusters
+* It has an intermediat behaviour between single and complete linkage
+* It tends to perform well with microarray data
 
 <!---
 # Practical part - doctormaragiuliabacalini
