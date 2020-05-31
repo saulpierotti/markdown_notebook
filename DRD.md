@@ -758,7 +758,68 @@ H_{adj} = \frac{H}{D}, && \mbox{where} \quad D = 1 - \frac{\sum (t^3 - t)}{(n-1)
 * I reject the null hypothesis if $H > \chi^2_\alpha$
 
 # Analysis of relationships between genes and samples
-*
+* One of the intuitive goals of microarray studies is to identify genes and samples that have similar expression profiles
+* We first need to distinguish if we are interested in similarity among genes or among samples
+	* Even though from the scientific standpoint these are really different questions, their analysys approach is essentially the same
+	* Here we will refer to gene profiles understanding that this applies to both gene and sample profiles
+* Being interested in the similarity among genes across 2 samples means to plot the expression level of all the genes in one sample against the other
+	* Samples are the axes and genes the datapoints
+	* It answers to the question: do the samples have similar gene expression profiles?
+* Being interested in the similarity among samples across 2 genes means to plot the expression level of all the samples for a gene against the other
+	* Samples are the dataoints and genes the axes
+	* It answers to the question: do the genes vary their expression together?
+* Note: data in this cases are always paired, since I have the same gene in different samples or different genes in the same sample
+
+## Distance metrics
+* I can describe similarity among 2 profiles as a distance metric on the high-dimensional samples-genes space
+* Any distance metric should have some properties
+	* Distances cannot be negative: $d(A,B) \geq 0$
+	* A profile must be at distance 0 to itself: $d(A,A) = 0$
+	* If two profiles are at distance 0, they are identical: $d(A,B) = 0 \implies A=B$
+	* The distance between A and B must be the same as the distance between B and A: $d(A,B) = d(B,A)$
+	* It should satisfy the triangular inequality: $d(A,C) \leq d(A,B) + d(B,C)$
+
+### Pearson correlation coefficient
+* It is a similarity measure that quantifies the strenght of the linear relationship among 2 sets of measurements
+* Note: I am assuming LINEAR dependency!
+* It is NOT a distance metric and it needs to be coverted into one
+* Given the sets of measurements $x$ and $y$, with $n$ observations each, the correlation coefficent $r_{xy}$ is
+$$ r_{xy} = \frac{Cov(x,y)}{\sigma_x\sigma_y} = \frac{n \sum_{i=1}^n (x_iy_i) - \sum_{i=1}^n x_i \sum_{i=1}^n y_i}{\sqrt{( n\sum_{i=1}^n x_i^2-(\sum_{i=1}^n x_i)^2) ( n\sum_{i=1}^n y_i^2-(\sum_{i=1}^n y_i)^2)}} $$
+* It can take a value from -1 to +1, where 0 represents no correlation, +1 represents complete correlation, and -1 represent complete inverse correlation
+* If the profiles are centered before calculating the correlation so to have mean 0 and standard deviation 1 the formula is much simpler
+$$r_{xy} = \sum_{i=1}^n x_iy_i$$
+* Centering is useful when we are comparing samples to a reference, but not when we are studying a time series
+	* In the case of a time series, centering the data removes any possible information on the up/down regolation of genes at different timepoints
+	* Centering is meaningful if I expect the averages to not be different among profiles
+* I can convert the correlation coefficient to a distance metric in several ways that respect the above stated conditions
+$$ d(XY) = 1 - |r_{xy}|$$
+$$ d(XY) = 1 - r_{xy}^2$$
+* The statistical significance of the Pearson correlation coefficient can be evaluated with a *t*-test
+$$ t = \frac{r}{\sqrt{\frac{1-r^2}{n-2}}}$$
+* $r$ is the Pearson coefficient and $n$ the sample size
+* I compare the $t$ statistic against the t distribution with n-2 degrees of freedom
+* Note: the Pearson correlation is really sensitive to outliers!
+
+### Spearman correlation coefficient
+* It is a non-parametric measure of correlation that is more robust to outliers with respect to the Pearson correlation
+	* It is more appropriate for microarray data
+* I replace real measurements with ranks and then applies the same formula of the Pearson correlation
+* As with data centering, ranking the data discards all the information on the direction of gene regulation
+	* Because of this, Spearman correlation is not adequate for timeseries data
+	* I just know that the expression in one sample is higher or lower than in another, but I do not now if it is up or down regulated with respect to the reference
+* The Spearman correlation is a statement about monotonicity, not about linearity
+
+### Euclidean distance
+* It it the actual distance in the plot space as given by the Pythegorean theorem
+* In 2 dimensions the distance between the points $x:(x_1,x_2)$ and $y:(y_1,y_2)$ is
+$$ d(x,y) = \sqrt{(x_1-y_1)^2+(x_2-y_2)^2}$$
+* To get the distance in 3 dimensions I first get the hypotenuse between the segments in the $x_1$ and $x_2$ axes, and then the hypothenuse between the previous hypothenus and the $x_3$ segment
+* This concept can be easily extended to n dimensions, since the squares and square roots cancel always each other perfectly
+$$ d(x,y) = \sqrt{\sum_{i=1}^n (x_i-y_i)^2}$$
+* Euclidean distance is NOT scale invariant: 2 profiles with the same shape but different magnitudes appear quite different
+	* This can be solved by centering the profiles before calculating the euclidean distance
+
+## Hierarchical clustering
 
 <!---
 # Practical part - doctormaragiuliabacalini
