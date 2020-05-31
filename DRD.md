@@ -818,6 +818,8 @@ $$ d(x,y) = \sqrt{(x_1-y_1)^2+(x_2-y_2)^2}$$
 $$ d(x,y) = \sqrt{\sum_{i=1}^n (x_i-y_i)^2}$$
 * Euclidean distance is NOT scale invariant: 2 profiles with the same shape but different magnitudes appear quite different
 	* This can be solved by centering the profiles before calculating the euclidean distance
+* Euclidean distance cannot spot negative correlations!
+	* Negatively correlated profiles are close with Pearson/Spearman correlation but far in Euclidean space
 
 ## Hierarchical clustering
 * It is a methodology that arranges genes or samples profiles in a tree, so that similar profiles are close to each other
@@ -831,6 +833,11 @@ $$ d(x,y) = \sqrt{\sum_{i=1}^n (x_i-y_i)^2}$$
 * The 3 most commonly used linkage methods are single linkage, complete linkage, and average linkage
 	* They give different results, so it is important to choose them carefully
 * Since clustering is method-dependent, it is better to not infer too much from observed clusters
+* Clustering is also dependent on the distance metric used
+	* Negatively correlated genes are close in Pearson and Spearman space but far in Euclidean space
+	* Profiles with the same shape but different scale have distance 0 only in Spearman space
+	* Euclidean distances tend to be larger than Pearson and Spearman distances and hence produce looser dendrograms
+* It is suggested to try all the possible distance metrics with hierarchical clustering before drawing conclusions
 
 ### Single linkage
 * In single linkage the distance between 2 clusters is defined as the distance between the nearest points in the respective clusters
@@ -847,6 +854,43 @@ $$ d(x,y) = \sqrt{\sum_{i=1}^n (x_i-y_i)^2}$$
 * In average linkage the distance between 2 clusters is defined as the average distance between the all the pairs of points in the clusters
 * It has an intermediat behaviour between single and complete linkage
 * It tends to perform well with microarray data
+
+### Isomorphisms
+* If 2 profiles are close to each other in the dendrogram this does not imply that they are near to each other in the clustering: the branches can be really long!
+* I can draw a tree in different order and let it be the same tree: there are isomorphic clusters
+
+## Reliability of hierarchical clustering
+* There are 3 methods for assessing the reliability of cluster analysis
+* Visually we can look at gene expression profiles and see if they are similar
+	* This is subjective and unreliable
+* By assessing the biological relevance of clusters
+	* I expect genes in the same cluster to be involved in similar pathways
+	* This is also subjective and unreliable
+* Using a statistical measure of known experimental variability
+	* This is done by building a consesus tree via parametric bootstrapping 
+### Parametric bootsrapping
+* I start from the real log ratio for each gene
+* I randomly sample numbers from a normal distribution with mean 0 and with a standard deviation equal to the coefficient of variability of the experiment
+$$CV = \sqrt{\exp{(\sigma*\ln{2})^2}-1}$$
+	* This bootstrap is parametric since I am introducing errors sampled from a normal distribution: I assume that the error is normally distributed!
+	* The coefficient of variability is the standard error!
+* I add the random numbers to the real log ratios and get a bootstrap dataset
+	* This dataset as an error added which is exactly of the same magnitude as the real data
+* I calculate a dendrogram from the bootstrap data, then repeat the bootstrap and calculate another tree for many times
+* I typically obtain at least 1000 bootstrap trees
+* I create a consesus tree by accepting all the nodes that appear in more than 50% of the bootstrap trees
+* There can be genes that are not resolved in the consensus tree!
+	* This just means that there is not enough evidence for assigning them to a cluster
+* The percentage of occurrence of a node in the bootstrap set is a measure of the statistical support for that node
+* From bootstrap we learn that much of the fine strucutre of dendrograms is not real data, but noise
+
+## Heat maps
+* Data matrices and dendrograms are often associated with an heat map for visualization
+* It is a matrix with samples in one axis and genes in the other
+* For both samples and genes a dendrogram is reported
+* Each point in the matrix (sample/gene association) has a color proportional to the fold change in expression
+	* Black means no fold change
+	* Red represents up-regulated genes and green down-regulated genes
 
 <!---
 # Practical part - doctormaragiuliabacalini
