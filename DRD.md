@@ -891,6 +891,10 @@ $$CV = \sqrt{\exp{(\sigma*\ln{2})^2}-1}$$
 * Each point in the matrix (sample/gene association) has a color proportional to the fold change in expression
 	* Black means no fold change
 	* Red represents up-regulated genes and green down-regulated genes
+* By placing genes and sample accoriding to their dendrogram I can spot strucutre in the color scheme
+
+## Principal component analysis (PCA)
+* In microarray analysis we have a lot of data: many genes and many samples
 
 <!---
 # Practical part - doctormaragiuliabacalini
