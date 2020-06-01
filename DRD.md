@@ -894,11 +894,21 @@ $$CV = \sqrt{\exp{(\sigma*\ln{2})^2}-1}$$
 * By placing genes and sample accoriding to their dendrogram I can spot strucutre in the color scheme
 
 # Unsupervised analysis
+* Unsupervised techniques are exploratory
+* You let the data organise itself withouth any prior assumption
 
 ### Principal component analysis (PCA)
 * In microarray analysis we have a lot of data: many genes and many samples
 * PCA is a method that projects a high-dimensional space to a lower-dimensional space
 * The angle at which to look at the high dimensional space is choosen so to maximise the variability of the original dataset captured in the low-dimensional space
+* PCA is recommended as an exploratory tool to uncover unknown trends in the data and identify variance components
+* PCA is the orthogonal linear transformation of that transforms the data to a new coordinate system such that the greatest variance by any projection of the data comes to lie on the first coordinate, the second greatest on the second coordinate and so on
+* The linear correlation of variables is expressed by their covariance
+* The first step in PCA is the construction of a variance-covariance matrix for the original $n$ axes
+	* It is an $n*n$ triangular matrix that represent the covariance of any axes pair and, on the diagonal, the variance of the axes
+* I define then the first principal component as the linear combination of the original variables that has the maximum amount of variance
+	* 
+
 
 <!---
 # Practical part - doctormaragiuliabacalini
