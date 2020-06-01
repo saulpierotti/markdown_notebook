@@ -893,8 +893,12 @@ $$CV = \sqrt{\exp{(\sigma*\ln{2})^2}-1}$$
 	* Red represents up-regulated genes and green down-regulated genes
 * By placing genes and sample accoriding to their dendrogram I can spot strucutre in the color scheme
 
-## Principal component analysis (PCA)
+# Unsupervised analysis
+
+### Principal component analysis (PCA)
 * In microarray analysis we have a lot of data: many genes and many samples
+* PCA is a method that projects a high-dimensional space to a lower-dimensional space
+* The angle at which to look at the high dimensional space is choosen so to maximise the variability of the original dataset captured in the low-dimensional space
 
 <!---
 # Practical part - doctormaragiuliabacalini
