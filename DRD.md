@@ -922,12 +922,26 @@ $$CV = \sqrt{\exp{(\sigma*\ln{2})^2}-1}$$
 	* In 4D I have an entire 3D space orthogonal to PC1 and so on: In general I have an $n-1$-dimensional space orthogonal to PC1
 * A scree plot is an histogram showing the percentage of original variance on each PC
 
+## Database for Annotation, Visualization and Integrated Discovery (DAVID)
+* Microarray data analysis often produces a large list of interesting genes, consisting of thousands of elements
+* DAVID is an integrated bioinformatics resource consisting of a knowledge base and analytic tools
+* It is a convenient platform for understanding the biological meaning of large lists of genes
+* It can identify enriched GO terms, functional gene groups
+* It can visualize genes on KEGG pathways
+* Many other functions
+
+## Volcano plot
+* A volcano plot is a plot of the fold change (x axis) against the negative log_10 of the p-value (y axis)
+* It allows to spot together the magnitude of a difference and its statistical significance
+* Data typically clusters towards 0 on the x (small fold change) and towards 0 on the y (not significant)
+* Interesting results are on the high portion of the plot, and the further they are from the center the more the magnitude of the effect
+
 ## Multidimensional scaling (MDS)
 * Multidimensional scaling (MDS)
 	* I define a distance metric and try to find a lower-dimensional coordinate system that preserves the distances as well as possible
 	* It tend to give very similar results to PCA, even though possibly at different scales
 
-## K-meaans clustering
+## K-means clustering
 
 
 <!---
