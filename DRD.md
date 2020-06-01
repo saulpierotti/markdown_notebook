@@ -906,8 +906,17 @@ $$CV = \sqrt{\exp{(\sigma*\ln{2})^2}-1}$$
 * The linear correlation of variables is expressed by their covariance
 * The first step in PCA is the construction of a variance-covariance matrix for the original $n$ axes
 	* It is an $n*n$ triangular matrix that represent the covariance of any axes pair and, on the diagonal, the variance of the axes
+	* It is different from a simple covariance matrix since in this the diagonal is always 1 (the covariance of a variable to itself is 1)
 * I define then the first principal component as the linear combination of the original variables that has the maximum amount of variance
-	* 
+	* First I translate the orgin of the coordinate system so that it is at the center of the data
+	* I choose a random line passing through the origin and I rotate it until I find the line that maximizes the sum of squared distances of each projected point to the origin
+	* This is equal to minimizing the sum of squared distances from the new axis to all the datapoints (because of Pythagora)
+* The successive principal componets are selected among the orthogonal lines to PC1, always by maximising the squared sum of distances from the origin of the projected data
+	* If the original data is 2D I have just 1 possible PC2, nothing to optimise
+	* If the original data is 3D, there is an entire orthogonal plane to PC1, so I need to rotate PC2 across this plane to optimise it
+	* In 4D I have an entire 3D space orthogonal to PC1 and so on: In general I have an $n-1$-dimensional space orthogonal to PC1
+* Usually data are centerd before doing PCA
+* A scree plot is an histogram showing the percentage of original variance on each PC
 
 
 <!---
