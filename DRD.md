@@ -928,7 +928,8 @@ $$CV = \sqrt{\exp{(\sigma*\ln{2})^2}-1}$$
 * It is a convenient platform for understanding the biological meaning of large lists of genes
 * It can identify enriched GO terms, functional gene groups
 * It can visualize genes on KEGG pathways
-* Many other functions
+* It has many other functions
+* In general, if you came up with a list of genes have a look in DAVID
 
 ## Volcano plot
 * A volcano plot is a plot of the fold change (x axis) against the negative log_10 of the p-value (y axis)
@@ -937,12 +938,40 @@ $$CV = \sqrt{\exp{(\sigma*\ln{2})^2}-1}$$
 * Interesting results are on the high portion of the plot, and the further they are from the center the more the magnitude of the effect
 
 ## Multidimensional scaling (MDS)
-* Multidimensional scaling (MDS)
-	* I define a distance metric and try to find a lower-dimensional coordinate system that preserves the distances as well as possible
+* Multidimensional scaling (MDS) is similar to PCA in that it maps an high-dimensional space to a lwer-dimensional space
+* I define a distance metric and try to find a lower-dimensional coordinate system that preserves the distances as well as possible
 	* It tend to give very similar results to PCA, even though possibly at different scales
+* As long as a distance metric can be defined, MDS can find the smallest number of dimensions that still capture adequately the distance between objects
+* An MDS plot is a 2D or 3D plot of points that reside in an higher-dimensional space that maximises the preservation of the distances between points
+* The MDS dimensions are a linear combination of the original dimensions
 
 ## K-means clustering
+* It is an unsupervised ML algo that can be used for hierarchical clustering of microarray data
+* It differs from hierarchical clustering in many ways
+	* I need to specify in advance the number of clusters
+	* There is no hierarchical relationship among clusters: they are just groups of genes
+	* It is stochastic and so not perfectly reproducible if I don't assign a fixed seed
+* I first choose the number of clusters to be found, called $k$
+* I randomly split the dataset in $k$ clusters and I calculate their centroid
+	* The centroid is a point which has the average coordinates of all the datapoints in the cluster
+* For each datapoint (profile) I calculate the distance from it and the centroids of all the clusters
+* I move each datapoint to the cluster whose centroid is the closest to the datapoint
+* I recalculate all the centroids form the new clusters
+* Reiterate until no datapoint moves anymore (each datapoint is in the cluster whose centroid it is closest to)
+* Also k-means clustering is dependent on a distance metric!
+* In order to choose $k$, do first an MDS plot and look visually at the clusters to get a starting point
+* Then try different values until you find a satisfactory one
+* k-means clustering can be validated in different ways
+	* Visually, check if profiles in the same cluster are actually similar to each other
+	* Try to understand if the clusters make sense biologically
+	* See if the clustering is reproducible with the same $k$ but a different random seed
+	* Do parametric bootstrapping
 
+## Caution notes
+* Batch effects can skew the data and show clusters that are not due to biological differences
+	* Normalization is not satisfactory
+	* You can deal with them by randomising the samples
+	* There are statistical packages aimed at detecting them (ComBat)
 
 <!---
 # Chromatine immunoprecipitation
