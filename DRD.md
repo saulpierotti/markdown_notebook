@@ -973,8 +973,9 @@ $$CV = \sqrt{\exp{(\sigma*\ln{2})^2}-1}$$
 	* You can deal with them by randomising the samples
 	* There are statistical packages aimed at detecting them (ComBat)
 
+
 <!---
-# Chromatine immunoprecipitation
+# ChIPSeq - Guest Professor: Dr. Mattia Forcato
 
 # Practical part - doctormaragiuliabacalini
 * We will prepare a report (:/)
