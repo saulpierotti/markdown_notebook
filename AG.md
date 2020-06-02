@@ -632,9 +632,12 @@ $$ Z_{H_p} = (H_p-\mu_{H_p})/\sigma_{H_p}$$
 
 ## Whole-genome resequencing reveals loci under selection during chicken domestication - Rubin et al. 2010
 * 44.5x coverage of the chicken genome using pooled DNA from 8 chicken populations and a red jungle fowl population (major wild ancestor)
+* Sequencing with SOLiD
 * They distinguished broilers and layers populations
 * Reported 7M SNPs, 1300 deletions, and some selective sweeps
 * Selective sweep in all the domestic population at the TSHR locus (metabolic regulation and photoperiod control of reproduction)
+* Selective sweeps in broilers associated with growth, appetite and metabolic regulation
+* No much evidence of loss-of-function mutations in chicken evolution
 
 # Examination mode
 * Final exam has 2 levels
