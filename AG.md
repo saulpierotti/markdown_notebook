@@ -150,6 +150,15 @@
 	* samtools is used for working with sam files
 * Sequencers are actually high-performance PCs with Intel Xeon CPUs and 48 Gb of RAM!
 * The NGS platforms that are not portable are so because the optics cannot be miniaturized
+* Paired-end reads are obtained by reading a short fragment from both directions
+	* If the fragment is short I just sequence it 2 times in opposing directions
+	* If the fragment is longer I get information about 2 sequence at a known distance from each other
+* Mate pairs are obtained from long fragments (2-5 kb)
+	* I biotinylate the ends of the fragment
+	* I make the fragment circular by pairing the biotinylated ends
+	* I Break the circular fragment in 200-600 bp pieces
+	* I select the fragment containing the biotyn (and so the opposing ends of the original 5 kb fragment)
+	* I sequence it in pared-end reads: I know 2 sequences that are 5 kb apart
 
 ## Ion torrent
 * There are many sequencing chips, with different throughputs
@@ -588,12 +597,44 @@ $$ Z_{H_p} = (H_p-\mu_{H_p})/\sigma_{H_p}$$
 # Selected papers
 
 ## Strong signatures of selection in the domestic pig genome - Rubin et al. 2012
+* Selective sweep showed selection signature in QTLs related to elongation of the back and number of vertebrae
+	* Wild boars have 19 vertebrae, domestic pigs 21-23
+* The domestic pig evolved from several divergent subspecies of wild boar
+* They used WGS on the draft pig genome assembly for udentifying loci under seleciton since pig domestication
+* They looked for allele frequency differences among wild boar and pig populations
+* 2 different datasets
+	* Mate pair reads from 8 pools of pigs and wild boars at 5x depth per pool
+	* Paired-end reads from 37 individual pigs and 11 wild boars at 10x coverage each
+* Identified an homoziguous region in the X chromosome, that is however present also in wild boars
+* Selective sweep at the melanocortin 4 receptor locus, related to food intake
+* Selective sweep at the NR6A1 locus, related to the number of vertebrae
+* Selective sweep candidates at PLAG1, LCORL, related to body lenght
+	* They are related to height also in humans
+* Selective sweep at OSTN, related to the type of muscle and bone development
+* Observed excess of non-synonimous substitutions in derived mutations in domestic pig and scarcity of non-sense mutations
+* 8 kb duplication in a CASP10 intron in domestic pigs
+* Structural variants at the KIT locus related to white spotting
+
 
 ## High-throughput SNP discovery in the rabbit (*Oryctolagus cuniculus*) genome by next-generation semiconductor-based sequencing - Fontanesi et al. 2014
+* Sequenced 2 RRLs for SNP discovery using IonTorrent Personal Genome Machine
+* Genomic DNA of 10 rabbits from different breeds pooled and digested separately with HaeIII and RsaI
+* Sequenced 280 Mb from the first RRL and 417 Mb from the second
+* Reads combined covered 15.82% of the rabbit genome
+* 62k SNPs were called
+* Some SNPs were validate by Sanger
 
 ## Design of a High Density SNP Genotyping Assay in the Pig Using SNPs Identified and Characterized by Next Generation Sequencing Technology - Ramos et al. 2009
+* 19 RRLs derived from 4 pig breeds and a wild boar population, using AluI, HaeIII and MspI
+* Sequencing with Illumina with 36 nt reads
+* Identified more than 372k SNPs
+* These and other SNPs (549k in total) were used for designing the Illumina Porcine 60k+ SNP beadchip, which included 64k SNPs
 
 ## Whole-genome resequencing reveals loci under selection during chicken domestication - Rubin et al. 2010
+* 44.5x coverage of the chicken genome using pooled DNA from 8 chicken populations and a red jungle fowl population (major wild ancestor)
+* They distinguished broilers and layers populations
+* Reported 7M SNPs, 1300 deletions, and some selective sweeps
+* Selective sweep in all the domestic population at the TSHR locus (metabolic regulation and photoperiod control of reproduction)
 
 # Examination mode
 * Final exam has 2 levels
