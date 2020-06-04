@@ -7,7 +7,7 @@
 
 ---
 
-## Introduction
+# Introduction
 * This course is not about Big Data, it is about infrastructures
 * We should have visited a datacenter, but... Corona
 * We need SSH, a little bit of C/C++, vim, Python
@@ -16,16 +16,16 @@
 * Prof of course is a physicist of the IIFN
 * The IIFN-CNAF hosts the Tier-1 datacenter in Bologna
 
-## Setting up AWS
+# Setting up AWS
 * It is a pay for use model
 * You have at the beginning a 50\$ credit
 
-## Big data
+# Big data
 * They tend to be non structured
 * They are characterized by 4 Vs: Volume, Variety, Veracity (can I trust them?), Velocity
 * Another important point is Value, what I want to extract from the data
 
-## Computational challenge
+# Computational challenge
 * Find a substring in a string
 * Doing it brute force is really slow
 * I can create an index once and then I can search every time much faster
@@ -42,13 +42,13 @@
 	* The aim of this course is creating a cloud based model for computing this
 	* I also want to estimate the time required
 
-## Some notes
+# Some notes
 * A checksum is essential when we are moving data
 	* It is a small string used to detect error in data transmission or storage
 	* It is possible to set an extended file attribute with the checksum (if the file system allows it)
 * Files are moved compressed, moving uncompressed files is a crime
 
-## CPU
+# CPU
 * 1 byte is 8 bits (but we can also use 10 to make it easier)
 * A multicore processor has more than 1 processing unit
 	* A core appears to the processor as a different CPU
@@ -79,7 +79,7 @@
 * A good source of info for the system is `cat /proc/cpuinfo`
 	* `flags` shows the capabilities of the processor (instructions)
 
-## Memory
+# Memory
 * Memory is RAM, it is volatile and fast
 * We typically have a memory hierarchy
 	* The first memory is the CPU register
@@ -114,7 +114,7 @@
 		* DDR is a type of SDRAM
 * Memory status can be seen with `free`
 
-## Network
+# Network
 * A computer network is an infrastructure that shares resources between nodes
 * Network topology can affect reliability and throughput
 	* Bus: everithing connected to the backbone
@@ -222,7 +222,7 @@
 * Top-of-the-rack switching: a switch that delievers packets to a rack of servers
 	* Usually there is also a switch that delivers to the right rack
 
-## Computing Infrastructures
+# Computing Infrastructures
 * A computing farm is a collection of servers and it can have millions of cores
 	* Network devices manage communication between servers and the interaction with users
 * Intel Xeon is used in datacenters since it is reliable and can work continuously
@@ -255,7 +255,7 @@
 * Backfill: while the reserved core are idle they can be used by other jobs
 	* Only jobs that will finish before the job that reserved the cores will start are permitted
 
-## Storage
+# Storage
 * The performance of a storage device is described in terms of bandwith and IOPS
 	* The bandwith is the data transfer speed
 	* The IOPS is the number of I/O operations per second
@@ -340,7 +340,7 @@
 * Nowadays datacenters are adopting the HyperConverged architecture
 	* Storage and computing happens on the same machines, no separate areas
 
-## Cloud Computing
+# Cloud Computing
 * It is not the same as virtualization!
 * It is a pay-per-use model, an utility service
 * The infrastructure has a teorethical infinite capacity
@@ -372,7 +372,7 @@
 	* In the terms of service for standard accounts there is no guarantee of continuity, reliability, ecc
 	* In many case cloud services are not completely mature
 
-## Databases
+# Databases
 * Big data are typically stored in relational or non-relational databases
 	* Non-relational databases require little coding skills
 		* They include NoSQL databases like MongoDB
@@ -380,7 +380,7 @@
 		* They typically require data scientists
 * There is a huge amount of software in the big data ecosystem
 
-### MapReduce
+## MapReduce
 * MapReduce is an algorithm developped by Google for parallel and decentralized processing and generation of big data
 	* It usually uses a distributed filesystem like Hadoop
 * It is based on the Map and Reduce actions
@@ -389,7 +389,7 @@
 	* Reduce: aggregate the data from a set of tuples
 		* I take several dictionaries from different documents and count the total word occurrence
 
-### Hadoop
+## Hadoop
 * Apache Hadoop is an open-source software ecosystem for big data analysis and storage
 	* It is designed to scale well from a single server to thousands
 	* It is highly fault tolerant
@@ -448,7 +448,7 @@
 * Hadoop MapReduce is the core processing component of the ecosystem
 	* It is a software framework for writing applications that process large datasets using distributed and parallel algorithms in an Hadoop environment
 
-### SQL
+## SQL
 * It is a relational DBMS based on tables
 * It works with a specific schema
 * It uses the powerfull SQL query language
@@ -458,7 +458,7 @@
 	* We can say that it focuses on the ACID properties: atomicity, consistency, isolation, durability
 * Scalability is vertical
 
-### NoSQL
+## NoSQL
 * In is non-relational and document-based
 * It can consist in key-value pairs, graphs, wide-columns
 * The schema is flexible and it can also host unstructured data
@@ -482,7 +482,7 @@
 * High performance computing (HPC): I want to speed up the execution time of the single jobs
 * FLOP: number of floating poin operations per second
 
-## HTC
+# HTC
 * HTC infrastructures are PC clusters, server clusters, distributed systems and grids
 * A Grid is an hardware and software infrastructure that provides inexpensive access to high-end computational capabilities
 	* It is NOT subject to centralised control
@@ -505,7 +505,7 @@
 * The user can in turn sign a proxy authorization for allowing delegation
 * Each job on the Grid is identified by an URL containing the address of the server who accepted it and a random string
 
-## HPC
+# HPC
 * The first machines for HPC were Vector machines
 * They were using single powerfull processors (small for now!)
 * Subsequently they shifted to massively parallel processors (MPP)
@@ -580,4 +580,10 @@
 
 ---
 
+# Introduction
+* This module focuses on topics beyond the IaaS model and it is mostly hands on
+* The main topics are: cloud storage, Docker containers, authentication and authorization for cloud services, automation for cloud applications
+* Professor is also a physicist from INFN, graduated from UniBo
+* INFN centers are linked by the high speed connections provided by the GARR network
+* The cloud is useful since it allows to optimize resource usage in presence of elastic demand
 

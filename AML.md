@@ -2,6 +2,10 @@
 % Saul Pierotti
 % \today
 
+# Basic part
+
+---
+
 # Introduction
 * Professor is a physicist in high-energy physics
 * We will not go so much into theory
@@ -272,6 +276,10 @@
 	* It can also be a notebook with both
 * It should be reproducible
 * You can copy but be clever!
+
+# Advanced part
+
+---
 
 # Tools for the advanced part
 * We will still use sklearn for preprocessing, but not for the main analysis

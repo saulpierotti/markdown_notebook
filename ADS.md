@@ -12,22 +12,29 @@ header-includes:
 ---
 
 # Introduction
-* Exam will be written, but you can do oral if you want
-	* After lectures, around June 25
+* The word algorithm comes from the name of the persian scientist Muhammad ibn Musa al-Khwaruzmi
+	* He lived in Uzbekstan and wrote Algoritmi de numero Indorum, wrongly understood as a latin plural
+	* He was also the founder of algebra (from al-jabr, a procedure to solve quadratic equations)
+* First algorithms were written by Babylonian in 1600 BC
+* Study of algorithms dates to Euclid in 300 BC
+* Modern algortihms study started in 1920 and was formalized in 1930 by Turing and Church (matematicians)
+* Many algos were discovered recently also by students
 * An algorithm is a finite series of steps that solves a problem
-	* In CS, an algorithm is a well defined computational procedure
-* For a sorting algorithm, the input is a series of numbers and the output is an ordered series of numbers
+* In CS, an algorithm is a well defined computational procedure that takes some inputs, follows a series of steps and eventually produces outputs in order to solve a computational problem
+* Sorting is a common computational problem
+	* The typical input is a series of numbers
+	* The output is a permutation of the input such that $a_i \leq a_{i+1}$
+	* A specific input sequence is an instance of the sorting problem
 * Algorithms are for humans, while a program is for a computer
 * Algorithms are written in pseudocode, which follow specific conventions
 * A problem can be solved by many algorithms
 * An algorithm can be implemented in many different programs
-* Properties of algorithms
-	* Input for an algorithm can have 0 or more inputs
-	* It always as 1 or more outputs
-	* It should be clearly defined and unanbiguous
+* Fundamental properties of algorithms
+	* Inputs can be 0 or more
+	* Outputs are always 1 or more
+	* An algorithm should be clearly defined and unanbiguous
 	* It should terminate after a finite number of steps
-	* All operations must be basic
-		* They can be solved exactly and in finite time
+	* All operations described must be basic, meaning that they can be solved exactly and in finite time
 * The correctness of an algorithm is difficult to prove
 	* I would need to try all possible inputs (!)
 	* Published algorithms have a mathematical proof
@@ -1893,3 +1900,6 @@ greeedy_knapsack_frac(weights, values, total_weight):
 	* No need to evaluate a branch that will lead to a worse solution than those I already found
 * In general I need an initial solution to be used as a first $z^*$
 	* I can choose it randomly or with heuristics
+
+# Exam info
+* Exam will be written, but you can do oral if you want
