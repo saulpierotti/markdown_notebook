@@ -1,4 +1,11 @@
-# Introduction to Big Data Processing Infrastructures
+% Big Data Processing Infrastructures
+% Saul Pierotti
+% \today
+
+
+# Part 1 - Prof. Daniele Cesini
+
+---
 
 ## Introduction
 * This course is not about Big Data, it is about infrastructures
@@ -568,3 +575,7 @@
 # Internet of Things (IoT)
 * The IoT is the network of connected physical devices through their electronic components
 * Each 'Thing' can be identified via its MAC address
+
+# Part 2 - Prof. Salomoni
+
+---
