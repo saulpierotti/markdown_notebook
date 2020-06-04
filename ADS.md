@@ -35,19 +35,24 @@ header-includes:
 	* An algorithm should be clearly defined and unanbiguous
 	* It should terminate after a finite number of steps
 	* All operations described must be basic, meaning that they can be solved exactly and in finite time
-* The correctness of an algorithm is difficult to prove
-	* I would need to try all possible inputs (!)
-	* Published algorithms have a mathematical proof
-* Incorrect algorithms can produce a wrong output or not produce any for some instances
+* Correct algorithms are necessary to solve computational problems
+* Efficient algorithms are necessary to solve computational problems with the available resources
+* An algorithm is correct if for every input, it halts with the correct output
+* An incorrect algorithm does not halt or halts with incorrect results on at least 1 instance
 	* In some cases they are still useful, if I can control their error rate
+* The correctness of an algorithm is difficult to prove
+	* Showing correctness in one instance is not a guarantee of correctness in every instance
+	* I can prove correctness by testing instances only if the possible number of instances is finite
+* Published algorithms needs to have a mathematical proof of correctness that shows that, for any given valid input, it halts with an output that is a solution for the problem
+* An algorithm without proof is an heuristic procedure that is not guaranteed to be correct
 * Efficiency is related to the ability of an algorithm to be executed with available resources
 * Resources are time and memory
 * Time is measured in running time, not CPU time
 	* CPU time is dependent on CPU (!)
 	* CPU time is number of instruction divided by number of istructions per unit time
 	* Running time is the number of primitive operations to be performed in proportion to the input size
-* The algorithm influences time much more than hardware, we do not focus on hardware (!)
-* Running time of $n^2$ is unacceptable for large inputs
+* The algorithm influences time much more than hardware, so we do not focus on hardware
+* A running time $\geq n^2$ is unacceptable for large inputs
 * Using the right data structure is important for efficiency
 * Decision trees are essential in CS
 * An instace of a problem is a specific input for that problem

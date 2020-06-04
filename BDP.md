@@ -586,4 +586,7 @@
 * Professor is also a physicist from INFN, graduated from UniBo
 * INFN centers are linked by the high speed connections provided by the GARR network
 * The cloud is useful since it allows to optimize resource usage in presence of elastic demand
-
+* The cloud should be accessible on demand as a self-service
+* The access is network-based, relies on resource sharing and it is assumed to be infinitely elastic
+* It has a pay-per-use model
+* Above the IaaS/PaaS/SaaS axis there is the isolation model dimension and the deployment model dimension
