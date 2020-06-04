@@ -11,7 +11,7 @@ header-includes:
 
 ---
 
-# Introduction
+# Introduction on algorithms
 * The word algorithm comes from the name of the persian scientist Muhammad ibn Musa al-Khwaruzmi
 	* He lived in Uzbekstan and wrote Algoritmi de numero Indorum, wrongly understood as a latin plural
 	* He was also the founder of algebra (from al-jabr, a procedure to solve quadratic equations)
@@ -47,44 +47,74 @@ header-includes:
 * An algorithm without proof is an heuristic procedure that is not guaranteed to be correct
 * Efficiency is related to the ability of an algorithm to be executed with available resources
 * Resources are time and memory
-* Time is measured in running time, not CPU time
-	* CPU time is dependent on CPU (!)
-	* CPU time is number of instruction divided by number of istructions per unit time
-	* Running time is the number of primitive operations to be performed in proportion to the input size
+* CPU time is number of instruction divided by number of istructions per unit time
+	* It is hardware-dependent
+* Running time is the number of primitive operations to be performeda before termination, in proportion to the input size
+	* A primitive operation is an arithmetic operation, data movement, comparison, decision (if)
+* Generally when referring to the time complexity of an algorithm this is measured in running time, not CPU time
 * The algorithm influences time much more than hardware, so we do not focus on hardware
+* Time and memory are bounded resources and must be used wisely
+* The input size is the number of elements in the input
 * A running time $\geq n^2$ is unacceptable for large inputs
-* Using the right data structure is important for efficiency
-* Decision trees are essential in CS
-* An instace of a problem is a specific input for that problem
 * In a while and for loop, the test is always executed once more than the body
 
+# Introduction to data structures
+* A data structure is a way to store and organise data so to facilitate its access and modification
+* Algorithm efficiency is affected by the choice of data structures
+
 # Math backgroud
+
+## Sums
 * Finite sums
-	* $\sum_{k=1}^{n}a_k  = a_1+a_2+...+a_n$
+$$\sum_{k=1}^{n}a_k  = a_1+a_2+...+a_n$$
 * Infinite sums
-	* $\sum_{k=1}^{\infty}a_k  = a_1+a_2+...$
+$$\sum_{k=1}^{\infty}a_k  = a_1+a_2+...$$
 * Sums are linear
-	* $\sum_{k=1}^{n}(ca_k+b_k)  = c\sum_{k=1}^{n}a_k + \sum_{k=1}^{n}b_k$
+$$\sum_{k=1}^{n}(ca_k+b_k)  = c\sum_{k=1}^{n}a_k + \sum_{k=1}^{n}b_k$$
 * The arithmetic series
-	* $\sum_{k=1}^{n}k = 1+2+...+n=\frac{n(n+1)}{2}$
+$$\sum_{k=1}^{n}k = 1+2+...+n=\frac{n(n+1)}{2}$$
 * The quadratic arithmentic series
-	* $\sum_{k=1}^{n}k^2 = 1+4+...+n^2=\frac{n(n+1)(2n+1)}{6}$
+$$\sum_{k=1}^{n}k^2 = 1+4+...+n^2=\frac{n(n+1)(2n+1)}{6}$$
 * The cubic arithmetic series
-	* $\sum_{k=1}^{n}k^3 = 1+8+...+n^3=\frac{n^2(n+1)^2}{4}$
+$$\sum_{k=1}^{n}k^3 = 1+8+...+n^3=\frac{n^2(n+1)^2}{4}$$
+* Arithmetic series of any power
+$$\sum_{k=1}^n k^p \approx \frac{n^{p+1}}{p+1}$$
 * The geometric series
-	* $\sum_{k=1}^{n}x^k = 1+x+x^2...+x^n=\frac{x^{n+1}-1}{x-1}$
-	* When x is less than 1
-		* $\sum_{k=1}^{\infty}x^k = \frac{1}{1-x}$
-		* $\sum_{k=1}^{\infty}kx^k = \frac{x}{(1-x)^2}$
-* Other formulas
-	* $\sum_{k=1}^n \log{k} \approx n \log{n}$
-	* $\sum_{k=1}^n k^p \approx \frac{n^{p+1}}{p+1}$
+$$\sum_{k=1}^{n}x^k = 1+x+x^2...+x^n=\frac{x^{n+1}-1}{x-1}$$
+* Infinite geometric series with base lower than 1
+$$\sum_{k=1}^{\infty}x^k = \frac{1}{1-x}$$
+$$\sum_{k=1}^{\infty}kx^k = \frac{x}{(1-x)^2}$$
+* Logarithmic sum
+$$\sum_{k=1}^n \log{k} \approx n \log{n}$$
+
+## Sets
+* Logic operations have specific symbols
+	* Logic and: $\land$
+	* Logic or: $\lor$
+	* Logic not: $\lnot$
 * A set is a non-ordered and non repetitive collection of elements
-* Sets can be infinite
-* It is described as $S={...}$
+* A set is described by listing explicitly all of its elements inside curly braces 
+$$S=\{...\}$$
+* A member $x$ of the set $S$ is an element that belongs to $S$ ($x \in S$)
+* A non-member $y$ of the set $S$ is an element that does not belongs to $S$ ($y \not\in S$)
 * 2 sets are equal if they contain the same elements
-* The cardinality of a set $|S|$ is the number of elements it contains
-* If $A$ contains all the elements contained in $B$ and also other elements, then $B$ is a proper subset of $A$
+* The cardinality of a set $S$, represented as $|S|$, is the number of elements that it contains
+	* If the cardinality of a set is a natural number, the set is finite, otherwise it is infinite
+* 2 sets $A$ and $B$ are equal ($A=B$) if they contain the same elements
+* The empty set $E$ is represented as $E=\{\}=\emptyset$ and it respect the condition $|E|=0$
+* If $A$ contains all the elements contained in $B$, then $B$ is a subset of $A$
+$$(x \in A \implies x \in B \quad \forall \ x\in A) \iff B \subseteq A$$
+* If $A$ contains all the elements contained in $B$ but $A$ and $B$ are not equal, then $B$ is a proper subset of $A$
+* The universe $U$ is a set including all the possible elements
+$$B \subseteq A \ \land \ A\not=B \iff B \subset A$$
+* Set intersection
+$$A \cap B = \{x:x \in A \land x \in B\}$$
+* Set union
+$$A \cup B = \{x:x \in A \lor x \in B\}$$
+* Set difference
+$$A-B = \{x:x \in A \land x \not\in B\}$$
+* Set complement
+$$A' = U-A \text{ where } A \subseteq U$$
 * The power set $P(S)$ is the set of all subset of $S$, including the empty set and $S$ itself
 	* $|P(S)| = 2^{|S|}$
 * The cartesian product of 2 sets is a set containing all possible pairs of elements
