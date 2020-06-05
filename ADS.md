@@ -191,6 +191,12 @@ $$f\colon A \to B\colon \exists\ a\colon f(a) = b\ \forall\ b \in B$$
 * The input size is the number of elements in the input
 * A running time $\geq n^2$ is unacceptable for large inputs
 * In a while and for loop, the test is always executed once more than the body
+* Analysing algorithms is useful for predicting the amount of resources required for running them and for selecting the most efficient one
+* We assume that instructions are executed sequentially and that each instructuon is simple and commonly found in real CPU instruction sets
+* One instructuion is assumed to require constant time
+* The running time of an algorithm is the proportionality between the input size and the number of primitive instructions executed
+* Caution note: the test of a loop is always executed once more than the body
+
 
 # Introduction on data structures
 * A data structure is a way to store and organise data so to facilitate its access and modification
@@ -287,13 +293,18 @@ $$f\colon A \to B\colon \exists\ a\colon f(a) = b\ \forall\ b \in B$$
 * I start with $j=2$ and I loop on it until $A.lenght$
 * The current element at each iteration, called key, is $A[j]$
 * I update the moving boundary $i$ to be $j-1$
-* I compare the key with all the objects in the sorted portion of the array starting from the end of it $A[]$, until I find an element smaller than the current one or I reach the start of the array
-* In both cases, I assign the value of the current element to the 
+* I compare the key with all the objects in the sorted portion of the array starting from the end of it $A[i]$, until I find an element smaller than the current one or I reach the start of the array
+	* At each loop iteration I move the element $A[i]$ to position $A[i+1]$
+	* I decrease $i$ of 1
+* When the loop ends (for any of the 2 reasons) I assign the value of the current element $key=A[j]$ to the position $A[i+1]$
+	* That position is empty since I shifted all the values in the previous loop
 
 \begin{algorithmic}
+\Statex
 \Procedure{INSERTION-SORT}{A}
 	\For{j = 2 to A.lenght}
-		\State key = A[j] // Insert A[j] into the sorted sequence A[1...j-1]
+		\State key = A[j]
+		\State // Insert A[j] into the sorted sequence A[1...j-1]
 		\State i = j-1
 		\While{i > 0 and A[i] > key}
 			\State A[i+1] = A[i]
@@ -301,43 +312,31 @@ $$f\colon A \to B\colon \exists\ a\colon f(a) = b\ \forall\ b \in B$$
 		\State A[i+1] = key
 	\EndFor
 \EndProcedure
+\Statex
 \end{algorithmic}
 
-* Nearly sorted numbers can be sorted much fatser with insertion sort
-* The input size is the length of the array
-	* `n = A.lenght`
-* The initial **for** test is executed n times
-	* It is n, not n-1 because even when it is false we still have to check ones (!)
-	* The body of the **for** is executed n-1 times
-* The assignemt of key is therefore executed n-1 times
-* The **while** test is executed $\sum_{j=2}^n t_j$ times
-	* The body of the **while** is executed $\sum_{j=2}^n t_j-1$
+* Let's assume that the input has $n$ elements
+* The initial **for** test is executed n time, while the body of the **for** is executed n-1 times
+	* I am looping on $n-1$ elements, but I do a test more that will return false and exit the procedure!
+* The body contains 3 constant operations and the while loop
+* The **while** test is executed a variable number of times at each iteration, for n-1 iterations (from $j=2 \to n$)
+	* If $t_j$ is the number of times the while loop test is exectuted at each iteration of the **for** loop, then the test in total is executed $\sum_{j=2}^n t_j$ times
+* The body of the **while** is executed always once less then the test ($t_j-1$ times for each iteration of the **for** loop)
+	* In total it is executed $\sum_{j=2}^n t_j-1$ times
 	* There are 2 assignments on the while body
-* The final assignment after the **while** inside the **for** is executed n-1 times
-
-**Best case**
-
-* The array is already sorted
-* I never enter the while, but I do completely the for
-* This means that $t_j$ is 1, I only do the test
-* The time is linear
-
-**Worst case**
-
-* The array is in reverse sorted order
-* The time is quadratic
-
-**Average case**
-
-* It is really difficult to do, we prefer to focus on the worst case
-
-**Evaluation**
-
-* For almost sorted sequences its running time is almost linear
-* Can be online
-	* It can sort sequences as they arrive
-* In the worst and average cases it is quadratic
-	* Quadratic is really bad (!)
+* The total running time is therefore $T(n) = n+3(n-1)+\sum_{j=2}^nt_j+2\sum_{j=2}^n(t_j-1)$
+* In the best case, the array is already sorted
+	* I never enter the **while** at each iteration of the **for**
+	* This means that $t_j=1$, I only do the test
+	* The time is linear: $T(n)=n+3(n-1)+(n-1)+2*0$
+	* Nearly sorted numbers can be sorted fast with insertion sort
+* In the worst case the array is in reverse sorted order
+	* For each iteration of the for loop, I iterate the while loop on all the elements
+	* The time is quadratic
+* Average case analysis is really difficult to do, therefore we prefer to focus on the worst case
+* For almost sorted sequences the running time of insertion-sort is almost linear: good when this is the case
+* For unsorted array I go towards quadratic time: there are better alternatives
+* Insertion-sort can operate online: it can sort sequences as they arrive
 
 # Merge sort
 * It is a divide and conquer algorithm
