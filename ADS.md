@@ -236,37 +236,41 @@ $$f\colon A \to B\colon \exists\ a\colon f(a) = b\ \forall\ b \in B$$
 * **return** trasnfers control back to the point of call and can optionally return a value
 * **error** indicates that an error occurred
 	* There is no need to specify how the error should be handled, since this is managed by the calling procedure
-* You can implement while loops and for loops as
-
+* Some constructs
 \begin{algorithmic}
 \Statex
 \While{condition}
 	\State statement
 \EndWhile
 \Statex
-\For{counter inizialization}{condition}
+\For{counter inizialization to/downto condition (by increment)}
 	\State statement
 \EndFor
+\Statex
+\If{condition}
+	\State statement 1
+\ElsIf{condition}
+	\State statement 2
+\Else
+	\State statement 3
+\EndIf
+\Statex
+\Procedure{proc-name}{arguments}
+	\State statement
+\EndProcedure
+\Statex
 \end{algorithmic}
 
-***
-* In our pseudocode we start counters from 1 instead of 0 since it is easier to understand
-* We can have loops like **while** and **for**
-```
-for i=0 to/downto i=4 (by 3)
-	<statement>
-```
-* We have if statements
-```
- if <condition>
-	<statement>
-```
-* Comments are rendered with //
-* No colon/semicolon at the end of lines
-* Use of indented blocks
-* Differentiate conditional expressions and assignments (!)
-* A slice of an array is indicated as `A[3..5]`
-* Attributes of objects are indicated as `object.attribute`
+* Assignment of the value $j$ to the variable $i$ is represented as $i = j$
+* The conditional statement of equivalence is $i == j$
+* Comments are written after `//`
+* Block structure is represented with indentation
+* In our pseudocode we start array counters from 1 instead of 0 since it is easier to understand
+* Elements in an array are accessed by placing the index in squared brackets after the name of the array
+	* $A[3]$ gives the third element of the array $A$
+* A slice of an array is indicated as $A[3...5]$
+* There is no colon/semicolon at the end of lines
+* Attributes of objects are indicated as `object_name.attribute`
 	* The lenght of an array can be indicated as `A.lenght`
 
 # Sorting
@@ -278,26 +282,26 @@ for i=0 to/downto i=4 (by 3)
 
 ## Insertion sort
 * Intuition: It is like arranging card in order in your hand by picking one at a time and placing it in the right position, by comparing it with all the other cards already in your hand
-	* I take 1 unsorted object at a time and I insert it in the correct position in the sorted array
-	* I compare with all the objects in the sorted array, until I find the right position
-* I start from the first element of the array and I don't do anything
-* I take the second element, and if it is smaller than the first I swap them
-* I take the third, and if it is smaller than the second I compare it with the first and I swap in the right position
-* I continue like this for all the elements
+* I always work on the same array but I put a moving boundary $i$ before which all the elements are sorted
+	* The loop invariant is that $A[1...j-1]$ is always sorted
+* I start with $j=2$ and I loop on it until $A.lenght$
+* The current element at each iteration, called key, is $A[j]$
+* I update the moving boundary $i$ to be $j-1$
+* I compare the key with all the objects in the sorted portion of the array starting from the end of it $A[]$, until I find an element smaller than the current one or I reach the start of the array
+* In both cases, I assign the value of the current element to the 
 
-**Pseudocode**
-
-```pascal
-INSERTION-SORT(A)
-	for j = 2 to A.lenght
-		key = A[j]
-		i = j-1
-		while i > 0 and A[i] > key
-			A[i+1] = A[i]
-		A[i+1] = key
-```
-
-**Running time**
+\begin{algorithmic}
+\Procedure{INSERTION-SORT}{A}
+	\For{j = 2 to A.lenght}
+		\State key = A[j] // Insert A[j] into the sorted sequence A[1...j-1]
+		\State i = j-1
+		\While{i > 0 and A[i] > key}
+			\State A[i+1] = A[i]
+		\EndWhile
+		\State A[i+1] = key
+	\EndFor
+\EndProcedure
+\end{algorithmic}
 
 * Nearly sorted numbers can be sorted much fatser with insertion sort
 * The input size is the length of the array
