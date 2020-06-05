@@ -146,6 +146,46 @@ $$|P(S)| = 2^{|S|}$$
 $$ A \times B = \{(a,b): a \in A \land b \in B\}$$
 $$ |A \times B| = |A|*|B|$$
 * The cartesian product of n sets is a set of n-tuples
+* Relations
+	* A binary relation $R$ on two sets $A$ and $B$ is a subset of their cartesian product
+	$$R \subseteq A \times B$$
+	* The relation $(a,b) \in R$ can be written as $a\ R\ b$
+		* If I have a relation $a \leq b$ on natural numbers $N$, this means $\{(a,b): a, b \in N \land a \leq b\}$
+		* I can also write $a \leq b = (a,b) \in \ \leq$
+	* A relation $R$ on $n$ sets $A_1, A_2, ..., A_n$ is a subset of $A_1 \times A_2 \times ... \times A_n$
+* Properties of binary relations
+	* A relation $R \subseteq A \times A$ is reflexive if each element is in that relation with itself
+$$a\ R\ a \quad  \forall\ a \in A$$
+		* $=, \leq, \geq$ are reflexive relations in $N$ but $<, >$ are not
+	* A relation is symmetric if it works both ways
+$$ a\ R\ b \implies b\ R\ a \quad \forall\ a,b \in A$$
+		* $=$ is a symmetric relation in $N$
+	* A relation is transitive if 
+$$a\ R\ b \land b\ R\ c \implies a\ R\ c \quad \forall \ a,b,c \in A$$
+		* $=, \leq, \geq, <, >$ are transitive relations in $N$
+	* A relation is antisymmetric if symmetry exists only among equal elements
+$$a\ R\ b \land b\ R\ a \implies a = b \quad \forall \ a,b \in A$$
+		* $\leq$ is an antisymmetric relation in $N$
+	* A relation that is reflexive, antisymmetric and transitive is said partial order
+	* A set in which a partial order is defined is called partially ordered set
+	* A partial order $R$ on the set $A$ is a total order if
+	$$ \forall\ a,b \in A\qquad a\ R\ b \lor b\ R\ a$$
+* Functions
+	 * A function $f\colon A$, given 2 sets $A$ and $B$ is defined as a subset of their cartesian product such that there is one and only one element of $B$ for each element of $A$ such that their are related by $f$
+	 $$ f \subseteq A \times B\colon\ \forall\ a \in A\ \exists!\ b \in B\colon\ a,b \in f$$
+	 	* $A$ is the domain of $f$, $B$ its codomain
+	 	* We can write $f\colon A \to B$ to represent the function
+	 	* If $a,b \in f$ we can write $f(a) = b$
+	 		* $a$ is called argument of $f$ and $b$ is called image of $a$ under $f$
+	 * 2 functions are equal if they have the same domain and codomain and their image is equal for every argument
+	 $$ f = g \iff f\colon A \to B, g\colon A \to B \land f(a)=g(a)\quad \forall\ a \in A$$
+	 * The range of a function $f(A)$ if a function $f\colon A \to B$ is the set of possible values that it can produce as output
+	 $$f(A) = \{b \in B\colon b=f(a) \land a \in A\}$$
+	 * It is different from the codomain since it includes only the values that can actually be taken by the function
+	 	* In $f\colon N \to N\colon f(n)=2n$ $N$ is the codomain but the range is represented by only the even numbers in $N$
+	* A function is a bijection if it is both a surjection and an injection
+		* For a bijection the inverse function $f^{-1}$ is defined
+		$$f^{-1}(b) = a \iff f(a) = b$$
 
 * A tree has only one way to go from one node to the other
 * A graph can have cycles
