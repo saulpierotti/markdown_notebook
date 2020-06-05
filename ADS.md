@@ -237,11 +237,18 @@ $$f\colon A \to B\colon \exists\ a\colon f(a) = b\ \forall\ b \in B$$
 * **error** indicates that an error occurred
 	* There is no need to specify how the error should be handled, since this is managed by the calling procedure
 * You can implement while loops and for loops as
+
 \begin{algorithmic}
-\While{<condition>}
+\Statex
+\While{condition}
 	\State statement
 \EndWhile
-\end{algorthmic}
+\Statex
+\For{counter inizialization}{condition}
+	\State statement
+\EndFor
+\end{algorithmic}
+
 ***
 * In our pseudocode we start counters from 1 instead of 0 since it is easier to understand
 * We can have loops like **while** and **for**
