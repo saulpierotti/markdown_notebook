@@ -58,7 +58,7 @@ header-includes:
 * A running time $\geq n^2$ is unacceptable for large inputs
 * In a while and for loop, the test is always executed once more than the body
 
-# Introduction on data structures
+# Introduction to data structures
 * A data structure is a way to store and organise data so to facilitate its access and modification
 * Algorithm efficiency is affected by the choice of data structures
 
@@ -107,38 +107,34 @@ $$(x \in A \implies x \in B \quad \forall \ x\in A) \iff B \subseteq A$$
 * If $A$ contains all the elements contained in $B$ but $A$ and $B$ are not equal, then $B$ is a proper subset of $A$
 * The universe $U$ is a set including all the possible elements
 $$B \subseteq A \ \land \ A\not=B \iff B \subset A$$
-
-## Basic set operations
-* Set intersection
-$$A \cap B = \{x:x \in A \land x \in B\}$$
-* Set union
-$$A \cup B = \{x:x \in A \lor x \in B\}$$
-* Set difference
-$$A-B = \{x:x \in A \land x \not\in B\}$$
-* Set complement
-$$A' = U-A \text{ where } A \subseteq U$$
-
-## Set laws
-* Empty set laws
-$$ A \cap \emptyset = \emptyset$$
-$$ A \cup \emptyset = A$$
-* Idempotency laws
-$$ A \cap A = A \cup A = A$$
-* Commutative laws
-$$ A \cap B = B \cap A$$
-$$ A \cup B = B \cup A$$
-* Associative laws
-$$ A \cap (B \cap C) = (A \cap B) \cap C$$
-$$ A \cup (B \cup C) = (A \cup B) \cup C$$
-* Distributive laws
-$$ A \cap (B \cup C) = (A \cap B) \cup (A \cap C)$$
-$$ A \cup (B \cap C) = (A \cup B) \cap (A \cup C)$$
-* De Morgan's laws
-$$ (A \cap B)'=A' \cup B'$$
-$$ (A \cup B)'=A' \cap B'$$
+* Set operations
+	* Set intersection
+	$$A \cap B = \{x:x \in A \land x \in B\}$$
+	* Set union
+	$$A \cup B = \{x:x \in A \lor x \in B\}$$
+	* Set difference
+	$$A-B = \{x:x \in A \land x \not\in B\}$$
+	* Set complement
+	$$A' = U-A \text{ where } A \subseteq U$$
+* Set laws
+	* Empty set laws
+	$$ A \cap \emptyset = \emptyset$$
+	$$ A \cup \emptyset = A$$
+	* Idempotency laws
+	$$ A \cap A = A \cup A = A$$
+	* Commutative laws
+	$$ A \cap B = B \cap A$$
+	$$ A \cup B = B \cup A$$
+	* Associative laws
+	$$ A \cap (B \cap C) = (A \cap B) \cap C$$
+	$$ A \cup (B \cup C) = (A \cup B) \cup C$$
+	* Distributive laws
+	$$ A \cap (B \cup C) = (A \cap B) \cup (A \cap C)$$
+	$$ A \cup (B \cap C) = (A \cup B) \cap (A \cup C)$$
+	* De Morgan's laws
+	$$ (A \cap B)'=A' \cup B'$$
+	$$ (A \cup B)'=A' \cap B'$$
 * Two sets are disjoint if their intersection is the empty set
-
-## Other set operations and definitions
 * A collection of nonempty sets $S_1, S_2, ..., S_n$ is a partition of the set $S$ if
 	* All the sets $S_1, S_2, ..., S_n$ are pairwise disjoint
 	$$ S_i \cap S_j = \emptyset \qquad \forall \ i,j = 1,2,...,n \qquad i \not= j$$
@@ -150,69 +146,61 @@ $$|P(S)| = 2^{|S|}$$
 $$ A \times B = \{(a,b): a \in A \land b \in B\}$$
 $$ |A \times B| = |A|*|B|$$
 * The cartesian product of n sets is a set of n-tuples
-
-## Relations
-* A binary relation $R$ on two sets $A$ and $B$ is a subset of their cartesian product
-$$R \subseteq A \times B$$
-* The relation $(a,b) \in R$ can be written as $a\ R\ b$
-	* If I have a relation $a \leq b$ on natural numbers $N$, this means $\{(a,b): a, b \in N \land a \leq b\}$
-	* I can also write $a \leq b = (a,b) \in \ \leq$
-* A relation $R$ on $n$ sets $A_1, A_2, ..., A_n$ is a subset of $A_1 \times A_2 \times ... \times A_n$
-* A relation $R \subseteq A \times A$ is reflexive if each element is in that relation with itself
+* Relations
+	* A binary relation $R$ on two sets $A$ and $B$ is a subset of their cartesian product
+	$$R \subseteq A \times B$$
+	* The relation $(a,b) \in R$ can be written as $a\ R\ b$
+		* If I have a relation $a \leq b$ on natural numbers $N$, this means $\{(a,b): a, b \in N \land a \leq b\}$
+		* I can also write $a \leq b = (a,b) \in \ \leq$
+	* A relation $R$ on $n$ sets $A_1, A_2, ..., A_n$ is a subset of $A_1 \times A_2 \times ... \times A_n$
+* Properties of binary relations
+	* A relation $R \subseteq A \times A$ is reflexive if each element is in that relation with itself
 $$a\ R\ a \quad  \forall\ a \in A$$
-	* $=, \leq, \geq$ are reflexive relations in $N$ but $<, >$ are not
-* A relation is symmetric if it works both ways
+		* $=, \leq, \geq$ are reflexive relations in $N$ but $<, >$ are not
+	* A relation is symmetric if it works both ways
 $$ a\ R\ b \implies b\ R\ a \quad \forall\ a,b \in A$$
-	* $=$ is a symmetric relation in $N$
-* A relation is transitive if 
+		* $=$ is a symmetric relation in $N$
+	* A relation is transitive if 
 $$a\ R\ b \land b\ R\ c \implies a\ R\ c \quad \forall \ a,b,c \in A$$
-	* $=, \leq, \geq, <, >$ are transitive relations in $N$
-* A relation is antisymmetric if symmetry exists only among equal elements
+		* $=, \leq, \geq, <, >$ are transitive relations in $N$
+	* A relation is antisymmetric if symmetry exists only among equal elements
 $$a\ R\ b \land b\ R\ a \implies a = b \quad \forall \ a,b \in A$$
-	* $\leq$ is an antisymmetric relation in $N$
-* A relation that is reflexive, antisymmetric and transitive is said partial order
-* A set in which a partial order is defined is called partially ordered set
-* A partial order $R$ on the set $A$ is a total order if
-$$ \forall\ a,b \in A\qquad a\ R\ b \lor b\ R\ a$$
-
-## Functions
- * A function $f\colon A$, given 2 sets $A$ and $B$ is defined as a subset of their cartesian product such that there is one and only one element of $B$ for each element of $A$ such that their are related by $f$
- $$ f \subseteq A \times B\colon\ \forall\ a \in A\ \exists!\ b \in B\colon\ a,b \in f$$
- 	* $A$ is the domain of $f$, $B$ its codomain
- 	* We can write $f\colon A \to B$ to represent the function
- 	* If $a,b \in f$ we can write $f(a) = b$
- 		* $a$ is called argument of $f$ and $b$ is called image of $a$ under $f$
- * 2 functions are equal if they have the same domain and codomain and their image is equal for every argument
- $$ f = g \iff f\colon A \to B, g\colon A \to B \land f(a)=g(a)\quad \forall\ a \in A$$
- * The range of a function $f(A)$ if a function $f\colon A \to B$ is the set of possible values that it can produce as output
- $$f(A) = \{b \in B\colon b=f(a) \land a \in A\}$$
- * It is different from the codomain since it includes only the values that can actually be taken by the function
- 	* In $f\colon N \to N\colon f(n)=2n$ $N$ is the codomain but the range is represented by only the even numbers in $N$
-* A function is an injection if it maps one-to-one elements in the domain and codomain
-$$f\colon A \to B\colon f(a) = f(b) \implies a = b \quad \forall\ a,b \in A$$
-* A function is a surjection if its range is equal to its codomain (if for each element in the codomain there is an argument that can produce it)
-$$f\colon A \to B\colon \exists\ a\colon f(a) = b\ \forall\ b \in B$$
-* A function is a bijection if it is both a surjection and an injection
-	* For a bijection the inverse function $f^{-1}$ is defined
-	$$f^{-1}(b) = a \iff f(a) = b$$
-
-## Trees
-* A tree is a set of nodes connected by edges such that there is one and only one way to get  to go from one node to another
-* A tree is an acyclic graph
-* A forest is a set containing trees
+		* $\leq$ is an antisymmetric relation in $N$
+	* A relation that is reflexive, antisymmetric and transitive is said partial order
+	* A set in which a partial order is defined is called partially ordered set
+	* A partial order $R$ on the set $A$ is a total order if
+	$$ \forall\ a,b \in A\qquad a\ R\ b \lor b\ R\ a$$
+* Functions
+	 * A function $f\colon A$, given 2 sets $A$ and $B$ is defined as a subset of their cartesian product such that there is one and only one element of $B$ for each element of $A$ such that their are related by $f$
+	 $$ f \subseteq A \times B\colon\ \forall\ a \in A\ \exists!\ b \in B\colon\ a,b \in f$$
+	 	* $A$ is the domain of $f$, $B$ its codomain
+	 	* We can write $f\colon A \to B$ to represent the function
+	 	* If $a,b \in f$ we can write $f(a) = b$
+	 		* $a$ is called argument of $f$ and $b$ is called image of $a$ under $f$
+	 * 2 functions are equal if they have the same domain and codomain and their image is equal for every argument
+	 $$ f = g \iff f\colon A \to B, g\colon A \to B \land f(a)=g(a)\quad \forall\ a \in A$$
+	 * The range of a function $f(A)$ if a function $f\colon A \to B$ is the set of possible values that it can produce as output
+	 $$f(A) = \{b \in B\colon b=f(a) \land a \in A\}$$
+	 * It is different from the codomain since it includes only the values that can actually be taken by the function
+	 	* In $f\colon N \to N\colon f(n)=2n$ $N$ is the codomain but the range is represented by only the even numbers in $N$
+	* A function is an injection if it maps one-to-one elements in the domain and codomain
+	$$f\colon A \to B\colon f(a) = f(b) \implies a = b \quad \forall\ a,b \in A$$
+	* A function is a surjection if its range is equal to its codomain (if for each element in the codomain there is an argument that can produce it)
+	$$f\colon A \to B\colon \exists\ a\colon f(a) = b\ \forall\ b \in B$$
+	* A function is a bijection if it is both a surjection and an injection
+		* For a bijection the inverse function $f^{-1}$ is defined
+		$$f^{-1}(b) = a \iff f(a) = b$$
+* Decision trees
+	* A tree has only one way to go from one node to the other, while a graph can have cycles
+	* A tree is a directed acyclic graph
+* A forest is made of many trees
 * Any non-empty tree with n nodes has n-1 edges
 	* If this is not true, we don't have a tree
 * A tree is rooted if one of its nodes is distinguished as root
 	* It can be defined recursively such that every non-root node of a rooted tree is itself the root of a subtree
-	* The base case of the recursive definition of root is when the subtrees are empty: in this case the current node is a leaf
-* Tree terminology is similar to that of ancestry trees: parents, ancestors, , children, descendant, sibilings
-	* Among the ancestors of a node it is included the node itself
-	* The proper ancestors of a node are its ancenstors minus the node itself
-	* All the ancestors of a node form a path from the node to the root
-* Nodes can be leaves or internal nodes
-	* A leaf is a node whose subtrees are empty
-* The depth of a node is the lenght of the path from it it the root (number of edges)
-* The height of a node is the lenght of the longest path from it to a leaf
+* Tree terminology is similar to that of ancestry trees
+* The depth of a node is its distance from the root (number of edges)
+* The height of a node is the lenght of the longest path to a leaf
 * A binary tree is an order tree with 2 subtrees wich are themselves binary
 
 
