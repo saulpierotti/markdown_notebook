@@ -11,57 +11,6 @@ header-includes:
 
 ---
 
-# Introduction on algorithms
-* The word algorithm comes from the name of the persian scientist Muhammad ibn Musa al-Khwaruzmi
-	* He lived in Uzbekstan and wrote Algoritmi de numero Indorum, wrongly understood as a latin plural
-	* He was also the founder of algebra (from al-jabr, a procedure to solve quadratic equations)
-* First algorithms were written by Babylonian in 1600 BC
-* Study of algorithms dates to Euclid in 300 BC
-* Modern algortihms study started in 1920 and was formalized in 1930 by Turing and Church (matematicians)
-* Many algos were discovered recently also by students
-* An algorithm is a finite series of steps that solves a problem
-* In CS, an algorithm is a well defined computational procedure that takes some inputs, follows a series of steps and eventually produces outputs in order to solve a computational problem
-* Sorting is a common computational problem
-	* The typical input is a series of numbers
-	* The output is a permutation of the input such that $a_i \leq a_{i+1}$
-	* A specific input sequence is an instance of the sorting problem
-* Algorithms are for humans, while a program is for a computer
-* Algorithms are written in pseudocode, which follow specific conventions
-* A problem can be solved by many algorithms
-* An algorithm can be implemented in many different programs
-* Fundamental properties of algorithms
-	* Inputs can be 0 or more
-	* Outputs are always 1 or more
-	* An algorithm should be clearly defined and unanbiguous
-	* It should terminate after a finite number of steps
-	* All operations described must be basic, meaning that they can be solved exactly and in finite time
-* Correct algorithms are necessary to solve computational problems
-* Efficient algorithms are necessary to solve computational problems with the available resources
-* An algorithm is correct if for every input, it halts with the correct output
-* An incorrect algorithm does not halt or halts with incorrect results on at least 1 instance
-	* In some cases they are still useful, if I can control their error rate
-* The correctness of an algorithm is difficult to prove
-	* Showing correctness in one instance is not a guarantee of correctness in every instance
-	* I can prove correctness by testing instances only if the possible number of instances is finite
-* Published algorithms needs to have a mathematical proof of correctness that shows that, for any given valid input, it halts with an output that is a solution for the problem
-* An algorithm without proof is an heuristic procedure that is not guaranteed to be correct
-* Efficiency is related to the ability of an algorithm to be executed with available resources
-* Resources are time and memory
-* CPU time is number of instruction divided by number of istructions per unit time
-	* It is hardware-dependent
-* Running time is the number of primitive operations to be performeda before termination, in proportion to the input size
-	* A primitive operation is an arithmetic operation, data movement, comparison, decision (if)
-* Generally when referring to the time complexity of an algorithm this is measured in running time, not CPU time
-* The algorithm influences time much more than hardware, so we do not focus on hardware
-* Time and memory are bounded resources and must be used wisely
-* The input size is the number of elements in the input
-* A running time $\geq n^2$ is unacceptable for large inputs
-* In a while and for loop, the test is always executed once more than the body
-
-# Introduction on data structures
-* A data structure is a way to store and organise data so to facilitate its access and modification
-* Algorithm efficiency is affected by the choice of data structures
-
 # Math backgroud
 
 ## Sums
@@ -196,6 +145,65 @@ $$f\colon A \to B\colon \exists\ a\colon f(a) = b\ \forall\ b \in B$$
 	* For a bijection the inverse function $f^{-1}$ is defined
 	$$f^{-1}(b) = a \iff f(a) = b$$
 
+# Introduction on algorithms
+* The word algorithm comes from the name of the persian scientist Muhammad ibn Musa al-Khwaruzmi
+	* He lived in Uzbekstan and wrote Algoritmi de numero Indorum, wrongly understood as a latin plural
+	* He was also the founder of algebra (from al-jabr, a procedure to solve quadratic equations)
+* First algorithms were written by Babylonian in 1600 BC
+* Study of algorithms dates to Euclid in 300 BC
+* Modern algortihms study started in 1920 and was formalized in 1930 by Turing and Church (matematicians)
+* Many algos were discovered recently also by students
+* An algorithm is a finite series of steps that solves a problem
+* In CS, an algorithm is a well defined computational procedure that takes some inputs, follows a series of steps and eventually produces outputs in order to solve a computational problem
+* Sorting is a common computational problem
+	* The typical input is a series of numbers
+	* The output is a permutation of the input such that $a_i \leq a_{i+1}$
+	* A specific input sequence is an instance of the sorting problem
+* Algorithms are for humans, while a program is for a computer
+* Algorithms are written in pseudocode, which follow specific conventions
+* A problem can be solved by many algorithms
+* An algorithm can be implemented in many different programs
+* Fundamental properties of algorithms
+	* Inputs can be 0 or more
+	* Outputs are always 1 or more
+	* An algorithm should be clearly defined and unanbiguous
+	* It should terminate after a finite number of steps
+	* All operations described must be basic, meaning that they can be solved exactly and in finite time
+* Correct algorithms are necessary to solve computational problems
+* Efficient algorithms are necessary to solve computational problems with the available resources
+* An algorithm is correct if for every input, it halts with the correct output
+* An incorrect algorithm does not halt or halts with incorrect results on at least 1 instance
+	* In some cases they are still useful, if I can control their error rate
+* The correctness of an algorithm is difficult to prove
+	* Showing correctness in one instance is not a guarantee of correctness in every instance
+	* I can prove correctness by testing instances only if the possible number of instances is finite
+* Published algorithms needs to have a mathematical proof of correctness that shows that, for any given valid input, it halts with an output that is a solution for the problem
+* An algorithm without proof is an heuristic procedure that is not guaranteed to be correct
+* Efficiency is related to the ability of an algorithm to be executed with available resources
+* Resources are time and memory
+* CPU time is number of instruction divided by number of istructions per unit time
+	* It is hardware-dependent
+* Running time is the number of primitive operations to be performeda before termination, in proportion to the input size
+	* A primitive operation is an arithmetic operation, data movement, comparison, decision (if)
+* Generally when referring to the time complexity of an algorithm this is measured in running time, not CPU time
+* The algorithm influences time much more than hardware, so we do not focus on hardware
+* Time and memory are bounded resources and must be used wisely
+* The input size is the number of elements in the input
+* A running time $\geq n^2$ is unacceptable for large inputs
+* In a while and for loop, the test is always executed once more than the body
+
+# Introduction on data structures
+* A data structure is a way to store and organise data so to facilitate its access and modification
+* A data structure is a way to represent and organize data needed to solve a problem
+* Algorithm efficiency is affected by the choice of data structures
+
+## Arrays
+* An array is a data structure consisting of a group of similar elements accessed by indexing
+* They typically have a fixed size that cannot change after their storage has been allocated
+* An array provides direct access to data: $A[i]$ contains the element $a_i$
+* Every array is created empty by declaring its size, and then it is filled by assginment
+* Each location in the array can be accessed and modified in constant time
+
 ## Trees
 * A tree is a set of nodes connected by edges such that there is one and only one way to get  to go from one node to another
 * A tree is an acyclic graph
@@ -213,11 +221,18 @@ $$f\colon A \to B\colon \exists\ a\colon f(a) = b\ \forall\ b \in B$$
 	* A leaf is a node whose subtrees are empty
 * The depth of a node is the lenght of the path from it it the root (number of edges)
 * The height of a node is the lenght of the longest path from it to a leaf
-* A binary tree is an order tree with 2 subtrees wich are themselves binary
-
+* The height of a tree is the height of its root
+* A sub-tree is formed by a node and all of its descendants
+* An ordered tree is a rooted tree  in which the children of each node are ordered according to some criterion
+* A binary tree is an ordered tree which is empty or consists of a root node and 2 sub-trees wich are themselves binary trees
 
 # Pseudocode
-* We start counters from 1 since it is easier to understand
+* Pseudocode is a way of representing an algorithm intended for human reading
+* It has a syntax similar to that of many popular programming languages
+* It provides a compact, semi-formal, high-level description of an algorithm
+* In pseudocode I can omit environment-based details that are not essential to the human understanding the algorithm
+***
+* In our pseudocode we start counters from 1 instead of 0 since it is easier to understand
 * Bold words are reserved words like **return**
 * Variables are always local to the current procedure
 * We can have loops like **while** and **for**
@@ -241,10 +256,13 @@ for i=0 to/downto i=4 (by 3)
 # Sorting
 * Sorting is an intermediate step in many tasks in CS
 * There are many sorting algorithms
+* The input of the sorting problem is a sequence of numbers $<a_1, a_2, ..., a_n>$
+* The numbers in the input are also called keys
+* The output of the sorting problem is a permutation $a_1', a_2', ..., a_n'$ of the input such that $a_1' \leq a_2 \leq...\leq a_n$
 
-# Insertion sort
-* It is like arranging card in order in your hand by picking one at a time
-* I take 1 unsorted object at a time and I insert it in the correct position in the sorted array
+## Insertion sort
+* Intuition: It is like arranging card in order in your hand by picking one at a time and placing it in the right position, by comparing it with all the other cards already in your hand
+	* I take 1 unsorted object at a time and I insert it in the correct position in the sorted array
 	* I compare with all the objects in the sorted array, until I find the right position
 * I start from the first element of the array and I don't do anything
 * I take the second element, and if it is smaller than the first I swap them
