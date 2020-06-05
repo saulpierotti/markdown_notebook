@@ -231,10 +231,19 @@ $$f\colon A \to B\colon \exists\ a\colon f(a) = b\ \forall\ b \in B$$
 * It has a syntax similar to that of many popular programming languages
 * It provides a compact, semi-formal, high-level description of an algorithm
 * In pseudocode I can omit environment-based details that are not essential to the human understanding the algorithm
+* Variables are always local to the given procedure, not global
+* Reserved words with special meaning are written in **bold**
+* **return** trasnfers control back to the point of call and can optionally return a value
+* **error** indicates that an error occurred
+	* There is no need to specify how the error should be handled, since this is managed by the calling procedure
+* You can implement while loops and for loops as
+\begin{algorithmic}
+\While{<condition>}
+	\State statement
+\EndWhile
+\end{algorthmic}
 ***
 * In our pseudocode we start counters from 1 instead of 0 since it is easier to understand
-* Bold words are reserved words like **return**
-* Variables are always local to the current procedure
 * We can have loops like **while** and **for**
 ```
 for i=0 to/downto i=4 (by 3)
