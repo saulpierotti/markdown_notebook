@@ -107,18 +107,46 @@ $$(x \in A \implies x \in B \quad \forall \ x\in A) \iff B \subseteq A$$
 * If $A$ contains all the elements contained in $B$ but $A$ and $B$ are not equal, then $B$ is a proper subset of $A$
 * The universe $U$ is a set including all the possible elements
 $$B \subseteq A \ \land \ A\not=B \iff B \subset A$$
-* Set intersection
-$$A \cap B = \{x:x \in A \land x \in B\}$$
-* Set union
-$$A \cup B = \{x:x \in A \lor x \in B\}$$
-* Set difference
-$$A-B = \{x:x \in A \land x \not\in B\}$$
-* Set complement
-$$A' = U-A \text{ where } A \subseteq U$$
+* Set operations
+	* Set intersection
+	$$A \cap B = \{x:x \in A \land x \in B\}$$
+	* Set union
+	$$A \cup B = \{x:x \in A \lor x \in B\}$$
+	* Set difference
+	$$A-B = \{x:x \in A \land x \not\in B\}$$
+	* Set complement
+	$$A' = U-A \text{ where } A \subseteq U$$
+* Set laws
+	* Empty set laws
+	$$ A \cap \emptyset = \emptyset$$
+	$$ A \cup \emptyset = A$$
+	* Idempotency laws
+	$$ A \cap A = A \cup A = A$$
+	* Commutative laws
+	$$ A \cap B = B \cap A$$
+	$$ A \cup B = B \cup A$$
+	* Associative laws
+	$$ A \cap (B \cap C) = (A \cap B) \cap C$$
+	$$ A \cup (B \cup C) = (A \cup B) \cup C$$
+	* Distributive laws
+	$$ A \cap (B \cup C) = (A \cap B) \cup (A \cap C)$$
+	$$ A \cup (B \cap C) = (A \cup B) \cap (A \cup C)$$
+	* De Morgan's laws
+	$$ (A \cap B)'=A' \cup B'$$
+	$$ (A \cup B)'=A' \cap B'$$
+* Two sets are disjoint if their intersection is the empty set
+* A collection of nonempty sets $S_1, S_2, ..., S_n$ is a partition of the set $S$ if
+	* All the sets $S_1, S_2, ..., S_n$ are pairwise disjoint
+	$$ S_i \cap S_j = \emptyset \qquad \forall \ i,j = 1,2,...,n \qquad i \not= j$$
+	* Their unioun gives S
+	$$ \cup_{S_i \in S} \ S_i = S$$
 * The power set $P(S)$ is the set of all subset of $S$, including the empty set and $S$ itself
-	* $|P(S)| = 2^{|S|}$
+$$|P(S)| = 2^{|S|}$$
 * The cartesian product of 2 sets is a set containing all possible pairs of elements
+$$ A \times B = \{(a,b): a \in A \land b \in B\}$$
+$$ |A \times B| = |A|*|B|$$
 * The cartesian product of n sets is a set of n-tuples
+
 * A tree has only one way to go from one node to the other
 * A graph can have cycles
 * A forest is made of many trees
