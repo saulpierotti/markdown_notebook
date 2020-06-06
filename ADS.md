@@ -165,10 +165,6 @@ $$ \lfloor n/2 \rfloor + \lceil n/2 \rceil = n$$
 * Many algos were discovered recently also by students
 * An algorithm is a finite series of steps that solves a problem
 * In CS, an algorithm is a well defined computational procedure that takes some inputs, follows a series of steps and eventually produces outputs in order to solve a computational problem
-* Sorting is a common computational problem
-	* The typical input is a series of numbers
-	* The output is a permutation of the input such that $a_i \leq a_{i+1}$
-	* A specific input sequence is an instance of the sorting problem
 * Algorithms are for humans, while a program is for a computer
 * Algorithms are written in pseudocode, which follow specific conventions
 * A problem can be solved by many algorithms
@@ -339,7 +335,37 @@ $$f(n) = \Theta(g(n)) \iff f(n) = O(g(n)) \land f(n) = \Omega(g(n))$$
 * A recurrence equation describes a function in terms of its value on a smaller input
 termine a tight bound
 
+### Iteration method
+* I take as an example the following recurrence equation
+$$ T(n) = T(n/2)+c$$
+* I expand the recurrence to look at its structure
+$$T(n)=T(n/2)+c \implies T(n/2)=T(n/4)+c \implies T(n)=T(n/4)+2c$$
+* I imagine to continue this until I get to the base case $T(1)$
+* The base case will occur when the argument of the function is $1$
+* I am halving the input at each recursion, so at recursion call $k$ the size of the input is $2^k$
+* If I start from an original input size $n$, the base case happens when the argument is
+$$n/n=n/2^k=1 \implies k=\log{n}$$
+* So I can solve for $T(n)$ as
+$$T(n)=T(n/2^k)+kc$$
+$$T(n)=c\log{n}+T(n/2^{\log{n}})=c\log{n}+T(1)$$
+* Therefore the running time is
+$$T(n)=\Theta(\log{n})+\Theta(1)=\Theta(\log{n})$$
+
+### Recursion tree method
+* I convert the equation into a tree and sum up the cost of each node for each level
+* I then sum up the cost for all the levels
+* I take as an example the following recurrence equation
+$$ T(n) = T(n/2)+c$$
+$$T(n)=2T(n/2)+n^2$$
+* The root has a cost $n^2$ and 2 children of cost $T(n/2)$ each
+* I continue to expand until the base case
+* This gives us a $O(n^2)$, since I cannot determine a tight bound
+
 # Sorting
+* Sorting is a common computational problem
+	* The typical input is a series of numbers
+	* The output is a permutation of the input such that $a_i \leq a_{i+1}$
+	* A specific input sequence is an instance of the sorting problem
 * Sorting is an intermediate step in many tasks in CS
 * There are many sorting algorithms
 * The input of the sorting problem is a sequence of numbers $<a_1, a_2, ..., a_n>$
