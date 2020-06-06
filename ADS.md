@@ -145,6 +145,16 @@ $$f\colon A \to B\colon \exists\ a\colon f(a) = b\ \forall\ b \in B$$
 	* For a bijection the inverse function $f^{-1}$ is defined
 	$$f^{-1}(b) = a \iff f(a) = b$$
 
+## Floors and ceilings
+* The floor of a number is the greatest integer less than or equal to it
+$$ \lfloor x \rfloor $$
+* The ceiling of a number is the smallest integer greater than or equal to it
+$$ \lceil x \rceil $$
+* For all real numbers $x$
+$$ x-1 < \lfloor x \rfloor \leq x \leq \lceil x \rceil < x+1$$
+* For any integer $n$
+$$ \lfloor n/2 \rfloor + \lceil n/2 \rceil = n$$
+
 # Introduction on algorithms
 * The word algorithm comes from the name of the persian scientist Muhammad ibn Musa al-Khwaruzmi
 	* He lived in Uzbekstan and wrote Algoritmi de numero Indorum, wrongly understood as a latin plural
@@ -299,20 +309,33 @@ $$f\colon A \to B\colon \exists\ a\colon f(a) = b\ \forall\ b \in B$$
 ## Limiting behaviour of functions
 * There are different notations to define the behaviour of functions
 * The $\Theta$ (theta) notation signifies asymptotic equality
-$$ \Theta(g(n))= {f(n): \exists (c_1, c_2 > 0 \land N_0 \geq 0)\colon 0 \leq c_1g(n)\leq f(n) \leq c_2g(n) \forall n \geq n_0}$$
-	* Formally, for a function $f(n)$ having a certain $\Theta$ notation there are 2 constant that multiplied for the $\Theta$ function are constantly greater or smaller than $f(n)$ for $n > n_0$
-		* This is defined as a tight bound
-	* If I say that $f(n) = \Theta(g(n))$ I mean that $f(n)$ belongs to the family of functions with order of growth $g(n)$
+$$ \Theta(g(n))= \{f(n): \exists (c_1, c_2, n_0 > 0)\colon 0 \leq c_1*g(n)\leq f(n) \leq c_2*g(n) \quad \forall \ n \geq n_0\}$$
+	* For a function $f(n)$ having a certain $\Theta$ notation there are 2 constant that multiplied for the $\Theta$ function are constantly greater or smaller than $f(n)$ for $n \geq n_0$
+	* It provides a tight bound
+	* $\Theta(g(n))$ is the set of functions with the same order of growth as $g(n)$
 * The $O$ (big-O) notation indicates an upper bound for the asymptotic behaviour
+$$ O(g(n))= \{f(n): \exists (c, n_0 > 0)\colon 0 \leq f(n) \leq c*g(n) \quad \forall \ n \geq n_0\}$$
 	* The formal definiton is similar to that of $\Theta$, but instead of a tight bound I only search for an upper bound
-		* I only want a constant, not 2!
+	* $O(g(n))$ is the set of functions with the same or smaller order of growth as $g(n)$
+	* It provides an asymptotic upper bound
 * The $\Omega$ (big-Omega) notation indicates a lower bound for the function
-* An important theorem: $f(n) = \Theta(g(n)) \iff f(n) = O(g(n)) \land f(n) = \Omega(g(n))$
+$$ \Omega(g(n))= \{f(n): \exists (c, n_0 > 0)\colon 0 \leq c*g(n) \leq f(n) \quad \forall \ n \geq n_0\}$$
+	* $\Omega(g(n))$ is the set of functions with the same or larger order of growth as $g(n)$
+	* It provides an asymptotic lower bound
+* An important theorem: a $\Theta$ bound implies both a lower and upper bound
+$$f(n) = \Theta(g(n)) \iff f(n) = O(g(n)) \land f(n) = \Omega(g(n))$$
 * The $o$ and $\omega$ (small-O and small-Omega) notation are equivalent to the big-O and big-Omega notations but require a strict inequality ($>, <$) instead of a $\geq, \leq$
+	* They define bounds which are not asymptotically tight
+* If I say that $f(n) = \Theta(g(n))$ I mean that $f(n) \in \Theta(g(n))$, and in the same way for $O$ and $\Omega$ notation
+* When I use one of these notations in an equation, I want to indicate a generic function with that asymptotic behavior
+* In general , there is no unique set of constants that satisfies this notations: It is enough to find 1 set of constants that works
+
+## Limiting behaviour of notable functions
+* Any positive polynomial is faster than a polylogarithmic function
+* The logarithm of a factorial is $\Theta(n\log{n})$
 * Factorials are faster than exponentials, but slower than $n^n$!
 
 ## Recurrence equations
-
 * A recurrence equation describes a function in terms of its value on a smaller input
 termine a tight bound
 
