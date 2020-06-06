@@ -179,24 +179,6 @@ $$f\colon A \to B\colon \exists\ a\colon f(a) = b\ \forall\ b \in B$$
 	* I can prove correctness by testing instances only if the possible number of instances is finite
 * Published algorithms needs to have a mathematical proof of correctness that shows that, for any given valid input, it halts with an output that is a solution for the problem
 * An algorithm without proof is an heuristic procedure that is not guaranteed to be correct
-* Efficiency is related to the ability of an algorithm to be executed with available resources
-* Resources are time and memory
-* CPU time is number of instruction divided by number of istructions per unit time
-	* It is hardware-dependent
-* Running time is the number of primitive operations to be performeda before termination, in proportion to the input size
-	* A primitive operation is an arithmetic operation, data movement, comparison, decision (if)
-* Generally when referring to the time complexity of an algorithm this is measured in running time, not CPU time
-* The algorithm influences time much more than hardware, so we do not focus on hardware
-* Time and memory are bounded resources and must be used wisely
-* The input size is the number of elements in the input
-* A running time $\geq n^2$ is unacceptable for large inputs
-* In a while and for loop, the test is always executed once more than the body
-* Analysing algorithms is useful for predicting the amount of resources required for running them and for selecting the most efficient one
-* We assume that instructions are executed sequentially and that each instructuon is simple and commonly found in real CPU instruction sets
-* One instructuion is assumed to require constant time
-* The running time of an algorithm is the proportionality between the input size and the number of primitive instructions executed
-* Caution note: the test of a loop is always executed once more than the body
-
 
 # Introduction on data structures
 * A data structure is a way to store and organise data so to facilitate its access and modification
@@ -279,6 +261,39 @@ $$f\colon A \to B\colon \exists\ a\colon f(a) = b\ \forall\ b \in B$$
 * Attributes of objects are indicated as `object_name.attribute`
 	* The lenght of an array can be indicated as `A.lenght`
 
+# Algorithm analysis
+* Efficiency is related to the ability of an algorithm to be executed with available resources
+* Resources are time and memory
+* CPU time is number of instruction divided by number of istructions per unit time
+	* It is hardware-dependent
+* Running time is the number of primitive operations to be performeda before termination, in proportion to the input size
+	* A primitive operation is an arithmetic operation, data movement, comparison, decision (if)
+* Generally when referring to the time complexity of an algorithm this is measured in running time, not CPU time
+* The algorithm influences time much more than hardware, so we do not focus on hardware
+* Time and memory are bounded resources and must be used wisely
+* The input size is the number of elements in the input
+* A running time $\geq n^2$ is unacceptable for large inputs
+* In a while and for loop, the test is always executed once more than the body
+* Analysing algorithms is useful for predicting the amount of resources required for running them and for selecting the most efficient one
+* We assume that instructions are executed sequentially and that each instructuon is simple and commonly found in real CPU instruction sets
+* One instructuion is assumed to require constant time
+* The running time of an algorithm is the proportionality between the input size and the number of primitive instructions executed
+* Caution note: the test of a loop is always executed once more than the body
+
+# Order of growth
+* In running time analyses we can ignore constants, since we are interested in the asymptotic behaviour of the algorithm
+* I can focus only on the leading term, since the others are relatively insignificant
+
+# Algorithm design approaches
+* Incremental approach: add one element at a time
+* Divide and conquer: divide into subproblems, solve them and combine their solutions
+	* It is inspired by the political control tactique of making your enemies fight against each other for controlling them
+	* The divide step involves dividing the problem in sub-problems of smaller size
+	* The conquer step involves solving the sub-problems recursively
+		* If the sub-problem is too big I break it into sub-sub-problems
+		* If it is small enough I solve it directly
+	* The combine step uses the solutions of the elementary problems to give a solution of the original problem
+
 # Sorting
 * Sorting is an intermediate step in many tasks in CS
 * There are many sorting algorithms
@@ -328,14 +343,18 @@ $$f\colon A \to B\colon \exists\ a\colon f(a) = b\ \forall\ b \in B$$
 * In the best case, the array is already sorted
 	* I never enter the **while** at each iteration of the **for**
 	* This means that $t_j=1$, I only do the test
-	* The time is linear: $T(n)=n+3(n-1)+(n-1)+2*0$
+	* The time is linear: $T(n)=n+3(n-1)+(n-1)+2*0=\Theta(n)$
 	* Nearly sorted numbers can be sorted fast with insertion sort
 * In the worst case the array is in reverse sorted order
 	* For each iteration of the for loop, I iterate the while loop on all the elements
-	* The time is quadratic
-* Average case analysis is really difficult to do, therefore we prefer to focus on the worst case
+	* The time is quadratic ($\Theta(n^2)$)
+* Average case analysis is really difficult to do (it is probabilistic), therefore we prefer to focus on the worst case
+	* The worst case provides an upper bound for the running time
+	* For some algorithms, the worst case occurs frequently
+	* The average case can be as bad as the worst case
 * For almost sorted sequences the running time of insertion-sort is almost linear: good when this is the case
 * For unsorted array I go towards quadratic time: there are better alternatives
+* Time is quadratic also in the average case
 * Insertion-sort can operate online: it can sort sequences as they arrive
 
 # Merge sort
