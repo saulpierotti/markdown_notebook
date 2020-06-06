@@ -290,8 +290,8 @@ $$f\colon A \to B\colon \exists\ a\colon f(a) = b\ \forall\ b \in B$$
 	* It is inspired by the political control tactique of making your enemies fight against each other for controlling them
 	* The divide step involves dividing the problem in sub-problems of smaller size
 	* The conquer step involves solving the sub-problems recursively
-		* If the sub-problem is too big I break it into sub-sub-problems
-		* If it is small enough I solve it directly
+		* If the sub-problem is too big I break it into sub-sub-problems (recursive case)
+		* If it is small enough I solve it directly (base case)
 	* The combine step uses the solutions of the elementary problems to give a solution of the original problem
 
 # Sorting
@@ -316,15 +316,15 @@ $$f\colon A \to B\colon \exists\ a\colon f(a) = b\ \forall\ b \in B$$
 
 \begin{algorithmic}
 \Statex
-\Procedure{INSERTION-SORT}{A}
-	\For{j = 2 to A.lenght}
-		\State key = A[j]
-		\State // Insert A[j] into the sorted sequence A[1...j-1]
-		\State i = j-1
-		\While{i > 0 and A[i] > key}
-			\State A[i+1] = A[i]
+\Procedure{INSERTION-SORT}{$A$}
+	\For{$j = 2$ to $A.lenght$}
+		\State $key = A[j]$
+		\State $i = j-1$
+		\While{$i > 0$ and $A[i] > key$}
+		\Comment{Insert $A[j]$ into the sorted sequence $A[1...j-1]$}
+			\State $A[i+1] = A[i]$
 		\EndWhile
-		\State A[i+1] = key
+		\State $A[i+1] = key$
 	\EndFor
 \EndProcedure
 \Statex
@@ -357,20 +357,76 @@ $$f\colon A \to B\colon \exists\ a\colon f(a) = b\ \forall\ b \in B$$
 * Time is quadratic also in the average case
 * Insertion-sort can operate online: it can sort sequences as they arrive
 
-# Merge sort
-* It is a divide and conquer algorithm
-	* Divide a problem in subproblems of smaller size
-	* Solve the subproblems recursivley (conquer)
-	* Combine the solution to solve the original problem
-	* When subproblems are too big to be solved directly we are in the recursive case
-	* When subproblems can be solved directlyu we are in the base case
-* The complicated part is the merging process
+# Merge-sort
+* Merge-sort is a divide and conquer algorithm for sorting
+	* I divide the input array of $n$ elements in 2 sub-sequences of $n/2$ elements each
+	* I sort the sub-sequences recursively
+	* When the sub-sequence has just 1 element I am in the base case
+	* A sub-sequence of 1 element is always sorted
+	* I combine the sub-sequences to produce the sorted sequence
+* Idea of the combine step
+	* I need to combine 2 sorted sub-sequences
+	* The first element of each sub-sequence is the smallest of that sub-sequence
+	* I take the respective first elements of the 2 sub-sequences and compare them
+	* I select the smallest of the 2 and put it as first element in the output
+	* I proceed with what is now the first element of the 2 sub-sequences and repeat
+	* When one of the 2 sub-sequences is empty I put in order all the remaining elements of the remaining sub-sequence to the end of the output array
+		* I can imagine as if at the end of both sub-sequences there is an $\infty$, so that always the other sub-sequence will be added when I reach it
+	* The output array is sorted
+* Implementation of merging
+	* I actually use always only the original array but I maintain 3 indexes to separate diferent zones of it
+	* The indexes are $p,q,r$ such that $p\leq q \leq r$ always holds
+	* The indexes split the array $A$ into 2 sub-arrays $A[p...q]$ and $A[q+1...r]$
+	* The sub arrays $A[p...q]$ and $A[q+1...r]$ are always sorted
+	* The output is one sorted sub-array $A[p...r]$
+
+\begin{algorithmic}
+\Statex
+\Procedure{MERGE}{$A,p,q,r$}
+	\State $n_1 = q - p + 1$ \Comment{lenght of sub-array 1}
+	\State $n_2 = r - q$ \Comment{lenght of sub-array 2}
+	\State let $L[1...n_1+1]$ and $R[1...n_2+1]$ be new arrays \Comment{I do $+1$ at the end since add $\infty$ at the end}
+	\For{$i = 1$ to $n_1$} \Comment{copying $A[p...q]$ to $L$}
+		\State $L[i] = A[p+i-1]$
+	\EndFor
+	\For{$j = 1$ to $n_2$} \Comment{copying $A[q+1...r]$ to $R$}
+		\State $R[i] = A[q+j]$
+	\EndFor
+	\State $L[n_1+1] = \infty$
+	\State $R[n_2+1] = \infty$
+	\State $i = 1$
+	\State $j = 1$
+	\For{$k = p$ to $r$} \Comment{go through all positions in both sub-arrays}
+		\If{$L[i] \leq R[j]$} \Comment{add an element from $L$ to the output}
+			\State $A[k] = L[i]$
+			\State $i = i + 1$
+		\Else \Comment{add an element from $R$ to the output}
+			\State $A[k] = R[j]$
+			\State $j = j + 1$
+		\EndIf
+	\EndFor
+\EndProcedure
+
+\Statex
+\Procedure{MERGE-SORT}{$A,p,r$}
+	\If{$p < r$} \Comment{if false $p==r$ so I am in the base case}
+		\State $q = \lfloor(p+r)/2 \rfloor$ \Comment{divide}
+		\State \Call{MERGE-SORT}{$A,p,q$} \Comment{conquer sub-array 1}
+		\State \Call{MERGE-SORT}{$A,q+1,r$} \Comment{conquer sub-array 2}
+		\State \Call{MERGE}{$A,p,q,r$} \Comment{combine}
+	\EndIf
+\EndProcedure
+
+\Statex
+\State \Call{MERGE-SORT}{$A,1,A.lenght$} \Comment{initial call with $p=1,r=A.lenght$}
+\Statex
+\end{algorithmic}
+
+* The complicated part of merge-sort is the combine step
 * It runs always as n*log(n), there is not worst or best case
 * It requires a lot of memory to store all the sub-arrays
 * It is worse than insertion sort in the best case, but better in most cases
 * It cannot work online (!)
-
-**Idea**
 
 * I want to sort the array A
 * I split the array using the indeces p,q,r such that $p <= q < r$
@@ -386,37 +442,6 @@ $$f\colon A \to B\colon \exists\ a\colon f(a) = b\ \forall\ b \in B$$
 		* This is so that when I finish the elements of an array, whatever remains in the other is smaller and so it is inserted in the output
 
 
-**Pseudocode**
-
-```pascal
-MERGESORT(A,p,r)
-	if p < r
-		q = (p+r)/2
-		MERGESORT(A,p,q)
-		MERGESORT(A,q+1,r)
-		MERGE(A,p,q,r)
-
-MERGE(A,p,q,r)
-	n1 = q - p + 1
-	n2 = r - q
-	for i = 1 to n1
-		L[i] = A[p+i-1]
-	for j = 1 to n2
-		R[i] = A[q+j]
-	L[n1+1] = \infty
-	R[n2+1] = \infty
-	i = 1
-	j = 1
-	for k = p to r
-		if L[i] <= R[j]
-			A[k] = L[i]
-			i += 1
-		else A[k] = R[j]
-			j += 1
-
-
-MERGESORT(A,1,A.lenght)
-```
 
 **Running time**
 
