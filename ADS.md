@@ -261,6 +261,17 @@ $$f\colon A \to B\colon \exists\ a\colon f(a) = b\ \forall\ b \in B$$
 * Attributes of objects are indicated as `object_name.attribute`
 	* The lenght of an array can be indicated as `A.lenght`
 
+# Algorithm design approaches
+* Incremental approach: add one element at a time
+* Divide and conquer: divide into subproblems, solve them and combine their solutions
+	* It is inspired by the political control tactique of making your enemies fight against each other for controlling them
+	* The divide step involves dividing the problem in sub-problems of smaller size
+	* The conquer step involves solving the sub-problems recursively
+		* If the sub-problem is too big I break it into sub-sub-problems (recursive case)
+		* If it is small enough I solve it directly (base case)
+	* The combine step uses the solutions of the elementary problems to give a solution of the original problem
+
+
 # Algorithm analysis
 * Efficiency is related to the ability of an algorithm to be executed with available resources
 * Resources are time and memory
@@ -280,19 +291,30 @@ $$f\colon A \to B\colon \exists\ a\colon f(a) = b\ \forall\ b \in B$$
 * The running time of an algorithm is the proportionality between the input size and the number of primitive instructions executed
 * Caution note: the test of a loop is always executed once more than the body
 
-# Order of growth
+## Order of growth
 * In running time analyses we can ignore constants, since we are interested in the asymptotic behaviour of the algorithm
 * I can focus only on the leading term, since the others are relatively insignificant
+* In general I am interested in the limiting behaviour of the algorithm as the input size increases
 
-# Algorithm design approaches
-* Incremental approach: add one element at a time
-* Divide and conquer: divide into subproblems, solve them and combine their solutions
-	* It is inspired by the political control tactique of making your enemies fight against each other for controlling them
-	* The divide step involves dividing the problem in sub-problems of smaller size
-	* The conquer step involves solving the sub-problems recursively
-		* If the sub-problem is too big I break it into sub-sub-problems (recursive case)
-		* If it is small enough I solve it directly (base case)
-	* The combine step uses the solutions of the elementary problems to give a solution of the original problem
+## Limiting behaviour of functions
+* There are different notations to define the behaviour of functions
+* The $\Theta$ (theta) notation signifies asymptotic equality
+$$ \Theta(g(n))= {f(n): \exists (c_1, c_2 > 0 \land N_0 \geq 0)\colon 0 \leq c_1g(n)\leq f(n) \leq c_2g(n) \forall n \geq n_0}$$
+	* Formally, for a function $f(n)$ having a certain $\Theta$ notation there are 2 constant that multiplied for the $\Theta$ function are constantly greater or smaller than $f(n)$ for $n > n_0$
+		* This is defined as a tight bound
+	* If I say that $f(n) = \Theta(g(n))$ I mean that $f(n)$ belongs to the family of functions with order of growth $g(n)$
+* The $O$ (big-O) notation indicates an upper bound for the asymptotic behaviour
+	* The formal definiton is similar to that of $\Theta$, but instead of a tight bound I only search for an upper bound
+		* I only want a constant, not 2!
+* The $\Omega$ (big-Omega) notation indicates a lower bound for the function
+* An important theorem: $f(n) = \Theta(g(n)) \iff f(n) = O(g(n)) \land f(n) = \Omega(g(n))$
+* The $o$ and $\omega$ (small-O and small-Omega) notation are equivalent to the big-O and big-Omega notations but require a strict inequality ($>, <$) instead of a $\geq, \leq$
+* Factorials are faster than exponentials, but slower than $n^n$!
+
+## Recurrence equations
+
+* A recurrence equation describes a function in terms of its value on a smaller input
+termine a tight bound
 
 # Sorting
 * Sorting is an intermediate step in many tasks in CS
@@ -356,6 +378,7 @@ $$f\colon A \to B\colon \exists\ a\colon f(a) = b\ \forall\ b \in B$$
 * For unsorted array I go towards quadratic time: there are better alternatives
 * Time is quadratic also in the average case
 * Insertion-sort can operate online: it can sort sequences as they arrive
+* Typical application: keep a dynamic file sorted when adding elements to it and sorting almost-sorted files
 
 # Merge-sort
 * Merge-sort is a divide and conquer algorithm for sorting
@@ -371,14 +394,22 @@ $$f\colon A \to B\colon \exists\ a\colon f(a) = b\ \forall\ b \in B$$
 	* I select the smallest of the 2 and put it as first element in the output
 	* I proceed with what is now the first element of the 2 sub-sequences and repeat
 	* When one of the 2 sub-sequences is empty I put in order all the remaining elements of the remaining sub-sequence to the end of the output array
-		* I can imagine as if at the end of both sub-sequences there is an $\infty$, so that always the other sub-sequence will be added when I reach it
 	* The output array is sorted
 * Implementation of merging
 	* I actually use always only the original array but I maintain 3 indexes to separate diferent zones of it
 	* The indexes are $p,q,r$ such that $p\leq q \leq r$ always holds
 	* The indexes split the array $A$ into 2 sub-arrays $A[p...q]$ and $A[q+1...r]$
-	* The sub arrays $A[p...q]$ and $A[q+1...r]$ are always sorted
-	* The output is one sorted sub-array $A[p...r]$
+	* I check that I am not in the base case ($p==r$)
+		* I sort recursively the 2 sub-arrays by calling again merge-sort 2 times with $(p=p, r=q)$ and $(p=q+1, r=r)$
+		* After the 2 recursive calls return I have 2 sorted sub-arrays to merge, $A[p...q]$ and $A[q+1...r]$
+		* I copy them to the new arrays $L$ and $R$
+		* I add at the end of both $L$ and $R$ an $\infty$, so that always the other sub-sequence will be added when I reach the end of one sequence
+		* I compare the first element of $L$ and $R$, and I place the smallest in the first position of the output array $A$
+		* I continue with the second smallest and place it in the second position of $A$ and so on
+		* When $L$ or $R$ finish, there is the $\infty$ remaining so all the comparison to it will return that the other sub-sequence has a smaller element
+		* When both sequence finish I stop the comparison and return control to the calling procedure: now $A[p...r]$ is sorted (for the $p,r$ used in the current recursive call)
+	* If I am in the base case I do not do anything: the sub-arrays are sorted
+	* The output is one sorted array input array
 
 \begin{algorithmic}
 \Statex
@@ -422,78 +453,28 @@ $$f\colon A \to B\colon \exists\ a\colon f(a) = b\ \forall\ b \in B$$
 \Statex
 \end{algorithmic}
 
+* Running time of merge-sort
+$$ T(n) = 2T(n/2)+T_{merge}(n)+c$$
+	* I perform 2 costant time operations at each call
+	* I have 2 recursive calls on an input of $n/2$ size
+	* I have 1 merge call on an input of size $n$
+* Running time of merge
+	* I perform 8 constant time operation
+	* I have 2 for loops which are executed $n/2$ times each, so together they take $\Theta(n)$ time
+	* The last for loop is executed $n$ times
+		* It always consists of 3 constant operations plus the initial test
+	* The total time is $T_{merge}(n)=2(n/2)+n+c=\Theta(n)$
+* The recurrence equation
+$$T(n)=\begin{cases}\Theta(1) & \text{if } n=1 \\ 2T(n/2)+n & \text{if } n>1 \end{cases}$$
+
+* It runs always as $\Theta(n\log{n})$, there is not worst or best case
+* The advantage of merge-sort is that its running time is guaranteed
+	* It is worse than insertion sort in the insertion-sort best case, but better in most cases
+* The disadvantage is that it requires extra space and cannot work online
+	* Merge-sort cannot work online, since I need the whole input array at the first step
+	* It requires a lot of memory to store all the sub-arrays
+* Typical application: sort a huge randomly ordered data file
 * The complicated part of merge-sort is the combine step
-* It runs always as n*log(n), there is not worst or best case
-* It requires a lot of memory to store all the sub-arrays
-* It is worse than insertion sort in the best case, but better in most cases
-* It cannot work online (!)
-
-* I want to sort the array A
-* I split the array using the indeces p,q,r such that $p <= q < r$
-* I want to produce a single sorted subarray
-* I call initially on A with p=1 and r=A.lenght
-* The index q is the one that best splits the array in 2
-* For merging I always have sorted arrays to merge
-	* The first element of each array is guaranteed to be the smallest one of the entire array
-	* I compare the first element of the 2 arrays to be merged, and I put the smallest in the output array
-	* I repeat until one of the arrays is empty
-	* I finsih by putting what remains of the other array in the output
-	* I put an immaginary infinite at the end of any array
-		* This is so that when I finish the elements of an array, whatever remains in the other is smaller and so it is inserted in the output
-
-
-
-**Running time**
-
-* MERGE
-	* Copying the elements into the subarrays takes $\Theta(n)$
-	* Adding elements to the final array takes n iterations of that themselves take constant time
-		* $\Theta(n)$
-	* In total, the merging takes $\Theta(n)$
-* MERGE-SORT
-	* Let T(n) be the unknown running time of MERGE-SORT
-	* Calculating q: $\Theta(1)$
-	* Solve recursively 2 subproblems of size n/2: 2T(n/2)
-	* Call to MERGE: $\Theta(n)$
-	* So, $T(n) = \begin{cases}\Theta(1) & \mbox{if } n=1\\2T(n/2)+\Theta(1)+\Theta(n) & \mbox{if } n>1\end{cases}$
-	* The recursive equation can be solved and we find that $T(n) = \Theta(n\log{n})$
-
-# Limiting behaviour of functions
-* There are different notations to define the behaviour of functions
-* The $\Theta$ (theta) notation signifies asymptotic equality
-	* Formally, for a function $f(n)$ having a certain $\Theta$ notation there are 2 constant that multiplied for the $\Theta$ function are constantly greater or smaller than $f(n)$ for $n > n_0$
-		* This is defined as a tight bound
-	* If I say that $f(n) = \Theta(g(n))$ I mean that $f(n)$ belongs to the family of functions with order of growth $g(n)$
-* The $O$ (big-O) notation indicates an upper bound for the asymptotic behaviour
-	* The formal definiton is similar to that of $\Theta$, but instead of a tight bound I only search for an upper bound
-		* I only want a constant, not 2 (!)
-* The $\Omega$ (big-Omega) notation indicates a lower bound for the function
-* An important theorem: $f(n) = \Theta(g(n)) \iff f(n) = O(g(n)) \land f(n) = \Omega(g(n))$
-* Factorials are faster than exponentials, but slower than $n^n$ (!)
-
-# Recurrence equations
-* A recurrence equation describes a function in terms of its value on a smaller input
-* An example: analysis of a divide and conquer algorithm
-	* $T(n)$ is the running time of the algorithm on input n
-	* Dividing takes $D(n)=\Theta(1)$ time
-	* Conquer takes the same $T$ on a smaller input, so $aT(n/b)$
-		* I need to solve $a$ subproblems in with an inpuit size reduced of a factor $b$
-	* Combining the solutions takes $C(n)=\Theta(n)$ time
-	* So we have that $T(n) = \begin{cases} c & n = 1 \\2T(n/2)+c+cn & n>1 \end{cases}$
-* Solving recurrence equations: the iteration method
-	* If I have $T(n)=T(n/2)+c \implies T(n/2)=T(n/4)+c$ and so on
-	* This implies that $T(n)=c+c+T(n/4)$
-	* If I continue this until I get to the base case $T(1)$
-	* I can write therefore $T(n)=c*k+T(n/2^k)$
-	* The base case will be when $n=2^k$ and therefore $k=\log{n}$
-	* So I get that $T(n)=c*\log{n}+T(n/2^{\log{n}})=c*\log{n}+T(1)$
-	* This means that $T(n)=\Theta(\log{n})$
-* Solving recurrence equations: the recursion tree method
-	* I convert the equation into a tree and sum up the cost of each node
-	* Let's try with $T(n)=2T(n/2)+n^2$
-	* The root has a cost $n^2$ and 2 children of cost $T(n/2)$ each
-	* I continue to expand until the base case
-	* This gives us a $O(n^2)$, since I cannot determine a tight bound
 
 # Heapsort
 * Normally, the numbers to be sorted are a key that is paired to other data, forming a record
