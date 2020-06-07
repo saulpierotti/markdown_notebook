@@ -191,56 +191,6 @@ $$ \lfloor n/2 \rfloor + \lceil n/2 \rceil = n$$
 * A data structure is a way to represent and organize data needed to solve a problem
 * Algorithm efficiency is affected by the choice of data structures
 
-## Arrays
-* An array is a data structure consisting of a group of similar elements accessed by indexing
-* They typically have a fixed size that cannot change after their storage has been allocated
-* An array provides direct access to data: $A[i]$ contains the element $a_i$
-* Every array is created empty by declaring its size, and then it is filled by assginment
-* Each location in the array can be accessed and modified in constant time
-
-## Trees
-* A tree is a set of nodes connected by edges such that there is one and only one way to get  to go from one node to another
-* A tree is an acyclic graph
-* A forest is a set containing trees
-* Any non-empty tree with n nodes has n-1 edges
-	* If this is not true, we don't have a tree
-* A tree is rooted if one of its nodes is distinguished as root
-	* It can be defined recursively such that every non-root node of a rooted tree is itself the root of a subtree
-	* The base case of the recursive definition of root is when the subtrees are empty: in this case the current node is a leaf
-* Tree terminology is similar to that of ancestry trees: parents, ancestors, , children, descendant, sibilings
-	* Among the ancestors of a node it is included the node itself
-	* The proper ancestors of a node are its ancenstors minus the node itself
-	* All the ancestors of a node form a path from the node to the root
-* Nodes can be leaves or internal nodes
-	* A leaf is a node whose subtrees are empty
-* The depth of a node is the lenght of the path from it it the root (number of edges)
-* The height of a node is the lenght of the longest path from it to a leaf
-* The height of a tree is the height of its root
-* A sub-tree is formed by a node and all of its descendants
-* An ordered tree is a rooted tree  in which the children of each node are ordered according to some criterion
-* A binary tree is an ordered tree which is empty or consists of a root node and 2 sub-trees wich are themselves binary trees
-* A full binary tree is a binary tree in which each node is either a leaf or it has degree exactly 2
-* A complete binary tree is a full binary tree in which all leaves have the same depth and all the internal nodes have exactly degree 2
-
-## Heaps
-* An heap is a nearly complete binary tree
-	* All nodes of an heap are binary except for possibly the last level
-	* If the last level is not full, it is filled always from left to righ
-* An heap follows the heap property: the key of a parent must always be greter that that of its children
-$$ Parent(i) \geq i \quad \forall i$$
-	* This is a max heap, there are also min heaps where the property is opposite
-	* The size of an heap is the number of nodes it contains
-* We can represent an heap with an array
-	* The first element is the root
-	* The children of the root are the second and third element
-	* The fourth and fifth element are the children of the second, and so on
-	* The children of node $A[i]$ are nodes $A[2i]$ and $A[2i+1]$
-	* The parent of A[i] is $A[\lfloor i/2 \rfloor]$
-* The maximum element of an heap is always the root
-
-## Priority queues
-* A priority queue is a data structure that implements an heap
-
 # Pseudocode
 * Pseudocode is a way of representing an algorithm intended for human reading
 * It has a syntax similar to that of many popular programming languages
@@ -298,7 +248,6 @@ $$ Parent(i) \geq i \quad \forall i$$
 		* If it is small enough I solve it directly (base case)
 	* The combine step uses the solutions of the elementary problems to give a solution of the original problem
 
-
 # Algorithm analysis
 * Efficiency is related to the ability of an algorithm to be executed with available resources
 * Resources are time and memory
@@ -347,7 +296,7 @@ $$f(n) = \Theta(g(n)) \iff f(n) = O(g(n)) \land f(n) = \Omega(g(n))$$
 * When I use one of these notations in an equation, I want to indicate a generic function with that asymptotic behavior
 * In general , there is no unique set of constants that satisfies this notations: It is enough to find 1 set of constants that works
 
-## Limiting behaviour of notable functions
+### Limiting behaviour of notable functions
 * Any positive polynomial is faster than a polylogarithmic function
 * The logarithm of a factorial is $\Theta(n\log{n})$
 * Factorials are faster than exponentials, but slower than $n^n$!
@@ -391,7 +340,145 @@ $$T(n/2^{\log_2{n}})=2^{\log_2{n}}T(n/\log_2{n})^2=2^{\log_2{n}}T(1)^2=2^{\log_2
 * So the total cost will be
 $$T(n)=\sum_{i=0}^{\log_2{n}-1}(\frac{n}{2^i})^2+2^{\log_2{n}}T(1)=n^2\sum_{i=0}^{\log_2{n}-1}(\frac{1}{2})^{2i}+O(n) \leq n^2 \sum_{i=0}^\infty (\frac{1}{2})^{2i}+O(n)= O(n^2)$$
 
-# Sorting
+# Basic data structures
+
+## Arrays
+* An array is a data structure consisting of a group of similar elements accessed by indexing
+* They typically have a fixed size that cannot change after their storage has been allocated
+* An array provides direct access to data: $A[i]$ contains the element $a_i$
+* Every array is created empty by declaring its size, and then it is filled by assginment
+* Each location in the array can be accessed and modified in constant time
+
+## Trees
+* A tree is a set of nodes connected by edges such that there is one and only one way to get  to go from one node to another
+* A tree is an acyclic graph
+* A forest is a set containing trees
+* Any non-empty tree with n nodes has n-1 edges
+	* If this is not true, we don't have a tree
+* A tree is rooted if one of its nodes is distinguished as root
+	* It can be defined recursively such that every non-root node of a rooted tree is itself the root of a subtree
+	* The base case of the recursive definition of root is when the subtrees are empty: in this case the current node is a leaf
+* Tree terminology is similar to that of ancestry trees: parents, ancestors, , children, descendant, sibilings
+	* Among the ancestors of a node it is included the node itself
+	* The proper ancestors of a node are its ancenstors minus the node itself
+	* All the ancestors of a node form a path from the node to the root
+* Nodes can be leaves or internal nodes
+	* A leaf is a node whose subtrees are empty
+* The depth of a node is the lenght of the path from it it the root (number of edges)
+* The height of a node is the lenght of the longest path from it to a leaf
+* The height of a tree is the height of its root
+* A sub-tree is formed by a node and all of its descendants
+* An ordered tree is a rooted tree  in which the children of each node are ordered according to some criterion
+* A binary tree is an ordered tree which is empty or consists of a root node and 2 sub-trees wich are themselves binary trees
+* A full binary tree is a binary tree in which each node is either a leaf or it has degree exactly 2
+* A complete binary tree is a full binary tree in which all leaves have the same depth and all the internal nodes have exactly degree 2
+
+## Heaps
+* An heap is a nearly complete binary tree with peculiar properties
+* Structural property: all nodes of an heap are binary except for possibly the last level, that is filled always from left to righ
+* Heap property: the key of a parent must always be greter that that of its children (except for the root, that has no parent)
+$$ Parent(i) \geq i \quad \forall i$$
+	* This is a max heap, there are also min heaps where the property is opposite
+	* The maximum element of an heap is always the root
+* The size of an heap is the number of nodes it contains
+* The heigh of an heap of size $n$ is $\lfloor \log{n} \rfloor$
+	* I use the floor and not the ceiling since the root has level 0
+* We can represent an heap with an array
+	* The first element is the root
+	* The children of the root are the second and third element
+	* The fourth and fifth element are the children of the second, and so on
+* The children of node $A[i]$ are nodes $A[2i]$ (left child) and $A[2i+1]$ (right child)
+* The parent of $A[i]$ is $A[\lfloor i/2 \rfloor]$
+* It always holds that the size of an heap is smaller or equal to the lenght of the array in which it is contained
+$$ A.heapsize \leq A.lenght$$
+* Leaves are all the elements in the sub-array $A[(\lfloor n/2 \rfloor+1)...n]$
+
+### Fundamental heap operations
+* These operations return fundamental feautures of an heap, like the values stored in the children and parent of the current node
+
+\begin{algorithmic}
+\Statex
+\Procedure{LEFT}{$i$}
+	\State \Return{$2i$}
+\EndProcedure
+
+\Statex
+\Procedure{RIGHT}{$i$}
+	\State \Return{$2i+1$}
+\EndProcedure
+
+\Statex
+\Procedure{PARENT}{i}
+	\State \Return{$\lfloor i/2 \rfloor$}
+\EndProcedure
+\Statex
+\end{algorithmic}
+
+* max-heapify maintains the heap property when new elements are added to it
+* I assume that there is always at most 1 heap violation after I add 1 element to the heap
+	* I am assuming that the sub-trees rooted in the children are max-heaps
+	* Both children can never be bigger that their parent!
+* I recursively explore the heap
+* If I find a parent that has a smaller key than one of its children, I swap them
+* This could generate a new heap violation down the tree
+* I continue swapping until no violations are left
+
+\begin{algorithmic}
+\Statex
+\Procedure{MAX-HEAPIFY}{$A,i$}
+	\State $l =$ \Call{LEFT}{$i$}
+	\State $r =$ \Call{RIGHT}{$i$}
+	\If{$l \leq A.heapsize$ and $A[l] > A[i]$} \Comment{if the heap did not finish}
+		\State $largest=l$ \Comment{the left child is larger than the parent}
+	\Else
+		\State $largest = i$ \Comment{the parent is larger than the child}
+	\EndIf
+	\If{$r \leq A.heapsize$ and $A[r] > A[largest]$}
+		\State $largest=r$ \Comment{the right child is larger than the parent}
+	\EndIf
+	\If{$largest \not= i$} \Comment{the parent is not largest element}
+		\State exchange $A[i]$ with $A[largest]$
+		\State \Call{MAX-HEAPIFY}{$A.largest$} \Comment{recursive call on the child who violated the heap-property}
+	\EndIf
+\EndProcedure
+\Statex
+\end{algorithmic}
+
+* Since an heap has $\log{n}$ levels and I do constant work at each level (there are no loops and at most 1 recursive call), max-heapify has $O(\log{n})$ running time
+* Equivalently, I can say that the running time of max-heapify is linear on the height of the heap $h$ (it is $O(h)$)
+	* This is because $h=\lfloor \log{n} \rfloor$
+
+\begin{algorithmic}
+\Statex
+\Procedure{BUILD-MAX-HEAP}{i}
+	\State \Return{$\lfloor i/2 \rfloor$}
+\EndProcedure
+
+\end{algorithmic}
+
+* build-max-heap converts an array $A[1...n]$ to a max-heap of size $n=A.lenght$
+* Since the element
+
+
+```pascal
+MAX-HEAPIFY(A,i)
+	l, r = LEFT(i), RIGHT(i)
+	if l <= A.heap-size and A[l]>A[i]
+		largest = l
+	else largest = i
+	if r <= A.heap-size and A[r]>A[i]
+		largest = r
+	else largest = i
+	if largest != i
+		exchange A[i] and A[largest]
+		MAX-HEAPIFY(A,largest)
+```
+
+## Priority queues
+* A priority queue is a data structure that implements an heap
+
+
+# Basic sorting algorithms
 * Sorting is a common computational problem
 	* The typical input is a series of numbers
 	* The output is a permutation of the input such that $a_i \leq a_{i+1}$
@@ -565,43 +652,9 @@ $$T(n)=\begin{cases}\Theta(1) & \text{if } n=1 \\ 2T(n/2)+n & \text{if } n>1 \en
 
 # Heap-sort
 * Heap-sort is another sorting algorithm running in $O(n\log{n})$ (like merge-sort)
-* It is able to sort in place
-* It uses an heap as data structure
-* Its running time is $\Theta n \log{n}$ and it sorts in place like insertion-sort
-* We can define 3 basic functions that return the index of the left child, right child and parent of element with index i in an heap
+* It is able to sort in place and it uses an heap as data structure
+* Many of the sub-routines used are the ones reported to work in general with heaps
 
-```pascal
-LEFT(i)
-	return 2i
-
-
-RIGHT(i)
-	return 2i+1
-
-
-PARENT(i)
-	return floor(i/2)
-```
-
-* How to maintain the max heap property (MAX-HEAPIFY)
-	* I recursively explore the tree
-	* If I find a parent smaller than its child, I swap them and continue
-	* I assume that there is only one violation
-	* The running time is O(log n), or linear to heap size (O(h))
-
-```pascal
-MAX-HEAPIFY(A,i)
-	l, r = LEFT(i), RIGHT(i)
-	if l <= A.heap-size and A[l]>A[i]
-		largest = l
-	else largest = i
-	if r <= A.heap-size and A[r]>A[i]
-		largest = r
-	else largest = i
-	if largest != i
-		exchange A[i] and A[largest]
-		MAX-HEAPIFY(A,largest)
-```
 
 * Now we start from a random array and we want to make it a max heap
 	* Note that $A[(\lfloor n/2 \rfloor +1)...n]$ are leaves
