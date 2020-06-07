@@ -219,6 +219,27 @@ $$ \lfloor n/2 \rfloor + \lceil n/2 \rceil = n$$
 * A sub-tree is formed by a node and all of its descendants
 * An ordered tree is a rooted tree  in which the children of each node are ordered according to some criterion
 * A binary tree is an ordered tree which is empty or consists of a root node and 2 sub-trees wich are themselves binary trees
+* A full binary tree is a binary tree in which each node is either a leaf or it has degree exactly 2
+* A complete binary tree is a full binary tree in which all leaves have the same depth and all the internal nodes have exactly degree 2
+
+## Heaps
+* An heap is a nearly complete binary tree
+	* All nodes of an heap are binary except for possibly the last level
+	* If the last level is not full, it is filled always from left to righ
+* An heap follows the heap property: the key of a parent must always be greter that that of its children
+$$ Parent(i) \geq i \quad \forall i$$
+	* This is a max heap, there are also min heaps where the property is opposite
+	* The size of an heap is the number of nodes it contains
+* We can represent an heap with an array
+	* The first element is the root
+	* The children of the root are the second and third element
+	* The fourth and fifth element are the children of the second, and so on
+	* The children of node $A[i]$ are nodes $A[2i]$ and $A[2i+1]$
+	* The parent of A[i] is $A[\lfloor i/2 \rfloor]$
+* The maximum element of an heap is always the root
+
+## Priority queues
+* A priority queue is a data structure that implements an heap
 
 # Pseudocode
 * Pseudocode is a way of representing an algorithm intended for human reading
@@ -353,13 +374,22 @@ $$T(n)=\Theta(\log{n})+\Theta(1)=\Theta(\log{n})$$
 
 ### Recursion tree method
 * I convert the equation into a tree and sum up the cost of each node for each level
+* The cost at each level is the cost icurred at that recursion level
 * I then sum up the cost for all the levels
 * I take as an example the following recurrence equation
-$$ T(n) = T(n/2)+c$$
 $$T(n)=2T(n/2)+n^2$$
-* The root has a cost $n^2$ and 2 children of cost $T(n/2)$ each
+* The root has a cost $n^2$
+* The first level has a cost
+$$2T(n/2)=2(n/2)^2$$
+* The second level has a cost
+$$4T(n/4)=4(n/4)^2$$
+* I see that in general, level at depth $i$ has a cost
+$$2^iT(n/2^i)=2^i(n/2^i)^2$$
 * I continue to expand until the base case
-* This gives us a $O(n^2)$, since I cannot determine a tight bound
+$$T(n/2^i)=T(1) \implies 2^i=n \implies i=\log_2{n}$$
+$$T(n/2^{\log_2{n}})=2^{\log_2{n}}T(n/\log_2{n})^2=2^{\log_2{n}}T(1)^2=2^{\log_2{n}}T(1)$$
+* So the total cost will be
+$$T(n)=\sum_{i=0}^{\log_2{n}-1}(\frac{n}{2^i})^2+2^{\log_2{n}}T(1)=n^2\sum_{i=0}^{\log_2{n}-1}(\frac{1}{2})^{2i}+O(n) \leq n^2 \sum_{i=0}^\infty (\frac{1}{2})^{2i}+O(n)= O(n^2)$$
 
 # Sorting
 * Sorting is a common computational problem
@@ -371,6 +401,14 @@ $$T(n)=2T(n/2)+n^2$$
 * The input of the sorting problem is a sequence of numbers $<a_1, a_2, ..., a_n>$
 * The numbers in the input are also called keys
 * The output of the sorting problem is a permutation $a_1', a_2', ..., a_n'$ of the input such that $a_1' \leq a_2 \leq...\leq a_n$
+* When there are at least 2 elements that are identical, sorting algorithms can maintain the respective previous order of the elements or not
+* Normally, the numbers to be sorted are a key that is paired to other data, forming a record
+	* A record is composed of a key and satellite data
+	* A sorting algorithm permutes the keys, and then it permutes the satellite data accordingly
+* In some applications it can be important that sorting does not alter the ordering of equal keys, especially when satellite data is involved
+	* The other data can already be sorted following another criterion and I may need to not alter this
+* An algorithm that sorts without altering the order of equal keys is said to sort in place
+
 
 ## Insertion sort
 * Intuition: It is like arranging card in order in your hand by picking one at a time and placing it in the right position, by comparing it with all the other cards already in your hand
@@ -525,25 +563,11 @@ $$T(n)=\begin{cases}\Theta(1) & \text{if } n=1 \\ 2T(n/2)+n & \text{if } n>1 \en
 * Typical application: sort a huge randomly ordered data file
 * The complicated part of merge-sort is the combine step
 
-# Heapsort
-* Normally, the numbers to be sorted are a key that is paired to other data, forming a record
-	* A record is composed of a key and satellite data
-* When I want to sort, are all keys unique?
+# Heap-sort
+* Heap-sort is another sorting algorithm running in $O(n\log{n})$ (like merge-sort)
+* It is able to sort in place
+* It uses an heap as data structure
 * Its running time is $\Theta n \log{n}$ and it sorts in place like insertion-sort
-* It is based on a data structure called heap
-	* An heap is a nearly complete binary tree
-		* All nodes are binary except for possibly the last level
-		* If the last level is not full, it is filled from left to right
-	* It follows the heap property: the value of a parent must be greter that that of a children
-		* This is a max heap, there are also min heaps where the property is opposite
-	* The size of an heap is the number of nodes
-* We can represent an heap with an array
-	* The first element is the root
-	* The children of the root are the second and third element
-	* The fourth and fifth element are the children of the second, and so on
-	* The children of node A[i] are nodes A[2i] and A[2i+1]
-	* The parent of A[i] is $A[\lfloor i/2 \rfloor]$
-	* The maximum element is always the root
 * We can define 3 basic functions that return the index of the left child, right child and parent of element with index i in an heap
 
 ```pascal
