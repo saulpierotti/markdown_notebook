@@ -508,7 +508,7 @@ $$ T(n) = O(n)$$
 \Statex
 \Procedure{HEAP-EXTRACT-MAX}{$A$}
 	\If{$A.heapsize < 1$} \Comment{the heap is empty, nothing to extract}
-		\State \Return nil
+		\State \Return error "heap underflow"
 	\EndIf
 	\State $max=A[1]$
 	\State $A[1] = A[A.heapsize]$ \Comment{put the last element as root}
@@ -519,8 +519,39 @@ $$ T(n) = O(n)$$
 \Statex
 \end{algorithmic}
 
+* Increasing the value of an element is useful when I want to update its priority in the queue
+	* Note that I can increase priority, not decrease!
+* I first increase the value and then check if the new heap respects the max-heap property
+* If it does not i traverse the tree from the updated node to the root to find a proper place for it
 
-* Increseing the value of a key is $O(\log{n})$ since the maximum possible number of place exchanges is equal to the height of the heap, log n
+\begin{algorithmic}
+\Statex
+\Procedure{HEAP-INCREASE-KEY}{$A,i,key$}
+	\If{$key < A[i]$} \Comment{check that the new key is actually bigger than the old one}
+		\State \Return error "new key is smaller than current key"
+	\EndIf
+	\State $A[i] = key$ \Comment{increase the key}
+	\While{$i > 1$ and $A[$\Call{PARENT}{$i$}$]<A[i]$} 
+	\State \Comment{until I am not at the root and while the max-heap property is not respected at $A[i]$}
+		\State exchange $A[i]$ with $A[$\Call{PARENT}{$i$}$]$
+		\State $i =$\Call{PARENT}{$i$}
+	\EndWhile
+\EndProcedure
+\Statex
+\end{algorithmic}
+
+* Increseing the value of a key is O(log n) since the maximum possible number of place exchanges is equal to the height of the heap, log n
+HEAP-EXTRACT-MAX(A)
+	if A.heapsize < 1
+		error "heap uderflow"
+	max = A[1]
+	A[1] = A[A.heapsize]
+	A.heapsize = A-heapsize - 1
+	MAX-HEAPIFY(A,1)
+	return max
+```
+
+* Increseing the value of a key is O(log n) since the maximum possible number of place exchanges is equal to the height of the heap, log n
 
 ```pascal
 HEAP-INCREASE-KEY(A, i, key)
