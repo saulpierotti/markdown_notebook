@@ -523,6 +523,8 @@ $$ T(n) = O(n)$$
 	* Note that I can increase priority, not decrease!
 * I first increase the value and then check if the new heap respects the max-heap property
 * If it does not i traverse the tree from the updated node to the root to find a proper place for it
+* It is doing all constant time operations, and a while loop
+* The while loop is executed at most once for each level, so the complexity is $O(\log{n})$ on the size of the heap
 
 \begin{algorithmic}
 \Statex
@@ -534,48 +536,28 @@ $$ T(n) = O(n)$$
 	\While{$i > 1$ and $A[$\Call{PARENT}{$i$}$]<A[i]$} 
 	\State \Comment{until I am not at the root and while the max-heap property is not respected at $A[i]$}
 		\State exchange $A[i]$ with $A[$\Call{PARENT}{$i$}$]$
-		\State $i =$\Call{PARENT}{$i$}
+		\State $i =$\Call{PARENT}{$i$} \Comment{move up one node}
 	\EndWhile
 \EndProcedure
 \Statex
 \end{algorithmic}
 
-* Increseing the value of a key is O(log n) since the maximum possible number of place exchanges is equal to the height of the heap, log n
-HEAP-EXTRACT-MAX(A)
-	if A.heapsize < 1
-		error "heap uderflow"
-	max = A[1]
-	A[1] = A[A.heapsize]
-	A.heapsize = A-heapsize - 1
-	MAX-HEAPIFY(A,1)
-	return max
-```
+* Inserting a new element to a max-heap takes advantage of heap-increase-key
+* I insert the new element with a placeholder key of $-\infty$
+* I then increase its key to the actual value with heap-increase-key
+* max-heap-insert does all constant time operations and a call to heap-increase-key (which is $O(\log{n})$), so the running time is $O(\log{n})$
 
-* Increseing the value of a key is O(log n) since the maximum possible number of place exchanges is equal to the height of the heap, log n
+\begin{algorithmic}
+\Statex
+\Procedure{MAX-HEAP-INSERT}{$A,key$}
+	\State $A.heapsize = A.heapsize + 1$
+	\State $A.heapsize = - \infty$
+	\State \Call{HEAP-INCREASE-KEY}{$A,A.heapsize,key$}
+\EndProcedure
+\Statex
+\end{algorithmic}
 
-```pascal
-HEAP-INCREASE-KEY(A, i, key)
-	if key < A[i]
-		error "new key smaller than current key"
-	A[i] = key
-	while i > 1 and A[PARENT(i)] < A[i]
-		exchange A[i] with A[PARENT(i)]
-		i = PARENT(i)
-```
-
-* Inserting a new element into the heap is equivalent to increasing the key of an alredy existing one
-	* I can insert an element with key infinitely small and update it to the real value
-	* It uses HEAP-INCREASE-KEY so its running time is O(log n)
-
-```pascal
-MAX-HEAP-INSERT(A, key)
-	A-heapsize = A.heapsize + 1
-	A[A.heapsize] = - infinity
-	HEAP-INCREASE-KEY(A, A.heapsize, key)
-```
-
-
-# Basic sorting algorithms
+# Comparison-based sorting algorithms
 * Sorting is a common computational problem
 	* The typical input is a series of numbers
 	* The output is a permutation of the input such that $a_i \leq a_{i+1}$
@@ -760,7 +742,7 @@ $$T(n)=\begin{cases}\Theta(1) & \text{if } n=1 \\ 2T(n/2)+n & \text{if } n>1 \en
 
 \begin{algorithmic}
 \Statex
-\Procedure{HEAPSORT}{$A$}
+\Procedure{HEAP-SORT}{$A$}
 	\State \Call{BUILD-MAX-HEAP}{$A$}
 	\For{$i = A.lenght$ downto $2$}
 		\State exchange $A[1]$ with $A[i]$
@@ -781,8 +763,54 @@ $$T(n)=\begin{cases}\Theta(1) & \text{if } n=1 \\ 2T(n/2)+n & \text{if } n>1 \en
 	* It is marginally better
 
 
-# Quicksort
-* It is a divide and conquer algorithm
+## Quick-sort
+* Quick-sort is a divide and conquer sorting algorithm with a worst-case running time of $\Theta(n^2)$ and an average case running time of $\Theta(n\log{n})$
+* It is one of the most popular sorting algorithms because of its good average performances
+* I works by splitting the array on a pivot, and then calling recursively on the sub-arrays at the 2 sides of the pivot (but not including it)
+	* Before calling the recursions all the elements to the left of the pivot are smaller than it (or equal), and all the elements at its right are larger
+	* This means that the pivot is in its correct final position in the array
+	* The base case is when the sub-arrays is just made of 1 element, and so it is sorted
+* After I select a pivot and before calling the recursions, I need to swap elements so that the pivot is in the right position
+	* I select as a pivot $A[r] = x$
+	* I mantain 4 regions in the array
+		* $A[r]$ is $x$ itself
+		* $A[p...i]$ is smaller or equal to $x$
+		* $A[i+1...j-1]$ is greater than $x$
+		* $A[j...r-1]$ is unrestricted
+	* I start by initializing $A[p...i]$ empty (I assign $i = p-1$)
+	* I check elements 1 by 1 from $p$ to $r-1$ (just before the pivot)
+	* When I find an element taht belogs to $A[p...i]$ I increase $i$ of 1 to make space for it and I place it there by swapping with the current $A[i]$
+	* When I reach $A[r-1]$ the unrestricted region $A[j...r-1]$ disappears
+	* As a last thing I swap the pivot from the end of the array to where it belongs ($A[i+1]$)
+
+\begin{algorithmic}
+\Statex
+\Procedure{QUICK-SORT}{$A,p,r$}
+	\If{$p < r$} \Comment{if $p=r$ I am in the base case: sub-array of 1 element}
+		\State $q =$ \Call{PARTITION}{$A,p,r$} \Comment{separate on a pivot}
+		\State \Call{QUICK-SORT}{$A,p,q-1$} \Comment{call recursively on the 2 sub-arrays at the sides of the pivot}
+		\State \Call{QUICK-SORT}{$A,q+1,r$}
+	\EndIf
+\EndProcedure
+\Statex
+\Procedure{PARTITION}{$A,p,r$}
+	\State $x = A[r]$ \Comment{select the pivot}
+	\State $i = p-1$ \Comment{start with $A[p...i]$ empty}
+	\For{$j=p$ to $r-1$} \Comment{j takes all the values in the (sub-)array except the last (the pivot)}
+		\If{$A[j] \leq x$} \Comment{check if the current element is smaller or equal to the pivot}
+			\State $i = i+1$ \Comment{if it is, I can extend the $A[p...i]$ region to make space for it}
+			\State exchange $A[i]$ with $A[j]$ \Comment{and I actually place it in $A[p...i]$}
+		\EndIf
+	\EndFor
+	\State exchange $A[i+1]$ with $A[r]$ \Comment{put the pivot where it belongs}
+	\State \Return $i+1$ \Comment{I return the index of the pivot to be used by quick-sort for splitting the array}
+\EndProcedure
+\Statex
+\Statex
+Initial call $\implies$ \Call{QUICK-SORT}{$A,1,A.lenght$}
+\Statex
+\end{algorithmic}
+
 * The conquer and combine parts are really easy, but divide requires effort
 	* This is sharply different from MERGESORT, where combine is the most demanding part
 * Divide: we want to find indexes p, q, r such that the elements $A[p...q-1] \leq A[q] \leq A[q+1...r]$
