@@ -391,6 +391,7 @@ $$ Parent(i) \geq i \quad \forall i$$
 * The parent of $A[i]$ is $A[\lfloor i/2 \rfloor]$
 * It always holds that the size of an heap is smaller or equal to the lenght of the array in which it is contained
 $$ A.heapsize \leq A.lenght$$
+	* It can be smallr if not all the array is used for storing the heap
 * Leaves are all the elements in the sub-array $A[(\lfloor n/2 \rfloor+1)...n]$
 
 ### Fundamental heap operations
@@ -422,6 +423,9 @@ $$ A.heapsize \leq A.lenght$$
 * If I find a parent that has a smaller key than one of its children, I swap them
 * This could generate a new heap violation down the tree
 * I continue swapping until no violations are left
+* Since an heap has $\log{n}$ levels and I do constant work at each level (there are no loops and at most 1 recursive call), max-heapify has $O(\log{n})$ running time
+* Equivalently, I can say that the running time of max-heapify is linear on the height of the heap $h$ (it is $O(h)$)
+	* This is because $h=\lfloor \log{n} \rfloor$
 
 \begin{algorithmic}
 \Statex
@@ -444,35 +448,33 @@ $$ A.heapsize \leq A.lenght$$
 \Statex
 \end{algorithmic}
 
-* Since an heap has $\log{n}$ levels and I do constant work at each level (there are no loops and at most 1 recursive call), max-heapify has $O(\log{n})$ running time
-* Equivalently, I can say that the running time of max-heapify is linear on the height of the heap $h$ (it is $O(h)$)
-	* This is because $h=\lfloor \log{n} \rfloor$
+* build-max-heap converts an array $A[1...n]$ to a max-heap of size $n=A.lenght$
+* The elements in the sub-array $A[(\lfloor n/2 \rfloor+1)...n]$ are leaves
+* I call max-heapify from the last non-leaf node to the root, so to reconstruct the max-heap property
+* I am constructive max-heaps in the subtrees by starting at the bottom, and then going up when everithing below the current level is a max-heap
 
 \begin{algorithmic}
 \Statex
-\Procedure{BUILD-MAX-HEAP}{i}
-	\State \Return{$\lfloor i/2 \rfloor$}
+\Procedure{BUILD-MAX-HEAP}{$A$}
+	\State $A.heapsize = A.lenght$
+	\For{$i=\lfloor A.lenght/2 \rfloor$ downto 1}
+		\State \Call{MAX-HEAPIFY}{$A,i$}
+	\EndFor
 \EndProcedure
-
+\Statex
 \end{algorithmic}
 
-* build-max-heap converts an array $A[1...n]$ to a max-heap of size $n=A.lenght$
-* Since the element
-
-
-```pascal
-MAX-HEAPIFY(A,i)
-	l, r = LEFT(i), RIGHT(i)
-	if l <= A.heap-size and A[l]>A[i]
-		largest = l
-	else largest = i
-	if r <= A.heap-size and A[r]>A[i]
-		largest = r
-	else largest = i
-	if largest != i
-		exchange A[i] and A[largest]
-		MAX-HEAPIFY(A,largest)
-```
+* Since max-heapify has a running time of $O(\log{n})$ and the for loop is executed $O(n)$ times, it holds that the running time of buil-max-heap is $O(n\log{n})$
+* This however is not a tight upper bound, we can define it more stringently
+* If $i$ is the depth of a level, each levels has $n_i=2^i$ nodes
+* An heap rooted at level $i$ has an height of $h_i = h-i$, where $h$ is the height of the complete heap
+* The cost of a max-heapify call is $O(h_i)$ at level $i$
+	* Its cost is linear to the height of the node on which it is called
+* The last level has height $h = i_{max} = \lfloor \log{n} \rfloor$
+* I can therefore write
+$$ T(n) = \sum_{i=0}^h n_i h_i$$
+$$ T(n) = \sum_{i=0}^h 2^i (h-i)$$
+$$ T(n) = \sum_{i=0}^h 2^i (h-i)$$
 
 ## Priority queues
 * A priority queue is a data structure that implements an heap
