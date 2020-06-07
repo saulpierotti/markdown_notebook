@@ -396,6 +396,7 @@ $$ A.heapsize \leq A.lenght$$
 
 ### Fundamental heap operations
 * These operations return fundamental feautures of an heap, like the values stored in the children and parent of the current node
+* Returning the maximum of an heap means returning its root value
 
 \begin{algorithmic}
 \Statex
@@ -411,6 +412,11 @@ $$ A.heapsize \leq A.lenght$$
 \Statex
 \Procedure{PARENT}{i}
 	\State \Return{$\lfloor i/2 \rfloor$}
+\EndProcedure
+
+\Statex
+\Procedure{HEAP-MAXIMUM}{$A$}
+	\State \Return{$A[1]$}
 \EndProcedure
 \Statex
 \end{algorithmic}
@@ -471,13 +477,71 @@ $$ A.heapsize \leq A.lenght$$
 * The cost of a max-heapify call is $O(h_i)$ at level $i$
 	* Its cost is linear to the height of the node on which it is called
 * The last level has height $h = i_{max} = \lfloor \log{n} \rfloor$
+* Consider also that $h=\log{n}$ and so $2^h=n$
 * I can therefore write
 $$ T(n) = \sum_{i=0}^h n_i h_i$$
 $$ T(n) = \sum_{i=0}^h 2^i (h-i)$$
-$$ T(n) = \sum_{i=0}^h 2^i (h-i)$$
+$$ T(n) = \sum_{i=0}^h 2^i (h-i)\frac{2^h}{2^h}$$
+$$ T(n) = 2^h \sum_{i=0}^h \frac{h-i}{2^h-i}$$
+$$ T(n) = n \sum_{k=0}^h \frac{k}{2^k} \qquad\text{with } k=h-i$$
+$$ T(n) \leq n \sum_{k=0}^\infty \frac{k}{2^k} = \sum_{k=0}^\infty k (\frac{1}{2})^{k} = \frac{1/2}{(1-1/2)^2} = 2$$
+$$ T(n) = O(n)$$
 
 ## Priority queues
-* A priority queue is a data structure that implements an heap
+* A priority queue is a data structure from which I can extract elements according to their priority level (key value)
+* Application: it can manage job scheduling in a PC with jobs that have different priority
+* There are min-priority queues, which always return the lowest key in them, and max-priority queue, that always return the highest key in them
+* A max-priority queue can be conveniently implemented with a max-heap
+	* A max-heap allows retrieval of the largest element in $O(1)$ with the heap-maximum routine
+* A max priority queue supports the following operations
+	* Return the element with largest key (heap-maximum, see heap operations)
+	* Remove the element with largest key and return it (extract-max-heap)
+	* Increase the key of an element (heap-increase-key)
+	* Insert a new element (max-heap-insert)
+* I can read the maximum element of the priority queue and remove it from the queue with the heap-extract-max procedure
+	* I replace the root of the heap with the last element
+	* I decrease the size of the heap by 1
+	* I call max-heapify on the new root to restore the max-heap property
+	* I do all constant time operations except for the max-heapify call, which is $O(\log{n})$
+
+\begin{algorithmic}
+\Statex
+\Procedure{HEAP-EXTRACT-MAX}{$A$}
+	\If{$A.heapsize < 1$} \Comment{the heap is empty, nothing to extract}
+		\State \Return nil
+	\EndIf
+	\State $max=A[1]$
+	\State $A[1] = A[A.heapsize]$ \Comment{put the last element as root}
+	\State $A.heapsize = A.heapsize-1$
+	\State \Call{MAX-HEAPIFY}{$A,1$}
+	\State \Return $max$
+\EndProcedure
+\Statex
+\end{algorithmic}
+
+
+* Increseing the value of a key is $O(\log{n})$ since the maximum possible number of place exchanges is equal to the height of the heap, log n
+
+```pascal
+HEAP-INCREASE-KEY(A, i, key)
+	if key < A[i]
+		error "new key smaller than current key"
+	A[i] = key
+	while i > 1 and A[PARENT(i)] < A[i]
+		exchange A[i] with A[PARENT(i)]
+		i = PARENT(i)
+```
+
+* Inserting a new element into the heap is equivalent to increasing the key of an alredy existing one
+	* I can insert an element with key infinitely small and update it to the real value
+	* It uses HEAP-INCREASE-KEY so its running time is O(log n)
+
+```pascal
+MAX-HEAP-INSERT(A, key)
+	A-heapsize = A.heapsize + 1
+	A[A.heapsize] = - infinity
+	HEAP-INCREASE-KEY(A, A.heapsize, key)
+```
 
 
 # Basic sorting algorithms
@@ -655,95 +719,36 @@ $$T(n)=\begin{cases}\Theta(1) & \text{if } n=1 \\ 2T(n/2)+n & \text{if } n>1 \en
 # Heap-sort
 * Heap-sort is another sorting algorithm running in $O(n\log{n})$ (like merge-sort)
 * It is able to sort in place and it uses an heap as data structure
-* Many of the sub-routines used are the ones reported to work in general with heaps
+* The sub-routines not written here are the ones for general heap operations
+* We start from a random array and we make it a max heap by calling build-max-heap on it
+* We swap the root of the heap with the last element of the array and decrease the heap-size by 1
+	* What was the root is now not part of the heap
+* We call max-heapify on the root to rebuild the max-heap property
+	* The only heap violation is the root itself, and max-heapify will descend the tree to recover the max-heap property
+* I repeat until the the heap has size 1: now the array is sorted
 
+\begin{algorithmic}
+\Statex
+\Procedure{HEAPSORT}{$A$}
+	\State \Call{BUILD-MAX-HEAP}{$A$}
+	\For{$i = A.lenght$ downto $2$}
+		\State exchange $A[1]$ with $A[i]$
+		\State $A.heapsize = A.heapsize - 1$
+		\State \Call{MAX-HEAPIFY}{$A,1$}
+	\EndFor
+\EndProcedure
+\Statex
+\end{algorithmic}
 
-* Now we start from a random array and we want to make it a max heap
-	* Note that $A[(\lfloor n/2 \rfloor +1)...n]$ are leaves
+* As we saw, build-max-heap is an $O(n)$ operation
+* The for loop body is called $n-1$ times
+	* It performs 2 constant time operations and a call to max-heapify on input size from $n-1$ down to $2$
+* max-heapify is an $O(\log{n})$ operation
+* The total running time is therefore  $O(n \log{n})$
+* Heap-sort is insensitive to input arrangement: there is no best or worst case
+* Compared to mergesort, which has a $\Theta(n\log{n})$, it as the same upper bound but the bound is not tight
+	* It is marginally better
 
-```pascal
-BUIL-MAX-HEAP(A)
-	A.heap-size = A.lenght
-	for i = floor(A.lenght/2) downto 1
-		MAX-HEAPIFY(A,i)
-```
-
-* This operations has an loose upper boundf of O(n log n)
-	* I do n/2 times a O(log n) operation
-* However, the argument to MAX-HEAPIFY is almost never n (!)
-	* In the first step it is 1, then 2 and so on
-* The worst case running time of MAX-HEAPIFY is O(log i) where i is the value of the for loop in BUILD-MAX-HEAP
-	* We obtain O(n)
-* The next step is to actually sort the array
-	* We swap the root with the last element and decrease the heap-size by 1
-	* We call MAX-HEAPIFY on the root to rebuil the max-heap property
-	* We repeat until the heap-size is 1
-	* The array is sorted (!)
-
-```pascal
-HEAPSORT(A)
-	BUILD-MAX-HEAP(A)
-	for i = A.lenght down to 1
-		exchange A[1] with A[-1]
-		A.heap-size = A.heap-size - 1
-		MAX-HEAPIFY(A,1)
-```
-
-* The total running time is O(n log n)
-* Compared to mergesort, which has a $\Theta(n log n)$, here we have an O bound
-	* The worst case is like mergesort, but it can be faster (!)
-
-# Priority queues
-* A priority queue is a data structure for maintaining a set S of element each with a priority value called key
-* There are max and min priority queues
-* A max priority queue supports the following operations
-	* Return the element with largest key
-	* Remove the element with largest key and return it
-	* Increase the key of an element
-	* Insert a new element
-* Heaps are really useful for implementing priority queues
-* Getting the largest element takes constant time
-
-```pascal
-HEAP-MAXIMUM(A)
-	return A[1]
-```
-
-* Extracting the largest element and re-building the heap takes O(log n) since it is essentially a single call to MAX-HEAPIFY plus a constant amount of work
-
-```pascal
-HEAP-EXTRACT-MAX(A)
-	if A.heapsize < 1
-		error "heap uderflow"
-	max = A[1]
-	A[1] = A[A.heapsize]
-	A.heapsize = A-heapsize - 1
-	MAX-HEAPIFY(A,1)
-	return max
-```
-
-* Increseing the value of a key is O(log n) since the maximum possible number of place exchanges is equal to the height of the heap, log n
-
-```pascal
-HEAP-INCREASE-KEY(A, i, key)
-	if key < A[i]
-		error "new key smaller than current key"
-	A[i] = key
-	while i > 1 and A[PARENT(i)] < A[i]
-		exchange A[i] with A[PARENT(i)]
-		i = PARENT(i)
-```
-
-* Inserting a new element into the heap is equivalent to increasing the key of an alredy existing one
-	* I can insert an element with key infinitely small and update it to the real value
-	* It uses HEAP-INCREASE-KEY so its running time is O(log n)
-
-```pascal
-MAX-HEAP-INSERT(A, key)
-	A-heapsize = A.heapsize + 1
-	A[A.heapsize] = - infinity
-	HEAP-INCREASE-KEY(A, A.heapsize, key)
-```
 
 # Quicksort
 * It is a divide and conquer algorithm
