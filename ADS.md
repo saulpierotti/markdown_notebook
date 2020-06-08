@@ -348,6 +348,13 @@ $$T(n)=\sum_{i=0}^{\log_2{n}-1}(\frac{n}{2^i})^2+2^{\log_2{n}}T(1)=n^2\sum_{i=0}
 * An array provides direct access to data: $A[i]$ contains the element $a_i$
 * Every array is created empty by declaring its size, and then it is filled by assginment
 * Each location in the array can be accessed and modified in constant time
+* Arrays are easy to use and they can implement many more complex data structures
+* They are fast for direct access to a defined location
+* With arrays their size is fixed and needs to be specified at initialization time
+* The reorganization of data in an array is complex and costly
+* It is really inflexible for organising data
+* However, I cannot implement every possible data structure with arrays
+
 
 ## Trees
 * A tree is a set of nodes connected by edges such that there is one and only one way to get  to go from one node to another
@@ -999,7 +1006,7 @@ $$ T(n) = \Theta(n\log{n})$$
 \Procedure{PUSH}{$S,x$}
 	\If{$S.top == S.lenght$}
 		\State \Return error "stack overflow"
-	\EndiF
+	\EndIf
 	\State $S.top = S.top + 1$
 	\State $S[S.top] = x$
 \EndProcedure
@@ -1018,7 +1025,7 @@ $$ T(n) = \Theta(n\log{n})$$
 * All these stack operations run in constant time
 
 
-## Queue
+## Queues
 * A queue is a line of elements that behaves like a line of people in a shop
 * In a queue I use a FIFO policy instead of a LIFO policy
 * I add elements from the tail of the queue with the enqueue procedure and extract them from its head with the dequeue procedure
@@ -1041,6 +1048,9 @@ $$ T(n) = \Theta(n\log{n})$$
 \begin{algorithmic}
 \Statex
 \Procedure{ENQUEUE}{$Q,x$}
+	\If{($Q.head == Q.tail+1$) or ($Q.head == 1$ and $Q.tail == Q.lenght$)}
+		\State \Return error "queue overflow"
+	\EndIf
 	\State $Q[Q.tail] = x$ \Comment{$Q[Q.tail]$ is always empty}
 	\If{$Q.tail == Q.lenght$} \Comment{in this case I wrap around the end of the array}
 		\State $Q.tail = 1$
@@ -1050,6 +1060,9 @@ $$ T(n) = \Theta(n\log{n})$$
 \EndProcedure
 \Statex
 \Procedure{DEQUEUE}{$Q$}
+	\If{$Q.head == Q.tail$}
+		\State \Return error "queue underflow"
+	\EndIf
 	\State $x = Q[Q.head]$
 	\If{$Q.head == Q.lenght$} \Comment{in this case I wrap around the end of the array}
 		\State $Q.head = 1$
@@ -1063,63 +1076,65 @@ $$ T(n) = \Theta(n\log{n})$$
 
 * In queue and dequeue operations, the pointers $Q.head$ and $Q.tail$ always move forward, running behind each other
 * When one of them reaches $Q.lenght$, it wraps around the end of the array and becomes $1$
-* Both operations require constant time
+* Enquque and dequeue require both constant time
 
+## Linked lists
+* A linked list $L$ is a data structure in which elements are arranged in a linear order
+* Differently from arrays, linked lists are dynamically allocated
+* The order of elements in a linked list is NOT determined by indeces, but by pointers in each element
+* Each element $x$ of a linked list has 2 fundamental attributes
+	* $x.key$ is the content of the element itself
+	* $x.next$ is a pointer to the next element in the linked list
+* $L.head$ is an attribute of the linked list itself that stores a pointer to the first element of the list
+* A linked list is empty when $L.head = NIL$
+* The last element $x$ of a linked list is the one for which $x.next = NIL$
+* Singly-linked lists store just the $x.next$ attrivbute in each element $x$
+* Doubly-linked lists store an $x.next$ and a $x.prev$ attribute for each element $x$
+	* $x.prev$ stores a pointer to the previous element in the linked list
+	* $L.tail$ is an attribute of a doubly linked list that stores a pointer to the last element of the list
+* A circular list is a doubly-linked list where
+	* $L.tail$ points to the last element of $L$
+	* $L.head.prev = L.tail$
+	* $L.tail.next = L.head$
+* Basic operations on linked lists are: list-search(key), list-insert(element), list-delete(element)
+* The following pseudocodes refer to doubly-linked lists
 
-# Arrays
-* They are easy and fast to use, they can implement many data structures
-* It is really inflexible for organising data
-* I need (directly or nor) to specify the size of the array at the beginning
-* I cannot implement all data structures with arrays
+\begin{algorithmic}
+\Statex
+\Procedure{LIST-SEARCH}{$L,k$}
+	\State $x = L.head$
+	\While{$x \not= NIL$ and $x.key \not= k$} \Comment{until I find what I want or I  reach the end of the list}
+		\State $x = x.next$ \Comment{move forward of 1 element}
+	\EndWhile
+	\State \Return $x$ \Comment{if I do not find $x$, I return NIL at this point}
+\EndProcedure
+\Statex
+\Procedure{LIST-INSERT}{$L,x$}
+	\State $x.next = L.head$
+	\If{$L.head \not= NIL$} \Comment{If the list is not empty}
+		\State $L.head.prev = x$ \Comment{update the prev pointer of the old head}
+	\EndIf
+	\State $L.head = x$ \Comment{update the list head}
+	\State $x.prev = NIL$
+\EndProcedure
+\Statex
+\Procedure{LIST-DELETE}{$L,x$}
+	\If{$x.prev \not= NIL$}
+		\State $x.prev.next = x.next$ \Comment{update the pointer of $x.prev$ so to skip $x$}
+	\Else
+		\State $L.head = x.next$ \Comment{if $x.prev$ is NIL $x$ was the old head of the list, so update it}
+	\EndIf
+	\If{$x.next \not= NIL$}
+		\State $x.next.prev = x.prev$ \Comment{update the pointer of $x.next$ so to skip $x$}
+	\EndIf
+\EndProcedure
+\Statex
+\end{algorithmic}
 
-# Linked lists
-* It is like an array where elements are next to each other
-* The order is NOT determined by indeces, but by pointers in each element for the next element
-* They are allocated dynamically when new elements are added
-* L.head is a pointer to the first element of the linked list
-* Each element x has 2 attributes
-	* x.key is the content of the element
-	* x.next is a pointer to the next element
-* If x.next = NIL it means that we reached the end of the list
-* If x.head = NIL the list is empty
-* In double linked lists each elements has also a x.prev attribute
-	* x.prev is a pointer to the previous element in the list
-* Returning an element is O(1) in an array but O(n) in a linked list
-	* I need to go through all the elements (!)
-	* In this pseudocode if k is not in list I am returning NIL
+* list-insert and list-delete are both constant time operations in linked lists
+* list-search is an $O(n)$ operation in linked lists since in the worst case I need to scan the entire list
 
-```pascal
-SEARCH-LIST(L, k)
-	x = L.head
-	while x != NIL and x.key != k
-		x = x.next
-	return x
-```
-
-* Inserting at the beginning of a double linked list is O(1)
-
-```pascal
-LIST-INSERT(L, x)
-	x.next = L.head
-	if x.head != NIL
-		L.head.prev = x
-	L.head = x
-	x.prev = NIL
-```
-
-* Deleting when I have a pointer x is general and it takes also O(1)
-
-```pascal
-LIST-DELETE(L, x)
-	if x.prev != NIL
-		x.prev.next = x.next
-	else
-		L.head = x.next
-	if x.next != NIL
-		x.next.prev = x.prev
-```
-
-# Rooted trees
+## Rooted trees
 * We already saw how to represent a binary rooted tree with arrays
 * I can represent them also with linked lists
 * Each element x of the linked list will contain
