@@ -927,7 +927,9 @@ $$ T(n) = \Theta(n\log{n})$$
 * It consideres the key as a number in base $k$, which has $d$ digits and so occupies $d$ columns
 * It looks at $1$ column at a time, starting from the LEAST significant and sorting it with any stable sorting algorithm
 	* If I start from the most significant column, I need to recurse for sorting the least significant digits
+		* This implementation is called MSD (most significant digit) radix-sort
 	* If I start from the least significant digits and I use a stable sort, when I sort the most significant column everithing is correclty sorted
+		* This implementation is called LSD (least significant digit) radix-sort
 * It requires only a for loop that runs from the lowest order digit (last column) to the highest order digit (column $d$)
 	* In each iteration it calls a stable sorting algorithm on the column
 	* It takes only $d$ passes on the array each with a running time depending on the sorting subroutine used, with input size $n$
@@ -946,13 +948,18 @@ $$ T(n) = \Theta(n\log{n})$$
 * If (as it is usually the case) I use counting-sort as a subroutine, it take $\Theta(d\ (n+k))$ time
 * In decimal notation $k=9$ since a column can only hold digits in the range $0...9$
 * Therefore when the base used is smaller than $n$, radix-sort has complexity $\Theta(n)$
-* radix-sort is not stable and does not sort in place
+* LSD radix-sort is stable while MSD radix-sort is not stable
+* radix-sort usually is implemented not in place, since it uses counting-sort
 	* If memory is a problem then quick-sort is a better choice
 
-# Dynamic sets
-* In CS, differently from maths, sets can change
-* A set supporting elementary operations is a dictionary
-	* Elementary set operations are insertion, deletion and test membership
+# More data structures
+
+## Dynamic sets
+* Sets are fundamental both for computer science and for maths
+* In maths sets are static, but in computer science they are dynamic
+	* They can grow or change over time when manipulated by algorithms
+* Elementary set operations are insertion, deletion and membership test
+* A set supporting all of the elementary operations is called a dictionary
 * Each set elements has key, and optional features
 	* It can have satellite data
 	* It can have a pointer, which points to another element in the set
