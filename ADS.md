@@ -557,7 +557,7 @@ $$ T(n) = O(n)$$
 \Statex
 \end{algorithmic}
 
-# Comparison-based sorting algorithms
+# Sorting
 * Sorting is a common computational problem
 	* The typical input is a series of numbers
 	* The output is a permutation of the input such that $a_i \leq a_{i+1}$
@@ -573,7 +573,10 @@ $$ T(n) = O(n)$$
 	* A sorting algorithm permutes the keys, and then it permutes the satellite data accordingly
 * In some applications it can be important that sorting does not alter the ordering of equal keys, especially when satellite data is involved
 	* The other data can already be sorted following another criterion and I may need to not alter this
-* An algorithm that sorts without altering the order of equal keys is said to sort in place
+* An algorithm that sorts without altering the order of equal keys is said to perform a stable sort
+* A sorting algorithm is said to sort in place if it does not require extra space besides that needed to store the original array
+	* It can require additional $O(n)$ space for variables, but it needs a constant amount of them at each given time
+	* In practice, it is an algorithm that does not copy the array to be sorted
 
 ## Insertion sort
 * Intuition: It is like arranging card in order in your hand by picking one at a time and placing it in the right position, by comparing it with all the other cards already in your hand
@@ -727,6 +730,7 @@ $$T(n)=\begin{cases}\Theta(1) & \text{if } n=1 \\ 2T(n/2)+n & \text{if } n>1 \en
 	* It requires a lot of memory to store all the sub-arrays
 * Typical application: sort a huge randomly ordered data file
 * The complicated part of merge-sort is the combine step
+* Merge-sort does not sort in place: it copies the values to other arrays
 
 # Heap-sort
 * Heap-sort is another sorting algorithm running in $O(n\log{n})$ (like merge-sort)
@@ -837,30 +841,8 @@ $$ T(n) = \Theta(n\log{n})$$
 * The choice of the pivot influences the performances of quick-sort, since it affects the proportionality of the split
 	* The solution presented here is to choice always the last element as a pivot
 	* Another approach is to pick 3 values from the array and choose their median as a pivot
-
-
-
-
-
-
-
-
-* The worst case running time is $\Theta(n^2)$ (unbalanced array) and the average and best case running times are $\Theta(n\log{n})$
-	* In practice we are almost always in the best case or close to it (!)
-* The array is maximally unbalanced when it is already sorted (!)
-	* In this case I have a subarray with 0 elements and one with n-1 elements
-	* I do n-1 recursions, sicne at each step I decrease n by 1 and I stop when I get to 1
-	* I pay a cost T(0) for the branch with 0 elements and a cost T(n-1) for the branch with n-1 elements
-	* At each level of the tree I pay a fixed cost $\Theta(n)$ for the partitioning
-	* $T(n) = T(n-1) + T(0) + \Theta(n)$
-	* I have n calls of $\Theta(n)$ complexity: the cost is $\Theta(n^2)$
-* The array is perfectly balanced when I get a constant proportional split
-	* Doesn't matter the proportionality, it can also be a 1/100 to 99/100 split, as long as it is not 0 to n-1
-	* In this case $T(n) = 2T(n/2) + \Theta(n)$
-	* T(n) is of complexity $\Theta(n\log{n})$
-* In a random array I expect a mix of good and bad splits
-	* This only adds a constant term to the complexity
-	* In this case I still have a complexity of $\Theta(n \log{n})$
+* The worst case running time of quick-sort is pretty bad and could be caused volountarily by submitting a specific instance
+	* This could be a security risk
 * To assure that no particular input (i.e. a sorted array) cause the worst-case scenario of quicksort, I can use the randomized version of the algorithm
 	* I can either randomize the input or the choice of the pivot
 * Also quick-sort sorts is able to sort in place
@@ -868,26 +850,31 @@ $$ T(n) = \Theta(n\log{n})$$
 # Some reflections on comparison-based sorting
 * All the algorithms we saw sort by comparing elements
 * All of them sort in place with the exception of MERGESORT
+* Insertion-sort and merge-sort are stable, while heap-sort and quick-sort are not
 * The worst-case running time of insertion-sort and quick-sort is $O(n^2)$
 * Heap-sort and merge-sort have a guaranteed running time of $O(n\log{n})$ on every possible instance
 * Insertion-sort is linear in the best case
 * The lower bound for comparision-based sorting is $\Omega(n \log{n})$ because in the worst case I need to do at least $n\log{n}$ comparisons
-	* Any comparison sort alogrithm must be able to sort any possible input of size n
-	* There are n! possible permutations of an array of size n, and the algorthm must be able to solve all of them
+	* Any comparison-based sorting alogrithm must be able to sort any possible input of size $n$
+	* There are $n!$ possible permutations of an array of size $n$, and the algorthm must be able to sort all of them
 	* Every permutation requires a different rearrangement of the array in order to be sorted
-	* I can imagine a decision tree with n! leaves, corresponding to all the permutions
+	* I can imagine a decision tree with $n!$ leaves, corresponding to all the permutions
 	* The height of the decision tree represent the number of single comparisons that the algorithm has to do in the worst case
-	* A tree of heigh h has $2^h$ leaves, and so a tree with n! leaves has heigh $\log{n!}$
+	* A tree of heigh h has $2^h$ leaves, and so a tree with $n!$ leaves has heigh $\log{n!}$
 	* We saw before that $\Theta (n!) = \Theta (n \log{n})$
-* Heapsort and Mergesort are asymptotically optimal comparison sort algorithms
+* Heapsort and Mergesort are asymptotically optimal comparison-based sorting algorithms
 
-# Counting sort
-* It can sort in linear time since it is not based on comparison
-* It assumes that the input array contains only integers in the range 0 - k
-* For each element x into the array, determine how many elements are equal or smaller than x
-* Put x in the correct position in the array
-* It uses an input array A, an output array B and a counter array C
-* I first create an array C of lenght k containing all 0s
+# Linear-time sorting
+* It is possible to sort in a time lower to $\Theta{n \log{n}}$ if my algorithm is not based on comparisons
+* In this case I need to make assumptions about the input elements
+* Linear-timesorting algorithms are counting-sort and radix-sort
+
+## Counting sort
+* Counting-sort assumes that the input array contains only integers in the range $0...k$
+* For each element $x$ into the array, I determine how many elements are equal or smaller than $x$
+* I put element $x$ in the correct position in the output array by knowing how many elements are smaller or equal to it
+* It uses an input array $A[1...n]$, an output array $B[1...n]$ and a counter array $C[1...k]$
+* I first initialize $C[0...k]$ to contain all $0$s
 * I go through all the elements in A
 	* In each iteration i use A[j] as an index in C, and I increment that position of 1
 	* In this way element C[i] contains the number of occurrences of the value i in the array A
@@ -899,54 +886,68 @@ $$ T(n) = \Theta(n\log{n})$$
 		* If there are i elements in A smaller than A[j], then A[j] is put in B[i]
 	* I decrease the respective counter in C of 1, so that if I find another element in A with the same key it is put in the previous position of B
 
-```pascal
-COUNTING-SORT(A, B, k)
-	let C[0...k] be a new array
-	for i = 0 to k
-		C[i] = 0
-	for j = 1 to A.length
-		C[A[j]] = C[A[j]] + 1
-	for i = i to k
-		C[i] = C[i] + C[i-1]
-	for j = A.length downto 1
-		B[C[A[j]]] = A[j]
-		C[A[j]] = C[A[j]] - 1
-```
+\begin{algorithmic}
+\Statex
+\Procedure{COUNTING-SORT}{$A, B, k$}
+	\State let $C[0...k]$ be a new array
+	\For{$i = 0$ to $k$} \Comment{I just initialize the counter array $C[0...k]$}
+		\State $C[i] = 0$
+	\EndFor
+	\For{$j = 1$ to $A.length$}
+		$C[A[j]] = C[A[j]] + 1$ 
+	\EndFor
+	\State \Comment{now $C[i]$ contains how many values equal to $i$ are present in the array}
+	\For{$i = 1$ to $k$}
+		\State $C[i] = C[i] + C[i-1]$
+	\EndFor
+	\State \Comment{now $C[i]$ contains the number of elements smaller or equal to $i$}
+	\For{$j = A.length$ downto $1$} \Comment{from the last index of the array ($A.lenght$) to the first ($1$)}
+		\State $B[C[A[j]]] = A[j]$
+		\State \Comment{the output array will store the value $A[j]$ in the correct position}
+		\State $C[A[j]] = C[A[j]] - 1$
+		\State \Comment{update the counter whenre the next element should be placed}
+		\State \Comment{this is needed only when there are equal elements}
+	\EndFor
+\EndProcedure
+\Statex
+\end{algorithmic}
 
-* The first and third for loops require both time $\Theta(k)$
-* The second and last for loops require both $\Theta(n)$
-* The total running time is $\Theta(n+k)$
+* The first and third for loops require both time $\Theta(k)$ since they loop through the counter array
+* The second and last for loops require both $\Theta(n)$, since they loop through the input array
+* The total running time is therefore $\Theta(n+k)$
+* In practice, we use counting-sort only when $k = O(n)$, so we can say that its running time is $O(n)$
 * The running time is at minimum $\Omega(n)$, and O(n+k)
 	* If k = O(n), then COUNTING-SORT runs in $\Theta(n)$
 	* Since I use COUNTING-SORT only when k = O(n), in practice the algorithm runs in $\Theta(n)$
-* COUNTING-SORT is stable
-	* The last equal key element of A is the first to be put in B
-	* The last for loop runs backwards, so the first element is put in the last position
-	* Order is preserved
-	* This is important because COUNTING-SORT is frequently used as a subroutine of RADIX-SORT
-		* RADIX-SORT requires a stable sorting subroutine
+* counting-sort is stable since the last of the equal-key elements of the input array is the first of them to be put in the output array (the last for loop runs backwards)
+	* This means that it will be put with the highest index, and so as last element in the output array
+* The stability of counting-sort is important because the algorithm is frequently used as a subroutine of radix-sort, and radix-sort requires a stable sorting subroutine
 
-# Radix sort
-* It consideres the key as a number in base k, which has d digit and so occupies d columns
-* It looks at 1 column at a time, starting from the LEAST significant and sorting it with any stable algorithm
-	* If I start from the most significant, I need to recurse for sorting the least significant digits
-	* If I start from the least significant and I use a stable sort, when I sort the most significant column everithing is correclty sorted
-* It requires only a for loop with i from 1 to d
-	* In each iteration it calls a stable sorting algorithm on column i
-* It takes only d passes on the array
+## Radix sort
+* It consideres the key as a number in base $k$, which has $d$ digits and so occupies $d$ columns
+* It looks at $1$ column at a time, starting from the LEAST significant and sorting it with any stable sorting algorithm
+	* If I start from the most significant column, I need to recurse for sorting the least significant digits
+	* If I start from the least significant digits and I use a stable sort, when I sort the most significant column everithing is correclty sorted
+* It requires only a for loop that runs from the lowest order digit (last column) to the highest order digit (column $d$)
+	* In each iteration it calls a stable sorting algorithm on the column
+	* It takes only $d$ passes on the array each with a running time depending on the sorting subroutine used, with input size $n$
 
-```pascal
-RADIX-SORT(A, d)
-	for i = 1 to d
-		use a stable sort to sort A on digit i
-```
+\begin{algorithmic}
+\Statex
+\Procedure{RADIX-SORT}{$A, d$}
+	\For{$i = 1$ to $d$}
+		\State use a stable sort to sort $A$ on digit $i$
+	\EndFor
+\EndProcedure
+\Statex
+\end{algorithmic}
 
-* RADIX-SORT takes $\Theta(d*f(n))$ time, where f(n) is the running time of the subroutine used
-* If I use COUNTIG-SORT as a subroutine, it take $\Theta(d(n+k))$
-* In decimal notation k=9 since a column can only hold digits in the range 0 - 9
-* Therefore when the base used is smaller than n, RADIX-SORT has complexity $\Theta(n)$
-* RADIX-SORT is not stable and does not sort in place
-	* If memory is a problem then QUICKSORT is better
+* radix-sort takes $\Theta(d\ f(n))$ time, where f(n) is the running time of the subroutine used
+* If (as it is usually the case) I use counting-sort as a subroutine, it take $\Theta(d\ (n+k))$ time
+* In decimal notation $k=9$ since a column can only hold digits in the range $0...9$
+* Therefore when the base used is smaller than $n$, radix-sort has complexity $\Theta(n)$
+* radix-sort is not stable and does not sort in place
+	* If memory is a problem then quick-sort is a better choice
 
 # Dynamic sets
 * In CS, differently from maths, sets can change
