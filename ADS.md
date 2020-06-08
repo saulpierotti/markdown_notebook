@@ -1134,28 +1134,29 @@ $$ T(n) = \Theta(n\log{n})$$
 * list-insert and list-delete are both constant time operations in linked lists
 * list-search is an $O(n)$ operation in linked lists since in the worst case I need to scan the entire list
 
-## Rooted trees
+## Representing rooted trees with linked lists
 * We already saw how to represent a binary rooted tree with arrays
 * I can represent them also with linked lists
-* Each element x of the linked list will contain
-	* x.left and x.right, pointers to the childrens
-	* x.p is a pointer to the parent
-	* x.key and x.data are key and satellite data
-* Some properties of the tree T
-	* T.root is a pointer to the root
-		* T.root.p = NIL
-	* The tree is empty if T.root = NIL
-	* If x.left and x.right are NIL x doesn't have children nodes
-* I am not cenessarily limited to binary trees with linked lists
-	* I can have x.child1, x.child2, x.childk
-	* This is wasteful since I need to know the number of children in advance (!)
-* I can do it more efficiently
-	* x.child is the first chilf of x
-	* x.child.sibiling is the next child of x
-	* If x.child.sibiling = NIL x.child is the last children
-	* The children are themselves a linked list (!)
+* In this case each element $x$ of the linked list will contain
+	* $x.left$ and $x.right$, pointers to the childrens of $x$
+	* $x.p$, a pointer to the parent node of $x$
+	* $x.key$ and $x.data$, key and satellite data of $x$
+* The tree $T$ will contain $T.root$, a pointer to the root of the tree
+* The tree is empty when $T.root = NIL$
+* If $x.left = NIL$ and $x.right = NIL$, then $x$ is a leaf
+* Note that always holds that $T.root.p = NIL$
+* I am not necessarily limited to binary trees with linked lists
+* I can have any number of branching factor by just increasing the number of child pointers for each element
+	* This works well when I have a fixed branching factor $k$ such that I can allocate pointers $x.child_1, x.child_2, ..., x.child_k$ for each node
+	* This approach is wasteful when the branching factor is unbounded since I need to allocate statically the number of children for each node
+* I can do it more efficiently by using a linked list also for representing the children
+	* Each node $x$ has the usual $x.key$, $x.data$, $x.p$ pointers
+	* The $x.left$ pointer points to the leftmost child of $x$
+	* The $x.right$ pointer is put to new use: it points to the right sibiling of $x$
+	* In this representation if $x.left= NIL$, then $x$ is a leaf
+	* If $x.right = NIL$, then $x$ is the rightmost child of $x.p$
 
-# Hash tables
+## Hash tables
 * Dictionaries are really useful in many scenarios in CS
 	* They implement INSERT, SEARCH and DELETE operations
 	* An hash table can be used for implementing a dictionary
@@ -1210,7 +1211,7 @@ DELETE(T,x)
 	* If I assume m to be proportional to n I have that $m=O(n)$
 	* In this case $\alpha=O(1)$ since $O(n)/O(n)=O(1)$
 
-# Binary search trees
+## Binary search trees
 * It can be used both as a dictionary and as a priority queue
 * On average all operations are O(log n), with a worst case O(n)
 	* Tree walks are an exception and always require O(n) since they go across the whole tree
