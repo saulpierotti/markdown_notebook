@@ -783,6 +783,7 @@ $$T(n)=\begin{cases}\Theta(1) & \text{if } n=1 \\ 2T(n/2)+n & \text{if } n>1 \en
 	* When I reach $A[r-1]$ the unrestricted region $A[j...r-1]$ disappears
 	* As a last thing I swap the pivot from the end of the array to where it belongs ($A[i+1]$)
 * The conquer and combine parts are really easy in quick-sort, but divide requires effort
+	* Conquer is just a recursive call on the sub-arrays
 	* This is sharply different from MERGESORT, where combine is the most demanding part
 
 \begin{algorithmic}
@@ -838,10 +839,6 @@ $$ T(n) = \Theta(n\log{n})$$
 
 
 
-* The base case is when the subarray has 3, 2, or 1 elements
-	* In this case the PARTITION function puts them in order
-* Conquer: the 2 subarrays $A[p:q-1]$ and $A[q+1:r]$ are sorted recursively with QUICKSORT
-* Combine: trivial, everithing is sorted because QUICKSORT sorts in place(!)
 
 
 
@@ -868,9 +865,10 @@ $$ T(n) = \Theta(n\log{n})$$
 	* In this case I still have a complexity of $\Theta(n \log{n})$
 * To assure that no particular input (i.e. a sorted array) cause the worst-case scenario of quicksort, I can use the randomized version of the algorithm
 	* I can either randomize the input or the choice of the pivot
+* Also quick-sort sorts is able to sort in place
 
 
-# Sone reflections on sorting
+# Some reflections on sorting
 * All the algorithms we saw sort in place with the exception of MERGESORT
 * A sort can be stable or not
 	* Sorting stability is the preserving of the orders of records with equal keys
