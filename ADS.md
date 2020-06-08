@@ -952,126 +952,119 @@ $$ T(n) = \Theta(n\log{n})$$
 * radix-sort usually is implemented not in place, since it uses counting-sort
 	* If memory is a problem then quick-sort is a better choice
 
-# More data structures
-
-## Dynamic sets
+# Dynamic sets
 * Sets are fundamental both for computer science and for maths
 * In maths sets are static, but in computer science they are dynamic
 	* They can grow or change over time when manipulated by algorithms
 * Elementary set operations are insertion, deletion and membership test
 * A set supporting all of the elementary operations is called a dictionary
-* Each set elements has key, and optional features
-	* It can have satellite data
-	* It can have a pointer, which points to another element in the set
+* A priority queue is a set that support the extract-max operation
+* Each set elements is identified by a key, and it can have optional features
+	* It can have satellite data associated to it
+	* It can store a pointer, which points to another element in the set
 * Set operations can be queries or modifying operations
-	* A query always returns a pointer to an element in the set
-	* A modifying operation modifies the set
-		* INSERT(S,x) and DELETE(S,x)
-* Dynamic sets can be represented with different data structures: stacks
+* A query always returns a pointer to another element in the set: search, minimum, maximum, successor, predecessor
+* A modifying operation modifies the set itself: insert and delete
+* Dynamic sets can be represented with different data structures that use pointers: stacks, queues, linked lists, rooted trees
 
-# Stack
-* It is a pile of elements on top of each other
-* A new element is always added to the top of the stack: PUSH(S, x)
-* Elements are always removed from the top of the stack: POP(S)
-* Popping order is the reverse of the push order
-	* They follow the last in first out (LIFO) policy
+## Stacks
+* A stack is a pile of elements on top of each other, deriving its element from an actual stack of plates in a resturant
+* A new element is always added to the top of the stack with a push operation
+* Elements are also always removed from the top of the stack, with a pop operation
+* The popping order is the reverse of the push order: stacks follow a last in first out (LIFO) policy
+* Elements cannot be accessed from a stack if they are not at its top
+* The top element can be popped (read and removed), or it can be accessed without removing it
 * A stack is NOT a good data structure for sorting and it is not used for this purpose
 * Some applications of stacks
 	* Storing undo history in text editors
 	* Synthax parsing: evaluating missing parenteses
 		* I push open and close parenthesis to the stack and pop twice when I find matching parenthesis
 		* At the end of the file I require the stack to be empty
-* A stack of n elements can be implemented with an array S[1..n]
-* The S.top call returns the index of the top of the stack
-* STACK-EMPTY(S) and STACK-FULL(S) return true or false in O(1)
+* A stack of $n$ elements can be implemented with an array $S[1..n]$
+* A stack has a $S.top$ attribute that contains the index of the top element of the stack
+	* The top element of a stack is usually the last element (index $n$)
+	* If the stack is empty $S.top = 0$
+* Some basic stack operations
 
-```pascal
-STACK-EMPTY(S)
-	if S.top == 0
-		return True
-	else
-		return False
+\begin{algorithmic}
+\Statex
+\Procedure{STACK-EMPTY}{$S$}
+	\If{$S.top == 0$}
+		\State \Return TRUE
+	\Else
+		\State \Return FALSE
+	\EndIf
+\EndProcedure
+\Statex
+\Procedure{PUSH}{$S,x$}
+	\If{$S.top == S.lenght$}
+		\State \Return error "stack overflow"
+	\EndiF
+	\State $S.top = S.top + 1$
+	\State $S[S.top] = x$
+\EndProcedure
+\Statex
+\Procedure{POP}{$S$}
+	\If{\Call{STACK-EMPTY}{$S$}}
+		\State \Return error "stack underflow"
+	\Else
+		\State $S.top = S.top-1$
+		\State \Return $S[S.top+1]$
+	\EndIf
+\EndProcedure
+\Statex
+\end{algorithmic}
 
-STACK-FULL(S)
-	if S.top == S.lenght
-		return True
-	else
-		return False
-```
+* All these stack operations run in constant time
 
-* PUSH(S,x) is also O(1)
-* If the size of the stack is not infinite I need first to check if it is full
 
-```pascal
-PUSH(S,x)
-	if not STACK-FULL(S)
-		S.top = S-top + 1
-		S[S.top] = x
-	else
-		error "stack is full, cannot push"
-```
+## Queue
+* A queue is a line of elements that behaves like a line of people in a shop
+* In a queue I use a FIFO policy instead of a LIFO policy
+* I add elements from the tail of the queue with the enqueue procedure and extract them from its head with the dequeue procedure
+* Elements can be always enqueued, but only the element that sat in the queue the longest can be dequeued
+* It is not possible to access elements in the middle of the queue
+* The element at the head of the queue can be dequeued or also read without removing it
+* Queues are used for scheduling processes in operating systems and for reservations for accessing a shared resource
+* A queue of $n-1$ elements can be implemented with an array $Q[1...n]$
+* Queues are circular, there is no end and beginning for their representaion on the array
+	* An empty elements marks where the queue ends and starts
+*  The array must be $1$ element longer than the queue because I need an empty element for marking the end of the queue
+* $Q.head$ is the index of first element of the queue
+* $Q.tail$ is the index of the last element of the queue $+ 1$, it is the index of the spacer that marks the end of the queue
+		* $Q[Q.tail]$ is always an empty element!
+* The queue spans positions $Q[Q.head...Q.tail-1]$ in circular order
+* A queue is empty when $Q.head = Q.tail$
+	* A new queue is initialized with $Q.head = Q.tail = 1$
+* A queue is full when $Q.head = Q.tail + 1$ (circular case, the queue wraps around the end of the array) or when $Q.head = 1$ and $Q.tail = Q.lenght = n$ (linear case. the queue does not wrap around the end of the array)
 
-* POP(S) returns the element we popped and removes it from the stack
+\begin{algorithmic}
+\Statex
+\Procedure{ENQUEUE}{$Q,x$}
+	\State $Q[Q.tail] = x$ \Comment{$Q[Q.tail]$ is always empty}
+	\If{$Q.tail == Q.lenght$} \Comment{in this case I wrap around the end of the array}
+		\State $Q.tail = 1$
+	\Else
+		\State $Q.tail = Q.tail + 1$
+	\EndIf
+\EndProcedure
+\Statex
+\Procedure{DEQUEUE}{$Q$}
+	\State $x = Q[Q.head]$
+	\If{$Q.head == Q.lenght$} \Comment{in this case I wrap around the end of the array}
+		\State $Q.head = 1$
+	\Else
+		\State $Q.head = Q.head + 1$
+	\EndIf
+	\State \Return $x$
+\EndProcedure
+\Statex
+\end{algorithmic}
 
-```pascal
-POP(S)
-	if not STACK-EMPTY(S)
-		S.top = S.top - 1
-		return S[S.top + 1]
+* In queue and dequeue operations, the pointers $Q.head$ and $Q.tail$ always move forward, running behind each other
+* When one of them reaches $Q.lenght$, it wraps around the end of the array and becomes $1$
+* Both operations require constant time
 
-	else:
-		error "stack empty, nothing to pop"
-```
-
-# Queue
-* In a queue I use a FIFO policy instead of a LIFO
-* I add elements to the queue with the enque operation in O(1)
-	* New elements are added at the end of the queue
-* Elements are removed with the dequeue operation
-	* They are always removed from the top of the queue
-* Also queues can be implemented with arrays
-* Queues are circular, there is no end and beginning for the array (!)
-	* For n elements I need an array of n+1 size (!)
-	* This is because I need an empty element for marking the end of the queue
-* I define several attributes for the queue
-	* Q.head is the index of first element of the queue
-	* Q.tail is the index of the last element of the queue + 1, it is the next available position
-		* It points to an empty element of the array (!)
-* Initally I have that Q.head = Q.tail = 1
-* The queue is full when Q.head = Q.tail + 1 (circular case) or when Q.head = 1 and Q.tail = Q.lenght (linear case)
-
-```pascal
-QUEUE-EMPTY(Q)
-	if Q.head == Q.tail
-		return True
-	else
-		return False
-
-QUEUE-FULL(Q)
-	if Q.head == Q.tail + 1 or (Q.head == 1 and Q.tail = Q.lenght)
-		return True
-	else
-		return False
-
-ENQUEUE(Q,x)
-	if QUEUE-FULL(Q)
-		error "Queue is full, cannot add"
-	Q[Q.tail] = x
-	if Q.tail == Q.lenght
-		Q.tail = 1
-	else
-		Q.tail = Q.tail + 1
-
-DEQUEUE(Q)
-	if QUEUE-EMPTY(Q)
-		error "Queue is empty, nothing to dequeue"
-	x = Q[Q.head]
-	if Q.head == Q.lenght
-		Q.head = 1
-	else
-		Q.head = Q.head + 1
-	return x
-```
 
 # Arrays
 * They are easy and fast to use, they can implement many data structures
