@@ -575,7 +575,6 @@ $$ T(n) = O(n)$$
 	* The other data can already be sorted following another criterion and I may need to not alter this
 * An algorithm that sorts without altering the order of equal keys is said to sort in place
 
-
 ## Insertion sort
 * Intuition: It is like arranging card in order in your hand by picking one at a time and placing it in the right position, by comparing it with all the other cards already in your hand
 * I always work on the same array but I put a moving boundary $i$ before which all the elements are sorted
@@ -835,6 +834,9 @@ $$ T(n) = \Theta(n\log{n})$$
 * In the average case I have a randomly ordered array
 	* I expect a mix of balanced and unbalanced splits randomly distributed along the recursion tree
 	* The average case running time is similar to the best case, $\Theta(n \log{n})$
+* The choice of the pivot influences the performances of quick-sort, since it affects the proportionality of the split
+	* The solution presented here is to choice always the last element as a pivot
+	* Another approach is to pick 3 values from the array and choose their median as a pivot
 
 
 
@@ -842,11 +844,7 @@ $$ T(n) = \Theta(n\log{n})$$
 
 
 
-* The running time depends on wether the array is balanced or not
-	* This in turn depends on the choice of the pivot element x
-	* The choice of the pivot influences the running time (!)
-	* The array is balanced if the pivot cause a constant proportional split
-	* If the array is balanced we are in the best case
+
 * The worst case running time is $\Theta(n^2)$ (unbalanced array) and the average and best case running times are $\Theta(n\log{n})$
 	* In practice we are almost always in the best case or close to it (!)
 * The array is maximally unbalanced when it is already sorted (!)
@@ -867,16 +865,13 @@ $$ T(n) = \Theta(n\log{n})$$
 	* I can either randomize the input or the choice of the pivot
 * Also quick-sort sorts is able to sort in place
 
-
-# Some reflections on sorting
-* All the algorithms we saw sort in place with the exception of MERGESORT
-* A sort can be stable or not
-	* Sorting stability is the preserving of the orders of records with equal keys
-	* This is important for sorting keys with satellite data, to not mix up the satellite data order
-		* If I order column A and then column B, I see that column A is not ordered anymore even for entries with the same keys on column B
-	* Insertion sort and mergesort are stable, heapsort and quicksort are not stable
+# Some reflections on comparison-based sorting
 * All the algorithms we saw sort by comparing elements
-* The lower bound for comparision-based sorting is $\Omega(n \log{n})$ because in the worst case I need to do at least n log n comparisons
+* All of them sort in place with the exception of MERGESORT
+* The worst-case running time of insertion-sort and quick-sort is $O(n^2)$
+* Heap-sort and merge-sort have a guaranteed running time of $O(n\log{n})$ on every possible instance
+* Insertion-sort is linear in the best case
+* The lower bound for comparision-based sorting is $\Omega(n \log{n})$ because in the worst case I need to do at least $n\log{n}$ comparisons
 	* Any comparison sort alogrithm must be able to sort any possible input of size n
 	* There are n! possible permutations of an array of size n, and the algorthm must be able to solve all of them
 	* Every permutation requires a different rearrangement of the array in order to be sorted
