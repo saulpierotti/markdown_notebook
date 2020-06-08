@@ -782,6 +782,8 @@ $$T(n)=\begin{cases}\Theta(1) & \text{if } n=1 \\ 2T(n/2)+n & \text{if } n>1 \en
 	* When I find an element taht belogs to $A[p...i]$ I increase $i$ of 1 to make space for it and I place it there by swapping with the current $A[i]$
 	* When I reach $A[r-1]$ the unrestricted region $A[j...r-1]$ disappears
 	* As a last thing I swap the pivot from the end of the array to where it belongs ($A[i+1]$)
+* The conquer and combine parts are really easy in quick-sort, but divide requires effort
+	* This is sharply different from MERGESORT, where combine is the most demanding part
 
 \begin{algorithmic}
 \Statex
@@ -811,48 +813,37 @@ Initial call $\implies$ \Call{QUICK-SORT}{$A,1,A.lenght$}
 \Statex
 \end{algorithmic}
 
-* The conquer and combine parts are really easy, but divide requires effort
-	* This is sharply different from MERGESORT, where combine is the most demanding part
-* Divide: we want to find indexes p, q, r such that the elements $A[p...q-1] \leq A[q] \leq A[q+1...r]$
-	* q is determined by the PARTITION function
-* Partioning: I want to create 4 zones with indeces p, i, j, r such that $A[p...i] \leq A[r] < A[i+1...j]$
-	* A[r]=x is called pivot element and it can be choosen freely
-	* Usually the implementation places x at the end of the array
-	* The region $A[j+1...r-1]$ is unrestricted
-	* The value returned by the partitioning step will be the q of the divide step
-	* i is initialized to p-1 so that there are no elements between them
-	* In the for loop j is always mooving
-		* If the new element is bigger than x, nothing happens
-		* If it is smaller, I increse i of 1 and place it in the new i position
-		* What was previously in the i position is necessarilyh bigger than x, since it was in the j region, and so I place it as element j
-		* After the end of the for I have a series of elements smaller than x, a series of elements bigger, and x itself at the end
-		* I exchange x with the element i+1, which is necessarily bigger than it
-		* Now x is what splits the array in a smaller and a bigger subarray, and so I return its index (i+1 now) which will be assigned to q
+* The partitioning procedure performs constant time operations and has a for loop
+* The for loop contains constant time operations and it is executed $n-1$ times
+* The running time of partition is $\Theta(n)$
+* quicksort has a cost of $O(1)$ in the base case while in the recursive case it calls partition ($\Theta(n)$) and it makes 2 recursive calls on an input size which depends on the partitioning used
+* I am in the worst case when the partitioning is maximally unbalanced, since the recursion tree will have its maximum height ($n$)
+	* In this case one recursive call will be called on $0$ element and one on $n-1$ elements
+	* If I am choosing the last elements as a pivot, the worst case occurs when the array is already sorted
+	* In the worst case the recurrence equation is
+$$ T(n) = T(n-1)+T(0)+\Theta(n) = T(n-1) + \Theta(n)$$
+$$ T(n) = \sum_{i=0}^{n-1} n-i = \sum_{k=1}^n k = \Theta(n^2)$$
+* The best case occurs when the partitioning is always perfectly balanced
+	* In this case the recursive calls are done on input sizes $n/2$ and $n/2-1$
+	* At recursion level $i$ I have $2^i$ recursive calls on an input size of $n/2^i$
+	* The total cost at each level is $n$ and I have $\log{n}$ levels
+	* The recursion equation of the best case is
+$$ T(n) = 2T(n/2) + \Theta(n)$$
+$$ T(n) = \Theta(n\log{n})$$
+* Actually I am in the best case when the split has constant proportionality, even if it is not perfectly balanced
+* In the average case I have a randomly ordered array
+	* I expect a mix of balanced and unbalanced splits randomly distributed along the recursion tree
+	* The average case running time is similar to the best case, $\Theta(n \log{n})$
+
+
+
+
 * The base case is when the subarray has 3, 2, or 1 elements
 	* In this case the PARTITION function puts them in order
 * Conquer: the 2 subarrays $A[p:q-1]$ and $A[q+1:r]$ are sorted recursively with QUICKSORT
 * Combine: trivial, everithing is sorted because QUICKSORT sorts in place(!)
 
 
-```pascal
-QUICKSORT(A, p, r)
-	if p < r
-		q = PARTITION(A, p, r)
-		QUICKSORT(A, p, q-1)
-		QUICKSORT(A, q+1, r)
-
-PARTITION(A, p, r)
-	x = A[r]
-	i = p - 1
-	for j = p to r - 1
-		if A[j] <= x
-			i = i + 1
-			exchange A[i] and A[j]
-	exchange A[i+1] and A[r]
-	return i + 1
-
-QUICKSORT(A, 1, A.lenght)
-```
 
 * The running time depends on wether the array is balanced or not
 	* This in turn depends on the choice of the pivot element x
