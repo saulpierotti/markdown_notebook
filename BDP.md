@@ -590,3 +590,6 @@
 * The access is network-based, relies on resource sharing and it is assumed to be infinitely elastic
 * It has a pay-per-use model
 * Above the IaaS/PaaS/SaaS axis there is the isolation model dimension and the deployment model dimension
+
+
+* Docker containers are lighter than traditional VMs since they include only what is different between the host and the guest so to be able to run applications on the guest
