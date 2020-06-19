@@ -1,32 +1,78 @@
-% Laboratory of Bioinformatics 1 part B - Capriotti
+ Laboratory of Bioinformatics 1 part B - Capriotti
 % Saul Pierotti
 % \today
 
 # Introduction
-* There will be a project for the final, to be submitted for May 18
-* Protein structure is more conserved than sequence
-* When sequence identity is sufficiently high, we can tranfer structural information
+* Protein structure is more conserved than sequence: proteins sharing high sequence identity usually have similar structures
+* When sequence identity is sufficiently high, we can exploit the sequence alignment to tranfer structural information between proteins
 * A structural alignment is a rigid body transformation of 2 subsets from 2 sets of points that maximizes a given distance metric
-	* The subsets need to have the same number of elements and define the corrispondence set
+	* The subsets need to have the same number of elements and define the corrispondence set for the alignment
 	* Finding the corrispondece set is an NP-hard problem
-	* Finding the optimal rigid transformation of the corrispondence set is $\Theta(n)$
+	* Finding the optimal rigid transformation of the corrispondence set is an $O(n)$ problem
+* Read Chothia C, Lesk AM. 1986
+* Measuring sequence similarity allows to eastimate structural similarity
+* In order to measure sequence similarity I need to
+	* Define a distance metric
+	* Find the alignment that minimizes that metric
+	* Evaluate the statistical significance of the alignment
+* The distance among 2 sequences is evaluated according to the amount of mutation incurred between them
 * The distance of 2 sequences can be evaluated with a substitution matrix and a gap penalty
+	* The score of an alignment is the sum of the pairwise scores
+	* A gap can be evaluated with a linear penalty that depends only on its length, or with an affine penalty that values differently gap opening and extension
 * Global alignments are computed with the NW algorithm, local alignments with the SW
+* Local alignment aims at finding the most similar subsequence
 * Local alignments are useful for multidomain proteins, when only some domains are conserved
-* The significance of an alignment score can be evaluated by comparing with the score distribution for random alignments
+* The significance of an alignment score can be evaluated by comparing with the score distribution of random alignments
 * Sanders and Schneider developed a twilight curve before Rost
-	* Sander's curve becomes straight after 80 residues
-	* Rost's curve does never become straight
-* Over 100 residues, under 25% of sequence identity only 10% of the sequences are homologous, while above 20% 90% of them are
-* Over 30% identity sequences longer than 100 residues have similar structures, but this does NOT mean that under 30% the structure is necessarily different!
+	* Read paper
+	* They developped a curve that separates pairs of proteins with more than 70% structural identity and pairs with less than 70% structural identity
+	* This plot was in a 2D space of alignmnent lenght vs sequence identity
+	* Sander's curve becomes straight after 80 residues, while Rost's curve never becomes straight
+* Rost: above 20% of sequence identity 90% of the alignments correspond to homologous proteins, while below 20% only 10% of the alignment are homologous
+	* This is true for alignments longer than 100 residues!
+	* Over 20% identity sequences longer than 100 residues have similar structures, but this does NOT mean that under 20% the structure is necessarily different!
 * Proteins with low sequence identity but high structural similarity are referred to as remote homologs
-* Structures can be predicted by comparative modeling, threading, ab initio
-* If I want to use sequence identity for trasferring annotation features, I need to identify the problem-specific twilight region
-	* For subcellularlocalization, the twilight zone is 50% (!)
+	* In remote homologs the sequence alignment is often wrong
+* Rost distinguished 3 zones of protein alignments
+	* In the safe zone (abova 30% of identity) practically all the alignments are true homologs
+	* In the twilight zone (between 20% and 30%) there are many false positives
+	* In the midnight zone (below 20%) homologs are abundant (remote homologs) but not recognizable among in a sea of non-homologs
+* Comparative modelling matches a protein of unknown structure (target) with a potential template that has a structure through sequence alignment, it produces the a model of the target from it and then it evaluates the model
+	* If the model is good I keep it, otherwise I try with a different template
+* Structures can be predicted by comparative modeling, threading, and ab initio predictions
+* Structures have various degrees of quality and usefullness
+	* Experimental NMR and X-Ray structures are around 1 $\AA$ resolution and can be used for studying catalytic mechanisms and for drug design
+	* Homology models have are comparable to structures of 4-1.5 $\AA$ resolution and can be produced when we can find a template with sequence identity above 30%
+		* They can be used for docking of small ligands, finding epitopes
+		* Real structures at this resolution can be used for molecular replacement (a method for solving the phase problem by using the diffraction pattern of a known structure)
+	* Below 30% identity I am in the zone were threading is needed
+		* These models are comparable to structures of 4 $\AA$ resolution
+		* They can be used for establishing broad functionality by comparison with other structures
+* Read Baker and Sali 2001 Science
+* If I want to use sequence identity for trasferring annotation features, I need to identify the problem-specific similarity threshold that allows a reliable transfer of features (a twilight zone)
+	* For subcellularlocalization, the twilight zone is 50%!
 * The sequence identity needed for transferring subcellular localization is higher than that required for structure
+	* Read Rost Nair 2002
+* Sequence idenitity can be used for assigning GO terms
+	* Read Sangar 2007
 * Function of proteins with really high sequence identity can be completely different
-* In remote homologs the sequence alignment is often wrong
-* Important residues in a sequence can be identified by comparing conservation levels
+	* Peroxisomal isocitrate dehydrogenase and cytosolic isocitrate dehydrogenase have 84.2% identity in 417 aa, but they have different subcellular localizations
+	* Yest GAL1 (Galactokinase) and GAL3 (regulatory protein) have 72.9% identity in 528 aa, but different function
+* Comparison of cytochrome C from different species
+	* CytC has 2 heme binding sites and 2 metal binding sites
+	* Human vs horse: 88% identity and 0.35 $\AA$ RMSD, all the binding sites conserved
+		* In this case sequence and structure alignment yield the same result
+	* Human vs Rhodobacter Sph.: 28% identity, 1.8 $\AA$ RMSD
+		* Binding sites are conserved but the sequence alignment aligns on of them wrongly
+		* Homology modelling is possible but after manual refinment of the alignment
+	* Human vs Rhodobacter Pal.: 29% identity and 1.3 $\AA$ RMSD
+		* All the binding sites are wrongly aligned: need for manual editing before homology modelling
+	* Human vs Arabidopsis: 13% identity, 3.5 $\AA$ RMSD
+		* Sequence alignment is almost completely wrong
+* Aligning sequence is not enough to recover information, not even for important residues
+	* Sequence alignments treat all the positions equally, they do not know what is important for us
+* We can detect important residues by comparing multiple structures and analysing conservation patterns
+* We can align sequences constraining the position of important residues by using a framework that can introduce positional dependencies (HMM!)
 
 # Structural alignment
 * Structural alignment is different from superimposition

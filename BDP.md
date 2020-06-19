@@ -341,36 +341,73 @@
 	* Storage and computing happens on the same machines, no separate areas
 
 # Cloud Computing
-* It is not the same as virtualization!
-* It is a pay-per-use model, an utility service
-* The infrastructure has a teorethical infinite capacity
-	* But you need infinite money to use it!
+* Cloud computing deals with supplying information and communication technologies as a service
+* It enables uniquitous access to shared pools of configurable system resources and higer level services that can be rapidly provisioned with minimal management effort, often over the internet
+* It is similar to a public utility in that achieves economy of scale and coherence
+* The core characteristics are that it is self-service and on-demand, network based
+* Physical resources are pooled and the user has no control over them
+* It uses a pay-per-use model
+* It is not the same as virtualization but it can employ virtualization to pool physical resources
+* The offer is elastic and can be adapted to user needs
+* The infrastructure has a teorethical infinite capacity, but you need infinite money to use it!
 * The model is focused on the concept of service, without the need of thinking about the underlying physical infrastructure
 * Infrastructure as a service (IaaS): the customer receives a machine with an OS
+	* It can provide storage, computational and network services and it is often virtualized
 * Platform as a service (PaaS): the customer manages data and software, but no direct access to the OS
 	* I can ask for a HTC-Condor cluster already functional, a parallel file system, an SQL database
 * Software as a service (SaaS): pre-formed environment entirely managed by the vendor
-	* Gmail infrastrucutre for companies
-* Deployment: public, hybrid private
-	* A private cloud is accessible only to insiders
-		* It is rarely with infinite resources
-	* A public cloud is AWS, which can be assumed infinite
+	* Gmail infrastrucutre for managing the email of a company
+* At the end, what matters for the user is the application: don't focus so much on the implementation!
+* The cloud paradigm has 3 main dimensions: service model (Iaas, PaaS, SaaS), deployment and isolation
+* Deployment refers to where the services are distributed and it can be public, hybrid or private
+	* A private cloud is accessible only to insidersa and it rarely has infinite resources
+	* A public cloud is AWS, which can be assumed as infinite
 	* An hybrid system is a private system that redirects peak requests to a public system
-	* I can also manage only sensitive data on a private system and non-sensitive data in a public cloud
-* Isolation: the scope of the cloud
+	* I could also decide to use a private system for sensitive data and a public cloud for non-sensitive data
+* Isolation concerns how I isolate the servies offered to different customers
 	* A dedicated cloud is dedicated to a scope (es. Bioinformatics)
-	* A multi-tenant cloud is multi-purpose
+	* A multi-tenant cloud is multi-purpose and is used by customers with different goals
 	* I can also consider a tenant as a group of customers (es. research group), that payed for a specifc QoS
+* The interaction of an end user with the cloud (es a Facebook user) must be
+	* Easy to access without any specific technology
+	* Private and secure
+	* It must provide means for authentication
+* Migrating an application to the cloud can be motivated by reduction of costs, business agility and savings on management
+* The choice of a public or private cloud can be influenced by the cost of WAN traffic, security concerns and integration with pre-existing applications
+* Migrating to a SaaS is not actually a migration but a chango of application
 * Web hosting is one of the most common cloud use cases
 * Public clouds can be adapted much quicker to the demand!
+* Multi-tiered application are organized into a data management tier, a business logic tier and a presentation tier
+	* If well designed it is possible to migrate the tiers independently to the cloud
 * A stateless service does not store the state (non-interactive web server)
-* A stateful service stores information about user interaction (a shopping cart)
+* A stateful service stores information about user interaction (a shopping cart
 	* It cannot be replicated easily!
 * A cloud-friendly application is stateless and distributed
 	* If there is a rise in requests I can just duplicate the system and create a new instance
+* Cloud-friendly applications are like cattle: I can easily replace them when needed
+* Legacy applications are like pets: I cannot replicate them and I need to take care of them
+* The reduction of costs in the cloud is due to economy of scale and less requirements for management
+	* Cooling systems are cheaper if used for huge datacenters
+	* Lower hardware costs due to the number of units bought
+* The cloud democratizes resource access to small actors, since it make the resources more finely divideable
+* SaaS applications provide ubiquitous access to resources from any device without specific software needed
 * Cloud risks: security, privacy, vendor lock-in, data loss
 	* In the terms of service for standard accounts there is no guarantee of continuity, reliability, ecc
 	* In many case cloud services are not completely mature
+
+# Virtualization
+* Virtualizing means creating a virtual version of a physical resource through an abstraction layer that hides the underlying implementation
+* Virtual machine are hardware-independent and their resource usage can be dynamically adapted
+* Thanks to virtualization I can consolidate the services provided by many servers
+* Applications are sandboxed in a virtual environment
+* Virtual applications can be provisioned on demand
+* Virtualization is vulberable to bugs and hacking, since many different hosts and OS are co-existing in the same hardware
+	* A VM can have unauthorized acces to data of another VM
+	* Some hypervisors work directly at the level of the hardware: everything can be compromised
+* Performances in a virtual environment can be worse due to the overhead for the physical host
+	* This is true particularly for I/O operations
+* The cloud can be provised with or without virtualization
+* Provisioning of VMs is NOT cloud computing if it does not respect the self-service, on-demand, network-based, elastic offer and pay-per-use paradigms
 
 # Databases
 * Big data are typically stored in relational or non-relational databases
@@ -506,16 +543,35 @@
 * Each job on the Grid is identified by an URL containing the address of the server who accepted it and a random string
 
 # HPC
-* The first machines for HPC were Vector machines
-* They were using single powerfull processors (small for now!)
-* Subsequently they shifted to massively parallel processors (MPP)
-	* It uses many standard processors connected in the same machine
+* Some glossary
+	* GFLOPs: billions of floating point operations per second
+	* TDP: thermal design power, it is the maximum amount of heat that the cooling system must be able to dissipate in typical operations
+* The max GFLOP of a system can be calculated from the number of sockets, cores per socket, clock frequency and FLOPs per cycle
+* The first machines for HPC were vector machines
+	* They are contrapposed to the currently used scalar machine for the fact that they could operate directly on vectors with their instruction set
+	* They were using single powerfull processors (small for now!)
+* CRAY-1 (1976) was one of the first vector machines
+	* It was able of 80 MFLOPs in scalar operations and 160/250 MFLOPs in vecotr operations
+	* It was consuming 115 kW for operation + 330 kW for refrigeration!
+* CRAY-XMP (1982 and 1984) had first 2 and then 4 processors and was capable of 2*200 MFLOPs (800 MFLOPs with 4 processors)
+* CRAY-2 (1985) had 4 processor and was able of 1.9 GFLOPs
+* Subsequently in the 80s there was a shift for vector machines to massively parallel processors (MPP)
+	* They used many standard processors connected in the same machine
 * In MPP processors need to communicate, since they are operating together on a single job
 	* There are low-latency connections between them and specialized netwroks
 * In time many dedicated MPP supercomputers were produced
-* It is also possible to use a cluster of commercial-grade servers for HPC
+* In 1985 Thinking Machines produced the CM-1, and then the CM-200 and CM-5
+	* CM-200 had 65536 1-bit CPUs and was capable of 40 GFLOPs
+* Intel Paragon was lauched in 1993 and had 4000 Intel i860 RISC microprocessors
+	* It was capable of 184 GFLOPs
+* ASCI Red MPP (1997) was capable of 1.4 TFLOPs and it was the first supercomputer above 1 TFLOP
+* IBM BlueGene was designed as multiple SoCs (system on a chip) and was able of 20 PFLOPs
+	* It was focused on low power consumption
+* A cluster is a paralle computer system made of an integrated collection of independent nodes (each of them capable of autonomous operation) and derived from products developped for other stand-alone purposes
+* It is possible to use a cluster of commercial-grade servers for HPC
 	* In this case I need a really low-latency network to make them cooperate effectively
 * Most HPC systems are built for the industry, not for research
+* Main applications of HPCs are astronomy, molecular dynamics, earth simulations, fluid dynamics, brain simulations, general relativity calculations
 * The speedup of an application when it runs in parallel on P processors is the ratio among the running time on a sequential system and that on the parallel system
 	* If the speedup is equal to the number of processors it means that there is no overhead for the parallism: perfect linear speedup
 * The efficiency of a parallel system is the ratio among the speedup and the number of processors
@@ -525,19 +581,38 @@
 	* It leaves the serial processing part of the job untouched while it divides the parallel computation by the number of nodes
 	* The maximum possible speedup is $S= 1/\alpha$ where $\alpha$ is the serial fraction of the computation
 * HPC systems can use shared memory (RAM) in order to share information among threads and processes
+	* Processes can run in the same or different processors when using shared memory
+	* This is an efficient mean for sharing information among processes
 * In uniform memory access (UMA) all the processors share uniformly the same RAM
 * In non-uniform memory access (NUMA) the memory access time depends on the location of the memory relatively to the processor
 * When I am using shared memory I need to ensure that also the CPU caches are syncronised!
-* libnuma can be used for setting up a NUMA environment
+* A Race condition is when the output of a parallel program changes by changing the order of execution of its threads, and it is generally bad
+* The NUMA API is used for setting shared memory allocation policies
+	* libnuma can be used for setting up a NUMA environment
 * OpenMP is another API used for writing multithreaded applications
 	* It shares variables among threads and greatly simplifies parallel programming in C/C++/Fortran
-	* It can cause a Race condition
-* A Race condition is when the output of a parallel program changes by changing the order of execution of its threads
+	* It can cause a Race condition when common variables are unintentianally introduced in the threads
+	* I can use synchronization to protect data conflicts, but it is computationally expensive
 * Distributed memory refers to a multiprocessor system where each CPU has its own memory
 	* In this case the communication among threads in mediated by explicit send/receive calls
-* MP is an API used for creating distributed HPC
+	* Each CPU can only operate on local data
+* MPI is an API used for creating distributed HPC
+	* Its core is representedby the functions `MPI_Send` and `MPI_Recv`
+	* The data to be sent or received is blocked, meaning that the function returns only when the data can be safely used
+	* The reduction operation can be used for summarising a set of numbers ot a smaller set of numbers
+		* It takes the input from tje distributed processes and then places the result only in the root process
 * Hardware coprocessors can be used for accelerating FLOPS
-	* The GPU is the most used coprocessor
+* Coprocessors are not a new idea: in 1980 the Intel 8087 was on of the first floating point coprocessors
+	* The 8087 was the first coprocessor to use the x87 instruction set
+	* The x87 was adopting the important IEE74 standard for floating point operations
+* Vector coprocessors in time were absorbed into CPUs and now are a main part of every CPU
+* The GPU is one of the most used coprocessors
+* In the 2006 CUDA was born: it is a parallel computing platform for performing general computation in GPU
+* A GPU is driven by a CPU that manages the code to be executed on GPUs, the memory of the GPU and the movements between CPU and GPU
+* A modern siliconn chip contains integrated components: in the same chip I can have CPU, GPU, chaches
+* HPC applications can be bounded by computing or by bandwidth
+* When comparing performances of CPU and GPU, be sure that the applications used for the comparison are optimized for both CPU and GPU and that the algorithm is state of the art!
+* When you see claims of 100+ speedup due to GPU, be suspicious!
 
 # Containers
 * A container is a framework used on top of other infrastructures, typically a cloud
