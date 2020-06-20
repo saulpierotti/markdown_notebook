@@ -31,8 +31,7 @@
 * Rost: above 20% of sequence identity 90% of the alignments correspond to homologous proteins, while below 20% only 10% of the alignment are homologous
 	* This is true for alignments longer than 100 residues!
 	* Over 20% identity sequences longer than 100 residues have similar structures, but this does NOT mean that under 20% the structure is necessarily different!
-* Proteins with low sequence identity but high structural similarity are referred to as remote homologs
-	* In remote homologs the sequence alignment is often wrong
+	* Proteins with low sequence identity but high structural similarity are referred to as remote homologs
 * Rost distinguished 3 zones of protein alignments
 	* In the safe zone (abova 30% of identity) practically all the alignments are true homologs
 	* In the twilight zone (between 20% and 30%) there are many false positives
@@ -40,7 +39,7 @@
 * Comparative modelling matches a protein of unknown structure (target) with a potential template that has a structure through sequence alignment, it produces the a model of the target from it and then it evaluates the model
 	* If the model is good I keep it, otherwise I try with a different template
 * Structures can be predicted by comparative modeling, threading, and ab initio predictions
-* Structures have various degrees of quality and usefullness
+* Structures have various degrees of quality and usefulness
 	* Experimental NMR and X-Ray structures are around 1 $\AA$ resolution and can be used for studying catalytic mechanisms and for drug design
 	* Homology models have are comparable to structures of 4-1.5 $\AA$ resolution and can be produced when we can find a template with sequence identity above 30%
 		* They can be used for docking of small ligands, finding epitopes
@@ -48,31 +47,12 @@
 	* Below 30% identity I am in the zone were threading is needed
 		* These models are comparable to structures of 4 $\AA$ resolution
 		* They can be used for establishing broad functionality by comparison with other structures
-* Read Baker and Sali 2001 Science
-* If I want to use sequence identity for trasferring annotation features, I need to identify the problem-specific similarity threshold that allows a reliable transfer of features (a twilight zone)
-	* For subcellularlocalization, the twilight zone is 50%!
+* If I want to use sequence identity for trasferring annotation features, I need to identify the problem-specific twilight region
+	* For subcellularlocalization, the twilight zone is 50% (!)
 * The sequence identity needed for transferring subcellular localization is higher than that required for structure
-	* Read Rost Nair 2002
-* Sequence idenitity can be used for assigning GO terms
-	* Read Sangar 2007
 * Function of proteins with really high sequence identity can be completely different
-	* Peroxisomal isocitrate dehydrogenase and cytosolic isocitrate dehydrogenase have 84.2% identity in 417 aa, but they have different subcellular localizations
-	* Yest GAL1 (Galactokinase) and GAL3 (regulatory protein) have 72.9% identity in 528 aa, but different function
-* Comparison of cytochrome C from different species
-	* CytC has 2 heme binding sites and 2 metal binding sites
-	* Human vs horse: 88% identity and 0.35 $\AA$ RMSD, all the binding sites conserved
-		* In this case sequence and structure alignment yield the same result
-	* Human vs Rhodobacter Sph.: 28% identity, 1.8 $\AA$ RMSD
-		* Binding sites are conserved but the sequence alignment aligns on of them wrongly
-		* Homology modelling is possible but after manual refinment of the alignment
-	* Human vs Rhodobacter Pal.: 29% identity and 1.3 $\AA$ RMSD
-		* All the binding sites are wrongly aligned: need for manual editing before homology modelling
-	* Human vs Arabidopsis: 13% identity, 3.5 $\AA$ RMSD
-		* Sequence alignment is almost completely wrong
-* Aligning sequence is not enough to recover information, not even for important residues
-	* Sequence alignments treat all the positions equally, they do not know what is important for us
-* We can detect important residues by comparing multiple structures and analysing conservation patterns
-* We can align sequences constraining the position of important residues by using a framework that can introduce positional dependencies (HMM!)
+* In remote homologs the sequence alignment is often wrong
+* Important residues in a sequence can be identified by comparing conservation levels
 
 # Structural alignment
 * Structural alignment is different from superimposition
@@ -105,7 +85,7 @@
 * When I want to determine the distribution of scores, it is better to have an analitycal distribution than an empirical one
 	* I don't have tools for working with empirical distributions (!)
 
-## CE algorthm
+## CE Algorthm
 * Compares AFPs composed of 8 residues, stiches them together and finds an optimal path trough them with dynamic programming
 * It gives a statistical score
 * The alignment is the longest continuous path of AFPs in a similarity matrix S
@@ -138,7 +118,7 @@
 * The SSE matching gives correspondences among SSEs, and can be used to yeld an initial sequence alignment
 * Connectivity (topology) can be neglected, considered but allow for any number of missing SSEs (soft connectivity) or allow only for an equal number of unmatched SSEs (strict connectivity)
 
-## MAMMOTH algorithm
+## MAMMOTH Algorithm
 * Matching molecular models obtained from theory (MAMMOTH) is one of the fastest algorithms
 * The protein is represented as a set of unit vectors among Ca
 * It is based on dynamic programming
@@ -150,7 +130,7 @@
 	* THe alignment score is obtained by normalizing the URMS with its expected value
 * The path trough the matrix is found with dynamic programming by a global alignment without end-gap penalties
 
-# RNA structure
+# RNA Structure
 * Most RNAs are around 50 bp
 * Secondary structure of RNAs is usually represented with parenteses
 	* I cannot represent pseudo-knots in this way
@@ -170,7 +150,7 @@
 * The twilight zone of RNA sequence alignment is around 60%
 * Secondary structure identity (PSS) correlates well with tertiary structure identity (PSI) but not with sequence identity
 
-# Multiple sequence alignment
+# Multiple Sequence Alignment
 * In MSA it is easier that in pariwise alignments to identify conserved regions, that could be functionally important
 	* We can observe blocks of conservation in MSAs
 * I can transform a MSA in a profile of the sequences
@@ -260,7 +240,7 @@
 	* If the score improves, keep the new MSA otherwise keep the previous one
 	* This is iterated until convergence on a local minimum
 
-## Consistency-based MSA
+## Consistency-Based MSA
 * Consistency: if residue X is aligned with Y and Y is aligned with Z, then X is aligned to Z
 	* This is necessarily true in an MSA
 * In reverse, I can use consistency to align two sub-alignments: I take advantage of transitivity of alignments
@@ -310,21 +290,21 @@
 	* Multi-threading can greatly speed-up these softwares, since there is a lot of parallel computing
 	* Many algos take advantage of parallel processing
 
-# Probabilistic sequence models
-* A model is an object producing different outcomes (sequences) from a probability distribution
+# Probabilistic Sequence Models
+* Generative definition: a model is an object producing different outcomes (sequences) from a probability distribution
 * The probability distribution in sequence space determines the specificity of the model
 * The probability for model M of generating sequence s is $p(s|M)$
-* In the reverse, I can see a model as an object that given an outcome computes a probability value
-* Models can be trained: I can adjust the probability density function over the sequence space from a set of known sequences
+* Associative definition: a model is an object that given an outcome computes a probability value
+* Models are most useful if they are trainable systems
+* In a trainable model I can estimate the probability density function over the sequence space from a set of known sequences with a learning algorithm
 	* If I want to model the globin family, I can train my model with sequences that are know to belong to that family
-* After training, I can use the model to compute the probability of an unknown sequence to belong to the globin family
+	* After training, I can use the model to compute the probability of an unknown sequence to belong to the globin family
 * The model M given a sequence s returns the probability $p(s|M)$
-	* This is the probability of the model generating the sequence, not the sequence coming from the model
-* Most times I am interested in the probability of a given sequence s to come from the model M
+	* This is the probability of the model generating the sequence, not the probability of the sequence coming from the model
+* Most times I am interested in the probability of a given sequence s to come from the model M $p(M|s)$
 	* This is the probability of a sequence being part of a specific family
-	* This is $p(M|s)$
 * In order to compute $p(M|s)$ from $p(s|M)$ I need to use Bayes theorem
-	* $p(M|s) = p(s|M)p(M)/p(s)$
+$$p(M|s) = p(s|M)p(M)/p(s)$$
 * The priors $p(M)$ and $p(s)$ needs to be estimated to do the conversion
 	* $p(M)$ is the a priori probability of any sequence belonging to the model
 		* This is the relative abundance of the class, relative to all possible classes
@@ -332,68 +312,67 @@
 	* $p(s)$ is the a priori probability of the sequence and cannot be estimated reliably
 * In order to avoid specifing $p(s)$ I can compare the probabilities of 2 different models
 	* Instead of looking for $p(M_1|s)$, I look for $p(M_1|s)/p(M_2|s)$
-	* $\frac{p(M_1|s)}{p(M_2|s)} = \frac{p(M_1|s)p(M_1)}{p(s)} \frac{p(s)}{p(M_2|s)p(M_2)} = \frac{p(M_1|s)p(M_1)}{p(M_2|s)p(M_2)}$
+$$\frac{p(M_1|s)}{p(M_2|s)} = \frac{p(M_1|s)p(M_1)}{p(s)} \frac{p(s)}{p(M_2|s)p(M_2)} = \frac{p(M_1|s)p(M_1)}{p(M_2|s)p(M_2)}$$
 	* In this way, the conditional probabilities of the sequences are easy to estimate from the models themselves
-	* The ratio $p(M_1)/p(M_2)$ can be estimated from the relative abundance of the 2 classes
+	* The ratio $p(M_1)/p(M_2)$ can be estimated from the relative abundance of the 2 classes (the number of proteins in the 2 families)
 * To make the calculation more standard, I can systematically compare any model to the NULL model
 * The NULL model N is a model that generates all the possible sequences with equal probabilities, only depending on the residue frequencies
 
-# Markov Models
-* HMM have their most frequent application in speech recognition
+## Markov Models
+* Markov Models have their most frequent application in speech recognition
 * A simple Markov Model, or Markov chain is a collection of states associated with probabilities for all the possible transitions between them
-* It is useful for modeling the probability of a sequence of states that only depend on the rpeciding state in the sequence
+* It is useful for modeling the probability of a sequence of states that only depend on the preciding state in the sequence
 * I can consider each residue as a state, and I can assume that its state depends only on the previous residue
 * The Markov model will contain all the possible residues and their transition probabilities
 * In this framework, the transition probability is the probability that residue B follows residue A in position $x_i$ of a sequence
-* The trasition probability $a_{AB}$ is the conditional probability of the position i+1 being B given that position i is A
-	* $a_{A,B} = p(x_{i+1} = B| x_i = A)$
+* The trasition probability $a_{AB}$ is the conditional probability of the position $i+1$ being B given that position i is A
+$$a_{A,B} = p(x_{i+1} = B| x_i = A)$$
 * The probability of a sequence x of lenght n is the product of all the transition probabilities at the various positions
 	* Here I am assuming independence of each transition
-	* $p(x) = p(x_n|x_{n-1})*p(x_{n-1}|x_{n-2})*...*p(x_2|x_1)*p(x_1)$
-	* $p(x) = p(x_1)*\prod_{i=2}^na_{x_i-1,x_i}$
-	* I can also add a BEGIN and an END state to my model for avoiding irregularities
-		* In this case the transition probability from BEGIN to a state is the probability of starting with that state
-		* This is symmetrical for transitions from a state to the END state
-		* We treat both BEGIN and END states as the same state 0 so $a_{0k}$ and $a_{j0}$ are transitions from BEGIN and to END
-			* There is noambiguity since transitions are only from BEGIN and only to END
+$$p(x) = p(x_n|x_{n-1}) p(x_{n-1}|x_{n-2})...p(x_2|x_1) p(x_1)$$
+$$p(x) = p(x_1) \prod_{i=2}^n p(x_i|x_{i-1}) = a_{BEGIN,x_1} \prod_{i=2}^n (a_{(i-1),(i)}) a_{x_n, END}$$
+* I can also add a BEGIN and an END state to my model for avoiding irregularities
+	* In this case the transition probability from BEGIN to a state is the probability of starting with that state
+	* This is symmetrical for transitions from a state to the END state
+	* We treat both BEGIN and END states as the same state 0 so $a_{0k}$ and $a_{j0}$ are transitions from BEGIN and to END
+		* There is no ambiguity since transitions are only from BEGIN and only to END
 * Let's say I want to model the probability that a given sequence is a CpG island
 	* In such sequence, $a_C,G$ would be much higher than elsewhere
 	* I can create 2 different Markov chains $M_+$ and $M_-$ for modelling the 2 sequences: CpG island and non CpG island
 	* The 2 models will have the same states but different transition probabilities
 	* To determine the likelihood S of a sequence x being a CpG island, i can compare the log-odds of the 2 models
-		* $S(x) = \log{\frac{P(x|M_+)}{P(x|M_-)}} = \sum_{i=1}^n \log{\frac{a^+_{x_{i-1},x_i}}{a^-_{x_{i-1},x_i}}}$
-* I can define the probability of a sequence $s_i$ to be generated by a family described by the model $M$
-	* $p(s_i|M)$
+$$S(x) = \log{\frac{P(x|M_+)}{P(x|M_-)}} = \sum_{i=1}^n \log{\frac{a^+_{x_{i-1},x_i}}{a^-_{x_{i-1},x_i}}}$$
 * In a Markov model, the sum of probabilities going out of a state is always 1
 	* It is certain that I will go out of the state
 * When I have only 2 possible mutually exclusive models, I can have a measure for $p(s)$
-	* $p(s|M_1) + p(s|M_2) = p(s)$
+$$p(s|M_1) + p(s|M_2) = p(s) \iff p(M_1) \cap p(M_2) = \emptyset$$
 * From this, I can recover $p(M_1|s)$ and $p(M_2|s)$
-	* $p(M_1|s) = \frac{p(s|M_1)p(M_1)}{p(s)} = \frac{p(s|M_1)p(M_1)}{p(s|M_1) + p(s|M_2)}$
-	* $p(M_2|s) = \frac{p(s|M_2)p(M_2)}{p(s)} = \frac{p(s|M_2)p(M_2)}{p(s|M_1) + p(s|M_2)}$
+$$p(M_1|s) = \frac{p(s|M_1)p(M_1)}{p(s)} = \frac{p(s|M_1)p(M_1)}{p(s|M_1) + p(s|M_2)}$$
+$$p(M_2|s) = \frac{p(s|M_2)p(M_2)}{p(s)} = \frac{p(s|M_2)p(M_2)}{p(s|M_1) + p(s|M_2)}$$
 * We always work with Markov models of order 1: every state depends only on the previous 1 state
-	* There are also MM of order 0 or >1
-
-# Training the model
-* The parameters for a model can be estimated from a set of training data
-* For any sequence s and model M, I can express $p(s|M)$ as the Markov chain that can produce s
-	* $p(s|M) = \prod_{j = 0}^{n+1} \prod_{k = 0}^{n+1} a_{jk}^{n^{jk}}$
+	* There are also MM of order 0 or greater than 1
+* A Markov Model like the ones described is parametric: It can be completely described by a set of parameters $\theta_M$ (the transition probabilities)
+	* Training the model means finding the optimal parameters
+	* The parameters for a model can be estimated from a set of training data
+* For any sequence $s$ and model $M$, I can express $p(s|M)$ as the Markov chain that can produce $s$
+$$p(s|M) = \prod_{j = 0}^{n+1} \prod_{k = 0}^{n+1} a_{jk}^{n^{jk}}$$
 	* In this representation 0 is the BEGIN state and n+1 the END state
-	* The probability is the product of the transition probability for all the possible transitions to the power of how many times they do occur
+	* The probability is the product of all the possible transition probabilities $a_{jk}$ to the power of how many times they do occur $n_{jk}$
+	* The probability of the sequence given the model is the joint probability of all the possible paths that generate it
 * The model is always under the normalization constraint
-	* $\forall j \: \sum_{k=1}^{n+1} a_{jk} = 1$
-	* The sum of outgoing transitions from any stae must sum up to 1
-* Maximum likelihood estimation: the value of the parameter $\theta$ is the one that maximises the probability of the dataset D given the model and the parameter
-	* $\theta_{ML} = argmax_\theta P(D|M, \theta)$
+$$\forall j \: \sum_{k=1}^{n+1} a_{jk} = 1$$
+	* The sum of outgoing transitions from any state must sum up to 1
+* Maximum likelihood estimation: the value of a parameter $\theta_M$ is the one that maximises the probability of the dataset $D$ given the model and the parameter itself (given the model that uses that parameter)
+$$\theta_{ML} = argmax_\theta P(D|M, \theta)$$
 	* The solution for any parameter $\theta$ can be obtained
-		* $\theta = a_{ik} = \frac{n_{ik}}{\sum_j n_{ij}}$
+$$\theta = a_{ik} = \frac{n_{ik}}{\sum_j n_{ij}}$$
 		* The optimal value of the parameter is the frequence of occurrence of the transition in the dataset
 		* The normalization constraint forces to divide the count of transitions for the total number of outgoing transitions
 * Maximum a posteriori estimation: the Bayesian correction of the ML approach
 	* $\theta_{MAP} = argmax_\theta (p(\theta|M, D))$
 	* $p(\theta|M, D) = p(D| M, \theta)p(\theta)$
 
-# HMM
+## Hidden Markov Models
 * Let's now try to model the presence of a CpG island in a larger sequence
 	* I can integrate both models $M_+$ and $M_-$ in a single model
 	* I will have 2 states for each nucleotide, one for each model
@@ -410,15 +389,24 @@
 	* In general, the outcome of a single state derives from a probability distribution
 	* We define the emission probability of symbol b from state k as $e_k(b) = p(x_i = b|\pi_i = k)$
 	* The sum of emission probabilities from a state is always 1, so the state always produces something
+* Formal definition of HMM: a stochastic generator of sequences characterized by
+	* $N$ states
+	* A set of transition probabilities $a_{kj}$ between states
+	* A set of starting probabilities $a_{0k}$ and ending probabilities $a_{j0}$
+	* An alphabet $C$ containing $M$ characters
+	* A set of emission probabilities for each state $\{e_k(c \in C)\}$
+	* The constraints $\sum_k a_0k = a_{k0} + \sum_j a_{kj} = \sum_{c \in C} e_k(c) = 1$
+* The topology and probabilities of transitions define a global grammar
+* The emission probabilities cast the propensity for observable symbols in each state
 * I can write the probability of observing the sequence x of lenght L under the path $\pi$
-	* $p(x,\pi) = a_{0\pi_1} \prod_{i=1}^L e_{\pi_i}(x_i) a_{\pi_i \pi_{i+1}}$
+$$p(x,\pi) = a_{0\pi_1} \prod_{i=1}^L e_{\pi_i}(x_i) a_{\pi_i \pi_{i+1}}$$
 	* In this equation $\pi_{L+1} = 0$, so the last transtition is to the END state
 	* The probability of a carachter $x_i$ being generated by the model is the product of the probability deriving from the markov chain and the emission probability for that carachter under the current state
 	* The path is typically hidden, so this equation is not useful in practice
 * The probability of the above equation under a model M can be rewritten as $p(x,\pi|M)$
 	* This can be decomposed as $p(x,\pi|M)=p(x|\pi,M)*p(\pi|M)$
 * Naive approach: if I want to obtain $p(x|M)$ under an HMM I need to sum over all the possible paths
-	* $p(x|M) = \sum_\pi p(x,\pi|M)$
+$$p(x|M) = \sum_\pi p(x,\pi|M)$$
 	* The number of possible paths is the number of states elevated to the lenght of the sequence
 		* No way you can do that brute force
 	* The time complexity is $O(tn^t)$ where n is sequence lenght an t the number of different symbols
@@ -427,12 +415,12 @@
 	* In general, my aim is to decode the path from the sequence, so that I can assess the true probability
 * Viterbi algorithm: dynamic programming for finding the most probable path
 	* If I need to choose just 1 path the most probable one is the most logical choice
-	* Let's define the most probable path $\pi^* = argmax(p(x,\pi))$
+	* Let's define the most probable path $\pi^* = argmax_\pi(p(x,\pi))$
 	* I can find $\pi^*$ recursively
 		* I suppose that the probability of $\pi^*$ having state k in position i is $v_k(i)$ and it is known for all the states k
 			* This means that I know the probability of each state in each position of the most probable path
 		* I can calculate recursively the probability of state l for position i+1
-			* $v_l(i+1)=e_l(x_{i+1})* max_k(v_k(i)a_{kl})$
+$$v_l(i+1)=e_l(x_{i+1})* max_k(v_k(i)a_{kl})$$
 			* The first term is the emission probability of the state l for the observed symbol $x_{i+1}$
 			* The second term is the probability of having state k in position i times the transition probability from k to l
 			* In the second term I take the max in k, so I choose the k that maximises the quantity
@@ -441,15 +429,15 @@
 			* It is certain that the beginning of the sequence comes from state 0
 	* Given this framework, I can create a dynamic programming matrix that finds the optimal path
 		* Initialization
-			* $i = 0,\; v_0(0) = 1,\; v_k(0) = 0 \quad \mbox{for}\; k > 0$
+$$i = 0,\; v_0(0) = 1,\; v_k(0) = 0 \quad \mbox{for}\; k > 0$$
 		* Recursion with i = 1 to L (lenght of sequence)
-			* $v_l(i) = e_l(x_i) * max_k(v_k(i-1)a_{kl})$
-			* $pointer_l(i) = argmax_k(v_k(i-1)a_{kl})$
+$$v_l(i) = e_l(x_i) * max_k(v_k(i-1)a_{kl})$$
+$$pointer_l(i) = argmax_k(v_k(i-1)a_{kl})$$
 		* Termination
-			* $p(x, \pi^*)=max_k(v_k(L)a_{k0})$
-			* $\pi^*(L) = argmax_k(v_k(L)a_{k0})$
+$$p(x, \pi^*)=max_k(v_k(L)a_{k0})$$
+$$\pi^*(L) = argmax_k(v_k(L)a_{k0})$$
 		* Traceback with i = L downto 1
-			* $\pi^*(i-1) = pointer_i(\pi^*_i)$
+$$\pi^*(i-1) = pointer_i(\pi^*_i)$$
 	* The probabilities obtained with the Viterbi algorithm are really small and give underflow errors
 		* It is better to operate in log space
 			* I use $\log{v_l(i)}$
@@ -461,9 +449,9 @@
 	* We can define $f_k(i)$ as the forward parallel of the Viterbi quantity $v_k(i)$
 		* It is the probability of state k in position i under the forward algorithm
 	* The probability of state k in position i is the joint probability of the sequence up to position i and the fact that the current state is k
-		* $f_k(i) = p(x1..x_i, \pi_i = k)$
+$$f_k(i) = p(x1..x_i, \pi_i = k)$$
 	* The recursion equation is therefore
-		* $f_l(i+1)=e_l(x_{i+1})* \sum_{k=0}^i(f_k(i)a_{kl})$
+$$f_l(i+1)=e_l(x_{i+1})* \sum_{k=0}^i(f_k(i)a_{kl})$$
 	* Like the Viterbi approach, the forward algorithm can give underflow errors
 		* I can correct by operating in log space or scaling the probabilities
 		* In log space the math is not as clean as with the Viterbi
@@ -478,20 +466,20 @@
 	* $p(x,\pi_i = k)$ can be decomposed as $f_k(i)b_k(i)$
 		* This is the joint probability of having $\pi_i = k$ when the sequence up to i and from i to the end is equal to the respective portions of x
 	* From this I can get the posterior probabilities
-		* $p(\pi = k|x) = p(x, \pi_i = k)/p(x) = f_k(i)b_k(i)/ p(x)$
+$$p(\pi = k|x) = p(x, \pi_i = k)/p(x) = f_k(i)b_k(i)/ p(x)$$
 		* $p(x)$ is the result of the forward algorithm here (!)
 * A posteriori decoding: when choosing the most probable path is not justified
 	* In some situations just choosing the most probable path (Viterbi decoding) is not legitimate
 		* I can have many paths with similar probabilities, and a posteriori decoding evaluates all of their contributions for any state
 	* For position i the a posteriori estimate for state $\pi_i$ is $\hat{\pi_i}$, as compared to $\pi^*_i$ of Viterbi decoding
-		* $\hat{\pi_i}=argmax_k(p(\pi_i = k|x))$
+$$\hat{\pi_i}=argmax_k(p(\pi_i = k|x))$$
 		* This probability includes all the possible paths that can bring me in position i at state k
 	* This definition is not very useful for determining the path, I can only decode a single state
-	* If I use this equation for the whole path, it can be non-sensical (!)
+	* If I use this equation for the whole path, it can be non-sensical!
 		* It could include forbidden transitions
-		* It can give the most probable state in position i given path, and then a state in position i+1 given a different path, when the transition from the 2 is impossible
+		* It can give the most probable state in position $i$ given a path, and then a state in position $i+1$ given a different path, when the transition from the 2 is actually impossible
 
-# HMM for pairwise alignments
+## HMMs for Sequence Alignments
 * I can see a gapped alignment as a finite state automaton (FSA) with a match state M, and two state for the respective insertions, X and Y
 	* In this FSA I have score changes at every state transition
 * I can similarly create a probabilistic HMM with the same states
@@ -511,7 +499,7 @@
 * The Viterbi path of the pair HMM is the optimal FSA alignment (!)
 	* It is the one I would recover from the NW algorithm
 
-# Profile HMMs
+## Profile HMMs
 * Profile HMMs are the most important application of HMMs to bioinformatics
 	* They were first done by Krogh (the one from Denmark)
 * In the ungapped case, I just want to model the propensity of the position for a symbol
@@ -529,10 +517,10 @@
 		* I can enter in a delete state (and not add anything to my sequence) and continue there
 	* I have also transitions $D_i$ to $M_{i+1}$ for modelling when the deletion ends
 	* In this way I have 4n-8 parameters
-* This delete model has different transitions in different positions, so I can include a position-specific gap penalty (!)
+* This delete model has different transitions in different positions, so I can include a position-specific gap penalty!
 * In my insert model I cannot do this, since I have loops for long insertions in the same I state
 	* This makes sense since The insertion only matters where it starts and how long it is
-	* For delitions it matters which residues are missing from the family profile (!)
+	* For delitions it matters which residues are missing from the family profile!
 * As a final refinement, I can include transitions between delete and insert states
 	* They are quite unlikely and usually they do not affect much the alignment
 	* These are $D_i$ to $I_i$ and $I_i$ to $D_{i+1}$
