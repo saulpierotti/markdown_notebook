@@ -520,7 +520,7 @@ $$\hat{\pi_i}=argmax_k(p(\pi_i = k|x))$$
 * This delete model has different transitions in different positions, so I can include a position-specific gap penalty!
 * In my insert model I cannot do this, since I have loops for long insertions in the same I state
 	* This makes sense since The insertion only matters where it starts and how long it is
-	* For delitions it matters which residues are missing from the family profile!
+	* For deletions it matters which residues are missing from the family profile!
 * As a final refinement, I can include transitions between delete and insert states
 	* They are quite unlikely and usually they do not affect much the alignment
 	* These are $D_i$ to $I_i$ and $I_i$ to $D_{i+1}$
@@ -559,30 +559,87 @@ $$\hat{\pi_i}=argmax_k(p(\pi_i = k|x))$$
 	* This can be a tuning parameter
 	* The area under the ROC curve is 0.5 for random predictions ad 1 for a perfect predicition
 
-# HMMER
-* It is a widely used tool for creation of HMMs from MSAs
+## HMMER
+* HMMER is a widely used tool for creation of HMMs from MSAs
+* It is used for searching a sequence database for homologs and for making sequence alignments
+* It is design for detecting remote homologs relying in the strenght of its probabilistic models
+* The last version of HMMER is as fast as BLAST
 * Its HHMs are based on a domain structure
 	* They present a domain chain defined by M, I and D states
 	* The domain chain is connected by 2 states that model the C and N terminal regions of the domain
 	* A J state models inter-domain regions
 * The score of a sequence is calculated in the Bayesian frame against the NULL model
+* The NULL model takes into consideration only background frequencies of aminoacids
+	* By default the frequencies in Swiss-Prot are used
+* The Log-odds score is actually a bit score (it uses a $log_2$)
 * HMMER takes the trained model and scores 200 randomly generated sequences with it in the Bayesian framework
+	* I do not use an analytical estimate of the p-value, but I evaluate it from bootstraps!
 	* The Log odd of the sequences is fitted with a Gumbell distribution
 	* This allows to estimate the distribution parameters $\mu$ and $\lambda$
 * Once I have the score distribution of random sequences, I can get the p-value of a sequence that I score against the model
-	* $p(s>t) = 1 - exp(-e^{-\lambda(t - \mu)})$
-* From the p-value I can obtain the e-value, the number of random sequences expected to have score >t
+$$p(s>t) = 1 - exp(-e^{-\lambda(t - \mu)})$$
+* From the p-value I can obtain the e-value, the number of random sequences expected to have score greater than $t$
 	* $p = 1-e^{-E}$
 	* E is the average number of rare events, modelled under the Poisson distribution
-* The default input format is Stockholm, but it accepts many common formats
-	* It can include info on secondary structure and can mask some carachters
+* The default input format is the textual Stockholm format, but it accepts many common formats
+	* The header is `# STOCKHOLM 1.0` were 1.0 is the version used
+	* It has then one row per sequence in the MSA, wrapped in a readable way
+	* Between sucsessive wrappings of the MSA there is an empty line
+	* Gaps are rendered with `.`
+	* The last row contains always only `//`
+	* It can include also info on secondary structure and can indicate to mask some carachters
+	* These information are rendered with a new line in the MSA that has a peculiar name
+	* `#=GC SS_cons` is used to store information on the consensus secondary structure
+	* `#=GC RF` stores the reference annotation (the consensus sequence)
+		* Upper and lower case can be used to denote the conservation level
+		* `~` indicates an unaligned insertion
+	* `#=GC MM` specifies a model mask, which columns of the MSA should be ignored
+		* Ignored columns are assigned a match state with background distribution
 * It is composed of several tools
 	* `hmmbuild` takes an msa and gives an HMM
 	* `hmmemit` generates a sample sequence from the HMM
 	* `hmmsearch` searches a database with the HMM returning a list ordered by e-value
 	* `hmmalign` alignes sequences to a given model
 	* `hmmpress` converts one or more concatenated HMMs in binary for subsequent searches
-	* `hmmscan` uses a binary HMM db to scan a sequence
+	* `hmmscan` uses a binary HMM library to scan a sequence
+		* It finds which model best matches the sequence
+* The HMMER profile HMM text file is the output of the `hmmbuild` command
+	* It can also contain more than 1 profile separated by a row with `//`
+	* It has an header with miscellaneous key:value pairs for each profile
+	* The header ends where a row starts with the keyword `HMM`
+	* Follows a table of $-log(p-vals)$ (`*` is used when $p-val = 0$ and so the $log$ is not defined)
+	* An optional `COMPO` line follows, with the backgroung emission probabilities used for the NULL model
+	* The next 2 lines code information on the BEGIN state
+		* The first line codes the INSERT emission probabilities for the 0 state
+		* The second line codes the TRANSITION probabilities for state 0
+			* These are $m \to m, m \to i, m \to d, i \to m, i \to i, d \to m, d \to d$
+	* It contains then 3 rows for each position of the profile
+		* The first row contains the 20 emission probabilities for each aminoacid in that position
+		* The second row contains the Insert emission probabilities for that position
+		* The third row contains transition probabilities $m \to m, m \to i, m \to d, i \to m, i \to i, d \to m, d \to d$
+* The `hmmsearch` output is a text file returning a list of sequences that passed the threshold, set of scores for each sequence, and an alignment of each sequence with the profile
+	* The header contains a series of key:value pairs
+		* MSV is the multi-segment Viterbi filter
+		* The expected counts for the sequences that pass each type of filter should be much lower than the actual counts
+	* For each sequence several scores are shown in the tabular section
+		* The following scores are differentiated as global and best domain scores: E-value, bit-score, bias
+			* The bias is a correction factor that should be much smaller than the bit-score
+			* An high bias indicates a biased composition or repetitive sequence
+			* A significant global domain E-value and not significant best-domain E-value may indicate a remote multi-domain homolog with weak similarities that add up on the whole sequence
+	* In the alignment part there are 3 rows per sequence
+		* The first is the profile row and it codes the preferred symbolin each position
+			* Conserved positions are represented in capital letters
+		* The midline shows the symbol of the position in case of conservation, or `+` in case of a substitution that has a positive score (conservative substitution)
+			* A space is shown when a non-conservative substitution is present
+		* The bottom line codes the posterior probability for each residue
+			* `*` indicates 95-100% probability, and number from 0 to 9 indicate lower probabilities
+		* Other scores and parameters are detailed in this section
+			* The c-Evalue is the conditional E-value: the significance of the domain given that I know the sequences are homologs
+			* The i-Evalue is the independent E-value, the independent significance of the best domain
+			* The envelope (`envfrom` and `envto`) is the best aaligned portion
+			* `acc` is the a posteriori mean per residue probability
+* `hmmalign` produces an MSA in STOCKHOLM format
+	* 
 
 # Kunitz domain project
 * We want to produce an HMM of the Kunitz domain
