@@ -641,64 +641,69 @@ $$p(s>t) = 1 - exp(-e^{-\lambda(t - \mu)})$$
 * `hmmalign` produces an MSA in STOCKHOLM format
 	* 
 
-# Kunitz domain project
-* We want to produce an HMM of the Kunitz domain
+# Kunitz Domain Project
+* We want to produce a profile HMM of the Kunitz protease inhibitor domain
 * The Kuniz domain is a protease inhibitor
-	* APP (Alzheimer) and TFPI (Tissue factor inhibitor) have this domain
-* Aprotinin is a drug that act as an anti-fibrinolitic
-	* It is actually the bovin pancreatic protease inhibitor
-	* A good structure is 3TGI, that also shows the mechanism of inhibition
-	* It has 6 cysteines
-	* Uniprot: P00974
+	* BPTI, APP (Alzheimer) and TFPI (Tissue factor inhibitor) have this domain
+* BPTI is an inhibitor of trypsin that blocks the activation of trypsinogen in the pancreas due to spontaneous clevage
+	* It is also found in the bovine lung
+* Aprotinin (the protein BPTI) is a drug that act as an anti-fibrinolitic, it is used for reducing bleeding during surgery
+* Apoprotin is a monomeric globular polypeptide obtained from bovine lung tisssue
+	* Its molecular mass is 6512 Da and it is composed of 58 residues
+	* It folds into a compact tertiary structure of the small SS-rich type
+	* It contains 3 disulfide bridges, a twisted $\beta$-hairpin and a C-terminal $\alpha$ helix
+	* It contains 10 positive residues and only 4 negative residues: it is strongly basic
+	* The stability of the protein is due to the 5:55, 14:38, 30:51 disulfide bridges
+	* Lys15 in the exposed loop binds tightly to the specificity pocket of trypsin
+	* BPTI is synthesized as a longer precursor that is then cleaved to the final form
 * The domain is included in single-domain and multiple-domain proteins
-	* I prefer to build my HMM with single-domain proteins if available in enough number
-		* Other domains nearby could influence the structure of my domain
+* It is preferred to build HMMs with single-domain proteins if available in enough number, since other domains nearby could influence the structure of my domain
 * We want to build our HMM of the Kunitz domain starting from structural information and use the model for annotating SwissProt
+* The Kunitz domain is exclusive of metazoa with a single exception: *Amsacta moorei entomopoxvirus*
 
-# Retriving the structures
+## Retriving the Structures
 * Several options available
-    * We can use PDBfold searching with a prototype structure
-    * We can search on CATH
+	* We can use PDBfold searching with a prototype structure
+	* We can search on CATH
 * Potential problems
-    * PDBs with multiple chains
-    * Chains with multiple domains
-    * Redundant PDB structures: I can get more copies of the same protein
-    * Mutated proteins for experimental reasons
-    * Variable resolution
+	* PDBs with multiple chains
+	* Chains with multiple domains
+	* Redundant PDB structures: I can get more copies of the same protein
+	* Mutated proteins for experimental reasons
+	* Variable resolution
 * Possible solutions
-    * Accept only structures with resolution above 2.5-3 $\AA$
-        * Interaction and $C\alpha-C\alpha$ distances are on this range
-            * H bonds are around 3 $\AA$ long
+	* Accept only structures with resolution above 2.5-3 $\AA$
+		* Interaction and $C\alpha-C\alpha$ distances are on this range, while H bonds are around 3 $\AA$ long
 * I select a set of seed proteins and I refine them on the basis of the structural alignment
 * I convert the alignment in Stockholm format with Jalview or with a script
 
-## Creating and testing the model
+## Creating and Testing the Model
 * I use `hmmbuild` to get the model from the alignment
 * I scan the original seed set wtih my model with `hmmscan` to see If I get a significant E-value
 * I do a real benchmark with non-seed proteins that I know to have the Kunitz domain
-    * Since SwissProt is manually annotated, I can define a subset containing all the Kunitz-containing proteins
-    * I also need a set of negatives to test the specificity of the model
+	* Since SwissProt is manually annotated, I can define a subset containing all the Kunitz-containing proteins
+	* I also need a set of negatives to test the specificity of the model
 * I need to define the confusion matrix for my model
 * I can use the Matthews correlation to give a quality score to my model
 * I can plot a ROC curve
 * The Kunitz domain is really well defined and annotated, so I expect few false negatives and positives
-    * I can manually review all of them and understand where the model failed
+	* I can manually review all of them and understand where the model failed
 * It is important to understand the limitations of my method!
 
-# Project report
+## Project Report
 * To be done following the structure of the Oxford Bioinformatics journal
 * I should put an abstract with information about the problem and summary of the results
-    * Should be short!
+	* Should be short!
 * Introduction should contain info on the domain, previous work, ecc.
-    * It will contain most of the citation
-    * It should describe the state of the art
+	* It will contain most of the citation
+	* It should describe the state of the art
 * Materials and methods: in bioinformatics mostly only methods
-    * Defines the reproducibility of the work
-    * I should describe procedures, algorithms, validation
-    * I should describe the dataset
+	* Defines the reproducibility of the work
+	* I should describe procedures, algorithms, validation
+	* I should describe the dataset
 * Results: what I did with the methods and what I got out of it
 * I should include subsections in all parts
-    * People can be interested only in some aspects!
+	* People can be interested only in some aspects!
 * Conclusion/discussion: summarise, discuss the limitations and future directions
 * I should start from materials and methods and results
 * At the end I write conclusion and introduction
@@ -708,84 +713,139 @@ $$p(s>t) = 1 - exp(-e^{-\lambda(t - \mu)})$$
 * Deadline: May 18 and then 3 weeks after it for the final version
 * To be sent by mail at emidio.capriotti@unibo.it with object should be "project lb1b - Saul Pierotti"
 
-# *Ab initio* structural predictions
+# Predicting Structural and Functional Fetures from the Sequence
+* The computational approach used for predicting structural features from protein sequence is divided in 3 main branches, depending on the availability of suitable templates: homology (comparative) modelling, fold recognition (threading), and *de novo* (*ab initio*) prediction
+* Comparative modelling requires the availability of a template with more than 30% sequence identity
+* The use of multiple sequence alignments and HMMs allow to extend the use of comparative modelling to remote homologs
+* Nonetheless, sometimes comparative modelling fails
+	* If no suitable templates exist in the PDB *Ab initio* methods are required
+	* If there are suitable templates in the PDB but they cannot be recognised, threading/fold recognition can be adopted
+
+## *Ab initio* Structural Predictions
 * It is used when there are no structures in the PDB that can be used as templates in modelling my sequence
-* Rosetta (David Becker) is the most used method
+* *Ab initio* predictions are difficult because the conformational space is huge
+* The goal is to predict the structure using only the sequence
+* This methods are based on the assumption that the native structure is the one with lowest energy
+* The CASP (critical assessment of structural predictions) evaluation is a contest from the UC Davis aimed at assessing the performances of protein structural prediction methods
+	* It has different sections for *ab initio* predictions, comparative modelling
+* *Ab initio* methods are generally based on molecular dynamics (MD) force fields
+* CHARMM is the force field that is traditionally used for proteins
+	* It was developped by the Nobel prize winner Martin Carplus at Harvard
+	* It uses bonding, angle, dihedral, and non-bonding energy terms
+	* Bonding energy refers to the oscillations around the optimal bond lenght
+	* Angle refers to the angle of 2 bonds among 3 atoms
+	* Dihedral referso to the torsion of a central bond among 3 bonds and 4 atoms
+	* Non-bonding contributions are electrostaic and Lenard-Jones energies
+* Molecular dynamics require a lot of computing power and therefore approaches using it are confined to small proteins
+	* MD cannot take into account chaperon activity
+	* It is not trivial to define criteria for a successfull model
+* *Ab initio* is computationally very hard for sequences longer than 150 aa
+	* AlphaFold from Google DeepMind, the winner of CASP13, seems to be able to predict also longer proteins
+* Rosetta (David Becker) is the most accurate fragment-based prediction methods according to CASP8
 	* It is based on short fragments that are used as building blocks of the global fold
 	* An energy landscape is built for these fragments
-	* All proteins in the PDB were collected and fragmented in blocks of 5 residues
-	* Similar fragments were clustered based on RMSD
-	* A sequence profile was built from each cluster
-	* When modelling a new sequence, this was broken in fragments and aligned to the profiles
+	* All proteins in the PDB were collected and fragmented in blocks of 5 residues, and similar fragments were clustered based on RMSD
+	* A sequence profile was built from each cluster of fragments
+	* When modelling a new sequence, the query was broken in fragments and aligned to the profiles
 	* Some heuristcs were used for choosing the best match
-	* The structurewas refined with moelcular dynamics
-* Force fields are typically used with these methods
-* CHARMM is a traditionally used force field for proteins
-	* It was developped by the Nobel prize winner Martin Carplus
-* The conformational space is huge and because of this it cannot be used above 150 aa
-	* Alphafold from Google seems to perform better
-* *Ab initio* ignores the action of chaperons
-* The CASP evaluation is for *Ab initio* methods
+	* The structure was then refined with molecular dynamics
 
-# Threading and fold recognition
-* It is used for sequences that have a suitable template in the PDB but we cannot find it based on sequence alone
-	* Proteins with different sequences can have similar structures
+## Threading
+* Threading is used for sequences that have a suitable template in the PDB but we cannot find it based on sequence alone
+	* Proteins with different sequences can have similar structures!
+	* A sequence of unknown structure is threaded onto a known structure and the goodness of fit is evaluated acconrding to a scoring function
 * Anna Tramontano was a researcher involved in evaluating the CASP challenge that died 2 years ago
-* I can fit (thread) a sequence of unknown structure onto a known structure and evaluate the goodness of fit with a scoring function
-* It is a generalization of comparative modelling
-	* I try to model against a database of knwon basic folds
-	* I align to a whole set of structures instead of just 1
-* The goodness of fit for each aminoacid is evaluated from observed preferences in known structures
-* It is possible beacause
-	* There is a limited number of folds in nature
-	* Aminoacid preferences for different structural environments allow to choose the best fit
-* Fold recognition: even if I cannot align the sequences I can still align secodary structure elements and other features
-* For threading I need to first align the sequences through fold recognition
+* Threading is a generalization of comparative modelling
+	* I align the target sequence not to another sequence (comparative modelling) but to structure templates and I evaluate the probability of finding each residue in that conformation
+	* The probability is assessed based on the preferences observed in determined structures
+	* The rationale behind threading is that there are a limeted number of basic folds naturally occurring in proteins and the preferences of aminoacids for different structural environments is sufficient for discriminating a good-fitting fold
+
+## Fold Recognition
+* Fold recognition is based on the idea that even if I cannot align the sequences of 2 proteins I can probably still align secodary structure elements and other features
+	* Other features can be solvent accessibility profiles, disulfide bonds, ...
 * For doing fold recognition I need to assess the features of the sequence
+* For doing threading I need to first align the sequences to known folds
+	* If the homology is remote I need to align them through fold recognition approaches
 * Predicting sequence properties is a mapping problem
 	* Secodary structure prediction: from a sequence of aminoacids to a sequence of secondary structures
 		* I am mapping a 20-letter alphabet to a 3-letter alphabet
-	* Transmembrane regions: I want to map the sequence to the states in the membrane/out of the membrane
-* The simplest approach is to use a propensity scale for each residue
+	* Transmembrane regions: I want to map the sequence to the possible states in the membrane/out of the membrane
+* The simplest approach for addressing these mapping problems is to use a propensity scale for each residue
+	* It is a table of preferences of each residue for each mapped state
 * The AAindex is a database of propensity scales for residues
 	* AAindex1 contains properties at the residue level (hydrophobicity, ecc...)
 	* AAindex2 contains substitution matrices
 	* AAindex3 contains propensities for interactions among aminoacids
 	* It shows for each entry also the correlation with other scales
-* The propensity scale for secondary structure is the Chou-Fasman:
+* The most used propensity scale for secondary structure is the Chou-Fasman scale:
 	* First they calculated how frequently a certain residue was found in each secondary structure ($P(A,h)$ with A being the residue and h the seocndary structure)
 	* Then they corrected it for the independent probabilities for the residue and for the structure ($P(A), P(h)$)
-	* The propensity is therefore $P(A,h)/(P(A)P(h))$
-		* If there is no correlation among $P(A)$ and $P(h)$, then $P(A,h) = P(A)P(h)$ and therefore the propensity is 1
-		* If the propensity is bigger than 1 the residue tends to be in that structure more than expected
-		* If it is smaller than 1 the residue tends to avoid that structure
-* The original Chou-Fasman was built with only 19 proteins, but the propensity scales did not change much also with the current dataset
+	* The propensity is therefore defined as $P(A,h)/(P(A)P(h))$
+	* If there is no correlation among $P(A)$ and $P(h)$, then $P(A,h) = P(A)P(h)$ and therefore the propensity is 1
+	* If the propensity is bigger than 1 the residue tends to be in that structure more than expected
+	* If it is smaller than 1 the residue tends to avoid that structure
+* The original Chou-Fasman scale was built in 1974 from only 19 proteins, but the propensity scales did not change much also re-evaluating it with the current dataset
 	* An updated version is available at AAindex
-* The Chou-Fasman is not accurate, it is around 50/60%
-	* It is 3-class classification, so it is not so bad but also not so useful in practice
-	* It is possible to improve the result by evaluating the average propensity of a sliding window
+* The Chou-Fasman is not accurate, the accuracy evaluated on a set of uncorrelated sequences with known structures is around 50/60% whith 3 classes
+	* It is 3-class classification, so it is not actually that bad but also not so useful in practice
+	* It is possible to improve the result by evaluating the average propensity of a sliding window, instead of that of single residues
 		* The original algorithm used a 4 residue window
-	* We can get better results with neural networks
-* The Kyte-Doolittle scale for hydrophobicity: partition coefficient octanol/water combined with the propensity for a residue to being found in a transmembrane helix
+	* We can get better results by using neural networks
+* The Kyte-Doolittle scale for hydrophobicity combines the partition coefficientin octanol/water with the propensity for a residue to being found in a transmembrane helix in known structures
 	* It is positive for hydrophobic residues and negative for hydrophilic ones
-* The GOR method was developped after Chou Fasman for the prediction of secondary structure
-	* It uses 8 residues sliding windows
-	* It is more accurate than Chou Fasman but it is still not comparable with modern methods
+* Second generation methods are based on the observation that the structure of a residue in a protein strongly depends on the sequence context in which it is found
+	* Sliding windows of -8/8 to -13/13 residues are often used
+* The GOR method (Garnier, Osguthorpe, Robson) was developped after the Chou Fasman scale and it also aims at the prediction of secondary structure from sequence
+	* It evaluates a score for each structure class at each position as
+$$ S_{ij} = \log \frac{P(SS_i|aa_{i+j})}{p(SS_i)} \qquad j = -8, ...., 8$$
+* The GOR scale was also built from a set of known structures (25 in this case!)
+	* It uses an -8/8 residues sliding window, assuming that the conformation of the central residue is influencedby the 17 neighboring residues
+	* The frequency of each of the aminoacids in the 17 positions in the window was evaluated for $\alpha, \beta$ and turn conformations
+	* This generates 3 17*20 matrices of frequencies
+	* This information is used for predicting the conformation of the central residue in the window
+	* It is more accurate than Chou Fasman but it is still not comparable with modern methods: it reaches 64% accuracy
+* The information function for the GOR scale encodes how much information the sequence at $R_j$ contains about the structure $S_j$
+$$ I(S_j, R_j) = \log \frac{P(S_j|R_j)}{P(S_j)}$$
+	* $S_j$ is one of the 3 possible secondary structures at position $j$
+	* $R_j$ is on of the 20 residues at position $j$
+	* $P(S_j)$ is the prior probability of that structure
+	* If $I=0$ it there is no information in $R_j$, if $I > 0$ $R_j$ favors $S_j$, if $I < 0$ $R_j$ avoids $S_j$
+* The GOR scale is making assumptions to simplify the prediction of the secondary structure
+	* In reality, the secondary structure depends on the whole sequence, but the GOR scale assumes that it only depends on the local sequence (the sliding window)
+$$ I(S_j, R) \approx I(S_j;R_{j-8}...R_{j+8})$$
+	* Each position is assumed to be statistically independent, and so the probabilities can be multiplied (summed in log scale)
+$$ I(S_j;R_{j-8}...R_{j+8}) \approx \sum_{m=-8}^8 I(S_j, R_j+m) $$
 
-# Protein structure analysis
-* Anfinsen's hypothesis: there is a native structure
-* Levinthal's paradox: the conformational space for a protein is huge and it cannot be explored by the protein in the age of the universe
-* Anfinsen's dogma
-	* Unicity of structure: same structure in the same condition
-		* I mean fluctuations, but in general it is like that
-	* Stability: the structure is conserved with small fluctuations of the environment
-		* The native structure is at the bottom of a funnel
-	* Kinetical accessibility: small kinetic barrier for reaching the folded state
-		* It should be possible to reach the folded state in reasonable time
-* The solution to protein folding: thermodynamics, kinetics and conformation
-* Thermodynamics: $\Delta G$ of folding is -5/-15 kcal/mol 
-	* It is less than the energy of a covalent bond!
-	* More or less the energy of a salt bridge
+# Protein Structure Analysis
+* Some numbers in biological databases at April 2020
+	* GenBank: 216M entries
+	* UniRef90: 109M entries
+	* Swiss-Prot: 562k entries
+	* PDB: 163k entries (redundant!)
+* Protein folding is the process by which a protein assumes its native conformation from the unfolded structure
+* Anfinsen's hypothesis states that there is a native structure for each protein and the sequence alone contains all the information required for reaching the native form
+	* Anfinsen showed that the denatired ribonuclease A returns active after the denaturing agent is removed
+* Levinthal's paradox: the conformational space for a protein is huge and it cannot be fully explored by the protein in a time equal to the age of the universe
+	* A 100 residues protein with 2 possible conformations per residue has $2^{100} \approx 10^{30}$ possible conformations
+	* If a conformation can be visited in $10^{-12}$ seconds, exploring the full conformational space will take $10^{18}$ seconds
+	* The univers now is $2-3*10^{17}$ seconds old
+* The Anfinsen's dogma postulates the uniqueness, stability, and kinetical accessibility of the native fold
+	* The native structure is the only one with a free energy that low, in physiological conditions
+		* There are fluctuations and bi-stable conformations, but in general this is true
+	* The native structure is stable against small fluctuations in the environment: it is in a local (and possibly global) energy minimum
+	* The path in the free energy surface for reaching the folded state has a low kinetic barrier, so that it is possible to reach the folded state in reasonable time
+* The solution to protein folding consist of studying 3 different aspects of theproblem: thermodynamics, kinetics, and conformation
+	* I want to estimate the stability (thermodynaics) of the native conformation
+	* I want to define the conformational path from the unfolded to the folded state, and the associated kinetics
+	* I want top predict what the native conformation will be
+* Thermodynamics: the $\Delta G$ of folding is typicall small, around -5/-15 kcal/mol 
+	* It is less than the energy of a covalent bond (-30/-100 kcal/mol)!
+	* It is comparable to the energy of a salt bridge
+	* Various interactions contribute to the stability of the native state, but they are NOT the driving forces of folding
+	* The hydrophobic collapse of the globular core is the driving force of folding
+		* Water molecules form a cage-like structure around hydrophobic surfaces
+		* The $\Delta H$ of the hydrophobic effect is positive since breaking the cage requires energy
+		* The $\Delta S$ is positive since water molecules are less constrained when freed from the hydrophobic surface
 * The alpha-helix is right handed, with $\phi-60$° and $\psi=-50$°
 	* Side chains are projected backwards and outwards
 	* The pitch of the helix is $5.4 \AA$
