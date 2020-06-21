@@ -846,19 +846,32 @@ $$ I(S_j;R_{j-8}...R_{j+8}) \approx \sum_{m=-8}^8 I(S_j, R_j+m) $$
 		* Water molecules form a cage-like structure around hydrophobic surfaces
 		* The $\Delta H$ of the hydrophobic effect is positive since breaking the cage requires energy
 		* The $\Delta S$ is positive since water molecules are less constrained when freed from the hydrophobic surface
-* The alpha-helix is right handed, with $\phi-60$° and $\psi=-50$°
+* Kinetcs: the protein folding mechanism depends on the free energy conformational landscape
+	* An higher activation barrier corresponds to a longer folding time
+* Protein structure is hierarchically organised in primary, secondary, tertiary, and optionally quaternary structure
+* Secondary structure elements are the $\alpha$-helix, the $\beta$-sheet and the random coil
+* The alpha-helix is genrally right handed, with $\phi-60$° and $\psi=-50$°
 	* Side chains are projected backwards and outwards
 	* The pitch of the helix is $5.4 \AA$
 	* There are 3.65 residues per turn
-	* The core is tightly packed
-	* The N-H of one aminoacid forms an H nond with the C=O of 4 residues earlier
+	* The core is tightly packed and formed by backbone atoms
+	* The N-H of one aminoacid forms an H bond with the C=O of 4 residues earlier
 	* The H bonding pattern gives to the helix a dipole moment
 * The beta-strand has $\phi=140$° and $\psi=-130$°
 	* The side chains project alternating above and below the strand
 	* The conformation is more extended than in helices
 	* Beta-strands can form parallel or anti-parallel beta-sheets
 	* Parallel beta-sheets are less stable than the anti-parallel ones
-* DSSP: obtain $\phi$ and $\psi$ angles from a structure and solvent accessibility
-	* It is both available as a web server and as a package
+* The arrangement of secondary structure elements forms the tertiary structure of the protein
+* The arrangement of 2 or more proteins in a complex gives rise to the quaternary structure
+* A PDB file contains the 3D coordinates of all the atoms (except H usually) in a protein
+* A protien structure is well defined by $\phi$ and $\psi$ angles, side chain rotamers, and solvent accessible area
+	* The dihedral angles define the secondary structure
+* The Ramachandran plot is a plot of $\phi$ and $\psi$ angles for each residue in a protein
+	* Distinct regions of the plot are assigned to $\alpha$ and $\beta$ conformations
+	* Some regions are not allowed by steric hindrance
+	* The Ramachandran plot of a model can be used to estimate its quality thanks to the knowledge that we have about disallowed regions, deriving from well-determined experimental structures
+* DSSP (define secondary structure of proteins) is an algorithm that calculates $\phi$ and $\psi$ angles, solvent accessibility, secondary structure and other features from a 3D structure
+	* It is both available as a web server and as an installable package
 	* For each residue in a PDB structure it calculates the dihedral angles and the solvent accessibility
-		* From these pieces of information I can determine the secondary structure using the Ramachandran plot
+	* From these pieces of information it determines the secondary structure using the Ramachandran plot
