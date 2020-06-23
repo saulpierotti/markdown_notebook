@@ -1,4 +1,4 @@
- Laboratory of Bioinformatics 1 part B - Capriotti
+% Laboratory of Bioinformatics 1 part B - Capriotti
 % Saul Pierotti
 % \today
 
@@ -798,7 +798,7 @@ $$p(s>t) = 1 - exp(-e^{-\lambda(t - \mu)})$$
 * The GOR method (Garnier, Osguthorpe, Robson) was developped after the Chou Fasman scale and it also aims at the prediction of secondary structure from sequence
 	* It evaluates a score for each structure class at each position as
 $$ S_{ij} = \log \frac{P(SS_i|aa_{i+j})}{p(SS_i)} \qquad j = -8, ...., 8$$
-* The GOR scale was also built from a set of known structures (25 in this case!)
+* The GOR scale was also built from a set of known structures (25 in this case!) but it takes into account not only the propensities of individual amino acids to form particular secondary structures, but also the conditional probability of the amino acid to form a secondary structure given that its immediate neighbors have already formed that structure
 	* It uses an -8/8 residues sliding window, assuming that the conformation of the central residue is influencedby the 17 neighboring residues
 	* The frequency of each of the aminoacids in the 17 positions in the window was evaluated for $\alpha, \beta$ and turn conformations
 	* This generates 3 17*20 matrices of frequencies
