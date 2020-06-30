@@ -1236,204 +1236,240 @@ $$\alpha = n/m$$
 	* If the lists are not ordered inserting is faster and I can implement a LIFO behaviour
 	* If they are ordered seaching is faster
 
-## Binary search trees
-* It can be used both as a dictionary and as a priority queue
-* On average all operations are O(log n), with a worst case O(n)
-	* Tree walks are an exception and always require O(n) since they go across the whole tree
-* It can be represented by a linked list with parent, left child, right child, key attributes
-* They respect the binary search tree property
-	* The key of all the elements in the left subtree of node x are smaller or equal to x.key
-	* The key of all the elements in the right subtree of node x are bigger or equal to x.key
-* In the following algorithms the initial calls are with x equal to a pointer to the root of the tree
-* Inorder tree walk: print the keys in sorted order
-	* For each node, I need to print first the left child, then the node itself, then the right child
+## Binary search trees (BST)
+* A BST supports many dynamic set operations: SEARCH, MINIMUM, MAXIMUM, PREDECESSOR, SUCCESSOR, INSERT, DELETE
+	* It can be used both as a dictionary and as a priority queue
+* On average all operations take $\Theta(log n)$, with a worst case $\Theta(n)$
+	* The expected height of the tree is $\Theta(\log n)$, while its biggest possible height is $\Theta(n)$ when the tree is actually alinear chain of elements
+* A BST is represented as a linked data structure in which each node stores an object and several pointers
+	* It has a key field, a ponter to the parent node, and pointers ti the right and left children of the node
+* Binary search trees respect the binary search tree property
+	* The key of all the elements in the left subtree of node $x$ are smaller or equal to $x.key$
+	* The key of all the elements in the right subtree of node $x$ are bigger or equal to $x.key$
+* Traversing a BST can be done with different tree walks
+* The inorder tree walk visits the keys of the BST in sorted order: each key is printed after the key of its left child and before the one of its right child
+	* The order is therefore: $left \to root \to right$
+* The preorder tree walk prints first the key of the current node and than the one of its right and lef children in this order
+	* The order is therefore: $root \to left \to right$
+* The postorder tree walk prints first the children and then the parent
+	* The order is therefore: $left \to right \to root$
+* Tree walks visit all the $n$ nodes of the tree so they have always $\Theta(n)$ time complexity
+* The initial calls of tree walks are with $x$ equal to a pointer to the root of the tree
 
-```pascal
-INORDER-TREE-WALK(x)
-	if x is not NIL
-		INORDER-TREE-WALK(x.left)
-		print x.key
-		INORDER-TREE-WALK(x.right)
-```
+\begin{algorithmic}
+\Statex
+\Procedure{INORDER-TREE-WALK}{$x$}
+	\If{$x \not= NIL$}
+		\State \Call{INORDER-TREE-WALK}{$x.left$}
+		\State print $x.key$
+		\State \Call{INORDER-TREE-WALK}{$x.right$}
+	\EndIf
+\EndProcedure
+\Statex
+\Procedure{PREORDER-TREE-WALK}{$x$}
+	\If{$x \not= NIL$}
+		\State print $x.key$
+		\State \Call{PREORDER-TREE-WALK}{$x.left$}
+		\State \Call{PREORDER-TREE-WALK}{$x.right$}
+	\EndIf
+\EndProcedure
+\Statex
+\Procedure{POSTORDER-TREE-WALK}{$x$}
+	\If{$x \not= NIL$}
+		\State \Call{POSTORDER-TREE-WALK}{$x.left$}
+		\State \Call{POSTORDER-TREE-WALK}{$x.right$}
+		\State print $x.key$
+	\EndIf
+\EndProcedure
+\Statex
+\end{algorithmic}
 
-* Preorder tree walk: root is printed first, then the children in order
+* Searching for a key $k$ in a BST means returning a pointer to the node whose key is $k$ if it exists, NIL otherwise
+	* The input of TREE-SEARCH are the root of the tree and the key to be found
+	* I start from the root and compare the key of current node $x.key$ with the one to be found $k$
+	* If the keys are equal, I return the current node
+	* If $k < x.key$ I call recursively TREE-SEARCH on $x.left$
+	* If $k > x.key$ I call recursively TREE-SEARCH on $x.right$
+	* If the function is called on NIL (I reached a leaf and call the function on one of its non-existen children), I return NIL
+* The running time of TREE-SEARCH is $O(h)$, where $h$ is the height of the tree (which is $O(\log n)$)
 
-```pascal
-PREORDER-TREE-WALK(x)
-	if x is not NIL
-		print x.key
-		INORDER-TREE-WALK(x.left)
-		INORDER-TREE-WALK(x.right)
-```
+\begin{algorithmic}
+\Statex
+\Procedure{TREE-SEARCH}{$x,k$}
+	\If{$x == NIL$ or $k == x.key$}
+		\State \Return $x$
+	\EndIf
+	\If{$k < x.key$}
+		\State \Return \Call{TREE-SEARCH}{$x.left, k$}
+	\Else
+		\State \Return \Call{TREE-SEARCH}{$x.right, k$}
+	\EndIf
+\EndProcedure
+\Statex
+\end{algorithmic}
 
-* Postorder tree walk: the children in order are printed first, then the root
+* The search function can be equivalently performed also iteratively instead tan with recursion
 
-```pascal
-POTSORDER-TREE-WALK(x)
-	if x != NIL
-		INORDER-TREE-WALK(x.left)
-		INORDER-TREE-WALK(x.right)
-		print x.key
-```
+\begin{algorithmic}
+\Statex
+\Procedure{ITERATIVE-TREE-SEARCH}{$x,k$}
+	\While{$x \not= NIL$ and $k \not= x.key$}
+		\If{$k < x.key$}
+			\State $x = x.left$
+		\Else
+			\State $x = x.right$
+		\EndIf
+	\EndWhile
+	\State \Return $x$
+\EndProcedure
+\Statex
+\end{algorithmic}
 
-* Search a key x: at every level I half the search space
-	* If the current node is smaller than x I go to the right child, if it is bigger I go to the left child, If it is equal I stop
-	* I go recursively until I find the key or I finish the tree
-* This recursive approach has complexity proportional to the height of the tree O(h)
+* Finding the minimum or maximum key in a BST is easy: always go left or always go right (respectively) until you reach a leaf
+	* The running time is $O(h)$, which in the average case equals $O(\log n)$
 
-```pascal
-TREE-SEARCH(x,k)
-	if x == NIL or k == x.key
-		return x
-	if k < x.key
-		return TREE-SEARCH(x.left,k)
-	else
-		return TREE-SEARCH(x.right,k)
-```
+\begin{algorithmic}
+\Statex
+\Procedure{TREE-MINIMUM}{$x$}
+	\While{$x.left \not= NIL$}
+		\State $x = x.left$
+	\EndWhile
+	\State \Return $x$
+\EndProcedure
+\Statex
+\Procedure{TREE-MAXIMUM}{$x$}
+	\While{$x.right \not= NIL$}
+		\State $x = x.right$
+	\EndWhile
+	\State \Return $x$
+\EndProcedure
+\Statex
+\end{algorithmic}
 
-* I can do the same also iteratively
+* If all keys are distinct, the successor of the node $x$ is defined as the node $y = successor(x)$ such that $y.key$ is the smallest key bigger or equal to $x.key$
+	* The successor is the node with key just bigger (or equal) to that of $x$
+	* If $x$ has a right subtree, the successor of $x$ is the smallest key of $x.right$
+	* If it has not, I need to go up the tree until I find a node that is the left child of its parent
+		* If such a node exists, the successor of $x$ is the parent of that node
+	* If $x$ is the biggest element of the tree I return NIL: there is no successor
+* Similarly, the predecessor of a node is defined as the node with key which is the largest among the ones smaller than the key of that node
+* Successor and predecessor require both $O(h)$ time, since they at most pass once for each level of the tree
 
-```pascal
-ITERATIVE-TREE-SEARCH(x,k)
-	while x is not NIL and k is not x.key
-		if k < x.key
-			x = x.left
-		else
-			x = x.right
-	return x
-```
+\begin{algorithmic}
+\Statex
+\Procedure{TREE-SUCCESSOR}{$x$}
+	\If{$x.right \not= NIL$}
+		\State \Return \Call{TREE-MINIMUM}{$x.right$}
+	\EndIf
+	\State $y = x.p$
+	\While{$y \not= NIL$ and $x == y.right$}
+		\State $x = y$
+		\State $y = y.p$
+	\EndWhile
+	\State \Return $y$
+\EndProcedure
+\Statex
+\Procedure{TREE-PREDECESSOR}{$x$}
+	\If{$x.left \not= NIL$}
+		\State \Return \Call{TREE-MAXIMUM}{$x.left$}
+	\EndIf
+	\State $y = x.p$
+	\While{$y \not= NIL$ and $x == y.left$}
+		\State $x = y$
+		\State $y = y.p$
+	\EndWhile
+	\State \Return $y$
+\EndProcedure
+\Statex
+\end{algorithmic}
 
-* Finding the minimum key: always go left
-	* The running time is O(h), so on average O(log n)
-* Finding the maximum: always go right
-	* It is equivalent to finding a minimum
-
-```pascal
-TREE-MINIMUM(x)
-	while x.left != NIL
-		x = x.left
-	return x
-
-TREE-MAXIMUM(x)
-	while x.right != NIL
-		x = x.right
-	return x
-```
-
-* If all keys are distinct, the successor of x is defined as the y such that y.key is the smallest key bigger or equal to x
-	* It is the smallest element with key equal or bigger than that of x
-* If x has a right subtree, the successor of x is the minumum of x.right
-* If it has not, I need to go up the tree until I find a node that is the left child of its parent
-	* The successor of x is the parent of that node
-* If x is the biggest element of the tree I return NIL
-
-```pascal
-TREE-SUCCESSOR(x)
-	if x.right != NIL
-		return TREE-MINIMUM(x.right)
-	y = x.p
-	while y != NIL and x == y.right
-		x = y
-		y = y.p
-	return y
-```
-
-* The predecessor of x is the node y for which x is its successor
-	* It is the node with the biggest key that is smaller than that of x
-	* The pseudocode is symmetrical to that for the successor
-
-```pascal
-TREE-PREDECESSOR(x)
-	if x.left != NIL
-		return TREE-MAXIMUM(x.right)
-	y = x.p
-	while y != NIL and x == y.left
-		x = y
-		y = y.p
-	return y
-```
-
-* Insertion: always at the leaves (!)
-	* I want to insert an element z such that z.key = v
+* Insertion in a BST happens always on the leaves
+	* I want to insert a node $z$ with key $z.key = v$ into a BST $T$
 	* I start from the root and maintain 2 pointers
-		* x is the current node
-		* y is the parent of x (trailing pointer)
-	* If x.key is smaller than v I go to the right, otherwise I go to the left
-	* When x = NIL we are at the correct position
-		* If v is smaller than y.key, then I insert z as y's left child
-		* Otherwise I insert it as right child
-	* The running time is O(h)
+		* $x$ is the current node
+		* $y$ is the parent of $x$ (called trailing pointer)
+	* If $x.key < v$ I move to $x.right$, else I move to $x.left$
+	* When $x == NIL$ we are at the correct position
+		* At this point either $y$ is a leaf or it is a node with only 1 child
+		* If $v$ is smaller than $y.key$, then I insert $z$ as $y.left$, else I insert it as $y.right$
+* The running time for insertion is also $O(h)$ since I go from the root to a leaf
 
-```pascal
-TREE-INSERT(T,z)
-	y = NIL
-	x = T.root
-	while x != NIL
-		y = x
-		if z.key < x.key
-			x = x.left
-		else
-			x = x.right
-	z.p = y
-	if y == NIL
-		T.root = z
-	elif z.key < y.key
-		y.left = z
-	else
-		y.right = z
-```
+\begin{algorithmic}
+\Statex
+\Procedure{TREE-INSERT}{$T,z$}
+	\State $y = NIL$
+	\State $x = T.root$
+	\While{$x \not= NIL$}
+		\State $y = x$
+		\If{$z.key < x.key$}
+			\State $x = x.left$
+		\Else
+			\State $x = x.right$
+		\EndIf
+	\EndWhile
+	\State $z.p = y$
+	\If{$y == NIL$}
+		\State {$T.root = z$} \Comment{Tree $T$ was empty}
+	\ElsIf{$z.key < y.key$}
+		\State $y.left = z$
+	\Else
+		\State $y.right = z$
+	\EndIf
+\EndProcedure
+\Statex
+\end{algorithmic}
 
-* Deletion: it is complicated
-	* If z has no children I just remove a pointer to it from its parent
-	* If z has 1 child I set the pointer of its parent to z child instead of z itself
-		* I also need to update the parent of z's child
-	* If z has 2 children it is complicated
-		* z's successor y is the minimum element in z's right subtree
-		* y cannot have a left child since there cannot be elements smaller than y in that subtree
-		* I delete y from the tree and replace z with y
-* To make the code for delete easier to read I define a function TRANSPLANT
-	* It replaces the subtree rooted at u with the one rooted at v
-	* I check if u is the root
-		* In this case I put v as the root
-		* If not, I check if u is the left child of its parent
-			* In this case, I put v as left child of u's parent
-			* If not, it means that u is the right child of its parent
-			* In this case, I put v as right child of u's parent
-	* At the end I update the parent of the moved subtree v to make it equal to that of the previous subtree u
+* Deletion of a node $z$ from a BST $T$ is more complicated than insertion
+	* $z$ can be a leaf, have one child, or have 2 children
+	* If $z$ has no children I just make $z.p$ point to $NIL$ instead of to $z$
+	* If $z$ has 1 child I set the pointer of $z.p$ to the child of $z$ instead of to $z$ itself
+		* I also need to update the parent pointer of $z$'s child
+	* If $z$ has 2 children it is more complicated
+		* $successor(z) = y$ is the minimum element in $z$'s right subtree
+			* Since $z$ has 2 children it cannot be otherwise
+		* $y$ cannot have a left child since there cannot be elements smaller than $y$ in that subtree by definition
+			* Either $y$ has no children or it has only a right child
+		* I delete $y$ from the tree as seen for the cases above and replace $z$ with $y$
+			* $y$ will be in the right position when placed in where $z$ was, since it is its successor
+* To make the code for delete easier to read I define a function called TRANSPLANT
+	* It replaces the subtree rooted at $u$ with the one rooted at $v$
+* The TREE-DELETE operation also runs in $O(h)$
 
-```pascal
-TRANSPLANT(T,u,v)
-	if u.p == NIL
-		T.root = v
-	elseif u == u.p.left
-		u.p.left = v
-	else
-		u.p.right = v
-	if v != NIL
-		v.p = u.p
-```
+\begin{algorithmic}
+\Statex
+\Procedure{TRANSPLANT}{$T,u,v$}
+	\If{$u.p == NIL$}
+		\State {$T.root = v$}
+	\ElsIf{$u == u.p.left$}
+		\State $u.p.left = v$
+	\Else
+		\State $u.p.right = v$
+	\EndIf
+	\If{$v \not= NIL$}
+		\State $v.p = u.p$
+	\EndIf
+\EndProcedure
+\Statex
+\Procedure{TREE-DELETE}{$T,z$}
+	\If{$z.left == NIL$}
+		\State \Call{TRANSPLANT}{$T,z,z.right$} \Comment{$z$ has no left child}
+	\ElsIf{$z.right == NIL$}
+		\State \Call{TRANSPLANT}{$T,z,z.left$} \Comment{$z$ has only a left child}
+	\Else \Comment{$z$ has 2 children}
+		\State $y =$ \Call{TREE-MINIMUM}{$z.right$} \Comment{$y$ is $z$ successor}
+		\If{$y.p \not= z$} \Comment{$y$ is not the root of $z$'s right subtree, but lies in it}
+			\State \Call{TRANSPLANT}{$T,y,y.right$}
+			\State $y.right = z.right$ \Comment{replace $z$ by $y$}
+		\EndIf
+		\State \Call{TRANSPLANT}{$T,z,y$}
+		\State $y.left = z.left$
+		\State $y.left.p = y$
+	\EndIf
+\EndProcedure
+\Statex
+\end{algorithmic}
 
-* Now we can describe the delete pseudocode
-	* If z doesn't have a left child, I transplant the whole right subtree of z to z's parent
-		* If there is no right subtree, I just put NIL as right childso it's ok
-	* If z doesn't have a right child, I do the same with the left subtree
-	* If both checks failed, z has 2 children
-		* I set y as z's successor (minimum of its right subtree)
-		* if the parent of y is not z
-			* I remove y from the tree by transplanting it with its right child (it cannot have a left child!)
-			* I replace z with y
-			* I update the right child of y to that of z
-			* I update the parent of the right child of y (that was of z before) to be y itself
-		* I transplant z with y
-		* I update pointers for y.left and for the parent of the new y.left
-
-```pascal
-TREE-DELETE(T,z)
-	if z.left == NIL
-		TRANSPLANT(T,z,z.right)
-```
-
-* All the operations in binary search trees are O(h)
+* All the operations in binary search trees are $O(h)$
 * This means that they are fast when the tree is not too deep
 
 # Ivan Lanese module
