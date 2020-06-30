@@ -44,13 +44,13 @@
 * A paraphyletic group includes the most recent common ancestor of all the leaves, but not all the leaves of that ancestor
 * A poliphyletic group includes leaves from more than 1 taxon
 * Evolution is like a branching tree, not like a ladder
-	* What is commonly considered ancestor is a sister group, the real ancestor does not exist any more (!)
+	* What is commonly considered ancestor is a sister group, the real ancestor does not exist any more!
 * The observed genetic distance between 2 species is the sum of the distance between both species and their common ancestor
 * The more distant the split, the more the genetic distance
 * Frequency of observed mutation is inversely related to the strenght of selective pressure
 	* Low mutation rate can be related to higher gene content
 	* When selecting a region for phylogenetic analysis, we need to adjust the mutation rate with the distance between the OTUs
-		* I cannot use very divergent regions for distantly related organisms or very conserved regions for closely related organisms (!)
+		* I cannot use very divergent regions for distantly related organisms or very conserved regions for closely related organisms!
 	* Differential mutation rate can be observed also inside genes
 * The rate of synonimus (S) and non-synonimus (N) mutation is an indication of the selection regime
 	* S > N suggests positive selection
@@ -82,24 +82,24 @@
 * The level of variability is not constant for all organisms and species
 	* Citochrome B is really variable in insects but not in mammals
 	* Cytochrome C is more variable in mammals
-	* Before doing something on a gene look at the literature (!)
+	* Before doing something on a gene look at the literature!
 * Paralogous genes derive from duplication, orthologous genes from speciation
 	* Studing paralogous sequences is informative for the duplication event
 	* Orthologous sequences are informative for speciation events
-	* If I want to study speciation I need to be sure that my locus is orthologous (!)
-* When we compare sequences or characters they must be homologous (!)
+	* If I want to study speciation I need to be sure that my locus is orthologous!
+* When we compare sequences or characters they must be homologous!
 * Homologus genes need to be orthologus in order to be useful for classification
 * Multiple substitutions on the same site or equal substitutions in different species can lead to underestimate the genetic distance: homoplasy
 * The molecular clock hypothesis assumes constant mutation rate
-	* Implicitely it assumes neutral evolution (!)
+	* Implicitely it assumes neutral evolution!
 	* Double molecular distance means double separation time
 * The mtDNA is smaller, aploid and more variable than the nuclear genome
-	* It is some orders of magnitude more variable than the nDNA (!)
+	* It is some orders of magnitude more variable than the nDNA!
 		* Less efficient proofreading
 		* Many more replications per individual
 	* mtDNA is useful for analysing shallow divergence
-	* It tells only about the maternal lineage (!)
-* Nucelar DNA is less variable, subject to recombination, polyploid: a mess (!)
+	* It tells only about the maternal lineage!
+* Nucelar DNA is less variable, subject to recombination, polyploid: a mess!
 * Gene rearrangments are really unlikely to happen twice in the same way
 	* Therefore, they are relly good to establish relationships
 	* The insertion of transposable sequences is one of these
@@ -110,7 +110,7 @@
 	* In this case It is more adequate to represent the phylogeny with a network, not a tree
 * For phylogenetic analysis, we aim at using loci under neutral selection
 * To understand the significance of a phylogenetic hypotesis we can use other information from biogeography
-* Relations determined by genes under strong selection can give wrong results (!)
+* Relations determined by genes under strong selection can give wrong results!
 	* Convergent evolution can make me cluster unrelated species, while splitting related species that have adapted to new environments
 * In some instances tree can be not binary: politomy
 	* Hard politomy refers to multiple, almost simultaneous speciation from a single ancestor
@@ -120,7 +120,7 @@
 * When we create a tree we actually reconstruct the phylogeny of the marker, not of the species
 * Because of this, we want to use many molecular markers at the same time
 * We want to find which gene trees are informative for and overlap with the the species tree
-	* If the genes that I am studying are paralogous, the coalescent event for the gene will be different than for the species (!)
+	* If the genes that I am studying are paralogous, the coalescent event for the gene will be different than for the species!
 * Higher coalescence time is related to lower probability of wrong trees
 * The probability of coalescence for a pair of genes in 1 generation is 1/2N, where N is the size of a diploid population
 	* It is the probability that 2 copy of a gene derive from the same parent gene in the previous generation
@@ -135,7 +135,7 @@
 # Multiple sequence alignments
 * A multiple sequence alignment (MSA) is an hypothesis about the homology of multiple sequences
 	* We arrange sequences so to have homologous positions in the same column
-* In order to find the real alignment of 2 sequences, I need to know the sequence of the mrca (!)
+* In order to find the real alignment of 2 sequences, I need to know the sequence of the mrca!
 * A simple model for aligning DNA: +1 for matches and -1 for mismatches
 * Modelling gaps: we can use different penalties for opening and extending a gap
 * Weighted sum of pairs: WSP objective function
@@ -170,7 +170,7 @@
 # Distance matrices
 * The distance among sequences can be estimated from the number of observed substitutions
 	* This is called observed distance or p-distance
-	* I cannot observe multiple substitutions, so I tend to underestimate the distance (!)
+	* I cannot observe multiple substitutions, so I tend to underestimate the distance!
 	* We say that the p-distance saturates with respect to the true distance d when d gets high
 	* From now, we will refer to true distance with d and observed distance with p
 * The number of mutation expected in a given amount of time can be modelled by a Poisson distribution
@@ -186,7 +186,7 @@
 	* Mutations probablities are only dependent on the immediately preceding state (Markov property)
 	* Substitution rates are constant in time (homogeneity)
 	* The nucleotide frequencies are at equilibrium (stationariety)
-	* These assumptions are not necessarily biologically reasonable, be careful (!)
+	* These assumptions are not necessarily biologically reasonable, be careful!
 * It is possible to develop time-reversible and non-time-reversible substitution models
 	* In a time reversible model $p(X -> Y) = p(Y -> X)$, so their matrices are symmetric
 	* We will only treat time-reversible models
@@ -194,7 +194,7 @@
 	* $p(t) = Q^t$
 * The Q matrix has 8 degrees of freedom
 	* I have 6 possible relative mutation rates
-		* These are the mutation rates Saul, not the transition probabilities (!)
+		* These are the mutation rates Saul, not the transition probabilities!
 	* I have 4 possible nucleotide frequencies
 	* The 2 groups have to sum up to 1, so I loose 2 degrees of freedom
 	* $df = 6+4-2 = 8$
@@ -206,7 +206,7 @@
 	* HKY85 is like the KM but it accounts for different nucleotide frequencies
 	* TN models purine transition, pyrimidine transition and  general transversion (5 parameters), plus different nucleotide frequencies
 	* The general time reversible model (GTR) specifies all the parameters (8 parameters)
-* More parameters are not always better, I risk to do overparametrization (!)
+* More parameters are not always better, I risk to do overparametrization!
 	* This is true when the exact value for the parameters is unknown
 * The strenght of a phylogenetic signal decrease with time since it is more probable to have multiple substitutions
 	* The plot of observed mutation with respect to distance tends to saturate
@@ -230,7 +230,7 @@
 * Algorithmic approach: first obtains the distances, and from them draw the tree
 	* These methods are based on pairwise distances
 	* UPGMA, WGMA, Neighbour-joining are in this category
-	* It is really easy to get wrong trees with them (!)
+	* It is really easy to get wrong trees with them!
 	* They were initially developped for phenograms (trees based on phenotypic features)
 	* Now they are applied for the construction of ultrametric trees
 		* A tree is ultrametric when the OTUs are equidistant from the root
@@ -241,7 +241,7 @@
 	* They can be refined by bayesian inference
 	* They determine which tree is more likely, given the sequences
 	* They are more reliable than algorithmic methods
-	* In charachter-based methods I need to know the ancestral sequence (!)
+	* In charachter-based methods I need to know the ancestral sequence!
 	* An exaustive search is almost always impossible
 		* The branch and bound approach is a possible solution: I create an optimal tree with a subset of sequences and I add a sequence at a time
 		* I can employ some heuristics
@@ -255,11 +255,11 @@
 	* When joining the node (A,B) with the node (C,D), their distance is the average among the distace C to (A,B) and D to (A,B)
 * UPGMA: like WPGMA but the average is weighted on the numerosity of the OTUs under a node
 	* Unweighted pair group method with arithmetic mean
-	* Unweighted refers to the fact that each distance contributes equally to the average, so the actual avergae is weighted on the numerosity (!)
+	* Unweighted refers to the fact that each distance contributes equally to the average, so the actual avergae is weighted on the numerosity!
 	* In an ultrametric tree it gives the same result as WPGMA
 * Both WPGMA and UPGMA are really sensitive to differences in rate of mutation among branches (differential branch lenght from a single split)
 	* This is defined as rate heterogeneity
-	* When I average 2 sequences I am assuming that their rate heterogeneity is equal (!)
+	* When I average 2 sequences I am assuming that their rate heterogeneity is equal!
 * To overcome the limitation of clustering methods, algorithms based on additive distances were developped
 * Addittive distances satisfy the four point metric condition for any 4 taxa A, B, C, D that are joined as (A,B) and (C,D)
 	* $d_{ab}+d_{cd} \leq max(d_{ac}+d_{bd},d_{ad}+d_{bc})$
@@ -381,7 +381,7 @@
 * If I don't know anything about the prior I can use a uniform distribution
 	* I consider all possible values equally likely
 * If I calculate a tree with Bayes, there is no need for validation
-	* What I am using for evaluating trees is already the probability of the tree being correct (!)
+	* What I am using for evaluating trees is already the probability of the tree being correct!
 * In this calculations I can ignore $p(d)$ since it is constant for all models
 	* $p(d) = \sum_M p(d|M)p(M)$
 * I can therefore assume that $p(M|d) \propto p(d|M)p(M)$
@@ -407,19 +407,52 @@
 	* It can be difficult to understand when I am at convergence
 * In certain conditions the Bayesian analysis consistently overestimates the probability of clades, when compared with ML
 
-# Molecular clock calibration
+# Ultrametric trees
+* Ultrametric trees represent divergence time using branch lenght: they are also called time trees
+* In order to build a time tree I need a measure of the time of divergence, which is usually obtained from studying the number of substitutions in a brnach: a molecular clock
 * The simplest molecular clock assumes constant substitution rate, and this is really unlikely in nature
+* The time of divergence can be calculated from the substitution rate and the observed number of substitutions (which is the branch lenght!)
+$$t = bl/\mu$$
 * Different branches tend to evolve at different rates, and we can take account of this by using a relaxed clock
+* A strict clock assumes constant $\mu$ across all branches
+* The likelyhood test ratio (LTR) can be used to test the suitability of a strict clock on the dataset
+$$LTR = 2 (\log L_{clock}-\log L_{non-clock}) \qquad L \mbox{ is the likelyhood of the dataset under the given model}$$
 * Closely related organisms tend to have similar substitution rates
-	* Substitution rates are affected by generation time, DNA repair, and other factors
+	* I can probably assume a strict clock among subspecies, but probably not among different species
+* Substitution rates are affected by generation time, DNA repair, selection regime, UV exposure, and other factors
+* The relative rate test compares the substitution rates of sister nodes using an outgroup as a reference
+* The Tajima test checks the difference among the number of characters shared by the outgroup and only one of the 2 ingroups and that shared with the other ingroup
+	* I expect the same number of non-shared mutation among the 2 ingroups and the outgroup under a strict clock
+* The branch lenght test compares the deviation of the distance from the root to the leaf with the average root-leaf distance in the tree
+* The local clock is a generalization of the strict clock: it assumes a different strict clock for each branch
+	* The mutation rate remains constant in a single branch through time
+* The autocorrelated relaxed clock is similar to the local clock in that assumes a possibly different clock for each branch, but it enforces more constraints
+	* It assumes that closer branches will have a more similar clock than far branches
+	* This is biologically justified by the fact that similar OTUs will share triats that affect the clock in similar ways
+	* In practice the rates of the branches originating from a node are drawn from a distribution centered on the rate of the parental branch
+* The general relaxed clock assumes that each branch has a different substitution rate, but these rates are drawn from the same distribution
+	* By enforcing the rates to come from a pre-determined distribution, it is effectly less heavily parameterized than a local clock
+* Non-parametric rate smoothing (NPRS) is another approach used for the calculation of substitution rates
+	* It relaxes the assumption of a molecular clock by using a least squares smoothing of local estimates of substitution rates
+	* For each node $k$ I calculate a value $r_k$ as
+$$ r_k = (\mu_1 - \mu_2)^2+(\mu_1 - \mu_3)^2$$
+	* $\mu_1$ is the rate of the branch that leads to node $k$, $\mu_2$ and $\mu_3$ is the rate of the branches from node $k$ to its 2 children
+	* $r_k$ will be 0 if all the rates are equal, and bigger than 0 if they differ in any way
+	* I then calculate a global value for the tree $R$ by summing $r$ over all the nodes
+$$ R = \sum_k r_k$$
+	* When I fit the model to the data, I also try to minimize $R$
+	* Basically I am penalizing sharp rate transitions among branches
+	* I can use the $R$ as a prior in a Bayesian framework
+
+# Molecular clock calibration
 * We can get a reference point from geological information (i.e. when two landmasses separated)
 	* Geological time references are frequently really uncertain, since they happen in long timescales
 * The fossil record is quite uncertain, since it is discontinuous
 	* For many species I don’t have a fossil available, or I can have fossils only in specific timepoints with long gaps in between them
 	* Fossil preservation can influence my time estimate and also the attribution of the fossil to a certain clade.
-	* If the fossil is really uncomplete or degraded I cannot be sure of the clade it belongs to (!)
+	* If the fossil is really uncomplete or degraded I cannot be sure of the clade it belongs to!
 	* In general, from a fossil I can get a lower time boundary
-		* A fossil of a clade tells me that te clade itself cannot be more recent than the fossil, but it can be older (!)
+		* A fossil of a clade tells me that te clade itself cannot be more recent than the fossil, but it can be older!
 * In Bayesian analysis I can use the time estimate as a prior
 	* In this way I can also model the time uncertainty (an hard minimum timeborder and a more flexible maximum time border) by tweaking the prior probability distribution
 	* Usually an exponential distribution is used as a model for fossil-record timepoints, since it reflects the soft-hard boundary pair
@@ -430,7 +463,7 @@
 		* It is a symmetric distribution, so it cannot implement an asymmetric soft-hard boundary. It is used for geological data
 	* The uniform distribution is the one that implies less assumptions, but it is also the less informative
 		* It is used for calibrating the root, since it is the point of the tree  of which we usually know less
-* Calibrating a clock can require a lot of effort for collecting data to be used as a prior (!)
+* Calibrating a clock can require a lot of effort for collecting data to be used as a prior!
 * I can increase the reliability of my estimate by including many fixed time references in my tree
 * Sensitivity analisys: correlation of the predicitons from different methods
 	* It can show when my Bayesian prediction are strongly influenced by the priors
@@ -467,7 +500,7 @@
 * The sponge war: sponges were considered the sister clade of all metazoans, but then a paper supported that Ctenophora  (jellyfish) is the real sister clade
 	* A debate started in the community and then this was dismissed
 	* This mistake was probably due to long branch attraction between the outgroup and Ctenophora
-	* The choice of the outgroup can introduce a bias (!)
+	* The choice of the outgroup can introduce a bias!
 * Pancrustacea is a monophiletic group that includes insects and crustaceans
 	* The true topology of the group is debated, mainly because of many really long branches and significant compositional bias
 * In time mutations tend to become fixed or extinct
@@ -617,7 +650,7 @@
 * I can find information about the taxonomy related to a sequence
 	* NCBI is not autoritative for taxonomy, but still gives an useful indication
 * I can find metadata about the sequence
-	* In some cases I can also find in which museum the original speciment is conserved (!)
+	* In some cases I can also find in which museum the original speciment is conserved!
 * The BOLD database contains a DNA barcode for many species
 * RepBase is a database of repetitive sequences
 * RNAcentral was a database about RNA sequences that now is discontinued

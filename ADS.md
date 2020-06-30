@@ -1157,59 +1157,84 @@ $$ T(n) = \Theta(n\log{n})$$
 	* If $x.right = NIL$, then $x$ is the rightmost child of $x.p$
 
 ## Hash tables
-* Dictionaries are really useful in many scenarios in CS
-	* They implement INSERT, SEARCH and DELETE operations
-	* An hash table can be used for implementing a dictionary
-* An hash table is a generalization of a simple array
-	* I have n elements that associated with one key each
-	* The keys are drawn from the key universe U of size m
-	* The key of each element is unique
-* I can represent the hash table with an array T[0...m-1]
-	* Each position in T is called slot and maps to a key in U
-	* For each element x with key k, T[k] contains x itself or a pointer to it
-	* If no elements has key k, then T[k] = NIL
-* I can implement SEARCH, INSERT and DELETE with hash tables in O(1)
+* In many applications I need a dynamic set that supports only the dictionary oerations INSERT, SEARCH and DELETE
+* A data structure implementing these operations is called a dictionary
+* An direct-address table is a convenient way of implementing a dictionary
+	* In an direct-access table under reasonable assumptions, SEARCH and INSERT take $O(1)$, but the worst case SEARCH time is $\Theta(n)$
+* An direct-address table is a generalization of an ordinary array
+	* It contains $n$ elements in the array, and each element is associated with a unique key $k$
+	* The keys are drawn from a reasonably small universe $U = \{0,1,...,m-1\}$
+* I can represent the direct-address table with an array $T[0...m-1]$
+	* Each position in $T$ is called slot and maps to a key in $U$
+	* For each element $x$ with key $k$, $T[k]$ contains $x$ itself or a pointer to it
+	* If no elements has key $k$, then $T[k] = NIL$
+* All the fundamental operations in direct adress tables have an $O(1)$ running time
 
-```pascal
-SEARCH(T,k)
-	return T[k]
+\begin{algorithmic}
+\Statex
+\Procedure{DIRECT-ADDRESS-SEARCH}{$T,k$}
+	\State \Return{$T[k]$}
+\EndProcedure
+\Statex
+\Procedure{DIRECT-ADDRESS-INSERT}{$T,x$}
+	\State $T[x.key] = x$
+\EndProcedure
+\Statex
+\Procedure{DIRECT-ADDRESS-DELETE}{$T,x$}
+	\State $T[x.key] = NIL$
+\EndProcedure
+\Statex
+\end{algorithmic}
 
-INSERT(T,x)
-	T[x.key] = x
-
-DELETE(T,x)
-	T[x.key] = NIL
-```
-
-* In general U can be very large, so I do not really store it
-	* I only store the U subset K containing the keys that I am actually yusing
-* An hash function maps every input to a slot in the hash table
-	* In this case I reduce U to K, which has size m
+* In general $U$ can be very large and the actual number of used keys can be small, so direct-access tables can be unpractical
+	* I need to allocate the table with all the possible keys in $U$!
+	* I want to be able to allocate a table of lenght equal to the subset $K$ of keys actually used from the universe $U$
+* To solve the space usage limitations of of direct-address tables, I can use an hash table
+	* An hash table does not use $T[k]$ as a slot for the key $k$, but $T[h(k)]$, where $h$ is an hash function
+* An hash function $h$ converts a key $k$ into an index in an hash table $T[0...m-1]$
+$$ h:U \to \{0,1,...,m-1\}$$
+	* We say that $k$ hashes to the slot $h(k)$
 	* We will not study hash functions, but we assume them to be well designed and to output with equal probability to each slot
-* It can happen that 2 elements hash to the same slot, and I define this as a collision
-	* It is impossible to completely avoid collisions, since m is smaller than the univers U of possible elements
-	* When I have a collision I create a linked list of the elements hashing at that location
+	* Using a subset of the possible keys reduces the storage requirements
+* It can happen that 2 elements hash to the same slot, and I define this event as a collision
+	* It is impossible to completely avoid collisions, since $m$ is smaller than the universe $U$ of possible elements
+* To solve the collision problem, When I have a collision I create a linked list of the elements hashing at that location
+	* In this configuration a slot does not contain a pointer to an element $x$, but to the head of a linked list containing all the elements that hash to that slot
+	* This approach is called collision by chaining
+
+\begin{algorithmic}
+\Statex
+\Procedure{CHAIN-HASH-INSERT}{$T,x$}
+	\State insert x at the head of the list $T[h(x.key)]$
+\EndProcedure
+\Statex
+\Procedure{CHAIN-HASH-DELETE}{$T,x$}
+	\State delete x from the list $T[h(x.key)]$
+\EndProcedure
+\Statex
+\end{algorithmic}
+
+* Insertion in a chained hash table takes $O(1)$ in the worst case
+* Deletion takes $O(1)$ if the the lists are doubly linked, and takes the time needed for searching if singly linked
+	* If the lists are single-linked, I need to find its predecessor in order to update the pointers in the list, but I do not have a pointer to it!
+	* No search is needed to find the element to delete, since I am given a pointer to it
+* In the average case hashing with chaining has performances that depend on how well the hash function distributes the $n$ keys among the $m$ slots
+* The load factor $\alpha$ of an hash table is the number of elements in the table $n$ divided by the number of slots $m$
+$$\alpha = n/m$$
+	* This is true if I assume that every slot has the same probability to be hashed by an element (simple uniform hashing assumption)
+	* $\alpha$ can be 1, bigger than 1 or smaller than 1
+* An unsucessfull search in a chained hash table takes expected time $\Theta(1+\alpha)$ under simple uniform hashing
+	* An unsuccessfull search is the worst case search for a chained hash table
+	* In an unsuccessfull search I need to go through the all list, which has expected lenght $\alpha$
+	* If choose $m$ to be proportional to $n$ I have that $m=O(n)$
+	* In this case $\alpha=O(1)$ since $O(n)/O(n)=O(1)$ and therefore an unsuccessfull search has a $O(1)$ running time
 * The size of the hash table influences the speed in operating with it
 	* If it has only 1 element essentially I don't have an hash table but a linked list
 	* If it is too big it requires a lot of space
-	* Typically the right size is 1/5 to 1/10 of the number of elements
-* I can keep the list ordered or not
-	* If not ordered inserting is faster and I can implement a LIFO behaviour
-* In a chained hash insert I usually insert new elements at the top of the respective linked list
-	* Inserting is O(1) and searching is O(k), with k lenght of the list
-	* Deleting takes O(k) if the list is single linked, O(1) if double-linked
-		* I assume that I have a pointer for x so I don't have to search it
-		* If the list is single linked I need to find the predecessor of x in order to recreate the list (!)
-* The load factor $\alpha$ of an hash table is the number of elements in the table n divided by the number of slots m
-	* $\alpha = n/m$
-	* This is true if I assume that every slot has the same probability to be hashed by an element
-	* $\alpha$ can be 1, bigger or smaller
-* The worst case in hash table searching is an unsuccessful search
-	* The time complexity is $O(1+\alpha)$
-		* O(1) is required for computing the hash function
-	* I need to look through the whole table (!)
-	* If I assume m to be proportional to n I have that $m=O(n)$
-	* In this case $\alpha=O(1)$ since $O(n)/O(n)=O(1)$
+	* Typically the right size is 1/5 to 1/10 of the number of elements to be stored in it
+* I can keep the lists in an hash table ordered or not
+	* If the lists are not ordered inserting is faster and I can implement a LIFO behaviour
+	* If they are ordered seaching is faster
 
 ## Binary search trees
 * It can be used both as a dictionary and as a priority queue
