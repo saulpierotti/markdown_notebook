@@ -1476,85 +1476,77 @@ $$\alpha = n/m$$
 
 ---
 
-# Introduction
-* Our main topic will be data structures (balanced trees, graphs) and algorithms (greedy, dynamic programming)
-* Recursion will be essential for exploring search trees
+## Introduction
+* Most algorithms on trees and graphs are recursive
+* Algorithm efficiency is extremely important when the input size is large
 
-Fibonacci recursive is incredibly slow with n above 35 while it can compute huge numbers in the iterative form.
-
-
-```python
-def fib(n):
-	if n==1 or n==0:
-		return 1
-	elif n>1:
-		return fib(n-1)+fib(n-2)
-	else:
-		print("fib not possible for negative numbers")
-
-fib(10)
-```
-
-```python
-def fib(n):
-	if n==0 or n==1:
-		return 1
-	list = [1,1,2]
-	for i in range(n-2):
-		list=[list[1],list[2],list[1]+list[2]]
-	return list[2]
-
-fib(100)
-```
-
-# Balanced search trees
-* A balanced tree is a bynary search tree (BST) that minimizes the height of the tree
-	* In a BST the left subtree contains elements smaller than the root, the right subtree bigger
-	* The BST property is useful for lookups and must be mantained by insertions and deletions
-* I BSTs insertion and delition have a complexity linear with the height of the tree, $O(h)$
-	* In a complete BST $h=\log{n}$, so insertion and deletion are $O(\log{n})$ with $n =$ number of nodes
-* Insertions and deletions can make a complete BST unbalanced
+## Balanced search trees
+* A balanced tree is a special kind of bynary search tree (BST)
+	* A BST must maintain the BST property during updates
+	* The BST property is useful during lookups
+* Insertions and deletions in a BST respect the BST property but they can alter the height of the tree
+	* I can obtain a tree in which $h = O(n)$ with a sequence of n insertions by adding element with always increasing (or always decreasing) keys
 * A tree built from ordered elements is maximally unbalanced
 	* A way to create a generally balanced tree is to randomly permutate the input data when constructing the tree
 * Modifications of BST have been developped for maintaining it as balanced as possible
+* Since most BST operation have a complexity of $O(h)$, it is important to minimize the height of the tree
+* There are variants of BSTs that aim at keeping the tree as balanced as possible, like red-black trees and AVL trees
 
-# AVL trees
-* AVL trees are almost balanced BST that support `insert()`, `delete()` and `lookup()` in $O(\log{n})$ time
-* AVL introduce a balancing factor for each node $\beta(n)$
-	* It is the difference in the height of the 2 subtrees of the node
-	* A tree is balanced if for each node $|\beta|$ is less than 1
-
-## Proof that for AVL $h=O(\log{n})$
-* The most unbalanced AVL (and therefore the longest one) is a fibonacci tree
-	* It puts everything on one side but it leaves on the other side only what is needed to make it AVL
-	* It is defined as a BST of height $h$ having a left subtree of heigh $h-1$ and a right subtree of heigh $h-2$
-		* $n_h = n_{h-1} + n_{h-2} + 1$
-	* I want to prove that a fibonacci tree of heigh $h$ has $F_{h+3}-1$ nodes with $F_n$ being the $n^{th}$ fibonacci number
-	* Base case: $h=0$
-		* I have 1 node and it satisfies the condition
-			* $n_0 = 1, F_3 = 2$
+### AVL trees
+* An AVL (Adelson-Velskii and Landis) tree is a BST which is almost balanced
+	* It was published by russian scientists in 1962
+* It supports INSERT, DELETE, and LOOKUP operations in $O(\log n)$ in the worst case
+* For each node $v$, an AVL tree evaluates the balancing factor $\beta(v)$ as the difference in height between the left and right subtrees of $v$
+$$ \beta(v) = height(v.left) - height(v.right)$$
+* A tree is said to be balanced in height if the absolute value of the load factor of each of its nodes is at most 1
+$$ T \mbox{ is balanced} \iff |\beta(v)| \leq 1 \ \forall \ v$$
+* An AVL tree is a BST which is balanced in height
+* The height of an AVL tree is always logarithmic with respect to the number of nodes
+$$ height(AVL) = O(\log n)$$
+	* The most unbalanced AVL tree possible is a Fibonacci tree
+		* It is a tree in which the heights of the left and right subtrees of the root are the Fibonacci trees of order (height) $n_{h-1}$ and $n_{h-2}$
+		* The number of nodes in the Fibonacci tree of height $h$ is
+$$ n_h = n_{h-1} + n_{h-2} +1$$
+	* I want to prove now that a Fibonacci tree of heigh $h$ has $F_{h+3}-1$ nodes with $F_n$ being the $n^{th}$ Fibonacci number
+$$ n_h = F_{h+3} -1$$
+	* In the base case I have a Fibonacci tree where $h=0$
+	* In this case I have 1 node and it satisfies the stated condition
+$$n_0 = 1, F_3 = 2 \implies n_0 = F_{0+3} - 1$$
 	* Induction: $n_h = n_{h-1} + n_{h-2} + 1$ by construction
-		* $n_h = n_{h-1} + n_{h-2} + 1=F_{h+2}-1+F_{h+1}-1+1=F_{h+3}-1$
-		* Since this is true for $h=0$, it is true for every $h$
-	* Since $F_h = \Theta(\phi^h)$ with $\phi \approx 1.618$
-		* $n_h = \Theta(\phi^h)$
-		* $\Theta(\log{n_h}) = \Theta(h)$
-		* $h=\Theta(\log{n_h})$
-* Since the height of the longest AVL tree is $\Theta(\log{n})$, the heigh of an AVL tree is $O(n)$
-
-## Operations in AVL trees
-* `search()` is the same as in a generic BST, since it does not modify the AVL property
-* `insert()` and `delete()` have to be modified so to maintain the AVL property
+$$n_h = n_{h-1} + n_{h-2} + 1=F_{h+2}-1+F_{h+1}-1+1=F_{h+3}-1$$
+	* Therefore, any Fibonacci tree has $F_{h+3} -1$ nodes
+	* Since it is known that
+$$F_h = \Theta(\phi^h) \qquad, \phi \approx 1.618$$
+	* Therefore
+$$n_h = \Theta(\phi^h)$$
+	* So I can conlude that
+$$\Theta(\log{n_h}) = \Theta(h)$$
+$$h=\Theta(\log{n_h})$$
+	* Since the height of the most unbalanced possible AVL tree is $\Theta(\log{n})$, the heigh of an AVL tree is $O(\log n)$
+* Operations in AVL trees are similar to those in BSTs
+	* SEARCH is the same as in a generic BST, since it does not modify the AVL property
+	* INSERT and DELETE have to be modified so to maintain the AVL property
+	* The balancing factor is stored in each node and it is updated during INSERT and DELETE operations
 * The AVL property is maintained through an operation called rotation
-	* It is a transformation that preserves the BST property
-* There are 4 possible rotations, and they are symmetric 2 by 2
-	* Which one to apply depends on the kind of inbalance
-	* The rotation LL can be applied when the imbalance is the the left subtree of the left child, LR, RL, and RR in the corresponding cases
-* The rotation LL has cost $O(1)$ and restores the AVL property
-	* I can use it when the leftmost subtree is of heigh $h+2$ and the leftomost one $h$
-	* I will restore AVL by creating 2 $h+1$ subtrees
-* The LR case cannot be resolved with a single rotation
-	* I need 2 rotations, one to the left and one to the right
+	* A tree rotation does not alter the horizontal arrangement of nodes but only the vertical arrangement
+	* It is a transformation of the tree that preserves the BST property and restores (sometimes in more than 1 passage) the AVL property
+	* It decreases by 1 the heigh of a subtree and increases by one the height of another subtree
+	* It is a movent described always by 3 nodes that pulls them like a string around one of the nodes, which is called pivot
+	* A rotation can be done to the right or to the left, depending on the fact that we pull from the righmost or leftmost node
+	* If the left child of the pivot has a right child, this becomes the left child of the pivot itself after the rotation in a right rotation, and symmetrically in a left rotation
+* Unbalances in an AVL 3 can be of 4 types, which are symmetric in pairs: LL, RR, LR, RL
+	* An LL unbalance derives from adding a leaf to the left of the left child of a node, and it is symmetric to an RR unbalance
+	* An LR unbalance derives from adding a leaf to the left of the right child of a node, and it is symmetric to an RL unbalance
+* Which rotation on sequence of rotations must be applied to an AVL tree after insertions and deletions depends on the kind of inbalance
+	* An LL (or RR) unbalance requires only 1 rotation, which is called LL (or RR) rotation
+		* An LL rotation is a single right rotation on the unbalanced node, an RR rotation a single left rotation onto it
+	* An LR (or RL) unbalance requires 2 rotations in sequence, on different pivots
+		* I first do a left rotation on the left child of the unbalanced node: this brings me to the LL case
+		* I then do the LL rotation to restore the AVL property: a right rotation on the unbalanced node
+* Insertion in AVL tree is similar to the normal BST insertion, but it also recalculates all the balancing factors that changed and performs the required rotations
+	* The balancing factor can change in at most one node per level on the path from the inserted node to the root
+	* The recalculation of the balancing factor is therefore done on each node in the path from the new node to the root, with a $O(\log n)$ time complexity
+	* If at least one node is critical ($|\beta| > 1$)
 
 ## AVL insertion
 * I insert a new value like in a normal BST
