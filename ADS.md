@@ -1625,59 +1625,91 @@ $$ 2^{h+1}-1 \leq n \leq (\frac{3^{h+1}-1}{2})$$
 	* The merging operations could propagate back until the root
 	* Also deletion has an $O(\log n)$ cost
 
-### B-trees
-* B-trees are similar to 2-3 trees but used for even larger amounts of data, when also the keys themselves are too many to be kept in memory
-* B-trees are used for indexing large storages with slow access
-	* They are used by many databases
-	* They have a huge branching factor, they can have thousands of childre per node
-* I want to minimize disk access, since it is usually a bottleneck
-* I cannot read a single byte from a disk, it is read in sectors
+### B trees
+* B trees are similar to 2-3 trees but used for even larger amounts of data, when also the keys themselves are too many to be kept in memory
+* They are typically used to manage large sets of ordered keys
+* A variant of B trees, called B+-trees, are an exact generalization of 2-3 trees and they are used in many filesystems and relational databases
+* Differently from 2-3 trees, B trees store keys and also satellite data in the internal nodes
+* Each node in a B tree can have a large number of children 
+	* They have a huge branching factor, they can have thousands of children per node
+	* Thanks to the high branching factor, B trees can index vast amounts of data on disk, thus reducing the number of I/O operations
+* B-trees are used for indexing large, slow storage disks
+* In general I cannot read a single byte from a disk, data is read in sectors
 	* Also SSDs have a minimal access unit, the block
-* In B-trees I have keys stored in all nodes
-* The grade $t \geq 2$ of a B-tree is the minimum number of children that each node different from the root can have
-	* We select the grade so that a node can be as large as possible but fit in a single sector on the disk
-* It has the following properties
+* The grade $t \geq 2$ of a B tree is the minimum number of children that each node different from the root can have
+	* We select the grade so that each node can be as large as possible but fit in a single sector on the disk
+	* The grade is constant for the whole tree
+	* The root has from 1 to $2t-1$ children
+* A B tree with grade $t$ has the following properties
 	* All the leaves have the same depth
-	* Every node but the root maintains $v$ ordered keys with $t-1 \leq v \leq 2t-1$
-	* The root has $1 \leq v \leq 2t-1$
-	* The keys stored in the first subtree are smaller than the first key of the node, the ones in the second subtree are between the first and the second key, and so on
-* The heigh of a B-tree with n keys is $h \leq \log_t{(n+1)/2}$
-
-## Search in B-trees
-* I check keys in the current node
-* If I don't find it I search it in the correct subtree
-* I visit $O(\log_t{n})$ nodes and each time I have a cost of $O(t)$, so the total cost is $O(t\log_t{n})$
+	* Every node $v$ different from the root maintains $v.n$ ordered keys with $t-1 \leq v.n \leq 2t-1$
+		* These are $v.key_1, v.key_2,...,v.key_{v.n}$
+	* The root has at least 1 and at most $2t-1$ children
+	* Every internal node $v$ has $v.n+1$ children
+	* The keys $v.key$ split the intervals of keys stored in every subtree
+		* The keys stored in the first subtree are smaller than the first key of the node, the ones in the second subtree are between the first and the second key, and so on
+* The heigh of a B-tree with $n$ keys is
+$$h \leq \log_t \frac{n+1}{2}$$
+	* Given a B tree of grade $t$, the higest possible tree is the one with fewer children per node
+	* A B tree of grade $t$ as a minimum of $t$ children per node, by definition
+	* The smallest B tree of grade $t$ has exactly $t$ children per internal node and 1 on the root
+	* A tree with 1 node has depth 0
+	* A tree of 2 nodes has depth 1
+	* A tree of $2t$ nodes has depth 2
+	* A tree of $2t^2$ nodes has depth 3
+	* A tree of $2t^{i-1}$ nodes has depth $i$
+	* The minimum total number of nodes in a B tree of height $h$ is therefore
+$$ 1+\sum_{i=1}^h 2t^{i-1}$$
+	* All the internal nodes (except the root) contain exactly $t-1$ keys
+	* The total number of keys $n$ satisfies
+$$ n \geq 1+(t-1) \sum_{i=1}^h2t^{i-1} = 1+2(t-1) \frac{t^h-1}{t-1} = 2t^h-1$$
+	* This is because
+$$\sum_{i=1}^h t^{i-1} = \sum_{i=0}^{h-1} t^i = \frac{t^h-1}{t-1}$$
+	* Now, since $n \geq 2t^h-1$ we get that
+$$ t^h \leq \frac{n+1}{2}$$
+$$ h \leq \log_t \frac{n+1}{2}$$
+* The search operation of the key $k$ in a B tree is a generalization of the BST search
+	* At each recursion I search for $k$ in the current node
+	* If I find $k$ I stop
+	* If $k$ is not contained in the node I descend into the appropriate subtree of the current node
+	* The number of visited nodes is $O(\log_t n)$
+	* Each visit costs $O(t)$ since I need to scan all the keys in the node
+	* The total cost of BTREE-SEARCH is $O(t log_t n)$
+	* Note that the keys on any given node are sorted: I can do a binary search instead of a linear search to identify the right one
+		* Binary search takes $O(\log n)$
+		* In this case the total complexity will be $O(\log t \log_t n)=O(\log n)$ (using the change of base formula)
+	* I search the leaf $f$ in which I can insert the key $k$
+	* If the leaf is not full (less than 2t-1 keys) I insert $k$ in the correct position
+	* If it is full I split the leaf $f$
+		* I put the key number $t$ of $f$ to $f.parent$
+			* If $f.p$ is full I need to split it and recurse
+			* In the worst case this will split the root and generate a new one
+	* I cannot use binary search in this case since I cannot split an array in that way, I need to copy half of its elements in $O(t)$
+	* Total cost is $O(t \log_t{n})$
 
 \begin{algorithmic}
-\vspace{1em}
-\Procedure{BTREE-SEARCH}{$v, k$}
+\Statex
+\Procedure{BTREE-SEARCH}{$v,k$}
 	\State $i = 1$
-	\While{$i <= len(v)$ \textbf{and} $key > v[i]$}:
-		\State $i += 1$
+	\While{$i \leq v.n$ and $k > v.kei_i$}: \Comment{if I reach the end of $v.key_i$ without finding $k$, $i = v.n + 1$}
+		\State $i = i + 1$
 	\EndWhile
-	\If{$i <= len(v)$ \textbf{and} $k==v[i]$}
-		\State \Return v[i].data
-	\ElsIf{$v$ is leaf}
-		\State \Return None
+	\If{$i \leq v.n$ and $k==v.key_i$}
+	\State \Comment{if $i = v.n+1$ ($k$ is bigger than all the $v.key_i$) the second statement is not evaluated}
+		\State \Return $v.elem_i$
+	\ElsIf{$v$ is a leaf} \Comment{I reached the bottom of the tree without finding $k$}
+		\State \Return $NIL$
 	\Else
-		\State \Return \Call{BTREE-SEARCH}{$v.child[i], k$}
+		\State \Return \Call{BTREE-SEARCH}{$v.child_i, k$}
 	\EndIf
 \EndProcedure
 \end{algorithmic}
 
-* Note that the keys on a node are ordered: I can do a binary search instead of a linear search
-	* Binary search takes $O(\log{n})$
-	* In this case the total complexity will be $O(\log{t}\log_t{n})=O(\log{n})$
 
-## Insert in B-trees
-* I search the leaf $f$ in which I can insert the key $k$
-* If the leaf is not full (less than 2t-1 keys) I insert $k$ in the correct position
-* If it is full I split the leaf $f$
-	* I put the key number $t$ of $f$ to $f.parent$
-		* If $f.p$ is full I need to split it and recurse
-		* In the worst case this will split the root and generate a new one
-* I cannot use binary search in this case since I cannot split an array in that way, I need to copy half of its elements in $O(t)$
-* Total cost is $O(t \log_t{n})$
+
+
+
+
 
 ## Delete in B-trees
 * I want to delete key $k$
@@ -1691,6 +1723,11 @@ $$ 2^{h+1}-1 \leq n \leq (\frac{3^{h+1}-1}{2})$$
 		* If one brother of the leaf has more than $t-1$ keys I redistribute the keys
 		* If not I make a fusion with one of the brothers
 * It has the same complexity of insertion, $O(t \log_t{n})$
+
+
+
+
+
 
 # Graphs
 * A graph is composed of a set of vertices and edges, $G=(V, E)$
