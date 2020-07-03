@@ -1546,100 +1546,87 @@ $$h=\Theta(\log{n_h})$$
 * Insertion in AVL tree is similar to the normal BST insertion, but it also recalculates all the balancing factors that changed and performs the required rotations
 	* The balancing factor can change in at most one node per level on the path from the inserted node to the root
 	* The recalculation of the balancing factor is therefore done on each node in the path from the new node to the root, with a $O(\log n)$ time complexity
-	* If at least one node is critical ($|\beta| > 1$)
+	* If at least one node is critical ($|\beta| > 1$), I need to rebalance the tree with rotations
+	* The overall cost of insertion in AVL trees is $O(\log n)$
+* Deletion in AVL trees is similar to the standard BST deletion, but it is also needed to recalculate the balancing factors that possibly changed and to perform the required rotations
+	* Similarly to insertion, the balancing factor needs to be recalculated in at most $O(\log n)$ nodes, in the path from the deleted node to the root
+	* Critical nodes must be rebalanced with rotations, and rebalancing is performed from the bottom to the top
+	* The overall cost of deletion is $O(\log n)$
+* Search in an AVL tree is also an $O(\log n)$ operation in the worst case
 
-## AVL insertion
-* I insert a new value like in a normal BST
-* I recalculate $\beta$ for all nodes that contain the leaf
-	* In the worst case I need to calculate it for one node for each leavel from the leaf to the root, so it is $O(h)=O(\log{n})$
-* If at least 1 node has $|\beta| > 1$ I need to rebalance the tree with rotations from bottom to top, in $O(1)$
-* In total, an insertion in an AVL tree takes $O(\log{n})$
+## Data structures for working on disk
+* Large data structures cannot be kept always in memory but instead need to be partially loaded in memory from disk, as needed
+* Computational time in these cases is heavily dependent on the number of read/write operations, since disk is typically MUCH slower than memory
+* Some data structures were developped so to minimize disk access operations
 
-## AVL deletion
-* I remove like in a normal BST
-* I rebalance like for the insertion
+### 2-3 trees
+* 2-3 trees are a data structure developped for minimizing disk access
+* It is a tree in which all the internal nodes have 2 or 3 children and all the leaves are at the same depth (the path from the root to each of the leaves has constant lenght)
+	* The leaves contain keys and satellite data, and they are sorted in ascending key order from left to right
+	* Each internal node $v$ maintains up to 2 pieces of information
+		* $v.L$ is the maximum key contained in the subtree rooted in the left child of $v$
+		* Only if $v$ has 3 children, $v.M$ is the maximum key contained in the subtree rooted in the central child of $v$
+* In 2-3 trees internal nodes are small and they can be easily kept in memory and read/written to disk in a single block, while leaves are large since they stire the satellite data
+	* Leaves are typically left on disk and read when needed, while the internal nodes are kept in memory
+* The height of a 2-3 tree is $\Theta(\log n)$
+	* Let $T$ be a tree with $n$ nodes, $f$ leaves and height $h$
+	* The following inequalities hold
+$$2^h \leq f \leq 3^h$$
+$$2^{h+1}-1 \leq n \leq \frac{3^{h+1}-1}{2}$$
+	* If $h=0$ the number of leaves is $f=1$, and so $2^h \leq f \leq 3^h$ holds
+	* If $h>0$ let's consider the tree $T'$ equal to $T$ but without the last level
+	* $n'$ and $f'$ are respectively the number of nodes and leaves in $T'$ 
+	* Every leaf in $T'$ can have either 2 or 3 children in $T$, so assuming that $2^{h-1} \leq f' \leq 3^{h-1}$ I observe that
+$$2*2^{h-1} \leq f \leq 3*3^{h-1} \implies 2^h \leq f \leq 3^h$$
+	* For the second inequality, when $h=0$ the number of nodes in the tree is $n=1$ and so $2^{h+1}-1 \leq n \leq \frac{3^{h+1}-1}{2}$ holds
+	* If $h>0$ I do the inductive assumption that (resuming the tree $T'$ used before) $2^h-1 \leq n' \leq \frac{3^h-1}{2}$
+	* I observe that $n = n'+f$ and $f'$ is under the previously computed bound $2^h \leq f \leq 3^h$
 
-All the basic operations in AVL take $O(\log{n})$
+$$ (2^h-1)+(2^h) \leq n'+f \leq (\frac{3^h-1}{2})+(3^h)$$
+$$ 2^{h+1}-1 \leq n \leq (\frac{3^{h+1}-1}{2})$$
 
-# Working on disk
-* Big data structures cannot be kept in memory but need to be partially loaded in memory from disk, when needed
-* Computational time is heavily dependent on the number of r/w operations into disk, since it is much slower than memory
-* There are data structures that minimize disk access
-
-# 2-3 trees
-* It is a tree in which all nodes have 2 or 3 children and all the leaves are at the same distance from the root
-* Keys and satellite data are stored in the leaves
-* Leaves are sorted in ascending order from left to right
-* Every internal node $v$ maintains up to 2 pieces of information
-	* `v.L`, the max key in the subtree rooted at its left child
-	* `v.M`, the max key in the subtree rooted at its middle child
-* Internal nodes are small, since they contain only keys, while leaves are large
-	* I can keep the internal nodes in memory and the leaves into disk
-* In a 2-3 tree with $n$ nodes, $f$ leaves and with heigh $h$
-	* $2^h \leq f \leq 3^h$
-	* $2^{h+1} -1 \leq n \leq \frac{3^{h+1}-1}{2}$
-* The heigh of a 2-3 tree is $\Theta(\log{n})$
-
-The following searches a 2-3 tree in $O(\log{n})$ time
+* Search in a 2-3 tree is performed as follows, by calling initially 23-SEARCH on the root of the tree
 
 \begin{algorithmic}
-\vspace{1em}
-\Procedure{SEARCH-23}{$v,k$}
-	\If{$v$ is None}:
-		\State \Return None
-	\ElsIf{$v$ is leaf}
+\Statex
+\Procedure{23-SEARCH}{$v,k$}
+	\If{$v == NIL$}
+		\State \Return $NIL$
+	\ElsIf{$v$ is a leaf}
 		\If{$v.key == k$}
 			\State \Return $v$
 		\Else
-			\State \Return None
+			\State \Return NIL
 		\EndIf
 	\Else
-		\If{$k <= v.L$}
-			\State \Return \Call{SEARCH-23}{$v.left, k$}
-		\ElsIf{$v.right \not= \mbox{None}$ \textbf{and} $k > v.M$}:
-			\State \Return \Call{SEARCH-23}{$v.right, k$}
+		\If{$k \leq v.L$}
+			\State \Return \Call{23-SEARCH}{$v.left, k$}
+		\ElsIf{$v.right \not= NIL$ and $k > v.M$}
+			\State \Return \Call{23-SEARCH}{$v.right, k$}
 		\Else
-			\State \Return \Call{SEARCH-23}{$v.mid, k$}
+			\State \Return \Call{23-SEARCH}{$v.mid, k$}
 		\EndIf
 	\EndIf
 \EndProcedure
+\Statex
 \end{algorithmic}
 
-## Insertion in 2-3 trees
-* I create al leaf `v` with key `k`
-* I search for a node `u` at the penultimate level, that will become father of `v`
-* If possible I add `v` as a child of `u`
-* If `u` has already 3 children, I do a recursive splitting back until it is needed
-* It takes $O(\log{n}$ to find the father of the new node and $O(1)$ to do the splitting
-* In the worst case I do $O(\log{n})$ splits back until the root
-* The overall insertion cost is $O(\log{n})$
+* Insertion of a key $k$ in a 2-3 tree procedes as follows
+	* I create a leaf $v$ with key $k$
+	* I use 23-SERACH to find a node $u$ on the penultimate level that will become the father of $v$
+	* If $u$ has not 3 children, I add $v$ to it at the appropriate position
+	* If $u$ has 3 children already, I perform a splitting operation, that can also propagate back until the root
+	* It takes $O(\log n)$ to find the father of the new node and $O(1)$ to do the each split
+	* In the worst case I need to do $O(\log n)$ splits on the path from $u$ back until the root
+	* The overall insertion cost is $O(\log{n})$
+* Deletion of a leaf $v$ with key $k$ in a 2-3 tree procedes as follows
+	* I remove $v$ by detaching it from its father $u$
+	* If $u$ had 2 children it will remain with just 1 child, violating the 2-3 property: in this case I need to merge $u$ with a neighbor
+	* The merging operations could propagate back until the root
+	* Also deletion has an $O(\log n)$ cost
 
-## Deletion in 2-3 trees
-* I search for a leaf `v` with key `k` to be deleted in $O(\log{n})$
-	* I detach it from its father `u`
-* If `u` had 2 children now it violates the 2-3 property, so I need to merge it with a neighbor
-	* This can be propagated until the root if needed
-
-* I search for a node `u` at the penultimate level, that will become father of `v`
-* If possible I add `v` as a child of `u`
-* If `u` has already 3 children, I do a recursive splitting back until it is needed
-* It takes $O(\log{n}$ to find the father of the new node and $O(1)$ to do the splitting
-* In the worst case I do $O(\log{n})$ splits back until the root
-* The overall insertion cost is $O(\log{n})$
-
-# Exercise on recursion
-Write a recursive function that computes the height of a node
-```python
-def h(node):
-	if ((n is leaf) or (n==None)): # n is a leaf or it is not existent
-		return 0
-	else:
-		return max(h(n.left),h(n.right))+1
-```
-Computing the height of a node recursively has complexity O(n)
-
-# B-trees
-* They are similar to 2-3 trees but used for even larger amounts of data, when also the keys are too many to be kept in memory
+### B-trees
+* B-trees are similar to 2-3 trees but used for even larger amounts of data, when also the keys themselves are too many to be kept in memory
 * B-trees are used for indexing large storages with slow access
 	* They are used by many databases
 	* They have a huge branching factor, they can have thousands of childre per node
