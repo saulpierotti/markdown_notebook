@@ -1628,14 +1628,16 @@ $$ 2^{h+1}-1 \leq n \leq (\frac{3^{h+1}-1}{2})$$
 ### B trees
 * B trees are similar to 2-3 trees but used for even larger amounts of data, when also the keys themselves are too many to be kept in memory
 * They are typically used to manage large sets of ordered keys
-* A variant of B trees, called B+-trees, are an exact generalization of 2-3 trees and they are used in many filesystems and relational databases
+* A variant of B trees, called B+ trees, are an exact generalization of 2-3 trees and they are used in many filesystems and relational databases
 * Differently from 2-3 trees, B trees store keys and also satellite data in the internal nodes
+	* B+ trees store satellite data only on the leaves
 * Each node in a B tree can have a large number of children 
 	* They have a huge branching factor, they can have thousands of children per node
 	* Thanks to the high branching factor, B trees can index vast amounts of data on disk, thus reducing the number of I/O operations
 * B-trees are used for indexing large, slow storage disks
 * In general I cannot read a single byte from a disk, data is read in sectors
 	* Also SSDs have a minimal access unit, the block
+* A constant number of sectors is kept in memory at any given time for a B tree, regardless of its size
 * The grade $t \geq 2$ of a B tree is the minimum number of children that each node different from the root can have
 	* We select the grade so that each node can be as large as possible but fit in a single sector on the disk
 	* The grade is constant for the whole tree
@@ -1648,6 +1650,9 @@ $$ 2^{h+1}-1 \leq n \leq (\frac{3^{h+1}-1}{2})$$
 	* Every internal node $v$ has $v.n+1$ children
 	* The keys $v.key$ split the intervals of keys stored in every subtree
 		* The keys stored in the first subtree are smaller than the first key of the node, the ones in the second subtree are between the first and the second key, and so on
+* In general the branching factor of a B tree is choosen so that a single node occupies a whole disk block and can be read/written to disk in a single operation
+	* Typical branching factors are between 50 and 2000
+	* The number of I/O operations is $O(h)$, since in general I perform one operation per node
 * The heigh of a B-tree with $n$ keys is
 $$h \leq \log_t \frac{n+1}{2}$$
 	* Given a B tree of grade $t$, the higest possible tree is the one with fewer children per node
@@ -1668,6 +1673,8 @@ $$\sum_{i=1}^h t^{i-1} = \sum_{i=0}^{h-1} t^i = \frac{t^h-1}{t-1}$$
 	* Now, since $n \geq 2t^h-1$ we get that
 $$ t^h \leq \frac{n+1}{2}$$
 $$ h \leq \log_t \frac{n+1}{2}$$
+* In the following pseudocodes I am assuming that the root is always in memory, and unused blocks are discarded from memory automatically
+* The operations DISK-READ and DISK-WRITE are used to retrieve and write data from disk
 * The search operation of the key $k$ in a B tree is a generalization of the BST search
 	* At each recursion I search for $k$ in the current node
 	* If I find $k$ I stop
@@ -1696,13 +1703,226 @@ $$ h \leq \log_t \frac{n+1}{2}$$
 	\EndWhile
 	\If{$i \leq v.n$ and $k==v.key_i$}
 	\State \Comment{if $i = v.n+1$ ($k$ is bigger than all the $v.key_i$) the second statement is not evaluated}
-		\State \Return $v.elem_i$
+		\State \Return $(v,i)$
 	\ElsIf{$v$ is a leaf} \Comment{I reached the bottom of the tree without finding $k$}
 		\State \Return $NIL$
 	\Else
+		\State \Call{DISK-READ}{$v.child_i$}
 		\State \Return \Call{BTREE-SEARCH}{$v.child_i, k$}
 	\EndIf
 \EndProcedure
+\end{algorithmic}
+
+* Insertion in B trees happens always in the leaves
+	* I search for the leaf $f$ in which to insert the key $k$
+	* If the selected leaf is not full (it has less than $2t-1$ keys) I insert $k$ into it
+	* If the leaf has already $2t-1$ keys I need to split the nodes
+		* The leaf $f$ is split into 2 and the key number $t$ is moved to the father of $f$
+		* If also the father is full, the split backpropagates, possibly until the root
+		* In the worst case the split propagates to the root, which is also full and needs to be split, generating a new root
+	* In total I am visiting $O(\log_t n)$ nodes in the worst case
+	* Each visit has a cost of $O(t)$ because of the split operations
+	* The total cost of B tree insertion is $O(t \log_t n)$
+	* To minimize disk access, I actually split all the full nodes (nodes with $2t-1$ children) in the path to the leaf, regardless to the fact that it is needed or not
+		* This allows to perform the insertion with a single pass down the tree
+		* In this way, every time that I need to split a node, I am sure that its parent cannot be full
+	* The only way for a B tree to increase in height is through a split of its root
+* Deletion in a B tree is different depending if the key $k$ to be deleted is in an internal node or in a leaf
+	* If $k$ is in a leaf $v$
+		* If the leaf has more than $t-$ keys, I just remove $k$
+		* If the leaf has exactly $t-1$ keys there are 2 cases according on the adjacent brothers of $v$
+			* If at least 1 of the adjacent brothers of $v$ has more than $t-1$ keys I redistribute the keys and perform the deletion of $k$
+			* Note that the redistribution involves one brother of $v$ and also $v$'s parent!
+			* If not, I perform a fusion operation of $v$ with one of the brothers and one key from $v$'s parent
+	* If $k$ is in an internal node $v$
+		* I find a node containing the predecessor of $k$, which is necessarily on a leaf
+		* I copy the max key in $v$ in the place of $k$, which is thus deleted
+		* I delete the original copy of the predecessor of $k$, which is on a leaf, using the procedure already seen
+	* Also the cost of deletion in B trees is $O(t \log_t n)$ in the worst case
+	* Also in deletion, I want to be able to operate in a single pass down the tree
+		* I assure that whenever BTREE-DELETE is called on a node, that node has at least $t$ children (1 more than the minimum required of $t-1$)
+		* This means that I can be sure that I can fuse to nodes without making their parent violate the B tree property
+		* If the root ever becomes without any key, it is deleted and the tree decreases its height
+
+## Graphs and visits
+* A graph $G = (V,E)$ is composed of a set of verteces $V$ and edges $E \subset V*V$
+* An edge $e = (u,v)$ is defiend by a pair of veritices
+* An edge is said to be directed if it is composed by an ordered pair of verteces
+* An edge is said to be undirected if it is composed by an unordered pair of verteces
+* A graph is said undirected if all of its edges are undirected
+* A graph is directed if all of its edges are directed
+* Two verteces are said to be adjacent if they are connected by an edge
+* The degree of a vertex is equal to the number of adjacent verteces it has
+* The sum of the degree of all the verteces is two times the number of edges
+$$ \sum_{v \in V} deg(v) = 2 (\mbox{number of edges})$$
+* A path is a sequence of verteces $V_1,V_2,...,V_k$ such that $V_i$ and and $V_{I+1}$ are adjacent
+* A simple path is a path that does not contain repeated verteces (it does not pass twice on the same vertex)
+* A cycle is a simple path, except for the fact that the start and end vertex are the same
+* A connected graph is a graph in which any 2 verteces are connected by a path
+* A sub-graph is a subset of verteces and edges forming a graph
+* A graph does not necessarily need to be connected
+	* There can be verteces or sub-graphs that don't have edge between them
+* A connected component is a maximal connected subgraph
+	* Two verteces are in the same connected compenent iff there is a path between them
+* A directed graphs is said to be strongly connected if for every pair of verteces $u,v$ there is a path from $u$ to $v$ and from $v$ to $u$
+* The strongly connected components of a directed graph are its maximal strongly connected sub-graphs
+	* The strongly connected components form a partition of the graph
+* A tree is a connected graph without cycles
+* A forest is a collection of trees
+* Both trees and forests are special cases of graphs
+* Fundamental graph operations are
+	* Create a new graph: CREATE($G$)
+	* Return True if a graph is empty, False otherwise: EMPTY($G$)
+	* Insert a new vertex: INS-VERTEX($G,v$)
+	* Insert a new edge: INS-EDGE($G,v_1,v_2$)
+	* Delete an existing vertex: DEL-VERTEX($G,v$)
+	* Delete an existing edge: DEL-EDGE($G,v_1,v_2$)
+	* Return the set of adjacent verteces of $v$: ADJ-SET($G,v$)
+* I can represent a graph with an adjacency matrix $M$
+	* It is a boolean matrix where $M[i,j]$ is True if the edge $(i,j)$ exists in the graph, False otherwise
+	* The space requirement of the adjacency matrix is $O(n^2)$, where $n$ is the number of verteces in the graph
+	* An adjancency matrix representation is preferred when the grpah is dense ($|E| \approx |V|^2$), or when I need to quickly tell if 2 verteces are connected
+* I can represent a graph also with adjacency lists
+	* The adjacency list of a vertex $v$ is the list of verteces adjacent to it
+	* A graph is represented by the adjacency lists of all of its verteces
+	* The space requirement for the adjacency list of a graph is $\Theta(n+\sum deg(v) = \Theta(n+m))$
+		* $n$ is the number of verteces in the graph, $m$ the number of edges
+	* The adjacency list representation is preferred for sparse graphs
+		* A sparse graph is a graph in which $|V| >> |E|$
+* I can represent a graph using an adjacency set
+	* An adjacency set is composed by a vector of verteces and a vector of edges
+	* The space requirement for an adjacency set is also $\Theta(n+m)$
+	* The verteces vector contains for each vertex the address, in the edges vector, of where the adjacent verteces of the current vertex are listed
+	* In low-level programming languages I also need to keep track of the end of the array, so I need to insert in the verteces array a fake node that points to the last position of the edges vector
+	* I can use the verteces vector to parse correctly the edges vector
+	* The edges vector contains the address of the adjacent verteces for each vertex in the verteces vector, in a continuous uninterrupted array
+* A graph traversal is the process of visiting all the verteces of a graph
+* There are 2 common graph traversal algorithms: breadth-first serach (BFS) and depth-first search (DFS)
+* Breadth-first search (BFS), given a source vertex $s$, explores all the verteces adjacent to $s$, and then all the verteces adjacent to those, iteratively
+	* Vertices are explored in order of increasing distance from the source $s$
+		* The distance of a vertex from the source $s$ is the number of edges in the path from $s$ to the vertex
+	* At the beginning all the verteces are undiscovered (they are said to be WHITE)
+	* I start from vertex $s$, I put it in the queue $Q$ and I mark it as discovered (referred to as GREY)
+	* Until there is somenthing in $Q$ I dequeue one vertex $v$ from it and I loop on the verteces $u$ into its adjacency set
+		* If the vertex $u$ in the set is WHITE I mark it as GREY (I discovered it) and I enqueue $u$ in $Q$
+	* When all the adjacency set of $v$ is GREY I mark $v$ as BLACK
+	* BFS works iteratively until the whole graph is BLACK (I discovered all the vertices)
+	* BFS produces a breadth-first tree of the graph by adding verteces and edges to it when they are discovered
+	* BFS tells me also which verteces are connected to the source $s$
+	* If the graph is implemented with and adjacency list the time complexity of BFS is $O(n+m)$
+		* Each vertex in the graph is marked only once
+		* For each vertex, I explore once its adjacency set
+		* The size of the adjacency set of the whole graph is $O(m)$ since $\sum_{v \in V} deg(v) = 2 (\mbox{number of edges})$
+	* If the graph is implemented with and adjacency matrix the time complexity of BFS is $O(n^2)$
+		* For each of the $n$ verteces, I need to scan its whole adjacency array of $n$ elements
+		* With an adjacency matrix the complexity is independent from the number of edges in the graph
+
+\begin{algorithmic}
+\Statex
+\Procedure{BFS}{$G, s$}
+	\ForAll{$u \in G.V - \{s\}$}
+		\State $u.color = WHITE$
+		\State $u.d = \infty$ \Comment{$u.d$ is the distance of $u$ from $s$}
+		\State $u.\pi = NIL$ \Comment{$u.\pi$ is the predecessor of $u$}
+	\EndFor
+	\State $s.color = GRAY$
+	\State $s.d = 0$
+	\State $s.\pi = NIL$
+	\State $Q = \emptyset$ \Comment{$Q$ is a new empty queue}
+	\State \Call{ENQUEUE}{$Q, s$}
+	\While{$Q \not= \emptyset$}
+		\State $u = $\Call{DEQUEUE}{$Q$}
+		\ForAll{$v \in G.Adj[u]$} \Comment{all the verteces adjacent to $u$}
+		\If{$v.color == WHITE$}
+			\State $v.color = GREY$
+			\State $v.d = u.d + 1$
+			\State $v.\pi = u$
+			\State \Call{ENQUEUE}{$Q, v$}
+		\EndIf
+		\EndFor
+	\State $u.color = BLACK$
+	\EndWhile
+\EndProcedure
+\end{algorithmic}
+
+* Depth-first search (DFS), given a source vertex $s$, explores recursively all the verteces adjacent to $s$
+	* When I visit a vertex $v$ from the vertex $u$, I recursively visit all the unvisited neighbors of $v$
+	* When there are no more unvisited neighbors to explore, I backtrack to $u$ and give control to the upper recursion level
+	* In general, differently from BFS, DFS is used on the entire graph in order to produce a DFS forest of DFS trees, one for each connected component
+	* DFS also create timestamps that record when a given vertex was discovered ($v.d$) and when it was blackened ($v.f$)
+		* Any vertex $v$ is WHITE before time $v.d$, GREY between time $v.d$ and time $v.f$, and BLACK after time $v.f$
+	* The time complexity is $O(n+m)$ with an adjacency list and $O(n^2)$ with an adjacency matrix for the same considerations made for BFS
+
+\begin{algorithmic}
+\Statex
+\Procedure{DFS}{$G$}
+	\ForAll{$u \in G.V$}
+		\State $u.color = WHITE$
+		\State $u.\pi = NIL$ \Comment{$u.\pi$ is the predecessor of $u$}
+	\EndFor
+	\State $time = 0$ \Comment{$time$ is a global variable}
+	\ForAll{$u \in G.V$}
+		\If{$u.color == WHITE$}
+			\State \Call{DFS-VISIT}{$G,u$}
+		\EndIf
+	\EndFor
+\EndProcedure
+\Statex
+\Procedure{DFS-VISIT}{$G, u$}
+	\State $time = time +1$
+	\State $u.d = time$
+	\State $u.color = GREY$
+	\ForAll{$v \in G.Adj[u]$}
+		\If{$v.color == WHITE$}
+			\State $v.\pi =u$
+			\State \Call{DFS-VISIT}{$G,v$}
+		\EndIf
+	\EndFor
+	\State $u.color = BLACK$
+	\State $time = time +1$
+	\State $u.f = time$
+\EndProcedure
+\Statex
+\end{algorithmic}
+
+# Topological sorting
+* A dependency graph is a graph representing casual dependencies between tasks
+* In general, tasks to be completed can be arranged into a directed acyclic graph (DAG)
+	* Each task is represented by a vertex
+	* A directed edge in the DAG represent a casual dependecy relationship between tasks
+* Tasks dependencies cannot be represented by a cyclic graph: there would be an infinite loop
+* Given a DAG $G=(V,E)$, an ordered set of verteces $S=\{v_1,v_2,...,v_n\}$ is a topological sorting iff
+	* It contains all the verteces in $V$
+$$s=\{v_1,v_2,...,v_n\}=V$$
+	* There is no path from $v_j$ to $v_i$ for all the $i < j$
+	* Equivalently, I can say that if there is an edge $u,v$ then $u$ must appear before $v$ in the topological sorting
+* A series of tasks can be executed in topological order without violating any dependency
+* There can be more than 1 topological sorting for a given DAG
+* Topological sorting algorithms add verteces one by one at the beginning of tha list such that any given vertex is added only after all the nodes reachable from it have been added
+* The algorithm that we will see uses a modified version of DFS to find nodes that are reachable from the current node
+
+\begin{algorithmic}
+\Statex
+\Procedure{TOPO-SORT}{$G$}
+	\State $L = \emptyset$ \Comment{$L$ is a list}
+	\ForAll{$u \in G.V$}
+		\If{$u.color \not= WHITE$}
+			\State \Call{TOPO-DFS}{$G,u,L$}
+		\EndIf
+	\EndFor
+\EndProcedure
+\Statex
+\Procedure{TOPO-DFS}{$G,u,L$}
+	\State $u.color = GREY$
+	\ForAll{$v \in G.Adj[u]$}
+		\If{$v.color == WHITE$}
+			\State \Call{TOPO-DFS}{$G,v,L$}
+		\EndIf
+	\EndFor
+	\State \Call{ADD-IN-FRONT}{$L,u$} \Comment{$u$ is added to the list only after all the calls on $v$ have returned}
+	\State $u.color = BLACK$
+\EndProcedure
+\Statex
 \end{algorithmic}
 
 
@@ -1711,119 +1931,9 @@ $$ h \leq \log_t \frac{n+1}{2}$$
 
 
 
-## Delete in B-trees
-* I want to delete key $k$
-* I first search it
-* If it is not in a leaf
-	* I find the node containing the predecessor of k (biggest smaller value)
-	* I substitute the $k$ with $k.p$
-* If it is in a leaf
-	* If the leaf has more that $t-1$ keys I just delete it
-	* If it has $t-1$ keys
-		* If one brother of the leaf has more than $t-1$ keys I redistribute the keys
-		* If not I make a fusion with one of the brothers
-* It has the same complexity of insertion, $O(t \log_t{n})$
 
 
-
-
-
-
-# Graphs
-* A graph is composed of a set of vertices and edges, $G=(V, E)$
-* An edge $e=(u,v)$ is a pair of vertices
-* The number of edges $E$ can at most be $V^2$
-* A graph can be directed or undirected
-* A simple path is one in which I never pass on the same vertex
-* A cycle is a symple path with the same start and end vertex
-* Adjacent vertices are those connected by an edge
-* The degree of a vertex is the number of adjacent vertices that it has
-* A graph does not necessarily need to be connected
-	* There can be node or subgraphs that don't have edges between them
-* A strongly connected graph has edges between each pair of vertices
-* The strongly connected components of a graph are its maximal strongly connected subgraphs
-* A tree is a connected acyclic graph and a forest is a collection of trees
-* Fundamental graph operations ($G$, $v$, $e$ are graph, vertex, edge)
-	* `Create(G)`
-	* `IsEmpty(G)`
-	* `InsVertex(G,v)`
-	* `InsEdge(G,v1,v2)`
-	* `DelVertex(G,v)`
-	* `DelEdge(G,v1,v2)`
-	* `AdjSet(G,v)` (return the set of adjacent vertices of $v$)
-
-## Representations
-* I can represent a graph with an adjacency matrix of dimensions $V^2$ with $V$ being the number of nodes
-	* It is preferred when I need to quickly get information about gthe connectivity if 2 specific nodes, or when the graph is dense (a lot of edges)
-	* The space requires is $O(V^2)$
-	* It can be a boolean matrix or contain weights for the respective edges
-* I can use an adjacency list
-	* It is formed by a list for each vertex containing all the adjacent vertices to it
-	* Space is $\Theta(V+\sum deg(v))=\Theta(E+V)$
-	* It is generally more used than the matrix, especially with sparse graphs (few edges)
-	* It can also support weights
-* I can use adjacency sets
-	* I have a vector for vertices and one for edges
-	* The edge vector is just a list of adjacent vertices for each node
-	* The node vector contains for each node the number of its adjacent vertices
-		* In low-level languages I also need to keep track of the end of the array, so I insert a fake node that starts at end of array + 1
-	* I can use the node vector to parse correctly the edge vector
-	* The space is $\Theta(E+V)$
-
-## Graph trasversal
-* It refers to the problem of visiting all the vertices of a graph
-* The 2 most used graph trasversal algorithms are BFS and DFS
-
-### Breath-first search (BFS)
-* I first explore closer vertices, and then far ones, starting from vertix $s$
-* At the beginning all the verteces are undiscovered (sometimes said WHITE)
-* I start from vertex s, I put it in the queue Q and I mark it as discovered
-	* Discovered vertexes are referred to as GREY
-* Until there is somenthing in Q
-	* I take one vertex v from Q
-	* I loop on the adjacency set of v
-		* If the vertex u in the set is not discovered (WHITE)
-			* I mark it as discovered (GREY)
-			* I put u in Q
-	* All the adjacenct set of v is GREY: I now mark v as BLACK
-
-```python
-def BFS(G, s):
-	Q = NewQueue()
-	EnQueue(Q, s)
-	s.discovered = True
-	while not IsEmpty(Q):
-		v = DeQueue(Q)
-		visit(v)
-		for nv in AdjSet(G, v):
-			if not nv.dicovered:
-				EnQueue(Q,nv)
-				nv.discovered = True
-```
-* Complexity analysis on an adjacency list
-	* Each vertex is put in the queue once, since it is put in only when WHITE and it is marked as GREY before being put in
-	* The queue operations take $O(1)$, and I do V of them, so $O(V)$
-	* The adjacency list of v is scanned only when v is dequeued, so once
-	* The sum of the lenght of the adjacency lists is $\Theta(E)$ with E the number of edges
-	* The time spent scanning the adjacency lists is therefore $O(E)$
-	* The toal time is therefore $O(V+E)$
-* Complexity analysis on an adjacency matrix
-	* Here there are the same considerations as above, but
-	* For computing the adjacency set I need to scan the respective row of the matrix, so $O(V)$
-	* I need to do this for all the V verteces so the toal complexity is $O(V^2)$
-
-### Depth-first search (DFS)
-* I visit recursively all the unexplored neighbors of the current node
-* At the end I backtrack to the original node
-
-```python
-def DFS(G, u):
-	visit(u)
-	for v in AdjSet(G, u):
-		if not IsVisited(v):
-			DFS(G, v)
-```
-* The time complexity is $O(E+V)$ with an adjacency list and $O(V^2)$ with an adjacency matrix for the same considerations made in BFS
+% Reviewed
 
 ## Topological sort
 * A dependency graph shows casual dependencies between tasks
