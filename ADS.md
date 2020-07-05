@@ -1937,14 +1937,12 @@ $$s=\{v_1,v_2,...,v_n\}=V$$
 * For a problem to be solvable with a greedy approach, it is necessary but not sufficient that it has an optimal substructure
 * Problems that can be solved with a greedy approach are said to repsect the greedy choice property: locally optimal choices are optimal also globally
 
-### The 0-1 knapsack problem
+### The knapsack problem
 * The problem is formulated as follows: a thief breaks into a museum and sees many items, of which he knows exactly the value and the weight. The thief has only a single knapsack with him, and he can take away only what he is able to carry with his knapsack. He is able to carry only items up to a certain total weight and he wants to maximise the value of the knapsack content. Items cannot be sub-divided, but just taken or not. The problem consists in finding the optimal set of items that will respect the weight contraint and maximize the value of the knapsack content.
 * This problem formulation is said 0-1 knapsack problem since it is the whole or none variant, in which items cannot be split up.
 * More formally, the problem can be formulated as: among a set of $n$ items, where item $i$ has value $v_i \in \mathbb{N}$ and weigth $w_i \in \mathbb{N}$, find the subset of items that maximises the total value $\sum_i v_i$ while respecting a total weight contraint $W \in \mathbb{N}$ such that $\sum_i w_i \leq W$
 * The 0-1 knapsack problem cannot be solved with a greedy approach, but it can be solved with dynamic programming
 * It shows optimal substructure but it does not have a greedy choice property
-
-### The fractional knapsack problem
 * The fractional knapsack problem is similar to the 0-1 knapsack problem with one fundamental difference: it is possible to take fractions of items
 * The formulation is usually stated similarly to the one for the 0-1 knapsack, but instead of undividable items it is said that the thief wants to maximize the value of the dust of gold and other precious metals that he can carry
 * Formally we can define the problem as: among a set of $n$ items, where item $i$ has value $v_i \in \mathbb{N}$ and $w_i \in \mathbb{N}$ amount (in weight) is available of it, find the set of fractions of items that maximises the total value $\sum_i v_i*t_i$ with $t_i \leq w_i$ being the amount of item $i$ taken, while respecting a total weight contraint $W \in \mathbb{N}$ such that $\sum_i t_i \leq W$
@@ -2028,56 +2026,164 @@ $$B(T) = \sum_{c \in C} c.freq*d_T(c)$$
 
 ## Dynamic programming
 * Dynamic programming, similarly to the divide-et-impera approach, solves problems by finding the solution to sub-problems
-	* "Programming" here refers to the use of a matrix, not to computer programming
+	* "Programming" here refers to the use of a matrix, not to computer programming (this is the same also in linear programming)
+	* It was formalized in the 1950s by R. Bellman
 * While divide-et-impera is used to solve problems made up of disjoint sub-problems, dynamic programming is used when the sub-problems overlap
 	* This is, in dynamic programming sub-problems share sub-sub-problems
 	* In this context a divide-et-impera approach wastes resources by solving multiple times the same sub-problems
-	* Dynamic programming stores intermediate solution (it uses memoization) and so avoids to solve multiple times the same sub-problem
+	* Dynamic programming stores intermediate solution and so avoids to solve multiple times the same sub-problem
+	* While divide-et-impera is typically done recursively and from the top-down, dynamic programmic is typically implemented iteratively and from the bottom-up
+* Problems that can be solved with dynamic programming are typically optimization problems
+	* These have many possible solutions, each associated one with a different value
+	* We want to find the solution with the maximum or minimum value (according to the problem)
+	* This solution is called **an** optimal solution instead as **the** optimal solution, since there can be many equally optimal solutions
+* Developping a dynamic programming algorithm is done in a sequence of 4 steps
+	* Describe what the structure of an optimal solution should be
+	* Define the value of the optimal solution recursively
+	* Compute the value of an optimal solution, typically from the bottom-up
+	* Contruct the optimal solution from the computed information
+		* This step can be omitted if I am only interested in the value of an optimal solution
+
+### Fibonacci numbers
+* The Fibonacci sequence is defined by the Fibonacci function $F$ as
+$$\begin{cases}F_1=1 \\F_2=1 \\ F_n= F_{n-1}+F_{n-2} & n > 2\end{cases}$$
+* The number of clockwise and anticlockwise spirals in many vegetables (sunflower, cauliflower, ecc.) tend to have adjacent values of the Fibonacci sequence
+* The $n^{th}$ Fibonacci number can be calculated recursively in a very ineffcient way
+	* The computational cost of this implementation is described by the following recurrence equation
+$$ T(n) = \begin{cases}c_1 & n \leq 2 \\ T(n-1)+T(n-2)+c_2 & n > 2\end{cases}$$
+	* Solving the equation gives that $T(n)=O(2^n)$, so the algorith has exponential time complexity
+
+\begin{algorithmic}
+\Statex
+\Procedure{FIBONACCI-NAIVE}{$n$}
+	\If{$n \leq 2$}
+		\State \Return $1$
+	\Else
+		\State \Return \Call{FIBONACCI-NAIVE}{$n-1$} $+$ \Call{FIBONACCI-NAIVE}{$n-2$}
+	\EndIf
+\EndProcedure
+\Statex
+\end{algorithmic}
+
+* I can solve the same problem iteratively in linear time and space
+
+\begin{algorithmic}
+\Statex
+\Procedure{FIBONACCI-ITERATIVE}{$n$}
+	\If{$n \leq 2$}
+		\State \Return $1$
+	\Else
+		\State initialize the array $f[1...n]$
+		\State $f[1]=1$
+		\State $f[2]=1$
+		\For{$i=3$ to $n$}
+			\State $f[i] = f[i-1]+f[i-2]$
+		\EndFor
+		\State \Return $f[n]$
+	\EndIf
+\EndProcedure
+\Statex
+\end{algorithmic}
+
+* This approach can be further improved by not storing the intermediate values of the sequence
+	* In this way I can reach linear time and constant space complexity
+
+\begin{algorithmic}
+\Statex
+\Procedure{FIBONACCI-ITERATIVE-CONSTANT-TIME}{$n$}
+	\If{$n \leq 2$}
+		\State \Return $1$
+	\Else
+		\State initialize the array $f[1...3]$
+		\State $f[1]=1$
+		\State $f[2]=1$
+		\For{$i=3$ to $n$}
+			\State $f[1] = f[2]$
+			\State $f[2] = f[3]$
+			\State $f[3] = f[1]+f[2]$
+		\EndFor
+		\State \Return $f[n]$
+	\EndIf
+\EndProcedure
+\Statex
+\end{algorithmic}
+
+### Dynamic programming for the 0-1 knapsack problem
+* For the 0-1 knapsack problem, I can describe an optimal solution in terms of the optimal solution for a smaller knapsack and number of objects
+* I have an array of weights for each object $w[1...n]$ and an array of values $v[1...n]$
+* The maximum capacity of the knapsack is $W$
+* I start by creating the dynamic programming matrix $V(i,j)$ with $i=0...n$ and $j=1...W$
+* I want to find the solution $V(i,j)$ consisting of a sub-set of the first $i$ objects whose total weight is less than $j$ and that maximize the total value of the knapsack
+* The optimal solution for a knapsack of capacity $W$ with a set of $n$ objects available will be the value computed in $V(n,W)$
+* I initialize the matrix by filling the first row and the first column as follows
+	* I set the first column to 0 since for a capacity $j=0$ no object can fit, and so the maximal value of the knapsack is always 0
+$$v(i,0)=0 \mbox{ for } i=1...n$$
+	* I set the first row to the value of the first object if it can fit ($j \leq w[1]$), 0 otherwise
+$$v(1,j)= \begin{cases} v[1] & \mbox{for } j \geq w[1] \\ 0 & \mbox{for } j < w[1] \end{cases}$$
+* Then I compute the matrix $V$ iteratively for $i=0...n$ and $j=1...W$ as follows
+$$V(i,j) = \begin{cases} V(i-1,j) & \mbox{if } w[i] > j\\ max(V(i-1,j),V(i-1,j-w[i])+v[i]) & \mbox{if } w[i] \leq j \end{cases}$$
+	* If the $i^{th}$ item does not fit in an empty knapsack of capacity $j$, I cannot take it and the optimal composition of the knapsack of capacity $j$ considering the subset of objects $0...i$ is the same as considering the subset of objects $0...i-1$
+$$ V(i,j) = V(i-1,j) \qquad \mbox{if } w[i] > j$$
+	* If it can fit in the knapsack, I make the choice that maximizes the total knapsack value among
+		* Putting the object in the knapsack and filling the remaining $j-w[i]$ free capacity with the optimal solution already found $V(i,j-w[i])$: in this case the value of the optimal knapsack of capacity $j$ is the value of the optimal knapsack of capacity $j-w[i]$ plus the value of the current object $v[i]$
+$$V(i,j) = V(i-1,j-w[i])+v[i]$$
+			* Note that since I am using $j-w[i]$ has an index for the matrix, $w[i]$ has to be an integer!
+		* Not putting the $i^{th}$ object in the knapsack and retaining the composition that it had considering only the subset of objects $1...i-1$
+$$ V(i,j) = V(i-1,j)$$
+* In order to know which objects are in the best solution $V(n,W)$ I need to build an additional table of booleans $K(i,j)$
+	* I set $K(i,j)=TRUE$ if the $i^{th}$ object belongs to the set of objects used for calculating $V(i,j)$, false otehrwise
+$$K(i,j)= \begin{cases} TRUE & \mbox{if } V(i,j)\not=V(i-1,j) \\ FALSE & \mbox{if } V(i,j)==V(i-1,j) \end{cases}$$
+* From the matrix $K$, I start from the bottom right and I procede by subtracting $w[i]$ at each step (I move to $K(i,j-w[i])$)
+	* The included objects are the ones for which $K$ is true in this path
+* The following pseudocode can print the objects included in the optimal solution
+
+\begin{algorithmic}
+\Statex
+\State $j = W$
+\State $i = n$
+\While{$i > n$}
+	\If{$K(i,j)$}
+		\State \Call{PRINT}{$i$}
+		\State $j = j - w[i]$
+	\EndIf
+	\State $i = i-1$
+\EndWhile
+\Statex
+\end{algorithmic}
 
 
-
+### The subset-sum problem
+* The subset-sum problem is a variant of the 0-1 knapsack problem in which I want to find a set of objects whose total weight is exactly $W$
+	* Note that in this case the total value of the set is completely irrelevant (the value of the objects is not even defined)
+* Given a set $X=\{1,2,...,n\}$ of $n$ objects where object $i$ weights $w[i]$ which is a positive integer, and a total capacity $W$, I want to find a subset $Y \subseteq X$ such that $\sum_{i \in Y} w[i] = W$
+* I can solve the subset-sum problem with dynamic programming similarly to how I can solve the 0-1 knapsack problem
+* In this case the sub-problem $P(i,j)$ is to determine if a set of objects drawn from the subset of objects $1...i$ with total weight exactly $j$ exists
+* A solution $B(i,j)$ is TRUE iff a subset of the first $i$ objects with total weight exactly $j$ exists, FALSE otherwise
+* To solve the subset-sum problem, I create the solution matrix $B$ and I initialize the first row to TRUE, since I can always find a set of objects that fills completely a capacity $j=0$: the empty set
+$$B(i,0) = TRUE \qquad \mbox{for } i=1...n$$
+* The first row is set to TRUE if the first object fits exactly in the capacity, 0 otherwise (this is, if $w[1]\not=j$)
+$$B(1,j) = \begin{cases} TRUE & \mbox{if } j=w[1]\\FALSE & \mbox{if } j>0 \mbox{ and } j \not=w[1] \end{cases}$$
+* Then in the general case, for each cell $B(i,j)$ I compute has follows
+	* If $j<w[i]$ than the object $i$ does not fit in the capacity and so the optimal solution is the same found without considering that object
+$$B(i,j)=B(i-1,j) \qquad \mbox{if } j<w[i]$$
+	* Otherwise if $j \geq w[i]$ $B(i,j)$ is TRUE if either of these 2 conditions is verified
+		* The capacity $j-w[i]$ can be filled exactly with the $1...i-1$ subset of objects
+$$B(i-1,j-w[i]) = TRUE \implies B(i,j) = TRUE$$
+		* I already filled exactly capacity $j$ without considering object $i$
+$$B(i-1,j) = TRUE \implies B(i,j) = TRUE$$
+	* If none of these conditions is verified than $B(i,j) = FALSE$
+* The solution of the subset-sum problem can be found by interrogating $B(n,W)$ after the computation
 
 
 % Reviewed
+% check cormen dp
 
 
 
 
 
-# Dynamic programming
-* It was developped in 1950 by Bellman
-* It is similar to divide et impera, but it stores the solution of subproblems (it has memoization)
-* It requires the problem to have optimal substructure
-* It can be implemented recursively (divide et impera with memoization) or iteratively (on a matrix)
-	* The iterative version requires to be able to sort the problems so that I can solve all the dependecies of a problem before solving it
-	* The recursive implementation is also called top-down and the iterative bottom-up
-	* The iterative version has usually smaller constant factor because I avoid the many function calls
 
 ## Knapsack problem
-* For the 0-1 knapsack problem, I can try to find the optimal solution for a subset of the objects
-* I want to find the solution V of i objects with total weight less than the capacity of the sack j that maximises the value
-	* $V(i,j)$ is the maximum value that can be obtained with the first i objects in a sack of capacity j
-* In this algorithm the weights must be integers
-* I create a matrix with i=(number of objects) and j=capacity and for each cell I compute the value of the sack
-* The real solution (value) for the complete set is in the bottom right cell
-* Base cases
-	* $v(i,0)=0$, if capacity is 0 nothing fits
-	* $v(1,j)=v[1] \mbox{ if } j>=w[1]\mbox{, } 0 \mbox{ if } j<w[1]$, if I can put only object 1 if it fits I have its value, otherwise 0
-* For each cell and for each object, if it fits the maximum value selecting it is the maximum value of the knapsack with one object less plus the value of the object, if it does not fit is the maximum value of the knapsack with one object less
-* General case
-	* If object i does not fit, the value is the maximum value with j-1 objects (I am copying from the right)
-		* $v(i,j)=v(i-1,j) \mbox{ if } j<w[i]$
-	* If it fits and I decide to take, the value is the maximum value of the knapsack with just enough space for the object ($j-w[i]$) plus the value of the object
-	* If it fits but I do not take it, the value is the maximum value of the knapsack with i-1 objects
-	* Among those 2 possibilities I choose the one that gives the highest value
-		* $v(i,j) = \max(v(i-1,j-w[i])+v[i],v(i-1,j)) \mbox{ if } j>=w[i]$
-	* Since I am subtracting the weight from j, it has to be integer!
-* In order to know which objects are in the best solution I need an additional table of booleans $k(i,j)$
-	* A cell is true if object i belongs to the object used for calculating V(i,j), false otehrwise
-	* $k(i,j)=1 \mbox{ if } v(i,j)!=v(i-1,j) \mbox{ else } 0$
-* From matrix k, I start from the bottom right and I procede by subtracting w[i] at each step (I go to k(i,j-w[i]))
-	* The included objects are the ones for which k is true in that position
-* The subset sum problem is a variant of the knapsack in which I request that the sack is completely full
 
 # Shortest Path
 * Given a weighted graph $G=(V,E)$ which each edge having an associated cost $w(x,y)$, the cost of path $\pi=(v_0,v_1,...,v_k)$ that connects node $v_0$ with node $v_k$ is the sum of the weights of each edge
