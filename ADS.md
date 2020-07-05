@@ -1885,7 +1885,7 @@ $$ \sum_{v \in V} deg(v) = 2 (\mbox{number of edges})$$
 \Statex
 \end{algorithmic}
 
-# Topological sorting
+## Topological sorting
 * A dependency graph is a graph representing casual dependencies between tasks
 * In general, tasks to be completed can be arranged into a directed acyclic graph (DAG)
 	* Each task is represented by a vertex
@@ -1925,9 +1925,114 @@ $$s=\{v_1,v_2,...,v_n\}=V$$
 \Statex
 \end{algorithmic}
 
+## Greedy algorithms
+* Algorithms for optimization problems typically go through a series of steps, with a set of choices at each step
+* For some optimization problems a dynamic programming approach is not needed, since a simpler and more efficient approach will suffice
+* A greedy algorithm always makes the choice that looks best at the moment
+* It makes a locally optimal choice with the hope that it will lead to a globally optimal solution
+* Greedy algorithms can lead to a globally optimal solutions in some problems, but in general they are not guaranteed to do so in any possible problem
+* Usually greedy algorithms are easy to design and write
+* The basic steps of the greedy approach are first defining a problem and the greedy strategy for solving it, and then showing that the greedy approach leads to an optimal solution
+* A problem is said to have optimal substructure if it is possible to find a globally optimal solution to it by combining optimal solutions to its sub-problems
+* For a problem to be solvable with a greedy approach, it is necessary but not sufficient that it has an optimal substructure
+* Problems that can be solved with a greedy approach are said to repsect the greedy choice property: locally optimal choices are optimal also globally
 
+### The 0-1 knapsack problem
+* The problem is formulated as follows: a thief breaks into a museum and sees many items, of which he knows exactly the value and the weight. The thief has only a single knapsack with him, and he can take away only what he is able to carry with his knapsack. He is able to carry only items up to a certain total weight and he wants to maximise the value of the knapsack content. Items cannot be sub-divided, but just taken or not. The problem consists in finding the optimal set of items that will respect the weight contraint and maximize the value of the knapsack content.
+* This problem formulation is said 0-1 knapsack problem since it is the whole or none variant, in which items cannot be split up.
+* More formally, the problem can be formulated as: among a set of $n$ items, where item $i$ has value $v_i \in \mathbb{N}$ and weigth $w_i \in \mathbb{N}$, find the subset of items that maximises the total value $\sum_i v_i$ while respecting a total weight contraint $W \in \mathbb{N}$ such that $\sum_i w_i \leq W$
+* The 0-1 knapsack problem cannot be solved with a greedy approach, but it can be solved with dynamic programming
+* It shows optimal substructure but it does not have a greedy choice property
 
+### The fractional knapsack problem
+* The fractional knapsack problem is similar to the 0-1 knapsack problem with one fundamental difference: it is possible to take fractions of items
+* The formulation is usually stated similarly to the one for the 0-1 knapsack, but instead of undividable items it is said that the thief wants to maximize the value of the dust of gold and other precious metals that he can carry
+* Formally we can define the problem as: among a set of $n$ items, where item $i$ has value $v_i \in \mathbb{N}$ and $w_i \in \mathbb{N}$ amount (in weight) is available of it, find the set of fractions of items that maximises the total value $\sum_i v_i*t_i$ with $t_i \leq w_i$ being the amount of item $i$ taken, while respecting a total weight contraint $W \in \mathbb{N}$ such that $\sum_i t_i \leq W$
+* The fractional knapsack problem can be solved with a greedy approach
+	* I first choose the item with the highest unitary value and take as much of it as possible
+	* If the I still have space in the knapsack after having taken all of the most precious item, I proceed with the second most valuable item and so on until the knapsack is full (until $\sum_i w_i = W$)
+* The greedy approach is optimal in this case since it ensures that the knapsack will always be full (if there are enough items to fill it) and replacing any of the items choosen with any other possible item will decrease the total value of the knapsack
+* This is the pseudocode for a possible greedy algorithm for the fractional case of the knapsack problem
 
+\begin{algorithmic}
+\Statex
+\Procedure{FRACTIONAL-KNAPSACK-GREEDY}{$N,W$}
+	\State \Comment{$W$ is the total weight constraint}
+	\State \Comment{$N$ is a set of items $n$ with $n.v$ being the value of the item and $n.w_i$ its weight}
+	\State $T = 0$ \Comment{$T$ is the total taken amount}
+	\State $K = \emptyset$ \Comment{$K$ is a set of items that will store the knapsack content}
+	\ForAll{$n \in N$}
+		\State $n.d = n.v/n.w$
+	\EndFor
+	\State $N=$\Call{SORT-DESCENDING}{$N,n.d$} \Comment{sort the items from the most dense to the least dense}
+	\ForAll{$n \in N$}
+		\If{$n.w \leq W-T$} \Comment{I can take the whole amount of the current item}
+			\State $T = T + n.w$
+			\State $K.value = K.value + n.v$
+			\State $n.a = n.w$ \Comment{$n.a$ is the amount of the current item put in the knapsack}
+			\State $K = K + \{n\}$
+		\Else
+			\State $n.a = W-T$
+			\State $K.value = K.value + (n.d*n.a)$
+			\State $K = K + \{n\}$
+			\State \Return $K$
+		\EndIf
+	\EndFor
+\EndProcedure
+\Statex
+\end{algorithmic}
+
+### Huffman codes
+* Huffman codes are effective ways to compress sequences of characters with a 20% to 90% compression ratio
+* The Huffman greedy algorithm uses a table of character frequencies in the data to built an optimal space-efficient binary representation of each character
+* I can represent each possible charachter present in the message with an unique binary string called codeword
+* If I choose to use fixed-length codewords, for an alphabet of 6 different characters I would need 3 bits per character ($2^3 = 8 \geq 6$ while $2^2 = 4 < 6$)
+* With a variable-lenght code I can reach a greater efficency by reducing the average number of bits per character below 3
+	* It would be efficient to assign a short codeword to frequent characters and a longer codeword to rare characters
+* We will restrict our attention to binary codes in which no codeword is also a prefix of some other codeword
+	* These codes are called, somewhat counter-intuitively, prefix codes
+	* It can be proven that a prefix code can always achieve optimal data compression among any character code, so we are not suffering a loss in generality by limiting ourselves to prefix codes
+	* Prefix codes are desirable since the decoding of characters from a binary string is unambiguous
+* In Huffmann codes, I represent all the codewords in a given message as leaves in a binary tree
+	* A codeword is interpreted as the simple path from the root to the corresponding leaf, where each left turn corresponds to a 0 and each right turn to a 1
+	* Note that these trees are not BSTs, since leaves do not appear in sorted order and internal nodes do not contain any key
+* Given an Huffman tree $T$, I can compute the number of bits needed to encode a file
+	* For each charachter $c$ in the alphabet $C$, let $c.freq$ be the frequency of the charachter in the file and $d_T(c)$ denote the depth of the leaf corresponding to $c$ in the tree
+	* Note that $d_T(c)$ is also the lenght of the codeword for character $c$
+	* The number of bits required for encoding the file is thus
+$$B(T) = \sum_{c \in C} c.freq*d_T(c)$$
+	* $B(T)$ is also defined as the cost of the tree $T$
+* The Huffman tree for a message can be built using the greedy Huffman algorithm
+	* It works on an alphabet $C$
+	* It uses a min-priority queue $Q$ keyed on the $freq$ attribute
+	* It starts from a set of $|C|$ leaves
+	* It merges together leaves starting from the least frequent ones
+	* The frequency of an internal node is built from the sum of the frequencies of all the leaves under it
+
+\begin{algorithmic}
+\Statex
+\Procedure{HUFFMAN}{$C$}
+	\State $n = |C|$
+	\State $Q = C$
+	\For{$i=1$ to $n-1$}
+		\State allocate a new node $z$
+		\State $z.left = x =$\Call{EXTRACT-MIN}{$Q$}
+		\State $z.right = y =$\Call{EXTRACT-MIN}{$Q$}
+		\State $z.freq = x.freq+y.freq$
+		\State \Call{INSERT}{$Q,z$}
+	\EndFor
+	\State \Return \Call{EXTRACT-MIN}{$Q$} \Comment{return the root of the tree}
+\EndProcedure
+\Statex
+\end{algorithmic}
+
+## Dynamic programming
+* Dynamic programming, similarly to the divide-et-impera approach, solves problems by finding the solution to sub-problems
+	* "Programming" here refers to the use of a matrix, not to computer programming
+* While divide-et-impera is used to solve problems made up of disjoint sub-problems, dynamic programming is used when the sub-problems overlap
+	* This is, in dynamic programming sub-problems share sub-sub-problems
+	* In this context a divide-et-impera approach wastes resources by solving multiple times the same sub-problems
+	* Dynamic programming stores intermediate solution (it uses memoization) and so avoids to solve multiple times the same sub-problem
 
 
 
@@ -1935,82 +2040,9 @@ $$s=\{v_1,v_2,...,v_n\}=V$$
 
 % Reviewed
 
-## Topological sort
-* A dependency graph shows casual dependencies between tasks
-* I can arrange a series of tasks in a directed acyclic graph (DAG)
-* A topological sort of a DAG $G=(V,E)$ is a linear ordering of its vertices such that if there is an edge $(u,v)$ then u appears before v in the ordering
-* I can execute tasks in topological order without violating dependecies
-* Topological sort algorithm
-	* Nodes are added one by one at the start of a list
-	* One node can be added only after all of its dependecies
 
-```python
-TopoSort(G):
-	L = empty_list()
-	for u in verteces(G):
-		if u is not marked:
-			topoDFS(G,u,L)
-	return L
 
-topoDFS(G, u, L):
-	mark(u)
-	for v in AdjSet(G,u):
-		if v is not marked:
-			topoDFS(G, v, L)
-	addInFront(L,u) # u is added to L only after all the recursive calls have finished
-```
 
-# Greedy algorithms
-* It always makes the locally optimal choice
-* It is not guaranteed to give a globally optimal solution
-* It is normally easy to code
-* A problem has optimal substructure if the solution contains the solution of its subproblems
-
-## Knapsack problem
-* A thief can carry only a certain weight and he wants to maximise the value
-* In the 0-1 formulation, only integer items can be taken (no half items)
-	* It cannot be solved with a greedy approach, but it requires dynamic programming
-* In the fractional formulation fractions of items are allowed
-	* It can be solved with a greedy approach
-
-```python
-greeedy_knapsack_frac(weights, values, total_weight):
-	unitary_val = []
-	for i in indeces(weights):
-		unitary_val.append(values[i]/weights[i])
-	taken_index, taken_weight = [], []
-	while total_weight > 0:
-		for i in weights.indeces:
-			if unitary_val[i] > max_i and i not in taken_index:
-				max_i = i
-		if total_weigth > weigths[max_i]:
-			taken_index.append(i)
-			taken_weight.append(weights[max_i])
-			total_weight -= weights[max_i]
-		else:
-			taken_index.append(i)
-			taken_weight.append(total_weight)
-			total_weight = 0
-	return taken_index, taken weight
-```
-
-## Huffman Codes
-* If we assume that our alphabet has 26 letters, I need to use 5 bits for each letter (32 possible combinations) to represent it
-* If I just assign a code to each letter, my message takes $n*5$ bits with n the number of letters in it
-* Since letters have different frequency, I can exploit this and give shorter codes to the most frequent letters
-	* The problem here is that the code is ambiguous, since I do not know how long a letter is
-* Huffman codes are non-ambiguous variable-lenght codes
-* They use a greedy approach based on a binary tree
-* First I calculate the frequency of each letter
-* I order the set of letters in non-increasing order
-* The 2 least frequent letters are selected and placed as children of a node, and assign a new cumulative symbol
-* I calculate again the frequencies with the new symbol and repeat the process
-* At the end I have a binary tree with the letters as leaves
-* I associate 1 to go left and 0 to go right
-* I start always from the root and I explore the tree until I reach a leave
-* Now I have one letter and I start again from the root
-* They can save 20% to 90% of space compared to a fixed lenght code!
-* An Huffman code is a prefix code: no codeword is part of the prefix of another
 
 # Dynamic programming
 * It was developped in 1950 by Bellman
