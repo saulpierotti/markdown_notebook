@@ -2375,22 +2375,22 @@ $$O((m+n)\log n) = O(m \log n)$$
 ---
 
 ## Disjoint sets
-* Sometimes we are interested in joining $n$ distinct elements into a collection of disjoint sets
+* Sometimes we are interested in joining $n$ distinct elements into a collection of disjoint-sets
 	* It is useful for determining the connected components of an undirected graph
 * Two sets are disjoint if they do not have any common element
 $$ S_i,S_j \mbox{ are disjoint } \iff S_i \cap S_j = \emptyset$$
-* A collection of disjoint sets $S$ is a set of sets $S_1, S_2,..., S_n$ that are disjoint
+* A collection of disjoint-sets $S$ is a set of sets $S_1, S_2,..., S_n$ that are disjoint
 $$S=\{S_1,S_2,...,S_n\} \ :\ S_i \cap S_j = \emptyset \ \forall \ i \not= j \ \land \ i,j \in 1,2,...,n$$
-* The sets in a disjoint set collection can change over time (they are dynamic)
-* Data structures have been implemented for working with disjoint sets collections (disjoint-set data structures)
+* The sets in a disjoint-set collection can change over time (they are dynamic)
+* Data structures have been implemented for working with disjoint-set collections (disjoint-set data structures)
 * These data structures must implement some basic operations
-	* Creating a disjoint set $S_i = \{x\}$
+	* Creating a disjoint-set $S_i = \{x\}$
 	* Finding the set $S_i$ to which an element $x$ belongs to
-	* Merging the disjoint sets $S_i, S_j$ by computing their unioin $S_i \cup S_j$
-* Each disjoint set $S_i$ is uniquely identified by a representative $\rho_i \in S_i$, a member of the set itself
+	* Merging the disjoint-sets $S_i, S_j$ by computing their unioin $S_i \cup S_j$
+* Each disjoint-set $S_i$ is uniquely identified by a representative $\rho_i \in S_i$, a member of the set itself
 	* In most cases it doesn't matter which element is choosen as a representative
 	* Any FIND operation on the set $S_i$ must return the same representative $\rho_i$
-	* When 2 disjoint sets are merged, the representative can change
+	* When 2 disjoint-sets are merged, the representative can change
 	* It is possible to use a specific element of $S_i$ as a representative, for instance the maximum or minimum element of the set
 * MAKE-SET($x$) creates a set $\{x\}$ assuming that $x\not\in S_i \ \mbox{for } i=1...n$
 	* Since $x$ is the only element of the new set, it will also be its representative
@@ -2408,9 +2408,9 @@ $$\mbox{FIND-SET}(x)\not=\mbox{FIND-SET}(y) \implies S_x \cap S_y = \emptyset$$
 $$G'=(V',E') \mbox{ is a connected component } \iff \mbox{ for } x \in V' \begin{cases} \exists \ x \leadsto y \ \forall \ y \in V' \\  \nexists \ x \leadsto z \ \forall \ z \in V-V'  \end{cases}$$
 * Disjoint sets can be used for determining the connected components in an undirected grpah $G=(V,E)$
 	* When the graph $G$ is static, I can quickly determine the connected components with a series of depth-first searches
-	* When the graph is dynamic (edges are added and removed over time), disjoint sets are more efficient in maintaining the connected components as the graph is modified
+	* When the graph is dynamic (edges are added and removed over time), disjoint-sets are more efficient in maintaining the connected components as the graph is modified
 		* When an edge is added I can just join the respective sets
-* We can define some operations based on disjoint sets to work on connected components
+* We can define some operations based on disjoint-sets to work on connected components
 	* CONNECTED-COMPONENTS($G$) computes what are the connected components
 	* SAME-COMPONENTS($u,v$) returns TRUE if $u$ and $v$ belong to the same component
 
@@ -2439,7 +2439,7 @@ $$G'=(V',E') \mbox{ is a connected component } \iff \mbox{ for } x \in V' \begin
 
 ### Disjoint sets representations
 * Disjoint sets can be implemented naively with linked lists
-	* In this case each disjoint set is represented by a linked list $L$ where each element $x$ stores
+	* In this case each disjoint-set is represented by a linked list $L$ where each element $x$ stores
 		* The set member $x.elem$
 		* A pointer to the next element in the list $x.next$
 		* A pointer back to the set object $x.set$
@@ -2453,10 +2453,10 @@ $$G'=(V',E') \mbox{ is a connected component } \iff \mbox{ for } x \in V' \begin
 * Here we will always refer to the total number of MAKE-SET, UNION, and FIND-SET operations as $m$, and to the total number of MAKE-SET operations as $n$
 	* Since the number of MAKE-SET operations $n$ is included in the number of total operations $m$, we have that $m \geq n$
 	* We assume that the first $n$ operations performed of the $m$ total operations are all MAKE-SET operations
-	* The total number of UNION operations in a collection of disjoint sets is at most $n-1$
+	* The total number of UNION operations in a collection of disjoint-sets is at most $n-1$
 		* $n$ is the number of MAKE-SET operations, and so the number of initial sets
 		* After $n-1$ unions on $n$ sets I am left with a single set
-* The running time is $O(m+n \log n)$ with a linked lists representation of disjoint sets
+* The running time is $O(m+n \log n)$ with a linked lists representation of disjoint-sets
 	* We are performing at most $n-1$ UNION operations
 	* Since we are using the weighted-union heuristic, when I perform an UNION operation the pointers are always updated in the smaller original set
 	* Let's look at an element $x$
@@ -2466,10 +2466,10 @@ $$G'=(V',E') \mbox{ is a connected component } \iff \mbox{ for } x \in V' \begin
 	* The total time spent in UNION operations is thus $O(n \log n)$
 	* Each MAKE-SET and FIND-SET operation takes $O(1)$ time, and $O(m)$ of them are performed
 	* Thus the total time for the entire sequence is $O(m+n\log n)$
-* The amortized cost (average cost per operation) with a linked-list representation of disjoint sets is thus
+* The amortized cost (average cost per operation) with a linked-list representation of disjoint-sets is thus
 $$\frac{O(m+n \log n)}{m} = O\left(\frac{n \log n}{m}\right)$$
-* Instead of linked lists, we can use a disjoint set forest representation
-	* In this case each disjoint set is represented by a rooted tree
+* Instead of linked lists, we can use a disjoint-set forest representation
+	* In this case each disjoint-set is represented by a rooted tree
 	* Each node in each tree contains an element $x$ and a pointer to its parent node $x.p$
 	* The representative of a set is the root of the corresponding tree
 	* The parent pointer of the root of each tree points to itself
@@ -2541,10 +2541,13 @@ $$\frac{O(m \ \alpha(n))}{m} = O\left(\frac{m \ \alpha(n)}{m}\right)=O(\alpha(n)
 \Statex
 \end{algorithmic}
 
+* Disjoint-sets are useful for the representation of dynamic sets that grow over time
+* A disjoint-set forest implementing the heuristics union-by-rank and path compression reaches an almost constant $O(\alpha(n))$ amortized running time per operation
+* The dishoint-sets representation of connected components does not support the removal of edges, but only their addition
+* Many of the results for disjoint-sets are due to the american scientist Robert E. Tarjan
+
 % Reviewed
 
-Add time analysis union-by-rank and path compression and hybrid
-substitute disjoint set disjoint-set
 
 
 
