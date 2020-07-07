@@ -2369,82 +2369,124 @@ $$O((m+n)\log n) = O(m \log n)$$
 \EndProcedure
 \end{algorithmic}
 
-
-
-
-% Reviewed
-
-
-
-
-
-
-
-
-
-
-
-
 # Roberto Amandini module
 
 ---
 
+## Disjoint sets
+* Sometimes we are interested in joining $n$ distinct elements into a collection of disjoint sets
+	* It is useful for determining the connected components of an undirected graph
+* Two sets are disjoint if they do not have any common element
+$$ S_i,S_j \mbox{ are disjoint } \iff S_i \cap S_j = \emptyset$$
+* A collection of disjoint sets $S$ is a set of sets $S_1, S_2,..., S_n$ that are disjoint
+$$S=\{S_1,S_2,...,S_n\} \ :\ S_i \cap S_j = \emptyset \ \forall \ i \not= j \ \land \ i,j \in 1,2,...,n$$
+* The sets in a disjoint set collection can change over time (they are dynamic)
+* Data structures have been implemented for working with disjoint sets collections (disjoint-set data structures)
+* These data structures must implement some basic operations
+	* Creating a disjoint set $S_i = \{x\}$
+	* Finding the set $S_i$ to which an element $x$ belongs to
+	* Merging the disjoint sets $S_i, S_j$ by computing their unioin $S_i \cup S_j$
+* Each disjoint set $S_i$ is uniquely identified by a representative $\rho_i \in S_i$, a member of the set itself
+	* In most cases it doesn't matter which element is choosen as a representative
+	* Any FIND operation on the set $S_i$ must return the same representative $\rho_i$
+	* When 2 disjoint sets are merged, the representative can change
+	* It is possible to use a specific element of $S_i$ as a representative, for instance the maximum or minimum element of the set
+* MAKE-SET($x$) creates a set $\{x\}$ assuming that $x\not\in S_i \ \mbox{for } i=1...n$
+	* Since $x$ is the only element of the new set, it will also be its representative
+	* I need to check that $x$ is not contained in any other set before inserting it in a new set!
+* FIND-SET($x$) returns a pointer to the representative $\rho_i$ of the unique set $S_i$ containing $x$
+* UNION($x, y$) returns $S_x \cup S_y$ assuming that $x \in S_x$, $y \in S_y$, and $S_x \cap S_y = \emptyset$
+	* The condition $S_x \cap S_y = \emptyset$ can be verified by enforcing that they belong to sets with different representatives
+$$\mbox{FIND-SET}(x)\not=\mbox{FIND-SET}(y) \implies S_x \cap S_y = \emptyset$$
+	* The UNION operation destroys the sets $S_x$ and $S_y$
+	* After UNION, a new representative for the set $S_x \cup S_y$ must be choosen
+		* Usually either the representative of $S_x$ or that of $S_y$ is used
 
-# Disjoint sets
-* A disjoint set is a set containing a number of sets without elements in common
-	* $S=\{S_1,S_2,...,S_k\}=\{\{a_1,a_2,...,a_n\},\{b_1, b_2,...,b_n\},...,\{k_1,k_2,...,k_n\}\}$
-* Each set is identified by a representative, which is a menìmber of the set itslef
-	* In most cases it doen't matter which element is the representative, it just matters that it is always the same for the given set
-* MAKE-SET($x$) creates a new set containing only $x$, which is this also its representative
-	* Since we are defining disjoint sets, we need also to assure that $x$ in not in any other set
-* UNION($x, y$) unites the 2 sets containing $x$ and $y$ into a new set
-* FIND-SET($x$) returns a pointer to the representative of the set containing $x$
-* A disjoint set can be useful to describe the connected components of a grahp
-	* We can define the function CONNECTED-COMPONENTS($G$) that computes the connected components and SAME-COMPONENTS($u$, $v$) that checks if 2 nodes belong to the same connected component
+### Connected components
+* A subgrapg $G'=(V',E')$ of the graph $G=(V,E)$ is a connected component if there is a path among all the possible pairs of verteces in $V'$ and there is no path among any vertex in $V$ and any vertex in $V$ but not in $V'$
+$$G'=(V',E') \mbox{ is a connected component } \iff \mbox{ for } x \in V' \begin{cases} \exists \ x \leadsto y \ \forall \ y \in V' \\  \nexists \ x \leadsto z \ \forall \ z \in V-V'  \end{cases}$$
+* Disjoint sets can be used for determining the connected components in an undirected grpah $G=(V,E)$
+	* When the graph $G$ is static, I can quickly determine the connected components with a series of depth-first searches
+	* When the graph is dynamic (edges are added and removed over time), disjoint sets are more efficient in maintaining the connected components as the graph is modified
+		* When an edge is added I can just join the respective sets
+* We can define some operations based on disjoint sets to work on connected components
+	* CONNECTED-COMPONENTS($G$) computes what are the connected components
+	* SAME-COMPONENTS($u,v$) returns TRUE if $u$ and $v$ belong to the same component
 
 \begin{algorithmic}
 \Statex
-\Statex
 \Procedure{CONNECTED-COMPONETS}{$G$}
 	\ForAll{nodes $v \in G.V$}
-		\State \Call{MAKE-SET}{v}
+		\State \Call{MAKE-SET}{$v$}
 	\EndFor
-	\ForAll{edges $(u,v) \in G.E$}
-		\If{\Call{FIND-SET}{u} $\neq$ \Call{FIND-SET}{v}}
+	\ForAll{$(u,v) \in G.E$}
+		\If{\Call{FIND-SET}{$u$} $\neq$ \Call{FIND-SET}{$v$}}
 		\State \Call{Union}{$u,v$}
 		\EndIf
 	\EndFor
 \EndProcedure
 \Statex
-\Statex
 \Procedure{SAME-COMPONETS}{$u,v$}
-	\If{\Call{FIND-SET}{u} $\neq$ \Call{FIND-SET}{v}}
+	\If{\Call{FIND-SET}{$u$} == \Call{FIND-SET}{$v$}}
 		\State \Return TRUE
 	\Else
 		\State \Return FALSE
 	\EndIf
 \EndProcedure
+\Statex
 \end{algorithmic}
 
-* A disjoint set can be implemented naively with a linked list
-	* Each set is represented by a linked list
-	* Each element of the list stores
-		* The object itself
-		* A pointer to the next element
-		* A pointer to the set representative
-	* The first object of the list is taken as representative
-	* In this case MAKE-SET and FIND-SET are easy to implement and cost O(1)
-		* MAKE-SET just creates a new list with the object
-		* FIND-SET follows the pointer back to the representative
-	* UNION is implemented by appending 2 lists and updating the pointers
-		* Updating the pointers costs $\Theta(|L_y|)$! ($|L_y|$ is the lenght of the second list)
-* A disjoint-set forest is a better representation
-	* Each set is a rooted tree
-	* Each node contains an element and a pointer to its parent
-		* The root points to itself
-	* FIND-SET needs to trasverse the tree until the root and costs O(n) in the worst case
-	* UNION is easy: I just make the root of one tree point to the root of another
-		* However, I need to call 2 times FIND-SET to find the 2 roots if I am not storing them!
+### Disjoint sets representations
+* Disjoint sets can be implemented naively with linked lists
+	* In this case each disjoint set is represented by a linked list $L$ where each element $x$ stores
+		* The set member $x.elem$
+		* A pointer to the next element in the list $x.next$
+		* A pointer back to the set object $x.set$
+	* The first object of the list $S.head$ is taken as representative
+	* In this case MAKE-SET($x$) and FIND-SET($x$) are easy to implement and have constant time complexity ($O(1)$)
+		* MAKE-SET just creates a new list containing only the object $x$
+		* FIND-SET follows the pointer $x.set$ back to the set object, and then returns the head of the respective list $L.head$
+	* UNION($x,y$) can be implemented naively by appending the list $L_y$ to which $y$ belongs to the list $L_x$ to which $x$ belongs
+		* This operations costs $O(|L_y|)$ since I need to update all the pointers $y.set$ for all the elements in $L_y$
+	* In order to inprove the performances of UNION($x,y$) I can use a weighted-union heuristic: I always append the sortest list among $L_x$ and $L_y$ to the longer one
+* Here we will always refer to the total number of MAKE-SET, UNION, and FIND-SET operations as $m$, and to the total number of MAKE-SET operations as $n$
+	* Since the number of MAKE-SET operations $n$ is included in the number of total operations $m$, we have that $m \geq n$
+	* We assume that the first $n$ operations performed of the $m$ total operations are all MAKE-SET operations
+	* The total number of UNION operations in a collection of disjoint sets is at most $n-1$
+		* $n$ is the number of MAKE-SET operations, and so the number of initial sets
+		* After $n-1$ unions on $n$ sets I am left with a single set
+* The running time is $O(m+n \log n)$ with a linked lists representation of disjoint sets
+	* We are performing at most $n-1$ UNION operations
+	* Since we are using the weighted-union heuristic, when I perform an UNION operation the pointers are always updated in the smaller original set
+	* Let's look at an element $x$
+	* After 1 union in which $x$'s pointer is updated the resulting set has at least 2 members, after 2 updates at least 4, and so on
+	* For any $k \leq n$, when $x$'s pointer has been updated $\lceil \log k \rceil$ times, the resulting set has at least $k$ members
+	* Since the largest set has at most $n$ members, each object's pointer is updated at most $\lceil \log n \rceil$ times overall
+	* The total time spent in UNION operations is thus $O(n \log n)$
+	* Each MAKE-SET and FIND-SET operation takes $O(1)$ time, and $O(m)$ of them are performed
+	* Thus the total time for the entire sequence is $O(m+n\log n)$
+* Instead of linked lists, we can use a disjoint set forest representation
+	* In this case each disjoint set is represented by a rooted tree
+	* Each node in each tree contains an element $x$ and a pointer to its parent node $x.p$
+	* The representative of a set is the root of the corresponding tree
+	* The parent pointer of the root of each tree points to itself
+$$ x.p = x \implies x \mbox{ is a root}$$
+	* MAKE-SET($x$) creates a tree with just the root in $O(1)$ time
+	* FIND-SET($x$) traverses the tree up to the root with a worst-case running time of $O(n)$
+	* UNION($x,y$) just redirects the pointer $x.p$ of the root of a tree to the root of another tree
+		* If I know who the 2 roots are the running time is $O(1)$
+			* I know the roots if I am maintaining a table of all the roots
+		* If I don't know I need to call FIND-SET($x$) and FIND-SET($y$)
+			* In this case UNION becomes an $O(n)$ operation in the worst case
+* So far it seems that the disjoint-set forest representation is not better than the linked-list representation, but we can improve dramatically the amortized cost of the disjoint-set forest by using some heuristics
+	* Union-by-rank: I can minimize the height of each tree resulting from UNION operations by making the root of the tree with fewer nodes point to the root of the tree with more nodes, and not vice-versa
+
+% Reviewed
+
+
+# Disjoint sets
+
+
 	* We can improve average performances by doing union by rank and path compression
 	* Union by rank: the smaller tree should point to the bigger, not vice-versa
 		* In this way I minimize the height of the resulting tree
@@ -2491,6 +2533,22 @@ $$O((m+n)\log n) = O(m \log n)$$
 \Statex
 \Statex
 \end{algorithmic}
+
+
+
+% Not checked
+
+
+
+
+
+
+
+
+
+
+
+
 
 # Longest common subsequence (LCA) 
 * The LCA problem is a classical problem that can be solved with dynamic programmin
