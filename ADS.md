@@ -1956,7 +1956,7 @@ $$s=\{v_1,v_2,...,v_n\}=V$$
 \Statex
 \Procedure{FRACTIONAL-KNAPSACK-GREEDY}{$N,W$}
 	\State \Comment{$W$ is the total weight constraint}
-	\State \Comment{$N$ is a set of items $n$ with $n.v$ being the value of the item and $n.w_i$ its weight}
+	\State \Comment{$N$ is a set of items $n$ with $n.v$ being the value of the item and $n.w$ its weight}
 	\State $T = 0$ \Comment{$T$ is the total taken amount}
 	\State $K = \emptyset$ \Comment{$K$ is a set of items that will store the knapsack content}
 	\ForAll{$n \in N$}
@@ -2031,7 +2031,7 @@ $$B(T) = \sum_{c \in C} c.freq*d_T(c)$$
 * While divide-et-impera is used to solve problems made up of disjoint sub-problems, dynamic programming is used when the sub-problems overlap
 	* This is, in dynamic programming sub-problems share sub-sub-problems
 	* In this context a divide-et-impera approach wastes resources by solving multiple times the same sub-problems
-	* Dynamic programming stores intermediate solution and so avoids to solve multiple times the same sub-problem
+	* Dynamic programming stores intermediate solution and so avoids to solve multiple times the same sub-problems
 	* While divide-et-impera is typically done recursively and from the top-down, dynamic programmic is typically implemented iteratively and from the bottom-up
 * Problems that can be solved with dynamic programming are typically optimization problems
 	* These have many possible solutions, each associated one with a different value
@@ -2043,6 +2043,35 @@ $$B(T) = \sum_{c \in C} c.freq*d_T(c)$$
 	* Compute the value of an optimal solution, typically from the bottom-up
 	* Contruct the optimal solution from the computed information
 		* This step can be omitted if I am only interested in the value of an optimal solution
+* For a problem to be solvable with dynamic programming, it has to have some key characteristics
+	* It should show optimal substructure
+	* It should have overlapping sub-problems
+* A problem is said to show optimal substructure if a solution to the problem contains the solution to its sub-problems
+* To show that a problem has an optimal substructure a common pattern is followed
+	* First I show that the solution to the problem consists in making a choice, and this choice leaves one or more similar sub-problems to be solved
+	* Then I suppose that I know what is the optimal choice for the problem, the one that leads to an optimal solution
+	* Given the optimal choice, I determine which sub-problems I should solve and how can I characterize the space of sub-problems
+		* Characterizing the space of sub-problems means to define the parameter space relevant for the problem (in the 0-1 knapsack problem this corresponds to all the possible combinations of the maximum weight of the knapsack $j$ and the subset of items up to $i$)
+	* I show by contradiction that the solution to sub-problems used for finding an optimal solution to the problem must be themselves optimal
+		* I show that the solution of the problem obtain from sub-optimal solution to its sub-problems can be improved by choosing an optimal sub-problem solution, thus showing that the original problem solution was sub-optimal
+* A problem solvable with dynamic programming has independent and overlapping sub-problems
+	* Sub-problems are independent in the sense that they do not share resources
+	* Sub-problems overlap in the sense that the same problem occurs as sub-problem of different problems
+		* I can take advantage of this by storing the result of sub-problems
+	* A problem with overlapping sub-problems shows a small sub-problem space
+		* This is because the recursive solution to sub-problems incurs again and again in the same sub-problems
+		* Quantitatively, the sub-problem space is typically polynomial on input size
+		* A problem with optimal sub-structure but non-overlapping sub-problems is a typical divide-et-impera problem
+* Storing the choice made in each sub-problem in a table allows to easily reconstruct a global solution
+	* If we need to reconstruct the solution and not only to know its value, I typically keep 2 tables, one storing the solutions themselves and one storing the choices made to reach them
+* A subtly different alternative to the iterative bottom-up dynamic programming approach is the memoized recursive dyanmic programming approach
+	* Instead of using the iterative bottom-up approach, I maintain the recursive top-down approach of the divide-et-impera paradigm
+	* I store the solution to the sub-problems that I encounter in a table, so to not solve the same sub-problems again and again
+	* In general, if all the possible sub-problems in problem space must be solved at least once, than the bottom-up approach outperforms the memoized recursive approach by a constant factor
+		* This is because the bottom-up approach lacks all the overhead due to recursive calls and has less overhead for mantaining the solution table
+		* With the bottom-up approach I can also exploit the regular pattern of table access to store at any given time only a constant number of solutions
+			* This is what we did in the last version of the Fibonacci algorithm
+	* If some sub-problems do not need to be solved at all, the memoized recursive version has the advantage of solving only those sub-problems that are effectively needed
 
 ### Fibonacci numbers
 * The Fibonacci sequence is defined by the Fibonacci function $F$ as
@@ -2090,7 +2119,7 @@ $$ T(n) = \begin{cases}c_1 & n \leq 2 \\ T(n-1)+T(n-2)+c_2 & n > 2\end{cases}$$
 
 \begin{algorithmic}
 \Statex
-\Procedure{FIBONACCI-ITERATIVE-CONSTANT-TIME}{$n$}
+\Procedure{FIBONACCI-ITERATIVE-CONSTANT-SPACE}{$n$}
 	\If{$n \leq 2$}
 		\State \Return $1$
 	\Else
@@ -2139,15 +2168,17 @@ $$K(i,j)= \begin{cases} TRUE & \mbox{if } V(i,j)\not=V(i-1,j) \\ FALSE & \mbox{i
 
 \begin{algorithmic}
 \Statex
-\State $j = W$
-\State $i = n$
-\While{$i > n$}
-	\If{$K(i,j)$}
-		\State \Call{PRINT}{$i$}
-		\State $j = j - w[i]$
-	\EndIf
-	\State $i = i-1$
-\EndWhile
+\Procedure{PRINT-KNAPSACK-CONTENT-DP}{$N,W,K$}
+	\State $j = W$
+	\State $i = |N|$
+	\While{$i > 0$}
+		\If{$K(i,j)$} \Comment{$K$ is a table of booleans}
+			\State \Call{PRINT}{$N.item_i$}
+			\State $j = j - N.w_i$
+		\EndIf
+		\State $i = i-1$
+	\EndWhile
+\EndProcedure
 \Statex
 \end{algorithmic}
 
@@ -2173,55 +2204,92 @@ $$B(i-1,j-w[i]) = TRUE \implies B(i,j) = TRUE$$
 $$B(i-1,j) = TRUE \implies B(i,j) = TRUE$$
 	* If none of these conditions is verified than $B(i,j) = FALSE$
 * The solution of the subset-sum problem can be found by interrogating $B(n,W)$ after the computation
+* The following pseudocode prints the solution of the subset-sum problem
 
+\begin{algorithmic}
+\Statex
+\Procedure{SUBSET-SUM}{$w,W$}
+	\State \Comment{$w[1...n]$ is a list of weights for each item and $W$ the total capacity}
+	\State initialize the matrix $B(1...n,0...W)$
+	\For{$i=1$ to $n$}
+		\State \Comment{I could also not do this loop and only set $B(1.0)=TRUE$, but check next comment}
+		\State $B(i,0) = TRUE$
+	\EndFor
+	\For{$j=1$ to $W$}
+		\If{$j=w[i]$}
+			\State $B(1,j) = TRUE$
+		\Else
+			\State $B(1,j) = FALSE$
+		\EndIf
+	\EndFor
+	\For{$i=2$ to $n$}
+		\For{$j=1$ to $W$}
+			\State \Comment{if in the previous comment I did so, the I should start from $j=0$, it would be less readable}
+			\If{$j \geq w[i]$}
+				\If{$B(i-1,j)$}
+					\State $B(i,j) = B(i-1,j)$
+				\Else
+					\State $B(i,j) = B(i-1,j-w[i])$
+				\EndIf
+			\EndIf
+		\EndFor
+	\EndFor
+	\State \Call{PRINT}{$B(n,W)$}
+\EndProcedure
+\Statex
+\end{algorithmic}
 
-% Reviewed
-% check cormen dp
+## Shortest paths
+* I am given an edge $(x,y) \in E$ with an associated cost $w(x,y)$
+* The cost of a path $\pi=(v_0,v_1,...,v_k)$ that connects the vertex $v_0$ with the vertex $v_k$ is the sum of the weights of all the edges that it includes
+$$w(\pi)=\sum_{i=1}^k w(v_{i-1}, v_i)$$
+* The shortest path between the verteces $u$ and $v$ $pi^*_{uv}$ is the path with minimal cost between them (if it exists)
+	* A path between 2 verteces does not exist when they are not reachable from each other
+		* $v$ is not reachable from $u$ if there are no edges among them or if the edges are directed in the wrong direction
+	* Also cycles with an overall negative cost make the target unreachable, since when one of them is present I will continuously go around the cycle getting lower and lower cost
+	* There can be many shortest paths with equal costs
+	* In a directed graph $\pi^*_{uv}$ is not necessarily equal to $\pi^*_{vu}$
+* The single source shortest path from a source vertex $s$ is the set of shortest paths $\pi^*_{sv}$ from $s$ to all the verteces $v$ reachable from it
+* The all-pairs shortest path is the set of shortest paths $\pi^*_{uv}$ for all possible pairs of connected verteces $u$ and $v$ in a graph
+* There is no known algorithm that solves the shortest path between 2 arbitrary verteces $\pi^*_{uv}$ without solving also the single source shortest path for $u$ in the worst case
+* The shortest path problem shows an optimal substructure: each sub-path of the shortest path is by itself a shortest path among different nodes
+	* Let $\pi^*_{uv}$ be the shortest path from vertex $u$ to vertex $v$
+	* Let $i$ and $j$ be 2 intermediate verteces along the path $\pi^*_{uv}$ that are connected by the sub-path $\pi_{ij}$, contained in $\pi^*_{uv}$
+	* I assume by contradiction that there is an alternative path $\pi'_{ij}$ such that $w(\pi'_{ij}) < w(\pi_{ij})$
+	* If that was true, then $\pi^*_{uv}$ would not be a shortest path, since I could find a path between $u$ and $v$ passing along $\pi'_{ij}$ instead that along $\pi_{ij}$
+* In a directed graph without negative-weight cycles there is a shortest path between any pair of connected verteces
+	* In the absence of negative-weight cycles a shortest path between connected verteces exists since there is only a finite number of paths among those verteces
+	* There is a finite number of paths among them since I cannot create a shorter path by adding a cycle to it (I am in a graph without negative-wieght cycles)
+* A shortest path cannot contain positive-weight cycles
+	* If a path contains a positive-weight cycle it is always possible to make the path shorter by removing the cycle
+* If a shortest path among 2 verteces exists, it is always possible to find an acyclic shortest path among them
+	* I can have a shortest path between 2 verteces that contains a cycle with a total weight of 0, but in this case there would be also an alternative shortest path that skips that cycle
+* A shortest path tree $T_s$ contains all the verteces reachable from a source $s$, which is the root of the tree, such that all the paths from $s$ are shortest paths
+	* I can build it from a partial tree by exploiting the optimal substructure of shortest paths
+* The distance $d_{uv}$ between the verteces $u$ and $v$ is the cost of any shortest path $\pi^*_{uv}$ connecting them if one exists, $+\infty$ otherwise
+$$d_{uv} = \begin{cases}w(\pi^*_{uv}) & \mbox{if } \exists \ \pi^*_{uv}\\ +\infty & \mbox{if } \nexists \ \pi^*_{uv} \end{cases}$$
+* The distance of a vertex to itself is always 0
+$$d_{vv} = 0$$
+* Distances on graphs respect the triangle inequality
+$$ d_{uv} \leq d_{ux} + d_{xv}$$
 
-
-
-
-
-
-## Knapsack problem
-
-# Shortest Path
-* Given a weighted graph $G=(V,E)$ which each edge having an associated cost $w(x,y)$, the cost of path $\pi=(v_0,v_1,...,v_k)$ that connects node $v_0$ with node $v_k$ is the sum of the weights of each edge
-	* $w(\pi)=\sum_{i=1}^k w(v_{i-1}, v_i)$
-* The shortest path $\pi^*$ is the one with the minimal cost
-	* It does not exist when the 2 nodes are not reachable from each other
-	* Also cycles with negative costs make the target unreachable, since I will continuously go around the cycle getting lower and lower cost
-	* There can be more than one shortest path, with equal costs
-* The single source shortest path from the source s is the set of shortest paths from s to all the reachable nodes
-* The all-pairs shortest path is the set of shortest paths for all possible pairs of connected nodes
-* There is no known algorithm that solves the shortest path without solving the single source shortest paths in the worst case
-* The shortest path has optimal substructure: each subpath of it is by itself a shortest path
-* In a directed graph without negative cycles there is a shortest path between any pair of nodes
-* The shortest path tree $T$ of vertex s contains all the verteces rechable from s such that each path along $T$ is a shortest path
-	* Given the optimal substructure, it is always possible to grow the partial tree $T$ until I reach the node of interest
-* The distance between nodes $x$ and $y$ $d_{xy}$ is the cost of a shortest path connecting them if it exists, otherwise $+\infty$ if they are not connected and $-\infty$ if there is a negative weight cycle between them
-	* It always holds that $d_{xx}=0$ and the triangular inequality $d_{xz}<=d_{xy}+d_{yz}>$
-* A shortest path cannot contain cycles
-	* It could contain 0 weight cycles, but in this case it is always possible to find another shortest path without the cycle
-	* I can safely assume that in a graph with $V$ nodes, if a shortest path exists it has at most $V-1$ edges
-		* If there are no cycles I can at most visit $V$ nodes, and they will be connected by $V-1$ edges
-
-## Relaxation
-* It is a technique used by various shortest-path algorithms
+### Relaxation
+* Relaxation is a technique used by various shortest-path algorithms
 * For each vertex $v \in V$ I maintain an attribute $v.d$ which is an upper bound for the shortest path from the source $s$ to $v$
 	* $v.d$ is a shortest path estimate
-* In this representation $v.\pi$ is the predecessor of $v$ in the shortest path tree
-* First I initialise everithing
-	* $s.d = 0$ and $v.d = \infty \mbox{ } \forall \mbox{ } v \in V- \{s\}$
-	* $v,\pi = \mbox{NIL}$ for all the nodes
-* Then I relax the edge $(u,v)$ by testing whether I can improve the shortest path to $v$ by passing through $u$
+* I also maintain $v.\pi$ as the predecessor of $v$ in the shortest path tree $T$
+* First I initialise everithing by setting
+$$s.d = 0$$
+$$v.d = +\infty \quad \forall \ v \in V- \{s\}$$
+$$v.\pi = NIL \quad \forall v \in G.V$$
+* Then I relax the edge $(u,v)$ by testing whether I can improve the shortest path to $\pi^*_{sv}$ by passing through $u$, and updating the relative attributes of $v$ accordingly
 
 \begin{algorithmic}
 \Statex
 \Procedure{INITIALIZE-SINGLE-SOURCE}{$G,s$}
 	\ForAll{$v \in G.V$}
 		\State $v.d = \infty$
-		\State $v.\pi = \mbox{NIL}$
+		\State $v.\pi = NIL$
 	\EndFor
 	\State $s.d = 0$
 \EndProcedure
@@ -2234,33 +2302,58 @@ $$B(i-1,j) = TRUE \implies B(i,j) = TRUE$$
 \EndProcedure
 \end{algorithmic}
 
-## Dijkstra Algrithm
-* It computes the shortest path from a single source provided that there are no negative edges
-	* It is a greedy algorithm
-	* The similar Bellman-Ford algorithm solves the problem also for negative edges but it is slower and it is based on dynamic programming
-* The central lemma of Dijkstra: given a partial shortest path tree $T$ of node $s$, a node $u$ in $T$ and a node $v$ not in $T$, the edge $(u,v)$ that minimizes $d_{su}+w(u,v)$ belongs to the shortest path $\pi^*_{sv}$
+### Dijkstra algorithm
+* The Dijkstra algorithm computes the single-source shortest path with a greedy approach provided that there are no negative-weight edges (not cycles, edges!) in the graph
+* The similar Bellman-Ford algorithm solves the problem also when negative edges are present, but it is slower and it is based on dynamic programming
+* With a good implementation the Dijkstra algorithm is faster than the Bellman-Ford algorithm
+* Let $G=(V,E)$ be a drected weighted graph such that $w(u,v) \geq 0 \quad \forall \ (u,v) \in G.E$
+* Let $S \subseteq G.V$ be the set of vertices that are part of a partial shortest path tree $T$ rooted in the vertex $s$
+	* $T$ contains only shortest paths originating from $s$, but not all of them
+* The edge $(u,v)$ with $u \in S$ and $v \in G.V-S$ that minimizes $d_{su}+w(u,v)$ belongs to the shortest path $\pi^*_{sv}$ if all the edges $(x,y) \in G.E$ are non-negative
 	* In practice it means that the shortest edge connecting a shortest path to the node of interest is part of the shortest path to that node
 	* If I take another route with more edges from the shortest path to the node I am guaranteed to not decrease the cost, sice weights are assumed to not be negative
 	* If an edge is negative this is not necessarily true since adding an edge can decrese the cost
-* Given the graph $G=(V,E)$ the algorithm maintains a subset of nodes $S \in V$ such that for each node in $S$ the shortest path from the source $s$ to that node has been determined
-* Repeatedly, it selects a node $u \in V-S$ (a node for which I do not know still the shortest path) and add it to $S$ with the minimum shortest path estimate and relaxes all the edges leaving $u$
-* I am here assuming that each weight $w(u,v) \geq 0$
-* This implementation uses a min priority queue $Q$ containing the nodes $v$ with keys equal to $v.d$
+	* Let's assume by contradiction that $(u,v)$ does not belong to $\pi^*_{sv}$
+	* In this case I have that
+$$ d_{su}+w(u,v) > d_{sv}$$
+	* Therefore, there must be a shortest path $\pi^*_{sv}$ that does not include $(u,v)$ with weight less than $d_{su} + w(u,v)$
+	* I can decompose this hypotetical shortest path $\pi^*_{sv}$ into the shortest paths $\pi^*_{sy}$, $\pi^*_{xy}$ and $\pi^*_{xv}$ where $y$ and $x$ are a pair of adjacent verteces along the path $\pi^*_{sv}$
+		* This is thanks to the optimal substructure property of shortest paths
+	* Since $x$ and $y$ are adjacent verteces IN THE SHORTEST PATH $\pi^*_{sv}$, the shortest path among them is represented by the edge $(x,y)$
+	* I can therefore write
+$$ d_{sv} = d_{sx}+w(x,y)+d_{yv}$$
+	* By definition, the edge $(u,v)$ is the edge among a vertex in the partial shortest-path tree $T$ and a vertex in the graph $G$ but not in $T$ that minimizes $d_{su}+w(uv)$
+	* Therefore, for any alternative vertex $x \in S$ connected to $v$
+$$ d_{su} +w(u,v) \leq d_{sx} + w(x,y)$$
+	* Note that $u$ can be ANY vertex $\in S$ and $v$ can be ANY vertex $\in G.V-S$
+	* The pair of verteces $u,v$ is choosen such that there is NO other pair $x,y$ with $d_{sx}+w(x,y) < d_{su}+w(u,v)$
+$$ d_{su}+w(u,v) \leq d_{sx}+w(x,y) \qquad \forall \ x,u \in S, \qquad \forall \ y,v \in G.V-S $$
+	* This leads to the absurd conclusion that $d_{su}+w(u,v)$ is shorter than $d_{sx}+w(x,y)$, but $d_{sx}+w(x,y)+d_{yv}$ is shorter than $d_{su}+w(u,v)$
+	* By constraint of the algorithm, $w(x,y) \geq 0 \quad \forall (x,y) \in G.E$, so the above is impossible
+	* From the last statement we can see also why the Dijkstra algorithm cannot work properly in the presence of negative-weight edges
+* This implementation of the Dijkstra algorithm uses a min priority queue $Q$ containing the nodes $v$ with keys equal to $v.d$
 	* Calling EXTRACT-MIN($Q$) means taking the node in the queue which is closest to the source $s$ in terms of shortest path estimate
 	* At the fist call $s$ itself is extracted since $s.d = 0$ while $v.d = \infty$ for all the other nodes
-* Running time
-	* The INITIALIZE-SINGLE-SOURCE call is a $\Theta(V)$ operation
-	* The queue is filled once with $V$ elements and since then always emptied
-	* Each iteration of the while loop removes one element from $Q$, so it iterates $V$ times
-		* EXTRACT-MIN is an $=O(\log{V})$ operation, as well as the assignment of $S$
+* The running time of this implementation of the Dijkstra algorithm depends on how the min-priority queue is implemented
+	* The INITIALIZE-SINGLE-SOURCE call is an $O(n)$ operation with $n$ being the number of verteces
+		* It set 2 pointers for each of the $n$ verteces and finally it sets $s.d=0$
+	* The initialization of $S$ to an empty set is an $O(1)$ operation
+	* The queue is filled once with $n$ elements (an $O(n)$ operation with a min-heap) and since then always emptied
+	* Each iteration of the while loop removes one element from $Q$, so it iterates $n$ times
+		* EXTRACT-MIN is an $=O(\log n)$ operation in a min-heap
+		* The addition of $u$ to the set $S$ is an $O(1)$ operation
 		* The for loop iterates a number of times equal to the lenght of the adjacency set of the current node
-			* The RELAX procedure is $\Theta(1)$
-	* In general the number of total iteration of the for loop is the sum of all the adjacency lists, so it is $\Theta(E)$
-	* The total running time is $O(V*\log{V}+E)$
+			* The RELAX procedure is an $O(\log n)$ operation since it implicitely calls DECREASE-KEY ($O(\log n)$ in a min-heap)
+	* In general the number of total iteration of the for loop across all the while loop iterations is the sum of the adjacency lists of all the nodes, $O(m)$
+	* So we have an $O(n)$ time for the rows outside the loops, a while loop executed $n$ times containing a for loop executed, overall, $O(m)$ times
+	* The unitary cost of the while loop except the for loop is $O(\log n)$, while the cost of each iteration of the for loop is $O(\log n)$
+	* The overall cost of the while loop is $O((m+n) \log n)$
+	* The final cost of DIJKSTRA implemented with a min-heap is thus
+$$O((m+n)\log n) = O(m \log n)$$
 
 \begin{algorithmic}
 \Statex
-\Require{$v.d \geq 0 \mbox{ } \forall \mbox{ } v \in G.V$}
+\Require{$v.d \geq 0 \quad \forall \ v \in G.V$}
 \Statex
 \Procedure{DIJKSTRA}{$G, w, s$}
 	\State \Call{INITIALIZE-SINGLE-SOURCE}{$G,s$}
@@ -2275,6 +2368,22 @@ $$B(i-1,j) = TRUE \implies B(i,j) = TRUE$$
 	\EndWhile
 \EndProcedure
 \end{algorithmic}
+
+
+
+
+% Reviewed
+
+
+
+
+
+
+
+
+
+
+
 
 # Roberto Amandini module
 
