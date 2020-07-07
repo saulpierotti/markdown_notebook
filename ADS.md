@@ -5,6 +5,7 @@
 ---
 header-includes:
 	\usepackage{algpseudocode}
+	\MakeRobust{\Call}
 ---
 
 # Zeynep Kizyltan module
@@ -2479,60 +2480,57 @@ $$ x.p = x \implies x \mbox{ is a root}$$
 		* If I don't know I need to call FIND-SET($x$) and FIND-SET($y$)
 			* In this case UNION becomes an $O(n)$ operation in the worst case
 * So far it seems that the disjoint-set forest representation is not better than the linked-list representation, but we can improve dramatically the amortized cost of the disjoint-set forest by using some heuristics
-	* Union-by-rank: I can minimize the height of each tree resulting from UNION operations by making the root of the tree with fewer nodes point to the root of the tree with more nodes, and not vice-versa
-
-% Reviewed
-
-
-# Disjoint sets
-
-
-	* We can improve average performances by doing union by rank and path compression
-	* Union by rank: the smaller tree should point to the bigger, not vice-versa
-		* In this way I minimize the height of the resulting tree
-		* To do this I store a property x.rank for each node
-		* The rank is the heigh of the subtree rooted in the current node
-	* Path compression: I redirect to the root each node so that I do not need to transverse the entire tree each time
-	* If I am using both path compression and union by rank, the rank is not any more the exact heigh, but its upper bound
-	* Path compression and union by rank are dynamically applied and maintained by FIND-SET and UNION
+* Union-by-rank: I can minimize the height of each tree resulting from UNION operations by making the root of the tree with fewer nodes point to the root of the tree with more nodes, and not vice-versa
+	* I maintain an $x.rank$ attribute for each node which is equal to the height of the subtree rooted in $x$
+	* When performing an UNION, I append the root with smaller rank to the root of higher rank
+		* This cannot alter the rank of the resulting root
+	* If the 2 roots have the same rank, I just choose one of the 2 trees and append it to the other
+		* In this case I need to increment by 1 the rank of the resulting root
+* Path compression: I add redirect $x.p$ directly to the root of the respective tree on each node $x$ on the path to the root when performing a FIND-SET operation
+	* This makes future FIND-SET operations on the affected nodes run in $O(1)$ time since I avoid traversing the whole path
+* Hybrid approach: I can combine the use of union-by-rank and path compression
+	* In this case when I perform a path compression with FIND-SET I do not waste time updating all the affected $x.rank$ pointers
+	* $x.rank$ is update only bu UNION operations and is no more the exact height of the subtree rooted in $x$ (as in pure union-by-rank) but an upper bound on this height
+* The following pseudocode implements the hybrid approach with union-by-rank and path compression
 
 \begin{algorithmic}
-\Statex
 \Statex
 \Procedure{MAKE-SET}{$x$}
 	\State $x.p = x$
 	\State $x.rank = 0$
 \EndProcedure
 \Statex
-\Statex
-\Procedure{UNION}{$x, y$}
-	\State $x.root =$\Call{FIND-SET}{$x$}
-	\State $y.root =$\Call{FIND-SET}{$y$}
-	\State \Call{LINK}{$x.root, y.root$}
+\Procedure{UNION}{$x,y$}
+	\State \Call{LINK}{\Call{FIND-SET}{$x$},\Call{FIND-SET}{$y$}}
 \EndProcedure
 \Statex
-\Statex
-\Procedure{LINK}{$x, y$}
+\Procedure{LINK}{$x,y$} \Comment{assuming $x,y$ belong to different sets}
 	\If{$x.rank > y.rank$}
 		\State $y.p = x$
 	\Else
 		\State $x.p = y$
 		\If{$x.rank == y.rank$}
-			\State $y.rank = y.rank + 1$ // if the ranks are different adding the subtree cannot change either rank!
+			\State $y.rank = y.rank + 1$
 		\EndIf
 	\EndIf
 \EndProcedure
 \Statex
-\Statex
 \Procedure{FIND-SET}{$x$}
-	\If{$x.p \neq x$} // x is not a root
-		\State $x.p =$ \Call{FIND-SET}{$x.p$}
+	\If{$x.p \neq x$} \Comment{if $x$ is not a root}
+		\State $x.p =$ \Call{FIND-SET}{$x.p$} \Comment{I update $x.p$ recursively until the root}
 	\EndIf
 	\State \Return $x.p$
 \EndProcedure
 \Statex
-\Statex
 \end{algorithmic}
+
+% Reviewed
+
+Add time analysis union-by-rank and path compression and hybrid
+substitute disjoint set disjoint-set
+
+
+
 
 
 
