@@ -2036,7 +2036,7 @@ $$B(T) = \sum_{c \in C} c.freq*d_T(c)$$
 	* While divide-et-impera is typically done recursively and from the top-down, dynamic programmic is typically implemented iteratively and from the bottom-up
 * Problems that can be solved with dynamic programming are typically optimization problems
 	* These have many possible solutions, each associated one with a different value
-	* We want to find the solution with the maximum or minimum value (according to the problem)
+	* We want to find the solution with associated value that is minimal/maximal (according to the problem) in the set of possible solution values
 	* This solution is called **an** optimal solution instead as **the** optimal solution, since there can be many equally optimal solutions
 * Developping a dynamic programming algorithm is done in a sequence of 4 steps
 	* Describe what the structure of an optimal solution should be
@@ -2546,6 +2546,22 @@ $$\frac{O(m \ \alpha(n))}{m} = O\left(\frac{m \ \alpha(n)}{m}\right)=O(\alpha(n)
 * The dishoint-sets representation of connected components does not support the removal of edges, but only their addition
 * Many of the results for disjoint-sets are due to the american scientist Robert E. Tarjan
 
+## Dynamic programming
+* Divide-et-impera solve problems recursively in a top-down way
+	* It is efficient when subproblems are disjoint and balanced
+* Dynamic programming avoids to solve repeatedly the same sub-problem by storing the solution of sub-problems in a table
+	* It works from the bottom-up and it is typically used for optimization problems
+* In an optimization problem I want to find the solution $S^*$ such that its value $\phi(S^*)$ is minimal/maximal (according to the problem) in the set of possible solution values
+$$S^* = argmax_S(\{\phi(S)\ |\ S \mbox{ is a solution of }P\})$$
+* The value of an optimal solution $\phi(S^*)$ is called optimal value
+* I should use dynamic programming on a problem $P$ when
+	* The problem $P$ has optimal substructure
+	* The subproblems of $P$ are independent and overlapping
+	* There is a polynomial number of subproblems $P_1...P_k$
+	* Deriving $S^*$ from $S_1^*...S_k^*$ requires polynomial time
+### Longest common subsequence
+
+
 % Reviewed
 
 
@@ -2555,18 +2571,6 @@ $$\frac{O(m \ \alpha(n))}{m} = O\left(\frac{m \ \alpha(n)}{m}\right)=O(\alpha(n)
 
 
 % Not checked
-
-
-
-
-
-
-
-
-
-
-
-
 
 # Longest common subsequence (LCA) 
 * The LCA problem is a classical problem that can be solved with dynamic programmin
