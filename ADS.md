@@ -2466,6 +2466,8 @@ $$G'=(V',E') \mbox{ is a connected component } \iff \mbox{ for } x \in V' \begin
 	* The total time spent in UNION operations is thus $O(n \log n)$
 	* Each MAKE-SET and FIND-SET operation takes $O(1)$ time, and $O(m)$ of them are performed
 	* Thus the total time for the entire sequence is $O(m+n\log n)$
+* The amortized cost (average cost per operation) with a linked-list representation of disjoint sets is thus
+$$\frac{O(m+n \log n)}{m} = O\left(\frac{n \log n}{m}\right)$$
 * Instead of linked lists, we can use a disjoint set forest representation
 	* In this case each disjoint set is represented by a rooted tree
 	* Each node in each tree contains an element $x$ and a pointer to its parent node $x.p$
@@ -2486,11 +2488,26 @@ $$ x.p = x \implies x \mbox{ is a root}$$
 		* This cannot alter the rank of the resulting root
 	* If the 2 roots have the same rank, I just choose one of the 2 trees and append it to the other
 		* In this case I need to increment by 1 the rank of the resulting root
+* Union-by-rank improves the running time from $O(m+n \log n)$ to $O(m \log n)$
+	* A tree rooted in $x$ has at least $2^{x.rank}$ nodes
+		* This can be proven by induction on the number of UNION operations performed
+	* Since $2^{x.rank} \leq n$, I have that $x.rank \leq \log n$
+	* FIND-SET can thus at most traverse $\log_n$ nodes in $O(\log n)$ time
+	* Since I am performing at most $m-n$ FIND-SET operations, the overall cost is bounded by $O(m \log n)$
+* The amortized cost implementing union-by-rank becomes
+$$\frac{O(m \log n)}{m} = O\left(\frac{m \log n}{m}\right)=O(\log n)$$
 * Path compression: I add redirect $x.p$ directly to the root of the respective tree on each node $x$ on the path to the root when performing a FIND-SET operation
 	* This makes future FIND-SET operations on the affected nodes run in $O(1)$ time since I avoid traversing the whole path
+* Path compression reduces the worst case running time to $O(n+f(1+\log_{2+f/n}n))$, where $f$ is the number of FIND-SET operations performed
+	* This is complicated but possible to prove
 * Hybrid approach: I can combine the use of union-by-rank and path compression
 	* In this case when I perform a path compression with FIND-SET I do not waste time updating all the affected $x.rank$ pointers
 	* $x.rank$ is update only bu UNION operations and is no more the exact height of the subtree rooted in $x$ (as in pure union-by-rank) but an upper bound on this height
+* Combining both union-by-rank and path compression yields a worst case running time of $O(m \ \alpha(n)) \approx O(m)$, where $\alpha$ is the inverse Ackermann function
+	* The inverse Ackermann function grows incredibly slowly: $\alpha(n) < 5$ for any $n$ that can be written in the physical universe
+		* We can safely assume that $\alpha(n) \approx O(1)$
+* The amortized cost of the hybrid approach is thus
+$$\frac{O(m \ \alpha(n))}{m} = O\left(\frac{m \ \alpha(n)}{m}\right)=O(\alpha(n)) \approx O(1)$$
 * The following pseudocode implements the hybrid approach with union-by-rank and path compression
 
 \begin{algorithmic}
