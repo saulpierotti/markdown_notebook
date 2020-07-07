@@ -2559,7 +2559,10 @@ $$S^* = argmax_S(\{\phi(S)\ |\ S \mbox{ is a solution of }P\})$$
 	* The subproblems of $P$ are independent and overlapping
 	* There is a polynomial number of subproblems $P_1...P_k$
 	* Deriving $S^*$ from $S_1^*...S_k^*$ requires polynomial time
+
 ### Longest common subsequence
+
+### Approximate string matching
 
 
 % Reviewed
