@@ -2616,19 +2616,67 @@ $$ i = 0,...,m \qquad j = 0,...,n$$
 $$ C(m,n) = |LCS_{X,Y}| \qquad m=|X|,\ n=|Y|$$
 * The table $C$ can be filled iteratively by starting from $C(0,0)$
 * In order to reconstruct the solution of the LCS problem we need to use a backtrack table $B(i,j)$ such that
-$$B(i,j) = \begin{cases} END & \mbox{if } i = 0 \lor j=0 \\ MATCH & \mbox{if } x_i = y_j \\ UP & \mbox{if } C(i-1,j) \geq C(i,j-1)) \\ LEFT & \mbox{otherwise}\end{cases}$$
+$$B(i,j) = \begin{cases}MATCH & \mbox{if } x_i = y_j \\ UP & \mbox{if } C(i-1,j) \geq C(i,j-1)) \\ LEFT & \mbox{otherwise}\end{cases}$$
 $$ i = 0,...,m \qquad j = 0,...,n$$
+* Note that $S$ will contain the reverse of an LCS of $X$ and $Y$
+$$ inv(S) \in LCS_{X,Y}$$
+* The solution can be reconstructed by starting from $B(m,n)$ and iterating until $i=0 \lor j=0$, building the solution $S$ as
+$$\begin{cases} B(i,j) = MATCH \implies S=S \cdot x_i,\ i=i-1,j=j-1 \\ B(i,j) = UP \implies i=i-1 \\ B(i,j)=LEFT \implies j=j-1\end{cases}$$
 * I can now define the function LCS-LENGTH($X,Y$) that returns the corresponding $C$ and $B$ tables
+	* Its cost is $O(mn)$ since I need to fill the tables $B$ and $C$ which have dimensions $O(mn)$
 
 \begin{algorithmic}
 \Statex
 \Procedure{LCS-LENGTH}{$X,Y$}
-	\State $x.p = x$
-	\State $x.rank = 0$
+	\State $m = X.lenght$
+	\State $n = Y.lenght$
+	\State let $C(0...m,0...n)$ and $B(1...m,1...n)$ be two new tables
+	\For{$i=0,...,m$}
+		\For{$j=0,...,n$}
+			\If{$x_i=0 \lor y_j=0$}
+				\State $C(i,j) = 0$
+			\ElsIf{$x_i == y_j$}
+				\State $C(i,j) = C(i-1,j-1)+1$
+				\State $B(i,j) = MATCH$
+			\ElsIf{$C(i-1,j) \geq C(i,j-1)$}
+				\State $C(i,j) = C(i-1,j)$
+				\State $B(i,j) = UP$
+			\Else
+				\State $C(i,j) = C(i,j-1)$
+				\State $B(i,j) = LEFT$
+			\EndIf
+		\EndFor
+	\EndFor
+	\State \Return $B,C$
 \EndProcedure
 \Statex
 \end{algorithmic}
 
+* The function PRINT-LCS($B,X,i,j$) prints a sequence $\in LCS_{X,Y}$ using the $B$ table
+	* Its initial call is PRINT-LCS($B,X,m,n$)
+	* Note that since the function is recursive the LCS is printed in the correct order! 
+	* Its cost is $O(m+n)$ since at each step either $i$ or $j$ is decreased, and at most I can have $m$ steps in which $i$ is reduced and $n$ steps in which $j$ is reduced
+
+\begin{algorithmic}
+\Statex
+\Procedure{PRINT-LCS}{$B,X,i,j$}
+	\If{$i==0 \lor j==0$}
+		\Return
+	\ElsIf{$B(i,j)== MATCH$}
+		\State \Call{PRINT-LCS}{$B,X,i-1,j-1$}
+		\State \Call{PRINT}{$x_i$}
+	\ElsIf{$B(i,j) == UP$}
+		\State \Call{PRINT-LCS}{$B,X,i-1,j$}
+	\Else
+		\State \Call{PRINT-LCS}{$B,X,i,j-1$}
+	\EndIf
+\EndProcedure
+\Statex
+\end{algorithmic}
+
+* Note that the $B$ table speeds up the reconstruction of the solution but it is redundant
+	* If space is an issue I can avoid storing it and re-calculate the backtrack path (at a time cost)
+* If I am only interested in $|LCS_{X,Y}|$ I can avoid filling $B$ without worries and I can at any time store only 2 rows of $C$
 
 ### Approximate string matching
 
