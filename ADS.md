@@ -2622,7 +2622,7 @@ $$ i = 0,...,m \qquad j = 0,...,n$$
 
 \begin{algorithmic}
 \Statex
-\Procedure{LCS-LENGTH}{$x$}
+\Procedure{LCS-LENGTH}{$X,Y$}
 	\State $x.p = x$
 	\State $x.rank = 0$
 \EndProcedure
