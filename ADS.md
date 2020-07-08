@@ -2691,16 +2691,6 @@ $$\begin{cases} B(i,j) = MATCH \implies S=S \cdot x_i,\ i=i-1,j=j-1 \\ B(i,j) = 
 
 % Not checked
 
-# Longest common subsequence (LCA) 
-* The LCA problem is a classical problem that can be solved with dynamic programmin
-* In this context an LCA is considered as a possibly gapped subsequence
-* The algorithm is essentially the NW withouth gap penalties
-* I can make it more space-efficient by not storing the backtrack matrix
-	* I can always compute it from the scores
-* I can also only store the last 2 rows, instead of the entire matrix
-	* In this case I cannot do bactrack!
-* The cost is O(nm) for building the matrx and O(n+m) for the backtrack
-
 # Approzimate string matching (ASM)
 * I want to serch a query string $P$ of lenght $m$ in a target string $T$ of lenght $n$ with $m < n$
 * In some cases I may want to allow inexact matches
