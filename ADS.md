@@ -2605,9 +2605,29 @@ $$ X_m = \langle x_1,..,x_m \rangle = X$$
 	* The third statement is symmetric to the second
 	* Therefore, the LCS of 2 sequences contains the LCS of their subsequences: we have an optimal substructure
 * I can define the LCS of 2 sequences recursively because of the theorems stated above
-$$LCS_{X,Y} = \begin{cases}LCS_{X_{m-1},Y_{n-1}}+x_m & \mbox{if } x_m = y_n \\ max(|LCS_{X_{m-1},Y}|,|LCS_{X,Y_{n-1}}|) & \mbox{if } x_m \not= y_n\end{cases}$$
+$$LCS_{X,Y} = \begin{cases}\epsilon = \langle \ \rangle & \mbox{if } m = 0 \lor n=0 \\ LCS_{X_{m-1},Y_{n-1}} \cdot x_m & \mbox{if } x_m = y_n \\ max(|LCS_{X_{m-1},Y}|,|LCS_{X,Y_{n-1}}|) & \mbox{otherwise}\end{cases}$$
 * The LCS problem can involve many overlapping subproblems
-	* Finding first $LCS_{X_{m-1},Y}$ and then from that $LCS_{X,Y_{n-1}}$
+	* If $m_m \not= y_n$ finding first $LCS_{X_{m-1},Y}$ and then from that $LCS_{X,Y_{n-1}}$ leads to calculating $LCS_{X_{m-1},Y_{n-1}}$, which is calculated directly also from $X,Y$ when $x_m = y_n$
+	* This case happens for any $X_i,Y_j$ with $i=2,...,m$ and $j=2,...,n$
+* I can create a dynamic programming table $C(i,j)$ of dimensions $\Theta(mn)$ such that
+$$C(i,j) = \begin{cases} 0 & \mbox{if } i = 0 \lor j=0 \\ C(i-1,j-1)+1 & \mbox{if } x_i = y_j \\ max(C(i-1,j),C(i,j-1)) & \mbox{otherwise}\end{cases}$$
+$$ i = 0,...,m \qquad j = 0,...,n$$
+* After computing the whole table, $C(m,n)$ will contain the lenght of the LCS of $X$ and $Y$
+$$ C(m,n) = |LCS_{X,Y}| \qquad m=|X|,\ n=|Y|$$
+* The table $C$ can be filled iteratively by starting from $C(0,0)$
+* In order to reconstruct the solution of the LCS problem we need to use a backtrack table $B(i,j)$ such that
+$$B(i,j) = \begin{cases} END & \mbox{if } i = 0 \lor j=0 \\ MATCH & \mbox{if } x_i = y_j \\ UP & \mbox{if } C(i-1,j) \geq C(i,j-1)) \\ LEFT & \mbox{otherwise}\end{cases}$$
+$$ i = 0,...,m \qquad j = 0,...,n$$
+* I can now define the function LCS-LENGTH($X,Y$) that returns the corresponding $C$ and $B$ tables
+
+\begin{algorithmic}
+\Statex
+\Procedure{LCS-LENGTH}{$x$}
+	\State $x.p = x$
+	\State $x.rank = 0$
+\EndProcedure
+\Statex
+\end{algorithmic}
 
 
 ### Approximate string matching
