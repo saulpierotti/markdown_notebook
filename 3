@@ -2605,9 +2605,7 @@ $$ X_m = \langle x_1,..,x_m \rangle = X$$
 	* The third statement is symmetric to the second
 	* Therefore, the LCS of 2 sequences contains the LCS of their subsequences: we have an optimal substructure
 * I can define the LCS of 2 sequences recursively because of the theorems stated above
-$$LCS_{X,Y} = \begin{cases}LCS_{X_{m-1},Y_{n-1}}+x_m & \mbox{if } x_m = y_n \\ max(|LCS_{X_{m-1},Y}|,|LCS_{X,Y_{n-1}}|) & \mbox{if } x_m \not= y_n\end{cases}$$
-* The LCS problem can involve many overlapping subproblems
-	* Finding first $LCS_{X_{m-1},Y}$ and then from that $LCS_{X,Y_{n-1}}$
+$$LCS_{X,Y} = \begin{cases}LCS_{X_{m-1},Y_{n-1}}+x_m & \mbox{if } x_m = y_n}\end{cases}$$
 
 
 ### Approximate string matching
