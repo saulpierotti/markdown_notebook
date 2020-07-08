@@ -2679,6 +2679,79 @@ $$\begin{cases} B(i,j) = MATCH \implies S=S \cdot x_i,\ i=i-1,j=j-1 \\ B(i,j) = 
 * If I am only interested in $|LCS_{X,Y}|$ I can avoid filling $B$ without worries and I can at any time store only 2 rows of $C$
 
 ### Approximate string matching
+* The string matching problem: I want to find occurrences of a query string $P=p_1 \cdot \cdot \cdot p_m$ called pattern in a target string $T = t_1 \cdot \cdot \cdot t_n$ with $m \leq n$
+* A k-approximation of a string $P = p_1 \cdot \cdot \cdot p_m$ is a string $P'=p_1' \cdot \cdot \cdot p_m'$ that can be obtained from the $P$ by performing $0 \leq k \leq m$ edit operations
+	* $k$ is defined as the edit distance between $P$ and $P'$
+* An edit operation is one of the following
+	* A substitution where a character $p_i$ is replaced by the character $p_i'$
+	* An insertion where a new character $p_i'$ is added
+	* A deletion where a character $p_i$ is removed from $P$
+* Approximate string matching (ASM) takes in input the strings $P$ and $T$ and it returns a k-approximation $P'$ of $P$ in $T$ with minimum $k$
+	* Note that all the approximations $P'$ with minimum $k$ that occur in $T$ are solution to the ASM problem, regardless of their length
+* Let now $P'$ be a k-approximated occurrence of $P$ in $T$ with minimum $k$
+* I can compute $P'$ by defining a table $D$ where $D(i,j)$ is the minimum $k$ for which a k-approximation of the prefix $P_i$ in the prefix $T_j$ exists
+$$D(i,j) = \begin{cases} 0 & \mbox{if } i=0 \\ i & \mbox{if } j=0 \\ min(D(i-1,j-1)+\delta_{ij},D(i-1,j), D(i,j-1))+1 & \mbox{otherwise}\end{cases}$$
+$$\delta_{ij} = \begin{cases} 0 & \mbox{if } p_i=t_j \\ 1 & \mbox{otherwise}\end{cases}$$
+$$ i = 0,...,m \qquad j = 0,...,n$$
+	* The value $D(i,j)$ remains equal to $D(i-1,j-1)$ if $p_i = t_j$
+	* If $p_i \not= t_j$, the cell from which $D(i,j)$ is derived is choosen so to minimize its final value
+	* Note how the ASM problem shows optimal substructure
+	* $D(0,j) = 0 \ \forall\ j=0,...,n$ since the prefix $P_0 = \epsilon$ occurs in any possible substring $T_j$
+	* $D(i,0) = i \ \forall\ i=0,...,m$ since to match $P_i$ with $T_0$ I need to delete all the characters in $P_i$
+	* $D(m,j)$ contains the minimum $k$ for a k-approximation of $P$ in $T_j$
+	* The minimum value $k^*$ for a k-approximation of $P$ in $T$ is the smallest value of the last row (except the trivial $i=0$, where $k=|P|$)
+$$ k^* = min\{D(m,j)|j=1,...,n\}$$
+* I can define the function APP-STR-MATCH($P,T$) that returns $k^*$ and the prefix $T_j$ on which it was obtained
+	* This algorithm costs $O(mn)$ similarly to the LCS algorithm and we can use a backtrack matrix to build the solution
+* To build the solution I follow the backtrack matrix from the cell corresponding to the minimal value in the last row of the matrix $D$ 
+	* Each direction on the backtrack matrix indicates what kind of edit operation must be performed
+	* A special direction can be inserted in the matrix for when $p_i = t_j$ and $D(i-1,j-1)$ was the minimal value choosen,
+		* In this case no edit needs to be performed
+
+\begin{algorithmic}
+\Statex
+\Procedure{APP-STR-MATCH}{$P,T$}
+	\State $m = P.lenght$
+	\State $n = T.lenght$
+	\State let $D(0...m,0...n)$ be a new table
+	\For{$i=0,...,m$}
+		$D(i,0)=i$
+	\EndFor
+	\For{$j=0,...,n$}
+		$D(0,j)=0$
+	\EndFor
+	\For{$i=1,...,m$}
+		\For{$j=1,...,n$}
+			\If{$p_i == t_j$}
+				\State $\delta_{ij}=0$
+			\Else
+				\State $\delta_{ij}=1$
+			\EndIf
+			\State $sub = D(i-1,j-1)+\delta_{ij}$
+			\State $del = D(i-1,j)+1$
+			\State $ins = D(i,j-1)+1$
+			\State $D(i,j)=min(sub,del,ins)$
+		\EndFor
+	\EndFor
+	\State $k=0$
+	\For{$i=0,...,n$}
+		\If{$D(m,i) < k$}
+			\State $k=D(m,i)$
+			\State $j=i$
+		\EndIf
+	\EndFor
+	\State \Return $j,k$
+\EndProcedure
+\Statex
+\end{algorithmic}
+
+### Related problems
+* Dynamic programming can be applied to many problems related to finding the longest common subsequent and to approximate string matching, but it is not necessarily the best approach
+* The longest common substring problem is similar to the longest common subsequence problem but with the further constraint that the common characters must be contiguous (they must be a substring, not a subsequence!)
+* Exact string matching is similar to approximate string matching but it requires the edit distance $k$ to be 0
+* Minimum edit distance is similar to ASM but it requires that the $P'$ approximation found be equal to $T$
+	* It is the problem of finding the minimum number of edits that can transform $P$ in $T$
+
 
 
 % Reviewed
