@@ -2834,13 +2834,52 @@ $$(u,v) \mbox{ is safe } \iff T_i \cup \{(u,v)\} \\subseteq T$$
 	* Proving that $(u,v)$ is safe for $A$ means proving that adding $(u,v)$ to $A$ I get a subset of some MST $T$
 $$A \cup \{(u,v)\} \subseteq T$$
 	* If $(u,v) \in T$ I am done since $A\subseteq T$ and so $A\cup\{(u,v)\} \subseteq T$
-	* If $(u,v) \not\in T$ I build a spanning tree $T'=T-\{(u',v')\}\cup\{(u,v)\}$ where $(u',v') \not\in A$ is an edge on the path $u \leadsto v$
+	* If $(u,v) \not\in T$ I build a spanning tree $T'=(T-\{(u',v')\})\cup\{(u,v)\}$ where $(u',v') \not\in A$ is an edge on the path $u \leadsto v$
 	* I note that $w(T')=w(T)-w(u',v')+w(u,v)$ and $(u,v)$ is light, so $w(T')\leq w(T)$
 	* I also know that $T$ is a MST so $w(T')\geq w(T)$
 $$ w(T') \leq w(T) \land w(T') \geq w(T) \implies w(T')=w(T)$$
 	* Since $w(T')=w(T)$, I conclude that $T'$ is a MST
-	* Since $A \subseteq T$ and $(u',v') \not\in A$ I have that $A \subseteq T-\{(u',v')\}$ and thus $A \cup\{(u,v)\}\subseteq T-\{(u',v')\}\cup\{(u,v)\}=T'$
+	* Since $A \subseteq T$ and $(u',v') \not\in A$ I have that $A \subseteq T-\{(u',v')\}$ and thus $A \cup\{(u,v)\}\subseteq (T-\{(u',v')\})\cup\{(u,v)\}=T'$
 * Thanks to this theorem, I can build a MST by adding safe edges to a smaller MST
+
+#### Kruskal algorithm
+* The Kruskal algorithm is a possible implementation of the GENERIC-MST algorithm seen above
+* I grow and merge forests of MSTs by incrementally adding safe edges until the final MST is computed
+* The algorithm is greedy since at each steps it adds to the forest the edge with minimal weight 
+* It is possible to implement the Kruscal algorithm with the disjoint-set data structure
+	* I represent each MST as a disjoint-set, where each MST node is an element of the set
+	* FIND-SET and UNION operations are used to determine whether to merge disjoint sets
+* If $n=|V|$ and $m=|E|$, I have the following time costs
+	* MAKE-SET costs in total $O(n)$
+	* SORT costs in total $O(m \log m)$
+	* FIND-SET and UNION are performed $m$ times so their total cost is $O(m \alpha(n)) \approx O(m)$ using path compression and union-by-rank
+	* The overall cost is $O(m \log m)$
+
+\begin{algorithmic}
+\Statex
+\Procedure{MST-KRUSCAL}{$G$}
+	\State $A = \emptyset$
+	\ForAll{$v \in G.V$}
+		\State MAKE-SET($v$) \Comment{I create $|V|$ trees}
+	\EndFor 
+	\State $S =$ \Call{SORT}{$G.E, w$} \Comment{sort edges non-decreasingly according to their weight}
+	\ForAll{$(u,v) \in S$}
+		\If{\Call{FIND-SET}{$u$} $\neq$ \Call{FIND-SET}{$v$}} \Comment{if $u$ and $v$ are on different trees}
+			\State $A = A \cup {(u,v)}$
+			\State \Call{UNION}{$(u,v)$}
+		\EndIf
+	\EndFor
+	\State \Return $A$
+\EndProcedure
+\Statex
+\end{algorithmic}
+
+#### Other MST algorithms
+* Kruskal's algorithm is not the only MST algorithm known
+* Prim's MST algorithm works similarly to the Dijkstra algorihtm for the shortest path in a graph and it has the same asymptotic complexity of Kruscal's algorithm ($O(m \log m)$)
+* Fredman and Tarjan's MST algorithm is based on the Fibonacci heap and runs in $O(m+n \log n)$
+* Karger, Klein and Tarjan's MST randomized algorithm runs in $O(m+n)$
+* Fredman and Willard's MST algorithm is not based on comparisons and runs in $O(m+n)$
 
 % Reviewed
 
@@ -2852,35 +2891,6 @@ $$ w(T') \leq w(T) \land w(T') \geq w(T) \implies w(T')=w(T)$$
 
 % Not checked
 
-# Minimum Spanning Tree (MST)
-* Given an undirected weighted graph $G = (V, E)$ I want to find an MST with $T \subseteq E$ such that
-	* $T$ is a tree (undirected, connected, acyclic)
-	* $T$ is connects all the nodes in $V$ (it is a spanning tree)
-	* $w(T) = \sum_{(u,v) \in T}w(u,v)$ is the minimal possible
-		* I want the tree with the minimum total weight
-* It can be applied to designing electric circuits with the minimum amount of wire and to construct minimum ultrametric trees
-* The MST problem can be solved with a greedy strategy
-* An MST always exists for connected undirected graphs but may not be unique
-* For designing an MST algo is important the concept of safe edge
-	* It is an edge that when added to a subset $A \subseteq T$ makes $A'$ still a subset of $T$
-* It is said that a cut respects a set of edges if there is no edge crossing the cut
-* An edge crossing the cut is called light edge if its weight is minimum among all the edges that cross the cut
-* **Safe edge theorem**
-	* $A \subseteq T$ is the subset of some MST $T$ for the graph $G = (V,E)$
-	* If $(S, V-S)$ is a cut respecting A and $(u,v)$ is a light edge crossing that cut, then $(u,v)$ is safe for $A$
-
-\begin{algorithmic}
-\Statex
-\Procedure{GENERIC-MST}{$G$}
-	\State $T_0 = \emptyset$
-	\While{$T_i$ is not an MST for $G$}
-		\State Find $(u,v) \in G.E - T_i$ which is $\textbf{safe}$ for $T_i$
-		\State i = i + 1
-		\State $T_i = T_{i-1} \cup \{(u,v)\}$
-	\EndWhile
-	\State \Return $T_i$
-\EndProcedure
-\end{algorithmic}
 
 ## Kruskal algorithm
 * I incrementally grow and merge a forest of MSTs by adding light edges intil I have the complete MST
