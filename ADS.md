@@ -2807,19 +2807,24 @@ $$\nexists T' : w(T') < w(T) \qquad w(T) = \sum_{(u,v) \in T} w(u,v)$$
 * The greedy algorithm for obtaining a MST starts from an empty tree $T = \emptyset$ add adds to it a safe edge $(u,v)$ at a time
 $$ T_i = \begin{cases} T_{i-1} \cup \{(u,v)\} & \mbox{for } i > 0 \\ T_i = 0 & \mbox{for } i = 0 \end{cases}$$
 * An edge $(u,v)$ is safe for $T_i$ iff the tree resulting from adding it to $T_i$ is a subset of some MST $T$
-(u, v) is safe ⇐⇒ Ti ∪ {(u, v)} ⊆ T
-procedure GENERIC-MST(G)
-T0 = ∅
-while Ti is not an MST for G do
-find (u, v) ∈ G.E - Ti such that (u, v) is safe for Ti
-i = i + 1
-Ti = Ti-1 ∪ {(u, v)}
-end while
-return Ti
-end procedure
-* In order to recognize a safe edge (u, v)
-	* A cut (S, V - S) of G = (V, E) is a partition of V
-	* An edge (u, v) crosses the cut (S, V - S) if u ∈ S ∧ v ∈ V - S
+$$(u,v) \mbox{ is safe } \iff T_i \cup \{(u,v)\} \\subseteq T$$
+
+\begin{algorithmic}
+\Statex
+\Procedure{GENERIC-MST}{$G$}
+	\State $T_0 = \emptyset$
+	\While{$T_i$ is not an MST for $G$}
+		\State find $(u,v) \in G.E - T_i$ such that $(u,v)$ is safe for $T_i$
+		\State $i = i + 1$
+		\State $T_i = T_i-1 \cup \{(u, v)\}$
+	\EndWhile
+\State \Return $T_i$
+\EndProcedure
+\Statex
+\end{algorithmic}
+
+* A cut $(S, V - S)$ of $G=(V, E)$ is a partition of $V$
+* An edge $(u,v)$ crosses the cut $(S, V - S)$ if $u \in S \land v \in V - S$
 
 % Reviewed
 
