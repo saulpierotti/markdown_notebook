@@ -2956,7 +2956,23 @@ $$ \phi(T)=w(T)$$
 
 ### Sorting with local search
 * Local search can be used to sort a collection of elements by reframing the sorting problem as an optimization problem
+* Given the sequence $A = \langle a_1,...,a_n \rangle$ I say that $(i,j)$ is a conflict for $A$ if $a_i > a_j$ while $i<j$
+$$ (i,j) \mbox{ is a conflict for } A \iff 1\leq i < j \leq n \ \land \ a_i > a_j$$
+$$A = \langle a_1,...,a_n \rangle$$
+* If $(i,j)$ is a conflict for $A$, then $a_i$ and $a_j$ are conflicting elements with distance $j-i$
+* The problem of sorting the sequence $A = \langle a_1,...,a_n \rangle$ can rephrased as the problem of finding a permutation $A'$ of $A$ having minimal number of conflicts
+* The sequence $A$ is sorted when it has 0 conflicts
+* The neighborhood of $A$ is defined as the set of all the permutations of $A$ that can be obtained by swapping 2 conflicting elements
+* If $A = \langle a_1,...,a_n \rangle$ and $\pi_{i,j}(A)$ is the sequence obtained by swapping $a_i$ and $a_j$, then I can defined the neighborhood of $A$, $N(A)$ as
+$$N(A)=\{\pi_{i,j}(A)|i<j \land a_i>a_j\}$$
+* The cost function $\phi(A)$ can be then defined as the number of conflicts in $A$ (the numerosity of the set of all the conflicts in $A$)
+$$\phi(A)=|\{(i,j)|i<j \land a_i > a_j\}|$$
+* In this case, the transition function $\delta_N(A)$ defines how the array is sorted at each step
 
+#### Insertion sort
+* Insertion sort is not explicitly local search-based, but it follows a similar logic
+$$ \delta_N(A)=\pi_{i,i+1}(A) \qquad \mbox{where } i = min(\{k|a_k > a_{k+1}\})$$
+	* It recognizes the first conflict $min(\{k|a_k > a_{k+1}\})$ among consecutive elements $a_k,a_{k+1}$ and swaps the offending elements
 
 
 % Reviewed
