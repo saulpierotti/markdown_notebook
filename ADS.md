@@ -2764,28 +2764,6 @@ $$ k^* = min\{D(m,j)|j=1,...,n\}$$
 
 % Not checked
 
-# Approzimate string matching (ASM)
-* I want to serch a query string $P$ of lenght $m$ in a target string $T$ of lenght $n$ with $m < n$
-* In some cases I may want to allow inexact matches
-* A k-approximation of $P$ in $T$ is a string $P'$ shorter or equal to $P$ itself which occurs in $T$ and can be obtained from $P$ in $0 \leq k \leq m$ edit operations
-* An edit operation is a substitution, insertion or deletion
-* ASM takes in input $P$ and $T$ and returns the k-approximation $P'$ with minimum $k$
-	* It returns the approximation with minimum edit distance, without aatention to its lenght!
-* I define a table $D$ that stores the minimum edit distance between the $P[1:i]$ and $T[1:j]$
-* I initialise the first row and column
-	* $D[0,j] = 0$ since I can match an empty $P$ everywhere in $T$ without any edit
-	* $D[i,0] = i$ since to match a string of lenght $i$ to an empty string I need to delete $i$ charachters
-* Then I fill iteratively or recursively
-	* If $p_i = t_j \implies D[i,j] = D[i-1,j-1]$ since I don't need to do any additional edit
-	* If $p_i \neq t_j$ I increment $k$ by assigning to $D[i,j]$ the minimum between
-		* $D[i-1,j-1] + 1$
-		* $D[i-1,j] + 1$
-		* $D[i,j-1] + 1$
-* The minimum $k$ can be retrieved from the smallest value of the last row
-* I can backtrack to rebuild the match
-* The cost is O(nm) for building the matrix
-* Backtracking costs O(n+m) in the worst case (if I need tro tranverse all the table)
-
 # Minimum Spanning Tree (MST)
 * Given an undirected weighted graph $G = (V, E)$ I want to find an MST with $T \subseteq E$ such that
 	* $T$ is a tree (undirected, connected, acyclic)
