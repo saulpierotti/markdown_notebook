@@ -2951,7 +2951,11 @@ $$ S^* : \phi(S^*) = min\{\phi(S')|S' \in N(S)\}$$
 * I define the cost function $\phi(T)$ so to be equal to the weight of the tree $w(T)$
 $$ \phi(T)=w(T)$$
 * I can then use local search to possibly replace an edge from a spanning tree $T$ at each iteration until $T$ becomes a MST
-* In any case, I replace the edge $(u,v)$ with the edge $(u',v')$
+* In any case, I replace the edge $(u,v)$ with the edge $(u',v')$ only if this reduces the weight of the tree $T$
+* For the MST problem, local search is guaranteed to find the global optimum, but the Kruskal algorithm is faster
+
+### Sorting with local search
+* Local search can be used to sort a collection of elements by reframing the sorting problem as an optimization problem
 
 
 
