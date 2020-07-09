@@ -2973,6 +2973,76 @@ $$\phi(A)=|\{(i,j)|i<j \land a_i > a_j\}|$$
 * Insertion sort is not explicitly local search-based, but it follows a similar logic
 $$ \delta_N(A)=\pi_{i,i+1}(A) \qquad \mbox{where } i = min(\{k|a_k > a_{k+1}\})$$
 	* It recognizes the first conflict $min(\{k|a_k > a_{k+1}\})$ among consecutive elements $a_k,a_{k+1}$ and swaps the offending elements
+* Insertion sort is simple and efficient when the sequence to be sorted $A$ is small
+
+\begin{algorithmic}
+\Statex
+\Procedure{INSERTION-SORT}{$A$}
+	\For{$i = 2$ to $A.lenght$}
+		\State $k = A[i]$
+		\State $j = i$
+		\While{$j > 1$ and $A[j-1] > k$}
+			\State $A[j] = A[j-1]$
+			\State $j=j-1$
+		\EndWhile
+		\State $A[j] = k$
+	\EndFor
+\EndProcedure
+\Statex
+\end{algorithmic}
+
+* The loop invariant in this pseudocode is that $\langle A[1],...,A[i] \rangle$ is always sorted after the $i$-th iteration of the for loop
+* The cost of insertion-sort depends on the number of conflicts in $A$
+	* In the best case, when $A$ is already sorted, the cost is $O(n)$
+	* In the worst case, when $A$ is in reversed sorted order, there are $\frac{n^2-n}{2}$ conflicts and the running time becomes $O(n^2)$
+
+#### Shell sort
+* We can see that insertion-sort works like a local search by gradually reducing the muber of conflicts but
+	* Only pairs contiguous elements are considered
+	* Only 1 conflict is resolved at each step
+* Shell-sort was proposed by Donald L. Shell to overcome these limitations of insertion-sort
+* Shell-sort is a generalization of insertion-sort by considering the elements $a[i],a[i+h]$ at distance $h \geq 1$ from each other on the sequence
+	* $h$ is decreased at each iteration until eventually shell-sort becomes equivalent to insertion-sort when $h=1$
+	* Shell-sort is correct only if, eventually, $h$ becomes 1
+* We can see shell-sort as a local search approach where
+$$ \delta_N(A)=\pi_{i,i+h}(A) \qquad \mbox{where } i = min(\{k|a_k > a_{k+h}\})$$
+* In practice shell-sort at each iteration sorts distinct subsequences where the elements are $h$ apart from each other
+$$\langle a_1,a_{h+1},a_{2h+1},... \rangle,\langle a_2,a_{h+2},a_{2h+2},... \rangle,...$$
+* Then, after having sorted all such subsequences it decreases $h$ and repeats, until eventually $h=1$ and it becomes equal to insertion-sort and $A$ is thus sorted
+* The variable $h$ can be reduced in different steps
+* A commonly used approach is to reduce $h$ by dividing it by 3 and taking the floor of the result
+$$ h_{k+1} = \lfloor h_k/3 \rfloor$$
+* In this case the sequence of $h$ values will be
+$$ h = ...,1093,264,121,40,13,4,1$$
+
+\begin{algorithmic}
+\Statex
+\Procedure{SHELL-SORT}{$A$}
+	\State $h = 1$
+	\While{$h \leq A.lenght$}  \Comment{I generate the starting value for $h$}
+		\State $h = 3*h+1$
+	\EndWhile 
+	\State $h = \lfloor h/3 \rfloor$
+	\While{$h \geq 1$}
+		\For{$i = h+1$ to $A.lenght$}
+		\State $k = A[i]$
+		\State $j = i$
+			\While{$j > h$ and $A[j-h] > k$}
+				\State $A[j] = A[j-h]$
+				\State $j = j - h$
+			\EndWhile
+		\State $A[j] = k$
+		\EndFor
+	\State $h =\lfloor h/3 \rfloor$
+	\EndWhile
+\EndProcedure
+\end{algorithmic}
+
+* The complexity of shell-sort depends on the gap sequence adopted
+* Using the sequence $ h_{k+1} = \lfloor h_k/3 \rfloor$ the complexity is usually $O(n^{1.5})$
+* Using other sequences, it can be from $O(n^{1.25})$ to $O(n \log^2 n)$
+* Shell-sort is the most efficient sorting algorithm for short ($n < 5000$) sequences
+* For long sequences ($n > 5000$) quick-sort is better, provided that some optimizations are implemented (iterative algorithm with random pivot, Bertossi et al.)
 
 
 % Reviewed
@@ -3013,28 +3083,6 @@ $$ \delta_N(A)=\pi_{i,i+1}(A) \qquad \mbox{where } i = min(\{k|a_k > a_{k+1}\})$
 	* When $h = 1$ SHELL-SORT is exactly equivalent to INSERTION-SORT
 	* It is empirically one of the fastest sorting algorithms when the sequence is small (~5000 elements)
 
-\begin{algorithmic}
-\Statex
-\Procedure{SHELL-SORT}{$A$}
-	\State $h = 1$
-	\While{$h \leq A.lenght$} // I am generating a series of h, this can vary
-		\State $h = 3*h+1$
-	\EndWhile 
-	\State $h = \lfloor h/3 \rfloor$
-	\While{$h \geq 1$}
-		\For{$i = h+1$ to $A.lenght$}
-		\State $k = A[i]$
-		\State $j = i$
-			\While{$j > h$ and $A[j-h] > k$}
-				\State $A[j] = A[j-h]$
-				\State $j = j - h$
-			\EndWhile
-		\State $A[j] = k$
-		\EndFor
-	\State $h =\lfloor h/3 \rfloor$
-	\EndWhile
-\EndProcedure
-\end{algorithmic}
 
 # Backtracking
 * Try a solution, if it is not good go back and try a different one
