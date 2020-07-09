@@ -2941,6 +2941,7 @@ $$ S^* : \phi(S^*) = min\{\phi(S')|S' \in N(S)\}$$
 \end{algorithmic}
 
 * Many local search approaches have been developped: hill climbing, simulated annealing, tabu search, ...
+* Local search has been effectively applied to a number of famous problems: minimum vertex cover, travelling saleseman problem, boolean satisfiability problem* Local search can be applied to sorting problems: insertion-sort, shell-sort, and bubble-sort can be seen as local search approaches that try to minimize conflicts (misplaced elements)
 
 ### Minimum spanning tree with local search
 * It is possible to use local search to solve the MST problem
@@ -3000,7 +3001,7 @@ $$ \delta_N(A)=\pi_{i,i+1}(A) \qquad \mbox{where } i = min(\{k|a_k > a_{k+1}\})$
 * We can see that insertion-sort works like a local search by gradually reducing the muber of conflicts but
 	* Only pairs contiguous elements are considered
 	* Only 1 conflict is resolved at each step
-* Shell-sort was proposed by Donald L. Shell to overcome these limitations of insertion-sort
+* Shell-sort was proposed by Donald L. Shell in 1959 to overcome these limitations of insertion-sort
 * Shell-sort is a generalization of insertion-sort by considering the elements $a[i],a[i+h]$ at distance $h \geq 1$ from each other on the sequence
 	* $h$ is decreased at each iteration until eventually shell-sort becomes equivalent to insertion-sort when $h=1$
 	* Shell-sort is correct only if, eventually, $h$ becomes 1
