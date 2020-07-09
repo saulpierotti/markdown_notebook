@@ -2758,6 +2758,7 @@ $$ k^* = min\{D(m,j)|j=1,...,n\}$$
 * Dynamic programming guarantees to find a globally optimal solution if its assumptions are respected
 * However, sometimes a simpler and more efficient greedy approach suffices for our problem
 * Greedy algorithms make a single choice $C_{i^*}$ that is locally optimal at each step without considering all the possible choices
+* Greedy algorithms first appeared in a 1971 paper form Jack Edmonds "Matroids and the greedy algorithm"
 * A greedy approach is based on the hope that a sequence of locally optimal choice will bring to a globally optimal solution
 	* This is NOT guaranteed to be true, and in general greedy algorithms are NOT guaranteed to find a globally optimal solution
 * However, if our problem shows the 2 following properties it is possible to develop a globally optimal greedy algorithm
@@ -2787,6 +2788,7 @@ $$ k^* = min\{D(m,j)|j=1,...,n\}$$
 	* It is pretty efficient
 	* It is globally optimal if the probelm has optimal substructure and it exhibits the greedy choice property
 	* Even when it gives a sub-optimal solution, for some problems this can be acceptable!
+		* This is true especially when I can give a bound to the distance between the greedy solution and the globally optimal solution
 * Disadvantages of a greedy strategy
 	* Only few problems exhibit the greedy choice property
 
@@ -2883,12 +2885,19 @@ $$ w(T') \leq w(T) \land w(T') \geq w(T) \implies w(T')=w(T)$$
 
 ### Optimal greedy algorithms
 * Greedy algorithms can find the globally optimal solution for other problems besides MST in polynomial time
-	* Huffman codes: given an alphabet $\Sigma$ and weights $w : \Sigma \to \mathbb{R}$ return a prefix code with codewords of minimum lenght
-	* Activity selection: given $n$ activities $S=\{a_1,...,a_n\}$ having start and finish times $(s_i,e_i)$ select a maximum-size set $T \subseteq S$ of non-overlapping activities to be executed
-	* Fractional knapsack: given objects $O_1,...,O_n$ where $O_i$ has value $v_i$ and weight $w_i$, and a knapsack of capacity $W$, select an amount $x_i \in [0,1]$ for each object $O_i$ such that $\sum_{i=1}^n w_ix_i \leq W$ and the total value $\sum_{i=1}^n v_ix_i$ is maximal
-		* It is a generalization of the 0-1 knapsack problem in which $x_i \in {0,1}$
+* Huffman codes: given an alphabet $\Sigma$ and weights $w : \Sigma \to \mathbb{R}$ return a prefix code with codewords of minimum lenght
+* Activity selection: given $n$ activities $S=\{a_1,...,a_n\}$ having start and finish times $(s_i,e_i)$ select a maximum-size set $T \subseteq S$ of non-overlapping activities to be executed
+* Fractional knapsack: given objects $O_1,...,O_n$ where $O_i$ has value $v_i$ and weight $w_i$, and a knapsack of capacity $W$, select an amount $x_i \in [0,1]$ for each object $O_i$ such that $\sum_{i=1}^n w_ix_i \leq W$ and the total value $\sum_{i=1}^n v_ix_i$ is maximal
+	* It is a generalization of the 0-1 knapsack problem in which $x_i \in {0,1}$
 
 ### Non-optimal greedy algorithms
+* For several problems greedy algorithms exist but they do not find a globally optimal solution
+* Change-making: given $n > 0$, return the smallest number of coins whose total value adds up to $n$
+	* The greedy approach involves sorting the coins in decreasing value order and, at each step, using the largest number of coins from the current value
+	* It is a particular case of the $O,1$ knapsack problem where each object has the same value (I want to minimize the number of objects)
+* Set-cover: given an universe $U = \{1,...,n\}$ and a set of sets $S = \{S_1,...,S_m\}$ such that $\cup_{i=1}^m S_i = U$ identify the smallest set $C \subseteq S$ such that $\cup_{S_i \in C} S_i = U$
+	* The greeady approach is to always choose the set $S_i$ that contains the biggest number of elements not yet in a set $S_k$ already in $C$
+	* The greedy strategy is not optimal but guarantees that the solution found $C$ will be at most $O(\log n)$ bigger than the optimal solution $C^*$
 
 % Reviewed
 
@@ -2901,29 +2910,6 @@ $$ w(T') \leq w(T) \land w(T') \geq w(T) \implies w(T')=w(T)$$
 % Not checked
 
 
-## Kruskal algorithm
-* I incrementally grow and merge a forest of MSTs by adding light edges intil I have the complete MST
-* I use disjoint sets to represent the forest, one set per tree
-* It's complexity is $O=(n \log{m})$
-* It is not the fastes algo, there are MST algos in $O(n+m)$
-
-\begin{algorithmic}
-\Statex
-\Procedure{KRUSCAL-MST}{$G$}
-	\State $A = \emptyset$
-	\ForAll $v \in G.V$
-		\State MAKE-SET($v$)
-	\EndFor 
-	\State $S =$ \Call{SORT}{$G.E, w$} // sort edges non-decreasingly according to weight
-	\ForAll $(u,v) \in S$
-		\If{\Call{FIND-SET}{$u$} $\neq$ \Call{FIND-SET}{$u$}} // if u and v are on different trees
-			\State $A = A \cup {(u,v)}$
-			\State \Call{UNION}{$(u,v)$}
-		\EndIf
-	\EndFor
-	\State \Return $A$
-\EndProcedure
-\end{algorithmic}
 
 ## Local search (LS)
 * It is an apporach for solving optimization problems
