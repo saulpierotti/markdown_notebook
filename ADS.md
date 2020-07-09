@@ -2824,7 +2824,23 @@ $$(u,v) \mbox{ is safe } \iff T_i \cup \{(u,v)\} \\subseteq T$$
 \end{algorithmic}
 
 * A cut $(S, V - S)$ of $G=(V, E)$ is a partition of $V$
-* An edge $(u,v)$ crosses the cut $(S, V - S)$ if $u \in S \land v \in V - S$
+* An edge $(u,v)$ crosses the cut $(S, V - S)$ if $(u \in S \land v \in V - S)\lor(v \in S \land u \in V - S)$
+* A cut $(S,S-V)$ respects a set of edges $A \subseteq E$ if no edge in $A$ crosses the cut
+* An edge $(u,v)$ crossing a cut $(S,V-S)$ is a light edge if $w(u,v)$ is minimal among all the edges crossing the cut
+* Let $G=(V,E)$ be a connected, underected graph with weight function $w$
+* Let $A \subseteq T$ be the subset of some MST $T$ for $G$
+* If $(S,V-S)$ is a cut repsecting $A$ and if $(u,v)$ is a light edge crossing the cut, then $(u,v)$ is safe for $A$
+	* I know that $A \subseteq T$, but I have to prove that $(u,v)$ is safe for $A$
+	* Proving that $(u,v)$ is safe for $A$ means proving that adding $(u,v)$ to $A$ I get a subset of some MST $T$
+$$A \cup \{(u,v)\} \subseteq T$$
+	* If $(u,v) \in T$ I am done since $A\subseteq T$ and so $A\cup\{(u,v)\} \subseteq T$
+	* If $(u,v) \not\in T$ I build a spanning tree $T'=T-\{(u',v')\}\cup\{(u,v)\}$ where $(u',v') \not\in A$ is an edge on the path $u \leadsto v$
+	* I note that $w(T')=w(T)-w(u',v')+w(u,v)$ and $(u,v)$ is light, so $w(T')\leq w(T)$
+	* I also know that $T$ is a MST so $w(T')\geq w(T)$
+$$ w(T') \leq w(T) \land w(T') \geq w(T) \implies w(T')=w(T)$$
+	* Since $w(T')=w(T)$, I conclude that $T'$ is a MST
+	* Since $A \subseteq T$ and $(u',v') \not\in A$ I have that $A \subseteq T-\{(u',v')\}$ and thus $A \cup\{(u,v)\}\subseteq T-\{(u',v')\}\cup\{(u,v)\}=T'$
+* Thanks to this theorem, I can build a MST by adding safe edges to a smaller MST
 
 % Reviewed
 
