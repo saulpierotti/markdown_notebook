@@ -2950,6 +2950,8 @@ $$ S^* : \phi(S^*) = min\{\phi(S')|S' \in N(S)\}$$
 	* In practice I am exchanging an edge in $T$ for an edge which is not in $T$
 * I define the cost function $\phi(T)$ so to be equal to the weight of the tree $w(T)$
 $$ \phi(T)=w(T)$$
+* I can then use local search to possibly replace an edge from a spanning tree $T$ at each iteration until $T$ becomes a MST
+* In any case, I replace the edge $(u,v)$ with the edge $(u',v')$
 
 
 
