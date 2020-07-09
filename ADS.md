@@ -2752,7 +2752,43 @@ $$ k^* = min\{D(m,j)|j=1,...,n\}$$
 * Minimum edit distance is similar to ASM but it requires that the $P'$ approximation found be equal to $T$
 	* It is the problem of finding the minimum number of edits that can transform $P$ in $T$
 
+## Greedy algorithms
+* An optimization algorithm typically go through a series of steps $S_1,...,S_n$ where at each step $S_i$ I can have different choices $C_{i_1},...,C_{i_m}$
+* Dynamic programming evaluates all the possible choices at each step in a bottom-up fashion, avoiding to re-evaluate the same choice multiple times
+* Dynamic programming guarantees to find a globally optimal solution if its assumptions are respected
+* However, sometimes a simpler and more efficient greedy approach suffices for our problem
+* Greedy algorithms make a single choice $C_{i^*}$ that is locally optimal at each step without considering all the possible choices
+* A greedy approach is based on the hope that a sequence of locally optimal choice will bring to a globally optimal solution
+	* This is NOT guaranteed to be true, and in general greedy algorithms are NOT guaranteed to find a globally optimal solution
+* However, if our problem shows the 2 following properties it is possible to develop a globally optimal greedy algorithm
+	* The problem shows optimal substructure
+	* The problem exhibits the greedy-choice property: I can get a globally optimal solution by making always locally optimal choices
+* Any problem that can be solved by a greedy approach can also be solved by dynamic programming, but DP is typically slower than a greedy algorithm in these cases
+* Given an input set of objects $X$, a greedy strategy selects an hopefully optimal subset $S \subseteq X$
+* The solution $S$ is built incrementally, adding at each step the locally optimal object $x \in X$ according to an optimality criterion $c$
 
+\begin{algorithmic}
+\Statex
+\Procedure{GREEDY}{$X,c$}
+	\State $S = \emptyset$
+	\For{$x \in X$}
+		\If{$c(x,X,S)$} \Comment{I may also want to sort $X$ according to $c$}
+			\State $S = S \cup \{x\}$
+		\EndIf
+	\EndFor
+	\State \Return $S$
+\EndProcedure
+\Statex
+\end{algorithmic}
+
+* In a greedy algorithm decisions are take from the top-down and do not depend on sub-problems
+* Advantages of a greedy strategy
+	* It is easy and intuitive to design
+	* It is pretty efficient
+	* It is globally optimal if the probelm has optimal substructure and it exhibits the greedy choice property
+	* Even when it gives a sub-optimal solution, for some problems this can be acceptable!
+* Disadvantages of a greedy strategy
+	* Only few problems exhibit the greedy choice property
 
 % Reviewed
 
