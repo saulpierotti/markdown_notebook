@@ -2899,6 +2899,19 @@ $$ w(T') \leq w(T) \land w(T') \geq w(T) \implies w(T')=w(T)$$
 	* The greeady approach is to always choose the set $S_i$ that contains the biggest number of elements not yet in a set $S_k$ already in $C$
 	* The greedy strategy is not optimal but guarantees that the solution found $C$ will be at most $O(\log n)$ bigger than the optimal solution $C^*$
 
+## Local search
+* Local search is yet another approach to tackle optimization problems
+* It starts from a feasible solution $S$ and searches for a better solution $S'$ in the neighborod $N(S)$ of $S$
+	* This approach is then iterated on $S'$ to obtain $S''$, and so on
+* Local search converges on a local optimum, that may or may not correspond to a global optimum
+	* Because of this we say that local search is not complete
+* Formally we can define local serach in the following way
+	* Let $\zeta$ be the set of solutions for a given problem
+	* I define a neighborhood function $N : \zeta \to 2^\zeta$ such that $N(S)=\{S,S_1,...,S_k\}$ is the  neighborhood of the solution $S \in \zeta$
+
+
+
+
 % Reviewed
 
 
