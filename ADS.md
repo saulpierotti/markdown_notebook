@@ -2942,6 +2942,15 @@ $$ S^* : \phi(S^*) = min\{\phi(S')|S' \in N(S)\}$$
 
 * Many local search approaches have been developped: hill climbing, simulated annealing, tabu search, ...
 
+### Minimum spanning tree with local search
+* It is possible to use local search to solve the MST problem
+* Let $T$ be any spanning tree for the graph $G=(V,E)$ with cost function $w$
+* I define $N(T)$ as the set of trees obtained from $T$ by adding an edge from the set of edges $E-T$ and removing an edge from the resulting circuit
+	* Since $T$ is a spanning tree, adding an edge to it necessarily results in forming a circuit
+	* In practice I am exchanging an edge in $T$ for an edge which is not in $T$
+* I define the cost function $\phi(T)$ so to be equal to the weight of the tree $w(T)$
+$$ \phi(T)=w(T)$$
+
 
 
 % Reviewed
