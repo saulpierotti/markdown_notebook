@@ -2881,6 +2881,15 @@ $$ w(T') \leq w(T) \land w(T') \geq w(T) \implies w(T')=w(T)$$
 * Karger, Klein and Tarjan's MST randomized algorithm runs in $O(m+n)$
 * Fredman and Willard's MST algorithm is not based on comparisons and runs in $O(m+n)$
 
+### Optimal greedy algorithms
+* Greedy algorithms can find the globally optimal solution for other problems besides MST in polynomial time
+	* Huffman codes: given an alphabet $\Sigma$ and weights $w : \Sigma \to \mathbb{R}$ return a prefix code with codewords of minimum lenght
+	* Activity selection: given $n$ activities $S=\{a_1,...,a_n\}$ having start and finish times $(s_i,e_i)$ select a maximum-size set $T \subseteq S$ of non-overlapping activities to be executed
+	* Fractional knapsack: given objects $O_1,...,O_n$ where $O_i$ has value $v_i$ and weight $w_i$, and a knapsack of capacity $W$, select an amount $x_i \in [0,1]$ for each object $O_i$ such that $\sum_{i=1}^n w_ix_i \leq W$ and the total value $\sum_{i=1}^n v_ix_i$ is maximal
+		* It is a generalization of the 0-1 knapsack problem in which $x_i \in {0,1}$
+
+### Non-optimal greedy algorithms
+
 % Reviewed
 
 
