@@ -3011,9 +3011,9 @@ $$\langle a_1,a_{h+1},a_{2h+1},... \rangle,\langle a_2,a_{h+2},a_{2h+2},... \ran
 * Then, after having sorted all such subsequences it decreases $h$ and repeats, until eventually $h=1$ and it becomes equal to insertion-sort and $A$ is thus sorted
 * The variable $h$ can be reduced in different steps
 * A commonly used approach is to reduce $h$ by dividing it by 3 and taking the floor of the result
-$$ h_{k+1} = \lfloor h_k/3 \rfloor$$
+$$h_{k+1} = \lfloor h_k/3 \rfloor$$
 * In this case the sequence of $h$ values will be
-$$ h = ...,1093,264,121,40,13,4,1$$
+$$h = ...,1093,264,121,40,13,4,1$$
 
 \begin{algorithmic}
 \Statex
@@ -3039,7 +3039,7 @@ $$ h = ...,1093,264,121,40,13,4,1$$
 \end{algorithmic}
 
 * The complexity of shell-sort depends on the gap sequence adopted
-* Using the sequence $ h_{k+1} = \lfloor h_k/3 \rfloor$ the complexity is usually $O(n^{1.5})$
+* Using the sequence $h_{k+1} = \lfloor h_k/3 \rfloor$ the complexity is usually $O(n^{1.5})$
 * Using other sequences, it can be from $O(n^{1.25})$ to $O(n \log^2 n)$
 * Shell-sort is the most efficient sorting algorithm for short ($n < 5000$) sequences
 * For long sequences ($n > 5000$) quick-sort is better, provided that some optimizations are implemented (iterative algorithm with random pivot, Bertossi et al.)
