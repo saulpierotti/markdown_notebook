@@ -2907,8 +2907,40 @@ $$ w(T') \leq w(T) \land w(T') \geq w(T) \implies w(T')=w(T)$$
 	* Because of this we say that local search is not complete
 * Formally we can define local serach in the following way
 	* Let $\zeta$ be the set of solutions for a given problem
-	* I define a neighborhood function $N : \zeta \to 2^\zeta$ such that $N(S)=\{S,S_1,...,S_k\}$ is the  neighborhood of the solution $S \in \zeta$
+	* I define a neighborhood function $N : \zeta \to 2^\zeta$ such that $N(S)=\{S,S_1,...,S_k\}$ is the neighborhood of the solution $S \in \zeta$
+		* The codomain of $N(S)$ is $2^\zeta$ since it produces 1 of the $2^\zeta$ possible subsets of solutions from the set of all possible solutions $\zeta$
+	* I define a transition function $\delta_N$ for each neighborhood $N(S)$ such that $\delta_N(S) \in N(S)$ is the next solution to explore after $S$
+		* $\delta_N(S)$ is 1 of the solutions in $N(S)$
+		* When there are no more solutions to explore in $N(S)$, then $\delta_N(S)=S$
+		* If $n=|N(S)|$, there are $n!$ possible transition functions for $N(S)$
+	* I define a cost function $\phi : \zeta \to \mathbb{R}$ to rank the solutions $S \in \zeta$
+$$ \phi(S) < \phi(S') \iff S \mbox{ is better than } S'$$
+	* The solution $S^*$ is a local optimum for $N(S)$ iff its cost is minimal among all the solutions in $N(S)$
+$$ S^* : \phi(S^*) = min\{\phi(S')|S' \in N(S)\}$$
+* The local optimum on which a local search converges depends on the starting solution $S_0$
+* A general local search algorithm looks like this
 
+\begin{algorithmic}
+\Statex
+\Procedure{LOCAL-SEARCH}{$S_0,N,\delta_N,\phi$}
+	\State $S^* = S_0$
+	\While{$N(S) \not= {S^*}$}
+		\State $S=S^*$
+		\While{$\phi(S) \geq \phi(S^*)$ and $\delta_N(S) \not= S$}
+			\State $S=\delta_N(S)$
+			\If{$\phi(S)<\phi(S^*)$}
+				\State $S = S^*$
+			\Else
+				\State \Return $S^*$
+			\EndIf
+		\EndWhile
+	\EndWhile
+	\State \Return $S^*$
+\EndProcedure
+\Statex
+\end{algorithmic}
+
+* Many local search approaches have been developped: hill climbing, simulated annealing, tabu search, ...
 
 
 
