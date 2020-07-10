@@ -3185,7 +3185,16 @@ $$ S[i]=TRUE \iff i \in S' \qquad \mbox{for } i = 1,...,n$$
 \end{algorithmic}
 
 ## Hard problems
+* A problem $Q$ is defined as a binary relation on a set $I$ of problem instances and a set $S$ of problem solutions
+* A decision problem is a problem in which the set of solutions is $S=\{0,1\}$
+
 * A problem is hard or untractable if it cannot be solved in polynomial time, while it is considered easy or tractable if a polynomial time algorithm able to solve it exists
+	* History shows that if a polynomial time algorithm is discovered for a problem, it is usually of reasonable degree ($O(n^3)$ at most)
+	* Even if only an high degree polynomial algorithm is discovered, then usually other more effcient polynomial algorithms of much lower degree are discovered
+* A problem is said to be concrete if its input is a set of binary strings
+* The input size of a concrete problem is the lenght of its binary input strings
+* An abstract problem can be mapped to a concrete problem unsing an encoding
+	* The choice of which encoding to use influences the running time, but if I rule out expensive encodings, then the running time is quite independent on the encoding used
 * Let $P$ be a decision problem (its answer is either yer or no) such that
 	* An polynomial algorithm $A_{ver}$ exists to verify if a candidate solution $S$ is feasible for $P$
 		* The running time of $A_{ver}$ is $O(n^k)$ for some constant $k$
@@ -3224,6 +3233,18 @@ $$\mbox{NP-complete} = \mbox{NP} \cap \mbox{NP-hard}$$
 * Conversely, I can show that a problem $A$ is not easier than a problem $B$ for which its hardness has been proven
 	* If I can reduce $B$ to $A$, and $B$ has been proven to be hard, then also $A$ is hard
 	* This can be proven by contradiction: If $A$ was easy, then I can reduce $B$ to an easy problem, but $B$ has been proven to be hard adn so this is absurd
+* A problem $A$ is NP-complete if it can be show that a polynomial reduction algorithm exists that can reduce $A$ to a problem $B \in \mbox{NP-complete}$
+	* We do not know hard NP-complete problems are, but we know that they are all equal since they can be reduced into one another
+* In order to show that a given problem is NP-complete, we must define a prototype NP-complete problem to which other problems must me reducable in order to show their NP-completeness
+	* We will use the circuit satisfiability problem as a prototype NP-complete problem
+* Any NP problem can be reduced in polynomial time to the boolean circuit satisfiability problem
+	* As a consequence, the boolean circuit satisfiability problem is no easier than any problem in NP (and so it is NP-hard!)
+	* Internally in a computer any problem goes trhough a set of logic gates, and so it can be represented by a boolean circuit
+* The boolean circuit satisfiability problem is verfiable in polynomial time: it is an NP problem
+* Since the boolean satisfiability problem is both an NP and an NP-hard problem, it is an NP-complete problem
+* I can thus show that a problem is NP-complete by reducing it to the boolean circuit satisfiability problem
+
+
 ### Graph coloring
 
 ### Traveling salesperson
