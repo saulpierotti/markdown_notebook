@@ -3244,8 +3244,13 @@ $$\mbox{NP-complete} = \mbox{NP} \cap \mbox{NP-hard}$$
 * Since the boolean satisfiability problem is both an NP and an NP-hard problem, it is an NP-complete problem
 * I can thus show that a problem is NP-complete by reducing it to the boolean circuit satisfiability problem
 
-
 ### Graph coloring
+* The graph coloring problem: given an undirected graph $G=(V,E)$ and $k \in \mathbb{N}$, can I color its nodes with $m \leq k$ colors such that adjacent nodes have different colors?
+* This problem can be reframed as the clique problem: given a graph $G=(V,E)$ and $k \in \mathbb{N}$, is there a subset of nodes $S \subseteq V$ with $|S| = m \geq k$ such that there is an edge $(u,v)$ among all the possible pairs of nodes $u,v \in S$?
+	* In other words, is there a clique $S \in V$ such that $|S| \geq k$?
+* If the answer to the clique problem is YES, then the answer to the graph coloring problem is NO, and vice versa
+	* If there is a clique of $k$ elements in a graph, I need at least $k$ colors for coloring it
+	* If in a graph the maximal clique has $k$ elements, then it is possible to color the nodes in the graph with $k$ colors
 
 ### Traveling salesperson
 
