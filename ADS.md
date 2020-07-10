@@ -3299,9 +3299,43 @@ $$\mbox{NP-complete} = \mbox{NP} \cap \mbox{NP-hard}$$
 \end{algorithmic}
 
 ### Traveling salesperson problem
-* The travelling salesperson problem: given $n$ cities at a certain distance from each other and given $k \in \mathbb{N}$, is there a tour of lenght $l \leq k$ that visits each city exactly once and returns back to the original city?
+* The travelling salesperson problem (TSP): given $n$ cities at a certain distance from each other and given $k \in \mathbb{N}$, is there a tour of lenght $l \leq k$ that visits each city exactly once and returns back to the original city?
 * This is equivalent to the hamiltonian cycle problem: given a weighted connected graph $G=(V,E)$ is there a circuit $\pi$ such that each node of the graph is visited exactly once and the last node is connected to the starting node?
 * The travelling saleseman problem can be formulated with symmetric or asymmetric distances: either $w(u,v)=w(v,u)$ or $w(u,v) \not= w(v,u)$
+* The following is a polynomial verifier for the travelling salesman problem that runs in $O(n)$ time
+	* $D$ is the distance matrix and $S[1...n]$ is the certificate of the tour $S[1] \leadsto S[2] \leadsto ... \leadsto S[n] \leadsto S[1]$
+
+\begin{algorithmic}
+\Statex
+\Procedure{VERIFY-TSP}{$S,k,n,D$}
+	\State $l = D[S[n],S[1]]$
+	\For{$i=2$ to $n$}
+		\State $l = l + D[S[i-1],S[i]]$
+	\EndFor
+	\State \Return $l \leq k$
+\EndProcedure
+\Statex
+\end{algorithmic}
+
+* If $C$ is the set of possible cities the possible tours for the TSP are $O(n!)$ where $n = |C|$ , since I need to consider all the possible permutations of the set of cities
+* I can use backtracking to solve the TSP problem in $O(n!)$ time by enumerating all the possible permutations of $C$ and using VERIFY-TSP for each of them
+
+\begin{algorithmic}
+\Statex
+\Procedure{TSP}{$S,i,k,C,D$}
+	\State $l = D[S[n],S[1]]$
+	\For{$c \in C$}
+		\State $S[i] = c$
+		\State $C = C- \{c\}$
+		\If{$C=\emptyset \land$ \Call{VERIFY-TSP}{$S,k,n,D$}} \Return $TRUE$
+		\ElsIf{\Call{TSP}{$S,i+1,k,C,D$}} \Return $TRUE$
+		\EndIf
+		\State $C=C\cup\{c\}$
+	\EndFor
+	\State \Return $FALSE$
+\EndProcedure
+\Statex
+\end{algorithmic}
 
 ### 0-1 linear programming problem
 * The 0-1 linear programming problem: given an integer matrix $A \in \mathbb{Z}^{m \times n}$ and an integer vector $b \in \mathbb{Z}^m$, is there a binary vector $x \in \{0,1\}^n$ such that $Ax \leq b$?
