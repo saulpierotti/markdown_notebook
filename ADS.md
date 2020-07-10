@@ -3023,18 +3023,28 @@ $$h = ...,1093,264,121,40,13,4,1$$
 	\While{$h \leq A.lenght$}  \Comment{I generate the starting value for $h$}
 		\State $h = 3*h+1$
 	\EndWhile 
-	\State $h = \lfloor h/3 \rfloor$
+	\State $h = \lfloor h/3 \rfloor$ \Comment{in the last while iteration $h$ can become bigger than $A.lenght$}
 	\While{$h \geq 1$}
-		\For{$i = h+1$ to $A.lenght$}
-		\State $k = A[i]$
+		\State \Comment{the while loop only updates $h$, I want to stop after $h = 1$, when the algorithm is correct}
+		\For{$i = h+1$ to $A.lenght$} \Comment{$i=h+1,h+2,h+3,...,A.lenght$}
+		\State $k = A[i]$ \Comment{$k$ is the forward element of the pair checked}
 		\State $j = i$
 			\While{$j > h$ and $A[j-h] > k$}
+				\State \Comment{$j=i,i-h,i-2h,...$ until I cannot decrease any more since $j<h$ and so $i-xh < 0$}
+				\State \Comment{note that $j-h$ is the value of $j$ at the next iteration}
+				\State \Comment{I compare $A[j-h]$ with $k=A[i]$ and stop when $A[j-h]$ is smaller than $A[i]$}
+				\State \Comment{Since $i \geq j$ the elements are NOT conflicting when $A[j-h]$ is smaller than $k$}
 				\State $A[j] = A[j-h]$
+				\State \Comment{At the first iteration $A[j]=A[i]=k$ so I am not loosing the value of $A[j]$}
+				\State \Comment{At the next iterations I am shifting $A[j-h]$ $h$ positions ahead to make space for placing $A[i]$}
 				\State $j = j - h$
 			\EndWhile
+			\State \Comment{the while ends when either I came to the beginning of the array or I found the correct place for $k$ in the sequence $A[i],A[i-h],A[i-2h],...$}
 		\State $A[j] = k$
+		\State \Comment{at this point I place $k$ in $A[j]$, which has already been copied to $A[j+h]$}
+		\State \Comment{$A[j]$ is the old $A[j-h]$ of the while loop!}
 		\EndFor
-	\State $h =\lfloor h/3 \rfloor$
+		\State $h =\lfloor h/3 \rfloor$ \Comment{update $h$ for the next round}
 	\EndWhile
 \EndProcedure
 \end{algorithmic}
