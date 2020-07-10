@@ -3057,6 +3057,7 @@ $$h = ...,1093,264,121,40,13,4,1$$
 
 ## Backtracking
 * The general idea of backtracking is to try a solution, check if it is feasible and if not go back and try a new solution
+* The term backtracking was coined by D.H. Lehmer in the 1950s
 * Backtrack explores exhaustively the search space and halts either at a feasible solution or after having explored all the solutions to the problem
 * It can be used for decision or optimization problems
 	* In a decision problem all the solutions are equivalent
@@ -3106,6 +3107,7 @@ $$h = ...,1093,264,121,40,13,4,1$$
 	* The initial call is ALL-SUBSETS($S,1,n$)
 	* I am describing a solution as a boolean vector for which an element is TRUE if the corresponding index is part of the current subset $S'$
 $$ S[i]=TRUE \iff i \in S' \qquad \mbox{for } i = 1,...,n$$
+	* The worst case time complexity is $O(2^n)$
 
 \begin{algorithmic}
 \Statex
@@ -3129,6 +3131,11 @@ $$ S[i]=TRUE \iff i \in S' \qquad \mbox{for } i = 1,...,n$$
 
 * The following pseudocode enumerates all the $n \choose k$ subsets of $S=\{1,...,n\}$ composed of $k \leq n$ elements
 	* The variable $j$ is used for counting the current number of elements for each subset
+	* $k-j$ is the number of elements that must be added to reach a solution of the desired lenght $k$
+	* $k-j$ cannot exceed the total number of elements remainin $n-i+1 = |\{i,i+1,...,n\}|$
+		* This reduces the number of choices by pruning some dead branches
+		* I cannot refuse more elements if then there are not enough elements remaining for completing a set of $k$ elements!
+	* The worst case time complexity is $O(2^n)$
 
 \begin{algorithmic}
 \Statex
@@ -3140,16 +3147,42 @@ $$ S[i]=TRUE \iff i \in S' \qquad \mbox{for } i = 1,...,n$$
 	\EndIf
 	\For{$c \in C$}
 		\State $S[i] = c$
-		\If{$i == n$}
-			\State \Call{PROCESS}{$S,n$}
+		\If{$c$}
+			\State $j = j+1$
+		\EndIf
+		\If{$j == k$}
+			\State \Call{PROCESS}{$S,i$}
 		\Else
-			\State \Call{ALL-SUBSETS}{$S,i+1,n$}
+			\State \Call{K-SUBSETS}{$S,i+1,j,k,n$}
+		\EndIf
+		\If{$c$}
+			\State $j = j-1$
 		\EndIf
 	\EndFor
 \EndProcedure
 \Statex
 \end{algorithmic}
 
+* The following pseudocode enumerates all the $n!$ permutations of a set $A=\{a_i,...,a_n\}$
+	* In this case there is no need to define explicitly a set of choices $C$
+	* The time complexity is $O(n!)$
+
+\begin{algorithmic}
+\Statex
+\Procedure{PERMUTATIONS}{$S,i,n,A$}
+	\For{$c \in A$}
+		\State $S[i] = c$
+		\State $A = A - \{c\}$
+		\If{$A = \emptyset$}
+			\State \Call{PROCESS}{$S,n$}
+		\Else
+			\State \Call{PERMUTATIONS}{$S,i+1,n,A$}
+		\EndIf
+		\State $A = A \cup \{c\}$
+	\EndFor
+\EndProcedure
+\Statex
+\end{algorithmic}
 
 % Reviewed
 
