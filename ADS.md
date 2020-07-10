@@ -3068,6 +3068,38 @@ $$h = ...,1093,264,121,40,13,4,1$$
 	* Its approach is similar to a tree visit or a DFS graph search
 * Iterative backtracking uses a greedy strategy, but it possibly undoes some decisions
 	* An example is the Knuth-Morris-Pratt algorithm for exact string matching
+* Backtracking can be used for
+	* Finding one feasible solution to a problem (e.g. for the $n\times n$ magic square problem)
+	* Finding one optimal solution to a problem (e.g. for the 0-1 knapsack problem)
+	* Counting all the feasible solutions to a problem (e.g. counting all the solutions to the $n$-queens problem)
+		* Here I am ony interested in how many solutions there are
+	* Enumerate all the feasible solutions to a problem (e.g generate all the subsets of size $k$ for a set of $n \geq k$ elements)
+		* Here I am interested in the solutions themselves
+* I can use bactracking to enumerate all the feasible solutions to a problem in the following way
+	* I represent a solution with an array of decisions $S[1...n]$, where $S[i]$ is a decision take from a set $C$ of possible choices
+	* The choices depend on the problem, and not all the choice lead to a feasible solution for the problem (i.e. a choice may lead to a dead end)
+	* At each step $i \leq n$ I consider a partial solution $S[1...i]$
+	* If $i=n$ and $S[1...i]$ is feasible, then I process the solution (print it or whatever)
+	* If $i < n$ and $S[1...i]$ is feasible, I extend it to $S[1...i+1]$ with a new choice, and I recursively check $S[1...i+1]$
+	* If $S[1...i]$ is NOT feasible I backtrack to the solution $S[1...i-1]$ and I explore a different solution (if any), otherwise I backtrack again from there
+* A generic backtacking enumeration algorithm can look like this
+
+\begin{algorithmic}
+\Statex
+\Procedure{ENUMERATE}{$S,i,n,...$} \Comment{the dots are for other optional problem-specific parameters}
+	\State $C = CHOICES(S,i,n,...)$
+	\For{$c \in C$}
+		\State $S[i] = c$
+		\State $j = i$
+		\If{$S[1...i]$ is feasible $\land i == n$}
+			\State \Call{PROCESS}{$S,n,...$}
+		\Else
+			\State \Call{ENUMERATE}{$S,i+1,n,...$}
+		\EndIf
+	\EndFor
+\EndProcedure
+\Statex
+\end{algorithmic}
 
 % Reviewed
 
