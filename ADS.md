@@ -3083,6 +3083,7 @@ $$h = ...,1093,264,121,40,13,4,1$$
 	* If $i < n$ and $S[1...i]$ is feasible, I extend it to $S[1...i+1]$ with a new choice, and I recursively check $S[1...i+1]$
 	* If $S[1...i]$ is NOT feasible I backtrack to the solution $S[1...i-1]$ and I explore a different solution (if any), otherwise I backtrack again from there
 * A generic backtacking enumeration algorithm can look like this
+	* The function CHOICES($S,i,n,...$) returns a set of possible choices for the decision $S[i]$, and it must return $\emptyset$ if $i > n$
 
 \begin{algorithmic}
 \Statex
@@ -3090,7 +3091,6 @@ $$h = ...,1093,264,121,40,13,4,1$$
 	\State $C = CHOICES(S,i,n,...)$
 	\For{$c \in C$}
 		\State $S[i] = c$
-		\State $j = i$
 		\If{$S[1...i]$ is feasible $\land i == n$}
 			\State \Call{PROCESS}{$S,n,...$}
 		\Else
@@ -3100,6 +3100,56 @@ $$h = ...,1093,264,121,40,13,4,1$$
 \EndProcedure
 \Statex
 \end{algorithmic}
+
+* The following pseudocode enumerates all the $2^n$ subset of the set $S=\{1,...,n\}$
+	* In this case there is no need to check for the feasibility of a solution, since all the solutions are feasible
+	* The initial call is ALL-SUBSETS($S,1,n$)
+	* I am describing a solution as a boolean vector for which an element is TRUE if the corresponding index is part of the current subset $S'$
+$$ S[i]=TRUE \iff i \in S' \qquad \mbox{for } i = 1,...,n$$
+
+\begin{algorithmic}
+\Statex
+\Procedure{ALL-SUBSETS}{$S,i,n$}
+	\If{$i \leq n$}
+		\State $C = \{FALSE,TRUE\}$
+	\Else
+		\State $C = \emptyset$
+	\EndIf
+	\For{$c \in C$}
+		\State $S[i] = c$
+		\If{$i == n$}
+			\State \Call{PROCESS}{$S,n$}
+		\Else
+			\State \Call{ALL-SUBSETS}{$S,i+1,n$}
+		\EndIf
+	\EndFor
+\EndProcedure
+\Statex
+\end{algorithmic}
+
+* The following pseudocode enumerates all the $n \choose k$ subsets of $S=\{1,...,n\}$ composed of $k \leq n$ elements
+	* The variable $j$ is used for counting the current number of elements for each subset
+
+\begin{algorithmic}
+\Statex
+\Procedure{K-SUBSETS}{$S,i,j,k,n$}
+	\If{$0 < k-j \leq n-i+1$}
+		\State $C = \{FALSE,TRUE\}$
+	\Else
+		\State $C = \emptyset$
+	\EndIf
+	\For{$c \in C$}
+		\State $S[i] = c$
+		\If{$i == n$}
+			\State \Call{PROCESS}{$S,n$}
+		\Else
+			\State \Call{ALL-SUBSETS}{$S,i+1,n$}
+		\EndIf
+	\EndFor
+\EndProcedure
+\Statex
+\end{algorithmic}
+
 
 % Reviewed
 
