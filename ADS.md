@@ -3254,6 +3254,23 @@ $$\mbox{NP-complete} = \mbox{NP} \cap \mbox{NP-hard}$$
 * If the answer to the clique problem is YES, then the answer to the graph coloring problem is NO, and vice versa
 	* If there is a clique of $k$ elements in a graph, I need at least $k$ colors for coloring it
 	* If in a graph the maximal clique has $k$ elements, then it is possible to color the nodes in the graph with $k$ colors
+
+### Traveling salesperson problem
+* The travelling salesperson problem (TSP): given $n$ cities at a certain distance from each other and given $k \in \mathbb{N}$, is there a tour of lenght $l \leq k$ that visits each city exactly once and returns back to the original city?
+* This is equivalent to the hamiltonian cycle problem: given a weighted connected graph $G=(V,E)$ is there a circuit $\pi$ such that each node of the graph is visited exactly once and the last node is connected to the starting node?
+* The travelling saleseman problem can be formulated with symmetric or asymmetric distances: either $w(u,v)=w(v,u)$ or $w(u,v) \not= w(v,u)$
+
+### 0-1 linear programming problem
+* The 0-1 linear programming problem: given an integer matrix $A \in \mathbb{Z}^{m \times n}$ and an integer vector $b \in \mathbb{Z}^m$, is there a binary vector $x \in \{0,1\}^n$ such that $Ax \leq b$?
+
+### Boolean satisfiability problem
+* The boolean satisfiability problem: given a boolean formula $\phi$ in conjunctive normal form (CNF), is there an assignment of truth values such that $\phi$ is true?
+* A boolean formula is a conjuntive normal form if it is a conjunction of disjunctions of literals, where a literal is a boolean variable or a negated boolean variable 
+$$ \phi = (\lnot a \lor \lnot b \lor \lnot c) \land (v \lor \lnot c) \land (a \lor \lnot b \lor c)$$
+$$ a=b=TRUE, c = FALSE \implies \phi = TRUE \implies \phi \mbox{ is satisfiable}$$
+
+
+### Some search and verification algorithms
 * The following algorithm is a verifier for the clique problem: it takes in input an instace of the clique problem ($G=(V,E)$, $k \in \mathbb{N}$) and a certificate $S \subseteq V$ for it, and checks if $S$ is indeed a clique of at least $k$ nodes for $G$
 	* It is a polynomial-time verifier for the clique problem with worst case complexity $O(n^2)$ with $n = |V|$
 
@@ -3298,10 +3315,6 @@ $$\mbox{NP-complete} = \mbox{NP} \cap \mbox{NP-hard}$$
 \Statex
 \end{algorithmic}
 
-### Traveling salesperson problem
-* The travelling salesperson problem (TSP): given $n$ cities at a certain distance from each other and given $k \in \mathbb{N}$, is there a tour of lenght $l \leq k$ that visits each city exactly once and returns back to the original city?
-* This is equivalent to the hamiltonian cycle problem: given a weighted connected graph $G=(V,E)$ is there a circuit $\pi$ such that each node of the graph is visited exactly once and the last node is connected to the starting node?
-* The travelling saleseman problem can be formulated with symmetric or asymmetric distances: either $w(u,v)=w(v,u)$ or $w(u,v) \not= w(v,u)$
 * The following is a polynomial verifier for the travelling salesman problem that runs in $O(n)$ time
 	* $D$ is the distance matrix and $S[1...n]$ is the certificate of the tour $S[1] \leadsto S[2] \leadsto ... \leadsto S[n] \leadsto S[1]$
 
@@ -3337,14 +3350,18 @@ $$\mbox{NP-complete} = \mbox{NP} \cap \mbox{NP-hard}$$
 \Statex
 \end{algorithmic}
 
-### 0-1 linear programming problem
-* The 0-1 linear programming problem: given an integer matrix $A \in \mathbb{Z}^{m \times n}$ and an integer vector $b \in \mathbb{Z}^m$, is there a binary vector $x \in \{0,1\}^n$ such that $Ax \leq b$?
-
-### Boolean satisfiability problem
-* The boolean satisfiability problem: given a boolean formula $\phi$ in conjunctive normal form (CNF), is there an assignment of truth values such that $\phi$ is true?
-* A boolean formula is a conjuntive normal form if it is a conjunction of disjunctions of literals, where a literal is a boolean variable or a negated boolean variable 
-$$ \phi = (\lnot a \lor \lnot b \lor \lnot c) \land (v \lor \lnot c) \land (a \lor \lnot b \lor c)$$
-$$ a=b=TRUE, c = FALSE \implies \phi = TRUE \implies \phi \mbox{ is satisfiable}$$
+### Working with hard problems
+* It is not possible to solve exactly an hard problem in polynomial time
+* To handle NP-hard problems, I need to renounce to something
+* Generality: I may be able to solve an hard problem in polynomial time for special cases of the problem
+	* The graph coloring problem can be solved in polynomial time for $k=2$, but it is NP-hard for $k\geq 3$
+	* The linear programming problem can be solved in polynomial time if $x \in \mathbb{R}^n$ is a vector of real numbers instead of an integer vector
+	* The boolean satisfiability problem can be solved in polynomial time if $\phi$ is a 2-CNF, but it is NP-hard if it is a 3-CNF
+		* A 2-CNF has at most 2 literals per clause, a 3-CNF has at most 3 literals per clause
+* Optimality: I may be able to compute a sub-optimal solution in polynomial time
+	* In an optimization problem, I can decide to halt when I reach a treshold score $\epsilon$, instead of halting at an extremum
+* Efficiency: I can accept to use a super-polynomial algorithm if I am able to prune the search space to a reasonable leavel (e.g. with branch-and-bound algorithms)
+* Formality: I can design a polynomial time algorithm that I am not able to proove correct, but seems to halt with the right solution (an heuristic algorithm)
 
 % Reviewed
 
