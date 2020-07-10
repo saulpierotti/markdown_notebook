@@ -3055,6 +3055,19 @@ $$h = ...,1093,264,121,40,13,4,1$$
 * Shell-sort is the most efficient sorting algorithm for short ($n < 5000$) sequences
 * For long sequences ($n > 5000$) quick-sort is better, provided that some optimizations are implemented (iterative algorithm with random pivot, Bertossi et al.)
 
+## Backtracking
+* The general idea of backtracking is to try a solution, check if it is feasible and if not go back and try a new solution
+* Backtrack explores exhaustively the search space and halts either at a feasible solution or after having explored all the solutions to the problem
+* It can be used for decision or optimization problems
+	* In a decision problem all the solutions are equivalent
+	* In an optimization problem solutiuons are ranked
+* The time complexity of backtracking is typically high (exponential) since it is linear to the magnitude of the search space for the problem
+	* A selected number of simple problems can be solved by a polynomial complexity backtracking approach
+* Recursive backtracking works by generating and recursively visiting a search tree
+	* When a leaf is reached if the solution is feasible the algorithm halts, if it is note it backtracks to the first node with yet unexplored branches
+	* Its approach is similar to a tree visit or a DFS graph search
+* Iterative backtracking uses a greedy strategy, but it possibly undoes some decisions
+	* An example is the Knuth-Morris-Pratt algorithm for exact string matching
 
 % Reviewed
 
@@ -3068,31 +3081,8 @@ $$h = ...,1093,264,121,40,13,4,1$$
 
 
 
-## Local search (LS)
-* It is an apporach for solving optimization problems
-* It starts from a sub-optimal solution $S$ and seraches for a better solution $S'$ in the neighborhood of $S$ $N(S)$ in an iterative way
-* It finds a local optimum in the solution space
-* We can use LS to solve the MST problem
 
-## LS sorting
-* I can frame a sorting problem as an optimization problem
-* Given a set of elements $A$ we say that $a_j$ and $a_i$ are misplaced if they are in the wrong order
-* If $a_i$ and $a_j$ are misplaced we say that $(i,j)$ is a conflict for $A$
-* $A$ is sorted when there are no conflicts
-* I can sort $A$ by minimising the number of conflicts
-* The neighborhood of $A$ is the set of all the possible permutations oof $A$ that can be obtained by swapping 2 elements
-* INSERTION-SORT can be seen as an LS algo however
-	* It only swaps contiguous elements
-	* At each step it solves just 1 conflict
-* SHELL-SORT was proposed by D. L. Shell to overcome this problems
-	* It is a generalization of INSERTION-SORT
-	* It considers elements at distance $h \geq 1$
-	* $h$ is decreased at each iteration until $h = 1$
-	* The algorthm is correct if at a certain point I use $h = 1$
-	* The series of $h$ used is called gap sequence
-		* For instance I can use $h = ..., 1093, 363, 32, 1$
-	* When $h = 1$ SHELL-SORT is exactly equivalent to INSERTION-SORT
-	* It is empirically one of the fastest sorting algorithms when the sequence is small (~5000 elements)
+
 
 
 # Backtracking
