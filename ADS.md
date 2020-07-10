@@ -3195,6 +3195,10 @@ $$ S[i]=TRUE \iff i \in S' \qquad \mbox{for } i = 1,...,n$$
 * The input size of a concrete problem is the lenght of its binary input strings
 * An abstract problem can be mapped to a concrete problem unsing an encoding
 	* The choice of which encoding to use influences the running time, but if I rule out expensive encodings, then the running time is quite independent on the encoding used
+* A verfier (also called certifier or checker) is an algorithm $A_{ver}$ such that, given a problem instance $P$ and a candidate solution $S$ for $P$, returns TRUE if $S$ is a valid solution for $P$, FALSE otherwise
+$$ A_{ver} = \begin{cases}TRUE & \mbox{if $S$ is feasible for $P$}\\ FALSE & \mbox{otherwise}\end{cases}$$
+	* A candidate solution $S$ for a problem instance $P$ is called a certificate or witness for $P$
+	* A verifier does not solve the problem $P$, but only chekcs if a given solution is valid
 * Let $P$ be a decision problem (its answer is either yer or no) such that
 	* An polynomial algorithm $A_{ver}$ exists to verify if a candidate solution $S$ is feasible for $P$
 		* The running time of $A_{ver}$ is $O(n^k)$ for some constant $k$
@@ -3204,7 +3208,6 @@ $$ S[i]=TRUE \iff i \in S' \qquad \mbox{for } i = 1,...,n$$
 * The open question is: does such an algorith $A_{poly}$ exist, given that a polynomial verification algorithm $A_{ver}$ exists?
 	* If the answer is YES, then all the problem for which a polynomial verification algorithm $A_{ver}$ is available can be solved in polynomial time
 	* If the answer is NO, then these problems are intrinsically exponential and hard to solve
-* Decision problems are generally grouped in complexity classes
 * The class **P** contains all the problems solvable in polynomial time
 * The class **NP** contains all the problems verifiable in polynomial time
 * It is obvious that **P** is contained in **NP**, since if I can find a solution to a problem in polynomial time, I don't need to verify that solution: I can just compute it ex-novo 
@@ -3244,19 +3247,70 @@ $$\mbox{NP-complete} = \mbox{NP} \cap \mbox{NP-hard}$$
 * Since the boolean satisfiability problem is both an NP and an NP-hard problem, it is an NP-complete problem
 * I can thus show that a problem is NP-complete by reducing it to the boolean circuit satisfiability problem
 
-### Graph coloring
+### Graph coloring problem
 * The graph coloring problem: given an undirected graph $G=(V,E)$ and $k \in \mathbb{N}$, can I color its nodes with $m \leq k$ colors such that adjacent nodes have different colors?
 * This problem can be reframed as the clique problem: given a graph $G=(V,E)$ and $k \in \mathbb{N}$, is there a subset of nodes $S \subseteq V$ with $|S| = m \geq k$ such that there is an edge $(u,v)$ among all the possible pairs of nodes $u,v \in S$?
 	* In other words, is there a clique $S \in V$ such that $|S| \geq k$?
 * If the answer to the clique problem is YES, then the answer to the graph coloring problem is NO, and vice versa
 	* If there is a clique of $k$ elements in a graph, I need at least $k$ colors for coloring it
 	* If in a graph the maximal clique has $k$ elements, then it is possible to color the nodes in the graph with $k$ colors
+* The following algorithm is a verifier for the clique problem: it takes in input an instace of the clique problem ($G=(V,E)$, $k \in \mathbb{N}$) and a certificate $S \subseteq V$ for it, and checks if $S$ is indeed a clique of at least $k$ nodes for $G$
+	* It is a polynomial-time verifier for the clique problem with worst case complexity $O(n^2)$ with $n = |V|$
 
-### Traveling salesperson
+\begin{algorithmic}
+\Statex
+\Procedure{VERIFY-CLIQUE}{$G,k,S$}
+	\If{$|S| < k$}
+		\Return $FALSE$
+	\EndIf
+	\For{$u \in S$}
+		\For{$v \in S-\{u\}$}
+			\If{$(u,v) \not\in G.E$}
+				\Return $FALSE$
+			\EndIf
+		\EndFor
+	\EndFor
+	\State \Return $TRUE$
+\EndProcedure
+\Statex
+\end{algorithmic}
 
-### 0-1 linear programming
+* An exhaustive search algorithm for the clique problem explores all the $2^n$ possible subsets of nodes in $V$
+* A backtracking algorithm can solve it in $O(2^n)$ by enumerating the $n \choose k$ subsets of $V$ that have $k$ nodes and checking each subset with VERIFY-CLIQUE
 
-### Boolean satisfiability
+\begin{algorithmic}
+\Statex
+\Procedure{CLIQUE}{$G,S,i,k,n$}
+	\If{$0 < k-|S| \leq n-i+1$}
+		\State $C=\{FALSE,TRUE\}$
+	\Else
+		\State $C=\emptyset$
+	\EndIf
+	\For{$c \in C$}
+		\If{$c$} $S=S \cup \{c\}$\EndIf
+		\If{\Call{VERIFY-CLIQUE}{$G,k,S$}} \Return $TRUE$
+		\ElsIf{\Call{CLIQUE}{$G,S,i+1,k,n$}} \Return $TRUE$
+		\EndIf
+		\If{$c$} $S=S -\{c\}$\EndIf
+	\EndFor
+	\State \Return $FALSE$
+\EndProcedure
+\Statex
+\end{algorithmic}
+
+### Traveling salesperson problem
+* The travelling salesperson problem: given $n$ cities at a certain distance from each other and given $k \in \mathbb{N}$, is there a tour of lenght $l \leq k$ that visits each city exactly once and returns back to the original city?
+* This is equivalent to the hamiltonian cycle problem: given a weighted connected graph $G=(V,E)$ is there a circuit $\pi$ such that each node of the graph is visited exactly once and the last node is connected to the starting node?
+* The travelling saleseman problem can be formulated with symmetric or asymmetric distances: either $w(u,v)=w(v,u)$ or $w(u,v) \not= w(v,u)$
+
+### 0-1 linear programming problem
+* The 0-1 linear programming problem: given an integer matrix $A \in \mathbb{Z}^{m \times n}$ and an integer vector $b \in \mathbb{Z}^m$, is there a binary vector $x \in \{0,1\}^n$ such that $Ax \leq b$?
+
+### Boolean satisfiability problem
+* The boolean satisfiability problem: given a boolean formula $\phi$ in conjunctive normal form (CNF), is there an assignment of truth values such that $\phi$ is true?
+* A boolean formula is a conjuntive normal form if it is a conjunction of disjunctions of literals, where a literal is a boolean variable or a negated boolean variable 
+$$ \phi = (\lnot a \lor \lnot b \lor \lnot c) \land (v \lor \lnot c) \land (a \lor \lnot b \lor c)$$
+$$ a=b=TRUE, c = FALSE \implies \phi = TRUE \implies \phi \mbox{ is satisfiable}$$
 
 % Reviewed
 
