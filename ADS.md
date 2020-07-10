@@ -3184,6 +3184,54 @@ $$ S[i]=TRUE \iff i \in S' \qquad \mbox{for } i = 1,...,n$$
 \Statex
 \end{algorithmic}
 
+## Hard problems
+* A problem is hard or untractable if it cannot be solved in polynomial time, while it is considered easy or tractable if a polynomial time algorithm able to solve it exists
+* Let $P$ be a decision problem (its answer is either yer or no) such that
+	* An polynomial algorithm $A_{ver}$ exists to verify if a candidate solution $S$ is feasible for $P$
+		* The running time of $A_{ver}$ is $O(n^k)$ for some constant $k$
+	* An exponential algorithm $A_{exp}$ exists to find a feasible solution $S$ for $P$ via exhaustive search
+		* The running time of $A_{exp}$ is $O(k^n)$ for some constant $k$
+	* There is no known polynomial algorithm $A_{poly}$ that can find a feasible solution $S$ for $P$
+* The open question is: does such an algorith $A_{poly}$ exist, given that a polynomial verification algorithm $A_{ver}$ exists?
+	* If the answer is YES, then all the problem for which a polynomial verification algorithm $A_{ver}$ is available can be solved in polynomial time
+	* If the answer is NO, then these problems are intrinsically exponential and hard to solve
+* Decision problems are generally grouped in complexity classes
+* The class **P** contains all the problems solvable in polynomial time
+* The class **NP** contains all the problems verifiable in polynomial time
+* It is obvious that **P** is contained in **NP**, since if I can find a solution to a problem in polynomial time, I don't need to verify that solution: I can just compute it ex-novo 
+$$\mbox{P} \subseteq \mbox{NP}$$
+* So far, it has not been proven if **P** and **NP** coincide: if all the problems verifiable in polynomial time are also solvable in polynomial time
+* There is a million US dollar prize for showing that either $\mbox{P}=\mbox{NP}$ or $\mbox{P} \not= \mbox{NP}$
+* The most difficult problems in **NP** are called NP-hard problems: they are at least as hard as the hardest problem in NP
+	* **NP-hard** intersecates with **NP** but it is not a subset of it
+	* Some NP-hard problems are also NP problems, while some NP-hard problems are not NP problems (i.e. they cannot be verified in polynomial time)
+* A problem which is NP-hard and also belongs to **NP** is called NP-complete
+	* **NP-complete** is the intersection of **NP** and **NP-hard**
+$$\mbox{NP-complete} = \mbox{NP} \cap \mbox{NP-hard}$$
+* If I can find a polynomial-time algorithm for a single NP-hard problem, then since all the NP problems are easier than it (by definition), a polynomial algorithm must exist for all the problems in **NP**
+	* This would mean that $\mbox{P}=\mbox{NP}$
+* If no polynomial time algorithm exist for a single NP-hard problem, then no polynomial time algorithm exists for all the NP-hard problems
+	* This would mean that $\mbox{P}\not=\mbox{NP}$
+	* This is considered the most likely, albeit sad, scenario
+* Even though these classes refer to decision problems and not to optimization problems, I can easily reframe an optimization problem into a related decision problem by imposing a threshold on the score of an acceptable solution
+* If I want to show that an optimization problem is NP-complete, I can show that the related decision problem is NP-complete
+	* The optimization problem can be as hard or harder than its corresponding decision problem
+	* If the decision problem is NP-complete the optimization problem must be hard
+* I can show that a decision problem $A$ is not harder than another decision problem $B$ by finding an algorith that reduces any instance (i.e. all the inputs) of problem $A$ to a corresponding instance of problem $B$ such that
+	* The transformation takes polynomial time
+	* The answer to the transformed problem is the same that would have been obtained for the original problem
+	* Such a procedure is called a polynomial time reduction algorithm
+* Conversely, I can show that a problem $A$ is not easier than a problem $B$ for which its hardness has been proven
+	* If I can reduce $B$ to $A$, and $B$ has been proven to be hard, then also $A$ is hard
+	* This can be proven by contradiction: If $A$ was easy, then I can reduce $B$ to an easy problem, but $B$ has been proven to be hard adn so this is absurd
+### Graph coloring
+
+### Traveling salesperson
+
+### 0-1 linear programming
+
+### Boolean satisfiability
+
 % Reviewed
 
 
@@ -3199,13 +3247,6 @@ $$ S[i]=TRUE \iff i \in S' \qquad \mbox{for } i = 1,...,n$$
 
 
 
-
-# Backtracking
-* Try a solution, if it is not good go back and try a different one
-* It can be used for decision and optimization problems
-* These algorithms are usually really expensive, exponential or super-exponential
-	* This is due to the magnitude of the search space
-* It can be recursively or iteratively implemented
 
 
 # Hard problems
