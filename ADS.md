@@ -3408,6 +3408,53 @@ $$ lb(S,i) \leq \phi(S') \qquad \forall \ S'[1...j] \ , j \geq i$$
 * I denote with $S^*$ the best known solution at any given node of the search tree, and with $z^*=\phi(S^*)$ its cost
 * If at any given node the lower bound is higher than $z^*$, I avoid exploring the subtree rooted in that node
 	* This action is called pruning the search tree
+* I assume that the number of choices at step $i$ $C_i$ is bounded by some constant $m$ such that $|C_i| \leq m$ for $i=1,...,n$
+* I assume that computing $lb(S,i)$ costs $O(f(n))$ where $f(n)$ is some function $\mathbb{N} \to \mathbb{N}$
+* With these assumptions, the worst-case time complexity of branch-and-bound is still exponential
+	* At each step $i \in \{1,...,n\}$ I can take $m$ choices, each costing $f(n)$
+	* The total cost is thus $O(m^n f(n))$
+* The actual running time of branch-and-bound depends on a set of conditions
+	* The initial solution adopted, that can be random or come from an heuristic algorithm
+	* The branching factor of the search tree (this is $m$)
+	* How costly it is to compute $lb(S,i)$ and how tight its bound is (this is $f(n)$ and the tightness of the bound influences how much of the tree I can avoid exploring)
+	* The order in which the search tree is visited (pre-order, by levels, by some priority key,...)
+
+\begin{algorithmic}
+\Statex
+\Procedure{BRANCH-BOUND}{$S,\phi,i,n,...$}
+	\State $C =$ \Call{CHOICES}{$S,i,n,...$}
+	\State $z^* = \infty$
+	\For{$c \in C$}
+		\State $S[i] = c$
+		\State $l = lb(S,i)$
+		\If{$l < z^*$}
+			\If{$i < n$}
+				\State \Call{BRANCH-BOUND}{$S,\phi,i+1,n,...$}
+			\ElsIf{$\phi(S) < z^*$}
+				\State $S^* = S$
+				\State $z^* = \phi(S)$
+			\EndIf
+		\EndIf
+	\EndFor
+\EndProcedure
+\Statex
+\end{algorithmic}
+
+* I can use the branch-and-bound approach for the TSP
+* I have $n = \{1,...,n\}$ cities and their distance matrix $D \in \mathbb{R}^{n \times n}$
+* At step $i = 1,...,n$ I have visited $i$ cities $S[1,...,i]$ and I need to decide which one to visit next, $S[i+1]$
+* In order to compute a lower bound $lb(S,i)$ for the TSP I need to consider some parameters
+	* The cost $\alpha$ for reaching $S[1]$ for any city not yet visited $j \not\in S$
+	* The cost $\beta$ for leaving $S[i]$ for reaching any city $j \not \in S$
+	* The cost $\gamma$ of the travel $S[1...i]$ up to the current state
+	* The cost $\delta_j$ for visiting each city $j \not \in S$
+* The above parameters can be computed for $S[1...i]$ as follows
+$$\alpha = min\{D(j,S[1])|j \not\in S\}$$
+$$\beta = min\{D(S[i],j)|j \not\in S\}$$
+$$\gamma = \begin{cases} 0 & \mbox{if }i=1\\ \sum_{j=1}^{i-1} D(S[j],S[j+1]]) & \mbox{otherwise}\end{cases}$$
+$$\delta_j = min_{p,q}\{D(p,j)+D(j,q)|j\not=p\not=q\} \ \forall \ j \not\in S$$
+
+
 
 % Reviewed
 
