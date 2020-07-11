@@ -3430,7 +3430,7 @@ $$ lb(S,i) \leq \phi(S') \qquad \forall \ S'[1...j] \ , j \geq i$$
 		\If{$l < z^*$}
 			\If{$i < n$}
 				\State \Call{BRANCH-BOUND}{$S,\phi,i+1,n,...$}
-			\ElsIf{$\phi(S) < z^*$}
+			\Else
 				\State $S^* = S$
 				\State $z^* = \phi(S)$
 			\EndIf
@@ -3453,6 +3453,40 @@ $$\alpha = min\{D(j,S[1])|j \not\in S\}$$
 $$\beta = min\{D(S[i],j)|j \not\in S\}$$
 $$\gamma = \begin{cases} 0 & \mbox{if }i=1\\ \sum_{j=1}^{i-1} D(S[j],S[j+1]]) & \mbox{otherwise}\end{cases}$$
 $$\delta_j = min_{p,q}\{D(p,j)+D(j,q)|j\not=p\not=q\} \ \forall \ j \not\in S$$
+* Now I can compute the lower bound $lb(S,i)$ as
+$$lb(S,i)=\begin{cases}\gamma+D(S[n],S[1]) & \mbox{if } i=n \\ \gamma+\lceil \frac{\alpha+\beta+\sum_{j\not\in S}d_j}{2} \rceil & \mbox{if } i < n\end{cases}$$
+* The worst-case time complexity of $lb(S,i)$ is $O(n^2)$, since for calculating $\delta_j$ I need to evaluate all the possible pairs of node with one of them not in $S$
+
+\begin{algorithmic}
+\Statex
+\Procedure{BRANCH-BOUND-TSP}{$S,i,n,R,G,D$} \Comment{$R$ is the set of cities not yet visited}
+	\State $C =$ \Call{CHOICES}{$S,i,n,...$}
+	\State $z^* = \infty$
+	\For{$c \in R$}
+		\State $S[i] = c$
+		\State $R = R - \{c\}$
+		\If{$i > 1$}
+			\State $G[i]=G[i-1]+D(S[i-1],S[i])$ \Comment{$G[i]$ is $\gamma$}
+		\EndIf
+		\State compute $\alpha,\beta,delta_j$
+		\If{$i = n$}
+			\State $lb=G[i]+D(S[n],S[1])$
+		\Else
+			\State $lb=G[i]+\lceil (\alpha+\beta+\sum\delta_j)/2 \rceil$
+		\EndIf
+		\If{$lb < z^*$}
+			\If{$i < n$}
+				\State \Call{BRANCH-BOUND-TSP}{$S,i+1,n,R,G,D$}				
+			\Else
+				\State $S^* = S$
+				\State $z^* = lb$
+			\EndIf
+		\EndIf
+		\State $R = R \cup \{c\}$
+	\EndFor
+\EndProcedure
+\Statex
+\end{algorithmic}
 
 
 
