@@ -3400,6 +3400,7 @@ $$ O(m \log n)+O(n)=O(n + m \log n)=O(m \log n) = O(n^2 \log n)$$
 
 ### Branch and bound
 * Branch-and-bound is a more efficient enumeration approach based on avoiding decisions that cannot lead to an optimal solution
+* It was developped by Alisa Land and Alison Dong in 1960
 * Let's assume a minimizazion problem with cost function $\phi(x)$
 	* This is not a restrictive condition since I can apply the same reasoning for maximization problems
 $$ min(\phi(x)) = max(-\phi(x))$$
@@ -3513,14 +3514,14 @@ $$lb(S,i)=\begin{cases}\gamma+D(S[n],S[1]) & \mbox{if } i=n \\ \gamma+\lceil \fr
 	\EndFor
 	\State \Call{SORT}{$G.E$}
 	\For{$(u,v) \in G.E$}
-		\If{$D[u] < 2 \land D[v] < 2 \land$ \Call{FIND-SET}{$u$} $\not=$ \Call{FIND-SET}{$v$}}
+		\If{$D[u] < 2 \land D[v] < 2 \ \land $ \Call{FIND-SET}{$u$} $\not=$ \Call{FIND-SET}{$v$}}
 			\State $S = S \cup \{(u,v)\}$
 			\State $D[u] = D[u] +1$
 			\State $D[v] = D[v] +1$
 			\State \Call{UNION}{$u,v$}
 		\EndIf
 	\EndFor
-	\State $u = 1$
+	\State $u = 1$ \Comment{now I am adding the closing edge}
 	\While{$D[u] \not= 1$} $u = u+1$
 	\EndWhile
 	\State $v = u+1$
@@ -3530,6 +3531,19 @@ $$lb(S,i)=\begin{cases}\gamma+D(S[n],S[1]) & \mbox{if } i=n \\ \gamma+\lceil \fr
 \EndProcedure
 \Statex
 \end{algorithmic}
+
+* The following is instead a local search procedure for the TSP
+	* Let $H$ be a Hamiltonian circuit for the graph $G=(V,E)$
+	* I define its neighborhood $N_2(H)$ as the circuit $H'$ obtained from $H$ by replacing 2 non-consecutive edges $e_1, e_2 \in H$ with the edges $e_1', e_2' \not\in H$ such that $\{e_1,e_2,e_1',e_2'\}$ is an Hamiltonian circuit
+	* We see that $H$ has $n=|V|$ edges and $|N_2(H)|=\frac{n(n-1)}{2}-n$ neighbors
+		* Since we are in a circuit, $n=|V|=|E|$
+		* The number of neighbors is the number of possible pairs of edges in $H$ ($n(n-1)/2$) minus the number of consecutive pairs of edges $n$
+	* Computing $N_2(H)$ costs $O(n^2)$ for a given $H$
+	* I can have an exponential number of local search iterations $N_2(H)$, $N_2(H')$,...
+	* I can generalize $N_2(H)$ to $N_k(H)$, where I replace an arbitrary number $k$ of edges to form the neighborhood of $H$
+	* I am sure to reach a global optimum only when I analyse all the possible neighborhoods of $H$ $\cup_{k=2}^n N_k(H)$
+		* In this way I am effectively performing an exhaustive search!
+	* Experimentally, it can be observed that $N_2(h) \cup N_3(H)$ gives good results, and it has a search space of magnitude $O(n^3)$
 
 % Reviewed
 
