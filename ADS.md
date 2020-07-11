@@ -3488,7 +3488,48 @@ $$lb(S,i)=\begin{cases}\gamma+D(S[n],S[1]) & \mbox{if } i=n \\ \gamma+\lceil \fr
 \Statex
 \end{algorithmic}
 
+### Heuristic algorithms
+* For some hard problems, it is too expensive to find an optimal solution, and an approximation algorithm does not exist
+* In these cases, it is possible to develop a heuristic procedure to search for feasible solutions
+* An heuristic algorithm cannot guarantee that an optimal solution, or even sub-optimal solution under a certain bound, will be found
+	* Nonetheless, the solutions obtained may be useful in practice
+* Heuristic algorithms follow 2 main approaches
+	* Greedy approaches applied when the greedy choice property is NOT repsected
+	* Local search approaches that restrict the search space to a neighbotrhood of a given solution
+* It is possible to devise a greedy heuristic for the TSP
+	* Let $G=(V,E)$ be a complete graph of cities, $S=\emptyset$
+	* Sort $G.E$ according to their weight
+	* For each sorted edge $(u,v) \in G.E$, starting from the one with lowest weight, if both $u$ and $v$ are not saturated in $S$ (they have a degree $< 2$), add the edge $(u,v)$ to the solution $S$
+	* Finally, add to the solution $S$ the edge $(u,v)$ that closes the tour
+	* An implementation of this heursitic using disjoint-sets with path compression and union-by-rank costs $O(n^2 \log n)$ with $n=|V|$
 
+\begin{algorithmic}
+\Statex
+\Procedure{GREEDY-TSP}{$G$}
+	\State $S = \emptyset$
+	\For{$u \in G.V$}
+		\State $D[u]=0$ \Comment{$D[u]$ is the degree of node $u$}
+		\State \Call{MAKE-SET}{$u$}
+	\EndFor
+	\State \Call{SORT}{$G.E$}
+	\For{$(u,v) \in G.E$}
+		\If{$D[u] < 2 \land D[v] < 2 \land$ \Call{FIND-SET}{$u$} $\not=$ \Call{FIND-SET}{$v$}}
+			\State $S = S \cup \{(u,v)\}$
+			\State $D[u] = D[u] +1$
+			\State $D[v] = D[v] +1$
+			\State \Call{UNION}{$u,v$}
+		\EndIf
+	\EndFor
+	\State $u = 1$
+	\While{$D[u] \not= 1$} $u = u+1$
+	\EndWhile
+	\State $v = u+1$
+	\While{$D[v] \not= 1$} $v = v+1$
+	\EndWhile
+	\State \Return $S \cup \{(u,v)\}$
+\EndProcedure
+\Statex
+\end{algorithmic}
 
 % Reviewed
 
