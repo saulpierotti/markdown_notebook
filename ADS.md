@@ -3572,7 +3572,9 @@ $$ p_{i,j} = \begin{cases}+1 & \mbox{if } x_i=y_j\\ -1 & \mbox{if } x_i \not= y_
 * The dynamic programming recurrence relation for the position $A(i,j)$ is
 $$A(i,j) = max\{A(i,j-1)-2,A(i-1,j)-2,A(i-1,j-1)+p_{i,j}\}$$
 * After filling table $A$, the best score for the alignment of $X$ and $Y$ can be retrieved from $A(m,n)$
-* I can also build a bactrack matrix $B \in \{MATCH,UP,LEFT\}^{m\times n}$
+* I can also build a bactrack matrix $B \in \{MATCH,UP,LEFT\}^{m\times n}$ to obtain the alignments themselves
+* The local alignment problem: given the sequences $X = \langle X_1, ..., X_m \rangle$ and $Y = \langle Y_1,...,Y_n \rangle$ over the alphabet $\Sigma$, return the alignment between a substring $\tilde{X}$ of $X$ and a substring $\tilde{Y}$ of $Y$ with maximum score
+
 
 % Reviewed
 
