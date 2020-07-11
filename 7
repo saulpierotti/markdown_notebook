@@ -3257,7 +3257,7 @@ $$\mbox{NP-complete} = \mbox{NP} \cap \mbox{NP-hard}$$
 
 ### Traveling salesperson problem
 * The travelling salesperson problem (TSP): given $n$ cities at a certain distance from each other and given $k \in \mathbb{N}$, is there a tour of lenght $l \leq k$ that visits each city exactly once and returns back to the original city?
-* This is equivalent to the hamiltonian cycle problem: given a weighted completely connected graph $G=(V,E)$ is there a circuit $\pi$ such that each node of the graph is visited exactly once and the last node is connected to the starting node?
+* This is equivalent to the hamiltonian cycle problem: given a weighted connected graph $G=(V,E)$ is there a circuit $\pi$ such that each node of the graph is visited exactly once and the last node is connected to the starting node?
 * The travelling saleseman problem can be formulated with symmetric or asymmetric distances: either $w(u,v)=w(v,u)$ or $w(u,v) \not= w(v,u)$
 
 ### 0-1 linear programming problem
@@ -3268,6 +3268,7 @@ $$\mbox{NP-complete} = \mbox{NP} \cap \mbox{NP-hard}$$
 * A boolean formula is a conjuntive normal form if it is a conjunction of disjunctions of literals, where a literal is a boolean variable or a negated boolean variable 
 $$ \phi = (\lnot a \lor \lnot b \lor \lnot c) \land (v \lor \lnot c) \land (a \lor \lnot b \lor c)$$
 $$ a=b=TRUE, c = FALSE \implies \phi = TRUE \implies \phi \mbox{ is satisfiable}$$
+
 
 ### Some search and verification algorithms
 * The following algorithm is a verifier for the clique problem: it takes in input an instace of the clique problem ($G=(V,E)$, $k \in \mathbb{N}$) and a certificate $S \subseteq V$ for it, and checks if $S$ is indeed a clique of at least $k$ nodes for $G$
@@ -3362,43 +3363,10 @@ $$ a=b=TRUE, c = FALSE \implies \phi = TRUE \implies \phi \mbox{ is satisfiable}
 * Efficiency: I can accept to use a super-polynomial algorithm if I am able to prune the search space to a reasonable leavel (e.g. with branch-and-bound algorithms)
 * Formality: I can design a polynomial time algorithm that I am not able to proove correct, but seems to halt with the right solution (an heuristic algorithm)
 
-### Approximation algorithms
-* An approximation algorithm returns a sub-optimal solution $C$ within a factor $\rho(n)$ from an optimal solution $C^*$, for an input of size $n$
-$$max\left(\frac{C}{C^*},\frac{C^*}{C}\right) \leq \rho(n)$$
-	* Note that this definition applyies to both maximization and minimization problems
-* An algorithm that achieves an approzimation ration $\rho(n)$ is said to be a $\rho(n)$-approximation algorithm
-	* An optimal algorithm produces an 1-approximated solution
+### Approximated $\Delta$-TSP
 * The $\Delta$-TSP problem is a variant of the travelling saleseperson problem enforcing triangle inequalities
 * Given $n$ cities and their distances in a matrix $D$, where $D(i,j) \leq D(i,k)+D(k,j)$ for all $i,j,k \in \{1,...,n\}$, find a minimum-lenght tour $l$ that visits each city exactly once and ends in the first city
 * The optimization version of $\Delta-TSP$ is NP-hard, and also the decision version of this problem (find a $l : |l| \leq k$ for some bound $k$ on the tour lenght) is NP-hard
-* However, the $\Delta$-TSP admits approximation algorithms (not all the NP-hard problems do)
-* An optimal $\Delta-TSP$ tour is a Hamiltonian circuit with minimum weight
-* I can get an approximate Hamiltonian circuit for $G$ by finding a minimum spanning tree $T$ for $G$ and returning a list $H$ of the nodes corresponding to a pre-order traversal of $T$
-	* By removing any single edge from a Hamiltonian circuit $H$ for a graph $G=(V,E)$, I get a spanning tree $T'$ for $G$
-		* This spanning tree is not necessarily a minimum spanning tree
-	* The cost of the spanning tree $T'$ obtained from $H$ is necessarily lower than the cost of $H$ itself, since it is obtained by removing a non-negative edgefrom it
-$$ c(T') \leq c(H)$$
-	* A minimum spanning tree $T$ for $G$ cannot cost more than any other spanning tree $T'$, included the one obtained from an optimal Hamiltonian circuit $H^*$
-$$ c(T) \leq c(T')$$
-	* Thus, by combining the 2 inequalities I get that the cost of a MST $T$ is necessarily lower than the cost of an optimal Hamiltonian circuit $H^*$
-$$ c(T) \leq c(H^*)$$
-	* When I perform a full tree walk $W$ on $T$, the same nodes are returned multiple times with a path that crosses all the edges in $T$ exactly twice
-	* Thus, the cost of the walk is exactly twice the cost of the MST $T$
-$$c(W)=2c(T)$$
-$$c(W)\leq 2c(H^*)$$
-	* Thanks to the triangle inequality, I can remove any repeated node by knowing that I am not increasing the lenght of the tour
-	* The maximal length of a tour $H$ returned by the approximated algorithm is thus at most twice the lenght of an optimal tour
-$$ c(H)= \leq c(H^*)$$
-	* This is thus a 2-approximated algorithm
-* The total time cost of the approximate Hamiltonian circuit is $O(n^2 \log n)$
-	* The cost of finding an MST using Kruskal's algorithm is $O(m \log n)$
-	* The cost of visiting $T$ in pre-order is $O(n)$
-$$ O(m \log n)+O(n)=O(n + m \log n)=O(m \log n) = O(n^2 \log n)$$
-* There are also much better practical approximations for the $\Delta$-TSP problem
-* If $\mbox{P} \not= \mbox{NP}$ there is NO constant-approximation algorithm for the general TSP problem without triangle inequalities
-* For many other problems finding an approximate solution within a constant factor from the optimal solution is itself an NP-hard problem!
-
-### Branch and bound
 
 % Reviewed
 
