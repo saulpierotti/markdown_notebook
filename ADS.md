@@ -3399,6 +3399,15 @@ $$ O(m \log n)+O(n)=O(n + m \log n)=O(m \log n) = O(n^2 \log n)$$
 * For many other problems finding an approximate solution within a constant factor from the optimal solution is itself an NP-hard problem!
 
 ### Branch and bound
+* Branch-and-bound is a more efficient enumeration approach based on avoiding decisions that cannot lead to an optimal solution
+* Let's assume a minimizazion problem with cost function $\phi(x)$
+	* This is not a restrictive condition since I can apply the same reasoning for maximization problems
+$$ min(\phi(x)) = max(-\phi(x))$$
+* I define a function $lb(S,i)$ that gives a lower bound on the cost of every possible solution in $S'[1...j]$ with $j \geq i$ obtainable by extending the solutionm $S[1...i]$ with new decisions
+$$ lb(S,i) \leq \phi(S') \qquad \forall \ S'[1...j] \ , j \geq i$$
+* I denote with $S^*$ the best known solution at any given node of the search tree, and with $z^*=\phi(S^*)$ its cost
+* If at any given node the lower bound is higher than $z^*$, I avoid exploring the subtree rooted in that node
+	* This action is called pruning the search tree
 
 % Reviewed
 
