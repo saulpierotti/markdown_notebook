@@ -3545,6 +3545,35 @@ $$lb(S,i)=\begin{cases}\gamma+D(S[n],S[1]) & \mbox{if } i=n \\ \gamma+\lceil \fr
 		* In this way I am effectively performing an exhaustive search!
 	* Experimentally, it can be observed that $N_2(h) \cup N_3(H)$ gives good results, and it has a search space of magnitude $O(n^3)$
 
+## Sequence comparison and assembly
+* The global alignment problem: given the sequences $X = \langle X_1, ..., X_m \rangle$ and $Y = \langle Y_1,...,Y_n \rangle$ over the alphabet $\Sigma$, return the alignment between $X$ and $Y$ with maximum score
+* Typically, $X$ and $Y$ have similar lenght ($m \approx n$) and they consist of thousand of elements
+* An alignment $X',Y'$ is an insertion of spaces _ in arbitrary positions of $X$ and $Y$ so that the resulting sequences $X'$ and $Y'$
+	* Have the same lenght
+$$ k = |X'| = |Y'|$$
+	* Don't have matching spaces
+$$ X'[i] = Y'[i] \implies X'[i] \not=\_ \qquad \mbox{for } i = 1,...,k$$
+* The pair score $\sigma(x,y)$ for the characters $x,y \in \Sigma$ is defined as
+$$ \sigma(x,y) = \begin{cases}+1 & \mbox{if }x=y\not=\_ \\
+				-1 & \mbox{if }x\not=y \land x \not= \_ \land y \not= \_ \\
+				-2 & \mbox{if } x \not=y \land (x=\_ \lor y=\_)
+\end{cases}$$
+* The overall alignment score is
+$$ \sum_{i=1}^k \sigma(X'[i],Y'[i])$$
+* The global alignment problem has optimal substructure
+* I can use a dynamic programming matrix $A \in \mathbb{Z}?{(m+1) \times (n+1)}$ such that $A(i,j)$ is the score of the best alignment for the prefixes $X_i$ and $X_j$
+	* This score is also called similarity of $X_i$ and $X_j$
+* The matrix $A$ is initialized with initial gaps
+$$A(i,0)= -2i \ \mbox{for } i= 1,...,m$$
+$$A(0,j)= -2j \ \mbox{for } j= 1,...,n$$
+	* I am aligning $X_0=\epsilon$ to $Y_j$ and vice-versa $X_i$ to $Y_0=\epsilon$
+* I define the match score $p_{i,j}$ as
+$$ p_{i,j} = \begin{cases}+1 & \mbox{if } x_i=y_j\\ -1 & \mbox{if } x_i \not= y_j \end{cases}$$
+* The dynamic programming recurrence relation for the position $A(i,j)$ is
+$$A(i,j) = max\{A(i,j-1)-2,A(i-1,j)-2,A(i-1,j-1)+p_{i,j}\}$$
+* After filling table $A$, the best score for the alignment of $X$ and $Y$ can be retrieved from $A(m,n)$
+* I can also build a bactrack matrix $B \in \{MATCH,UP,LEFT\}^{m\times n}$
+
 % Reviewed
 
 ---
