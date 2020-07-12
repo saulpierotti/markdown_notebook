@@ -3752,6 +3752,16 @@ $$ w(X_i,X_j)=|X_i|-\theta(X_i,X_j) \ \forall (X_i,X_j) \in E$$
 * Suffix links connect a node representing the string $a \cdot w$ where $a \in \Sigma$ and $w \in \Sigma^*$ with the only node representing the string $w$
 	* Every node represents the prefix of some suffix, and it has a suffix link that points to another node representing a string of one character less
 	* A suffix link for a leaf (for a suffix!) always points to another leaf, apart for the suffix link of $\$$, which points to the root
+* To find the longest common substring between $S$ and $Q$, I can walk down the $Q$-path and
+	* If there is no edge $(u,v)$ matching the character $Q[i]$, I save the node $u$ and I try to match the character $Q[i]$ starting from the suffix link of $u$
+		* I am searching for another substring of $S$ containing the same characters of the common substring found up to now, except for the first character
+		* I then try to extend it, and if not possible I remove another starting character and try again
+		* If it is not possible to match the character $Q[i]$, I eventually backtrack until the root (I start again from scratch)
+		* If the root does not have any edge matching $Q[i]$, it means that character $Q[i]$ is absent from $S$
+			* If $S,Q \in \Sigma^*$, this is not possible
+	* When $Q$ is exhausted, the longest common substring among $S$ and $Q$ is the deepest of the saved nodes
+	* The cost of finding the longest common substring among $S$ and $Q$ is $O(m)$ when $SuffTrie(S)$ is already available, while it is $O(nm)$ with dynamic programming, with $n=|S|$ and $m=|Q|$
+* In order to build $SuffTrie(S)$, I scan $S$ from left to right and I build $n$ tries $SuffTrie(S_i)$ for each prefix $S_i$ of $S$
 
 
 % Reviewed
