@@ -3710,7 +3710,11 @@ $$ w(X_i,X_j)=|X_i|-\theta(X_i,X_j) \ \forall (X_i,X_j) \in E$$
 		* Chimeras should be recognized and removed from the input pool before the assebmly step
 	* The orientation of each fragment (the strand to which it belongs) is unknown
 		* A fragment $X$ is a substring of the string $Y$ iff the reverse complement of $X$ is a substring of the reverse complement of $Y$
-
+		* In general, given $m$ fragments, I should try all the $2^m$ possible combinations of fragment orientations
+		* In practice, I consider all the fragments and their reverse complement as separate nodes in the overlap graph where $w(X,Y)$ is the score of the semiglobal alignment between $X$ and $Y$
+	* Repetitive sequences and missing regions leads to further assembly problems
+		* A repetitive region can be identified in the overlap graph as a cycle
+		* A missing region can be identified from the fact that the overlap graph is disconnected
 
 
 
