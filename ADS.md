@@ -3704,7 +3704,10 @@ $$ w(X_i,X_j)=|X_i|-\theta(X_i,X_j) \ \forall (X_i,X_j) \in E$$
 * If I decide to admit errors in the strings to assemble, things become more complicated
 	* An error is any substitution, insertion or deletion in the string as compared to the original sequenced genome
 	* Typically we observe a 1-5% error rate next to the end of a fragment
-	* It
+	* It may still be possible to reconstruct the right consensus by using gaps and majority voting, if the coverage is high enough
+	* Base call errors are not the only possible sequencing error
+	* A chimera is a fragment made up of sequences that are not contiguous in the original genome
+		* Chimeras should be recognized and removed from the input pool before the assebmly step
 
 
 
