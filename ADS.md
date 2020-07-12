@@ -3638,6 +3638,22 @@ $$ X_c = argmax_{X_c} \{\sum_{i \in \{1,...,m\}-\{c\}} \sigma(X_c,X_i) | c \in  
 * A scoring system is a pair $(p,g)$ such that
 	* $p: \Sigma \times \Sigma \to \mathbb{R}$ is a function from all the pairs of symbols in an alphabet $\Sigma$ to the real numbers such that for each pair of aligned symbols it returns a score
 	* $g \in \mathbb{R}$ is a (usually negative) constant used for penalizing a gap
+* The total score of an alignment $\alpha$, denoted $score(\alpha)$, os the sum of all the scores for each pair of aligned residues
+$$ score(\alpha) = \sum_{i=1}^n p(X'[i],Y'[i])$$
+* The similarity $sum(X,Y)$ among 2 sequences $X$ and $Y$ is the maximum score achievable among all the possible alignments of $X$ and $Y$
+$$sim(X,Y) = max\{score(\alpha)|\alpha \in \mathbb{A}_{X,Y}\} \qquad \mathbb{A}_{X,Y} \mbox{ is the set of all the possible alignments of $X$ and $Y$}$$
+* $\mathbb{A}_{X,Y}$ has finite dimentions but it is far too big to be enumerated in practice
+
+### Distance
+* A distance $d$ over a set $E$ is a function $d: E \times E \to \mathbb{R}$ such that
+$$d(x,x) = 0 \ \forall \ x \in E$$
+$$d(x,y) > 0 \ \forall \ x\not=y$$
+$$d(x,y) = d(y,x) \ \forall \ x,y \in E$$
+$$d(x,y) \leq d(x,z)+d(z,y) \ \forall \ x,y,z \in E$$
+* The Manhattan distance over $E = \mathbb{R} \times \mathbb{R}$ is defined as
+$$ d((x,y),(x',y')) = |x-x'|+|y-y'|$$
+* The Euclidean distance over $E = \mathbb{R} \times \mathbb{R}$ is defined as
+$$ d((x,y),(x',y')) = \sqrt{(x-x')^2+(y-y')^2}$$
 
 
 % Reviewed
