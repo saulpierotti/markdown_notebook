@@ -3546,6 +3546,8 @@ $$lb(S,i)=\begin{cases}\gamma+D(S[n],S[1]) & \mbox{if } i=n \\ \gamma+\lceil \fr
 	* Experimentally, it can be observed that $N_2(h) \cup N_3(H)$ gives good results, and it has a search space of magnitude $O(n^3)$
 
 ## Sequence comparison and assembly
+
+### Global alignment
 * The global alignment problem: given the sequences $X = \langle X_1, ..., X_m \rangle$ and $Y = \langle Y_1,...,Y_n \rangle$ over the alphabet $\Sigma$, return the alignment between $X$ and $Y$ with maximum score
 * Typically, $X$ and $Y$ have similar lenght ($m \approx n$) and they consist of thousand of elements
 * An alignment $X',Y'$ is an insertion of spaces _ in arbitrary positions of $X$ and $Y$ so that the resulting sequences $X'$ and $Y'$
@@ -3561,7 +3563,7 @@ $$ \sigma(x,y) = \begin{cases}+1 & \mbox{if }x=y\not=\_ \\
 * The overall alignment score is
 $$ \sum_{i=1}^k \sigma(X'[i],Y'[i])$$
 * The global alignment problem has optimal substructure
-* I can use a dynamic programming matrix $A \in \mathbb{Z}?{(m+1) \times (n+1)}$ such that $A(i,j)$ is the score of the best alignment for the prefixes $X_i$ and $X_j$
+* I can use a dynamic programming matrix $A \in \mathbb{Z}^{(m+1) \times (n+1)}$ such that $A(i,j)$ is the score of the best alignment for the prefixes $X_i$ and $X_j$
 	* This score is also called similarity of $X_i$ and $X_j$
 * The matrix $A$ is initialized with initial gaps
 $$A(i,0)= -2i \ \mbox{for } i= 1,...,m$$
@@ -3571,9 +3573,58 @@ $$A(0,j)= -2j \ \mbox{for } j= 1,...,n$$
 $$ p_{i,j} = \begin{cases}+1 & \mbox{if } x_i=y_j\\ -1 & \mbox{if } x_i \not= y_j \end{cases}$$
 * The dynamic programming recurrence relation for the position $A(i,j)$ is
 $$A(i,j) = max\{A(i,j-1)-2,A(i-1,j)-2,A(i-1,j-1)+p_{i,j}\}$$
-* After filling table $A$, the best score for the alignment of $X$ and $Y$ can be retrieved from $A(m,n)$
+* After filling table $A$, the best score for the alignment of $X$ and $Y$ can be retrieved from the last cell in the matrix
+$$BEST=A(m,n)$$
 * I can also build a bactrack matrix $B \in \{MATCH,UP,LEFT\}^{m\times n}$ to obtain the alignments themselves
+
+### Local alignment
 * The local alignment problem: given the sequences $X = \langle X_1, ..., X_m \rangle$ and $Y = \langle Y_1,...,Y_n \rangle$ over the alphabet $\Sigma$, return the alignment between a substring $\tilde{X}$ of $X$ and a substring $\tilde{Y}$ of $Y$ with maximum score
+* As for the global alignment problem, I create a dynamic programming matrix $A \in \mathbb{Z}^{(m+1) \times (n+1)}$ such that $A(i,j)$ is the score of the best alignment for suffixes of prefixes $X_i$ and $X_j$
+* The matrix $A$ is initialized with initial gaps
+$$A(i,0)= 0 \ \mbox{for } i= 1,...,m$$
+$$A(0,j)= 0 \ \mbox{for } j= 1,...,n$$
+* The dynamic programming recurrence relation for the position $A(i,j)$ is
+$$A(i,j) = max\{A(i,j-1)-2,A(i-1,j)-2,A(i-1,j-1)+p_{i,j},0\}$$
+* After filling table $A$, the best score for the alignment of $X$ and $Y$ can be retrieved from the highest cell in the whole matrix
+$$BEST=max_{i,j}(A(i,j))$$
+* I can build a bactrack matrix $B \in \{MATCH,UP,LEFT,END\}^{m\times n}$ to obtain the alignments themselves
+
+### Semiglobal alignment
+* The semiglobal alignment problem is similar to the global alignment problem, but it ingnores the spaces at the beginning and end of $X$ and $Y$
+* The inizialization of $A$ is done as follows
+$$A(i,0)= 0 \ \mbox{for } i= 1,...,m$$
+$$A(0,j)= 0 \ \mbox{for } j= 1,...,n$$
+* Its recurrence equation is identical to that of the global alignment
+$$A(i,j) = max\{A(i,j-1)-2,A(i-1,j)-2,A(i-1,j-1)+p_{i,j}\}$$
+* After filling table $A$, the best score for the alignment of $X$ and $Y$ can be retrieved from the highest value of the last row and column
+$$BEST = max(\{A(i,n)|i=1,...,m\}\cup\{A(m,j)|j=1,...,n\})$$
+
+### Multiple alignment
+* The multiple sequence alignment problem: given $m >1$ sequences $X_1,...,X_m$ having about the same length, return the best alignment among all of them
+* Spaces are inserted at arbitrary locations of the sequences so to make all the sequences of the same length $n \geq max\{|X_i||i=1,...,m\}$
+* Multiple sequence alignment is a generalization of the global alignment problem (where $m=2$)
+* A multiple sequence alignment is evaluated with a multiple scoring function that must be
+	* Independent to the order of the arguments (it should be commutative)
+	* It should reward strongly related fragments
+	* It should penalize spaces and unrelated sequences
+* The sum-of-pairs ($SP$) scoring function is a possible solution consisting in summing the pair scores of all the pairs of symbols in a column of the multiple sequence alignment
+$$SP(S) = \sum_{(x,y) \in S \times S} \sigma(x,y)/2 \qquad S=\{S_1,...,S_m\} \mbox{ is the set of symbols in a column} $$
+	* I am dividing by 2 since for each pair $x,y \in S \times S$ there is also an equal pair $y,x$, and I want to consider its score only once!
+* Finding the best multiple sequence alignment score using the SP score is an NP-hard problem!
+	* I need to score $O(m^2)$ pairs of symbols for each of the $O(n)$ positions in the alignment
+	* Just scoring a given alignment with the SP score has a $O(m^2n)$ running time
+	* If I use dynamic programming I need to calculate $O(n^m)$ cells in the matrix to find the optimal alignment
+	* Each cell requires calculating an SP score for a position plus a constant amount of work for determining which direction to adopt
+	* Calculating the SP score for the position is an $O(m^2)$ problem
+	* Finding an optimal alignment is a superexponential $O(n^mm^2)=O(n^m)$ problem
+
+### Star alignment heuristic
+* I can use the start alignment heuristic for calclulationg multiple sequence alignments
+* Given the sequences $X_1,...,X_m$, I first select a sequence $X_c$ with $c \in \{1,...,m\}$, which represents the center of the star
+* I find then the $m-1$ optimal global alignments between $X_c$ and $X_i$ with $i \in \{1,...,m\}-\{c\}$
+* The star center $X_c$ can be selected in different ways
+	* I can compute the $O(m^2)$ possible pairwise alignments and choose as $X_c$ the sequence that maximizes the sum of scores between itself and any of the other sequences
+$$ X_c = max_{X_c}\{\sum_{i \in \{1,...,m\}-\{c\}} \sigma(X_c,X_i)}$$
 
 
 % Reviewed
