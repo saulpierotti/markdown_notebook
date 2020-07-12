@@ -3666,6 +3666,9 @@ $$ dist(X,Y) = min\{cost(O)|O \in \mathbb{S}_{X,Y}\}$$
 	* $\mathbb{S_{X,Y}}$ is infinite since I can do any number of insertions and deletions on the same character so that the initial and final state of the character are the same
 $$ x \to xa \to xaa \to x\underbrace{a\cdot \cdot \cdot a}_n \to ... \to x\underbrace{a\cdot \cdot \cdot a}_{n-1} \to ... \to xaa \to xa \to x$$
 		* For each $n \in \mathbb{N}$, I can transform $x \to x$ with cost $2*h*n$ by performing $n$ insertions followed by $n$ deletions of a character $a \in \Sigma$
+* The most commonly used edit distance is the Levensthein distance where
+$$\begin{matrix} h=1 \\ \\ c(a,b) =  \begin{cases}0 & \mbox{if } a=b \\ 1 & \mbox{if } a\not=b\end{cases}\end{matrix}$$
+	* Because of its mainstream use, Levensthein distance is sometimes used as a synonim of edit distance
 
 
 % Reviewed
