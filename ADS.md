@@ -3624,7 +3624,9 @@ $$SP(S) = \sum_{(x,y) \in S \times S} \sigma(x,y)/2 \qquad S=\{S_1,...,S_m\} \mb
 * I find then the $m-1$ optimal global alignments between $X_c$ and $X_i$ with $i \in \{1,...,m\}-\{c\}$
 * The star center $X_c$ can be selected in different ways
 	* I can compute the $O(m^2)$ possible pairwise alignments and choose as $X_c$ the sequence that maximizes the sum of scores between itself and any of the other sequences
-$$ X_c = max_{X_c}\{\sum_{i \in \{1,...,m\}-\{c\}} \sigma(X_c,X_i)}$$
+$$ X_c = argmax_{X_c} \{\sum_{i \in \{1,...,m\}-\{c\}} \sigma(X_c,X_i) | c \in  \{1,...,m\} \}$$
+		* The time complexity of this approach is $O(m^2n^2)$ where $n = max\{|X_i| | i = 1,...,m\}$
+		* I am computinf $O(m^2)$ global alignments which cost $O(n^2)$ each
 
 
 % Reviewed
