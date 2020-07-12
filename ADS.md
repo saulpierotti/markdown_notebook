@@ -3669,6 +3669,43 @@ $$ x \to xa \to xaa \to x\underbrace{a\cdot \cdot \cdot a}_n \to ... \to x\under
 * The most commonly used edit distance is the Levensthein distance where
 $$\begin{matrix} h=1 \\ \\ c(a,b) =  \begin{cases}0 & \mbox{if } a=b \\ 1 & \mbox{if } a\not=b\end{cases}\end{matrix}$$
 	* Because of its mainstream use, Levensthein distance is sometimes used as a synonim of edit distance
+* Given a cost measure $(c,h)$ and a constant $M$, it is possible to devise a scoring system $(p,g)$ for a global alignment as
+$$p(a,b) = M - c(a,b)$$
+$$g = -h+M/2$$
+* With such a scoring system and cost measure, I observe that for any pair of sequences $X,Y$
+$$sim(X,Y)+dist(X,Y)=\frac{M(|X|+|Y|)}{2}$$
+* This means that similarity and distance are interchangable: I can compute the distance from the similarity and vice-versa
+* For the Levensthein distance, if I choose $M=0$ such that a match has score 0, a mismatch has score -1, and a gap has score -1, or I can choose $M=2$ such that a match has score 2, a mismatch has score 1, and a gap has score 0
+* The choice of a constant $M'\not=M$ does not affect which alignment has an optimal score among 2 sequences, but it affects its score, such that $S'\not=S$ but $S' \propto S$
+$$S=\frac{|X|+|Y|}{2}(M-M')+S'$$
+	* Note that this holds only for global alignments!
+
+### Sequence assembly and shortest common superstring
+* Sequence assembly is the act of assebling fragments of DNA obtained from a sequencer in order to reconstruct a genome
+* A multiple sequence alignment can be used to assemble sequences
+* The shortest common superstring (SCS) problem is a simplified version of the sequence assembly problem that does not take into accounts errors into the sequenced fragments
+* The SCS problem takes in input $m > 1$ sequences $X_1,...,X_m$ and returns the shortest string $X$ which is a superstring of each $X_i$ for $i=1,..,m$
+	* For $X$ to be superstring of $X_i$, $X_i$ must be a substring of $X$
+* If $m$ is bounded by a constant, then the time complexity of the SCS problem is $O(n^m)$ using a dynamic programming approach where $n=max\{|X_i||i=1,...,m\}$
+	* For an arbitrary number $m$ of sequences, the SCS problem is NP-hard
+* SCS can be reduced to the TSP by creating an overlap graph
+	* Let $X = x_1, \cdot \cdot \cdot x_m$ and $Y = y_1, \cdot \cdot \cdot y_n$ be 2 sequences
+	* I define their overlap $\theta(X,Y)$ as the maximum number of characters $k$ such that the k-suffix of $X$ is equal to the k-prefix of $Y$
+$$ \theta(X,Y)=max\{k|x_{m-k+1}x_{m-k+2}\cdot \cdot \cdot x_m = y_1y_2 \cdot \cdot \cdot y_k\}$$
+	* An overlap graph for the strings $X_1,...,X_m$ is a weighted, directed and complete graph $G=(V,E)$ with weight function $w$ such that each string is a vertex and the weight of each edge is the difference among the length of the first sequence it connects and the overlap of the connected sequences
+$$ V =\{X_1,...,X_m\}$$
+$$ w(X_i,X_j)=|X_i|-\theta(X_i,X_j) \ \forall (X_i,X_j) \in E$$
+* Let $X_1,...,X_m$ be $m$ input sequences where no sequence is a substring of another (otherwise we just ignore it)
+	* I can find the SCS for $X_1,...,X_m$ by solving the TSP for the corresponding overlap graph
+	* Once I find an Hamiltonian path on the overlap graph, I can reconstruct the alignment by aligning without gaps the suffix of any sequence in the path with the prefix of the next sequence
+* The transformation of the SCS problem into the TSP is a polynomial-time reduction
+	* This proves that the TSP is at least has hard as the SCS probelm, not the opposite
+* Since besides being NP-hard the SCS problem is also NP (it can be verified in polynomial time), the SCS problem is NP-complete
+* If I decide to admit errors in the strings to assemble, things become more complicated
+	* An error is any substitution, insertion or deletion in the string as compared to the original sequenced genome
+	* Typically we observe a 1-5% error rate next to the end of a fragment
+	* It
+
 
 
 % Reviewed
