@@ -3770,16 +3770,17 @@ $$ w(X_i,X_j)=|X_i|-\theta(X_i,X_j) \ \forall (X_i,X_j) \in E$$
 		* Follow the suffix link of $CurrentSuffix$ and set $CurrentSuffix$ to it
 			* The suffix link of the longest suffix in $SuffTrie(S_{i-1})$ is the second longest suffix in it, and so on
 		* Set the suffix link of the previous new node to the node you will create at the next iteration
-	* Set the suffix link of the last new node added to the root if I terminated because I reached the root, or to the already existing node if I terminated because the current node has already an outgoing edge labeled $S[i]$
+	* Make the sSet tuffix link of the last new node added to point to
+		* The root if I terminated because I reached the root
+		* The already existing node if I terminated because the current node has already an outgoing edge labeled $S[i]$
 * The number of nodes in a suffix trie is not necessarily linear: it is $O(n^2)$ with $n=|S|$
 	* Let $S = \underbrace{a \cdot ... \cdot a}_{n/2}\cdot \underbrace{b \cdot ... \cdot b}_{n/2}$
-* Its suffix trie is composed of
-	* The root
-	* A path of $n/2$ nodes all labeled with $a$
-		* This path does not lead to a leaf since $a$ is not a suffix of $S$
-	* $n/2+1$ paths which are labeled with only $b$, each containing $n/2$ nodes
-		* All of these paths end in a leaf, since $b$ is a suffix for $S$
-		* There is 1 such path starting from the root, and 1 for each of the nodes in the path containing all $a$
+	* Its suffix trie is composed of the root and
+		* A path of $n/2$ nodes all labeled with $a$
+			* This path does not lead to a leaf since $a$ is not a suffix of $S$
+		* $n/2+1$ paths which are labeled with only $b$, each containing $n/2$ nodes
+			* All of these paths end in a leaf, since $b$ is a suffix for $S$
+			* There is 1 such path starting from the root, and 1 for each of the nodes in the path containing all $a$
 
 ### Suffix tree
 
