@@ -3717,6 +3717,41 @@ $$ w(X_i,X_j)=|X_i|-\theta(X_i,X_j) \ \forall (X_i,X_j) \in E$$
 		* A repetitive region can be identified in the overlap graph as a cycle
 		* A missing region can be identified from the fact that the overlap graph is disconnected
 
+## Suffix tries, trees, and arrays
+* In many applications we need to store efficiently a long, known, and fixed string $S$ over an alphabet $\Sigma$
+	* For example, a genome to which I want to align some reads
+* I can preprocess $S$ in such a way to facilitate future queries over $S$
+* Given a string $Q \in \Sigma^* : |Q| << |S|$ common queries that I may want to answer are
+	* Is $Q$ a substring of $S$?
+	* Is $Q$ a subsequence of $S$?
+	* How many times deos $Q$ occurr in $S$?
+	* What is the longest common substring of $Q$ and $S$?
+	* What is the longest common subsequence of $Q$ and $S$?
+	* What is the best approximation of $Q$ in $S$?
+* Other queries are possible that do not depend on any query $Q$
+	* What is the longest repeat in $S$?
+
+### Suffix trie
+* A suffix trie is a space-efficient tree used for storing strings in such a way to facilitate the processing of common query types
+* Given a string $S \in \Sigma^*$ ending with a special final symbol $\$$, a suffix trie for it is a tree $SuffTrie(S)$ such that
+	* Each edge corresponds to a character in $\Sigma$, the same character can correspond to many edges
+	* Any edge from a node to a leaf is labelled with the special character $\$$
+	* Every path from the root to a leaf represents a suffix of $S$
+	* Every suffix of $S$ is represented by some path from the root to a leaf
+	* Suffixes with the same prefix share a common path corresponding to that prefix
+* The utility of a suffix trie is based on the fact that any substring of any string $S$ is a prefix of some suffix of $S$ itself
+* To find if $Q$ is a substring of $S$ using a suffix trie I follow the path in $SuffTrie(S)$ given by $Q$
+	* I am looking for a suffix of $S$ starting with $Q$
+	* If I am able to match all the characters of $Q$ in a path down the tree, $Q$ is a substring of $S$, otherwise it is not
+	* The worst-case time complexity is $O(m)$, where $m=|Q|$, and it does not depend on the size of $S$
+* To understand if $Q$ is a suffix of $S$ I can follow the $Q$-path in $SuffTrie(S)$ and, if the path ends in a leaf the answer is yes, otherwise no
+* To count the occurrences of $Q$ is $S$ I can follow the $Q$-path in $SuffTrie(S)$ and count the number of leaves in the subtree rooted in the node where the $Q$-path terminates
+	* I am counting how many suffixes of $S$ start with $Q$
+* To find the longest repeat in $S$ I can find the deepest node having at least 2 leaves in its subtree
+* To find the lexicographically smallest suffix of $S$ I can start from the root and follow always the character with smallest alphabetical order until the special character $\$$ is found
+* Suffix links connect a node representing the string $a \cdot w$ where $a \in \Sigma$ and $w \in \Sigma^*$ with the only node representing the string $w$
+	* Every node represents the prefix of some suffix, and it has a suffix link that points to another node representing a string of one character less
+	* A suffix link for a leaf (for a suffix!) always points to another leaf, apart for the suffix link of $\$$, which points to the root
 
 
 % Reviewed
