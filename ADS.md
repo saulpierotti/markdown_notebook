@@ -3634,7 +3634,10 @@ $$ X_c = argmax_{X_c} \{\sum_{i \in \{1,...,m\}-\{c\}} \sigma(X_c,X_i) | c \in  
 ### Similarity
 * Similarity is a metric based on sequence alignments
 * An alignment $\alpha$ between 2 sequences $X,Y$ over some alphabet $\Sigma$ is a pair $(X',Y')$ such that $|X'|=|Y'|$, $X'$ and $Y'$ are obtained by optionally adding $\_$ in $X$ and/or $Y$, and if $X'[i]=Y'[i] \implies X'[i] \not= \_ \ \mbox{for } i=1,...,k$
-	* We say that $X'[i]$ and $Y'[i]$ are aligned under $\alpha$
+	* We say that the symbols $X'[i]$ and $Y'[i]$ are aligned under $\alpha$
+* A scoring system is a pair $(p,g)$ such that
+	* $p: \Sigma \times \Sigma \to \mathbb{R}$ is a function from all the pairs of symbols in an alphabet $\Sigma$ to the real numbers such that for each pair of aligned symbols it returns a score
+	* $g \in \mathbb{R}$ is a (usually negative) constant used for penalizing a gap
 
 
 % Reviewed
