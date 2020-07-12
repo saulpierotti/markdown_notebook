@@ -3762,7 +3762,16 @@ $$ w(X_i,X_j)=|X_i|-\theta(X_i,X_j) \ \forall (X_i,X_j) \in E$$
 	* When $Q$ is exhausted, the longest common substring among $S$ and $Q$ is the deepest of the saved nodes
 	* The cost of finding the longest common substring among $S$ and $Q$ is $O(m)$ when $SuffTrie(S)$ is already available, while it is $O(nm)$ with dynamic programming, with $n=|S|$ and $m=|Q|$
 * In order to build $SuffTrie(S)$, I scan $S$ from left to right and I build $n$ tries $SuffTrie(S_i)$ for each prefix $S_i$ of $S$
+* To get $SuffTrie(S_i)$ from $SuffTrie(S_{i-1})$ I add $S[i]$ to ALL of the suffixes of $S_{i-1}$
+	* Let $CurrentSuffix$ be the longest suffix in $SuffTrie(S_{i-1})$
+	* Add a child labeled $S[i]$ to $CurrentSuffix$
+	* Follow the suffix link to set $CurrentSuffix$ to the next longest suffix in $SuffTrie(S_{i-1})$
 
+### Suffix tree
+
+### Suffix array
+
+### Burrows-Wheeler transform
 
 % Reviewed
 
