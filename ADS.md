@@ -3669,6 +3669,7 @@ $$ x \to xa \to xaa \to x\underbrace{a\cdot \cdot \cdot a}_n \to ... \to x\under
 * The most commonly used edit distance is the Levensthein distance where
 $$\begin{matrix} h=1 \\ \\ c(a,b) =  \begin{cases}0 & \mbox{if } a=b \\ 1 & \mbox{if } a\not=b\end{cases}\end{matrix}$$
 	* Because of its mainstream use, Levensthein distance is sometimes used as a synonim of edit distance
+	* It was first described by the Russian scientist Vladimir I. Levensthein in 1965
 * Given a cost measure $(c,h)$ and a constant $M$, it is possible to devise a scoring system $(p,g)$ for a global alignment as
 $$p(a,b) = M - c(a,b)$$
 $$g = -h+M/2$$
