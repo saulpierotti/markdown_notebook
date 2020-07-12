@@ -3708,6 +3708,9 @@ $$ w(X_i,X_j)=|X_i|-\theta(X_i,X_j) \ \forall (X_i,X_j) \in E$$
 	* Base call errors are not the only possible sequencing error
 	* A chimera is a fragment made up of sequences that are not contiguous in the original genome
 		* Chimeras should be recognized and removed from the input pool before the assebmly step
+	* The orientation of each fragment (the strand to which it belongs) is unknown
+		* A fragment $X$ is a substring of the string $Y$ iff the reverse complement of $X$ is a substring of the reverse complement of $Y$
+
 
 
 
