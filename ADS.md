@@ -3654,6 +3654,18 @@ $$d(x,y) \leq d(x,z)+d(z,y) \ \forall \ x,y,z \in E$$
 $$ d((x,y),(x',y')) = |x-x'|+|y-y'|$$
 * The Euclidean distance over $E = \mathbb{R} \times \mathbb{R}$ is defined as
 $$ d((x,y),(x',y')) = \sqrt{(x-x')^2+(y-y')^2}$$
+* It is possible to define also a distance over strings, where $E = \Sigma^*$
+* The edit distance $dist(X,Y)$ is the minimum number of edit operations needed to transfrom a string $X$ into a string $Y$
+	* Edit operations are substitutions, insertions and deletions of symbols
+* I can assign a cost to each edit operation: a cost measure is a pair $(c,h)$ where $c : \Sigma \times \Sigma \to \mathbb{R}$ is a distance over each possible pair of symbols in the alphabet $\Sigma$ and $h > 0$ is the cost of inserting or deleting a symbol
+* If I have $k > 0$ edit operations $O = \langle o_1,...,o_k \rangle$ the total cost $cost(O)$ is the sum of all the individual costs $o_1,...o_k$
+$$ cost(O) = \sum_{i=1}^k o_i$$
+* The edit distance $dist(X,Y)$ is formally defined as
+$$ dist(X,Y) = min\{cost(O)|O \in \mathbb{S}_{X,Y}\}$$
+	* $\mathbb{S_{X,Y}}$ is the set of all the possible series of operations that can transform the sequence $X$ into the sequence $Y$
+	* $\mathbb{S_{X,Y}}$ is infinite since I can do any number of insertions and deletions on the same character so that the initial and final state of the character are the same
+$$ x \to xa \to xaa \to x\underbrace{a\cdot \cdot \cdot a}_n \to ... \to x\underbrace{a\cdot \cdot \cdot a}_{n-1} \to ... \to xaa \to xa \to x$$
+		* For each $n \in \mathbb{N}$, I can transform $x \to x$ with cost $2*h*n$ by performing $n$ insertions followed by $n$ deletions of a character $a \in \Sigma$
 
 
 % Reviewed
