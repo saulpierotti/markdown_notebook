@@ -3622,11 +3622,19 @@ $$SP(S) = \sum_{(x,y) \in S \times S} \sigma(x,y)/2 \qquad S=\{S_1,...,S_m\} \mb
 * I can use the start alignment heuristic for calclulationg multiple sequence alignments
 * Given the sequences $X_1,...,X_m$, I first select a sequence $X_c$ with $c \in \{1,...,m\}$, which represents the center of the star
 * I find then the $m-1$ optimal global alignments between $X_c$ and $X_i$ with $i \in \{1,...,m\}-\{c\}$
-* The star center $X_c$ can be selected in different ways
-	* I can compute the $O(m^2)$ possible pairwise alignments and choose as $X_c$ the sequence that maximizes the sum of scores between itself and any of the other sequences
+* To select the star center $X_c$ I can compute the $O(m^2)$ possible pairwise alignments and choose as $X_c$ the sequence that maximizes the sum of scores between itself and any of the other sequences
 $$ X_c = argmax_{X_c} \{\sum_{i \in \{1,...,m\}-\{c\}} \sigma(X_c,X_i) | c \in  \{1,...,m\} \}$$
-		* The time complexity of this approach is $O(m^2n^2)$ where $n = max\{|X_i| | i = 1,...,m\}$
-		* I am computinf $O(m^2)$ global alignments which cost $O(n^2)$ each
+	* The time complexity of this approach is $O(m^2n^2)$ where $n = max\{|X_i| | i = 1,...,m\}$
+	* I am computinf $O(m^2)$ global alignments which cost $O(n^2)$ each
+* After I have selected a star center $X_c$, I align all the $X_i \not=X_c$ to it with a global alignment
+	* Once gaps are introduced in $X_c$, they are never removed for avoiding altering other alignments
+* After having performed all the alignments, I add padding gaps to the aligned sequences to bring all of them to the same length
+* There is no guarantee of optimality for the star alignment heuristic, but in practice I tend to get good sub-optimal results
+
+### Similarity
+* Similarity is a metric based on sequence alignments
+* An alignment $\alpha$ between 2 sequences $X,Y$ over some alphabet $\Sigma$ is a pair $(X',Y')$ such that $|X'|=|Y'|$, $X'$ and $Y'$ are obtained by optionally adding $\_$ in $X$ and/or $Y$, and if $X'[i]=Y'[i] \implies X'[i] \not= \_ \ \mbox{for } i=1,...,k$
+	* We say that $X'[i]$ and $Y'[i]$ are aligned under $\alpha$
 
 
 % Reviewed
