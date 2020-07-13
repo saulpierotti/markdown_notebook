@@ -3885,8 +3885,25 @@ $$S'=abc\$ \implies S=abc$$
 * Let $M$ be the BWT matrix for a string $S$, let $n=|S|$, and let $F$ and $L$ be the first and last column of $M$, repsectively
 * An LF mapping for $S$ is defined as an array $LF$ such that $LF[i]$ is the position of charachter $L[i]$ in the array $F$ for $i=1,...,n+1$
 	* $LF$ is thus a permutation of $\{1,...,n+1\}$
+	* For $S=abc$ thus
+$$L=\begin{bmatrix}c \\ \$ \\ a \\ b \end{bmatrix}, \ F=\begin{bmatrix}\$ \\ a \\ b \\ c \end{bmatrix} \implies LF=[4,1,2,3]$$
+* Let $R_S$ be a function such that $R_S(i)$ is the number of occurrences of the character $S[i]$ in the $i$-th prefix of $S$, $S_i$
+	* $R_S(i)$ is called as the rank of character $S[i]$ in $S$
+	* I can write an array $R_S$ such that $R_S[i]=R_S(i)$
+	* For $S=abc$, thus the array $R_S$ is
+$$ S_1 = \epsilon, S_2 = a, S_3 = ab \implies R_S(1)=0, R_S(2)=0, R_S(3)=0 \implies R_S=[0,0,0]$$
+* An LF mapping repsects the LF property: the rank of every position $i=1,...,n+1$ is preserved
+$$R_L(i)=R_F(LF[i]) \ \forall \ i=1,...,n+1$$
+	* For $S=abc$ we observe that
+$$S=abc, L=c\$ab, F=\$abc \implies R_L=[0,0,0,0], R_F=[0,0,0,0], LF=[4,1,2,3]$$
+* The LF mapping can be used for counting the occurrences of a query string $Q$ into the string $S$
+	* I scan $Q$ right-to-left (from the end)
+	* I start thus from the last character of $Q$ and I see to which positions does it match in $F$, selecting a range $F[i...j]$ of matches
+	* I then use these indeces in L, selecting $L[i...j]$
+	* I procede with the second last character of $Q$, and I search for occurrences of it in $L[i...j]$, and I denote the matches as the range $L[x...y]$
+	* I follow the range and select the values $LF[x...y]$
+	* The size of the range $y-x$ denotes the number of occurrences of $Q$ in $S$
 
-% Reviewed
 
 ---
 
