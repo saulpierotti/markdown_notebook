@@ -3833,13 +3833,25 @@ $$X \preceq Y \iff \exists k \in \{0,...,min(m,n)\} : X_k=Y_k \land (X[k+1] \pre
 		* Each leaf in a suffix tree is labelled with the start position of the corresponding suffix
 	* I can perform a in-order visit of this suffix tree and just output the labels of the leaves that I encounter, putting them in the suffix array
 * I can also obtain a suffix array in $O(n)$ without building a suffix tree, using the Skew algorithm designed in 2003 by Karkainnen and Sanders
-	* This algorithm is based on a skewed (2/3 to 1/3) divide-et-impera approach on radix-sort
+	* This algorithm is based on a skewed (2/3 to 1/3) divide-et-impera approach and on radix-sort
 	* I assume that the string $S$ starts from position 0 instead of from position 1
-	* I use the special symbol $\$$ to pad $S$, if needed
+	* I use the special symbol $\$$ to pad $S$, if needed, so that $|S| \mod 3 = 0$
 	* I divide the suffixes of $S$ into 3 groups: the ones starting in position $i=0,3k,...$ with $k \in \mathbb{N}$, the ones starting in position $i=1,3k+1,...$, and the ones starting in position $i=2,3k+2,...$
-	* I build the suffix array $SA^{1,2}$ for suffixes starting at position $i : i \mod 3 \not = 0$ (all the suffixes not belonging to the first group)
+	* I build the suffix array $SA^{1,2}$ for suffixes starting at position $i : i \mod 3 \not = 0$ (all the suffixes NOT belonging to the first group)
+	* I build the suffix array $SA^0$ for suffixes starting at position $i : i \mod 3 = 0$ (all the suffixes belonging to the first group)
+	* I use radix-sort to sort in linear time the sub-arrays
+	* I build the suffix array $SA$ for $S$ by merging $SA^{1,2}$ and $SA^0$
 
 ### Burrows-Wheeler transform
+* In some situations transforming the input string $S$ can be convenient
+	* $n=|S|$ could be huge (millions of characters)
+	* Storing a string $S \in \Sigma^*$ with length $n$ requires $n \log |\Sigma|$ bits
+	* A suffix array requires thus $O(n \log n)+n \log |\Sigma|$ bits
+		* The index array is composed of $n$ symbols $x_i$ with $x:i \in \{1,...,n\}$, so it requires $n \log n$ bits for its representation
+		* Note that typically $n >> |\Sigma|$, $n$ can be in the order of $2^{32}$ while $|\Sigma|$ can be on the order of $2^8=256$
+	* I can use data compression algorithms to save space
+* The Burrows-Wheeler Transform (BWT) is NOT a compression algorithm, but it prepares the compression of $S$ by transforming it in the string $BWT(S)$
+	* The goal of BWT is to find a string $BWT(S)$ that maximizes the number of repeated characters in it, so to facilitate its subsequent compression
 
 % Reviewed
 
