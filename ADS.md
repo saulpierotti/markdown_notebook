@@ -5,6 +5,7 @@
 ---
 header-includes:
 	\usepackage{algpseudocode}
+	\usepackage{mathtools}
 	\MakeRobust{\Call}
 ---
 
@@ -3852,6 +3853,31 @@ $$X \preceq Y \iff \exists k \in \{0,...,min(m,n)\} : X_k=Y_k \land (X[k+1] \pre
 	* I can use data compression algorithms to save space
 * The Burrows-Wheeler Transform (BWT) is NOT a compression algorithm, but it prepares the compression of $S$ by transforming it in the string $BWT(S)$
 	* The goal of BWT is to find a string $BWT(S)$ that maximizes the number of repeated characters in it, so to facilitate its subsequent compression
+* I first produce a string $S' = S \cdot \$$, with $\$ \preceq a \ \forall \ a \in \Sigma$
+* I then generate all the cyclic shifts of $S'$ and sort them lexicographically forming a matrix $M \in \Sigma^{(n+1)\times (n+1)}$
+	* The matrix $M$ for $S=abc$ is then
+$$M(abc)=\begin{bmatrix}\$abc \\ abc\$ \\ bc\$a \\ c\$ab \end{bmatrix}$$
+* I select as $BWT(S)$ the last column of the matrix $M$
+	* Each position in $S'$ is appearing in the last column of $M$ once and only once
+	* $BWT(S)$ for $S=abc$ is thus
+$$ BWT(S) = c\$ab $$
+* The BWT transformation costs $O(n^2 \log n)$ since I need to perform $O(n\log n)$ lexicographic comparisons, each costing $O(n)$
+* The BWT transformation is reversible: I can get back $S$ from $BWT(S)$
+	* I can compute $BWT^{-1}(BWT(S))=S$ by creating a matrix $B \in \Sigma^{(n+1)\times (n+1)}$
+	* I start from $B = \emptyset$ and I proceed one column at time
+	* I put the string $BWT(S)$ as the first column of $B$ and I sort it lexicographically
+	* I repeat $n+1$ times by prepending $BWT(S)$ to the partial $B$ matrix and sorting the result lexicographically
+	* For $S=abc$ and $BWT(S)=c\$ab$ the $B$ matrix is thus built as follows
+$$
+\begin{bmatrix} c \\ \$ \\ a \\ b \end{bmatrix} \xrightarrow{\text{sort}}
+\begin{bmatrix} \$ \\ a \\ b \\ c \end{bmatrix} \xrightarrow{\text{prepend}}
+\begin{bmatrix} c\$ \\ \$a \\ ab \\ bc \end{bmatrix} \xrightarrow{\text{sort}}
+\begin{bmatrix} \$a \\ ab \\ bc \\ c\$ \end{bmatrix} \xrightarrow{\text{prepend}}
+\begin{bmatrix} c\$a \\ \$ab \\ abc \\ bc\$ \end{bmatrix} \xrightarrow{\text{sort}}
+\begin{bmatrix} \$ab \\ abc \\ bc\$ \\ c\$a \end{bmatrix} \xrightarrow{\text{prepend}}
+\begin{bmatrix} c\$ab \\ \$abc \\ abc\$ \\ bc\$a \end{bmatrix} \xrightarrow{\text{sort}}
+\begin{bmatrix} \$abc \\ abc\$ \\ bc\$a \\ c\$ab \end{bmatrix} \xrightarrow{\text{sort}}
+$$
 
 % Reviewed
 
