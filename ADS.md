@@ -3786,14 +3786,34 @@ $$1+n/2+(n/2+1)(n/2) = 1+n+n^2/4 = O(1)+O(n)+O(n^2)=O(n^2)$$
 
 ### Suffix tree
 * Suffix trees improve the space efficiency of suffix tries by compressing the paths without choices and representing suffixes with a range $i:j$ corresponding to the substring $S[i...j]$
-* A compressed representation in a suffix tree takes $O(n)$ space, compared to the $O(n^2)$ space taken by the uncompressed suffix trie
+	* If a path does not involve any real choice, there is no need to keep additional nodes, but I can represent that path with a single edge
+	* This edge will correspond not to a symbol $S[i]$ but to a range of forced choices $S[i...j]$
+* A compressed representation of a string $S$ in a suffix tree takes $O(n)$ space with $n=|S|$, compared to the $O(n^2)$ space taken by the uncompressed suffix trie
 	* There are $n$ leaves, corresponding to each starting position of a suffix in $S$
 	* Each internal node has $k$ children, with $2 \leq k \leq n$
 		* $k \geq 2$ since If there is just 1 in choice in a position I remove the node
-		* The number of internal nodes is thus $O(k) \leq O(n)$
-	* Each edge in the tree takes constant space, if I assume that each range is encoded by $O(1)$ bitys
+	* The number of internal nodes (and thus of edges) is $O(k) = O(n)$
+		* The number of internal nodes if $k=2$ is at most $n-1$, with $n$ being the number of leaves
+		* Base case: for 2 leaves I have 1 internal node, and $2-1=1 \geq 1$
+		* Inductive step: I want to prove that a binary tree with $n$ leaves has exactly $n-1$ internal nodes
+			* A binary tree of $n$ leaves is made up of a root and
+			* A left binary subtree of the root with $k$ leaves
+			* A right binary subtree of the root with $n-k$ leaves
+			* By induction, the left binary subtree has $k-1$ internal nodes, and the right binary subtree has $n-k-1$ internal nodes
+		* Thus, a binary tree of $n$ leaves has $n-1$ internal nodes
+$$(k-1)+(n-k-1)+1 = n-k+k-1-1+1 = n-1 = O(n)$$
+		* If $k > 2$, the number of internal nodes is smaller than if $k=2$, so the number of internal nodes is $O(n)$ in any case
+	* The total number of nodes (leaves and internal nodes) in a suffix tree $T$ is thus
+$$ |T| \leq n+n-1 = 2n-1 = O(n)$$
+	* Each edge in the tree takes constant space, if I assume that each range is encoded by $O(1)$ bits
+* A suffix tree can be built in $O(n)$ time using the algorithm of the Finnish scientist Esko J. Ukkonen (1995)
+	* It works similarly to the algorithm for building a suffix trie, but with some additional tricks
+	* The hidden constant for this algorithm is big: I need about 20 bytes per character of $S$
+		* For a 10 Gbp genome I need around 200 Gb of storage space!
 
 ### Suffix array
+* A suffix array is a more efficient way to store the suffixes of a string $S$ in $O(n)$ space
+* A suffix array has the same capabilities of a suffix tree, but operations on it are a bit slower
 
 ### Burrows-Wheeler transform
 
