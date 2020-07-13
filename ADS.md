@@ -3876,8 +3876,15 @@ $$
 \begin{bmatrix} c\$a \\ \$ab \\ abc \\ bc\$ \end{bmatrix} \xrightarrow{\text{sort}}
 \begin{bmatrix} \$ab \\ abc \\ bc\$ \\ c\$a \end{bmatrix} \xrightarrow{\text{prepend}}
 \begin{bmatrix} c\$ab \\ \$abc \\ abc\$ \\ bc\$a \end{bmatrix} \xrightarrow{\text{sort}}
-\begin{bmatrix} \$abc \\ abc\$ \\ bc\$a \\ c\$ab \end{bmatrix} \xrightarrow{\text{sort}}
+\begin{bmatrix} \$abc \\ abc\$ \\ bc\$a \\ c\$ab \end{bmatrix}
 $$
+	* Finally, I return $S'$ as the row of $B$ ending with the special symbol $\$$
+$$S'=abc\$ \implies S=abc$$
+
+### LF mapping
+* Let $M$ be the BWT matrix for a string $S$, let $n=|S|$, and let $F$ and $L$ be the first and last column of $M$, repsectively
+* An LF mapping for $S$ is defined as an array $LF$ such that $LF[i]$ is the position of charachter $L[i]$ in the array $F$ for $i=1,...,n+1$
+	* $LF$ is thus a permutation of $\{1,...,n+1\}$
 
 % Reviewed
 
