@@ -2566,7 +2566,7 @@ $$ subseq(X,Y) \iff \exists \ i_1,...,i_k \ : \ \forall \ j \in \{1,...,k\} \ :\
 * For $X$ to be a subsequence of $Y$, the elements ion $X$ must appear in the same order as the elements in $Y$, but they are NOT required to be contiguous in $Y$
 * The empty sequence $\langle \ \rangle$ is a subsequence of every sequence
 * A string is a sequence of characters drawn from a given alphabet $\Sigma$
-* A string $\langle c_1,...,c_m \rangle\ :\ c_i \in \Sigma$ is conventionally represented as $c_1 \cdot \cdot \cdot c_m$
+* A string $\langle c_1,...,c_m \rangle\ :\ c_i \in \Sigma^*$ is conventionally represented as $c_1 \cdot \cdot \cdot c_m$
 	* The string $\langle h,e,l,l,o \rangle$ is represented as $hello$
 * The empty string is represented with $\epsilon$
 $$ \epsilon = \langle \ \rangle$$
@@ -3814,6 +3814,16 @@ $$ |T| \leq n+n-1 = 2n-1 = O(n)$$
 ### Suffix array
 * A suffix array is a more efficient way to store the suffixes of a string $S$ in $O(n)$ space
 * A suffix array has the same capabilities of a suffix tree, but operations on it are a bit slower
+* The main idea is to sort lexicographically all the suffixes and store their starting indexes into an array
+* I first define a total order $\preceq$ on the characters in the alphabet $\Sigma$
+	* $\preceq$ is a total order because $a \preceq b \lor b \preceq a \quad \forall \ a,b \in \Sigma$
+* I then extend the total order $\preceq$ from single characters to strings: for each $X,Y \in \Sigma^*$, with $m=|X|$ and $n=|Y|$, $X \preceq Y$ iff there is a $k \in \{0,...,min(m,n)\}$ such that $X_k = Y_k$ and $X[k+1] \prec Y[k+1]$ or $k=m$
+$$X \preceq Y \iff \exists k \in \{0,...,min(m,n)\} : X_k=Y_k \land (X[k+1] \prec Y[k+1] \lor k=m)$$
+* The space complexity for suffix arrays is $O(n)$ like for suffix trees, but the hidden constant is much smaller
+	* I just need to store the string $S$ itself and an array of $n$ indexes
+* To search for a query string $Q$ in $S$, I perform a binary search on the index array to find a suffix of $S$ starting with $Q$
+	* It is equivalent to a binary search among numbers (I am just using a $\preceq$ order instead of an $\leq$ order)
+	* The cost of checking $x \leq y$ is $O(1)$, but the worst case complexity for checking whether $X \preceq Y$ is $O(|X|)$ since I may need to check all the characters in $X$
 
 ### Burrows-Wheeler transform
 
