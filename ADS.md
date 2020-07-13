@@ -3781,8 +3781,17 @@ $$ w(X_i,X_j)=|X_i|-\theta(X_i,X_j) \ \forall (X_i,X_j) \in E$$
 		* $n/2+1$ paths which are labeled with only $b$, each containing $n/2$ nodes
 			* All of these paths end in a leaf, since $b$ is a suffix for $S$
 			* There is 1 such path starting from the root, and 1 for each of the nodes in the path containing all $a$
+	* Therefore, the total number of nodes in the suffix trie is
+$$1+n/2+(n/2+1)(n/2) = 1+n+n^2/4 = O(1)+O(n)+O(n^2)=O(n^2)$$
 
 ### Suffix tree
+* Suffix trees improve the space efficiency of suffix tries by compressing the paths without choices and representing suffixes with a range $i:j$ corresponding to the substring $S[i...j]$
+* A compressed representation in a suffix tree takes $O(n)$ space, compared to the $O(n^2)$ space taken by the uncompressed suffix trie
+	* There are $n$ leaves, corresponding to each starting position of a suffix in $S$
+	* Each internal node has $k$ children, with $2 \leq k \leq n$
+		* $k \geq 2$ since If there is just 1 in choice in a position I remove the node
+		* The number of internal nodes is thus $O(k) \leq O(n)$
+	* Each edge in the tree takes constant space, if I assume that each range is encoded by $O(1)$ bitys
 
 ### Suffix array
 
