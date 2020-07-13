@@ -3824,6 +3824,20 @@ $$X \preceq Y \iff \exists k \in \{0,...,min(m,n)\} : X_k=Y_k \land (X[k+1] \pre
 * To search for a query string $Q$ in $S$, I perform a binary search on the index array to find a suffix of $S$ starting with $Q$
 	* It is equivalent to a binary search among numbers (I am just using a $\preceq$ order instead of an $\leq$ order)
 	* The cost of checking $x \leq y$ is $O(1)$, but the worst case complexity for checking whether $X \preceq Y$ is $O(|X|)$ since I may need to check all the characters in $X$
+	* Since I need to perform $O(\log n)$ comparisons in the worst case for a binary search with $n=|S|$, the total worst case time complexity for searching $Q$ in $S$ is $O(m \log n)$ with $m=|Q|$
+		* This compares to a $O(m)$ time complexity using suffix tries or trees
+* I can build a suffix array in $O(n^2 \log n)$ time by sorting the $n$ suffixes with $O(n \log n)$ comparisons (the bound for comparison-based sorting), each costing $O(n)$
+* I can actually do better and build a suffix array in $O(n)$ by exploiting the relationship of suffix arrays with suffix trees
+	* I build a suffix tree in $O(n)$ using the Ukkonnen algorithm such that
+		* The edges leaving a node in a suffix tree are sorted lexicographically by their labels
+		* Each leaf in a suffix tree is labelled with the start position of the corresponding suffix
+	* I can perform a in-order visit of this suffix tree and just output the labels of the leaves that I encounter, putting them in the suffix array
+* I can also obtain a suffix array in $O(n)$ without building a suffix tree, using the Skew algorithm designed in 2003 by Karkainnen and Sanders
+	* This algorithm is based on a skewed (2/3 to 1/3) divide-et-impera approach on radix-sort
+	* I assume that the string $S$ starts from position 0 instead of from position 1
+	* I use the special symbol $\$$ to pad $S$, if needed
+	* I divide the suffixes of $S$ into 3 groups: the ones starting in position $i=0,3k,...$ with $k \in \mathbb{N}$, the ones starting in position $i=1,3k+1,...$, and the ones starting in position $i=2,3k+2,...$
+	* I build the suffix array $SA^{1,2}$ for suffixes starting at position $i : i \mod 3 \not = 0$ (all the suffixes not belonging to the first group)
 
 ### Burrows-Wheeler transform
 
