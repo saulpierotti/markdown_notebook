@@ -3898,7 +3898,11 @@ $$
 \xrightarrow{\text{prepend}}
 \begin{bmatrix} a\$bana \\ na\$ban \\ nana\$b \\ banana \\ \$banan \\ ana\$ba \\ anana\$ \end{bmatrix}
 \xrightarrow{\text{sort}}
-\begin{bmatrix} \$ \\ a \\ a \\ a \\ b \\ n \\ n \end{bmatrix}
+\begin{bmatrix} \$banan \\ a\$bana \\ ana\$ba \\ anana\$ \\ banana \\ na\$ban \\ nana\$b \end{bmatrix}
+\xrightarrow{\text{prepend}}
+\begin{bmatrix} a\$banan \\ na\$bana \\ nana\$ba \\ banana\$ \\ \$banana \\ ana\$ban \\ anana\$b \end{bmatrix}
+\xrightarrow{\text{sort}}
+\begin{bmatrix} \$banana \\ a\$banan \\ ana\$ban \\ anana\$b \\ banana\$ \\ na\$bana \\ nana\$ba \end{bmatrix}
 $$
 	* Finally, I return $S'$ as the row of $B$ ending with the special symbol $\$$
 $$S'=abc\$ \implies S=abc$$
