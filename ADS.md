@@ -4020,6 +4020,8 @@ $$|L[3...4]|=2 \implies 2 \mbox{ occurrences of $Q$ in $S$}$$
 	* If at any point the range has size 0, it means that there are no occurrences of $Q$ in $S$
 * It is possible to find occurrences of $Q$ in $S$ in $=O(m)$ with $m=|Q|$ by calculating the $LF$ array on the fly in $O=(1)$
 	* This approach was developped by Ferragina, Manzini and it uses the FM-index data structure
+	* FM-index is a BWT-based data structure that allows to compress the input while permitting fast substring queries
+	* The FM-index was successfully applied to approximate string matching and sequence alignment problems (bowtie)
 
 ---
 
