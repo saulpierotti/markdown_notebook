@@ -3852,6 +3852,7 @@ $$X \preceq Y \iff \exists k \in \{0,...,min(m,n)\} : X_k=Y_k \land (X[k+1] \pre
 		* Note that typically $n >> |\Sigma|$, $n$ can be in the order of $2^{32}$ while $|\Sigma|$ can be on the order of $2^8=256$
 	* I can use data compression algorithms to save space
 * The Burrows-Wheeler Transform (BWT) is NOT a compression algorithm, but it prepares the compression of $S$ by transforming it in the string $BWT(S)$
+	* It was developped by M. Burrows and D. Wheeler in 1994
 	* The goal of BWT is to find a string $BWT(S)$ that maximizes the number of repeated characters in it, so to facilitate its subsequent compression
 	* The BWT performs a reversible permutation of a string
 * I first produce a string $S' = S \cdot \$$, with $\$ \preceq a \ \forall \ a \in \Sigma$
