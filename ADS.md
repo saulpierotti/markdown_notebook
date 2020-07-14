@@ -3946,11 +3946,39 @@ $$ R_L(5) = 0 \implies R_F(LF[5])=R_F(1)=0$$
 $$ R_L(6) = 1 \implies R_F(LF[6])=R_F(3)=1$$
 $$ R_L(7) = 2 \implies R_F(LF[7])=R_F(4)=2$$
 	* The preservation of ranks is also true for the rank of the symbols in the original string $S$: their original rank is preserved between $L$ and $F$
-	* For $S=banana$ we observe that, ignoring the rank of $\$$ which is always 0 (one and only one occurrence of $\$$ in every possible string)
+	* For $S=banana$ thus we have
 		* Showing the ranks of symbols in $S$ (they are not really stored, but showing them now is useful for keeping track of them)
-$$S=banana,\ R_S = [0,0,0,1,1,2] \implies S=b_0a_0n_0a_1n_1a_2$$
-		* The original ranks in the $M$ matrix
-$$M(S)=\begin{bmatrix}\$b_0a_0n_0a_1n_1a \\ a_2\$b_0a_0n_0a_1n_1 \\ a_1n_1a_2\$b_0a_0n_0 \\ a_0n_0a_1n_1a_2\$b_0 \\ b_0a_0n_0a_1n_1a_2\$ \\ n_1a_2\$b_0a_0n_0a_1 \\ n_0a_1n_1a_2\$b_0a_0 \end{bmatrix}$$
+$$S'=banana\$,\ R_S' = [0,0,0,1,1,2,0] \implies S=b_0a_0n_0a_1n_1a_2\$_0$$
+		* The original ranks in the $M$ matrix and in the $L$ and $F$ arrays
+$$
+M(S)=\begin{bmatrix}
+\$_0b_0a_0n_0a_1n_1a_2 \\
+a_2\$_0b_0a_0n_0a_1n_1 \\
+a_1n_1a_2\$_0b_0a_0n_0 \\
+a_0n_0a_1n_1a_2\$_0b_0 \\
+b_0a_0n_0a_1n_1a_2\$_0 \\
+n_1a_2\$_0b_0a_0n_0a_1 \\
+n_0a_1n_1a_2\$_0b_0a_0
+\end{bmatrix}
+\implies
+L=[a_2n_1n_0b_0\$_0a_1a_0], \ F=[\$_0a_2,a_1,a_0,b_0,n_1,n_0]$$
+$$R_L = [2,1,0,0,0,1,0], \ R_F=[0,2,1,0,0,1,0],\ LF=[2,6,7,5,1,3,4]$$
+$$ R_L(1) = 2 \implies R_F(LF[1])=R_F(2)=2$$
+$$ R_L(2) = 1 \implies R_F(LF[2])=R_F(6)=1$$
+$$ R_L(3) = 0 \implies R_F(LF[3])=R_F(7)=0$$
+$$ R_L(4) = 0 \implies R_F(LF[4])=R_F(5)=0$$
+$$ R_L(5) = 0 \implies R_F(LF[5])=R_F(1)=0$$
+$$ R_L(6) = 1 \implies R_F(LF[6])=R_F(3)=1$$
+$$ R_L(7) = 0 \implies R_F(LF[7])=R_F(4)=0$$
+	* It is easy to see why the LF property holds
+		* Equal characters in the $F$ column of $M$ are sorted according to the characters at their right (called their right context)
+		* Equal characters in the $L$ column of $L$ are sorted according to the charachters at their left (their left context)
+		* Since the $M$ matrix is obtained with rotations of the string $S$, the left context of the characters in $L$ is the right context of the same charachters when they are in $F$
+		* Thus, the order of equal characters is preserved between $F$ and $L$
+* Ranking the characters not according to their occurrence in $S$ but to their occurrence in $F$ is useful
+	* I get a predictable structure of $F$ where characters are sorted (because it is the first column!) and equal characters have ascending rank
+	* Since every character appears in $F$ once, I have a rank for all the characters in the matrix thanks to this property
+	* Thanks to the LF property, also the ranks in $L$ (and so on $BWT(S)$!) will be ascending for equal characters
 
 * An LF mapping can be used for counting the occurrences of a query string $Q$ into the string $S$
 	* I scan $Q$ right-to-left (from the end)
