@@ -3979,6 +3979,26 @@ $$ R_L(7) = 0 \implies R_F(LF[7])=R_F(4)=0$$
 	* I get a predictable structure of $F$ where characters are sorted (because it is the first column!) and equal characters have ascending rank
 	* Since every character appears in $F$ once, I have a rank for all the characters in the matrix thanks to this property
 	* Thanks to the LF property, also the ranks in $L$ (and so on $BWT(S)$!) will be ascending for equal characters
+	* If I want to know the index in $F$ of a character $x_n : x \in \Sigma$ with rank $n$, I just need to add $n$ to the sum of the number of occurreces in $S$ of other characters with lexicographic order smaller than $x$ in $\Sigma$
+$$S'=b_0a_0n_0a_1n_1a_2\$_0$$
+$$index_F(n_1) = num(\$)+num(a)+num(b)+rank(n_1)=1+3+1+1=6$$
+$$F[6]=n_1$$
+* I can use the LF mapping to retrieve $S$ from $BWT(S)$
+	* The first character in $F$ is necessarily $\$$
+	* The character that came before $\$$ in $S'$ (the last character of $S$) is the character in $L[1]$
+		* This is because each row of the $M$ matrix is a rotation of $S'$: the character before $F[1]$ in the rotation is $L[1]$
+	* In the same way I can then take the character in $L[1]$ and find it in $F[LS[1]]$: the second last character of $S$ will be then $L[LS[1]]$
+	* I can proceed like this until I obtain $S$ from $L=BWA(S)$ and $F$
+	* Note that I actually never need $F$ to reconstruct $S$ from $BWA(S)$ in this way: I only need $L=BWA(S)$ and the $LF$ array
+$$S'=b_0a_0n_0a_1n_1a_2\$_0, \ L=[a_2n_1n_0b_0\$_0a_1a_0], \ F=[\$_0a_2,a_1,a_0,b_0,n_1,n_0]$$
+$$LF=[2,6,7,5,1,3,4],\ len(S)=6$$
+$$S[6]=L[1]=a_2$$
+$$S[5]=L[LF[1]]=L[2]=n_1$$
+$$S[4]=L[LF[2]]=L[6]=a_1$$
+$$S[3]=L[LF[6]]=L[3]=n_0$$
+$$S[2]=L[LF[3]]=L[7]=a_0$$
+$$S[1]=L[LF[7]]=L[4]=b_0$$
+$$S=L[4]+L[7]+L[3]+L[6]+L[2]+L[1]=b_0a_0n_0a_1n_1a_2$$
 
 * An LF mapping can be used for counting the occurrences of a query string $Q$ into the string $S$
 	* I scan $Q$ right-to-left (from the end)
