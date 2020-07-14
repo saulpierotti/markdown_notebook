@@ -3979,35 +3979,47 @@ $$ R_L(7) = 0 \implies R_F(LF[7])=R_F(4)=0$$
 	* I get a predictable structure of $F$ where characters are sorted (because it is the first column!) and equal characters have ascending rank
 	* Since every character appears in $F$ once, I have a rank for all the characters in the matrix thanks to this property
 	* Thanks to the LF property, also the ranks in $L$ (and so on $BWT(S)$!) will be ascending for equal characters
-	* If I want to know the index in $F$ of a character $x_n : x \in \Sigma$ with rank $n$, I just need to add $n$ to the sum of the number of occurreces in $S$ of other characters with lexicographic order smaller than $x$ in $\Sigma$
-$$S'=b_0a_0n_0a_1n_1a_2\$_0$$
-$$index_F(n_1) = num(\$)+num(a)+num(b)+rank(n_1)=1+3+1+1=6$$
-$$F[6]=n_1$$
+	* If I want to know the index in $F$ of a character $x_n : x \in \Sigma$ with rank $n$, I just need to add $n$ to the sum of the number of occurreces in $S$ of other characters with lexicographic order smaller than $x$ in $\Sigma$ (I also add 1 since I am starting the indeces from 1)
+$$F=[\$_0a_0,a_1,a_2,b_0,n_0,n_1]$$
+$$index_F(n_1) = num(\$)+num(a)+num(b)+rank(n_1)+1=1+3+1+1+1=7$$
+$$F[7]=n_1$$
 * I can use the LF mapping to retrieve $S$ from $BWT(S)$
 	* The first character in $F$ is necessarily $\$$
 	* The character that came before $\$$ in $S'$ (the last character of $S$) is the character in $L[1]$
 		* This is because each row of the $M$ matrix is a rotation of $S'$: the character before $F[1]$ in the rotation is $L[1]$
 	* In the same way I can then take the character in $L[1]$ and find it in $F[LS[1]]$: the second last character of $S$ will be then $L[LS[1]]$
 	* I can proceed like this until I obtain $S$ from $L=BWA(S)$ and $F$
-	* Note that I actually never need $F$ to reconstruct $S$ from $BWA(S)$ in this way: I only need $L=BWA(S)$ and the $LF$ array
-$$S'=b_0a_0n_0a_1n_1a_2\$_0, \ L=[a_2n_1n_0b_0\$_0a_1a_0], \ F=[\$_0a_2,a_1,a_0,b_0,n_1,n_0]$$
-$$LF=[2,6,7,5,1,3,4],\ len(S)=6$$
-$$S[6]=L[1]=a_2$$
-$$S[5]=L[LF[1]]=L[2]=n_1$$
-$$S[4]=L[LF[2]]=L[6]=a_1$$
-$$S[3]=L[LF[6]]=L[3]=n_0$$
-$$S[2]=L[LF[3]]=L[7]=a_0$$
-$$S[1]=L[LF[7]]=L[4]=b_0$$
-$$S=L[4]+L[7]+L[3]+L[6]+L[2]+L[1]=b_0a_0n_0a_1n_1a_2$$
+	* Note that if I use rankings based on the order on $F$ I actually never need $F$ to reconstruct $S$ from $BWA(S)$ in this way: I only need $L=BWA(S)$!
+		* The position of each character on $F$ can be reconstructed since $F$ is always lexicographically sorted!
+		* Here I omit the ranks, since I am always proceeding backwards from the lowest rank to the higest in $F$
+$$S=banana, \ BWA(S)=annb\$aa$$
+$$S[6]=L[1]=a \implies next=num(\$)+1=2$$
+$$S[5]=L[2]=n \implies next=num(\$)+num(a)+num(b)+1=6$$
+$$S[4]=L[6]=a \implies next=num(\$)+1+used(a)=3$$
+$$S[3]=L[3]=n \implies next=num(\$)+num(a)+num(b)+1+used(n)=7$$
+$$S[2]=L[7]=a \implies next=num(\$)+1+used(a)=4$$
+$$S[1]=L[4]=b$$
+$$S=L[4]+L[7]+L[3]+L[6]+L[2]+L[1]=banana$$
 
 * An LF mapping can be used for counting the occurrences of a query string $Q$ into the string $S$
-	* I scan $Q$ right-to-left (from the end)
-	* I start thus from the last character of $Q$ and I see to which positions does it match in $F$, selecting a range $F[i...j]$ of matches
-	* I then use these indeces in L, selecting $L[i...j]$
-	* I procede with the second last character of $Q$, and I search for occurrences of it in $L[i...j]$, and I denote the matches as the range $L[x...y]$
-	* I follow the range and select the values $LF[x...y]$
-	* The size of the range $y-x$ denotes the number of occurrences of $Q$ in $S$
-
+	* Here we will see an example with $S=banana$ and $Q=ana$
+	* I scan $Q$ right-to-left (from the end) to find the range of rows prefixed by successively longer suffixes of $Q$
+	* I start thus from the last character of $Q$ and I see to which positions does it match in $F$, selecting a range of matches
+$$Q[3]=a, L=annb\$aa \implies F[2..4]=aaa$$
+		* This means that the rows $2...4$ in the $M$ matrix are prefixed by $Q[3]$, a suffix of $Q$
+	* I procede with the second last character of $Q$, and I search for occurrences of it in the selected range in $L$
+$$ Q[2]=n,\ L[2...4]=nnb \implies L[2...3]=nn \implies L[LF[2]...LF[3]]=L[6...7]$$
+		* By following the range from $F$ to $L$, I am searching among the characters preceeding $F[2...4]$
+		* I restrict the range to $2...3$, corresponding to the rows ending with $Q[2]=n$ and starting with $Q[3]=a$
+		* By following the LF mapping of the range I get to range $6...7$, where the characters in $L$ become in $F$
+		* This means that the rows $6...7$ of the matrix $M$ are prefixed by the suffix $Q[2...3]=na$, since I selected this match only among the matches selected at the previous step
+	* I procede matching $Q[1]=a$ in $L[6...7]=aa$
+$$Q[1]=a,\ L[6...7]=aa \implies L[6...7]=aa \implies L[LF[6]...LF[7]]=L[3...4]=nb$$
+	* The size of the final range that I have when $Q$ is consumed completely denotes the number of occurrences of $Q$ in $S$
+$$|L[3...4]|=2 \implies 2 \mbox{ occurrences of $Q$ in $S$}$$
+	* If at any point the range has size 0, it means that there are no occurrences of $Q$ in $S$
+* It is possible to find occurrences of $Q$ in $S$ in $=O(m)$ with $m=|Q|$ by calculating the $LF$ array on the fly in $O=(1)$
+	* This approach was developped by Ferragina, Manzini and it uses the FM data structure
 
 ---
 
