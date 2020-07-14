@@ -3857,7 +3857,7 @@ $$X \preceq Y \iff \exists k \in \{0,...,min(m,n)\} : X_k=Y_k \land (X[k+1] \pre
 * I first produce a string $S' = S \cdot \$$, with $\$ \preceq a \ \forall \ a \in \Sigma$
 * I then generate all the cyclic shifts of $S'$ and sort them lexicographically forming a matrix $M \in \Sigma^{(n+1)\times (n+1)}$
 	* The matrix $M$ for $S=banana$ is then
-$$M(banana)=\begin{bmatrix}\$banana \\ a\$banan \\ ana\$ban \\ anana\$b \\ banana\$ \\ na\$bana \\ nana\$ba \end{bmatrix}$$
+$$M(S)=\begin{bmatrix}\$banana \\ a\$banan \\ ana\$ban \\ anana\$b \\ banana\$ \\ na\$bana \\ nana\$ba \end{bmatrix}$$
 * I select as $BWT(S)$ the last column of the matrix $M$
 	* Each position in $S'$ is appearing in the last column of $M$ once and only once
 	* Since the $M$ matrix is sorted, the characters in the BWT are choosen according to the similar character envronment in which they are found
@@ -3892,6 +3892,8 @@ $$
 \xrightarrow{\text{sort}}
 \begin{bmatrix} \$ban \\ a\$ba \\ ana\$ \\ anan \\ bana \\ na\$b \\ nana \end{bmatrix}
 \xrightarrow{\text{prepend}}
+$$
+$$
 \begin{bmatrix} a\$ban \\ na\$ba \\ nana\$ \\ banan \\ \$bana \\ ana\$b \\ anana \end{bmatrix}
 \xrightarrow{\text{sort}}
 \begin{bmatrix} \$bana \\ a\$ban \\ ana\$b \\ anana \\ banan \\ na\$ba \\ nana\$ \end{bmatrix}
@@ -3905,24 +3907,52 @@ $$
 \begin{bmatrix} \$banana \\ a\$banan \\ ana\$ban \\ anana\$b \\ banana\$ \\ na\$bana \\ nana\$ba \end{bmatrix}
 $$
 	* Finally, I return $S'$ as the row of $B$ ending with the special symbol $\$$
-$$S'=abc\$ \implies S=abc$$
+$$S'=banana\$ \implies S=banana$$
 
 ### LF mapping
 * Let $M$ be the BWT matrix for a string $S$, let $n=|S|$, and let $F$ and $L$ be the first and last column of $M$, repsectively
-* An LF mapping for $S$ is defined as an array $LF$ such that $LF[i]$ is the position of charachter $L[i]$ in the array $F$ for $i=1,...,n+1$
+	* The last column of $M$ is the BWT of $S$ by definition
+$$ L = BWT(S)$$
+	* Since $M$ is sorted, the first column $F$ is also sorted
+$$ F[i] \preceq F[i+1] \ \forall \ i \in {1,...,n+1}$$
+* The first column $F$ and the last columns $L$ of the $M$ matrix exhibit the LF mapping property
+* An LF mapping for $S$ is defined as an array $LF$ such that the number stored in $LF[i]$ is the index of charachter $L[i]=BWT(S)[i]$ in the array $F$ for $i=1,...,n+1$
 	* $LF$ is thus a permutation of $\{1,...,n+1\}$
-	* For $S=abc$ thus
-$$L=\begin{bmatrix}c \\ \$ \\ a \\ b \end{bmatrix}, \ F=\begin{bmatrix}\$ \\ a \\ b \\ c \end{bmatrix} \implies LF=[4,1,2,3]$$
-* Let $R_S$ be a function such that $R_S(i)$ is the number of occurrences of the character $S[i]$ in the $i$-th prefix of $S$, $S_i$
+	* For $S=banana,\ BWA(S)=annb\$aa$ I have that
+$$
+M(S)=\begin{bmatrix}\$banana \\ a\$banan \\ ana\$ban \\ anana\$b \\ banana\$ \\ na\$bana \\ nana\$ba \end{bmatrix}
+\implies
+L=\begin{bmatrix} a \\ n \\ n \\ b \\ \$ \\ a \\ a \end{bmatrix}, \ 
+F=\begin{bmatrix}\$ \\ a \\ a \\ a \\ b \\ n \\ n \end{bmatrix}
+\implies
+LF=[2,6,7,5,1,3,4]$$
+* Let $R_S$ be a function $\Sigma^* \to \mathbb{N}$ such that $R_S(i)$ is the number of occurrences of the character $S[i]$ in $S_i$, the $i$-th prefix of $S$ (consisting of $S[1...i-1]$)
 	* $R_S(i)$ is called as the rank of character $S[i]$ in $S$
 	* I can write an array $R_S$ such that $R_S[i]=R_S(i)$
-	* For $S=abc$, thus the array $R_S$ is
-$$ S_1 = \epsilon, S_2 = a, S_3 = ab \implies R_S(1)=0, R_S(2)=0, R_S(3)=0 \implies R_S=[0,0,0]$$
-* An LF mapping repsects the LF property: the rank of every position $i=1,...,n+1$ is preserved
+	* For a string $S=aaaabbbbbba$, thus the array $R_S$ is
+$$R_S=[0,1,2,3,0,1,2,3,4,5,4]$$
+* An LF mapping respsects the LF property: the rank of every position $i=1,...,n+1$ is preserved between the arrays $L$ and $F$
 $$R_L(i)=R_F(LF[i]) \ \forall \ i=1,...,n+1$$
-	* For $S=abc$ we observe that
-$$S=abc, L=c\$ab, F=\$abc \implies R_L=[0,0,0,0], R_F=[0,0,0,0], LF=[4,1,2,3]$$
-* The LF mapping can be used for counting the occurrences of a query string $Q$ into the string $S$
+	* Here $R_L(i)$ is the ranking of character $i$ in the array $L$, and $R_F(LF[i])$ is the ranking of character $LF[i]$ (the position of chartachter $L[i]$ in the array $F$) in the array $F$
+	* This means that the order of equal symbols is preserved between $L$ and $F$
+	* For $S=banana$ we observe that
+$$S=banana,\ L=annb\$aa,\ F=\$aaabnn$$
+$$R_L=[0,0,1,0,0,1,2],\ R_F=[0,0,1,2,0,0,1],\ LF=[2,6,7,5,1,3,4]$$
+$$ R_L(1) = 0 \implies R_F(LF[1])=R_F(2)=0$$
+$$ R_L(2) = 0 \implies R_F(LF[2])=R_F(6)=0$$
+$$ R_L(3) = 1 \implies R_F(LF[3])=R_F(7)=1$$
+$$ R_L(4) = 0 \implies R_F(LF[4])=R_F(5)=0$$
+$$ R_L(5) = 0 \implies R_F(LF[5])=R_F(1)=0$$
+$$ R_L(6) = 1 \implies R_F(LF[6])=R_F(3)=1$$
+$$ R_L(7) = 2 \implies R_F(LF[7])=R_F(4)=2$$
+	* The preservation of ranks is also true for the rank of the symbols in the original string $S$: their original rank is preserved between $L$ and $F$
+	* For $S=banana$ we observe that, ignoring the rank of $\$$ which is always 0 (one and only one occurrence of $\$$ in every possible string)
+		* Showing the ranks of symbols in $S$ (they are not really stored, but showing them now is useful for keeping track of them)
+$$S=banana,\ R_S = [0,0,0,1,1,2] \implies S=b_0a_0n_0a_1n_1a_2$$
+		* The original ranks in the $M$ matrix
+$$M(S)=\begin{bmatrix}\$b_0a_0n_0a_1n_1a \\ a_2\$b_0a_0n_0a_1n_1 \\ a_1n_1a_2\$b_0a_0n_0 \\ a_0n_0a_1n_1a_2\$b_0 \\ b_0a_0n_0a_1n_1a_2\$ \\ n_1a_2\$b_0a_0n_0a_1 \\ n_0a_1n_1a_2\$b_0a_0 \end{bmatrix}$$
+
+* An LF mapping can be used for counting the occurrences of a query string $Q$ into the string $S$
 	* I scan $Q$ right-to-left (from the end)
 	* I start thus from the last character of $Q$ and I see to which positions does it match in $F$, selecting a range $F[i...j]$ of matches
 	* I then use these indeces in L, selecting $L[i...j]$
