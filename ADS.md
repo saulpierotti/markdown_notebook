@@ -3876,14 +3876,29 @@ $$SA(S) = [7,6,4,2,1,5,3] \implies\begin{bmatrix}\$ \\ a\$ \\ ana\$ \\ anana\$ \
 	* I repeat $n+1$ times by prepending $BWT(S)$ to the partial $B$ matrix and sorting the result lexicographically
 	* For $S=banana$ and $BWT(S)=annb\$aa $ the $B$ matrix is thus built as follows
 $$
-\begin{bmatrix} c \\ \$ \\ a \\ b \end{bmatrix} \xrightarrow{\text{sort}}
-\begin{bmatrix} \$ \\ a \\ b \\ c \end{bmatrix} \xrightarrow{\text{prepend}}
-\begin{bmatrix} c\$ \\ \$a \\ ab \\ bc \end{bmatrix} \xrightarrow{\text{sort}}
-\begin{bmatrix} \$a \\ ab \\ bc \\ c\$ \end{bmatrix} \xrightarrow{\text{prepend}}
-\begin{bmatrix} c\$a \\ \$ab \\ abc \\ bc\$ \end{bmatrix} \xrightarrow{\text{sort}}
-\begin{bmatrix} \$ab \\ abc \\ bc\$ \\ c\$a \end{bmatrix} \xrightarrow{\text{prepend}}
-\begin{bmatrix} c\$ab \\ \$abc \\ abc\$ \\ bc\$a \end{bmatrix} \xrightarrow{\text{sort}}
-\begin{bmatrix} \$abc \\ abc\$ \\ bc\$a \\ c\$ab \end{bmatrix}
+\begin{bmatrix} a \\ n \\ n \\ b \\ \$ \\ a \\ a \end{bmatrix}
+\xrightarrow{\text{sort}}
+\begin{bmatrix} \$ \\ a \\ a \\ a \\ b \\ n \\ n \end{bmatrix}
+\xrightarrow{\text{prepend}}
+\begin{bmatrix} a\$ \\ na \\ na \\ ba \\ \$b \\ an \\ an \end{bmatrix}
+\xrightarrow{\text{sort}}
+\begin{bmatrix} \$b \\ a\$ \\ an \\ an \\ ba \\ na \\ na \end{bmatrix}
+\xrightarrow{\text{prepend}}
+\begin{bmatrix} a\$b \\ na\$ \\ nan \\ ban \\ \$ba \\ ana \\ ana \end{bmatrix}
+\xrightarrow{\text{sort}}
+\begin{bmatrix} \$ba \\ a\$b \\ ana \\ ana \\ ban \\ na\$ \\ nan \end{bmatrix}
+\xrightarrow{\text{prepend}}
+\begin{bmatrix} a\$ba \\ na\$b \\ nana \\ bana \\ \$ban \\ ana\$ \\ anan \end{bmatrix}
+\xrightarrow{\text{sort}}
+\begin{bmatrix} \$ban \\ a\$ba \\ ana\$ \\ anan \\ bana \\ na\$b \\ nana \end{bmatrix}
+\xrightarrow{\text{prepend}}
+\begin{bmatrix} a\$ban \\ na\$ba \\ nana\$ \\ banan \\ \$bana \\ ana\$b \\ anana \end{bmatrix}
+\xrightarrow{\text{sort}}
+\begin{bmatrix} \$bana \\ a\$ban \\ ana\$b \\ anana \\ banan \\ na\$ba \\ nana\$ \end{bmatrix}
+\xrightarrow{\text{prepend}}
+\begin{bmatrix} a\$bana \\ na\$ban \\ nana\$b \\ banana \\ \$banan \\ ana\$ba \\ anana\$ \end{bmatrix}
+\xrightarrow{\text{sort}}
+\begin{bmatrix} \$ \\ a \\ a \\ a \\ b \\ n \\ n \end{bmatrix}
 $$
 	* Finally, I return $S'$ as the row of $B$ ending with the special symbol $\$$
 $$S'=abc\$ \implies S=abc$$
