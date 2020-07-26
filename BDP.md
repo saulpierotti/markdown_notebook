@@ -43,6 +43,16 @@
 * Big Data is a lot of data, coming really fast, in many different formats and from many different sources
 * The definition of Big data is not static, but it is relative to processing capabilities
 * The Gartner hype cycle of emerging technologies: new technologies go through an innovation trigger, a peak of inflated expectations, a trough of disillusionment, and then finally enter the slope of enlightment and the plateau of productivity
+* Big data is not reported in the last Gartner hype cycle, since it is NOT consider an emerging technology, but a prevalent aspect of many modern technologies
+* Big data come from a variety of sources
+	* Web data: the web browsing behaviour of customers, used for showing targeted ads
+	* Text data: emails, documents uploaded, web forms
+		* Typically key meanings are extracted and then used downstream for predictions and targeting
+	* Time and geolocation data: deriving from GPS and WiFi data at the individual or aggregated level
+		* Individual level: targeted advertising
+		* Aggregated level: dimensioning and placing infrastrucutres
+		* This type of data raises many privacy concerns
+	* Smart grids and sensors data
 
 # Computational challenge
 * Find a substring in a string
