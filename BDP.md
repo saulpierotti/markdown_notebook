@@ -8,22 +8,41 @@
 ---
 
 # Introduction
-* This course is not about Big Data, it is about infrastructures
-* We should have visited a datacenter, but... Corona
-* We need SSH, a little bit of C/C++, vim, Python
-* We will use AWS and Google Cloud computing!
-* Of course we will make a project and an oral exam
-* Prof of course is a physicist of the IIFN
-* The IIFN-CNAF hosts the Tier-1 datacenter in Bologna
-
-# Setting up AWS
-* It is a pay for use model
-* You have at the beginning a 50\$ credit
+* Prof. Cesini and Prof. Salomoni are both from the INFN-CNAF center in Bologna
+* The CNAF is the computational center of the INFN, located in Bologna
+	* It started as a facility for the analysis of data from bubble chambers
+	* CNAF developped an managed the Italian research network, now managed by GARR
+	* In 1990 CNAF realized the LHC Tier-1 datacenter in Bologna
+	* One of the main actors in GRID worldwide computing
+	* It offers CPU and sotrage resources to many INFN initiatives
+* This course is about infrastructures, not about Big Data
 
 # Big data
-* They tend to be non structured
-* They are characterized by 4 Vs: Volume, Variety, Veracity (can I trust them?), Velocity
-* Another important point is Value, what I want to extract from the data
+* Cell phone data were used in Pakistan to track and predict the spread of Dengue
+* Google traffic suggests an optimal route to users according to current conditions
+* Both of these applications process data from many sources, that come in a non-regular schedule
+* They both need to quickly process huge amounts of data in real time
+* The need to be able to quickly verify the validity of data
+* We are currently producing around 40 Zb per year, and this number is in exponential increase
+* Big data are characterized by Vs
+	* Volume: typically several Tb ($10^{12}$) to Zb ($10^{21}$)
+	* Velocity: data coming at high speed, with short time to react
+		* We are in a real-time streaming more than in a batch processing scenario
+	* Variety: data from different sources, in different formats
+		* Data can be structured, semistructured or unstructured
+		* A database table is structured
+		* An xlm file is semi-structured
+		* Text, images, audio files, video streams are unstructured
+		* Big data tend to be mostly unstructured
+	* Veracity: the degree to which data is trustworthy
+		* Big data tend to involve datasets, problem spaces and environments that are difficult to trust
+	* People are starting to add more Vs, but let's keep it simple and stick to these 4 Vs
+	* Value: big data is about transforming a lot of data in something valuable
+* The Gartner definition of Big Data: Big data is high-volume, high-velocity and/or high-varietyinformation assets that demand cost-effective, innovative forms of information processing that enable enhanced insight, decision making, and process automation
+* Big data is not just about volume, but it definitely has a big volume
+* Big Data is a lot of data, coming really fast, in many different formats and from many different sources
+* The definition of Big data is not static, but it is relative to processing capabilities
+* The Gartner hype cycle of emerging technologies: new technologies go through an innovation trigger, a peak of inflated expectations, a trough of disillusionment, and then finally enter the slope of enlightment and the plateau of productivity
 
 # Computational challenge
 * Find a substring in a string
