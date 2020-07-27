@@ -132,12 +132,12 @@
 	* A multicore processor executes ordinary CPU instructions, but multiple instructions can be run at the same time
 	* It increases the overall speed compared to a single core for programs that support parallel computing
 	* A socket is the physical matherboard processor, and it can have many physical and logical cores
-* Hyper-threading is a technology from Intel that represents each physical core with two logical cores at the software level
-	* The OS sees a double number of cores
-	* It maximises the exploitation of the processor by running at the same time operations that can be run at the same time
+* Hyper-threading is a propietary technology from Intel that represents each physical core as 2 logical cores at the software level
+	* The OS sees a double number of cores with respect to the physical number actually present
+	* It maximises the exploitation of the processor by running at the same time operations that are independent
 		* An example can be doing an ALU operation and a logical operation at the same time
 		* When a process is waiting for something the processor can run another process
-	* It can improve performances but it depends on the application
+	* It can improve performances but this depends on the application
 	* It uses more die area (space on the silicon chip)
 	* It can also degrade performance by trashing the cache
 		* Memory is virtual in modern systems, in the sense that the address space used by applications does not refer to the physical memory adress
@@ -148,17 +148,19 @@
 		* The OS then swaps the requested page in memory from the swap area of the disk
 		* If there is no space in memory another page is swapped out to disk
 		* If the memory is constantly full this swapping results in a lot of time spent moving data back and forth, degrading performances
-* `top` shows the status of all the logical cores in the system
+* The `top` command on a Linux system shows the status of all the logical cores in the system
 	* `wa` shows the time spent waiting for I/O
 	* `load` average shows the number of processes waiting for enetering in CPU
 		* It should be at most equal to the number of cores, otherwise we are in an overloading
 * A good source of info for the system is `cat /proc/cpuinfo`
 	* `flags` shows the capabilities of the processor (instructions)
 
-# Memory
-* Memory is RAM, it is volatile and fast
-* We typically have a memory hierarchy
-	* The first memory is the CPU register
+## Memory
+* Random Access Memory (RAM) is a device used for storing information for immediate use
+* When talking about memory, in general we are referring to RAM
+* RAM typicaly stores working data and machine code
+* We typically have a memory hierarchy on a PC
+	* The first-tier memory is the CPU register
 	* L1, L2 and L3 cache in the processor
 		* L1 is subdivided in L1i (instructions) and L1d (data)
 		* L3 is shared among cores (in some cases), while L1 and L2 are core-specific
