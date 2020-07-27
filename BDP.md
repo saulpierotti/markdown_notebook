@@ -63,6 +63,18 @@
 * Most traditional data sources are structured, while Big Data tend to be unstructured
 	* In traditional data every piece of information included is known ahead of time, comes in a specified format and occurs in a specified order
 	* In Big Data there is no control over the source and the format of the data
+	* Web logs are an example of semi-structured data: thelenght of the log is variable but it does follow an underlying logic
+* The power of Big Data is in the analysis and the actions that you can take as a result of the analysis
+	* The data themselves do not have any intrinsic value, they become valuable only when I am able to extract useful information from them
+* The analysis of data can be descriptive, predictive, or prescriptive
+	* A descriptive analysis looks at the past and tryes to extrapolate trends
+	* A predictive analysis tryes to use past data to predict future behaviours
+		* This is typically harder than a descriptive analysis!
+	* A prescriptive analysis outputs recommendations according to past data
+		* I can get a hint that a machine part is about to break
+		* I can suggest news articles to a customer according to past browsing behaviour
+* All these analysis approaches existed before Big Data, but Big Data improves the ability for precise future insight
+
 
 # Computational challenge
 * Find a substring in a string
