@@ -74,7 +74,28 @@
 		* I can get a hint that a machine part is about to break
 		* I can suggest news articles to a customer according to past browsing behaviour
 * All these analysis approaches existed before Big Data, but Big Data improves the ability for precise future insight
-
+* Segmentation: specific actors collect focused data
+	* Banks can aggregate data on loans, mortgages, credit cards to calculate a credit score
+	* Insurance companies can aggregate health data to predict the likelyhood of of health outcomes
+* Churn prediction: a churn is the probability of a current customer to swtich to a competitor
+	* A company may flag customers at the risk of churning using web data analytics and social media data
+	* The company may propose targeted offers to avoid churning of those flagged customers
+* Recommendation systems: they can be user-scpecific or general
+	* User-specific recommendation: Amazon proposes recommended articles to buy, Spotify recommends the next song, and Netflix recommends the next movie
+	* General trends: many platforms suggest products that have been generally sucsessfull
+* Sentiment analysis: looking at the general public opinion on a topic or company
+	* It typically uses data from social media
+	* It can use aggregate data or individual data
+	* It can use pattern recognition to detect the mood of a calling customer and direct it to the appropriate specialist
+* Operational analytics: automate decisions
+	* An airline reroutes coustomers automatically upon flight cancellation
+* Social good, research, and personalized medicine: remote diagnosis and healt prevention with wearable devices
+* Big Data is not only related to the commercial applications shown, but also to large-scale scientific experiments
+	* The Square Kilometer Assay (SKA) is an international effort to build the word's largest radio telescope
+	* The LHC produces 60 Pb of data per year
+	* Climate and weather simulations require extensive data
+	* Avionic simulations
+	* Genome sequencing
 
 # Computational challenge
 * Find a substring in a string
