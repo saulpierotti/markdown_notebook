@@ -98,36 +98,40 @@
 	* Genome sequencing
 
 # Computational challenge
-* Find a substring in a string
+* The challenge involves find a substring in a string
 * Doing it brute force is really slow
 * I can create an index once and then I can search every time much faster
-	* It is blast essentially
+	* Blast uses this approach
 	* The BWA algorithm is another possibility
 		* It is used for more similar sequences
 		* It is faster when I have many reads to be aligned
 * Using the right approach is much more effective than increasing computational power
+* Read the literature: if you created your own tool, probably it is the wrong one
 * If possible use open source code
-	* You avoid vendor lockin and the approach can be scaled more easily
-* Creating a new approach from scratch is usually wrong
-	* You will not create a good system from scratch
- c* Our challenge: align 554k sequences per patient against the human genome
-	* The aim of this course is creating a cloud based model for computing this
-	* I also want to estimate the time required
-
-# Some notes
+* Avoid vendor lockin
+* Use standards or de facto standards
+* Think in advance about scalability
 * A checksum is essential when we are moving data
 	* It is a small string used to detect error in data transmission or storage
+	* They are used to verify data integrity, not autenticity
 	* It is possible to set an extended file attribute with the checksum (if the file system allows it)
 * Files are moved compressed, moving uncompressed files is a crime
 
-# CPU
-* 1 byte is 8 bits (but we can also use 10 to make it easier)
-* A multicore processor has more than 1 processing unit
-	* A core appears to the processor as a different CPU
-	* A socket is the physical CPU, and it can have many cores
-* A core is composed of an ALU, processor registers and control unit
-	* The register gives data to the ALU and stores its output
-	* The control unit fetches data from memory and coordinates the operations of ALU and register
+# From PC to datacenter
+* 1 byte is composed of 8 bits (but we can also use 10 to make it easier)
+
+## Processor
+* A Central Processing Unit (CPU) is the electronic circuitry that execute the instructions that make up a computer program
+* A CPU performs basic arithmeitc, logic, controlling and I/O operations specified by the instructions in a program
+* A CPU is composed of an Arithmetic Logic Unit (ALU), processor registers and a control unit
+	* The ALU performs arithmetic and logic operations
+	* The registers supply operands to the ALU and store the result of ALU operations
+	* The control unit controls the fetching of data from memory and coordinates the operations of ALU, registers and other components
+* A multicore processor is an integrated circuit that has at least 2 processing units, called cores
+	* Each core appears to the processor as a different CPU
+	* A multicore processor executes ordinary CPU instructions, but multiple instructions can be run at the same time
+	* It increases the overall speed compared to a single core for programs that support parallel computing
+	* A socket is the physical matherboard processor, and it can have many physical and logical cores
 * Hyper-threading is a technology from Intel that represents each physical core with two logical cores at the software level
 	* The OS sees a double number of cores
 	* It maximises the exploitation of the processor by running at the same time operations that can be run at the same time
