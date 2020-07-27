@@ -52,7 +52,17 @@
 		* Individual level: targeted advertising
 		* Aggregated level: dimensioning and placing infrastrucutres
 		* This type of data raises many privacy concerns
-	* Smart grids and sensors data
+	* Smart grids and sensors data: data from cars, windmills, planes, turbines, oil pipes, and other apparati
+		* They allow to improve performances and to diagnose problems early
+		* A plane can produce 640 Tb of data per day
+	* Social network data: analysis of the connections of a given user
+		* These data can be used for targeting ads also on the basis of the social circle of the customer
+* The value of data is not in the data themselves but in the value that arises from the combination of different pieces of information
+* Big data can be an entirely unconventional source of data, like browsing behaviour in online shopping
+* The speed of data feeds can transform old data in new data, by allowing a more in-depth analysis
+* Most traditional data sources are structured, while Big Data tend to be unstructured
+	* In traditional data every piece of information included is known ahead of time, comes in a specified format and occurs in a specified order
+	* In Big Data there is no control over the source and the format of the data
 
 # Computational challenge
 * Find a substring in a string
