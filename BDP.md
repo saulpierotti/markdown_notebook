@@ -167,18 +167,29 @@
 		* I have 128 KiB of L1i and 128 KiB of L1d cache, 1 MiB L2 and 8 MiB L3
 	* Main system memory (RAM)
 	* Swap as a last resort
-* Different pieaces of memory have different latency
-	* L1 has 4 cycles latency, 0.5 ns
+* Different pieaces of memory have different latencies
+	* L1 has a 4 cycles latency, 0.5 ns
 	* L2 11 cycles, 7 ns
 	* L3 39 cycles
 	* RAM 107 cycles, 100 ns
+* Because of this latency differences, an $O(n)$ algorithm can perform better that a $O(1)$ if it cause less memory access event
+* The memory bandwidth is the rate at which data can be read or stored in a semiconductor memory by a processor
+	* It is usually expressed in bytes per second
+	* The total bandwidth is the product of clock frequency, number of transfers per cycle, memory bus width, and number of memory interfaces
+	* Double Data Rate (DDR) RAM pieces can perform 2 transfers per clock cycle
+	* The memory bus has typically a width of 64 bits (also called a line)
+	* Modern PCs have 2 memory interfaces, so they effectively have a 128 bits line width
 * Data is transferred between pieces of memory in cache lines
-	* It is a data chunk, typically 64 bytes
-	* We can write code that optimizes the use of cache lines
-		* Keep physically close in memory data which is aceessed together!
-* Because of this latency differences, an $O(n)$ algorithm can perform better that a $O(1)$ if it cause less memory access
-* A RAM disk is a portion of RAM used as a storage device
+	* A cache line is a data chunk, typically of 64 bits
+	* We can write code that optimizes the use of cache lines by keeping physically close in memory data which is frequently accessed together
 * Cache lines operate on 84 GB/s between register and L1, 60 GB/s between L1 and L2, 30 GB/s between L2 and L3 and 10 GB/s between L3 and RAM
+* A RAM disk is a portion of RAM used as a storage device
+	* It is much faster than a conventional disk, but it is not persistent if the RAM is not arranged so to have a standby battery source
+* Modern PCs extend RAM capacity by using virtual memory
+	* A virtual memory space is a part of an hard disk that it is used as an extension of the physical RAM
+	* It is also called swap space
+	* The data is typically stored in a dynamic paging file on the hard disk
+	* Overuse of swap space can trash performances, since an hard disk is much slower than real RAM
 * Registers typically use SRAM, while other caches use SRAM or DRAM and memory use DRAM
 	* SRAM is static RAM, it does not need refreshing but it is still volatile
 		* It is made with a bistable circuitry called flip-flop
@@ -190,7 +201,7 @@
 		* 1 Gb can cost 50\$
 		* SDRAM is a DRAM which operates in sync with the clock
 		* DDR is a type of SDRAM
-* Memory status can be seen with `free`
+* The memory status of a Linux system can be seen with the `free` command
 
 # Network
 * A computer network is an infrastructure that shares resources between nodes
