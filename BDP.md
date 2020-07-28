@@ -393,18 +393,24 @@
 	* Only jobs that will finish before the job that reserved the cores will start are permitted
 	* For backfill to be possible, the user must declare the duration of his jobs!
 	* After the pre-determined time expires, the job is killed by the scheduler
+* Main messagges
+	* Concurrency in a datacenter is handled by a batch system
+	* Jobs are typically unattended
+	* Fairshare uses a dynamic priority to ensure the respect of the agreed usage quotas
+	* Dynamic priorities depend on a large number of factors
+	* The batch scheduler minimizes the waiting time for customers and maximizes cluster utilization
 * Jobs are composed of
 	* Job type
-	* Prologue: initial checks
-	* Input sandbox: the list of needed files
-	* Requirements: the hardware required
-	* Executable: the actual code to run
-	* where stdout/stderr should be directed
-	* Output sandbox: the files that need to be produced
+	* Prologue: initial checks to be performed
+	* Input sandbox: the list of needed files for the job
+	* Requirements: the hardware required for the job
+	* Executable: the actual application to run
+	* Where the stdout and stderr of the application should be directed
+	* Output sandbox: the files that will be produced by the application
 	* Epilogue: final cleanup, file uploads, updates, ...
 	* Error recovery: what to do if the job fails
 
-# Storage
+## Storage
 * The performance of a storage device is described in terms of bandwith and IOPS
 	* The bandwith is the data transfer speed
 	* The IOPS is the number of I/O operations per second
