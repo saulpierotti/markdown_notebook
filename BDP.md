@@ -411,26 +411,24 @@
 	* Error recovery: what to do if the job fails
 
 ## Storage
-* The performance of a storage device is described in terms of bandwith and IOPS
-	* The bandwith is the data transfer speed
-	* The IOPS is the number of I/O operations per second
-		* It is importnat when operating on small files
-* SSDs use NAND technology, it is much slower than RAM but non-volatile
+* Storage devices are Hard Disks (HDDs), Solide State Disks (SSDs), tape, Non-Volatile Memory (NVM)
+* The performance of a storage device is described in terms of storage capacity, bandwith and Input/Output Operations Per Second (IOPS)
+	* The bandwith is the read and write speed for sequential data on the drive
+	* The IOPS is the number of I/O operations per second that can be requested
+		* It is important when operating on small files
+* An SSDs use NAND technology, it is much slower than RAM but non-volatile
 	* It can withstand a limited number of write cycles
 	* NAND SSDs use NAND logical gates
 	* The NAND used in USB drives tend to be less performant, cheaper and less durable than the one used in SSDs
-	* Speed is 400/500 MB/s, 100k/400k IOPS
-	* Capacity 500 GB
-	* The biggest advantage of SSDs is in terms of IOPS
-* Hard disks are slow since they have moving parts
-	* Speed is 100/150 Mb and 100/200 IOPS
-	* Capacity 8 TB
+	* Bandwidth is of 400/500 MB/s, 100k/400k IOPS, capacity of 500 Gb
+	* The biggest advantage of an SSD is in terms of IOPS
+* Hard disks are slow since they have mechanical moving parts
 	* They have spinning disks and a moving head
-* Tape cartridge are expensive since they require an infrastructure (tape library) but really scalable
-	* Speed is 250 MB/s, sequential access (no IOPS)
-	* Capacity 8.5 TB
+	* Speed is 100/150 Mb, 100/200 IOPS, capacity 8 Tb
+* Tape storage is expensive since it requires a special infrastructure (a tape library) but it is really scalable
+	* Speed is 250 MB/s, sequential access (no IOPS definable), capacity 8.5 Tb
 * Data maintainance is a huge responsibility, since it could be impossible to recreate lost data
-* RAID (Redundant Array of Independent Disks) systems allow to virtualize data storage
+* RAID (Redundant Array of Independent Disks) systems allow to virtualize data storage devices
 * RAID0: file striping at the block level
 	* A single file is stripped into several drives
 	* I collect n physical disks into 1 virtual disk
