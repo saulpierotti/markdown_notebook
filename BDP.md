@@ -203,7 +203,7 @@
 		* DDR is a type of SDRAM
 * The memory status of a Linux system can be seen with the `free` command
 
-# Network
+## Network
 * A computer network is an infrastructure that shares resources between nodes
 * Data transmission between nodes is supported over data links consisting of a physical medium
 * A network node is a network computer device that originates, routes or terminates data communication
@@ -311,32 +311,51 @@
 	* `localhost` is mapped to 127.0.0.1 in most computers
 	* It is used for diagnostic and by applications to reach resources on the same machine (e.g. by Jupyter to show its interface)
 * DNS is a hierarchical and decentralised mapping system between IP addresses and mnemonic names 
-* A communication protocol is a set of rules for exchanging packets over a network
+* A communication protocol is a set of rules for exchanging data over a network
 	* In a protocol stack each protocol uses services from the one below it
-	* HTTP runs over TCP which runs over IP
-* There are various kinds of bandwith
-	* Goodput is the actual data transmitted
-	* Channel bandwith includes also the overhead control information
+	* A protocol stack is HTTP running over TCP which runs over IP, which uses a IEEE802 protocol (Ethernet, WiFi)
+* IEEE802 is a family of IEEE (Institute of Electrical and Electronic Engeneers) standards dealing with LANs and metropolitan area networks
+	* Ethernet (also called LAN) is a family of protocols used in wired LANs, described by a set of standards called IEEE 802.3
+	* Wireless LAN (also called WLAN or WiFi) is another protocol standardized by IEEE 802.11 that shares many properties with the wired Ethernet protocol
+* Network bandwidth can refer to different concepts
+	* The channel bandwith refers to the gross transfer rate of the payload and also of the overhead control information
+	* The goodput is the actual rate of payload transfer
 * Latency is measured as end-to-end delay (OWD) or round-trip-time (RTT)
-	* It can be assessed with `ping`
-	* RTT is usually 2*OWD, but not necessarily (upload and download can difffer)
-	* Latency cannot be smaller than what the speed of light requires!
-* Network adapters are physical devices that connects a computer to a network7
+	* The OWD is the time that a packet takes to travel from source to destination
+	* The RTT is the time that a packet takes to travel from the source to the destination and back to the source
+	* The RTT is usually twice the OWD, but not necessarily (upload and download latencies can difffer)
+	* The RTT can be assessed with the `ping` command on a Linux system
+	* Latency can never be smaller than what the speed of light requires!
+* Network adapters are physical devices that connect a computer to a network
 	* They can be part of the motherboard or can be plugged in as expansion cards
-	* They implement OSI 1 and 2
-	* Netwrok adapters are Ethernet, WiFi, Fiber Channel
-	* There are also high-performace adapters used for high-performance computing like Omnipath and Infiniband
-		* Infiniband (Melanox) and Omnipath (Intel) are high bandwith and low latency network interfaces
-* Hub: it broadcast the same packet to all the ports
-* Switch: delivers a packet to a specific machine
-	* It knows the MAC of all the devices attached to it 
-	* It works at OSI2 (and in some case at OSI3)
-	* It does not increase significantly network response times
-* Router: delivers a packet to an IP address
-	* It can route to other LANs
-	* It works at OSI3
-* Top-of-the-rack switching: a switch that delievers packets to a rack of servers
-	* Usually there is also a switch that delivers to the right rack
+	* They implement the OSI layers 1 and 2
+	* Netwrok adapters are Ethernet adapters, WiFi adapters, Fiber Channel adapters
+		* Typical latencies are around 50-125 $\mu$s
+		* Ethernet can reach a bandwidth of 10 Gbit/s
+	* There are also high-performace adapters used for high-performance computing like Omnipath (Melanox) and Infiniband (Intel)
+		* They provide high bandwidth and really low latency network interfaces
+		* Typical latencies are less than 5 $\mu$s
+		* They can reach a bandwidth of 100 Gbit/s
+* A hub is a network device that broadcast the same packet to all the devices connected to it
+	* It is used for connecting segments of LAN
+* A switch is a network device that statically delivers a packet to a specific machine
+	* It knows the MAC of all the devices attached to it and can identify which machine sits at which of its ports
+	* It works at OSI layer 2 (and in some cases also at OSI layer 3)
+	* It does not increase significantly network response times since it knows to which port each packet should be sent to
+* A router is a network device that delivers a packet to an IP address
+	* It works at OSI layer 3
+	* It can sit between 2 LANs, between a LAN and a WAN, or between a LAN and the network of an ISP
+* Top-of-the-rack switching: a switch that delievers packets to a rack of servers and sits on the top of a server rack
+	* Usually there are also aggregation switches that deliver packets to the right top-of-the-rack switch
+* Some useful network commands (from the `bind-utils` package)
+	* `ping`: test connectivity and latency
+	* `traceroute` or `tracepath`: check the path to a server and the segment latencies
+	* `ifconfig` or `ip addr show`: inspect the configuration of the network devices
+	* `ethtool`: 
+	* `netstat`: statistics on the connections available
+	* `host`: get information on a host (form its IP or name)
+	* `dig`: lookup a name
+	* `whois`: pulls information on an address from IANA (Internet Assigned Numbers Authority)
 
 # Computing Infrastructures
 * A computing farm is a collection of servers and it can have millions of cores
