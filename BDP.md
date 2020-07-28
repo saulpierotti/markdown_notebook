@@ -603,6 +603,8 @@
 * The cooling system of a datacenter can include free cooling, forced air flow, liquid submersion, liquid cooling, heat pipes, and many other systems
 * The Power Usage Effectiveness (PUE) of a datacenter is the ratio among the energy used for computing and the energy used for overheads like cooling
 	* Its ideal value is 1.0: all the energy is used for IT systems and not for overheads
+	* The PUE is the inverse of the DataCenter Infrastructure Efficiency (DCIE)
+	* In 2008 Google had a PUE of 1.21 across 6 of its centers
 
 # Cloud Computing
 * Cloud computing deals with supplying information and communication technologies as a service
