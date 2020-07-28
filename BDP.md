@@ -491,19 +491,39 @@
 	* A SAN is composed of a series of storage and network devices, that can be dedicated or not
 	* A file system can be created on top of a SAN to provide file-level access
 * A SAN is composed of an host layer, a fabric layer and a storage layer
-	* The host layer is composed of servers that allow access to the SAN
-	* The gabric layer is composed of cables, routers, switches
+	* The host layer is composed of servers that allow access to the SAN and storage devices
+		* The communication between the host layer and the storage devices happens trough HBAs (usually cables)
+			* A GigaBit Interface Converter (GBIC) is used to convert ligth to digital signals
+	* The fabric layer is composed of the SAN networking devices
+		* It includes cables, routers, gateways, switches
+		* Network devices move data within the SAN and between an initiator (HBA port of a server) and a target (the port of a storage device)
+		* SAN networks are typically redundant, so SAN switches tend to be connected by redundant links
 	* The storage layer is composed of the storage devices
-		* Every partition of every storage device is identified by a logic unit number (LUN)
-* Important data are backed up frequently and possibly moved to a different geographical location
-* A parallel filesystem is a single filesystem across multiple storage devices
-	* It usually supports mutliple clients (thousands of them!)
+		* HDDs are usually connected in JBODs and organised in RAID systems
+		* Tape devices are arranged in libraries
+		* Every partition of every storage device is identified by a logic unit number (LUN) in the SAN
+		* The LUN allows to restrict access to data in the SAN and to segment the storage space
+* Important data need to be backed up frequently and possibly moved to a different geographical location
+* A parallel filesystem is a single filesystem across multiple networked servers
+	* It facilitates high-performance access thanks to the use of coordinated I/O operations between clients and storage nodes
+	* It usually supports a high mutliplicity of clients (thousands of them!)
 	* It is built on a SAN, with block level access
-	* It maintaines metadata servers with information about the location of the blocks for each file and their metadata
-* Metadata are essential and cannot be lost: metadata servers have a lot of redundancy
+	* Files are striped across multiple local and remote storage devices
+	* The user of a parallel file system is not required to know the block location of files to access them
+	* The system uses a global namespace
+	* It maintains metadata servers with information about the location of the blocks for each file and their metadata
+	* Metadata in a parallel file system are essential and cannot be lost: metadata servers have a lot of redundancy
+	* Capacity and bandwidth can be scaled depending on the requirements
+	* Parallel file systems are typical of high performance computing environments
+	* They are designed for performance and highly concurrent access
+	* Examples of parallel file systems are LUSTRE and IBM Spectrum Scale (General Parallel File System, GPFS)
 * A distibuted file system is built on a system with file-level access
-	* It is built on top of the file systems of the disks!
+	* It does not provide block-level access to clients
+	* It creates a unique global namespace for distributed file
+	* Files on a distributed file system can be accessed with the same semantics used for local files
+	* A distributed file system is built on top of the file systems of the disks on the various servers!
 	* They are typically slower than parallel file systems
+	* Examples of distributed file systems are HDFS, BeeGFS, GFS, ...
 * The tape area network (TAN) is a subsection of a SAN dedicated to tape devices
 	* Tapes are organized in libraries containing tape drives and robotic arms that move the tape cartridges into the drives
 	* A tape library can have 85 PB capacity
