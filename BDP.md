@@ -351,7 +351,7 @@
 	* `ping`: test connectivity and latency
 	* `traceroute` or `tracepath`: check the path to a server and the segment latencies
 	* `ifconfig` or `ip addr show`: inspect the configuration of the network devices
-	* `ethtool`: 
+	* `ethtool`: for the configuration and diagnosis of network interface controllers
 	* `netstat`: statistics on the connections available
 	* `host`: get information on a host (form its IP or name)
 	* `dig`: lookup a name
