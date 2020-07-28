@@ -365,7 +365,7 @@
 	* Servers are organised in hot islands which are separated by a cooling system
 * In a datacenter typically multiple users share the same resources
 	* It is important to organize resource usage so to avoid wasting computing power
-	* Different users could have paid for different quality of services
+	* Different users could have paid for different a Quality of Service (QoS)
 	* Different users can have different priorities
 * A batch system (or scheduler) manages the concurrent access to resources, respecting priorities and usage shares as much as possible
 	* It is an application that controls the inattended (batch) execution of jobs (task to be executed)
@@ -383,10 +383,10 @@
 	* They typically act on different input data
 * A parallel job is a job that needs to run in more than 1 core
 * A parametric job is a collection that can be easily defined by a parameter
-* Fair share scheduling: each user should obtain its fair share of resources, depending on the quality of service he paid for
+* Fair share scheduling: each user should obtain its fair share of resources, depending on the QoS he paid for
 	* Normally jobs are dispatched with a FIFO behaviour (first come first served, FCFS)
 	* With fair share scheduling, the load is redistributed across queues so that no queue becomes starved and no user can monopolise resources
-	* Fair share does not mean necessarily equal share, customers could have paid for different service levels!
+	* Fair share does not mean necessarily equal share, customers could have paid for different QoS levels!
 * Reservation: the batch scheduler can reserve cores for 1 job that is waiting for something to be executed
 	* This is typical of parallel jobs that are waiting for enough cores to be available
 * Backfill: while the reserved cores are idle they can be used by other jobs whose duration does not exceed the starting time of the job that reserved the cores
@@ -421,50 +421,71 @@
 	* NAND SSDs use NAND logical gates
 	* The NAND used in USB drives tend to be less performant, cheaper and less durable than the one used in SSDs
 	* Bandwidth is of 400/500 MB/s, 100k/400k IOPS, capacity of 500 Gb
-	* The biggest advantage of an SSD is in terms of IOPS
+	* The biggest advantage of an SSD is in terms of IOP
 * Hard disks are slow since they have mechanical moving parts
 	* They have spinning disks and a moving head
 	* Speed is 100/150 Mb, 100/200 IOPS, capacity 8 Tb
 * Tape storage is expensive since it requires a special infrastructure (a tape library) but it is really scalable
 	* Speed is 250 MB/s, sequential access (no IOPS definable), capacity 8.5 Tb
-* Data maintainance is a huge responsibility, since it could be impossible to recreate lost data
+* Data maintainance is a huge responsibility, since it could be impossible to re-obtain lost data
 * RAID (Redundant Array of Independent Disks) systems allow to virtualize data storage devices
-* RAID0: file striping at the block level
+	* The purpose of a RAID system is to increase data redundancy, imporve performances, or both
+	* The RAID level can be considered as a type of QoS
+* RAID0: file stripping at the block level
 	* A single file is stripped into several drives
-	* I collect n physical disks into 1 virtual disk
+	* I aggregate $n$ physical disks into 1 virtual disk
 	* I get higher performances but no redundancy
-	* Losing only 1 disk means losing all the data
+	* Losing only 1 disk means losing all the data: there is no redundancy
+	* The transfer rate is up to $n$ times higher than whoat it would be on a single disk
+		* The transfer rate is maximal when the file to read or write is equally divided among the disks
+	* The total virtual storage size is $n$ times the size of the smallest disk
 * RAID1: file mirroring
-	* Performances can imporove for reading
-	* 2 disk that operate as 1, mirroring theyr contents
-* RAID2 is rarely used and involces stripping at the bit level
+	* Performances can imporove for reading operations, while they remain at the level of single disks for writing
+		* I can access different locations of the same file at the same time from different disks
+	* An example is 2 disk that operate as 1, mirroring their contents
+	* The redundancy level is always $n-1$
+	* The storage space is equal to the capacity of the smallest disk
+* RAID2 is rarely used and involves stripping at the bit level
 	* It uses an Hamming code for error correction
 * RAID3 is rarely used and involces stripping at the byte level with a parity disk
 	* A parity disk contains parity bits for each block, that are used in error correction
-	* It requires the rotation of disks to be in sync!
+	* It requires the rotation of all the disks to be in sync!
 * RAID4: block-level stripping with parity disk
+	* It is similar to RAID0 but it also has a parity disk
 * RAID5: block-level stripping with distributed parity
-	* In each disk I have all the blocks but 1 plus the parity of the missing block
-	* It requires at least 3 disks
-	* It is similar to RAID0 in term of performances (but a little bit less), but tolerant to the loss of an entire disk
+	* It is similar to RAID0 but it uses parity blocks, distributed among all the disks
+	* It requires at least 3 disks, since a full disk capacity is used for the parity blocks (but distributed across all the disks!)
 	* It is more reliable of RAID0 because of parity, but also less performant
+	* It is tolerant to the loss of an entire disk from the array
+		* Its data can be reconstructed from the parity blocks
 * RAID6: block-level stripping with double distributed parity
-	* It is similar to RAID5 but it uses 2 parity blocks
-	* It can tolarete the failure of 2 disks
+	* It is similar to RAID5 but it uses 2 parity blocks instead of 1
 	* It requires a minimum of 4 disks
-* A file system controls how data are stored and retrieved in the physical medium
-	* It can suppor file metadata like owner, permissions, access time
-* POSIX (Portable Operating System Interface) is a family of standards for maintaining compatibility between OS
-* A POSIX filesystem basically is one that supports open operations
-* Cables are important, especially for DAS (direct access storage) systems
-* A DAS system does not incorporate any network capability
+	* It can tolarete the concomitant failure of 2 disks
+* A file system controls how data is stored and retrieved
+	* It manages the space on the drive, keeping track of which physical locations contain which files
+	* It uses filenames as a reference to specific physical locations
+	* It uses directories to group files into separate collections
+	* The allocation of space on a drive can be implemented with an index table, or with an inode (index node, typical of Unix-like systems)
+	* It can or not suppor file metadata like owner, permissions, access times, dimension of the file, creation time, edit time
+* The POSIX (Portable Operating System Interface) is a family of standards defined by IEEE for maintaining compatibility between operating systems
+	* POSIX defines the API, as well as command line shells and utility interfaces
+	* POSIX is defined in the standard IEEE 1003 and in ISO/IEC 9945
+	* It also define the characteristics of a POSIX file system
+	* Most Linux file systems are POSIX-compliant (ext3, ext4, zfs, xfs)
+	* A POSIX filesystem basically is a file system that supports file-open operations
+* A Direct Access Storage (DAS) system is a digital storage device directly attached to the computer accessing it
+	* It does not incorporate any network capability, but it can be exposed to a network by the computer accessing it
+	* A DAS is connected to an host trough a Host Bus Adapter (HBA)
+	* Cables are important, especially for DAS systems
+		* The main protocols used are ATA, SATA, NVMe, SCSI, SAS, USB, and fiber channel
 * A JBOD (just a bunch of disks) is a container containing disks that can be plugged into a server
-* A NAS (network access storage) is a storage device exposed to the network
-	* It has file level access for external clients
+* A NAS (network access storage) is a storage device exposed to a network
+	* It provides file level access for external clients
 	* It uses protocols like NFS and SAMBA
-* The storage area network (SAN) is a dedicated network for storage access at the block level
+* A storage area network (SAN) is a dedicated network that provides storage access at the block level
 	* I am not exposing the file system, but the disk itself
-* The SAN is composed of an host layer, a farbric layer and Storage layer
+* The SAN is composed of an host layer, a fabric layer and a storage layer
 	* The host layer is composed of servers that allow access to the SAN
 	* The gabric layer is composed of cables, routers, switches
 	* The storage layer is composed of the storage devices
