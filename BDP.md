@@ -524,20 +524,73 @@
 	* A distributed file system is built on top of the file systems of the disks on the various servers!
 	* They are typically slower than parallel file systems
 	* Examples of distributed file systems are HDFS, BeeGFS, GFS, ...
+* Note: the distinction among parallel and distributed file systems is not binary, and some file systems present characteristics of both
 * The tape area network (TAN) is a subsection of a SAN dedicated to tape devices
+	* It is composed of the interconnections among servers, libraries and tape devices
 	* Tapes are organized in libraries containing tape drives and robotic arms that move the tape cartridges into the drives
-	* A tape library can have 85 PB capacity
-* Storage is organised in tiers according to their QoS
-	* Tier 1 storage is used for hot data (frequently used)
+	* A tape library can have a 85 Pb capacity and frequently has a disk buffer for performing read and write operations on tapes
+	* At CNAF 80 Pb of tape storage are used for RAW scientific data and for backing up server configurations, logs, and repositories
+* Tiered storage is a data storage environment organised in tiers according to the QoS of its different storage devices
+	* Tiers differ for storage price, performance, capacity, and/or function
+	* Tier 1 storage is used for hot data (frequently used data)
 		* It is composed of large RAID systems and SSDs 
 	* Tier 2 is used for warm data
 		* It is mainly old disks and small RAIDs
 	* Tier 3 is used for cold data like backups and rarely accessed data
 		* It is mainly tape storage
-* Moving a file to an higher QoS is call recall, moving it to a lower one migration
-* Tape storage is extremely safe: I can put the cartridge in a safe box and it is inaccesible
-* Nowadays datacenters are adopting the HyperConverged architecture
-	* Storage and computing happens on the same machines, no separate areas
+* Moving a file to an higher QoS tier is called a recall, while moving it to a lower tier is called a migration
+* A storage device that declares a certain QoS ensures that a particular application always can benefit of a certain minimum performance level
+	* For storage devices, QoS is often expressed in terms of IOPS
+	* Nowadays many storage systems claim to offer some form of QoS
+* IBM Spectrum Protect (formerly TSM, Tivoli Storage Manager) is proprietary software from IBM which is leader in data protection solutions
+	* It is used mostly for backup and archive purposes
+	* It offers a Hierarchical Storage Management (HSM) extension to manage migrations and recalls between disk and tape storage of data hosted on a Spectrum Scale file system
+	* The mean daily transfer rate for each server is of 600-650 Mb/s
+* Tape is becoming popular again since the amount of data to be stored increases exponentially while HDD capacity has stagnated
+	* 80% of the newly created data is cold data, which is not accessed in at least 3 months: it is ideal for tape storage
+	* Tape storage is energy efficient: no power needed when not in use
+	* Tape storage is extremely safe: I can put the cartridge in a safe box and it is inaccesible for everyone
+	* Tape devices are expected to last for more than 30 years and are very reliable
+		* Data can often be recovered also in case of drive failure
+		* The data is verified by a read-while-write system
+	* Tape storage is extremely safe: I can put the cartridge in a safe box and it is inaccesible for everyone
+	* The main advantage: tape is really cheap
+* A Storage Remote Access Service is a service that grants remote access to file system
+	* It implements operations like list, copy, delete, migrate, recall
+	* It should be possibly based on a standard or de-facto standard
+	* It provides various types of auth/authZ mechanisms such as username and password, tokens, and digital certificates
+* Data transfer applications can implement asynchronous data movement or data streaming
+	* Asynchronous data movement applications are `scp`, `rsync`, `ftp`
+	* Streaming applications are Flume and Kafka
+* GridFTP is an extension of the File Transfer Protocol (FTP) used for distrubuted computing
+	* Provides a reliable and high-performance transfer of large files
+	* It is extensively used at LHC
+	* It can use multiple concurrent TCP streams
+	* It allows the transmission of partial files
+* Main messages
+	* DAS is a devicde directly connected to a server
+	* NAS provides file level access to storage devices through a network
+	* SAN is a dedicated network infrastructure that provides access at the block level
+	* Parallel and distributed file system manage highly concurrent access to data over multiple servers
+	* A datacenter can provide storage resources with different QoS
+
+## Data center management for Big Data
+* HyperConverged architecture: use of general-purpose low-cost hardware instead of dedicated systems
+	* It is becoming increasingly popular
+	* Storage and computing happen on the same consumer-level machines, not on separate and dedicated areas of a server farm
+	* It is suitable for Big Data and MapReduce applications
+	* It is easily scalable
+* Provisioning: the deployment of thousands of servers in a datacenter can be facilitated by automated tools for installation and configuration
+	* Foreman is an application that manages the lifecycle of servers (physical or virtual)
+		* It is open source, accessible from a web interface, an API, or the command line
+		* It allows to define the OS to be installed, the installation medium, files to be executed
+		* If integrated with Puppet it acts as an external node classifier
+	* Puppet is an application for the automatic deployment and configuration of servers
+		* It is open source and works through modules written in a declarative language (many contributed modules are available)
+		* It is composed of a Puppet master and a Puppet agent
+		* The Puppet master knows how the nodes should be configured and compares their actual configuration with the desired one
+		* The Puppet agent sends to the master the actual configuration of nodes and executes the proper actions to apply the desired configuration
+* Monitoring
 
 # Cloud Computing
 * Cloud computing deals with supplying information and communication technologies as a service
