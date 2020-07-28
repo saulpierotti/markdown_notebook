@@ -264,45 +264,54 @@
 	* The payload is the actual data that needs to be transmitted trough the network
 	* The control information provides the data that the network needs for correct shipment of the packet: source, destination, error detection code, sequencing information
 	* Increasing the payload proportion in a packet increases the transmission speed at the cost of accuracy
-* MTU (maximum transmission unit) is the size of the largest protocol data unit (PDU) that can be transmitted in a single network layer transaction
-	* Larger MTU reduces overhead but can increase delay
-	* It should be set so to respect the properties of the physical netwrok
-* The MAC (media access control) address is a unique ID assigned to a NIC (network interface controller)
-	* It is at OSI 2
-	* It is used for communications within a netwrok segment
-* The IP (internet protocol) address is a numerical label assigned to the machine
-	* It is at layer OSI 3
-	* IPv4 is a 32 bit number
-	* To make it more human-readable, each byte is represented with a decimal number from 0 to 255
-* The IP is subdivided into a subnet and a rest field using the CIDR notation or the subnet mask
-	* The network prefix identifies the netwrok, while the rest field is host-specific
-	* The CIDR notation is represented with a slash after the IP that says the number of bits to be used for the subnet
-		* `192.168.1.1/24` means that the first 24 bits of the 32 total (`192.168.1`) are the subnet, while `1` is the rest field
-	* The subnet mask (255.255.255.0) means that the first 3 bytes are the subnet while the last one is the rest field
-		* The subnet is obtained with a bitwise AND between IP and subnet mask
-* IPv4 uses private adresses, that do not to be globally unique
-	* They are not exposed to the internet
-	* The private address is translated to/from a global address with NAT (network adress translation)
-* There are 3 non-overlapping adrress ranges reserved for private use
+* The MTU (maximum transmission unit) is the size of the largest protocol data unit (PDU) that can be transmitted in a single network layer transaction
+	* It is related (but not equal, there is control information!) to the maximum frame size that can be transported by the data link layer
+	* A larger MTU is related to a reduced overhead while a smaller MTU can reduce network delay
+	* It should be set so to respect the properties of the physical network and not exceed its capabilities
+* The MAC (Media Access Control) address is a unique ID assigned to a NIC (Network Interface Controller) for use as a network address in a given network segment
+	* It is used in most of the IEEE802 technologies such as Ethernet, WiFi, Bluetooth
+	* It is at the medium access control protocol sublayer of the data link layer (OSI layer 2)
+	* A MAC address is composed of 6 groups of 2 hexadecimal digits separated by hyphens, colons, or without a separator
+	* It is assigned primarily by the device manufacturer and physically stored in a read-only memory or in the firmware of the device (burned-in address)
+* The IP (internet protocol) address is a numerical label assigned to each device connected to a computer network that uses the Internet Protocol for communication
+	* It serves as an identifier of an host on a network and for the routing of packets
+	* IPv4 defines an IP address as a 32 bit number
+	* To make the IP address more human-readable, each byte is usually represented with a decimal number from 0 to 255 ($2^8 = 256$ possible states of a byte)
+* The IP is subdivided into a network prefix (subnet) and a rest field (host identifier)
+	* The network prefix is represented by a variable number of higer-order bits
+	* How many bits belong to the network prefix can be specified using the CIDR notation or a subnet mask
+	* The CIDR notation is represented with a slash after the IP address that specifies the number of bits to be used for the subnet
+		* `192.168.1.1/24` means that the first 24 bits of the 32 total (the first 3 of 4 bytes, `192.168.1`) are the subnet, while `1` is the rest field
+	* A subnet mask is used in a logic AND operation against the IP address for obtaining the subnet, and in a NAND operation for obtaining the rest field
+		* A subnet mask of `255.255.255.0` means that the first 3 bytes belong to the subnet while the last byte forms the rest field
+* The early design of the IP envisioned global end-to-end connectivity among all the Internet hosts
+	* This required all the addresses to be globally unique
+* Subsequently, with the development of private networks, it was realised that private addresses for each device needed to be unique only inside the LAN, while maintaining a gloablly unique public address for the LAN router
+	* Computer that are not directly connected to the Internet use a NAT (Network Address Translation) service that translates their private IP to/from the public IP of the router
+* There are 3 non-overlapping address ranges reserved for private use
 	* 24 bit block: CIDR 10.0.0.0/8
-		* 8 bits is the subnet so 24 bits (8-32) is the rest field
+		* The first byte (10) is the subnet, while the 3 following bytes compose the host identifier
 	* 20 bit block: CIDR 172.16.0.0/12
+		* The first byte and part of the second form the subnet (172.16 to 172.31)
 	* 16 bit block: CIDR 192.168.0.0/16
-		* 8 bit block: CIDR 192.168.0.0/24
-* IPv6 has a 128 bit address space
-	* Actually it is much different from IPv4 in terms of routing
-	* Its size allows to reserve large address blocks for specific use
-	* The unique local address (ULA) is reserved for local use
-		* It is fc00::/7
-* `ifconfig` can be used to configure the network interface
+		* The first 2 bytes (192.168) form the subnet, while the 2 following bytes compose the host identifier
+	* 8 bit block: CIDR 192.168.0.0/24
+* In the version 6 of the Internet protocol (IPv6) the address space was increased to 128 bits
+	* The address space is not the only difference between IPv4 and IPv6, they are much different in terms of routing
+	* The magnitude of the IPv6 address space is deemed sufficient for the foreseeable future
+	* Its size allows to reserve large address blocks for specific use and to aggregate addresses for more efficient routing
+	* A unique local address (ULA) in IPv6 is reserved for local use and corresponds to fc00::/7
+		* It is the equivalent of a private IPv4 address
+		* An address in this range can be used without registration in the scope of a private network
+* `ifconfig` can be used to configure and inspect the network interface on a Linux system
 * The loopback network device: a connection to the same machine
-	* It is entirely managed by the OS and does not send any packet to network devices
+	* It is entirely managed via software by the OS and does not send any packet to network devices
 	* It is assigned to the block 127.0.0.0/8 in IPv4
-	* In practice it is used almost always 127.0.0.1
-	* `localhost` is mapped to 127.0.0.1
-	* It is used for diagnostic and by applications to reach resources on the same machine
-* DNS is a decentralised mapping system between IP addresses and mnemonic names 
-* A network protocol is a set of rules for exchanging packets over a network
+	* In practice it is used almost always only the address 127.0.0.1
+	* `localhost` is mapped to 127.0.0.1 in most computers
+	* It is used for diagnostic and by applications to reach resources on the same machine (e.g. by Jupyter to show its interface)
+* DNS is a hierarchical and decentralised mapping system between IP addresses and mnemonic names 
+* A communication protocol is a set of rules for exchanging packets over a network
 	* In a protocol stack each protocol uses services from the one below it
 	* HTTP runs over TCP which runs over IP
 * There are various kinds of bandwith
