@@ -205,47 +205,65 @@
 
 # Network
 * A computer network is an infrastructure that shares resources between nodes
-* Network topology can affect reliability and throughput
+* Data transmission between nodes is supported over data links consisting of a physical medium
+* A network node is a network computer device that originates, routes or terminates data communication
+* Nodes are generally identified by network addresses
+* Network topology can affect reliability and throughput of a network
+	* The more connected a network is, the more reliable, but also the more expensive to build and maintain it is
 	* Bus: everithing connected to the backbone
 	* Star: everithing connected to a centrul node
 	* Ring: each node connected to the ones at its sides
 	* Mesh: each node is connected to an arbitrary number of nodes but guaranteeing that all nodes can be reached
-	* Tree: hyerarchical
+	* Tree: hyerarchical organization
 	* Fully connected network
-* OSI (open system interconnection) model: a series of layers from physical to abstract
+* The OSI (open system interconnection) model: a conceptual model that characterizes and standardizes communication in computer systems without regard to its internal structure or technology
 	* Layer 1, physiscal layer: concerns the raw bit transmission
 		* It codes and decodes bits into the physical transmission protocol (voltage levels, frequencies, ...)
+		* The data transmitted is unstructured: it is just bits
 	* Layer 2, data link: node to node data transfer
-		* It cacthes and corrects errors in layer 1 transmission
-		* Itinitiates, mantains, and terminates node to node connections
-		* The MAC is parto of this level
+		* It catches and corrects errors in layer 1 transmission
+		* It initiates, mantains, and terminates node to node connections
+		* The Medium Access Control (MAC) layes is part of this level
+			* It is responsble for controlling how network devices gain access to a medium and to the permission for transmitting data
+		* The Logical Link Control (LLC) layer catches and corrects errors in layer 1
 	* Layer 3, network layer: packets of data and transmission across networks
 		* It splits the data in packets
-		* It manages the route data to an address in the network
+		* It manages the route to an address in the network for data packets to follow
 		* It can provide reliable data transfer, but not necessarily
+		* It may (or not) report on delivery errors
 	* Layer 4, transport layer: control data reliability
-		* It re-transmits damaged packets
-		* It includes TCP and UDP
-	* Layer 5, session layer: ports and sessions
-	* Layer 6, presentation layer: encryption and make the data usable
+		* It re-transmits damaged packets and ackowledges successfull data transmission
+		* It segments the message from the application layer and de-segments it for the application layer on the receiving end
+		* There are 4 classes of transport protocols from class 0 (fewest features) to class 4 (for unreliable network such as the Internet)
+		* Class 4 transport protocols are close to TCP
+	* Layer 5, session layer: manages ports and sessions, and maintains connections
+	* Layer 6, presentation layer: it ensures that the data is in a usable format
+		* If needed, it performs encryption and decryption
 	* Layer 7, application layer: human-computer interaction layer, it interacts with applications and with the presentation layer
+		* It is the interface that an application uses for interacting with the network
 * OSI is a general networking model and reference framework
 * The Internet does not strictly follow the OSI model, but it uses the internet protocol suite (TCP/IP)
 * The TCP/IP model (not the TCP protocol!) is an alternative to OSI
-	* It collapses OSI 7 to 5 in the application level and OSI 1 and 2 to the netwrok interface level
-* LAN (local area network) are small and localised networks
+	* It is called TCP/IP because it is based on the TCP protocol and on the IP protocol
+	* It collapses OSI 7 to 5 in the application level and OSI 1 and 2 in the netwrok interface level
+* LANs (Local Area Networks) are small and localised networks
 	* They are present in houses (made by a router), universities, businesses
-* WAN (wide area network) cover cities, nations, ecc.
-	* It is made up of connected LANs
-	* Routing a packet in a WAN means finding to whoch LAN it should go
-	* ARPANET (US defense) was the first WAN and the first network to implement TCP/IP
-* LHCone network: the WAN of the LHC
-* Packets: organising data
-	* The alternative is to transmit bit streams
-	* It is a formatted list of bits of 10 bits to some kbs
-	* They include control information like destination, source, checksums
-	* The actual data transmitted is the payload
-	* Increasing the payload increases speed at the cost of accuracy
+	* They are controlled and managed in-house by the organization that deploys them
+	* They are typically fast and trusted
+* WANs (Wide Area Networks) cover cities, nations, and the whole world
+	* They are made up of connected LANs
+	* Routing a packet in a WAN means finding to which LAN it should go
+	* The Advanced Research Projects Agency Network (ARPANET, US defense) was the first WAN and the first network to implement TCP/IP
+* The LHCone network is the WAN of the LHC, that connects LHC tier 1, 2, and 3 sites
+* Computer communication links that do not support data packets work by transmitting bit streams
+* The wast majority of computer networks transfers data in packets
+	* A packet is a formatted unit of data
+	* It is a list of bits, a few 10 byets to some kylobytes long, carried by a packed switched network
+	* A message that does not fit in a packet is divided in multiple packets and then re-assembled at the destination
+* A packet is composed of a payload and control information
+	* The payload is the actual data that needs to be transmitted trough the network
+	* The control information provides the data that the network needs for correct shipment of the packet: source, destination, error detection code, sequencing information
+	* Increasing the payload proportion in a packet increases the transmission speed at the cost of accuracy
 * MTU (maximum transmission unit) is the size of the largest protocol data unit (PDU) that can be transmitted in a single network layer transaction
 	* Larger MTU reduces overhead but can increase delay
 	* It should be set so to respect the properties of the physical netwrok
