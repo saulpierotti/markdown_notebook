@@ -479,13 +479,18 @@
 	* A DAS is connected to an host trough a Host Bus Adapter (HBA)
 	* Cables are important, especially for DAS systems
 		* The main protocols used are ATA, SATA, NVMe, SCSI, SAS, USB, and fiber channel
-* A JBOD (just a bunch of disks) is a container containing disks that can be plugged into a server
-* A NAS (network access storage) is a storage device exposed to a network
+* A JBOD (Just a Bunch Of Disks) is a container containing disks that can be plugged into a server
+* A NAS (Network Access Storage) is a file-level storage server exposed to a network
 	* It provides file level access for external clients
-	* It uses protocols like NFS and SAMBA
+	* It is usually represented by a purpose-built computer that hosts a collection of storage devices, often in a redundat or RAID arrangement
+	* It uses file sharing protocols like NFS and SAMBA
+	* A NAS removes the file-sharing responsibility from other computers on the network
 * A storage area network (SAN) is a dedicated network that provides storage access at the block level
-	* I am not exposing the file system, but the disk itself
-* The SAN is composed of an host layer, a fabric layer and a storage layer
+	* With a SAN I am not exposing the file system, but the disk itself
+	* The connections are made by Fibre Channel, iSCSI, or Infiniband
+	* A SAN is composed of a series of storage and network devices, that can be dedicated or not
+	* A file system can be created on top of a SAN to provide file-level access
+* A SAN is composed of an host layer, a fabric layer and a storage layer
 	* The host layer is composed of servers that allow access to the SAN
 	* The gabric layer is composed of cables, routers, switches
 	* The storage layer is composed of the storage devices
