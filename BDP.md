@@ -590,7 +590,19 @@
 		* It is composed of a Puppet master and a Puppet agent
 		* The Puppet master knows how the nodes should be configured and compares their actual configuration with the desired one
 		* The Puppet agent sends to the master the actual configuration of nodes and executes the proper actions to apply the desired configuration
-* Monitoring
+* Monitoring and alarming: monitor the operations of the datacenter and report anomalies
+	* Monitoring data is typically accessed from a web interface or with a reporting tool
+	* An alarming system notifies administrators in case of anomalies
+		* An anomaly can be a server crash, or the passing of a threshold (disk usage, memory, CPU)
+		* It can hanlde specific events, for instance restart a service in case of a crash
+
+## Power and cooling
+* The power infrastructure of a datacenter provides electricity to all the components of the farm
+* It can emply Uninterruptable Power Supplyes (UPSs), a system that prevents failure in case of electrical cuts
+	* It can be based on batteries, inertial systems, engines, or some combination of these elements
+* The cooling system of a datacenter can include free cooling, forced air flow, liquid submersion, liquid cooling, heat pipes, and many other systems
+* The Power Usage Effectiveness (PUE) of a datacenter is the ratio among the energy used for computing and the energy used for overheads like cooling
+	* Its ideal value is 1.0: all the energy is used for IT systems and not for overheads
 
 # Cloud Computing
 * Cloud computing deals with supplying information and communication technologies as a service
