@@ -357,19 +357,35 @@
 	* `dig`: lookup a name
 	* `whois`: pulls information on an address from IANA (Internet Assigned Numbers Authority)
 
-# Computing Infrastructures
+## Computing Infrastructures
 * A computing farm is a collection of servers and it can have millions of cores
-	* Network devices manage communication between servers and the interaction with users
-* Intel Xeon is used in datacenters since it is reliable and can work continuously
-* The link between sockets in the same motherboard is called qlink
-* Servers are organised in hot islands which are separated by a cooling system
-* A computing farm is usually shared among paying customers
-	* The resources must be allocated effciently among users
-	* The batch scheduler manages resource access
-* A batch system takes care of scheduling non-interactive jobs
-	* There are many batch systems: HTCondor, OpenLava, LSF, ...
-	* It dynamically allocates jobs so to maximise cluster use, minimise latency and respect fairshare on a time window
+	* Network devices manage communication among servers and the interactions with users
+	* The Intel Xeon CPU is often used in datacenters since it is reliable and can work continuously
+	* The link between sockets in the same motherboard is called qlink
+	* Servers are organised in hot islands which are separated by a cooling system
+* In a datacenter typically multiple users share the same resources
+	* It is important to organize resource usage so to avoid wasting computing power
+	* Different users could have paid for different quality of services
+	* Different users can have different priorities
+* A batch system (or scheduler) manages the concurrent access to resources, respecting priorities and usage shares as much as possible
+	* It is an application that controls the inattended (batch) execution of jobs (task to be executed)
+	* There are many batch schedulers: HTCondor, OpenLava, LSF, ...
+	* A batch system takes care of scheduling non-interactive jobs and manages resource access
 	* It provides a single point of control for jobs submitted to the CPU farm
+	* It dynamically allocates jobs so to maximise cluster use, minimise latency and respect fairshare on a time window
+		* A computing farm is usually shared among paying customers
+	* Jobs are often organised in queues
+* A single job is batch instruction that occupies a single slot and it is executed in a single core
+* A DAG workfolow is a series of jobs dependent from each other described by a directed acyclic graph
+	* It is essentially a pipeline
+	* The output of a job is the input of another
+* A collection is a group of jobs that can be run in parallel
+	* They typically act on different input data
+* A parallel job is a job that needs to run in more than 1 core
+* A parametric job is a collection that can be easily defined by a parameter
+* Fair share scheduling: each user should obtain its fair share of resources, depending on the quality of service he paid for
+	* Normally jobs are dispatched with a FIFO behaviour (first come first served, FCFS)
+	* With fair share scheduling, the load is redistributed across queues so that no queue becomes starved and no user can monopolise resources
 * Jobs are composed of
 	* Job type
 	* Prologue: initial checks
@@ -380,11 +396,6 @@
 	* Output sandbox: the files that need to be produced
 	* Epilogue: final cleanup, file uploads, updates, ...
 	* Error recovery: what to do if the job fails
-* A job can be a single batch job that occupyies a single slot and it is executed in one core
-* A DAG workfolow is a series of jobs dependent from each other described by a directed acyclic graph
-	* It is essentially a pipeline
-* A collection of jobs can be run in parallel
-* A parallel job needs more than 1 core to run
 * Reservation: the batch scheduler can reserve cores for 1 job that is waiting for something to be executed
 	* This is typical of parallel jobs that are waiting for enough cores to be available
 * Backfill: while the reserved core are idle they can be used by other jobs
