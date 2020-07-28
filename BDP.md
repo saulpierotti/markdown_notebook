@@ -386,6 +386,13 @@
 * Fair share scheduling: each user should obtain its fair share of resources, depending on the quality of service he paid for
 	* Normally jobs are dispatched with a FIFO behaviour (first come first served, FCFS)
 	* With fair share scheduling, the load is redistributed across queues so that no queue becomes starved and no user can monopolise resources
+	* Fair share does not mean necessarily equal share, customers could have paid for different service levels!
+* Reservation: the batch scheduler can reserve cores for 1 job that is waiting for something to be executed
+	* This is typical of parallel jobs that are waiting for enough cores to be available
+* Backfill: while the reserved cores are idle they can be used by other jobs whose duration does not exceed the starting time of the job that reserved the cores
+	* Only jobs that will finish before the job that reserved the cores will start are permitted
+	* For backfill to be possible, the user must declare the duration of his jobs!
+	* After the pre-determined time expires, the job is killed by the scheduler
 * Jobs are composed of
 	* Job type
 	* Prologue: initial checks
@@ -396,10 +403,6 @@
 	* Output sandbox: the files that need to be produced
 	* Epilogue: final cleanup, file uploads, updates, ...
 	* Error recovery: what to do if the job fails
-* Reservation: the batch scheduler can reserve cores for 1 job that is waiting for something to be executed
-	* This is typical of parallel jobs that are waiting for enough cores to be available
-* Backfill: while the reserved core are idle they can be used by other jobs
-	* Only jobs that will finish before the job that reserved the cores will start are permitted
 
 # Storage
 * The performance of a storage device is described in terms of bandwith and IOPS
