@@ -756,9 +756,6 @@
 * The cloud can be provised with or without virtualization
 * Provisioning of VMs is NOT cloud computing if it does not respect the self-service, on-demand, network-based, elastic offer and pay-per-use paradigms
 
-
-## Hadoop
-
 ## SQL
 * It is a relational DBMS based on tables
 * It works with a specific schema
