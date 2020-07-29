@@ -595,12 +595,15 @@
 	* An alarming system notifies administrators in case of anomalies
 		* An anomaly can be a server crash, or the passing of a threshold (disk usage, memory, CPU)
 		* It can hanlde specific events, for instance restart a service in case of a crash
+* The fast-performing interconnections of a motherboard form the northbridge, which connects CPU, memory, and PCIe devices
+* The slow-performing interconnections of a motherboard form the southbridge, which connects the northbridge with PCI, USB, SATA, IDE, BIOS, and legacy devices
 
 ## Power and cooling
 * The power infrastructure of a datacenter provides electricity to all the components of the farm
 * It can emply Uninterruptable Power Supplyes (UPSs), a system that prevents failure in case of electrical cuts
 	* It can be based on batteries, inertial systems, engines, or some combination of these elements
 * The cooling system of a datacenter can include free cooling, forced air flow, liquid submersion, liquid cooling, heat pipes, and many other systems
+	* Liquid submersion uses non-electrically conductive liquids such as oils
 * The Power Usage Effectiveness (PUE) of a datacenter is the ratio among the energy used for computing and the energy used for overheads like cooling
 	* Its ideal value is 1.0: all the energy is used for IT systems and not for overheads
 	* The PUE is the inverse of the DataCenter Infrastructure Efficiency (DCIE)
