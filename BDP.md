@@ -638,13 +638,18 @@
 	* Hadoop Ozone: an object storage service
 	* Hadoop Submarine: a machine learning engine
 * The Hadoop Distributed File System (HDFS) is the core component of the Hadoop ecosystem
-	* It abstracts resources and allows to see the whole HDFS as a single unit
-	* It stores data in the various nodes and mantains metadata
+	* It creates a level of abstraction above the resources
+	* It allows to see the whole HDFS as a single unit
+	* It stores data in the various nodes and mantains a log of the stored data
 	* It is composed of 2 core components: NameNode and DataNode
-	* NameNode is the metadata server: high computational requirements but low storage requirements
-	* DataNode: commodity hardware with more storage resources
-	* There is typically only 1 NameNode and many DataNode
-* Writing in an Hadoop cluster requires 2 essential pieces of information to be submitted with the data: block size and replication (number of copies of the block that I want)
+	* The NameNode is the metadata server
+		* It does not store the actual data
+		* It has high computational requirements but low storage requirements
+	* The DataNodes actually store the data
+		* They can be represented by commodity hardware
+		* They tend to be storage-specialised systems
+	* There is typically only 1 NameNode and many DataNode in an Hadoop cluster
+* Writing in an Hadoop cluster requires 2 essential pieces of information to be submitted with the data: block size and replication (number of copies of the block that I want to be stored in the Hadoop cluster)
 	* Typically a block size of 64 or 128 Mb and a replication of 3 are used
 	* The client sends the request to the NameNode, which returns a sorted list of DataNodes in order of distance from the client
 	* The client sends the data only to the first DataNode
