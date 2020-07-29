@@ -616,10 +616,6 @@
 	* Storing data on non-relational databases like MongoDB (a NoSQL database): this requires little coding skills
 	* Storing data on massively parallel database systems and using MapReduce applications: typically requires a specialised data scientist
 * The Big Data software ecosystem is too damn big
-* The Hadoop ecosystem is a open-source system for dealing with Big Data
-	* It uses the HaDoop File System (HDFS) for storage
-	* It uses YARN for resource management
-	* It takes advantage of the MapReduce paradigm
 * MapReduce is an algorithm developped by Google for parallel and decentralized processing and generation of big data
 	* It does not rely on a centralised database and it usually uses a distributed filesystem like HDFS
 	* It is based on the Map and Reduce actions
@@ -628,9 +624,9 @@
 		* Reduce: aggregate the data from a set of tuples
 			* I take several dictionaries from different documents and count the total word occurrence
 * Apache Hadoop is an open-source software ecosystem for big data analysis and storage
-	* It is designed to scale well from a single server to thousands
+	* It is designed to scale well from a single server to thousands of servers
 	* It is highly fault tolerant
-	* It is typically run on low-grade hardware, but it is highly reliable because of the software-level failure handling
+	* It is typically run on low-grade hardware, but it is highly reliable because of the software-level failure handling routines
 	* New nodes can be added quickly without changing configurations
 	* It does not require any schema, it can accept any kind of data
 	* When a node fails the system just redirects the load on the remaining nodes, without halting
@@ -638,9 +634,9 @@
 	* Hadoop Common: a series of common utilities that support the other modules
 	* Hadoop Distributed File System (HDFS)
 	* Hadoop YARN: framework for job scheduling and resource management
-	* Hadoop MapReduce: a YARN-bases system for parallel processing based on the MapReduce approach
-	* Hadoop Ozone: object store
-	* Hadoop Submarine: machine learning engine
+	* Hadoop MapReduce: a YARN-based system for parallel processing based on the MapReduce approach
+	* Hadoop Ozone: an object storage service
+	* Hadoop Submarine: a machine learning engine
 * The Hadoop Distributed File System (HDFS) is the core component of the Hadoop ecosystem
 	* It abstracts resources and allows to see the whole HDFS as a single unit
 	* It stores data in the various nodes and mantains metadata
