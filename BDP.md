@@ -609,6 +609,82 @@
 	* The PUE is the inverse of the DataCenter Infrastructure Efficiency (DCIE)
 	* In 2008 Google had a PUE of 1.21 across 6 of its centers
 
+# Hadoop and MapReduce
+* To work with Big Data, you need an infrastructure which is capable of working with a huge volume of unstructured or semistructured data in real time
+	* Typically this infrastructure is the cloud
+* There are 2 main ways of dealing with Big Data
+	* Storing data on non-relational databases like MongoDB (a NoSQL database): this requires little coding skills
+	* Storing data on massively parallel database systems and using MapReduce applications: typically requires a specialised data scientist
+* The Big Data software ecosystem is too damn big
+* The Hadoop ecosystem is a open-source system for dealing with Big Data
+	* It uses the HaDoop File System (HDFS) for storage
+	* It uses YARN for resource management
+	* It takes advantage of the MapReduce paradigm
+* MapReduce is an algorithm developped by Google for parallel and decentralized processing and generation of big data
+	* It does not rely on a centralised database and it usually uses a distributed filesystem like HDFS
+	* It is based on the Map and Reduce actions
+		* Map: convert a set of data into another, described by key/value tuples
+			* I can take a document and form a dictionary with single words as keys and their count in the document as value
+		* Reduce: aggregate the data from a set of tuples
+			* I take several dictionaries from different documents and count the total word occurrence
+* Apache Hadoop is an open-source software ecosystem for big data analysis and storage
+	* It is designed to scale well from a single server to thousands
+	* It is highly fault tolerant
+	* It is typically run on low-grade hardware, but it is highly reliable because of the software-level failure handling
+	* New nodes can be added quickly without changing configurations
+	* It does not require any schema, it can accept any kind of data
+	* When a node fails the system just redirects the load on the remaining nodes, without halting
+* Hadoop is composed of
+	* Hadoop Common: a series of common utilities that support the other modules
+	* Hadoop Distributed File System (HDFS)
+	* Hadoop YARN: framework for job scheduling and resource management
+	* Hadoop MapReduce: a YARN-bases system for parallel processing based on the MapReduce approach
+	* Hadoop Ozone: object store
+	* Hadoop Submarine: machine learning engine
+* The Hadoop Distributed File System (HDFS) is the core component of the Hadoop ecosystem
+	* It abstracts resources and allows to see the whole HDFS as a single unit
+	* It stores data in the various nodes and mantains metadata
+	* It is composed of 2 core components: NameNode and DataNode
+	* NameNode is the metadata server: high computational requirements but low storage requirements
+	* DataNode: commodity hardware with more storage resources
+	* There is typically only 1 NameNode and many DataNode
+* Writing in an Hadoop cluster requires 2 essential pieces of information to be submitted with the data: block size and replication (number of copies of the block that I want)
+	* Typically a block size of 64 or 128 Mb and a replication of 3 are used
+	* The client sends the request to the NameNode, which returns a sorted list of DataNodes in order of distance from the client
+	* The client sends the data only to the first DataNode
+	* The first DataNode sends to the second and so on for the desired replication level
+	* All the DataNode send a confirmation for finished writing to the NameNode
+	* When all the blocks have been written the NameNode stores the file metadata
+	* The NameNode returns a success message to the client
+* Reading data from an Hadoop cluster
+	* The client request a file to the NameNode
+	* The NameNode returns a list of blocks and of DataNodes having them
+	* The client retrieves the blocks from the respective DataNodes
+* Node failure in Hadoop is handled by the NameNode
+	* The DataNodes every 3 seconds send and HEARTBEAT message to the NameNode, signaling their presence
+	* If the NameNode does not receive the HEARTBEAT from a DataNode (because it is dead or there is a network failure) it considers it dead
+* Network failure handling in Hadoop
+	* Whenever data is sent the receiver returns an ACK message
+	* If the ACK message is not received after several trials the sender assumes the receiver to be dead
+* Corrupted data in Hadoop
+	* Data always include a checksum when it is sent and when it is stored
+	* DataNodes periodically send a BLOCKREPORT to the NameNode, a list of all the blocks in the node
+		* Before sending the BLOCKREPORT a DataNode checks all the block checksums
+		* If a block is corrupted it is not sent to the NameNode, that assumes the missing one to be corrupted
+* The NameNode always mantains 2 essential tables: a list of blocks and a list of DataNodes
+* When a DataNode is dead or assumed dead, it is skept for all transactions both by client and NameNode
+	* If it is so the data will not reach the desired replication, but the NameNode will subsequently instruct the DataNodes to copy data from each other accordingly
+* In order to be as resilient as possible, block replicas are kept at most as 1 per datanode and 2 per server rack, if possible
+	* It is also possible to specify a custom placemnt algorithm
+* YARN performs allocates resources and schedules jobs in the Hadoop cluster
+* It is composed of 2 major components: ResourceManager and NodeManager
+* The ResourceManager is the central node of the cluster
+	* It receives requests and dispatches them to the relevant NodeManagers
+* The NodeManagers are installed onto each DataNode and manages task execution of that node
+* ApplicationManagers accept job submission and forwards them to the respective ApplicationMaster on the DataNode
+* Hadoop MapReduce is the core processing component of the ecosystem
+	* It is a software framework for writing applications that process large datasets using distributed and parallel algorithms in an Hadoop environment
+
 # Cloud Computing
 * Cloud computing deals with supplying information and communication technologies as a service
 * It enables uniquitous access to shared pools of configurable system resources and higer level services that can be rapidly provisioned with minimal management effort, often over the internet
@@ -678,81 +754,8 @@
 * The cloud can be provised with or without virtualization
 * Provisioning of VMs is NOT cloud computing if it does not respect the self-service, on-demand, network-based, elastic offer and pay-per-use paradigms
 
-# Databases
-* Big data are typically stored in relational or non-relational databases
-	* Non-relational databases require little coding skills
-		* They include NoSQL databases like MongoDB
-	* Relational databases are massively parallel systems
-		* They typically require data scientists
-* There is a huge amount of software in the big data ecosystem
-
-## MapReduce
-* MapReduce is an algorithm developped by Google for parallel and decentralized processing and generation of big data
-	* It usually uses a distributed filesystem like Hadoop
-* It is based on the Map and Reduce actions
-	* Map: convert a set of data into another, described by key/value tuples
-		* I can take a document and form a dictionary with single words as keys and their count in the document as value
-	* Reduce: aggregate the data from a set of tuples
-		* I take several dictionaries from different documents and count the total word occurrence
 
 ## Hadoop
-* Apache Hadoop is an open-source software ecosystem for big data analysis and storage
-	* It is designed to scale well from a single server to thousands
-	* It is highly fault tolerant
-	* It is typically run on low-grade hardware, but it is highly reliable because of the software-level failure handling
-	* New nodes can be added quickly without changing configurations
-	* It does not require any schema, it can accept any kind of data
-	* When a node fails the system just redirects the load on the remaining nodes, without halting
-* Hadoop is composed of
-	* Hadoop Common: a series of common utilities that support the other modules
-	* Hadoop Distributed File System (HDFS)
-	* Hadoop YARN: framework for job scheduling and resource management
-	* Hadoop MapReduce: a YARN-bases system for parallel processing based on the MapReduce approach
-	* Hadoop Ozone: object store
-	* Hadoop Submarine: machine learning engine
-* The Hadoop Distributed File System (HDFS) is the core component of the Hadoop ecosystem
-	* It abstracts resources and allows to see the whole HDFS as a single unit
-	* It stores data in the various nodes and mantains metadata
-	* It is composed of 2 core components: NameNode and DataNode
-	* NameNode is the metadata server: high computational requirements but low storage requirements
-	* DataNode: commodity hardware with more storage resources
-	* There is typically only 1 NameNode and many DataNode
-* Writing in an Hadoop cluster requires 2 essential pieces of information to be submitted with the data: block size and replication (number of copies of the block that I want)
-	* Typically a block size of 64 or 128 Mb and a replication of 3 are used
-	* The client sends the request to the NameNode, which returns a sorted list of DataNodes in order of distance from the client
-	* The client sends the data only to the first DataNode
-	* The first DataNode sends to the second and so on for the desired replication level
-	* All the DataNode send a confirmation for finished writing to the NameNode
-	* When all the blocks have been written the NameNode stores the file metadata
-	* The NameNode returns a success message to the client
-* Reading data from an Hadoop cluster
-	* The client request a file to the NameNode
-	* The NameNode returns a list of blocks and of DataNodes having them
-	* The client retrieves the blocks from the respective DataNodes
-* Node failure in Hadoop is handled by the NameNode
-	* The DataNodes every 3 seconds send and HEARTBEAT message to the NameNode, signaling their presence
-	* If the NameNode does not receive the HEARTBEAT from a DataNode (because it is dead or there is a network failure) it considers it dead
-* Network failure handling in Hadoop
-	* Whenever data is sent the receiver returns an ACK message
-	* If the ACK message is not received after several trials the sender assumes the receiver to be dead
-* Corrupted data in Hadoop
-	* Data always include a checksum when it is sent and when it is stored
-	* DataNodes periodically send a BLOCKREPORT to the NameNode, a list of all the blocks in the node
-		* Before sending the BLOCKREPORT a DataNode checks all the block checksums
-		* If a block is corrupted it is not sent to the NameNode, that assumes the missing one to be corrupted
-* The NameNode always mantains 2 essential tables: a list of blocks and a list of DataNodes
-* When a DataNode is dead or assumed dead, it is skept for all transactions both by client and NameNode
-	* If it is so the data will not reach the desired replication, but the NameNode will subsequently instruct the DataNodes to copy data from each other accordingly
-* In order to be as resilient as possible, block replicas are kept at most as 1 per datanode and 2 per server rack, if possible
-	* It is also possible to specify a custom placemnt algorithm
-* YARN performs allocates resources and schedules jobs in the Hadoop cluster
-* It is composed of 2 major components: ResourceManager and NodeManager
-* The ResourceManager is the central node of the cluster
-	* It receives requests and dispatches them to the relevant NodeManagers
-* The NodeManagers are installed onto each DataNode and manages task execution of that node
-* ApplicationManagers accept job submission and forwards them to the respective ApplicationMaster on the DataNode
-* Hadoop MapReduce is the core processing component of the ecosystem
-	* It is a software framework for writing applications that process large datasets using distributed and parallel algorithms in an Hadoop environment
 
 ## SQL
 * It is a relational DBMS based on tables
