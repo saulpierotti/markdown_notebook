@@ -662,27 +662,28 @@
 	* The NameNode returns a list of blocks and of DataNodes having them
 	* The client retrieves the blocks from the respective DataNodes
 * Node failure in Hadoop is handled by the NameNode
-	* The DataNodes every 3 seconds send and HEARTBEAT message to the NameNode, signaling their presence
-	* If the NameNode does not receive the HEARTBEAT from a DataNode (because it is dead or there is a network failure) it considers it dead
+	* The DataNodes every 3 seconds send a HEARTBEAT message to the NameNode, signaling their presence
+	* If the NameNode does not receive the HEARTBEAT from a DataNode in 10 minutes (because it is dead or there is a network failure) it considers it dead
 * Network failure handling in Hadoop
-	* Whenever data is sent the receiver returns an ACK message
+	* Whenever data is sent the receiver returns an ACK (acknowledge) message
 	* If the ACK message is not received after several trials the sender assumes the receiver to be dead
 * Corrupted data in Hadoop
 	* Data always include a checksum when it is sent and when it is stored
 	* DataNodes periodically send a BLOCKREPORT to the NameNode, a list of all the blocks in the node
 		* Before sending the BLOCKREPORT a DataNode checks all the block checksums
-		* If a block is corrupted it is not sent to the NameNode, that assumes the missing one to be corrupted
+		* If a block is corrupted it is not sent to the NameNode
+		* The blocks that the NameNode knows to be stored in a specific DataNode but that are not included in the BLOCKREPORT of that DataNode are assumed to be corrupted
 * The NameNode always mantains 2 essential tables: a list of blocks and a list of DataNodes
 * When a DataNode is dead or assumed dead, it is skept for all transactions both by client and NameNode
 	* If it is so the data will not reach the desired replication, but the NameNode will subsequently instruct the DataNodes to copy data from each other accordingly
-* In order to be as resilient as possible, block replicas are kept at most as 1 per datanode and 2 per server rack, if possible
+* In order to be as resilient as possible, block replicas are kept at most as 1 per server and 2 per server rack, if possible
 	* It is also possible to specify a custom placemnt algorithm
-* YARN performs allocates resources and schedules jobs in the Hadoop cluster
-* It is composed of 2 major components: ResourceManager and NodeManager
-* The ResourceManager is the central node of the cluster
-	* It receives requests and dispatches them to the relevant NodeManagers
-* The NodeManagers are installed onto each DataNode and manages task execution of that node
-* ApplicationManagers accept job submission and forwards them to the respective ApplicationMaster on the DataNode
+* YARN allocates resources and schedules jobs in the Hadoop cluster
+	* It is composed of 2 major components: ResourceManager and NodeManager
+	* The ResourceManager is the central node of the cluster
+		* It receives requests and dispatches them to the relevant NodeManagers
+	* The NodeManagers are installed onto each DataNode and manages task execution of that node
+	* ApplicationManagers accept job submission and forwards them to the respective ApplicationMaster on the DataNode
 * Hadoop MapReduce is the core processing component of the ecosystem
 	* It is a software framework for writing applications that process large datasets using distributed and parallel algorithms in an Hadoop environment
 
