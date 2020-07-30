@@ -931,46 +931,17 @@
 * A real-life complex workflow can be a linear combination of CPU-driven and Data-driven models
 	* This is usually the case when different jobs of the workflow need very different hardware architectures (HTC vs HPC)
 
-# Parallel computing
-* The distributed infrastructures we saw until now were localised in the same WAN
-* High throughput computing (HTC) I want to maximise the number of jobs executed, not speed up the single job
-* High performance computing (HPC): I want to speed up the execution time of the single jobs
-* FLOP: number of floating poin operations per second
-
-# HTC
-* HTC infrastructures are PC clusters, server clusters, distributed systems and grids
-* A Grid is an hardware and software infrastructure that provides inexpensive access to high-end computational capabilities
-	* It is NOT subject to centralised control
-	* Uses standard and general-purpose interfaces
-	* Delivers non-trivial QoS
-* The user of a Grid is a virtual organization
-	* It is a set of individuals that share the resources under certain rules
-	* Sharing of resources is highly controlled and well-defined
-	* The owner of the individual resources decides who can access them
-* 95% of the Grid is agreement on protocols between participating institutions
-* There is no Grid owner and the network is distributed: I do not know which machine is processing my data
-* Grids can be based on supercomputers, servers, or volunteers that share desktop PC power
-* Grids are really complex, and they often fail
-* The Grid implements a single sign on policy (one access system grants all the resources available)
-* The Grid should allow for delegation (automatic access by programs)
-* The X509 certificate is used for signing into a Grid
-	* It contains the Public key of the owner, its identity
-	* It is sgned by a certification authority
-* The certification signs the authorization for the user
-* The user can in turn sign a proxy authorization for allowing delegation
-* Each job on the Grid is identified by an URL containing the address of the server who accepted it and a random string
-
-# HPC
-* Some glossary
-	* GFLOPs: billions of floating point operations per second
-	* TDP: thermal design power, it is the maximum amount of heat that the cooling system must be able to dissipate in typical operations
-* The max GFLOP of a system can be calculated from the number of sockets, cores per socket, clock frequency and FLOPs per cycle
+# High Performance Computing (HPC)
+* GFLOPs: billions of floating point operations per second
+	* The max GFLOP of a system can be calculated from the number of sockets, cores per socket, clock frequency and FLOPs per cycle
+* TDP: thermal design power, it is the maximum amount of heat that the cooling system must be able to dissipate in typical operations
 * The first machines for HPC were vector machines
-	* They are contrapposed to the currently used scalar machine for the fact that they could operate directly on vectors with their instruction set
+	* They are contrapposed to the currently used scalar machines for the fact that they could operate directly on vectors with their instruction set
 	* They were using single powerfull processors (small for now!)
 * CRAY-1 (1976) was one of the first vector machines
 	* It was able of 80 MFLOPs in scalar operations and 160/250 MFLOPs in vecotr operations
 	* It was consuming 115 kW for operation + 330 kW for refrigeration!
+	* It costed 8.8 million dollars
 * CRAY-XMP (1982 and 1984) had first 2 and then 4 processors and was capable of 2*200 MFLOPs (800 MFLOPs with 4 processors)
 * CRAY-2 (1985) had 4 processor and was able of 1.9 GFLOPs
 * Subsequently in the 80s there was a shift for vector machines to massively parallel processors (MPP)
@@ -1031,6 +1002,35 @@
 * HPC applications can be bounded by computing or by bandwidth
 * When comparing performances of CPU and GPU, be sure that the applications used for the comparison are optimized for both CPU and GPU and that the algorithm is state of the art!
 * When you see claims of 100+ speedup due to GPU, be suspicious!
+* The distributed infrastructures we saw until now were localised in the same WAN
+* High throughput computing (HTC) I want to maximise the number of jobs executed, not speed up the single job
+* High performance computing (HPC): I want to speed up the execution time of the single jobs
+* FLOP: number of floating poin operations per second
+
+# HTC
+* HTC infrastructures are PC clusters, server clusters, distributed systems and grids
+* A Grid is an hardware and software infrastructure that provides inexpensive access to high-end computational capabilities
+	* It is NOT subject to centralised control
+	* Uses standard and general-purpose interfaces
+	* Delivers non-trivial QoS
+* The user of a Grid is a virtual organization
+	* It is a set of individuals that share the resources under certain rules
+	* Sharing of resources is highly controlled and well-defined
+	* The owner of the individual resources decides who can access them
+* 95% of the Grid is agreement on protocols between participating institutions
+* There is no Grid owner and the network is distributed: I do not know which machine is processing my data
+* Grids can be based on supercomputers, servers, or volunteers that share desktop PC power
+* Grids are really complex, and they often fail
+* The Grid implements a single sign on policy (one access system grants all the resources available)
+* The Grid should allow for delegation (automatic access by programs)
+* The X509 certificate is used for signing into a Grid
+	* It contains the Public key of the owner, its identity
+	* It is sgned by a certification authority
+* The certification signs the authorization for the user
+* The user can in turn sign a proxy authorization for allowing delegation
+* Each job on the Grid is identified by an URL containing the address of the server who accepted it and a random string
+
+# HPC
 
 # Containers
 * A container is a framework used on top of other infrastructures, typically a cloud
