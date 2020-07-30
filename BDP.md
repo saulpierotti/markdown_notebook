@@ -930,8 +930,10 @@
 	* Data distribution is done a priori or by the job itself
 * A real-life complex workflow can be a linear combination of CPU-driven and Data-driven models
 	* This is usually the case when different jobs of the workflow need very different hardware architectures (HTC vs HPC)
+* The distributed infrastructures we saw until now are localised in the same WAN
 
 # High Performance Computing (HPC)
+* High performance computing (HPC): I want to speed up the execution time of single jobs
 * GFLOPs: billions of floating point operations per second
 	* The max GFLOP of a system can be calculated from the number of sockets, cores per socket, clock frequency and FLOPs per cycle
 * TDP: thermal design power, it is the maximum amount of heat that the cooling system must be able to dissipate in typical operations
@@ -1028,12 +1030,9 @@
 		* When you see claims of 100x speedup due to GPU, be suspicious!
 		* A GPU has a penalty compared to a CPU since it needs to move data across the PCI bus from the CPU to the GPU: this must be considered when making comparisons
 	* A modern silicon chip contains integrated components: in the same chip I can have CPU, GPU, chaches, and other devices
-* The distributed infrastructures we saw until now were localised in the same WAN
-* High throughput computing (HTC) I want to maximise the number of jobs executed, not speed up the single job
-* High performance computing (HPC): I want to speed up the execution time of the single jobs
-* FLOP: number of floating poin operations per second
 
 # HTC
+* High throughput computing (HTC) I want to maximise the number of jobs executed, not speed up the single job
 * HTC infrastructures are PC clusters, server clusters, distributed systems and grids
 * A Grid is an hardware and software infrastructure that provides inexpensive access to high-end computational capabilities
 	* It is NOT subject to centralised control
@@ -1055,8 +1054,6 @@
 * The certification signs the authorization for the user
 * The user can in turn sign a proxy authorization for allowing delegation
 * Each job on the Grid is identified by an URL containing the address of the server who accepted it and a random string
-
-# HPC
 
 # Containers
 * A container is a framework used on top of other infrastructures, typically a cloud
