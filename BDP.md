@@ -859,7 +859,21 @@
 	* EU citizens, but not US citizens, have the right to be forgotten
 * The General Data Protection Regulation (GDPR, 2018) is a EU regulation that enforces privacy of personal data
 	* The fines for breaching GDPR are of 20 million € (or 4% of global turnover, whicherver is greater)
-
+	* Personal data is any information related to a natural person or Data Subject that can be used to identify (directly or indirectly) the person
+		* It can be anything, from an IP address to a picture to an email address
+	* For non-personal data (e.g scientific data non related to Data Subjects) it is required
+		* Free movent of data within the EU (no strict data localization)
+		* Data availability for the authorities of the EU
+		* Free porting of data (no vendor lock-in)
+* Some common cloud misunderstandings
+	* Capacity is theoretically infinite, but it is not infinite in practice (as well as credit card limits are not infinite)
+		* We may not be able to obtain the QoS that we need, when we need it
+		* We may be asked a hefty price for what we need
+	* It is not easy to decide if a public or private cloud is best for our needs
+		* I should evaluate the risk for data loss and leakeage, and the terms of the ToC
+* In 2021 28% of total market revenue for infrastructures, middleware and applications is expected to shift to the cloud
+* In 2021 70% of public cloud service revenue is dominated by the top 10 providers
+* There is no cloud, it's just someone else's computer
 
 # Parallel computing
 * The distributed infrastructures we saw until now were localised in the same WAN
