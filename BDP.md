@@ -686,18 +686,64 @@
 	* ApplicationManagers accept job submission and forwards them to the respective ApplicationMaster on the DataNode
 * Hadoop MapReduce is the core processing component of the ecosystem
 	* It is a software framework for writing applications that process large datasets using distributed and parallel algorithms in an Hadoop environment
+* SQL is a relational DBMS based on tables
+	* It works with a specific schema
+	* It uses the powerfull SQL query language
+	* Implementations are MySQL, Oracle, Sqlite, Postgres
+	* It is typically commercially supported
+	* It focuses mostly on consistency: typical application is the database of a bank
+		* We can say that it focuses on the ACID properties: atomicity, consistency, isolation, durability
+	* Scalability is vertical
+* NoSQL is a non-relational and document-based DBMS
+	* It can consist in key-value pairs, graphs, wide-columns
+	* The schema is flexible and it can also host unstructured data
+	* Scalability is horizontal: I can just increase the number of servers in the pool
+	* It uses the non-standard UnQL query language (unstructured query)
+	* Implementations are MongoDB, Cassandra
+	* It is typically supported by the community
+	* It focuses on availability: it does everything possible to remain operational also in case of errors
+	* Consistency is eventual: it is not guaranteed at the end of each transaction but eventually it is restored when there is time available for the operation
+	* Apache Cassandra is open-source and distributed
+		* There is no central node, so no single point of failure
+		* It works with wide-columns
+		* It was initially developped at Facebook
+		* It supports the Hadoop integration and MapReduce
+		* It uses the novel query language CQL
+	* Apache Kafka is a distributed streaming platform
+
+# Virtualization
+* Virtualizing means creating a virtual version of a physical resource through an abstraction layer that hides the underlying implementation
+* Virtual machine are hardware-independent and their resource usage can be dynamically adapted
+* Virtualization advantages
+	* Thanks to virtualization I can consolidate the services provided by many servers into a single machine
+	* Applications are sandboxed in a virtual environment
+		* I can test code and applications without risking to crash the whole physical server
+		* I can create a dedicated envronment for legacy applications
+	* Virtual applications can be provisioned on demand
+	* Hardware and software are decoupled: I can move VMs betwenn different hosts and I can suspend a VM when not needed
+	* I can emulate hardware which is not present on the physical host
+	* I can run applications that are not compatible with the OS of the physical machine
+* Virtualization disadvantages
+	* Virtualization is vulberable to bugs and hacking, since many different hosts and OSs are co-existing on the same hardware
+		* VM-to-VM attack: a VM can have unauthorized acces to data of another VM
+		* VM-to-HV attack: some hypervisors (KVM or XEN) work directly at the level of the hardware: everything can be compromised
+	* Performances in a virtual environment can be worse due to the overhead for the physical host
+		* This is true particularly for I/O operations
+* Provisioning of VMs is NOT cloud computing if it does not respect the self-service, on-demand, network-based, elastic offer and pay-per-use paradigms (see next section)
 
 # Cloud Computing
 * Cloud computing deals with supplying information and communication technologies as a service
-* It enables uniquitous access to shared pools of configurable system resources and higer level services that can be rapidly provisioned with minimal management effort, often over the internet
-* It is similar to a public utility in that achieves economy of scale and coherence
-* The core characteristics are that it is self-service and on-demand, network based
-* Physical resources are pooled and the user has no control over them
-* It uses a pay-per-use model
-* It is not the same as virtualization but it can employ virtualization to pool physical resources
-* The offer is elastic and can be adapted to user needs
-* The infrastructure has a teorethical infinite capacity, but you need infinite money to use it!
-* The model is focused on the concept of service, without the need of thinking about the underlying physical infrastructure
+* The cloud model is focused on the concept of offering a service, without the need of thinking about the underlying physical infrastructure
+* It enables uniquitous access to shared pools of configurable system resources and higer level services that can be rapidly provisioned with minimal management effort, often over the internet (definition from the US National Insttitute of standards and technologies, NINST)
+* It is similar to a public utility in that achieves economy of scale and coherence: the cloud is a utility service
+* Cloud essential characteristics
+	* Self-service, on-demand: computing capabilities can be provisioned unilaterally from the client, without the need for human intervention
+	* Netwrok-based access: capabilities are available over the network and accessed trough clients
+	* Resource pooling: physical resources are pooled by the cloud provider and the user has no control or knowledge of them
+	* Elasticity: resources can be easily scaled up or down in response to demand, with minimal delay and apparent infinite capacity
+	* Pay-per-use: the customer doen not incur in any upfront cost
+* Cloud computing is not the same as virtualization but it can employ virtualization to pool physical resources
+* A cloud infrastructure has a teorethical infinite capacity, but you need infinite money to use it!
 * Infrastructure as a service (IaaS): the customer receives a machine with an OS
 	* It can provide storage, computational and network services and it is often virtualized
 * Platform as a service (PaaS): the customer manages data and software, but no direct access to the OS
@@ -706,83 +752,114 @@
 	* Gmail infrastrucutre for managing the email of a company
 * At the end, what matters for the user is the application: don't focus so much on the implementation!
 * The cloud paradigm has 3 main dimensions: service model (Iaas, PaaS, SaaS), deployment and isolation
+* The service model is what said before: IaaS, PaaS, SaaS
 * Deployment refers to where the services are distributed and it can be public, hybrid or private
-	* A private cloud is accessible only to insidersa and it rarely has infinite resources
-	* A public cloud is AWS, which can be assumed as infinite
-	* An hybrid system is a private system that redirects peak requests to a public system
-	* I could also decide to use a private system for sensitive data and a public cloud for non-sensitive data
+	* A private cloud is accessible only to insiders and it rarely has infinite resources
+	* A community cloud is available to a community of organizations sharing a common goal
+	* A public cloud is AWS or Google Cloud, which can be assumed as infinite
+	* An hybrid system is a combination of the above
+		* I can use a private cloud system that redirects peak requests to a public system
+		* I could also decide to use a private system for sensitive data and a public cloud for non-sensitive data
 * Isolation concerns how I isolate the servies offered to different customers
 	* A dedicated cloud is dedicated to a scope (es. Bioinformatics)
 	* A multi-tenant cloud is multi-purpose and is used by customers with different goals
 	* I can also consider a tenant as a group of customers (es. research group), that payed for a specifc QoS
-* The interaction of an end user with the cloud (es a Facebook user) must be
-	* Easy to access without any specific technology
-	* Private and secure
-	* It must provide means for authentication
+	* The isolation type is essential for determining how to deal with resource segmentation, data protection, application security, auditing, and disaster recovery
+* The main clud use-cases are
+	* End-user that interacts directly with the cloud
+		* It should be easy to access without any specific technology (it should be an open client)
+		* If need by the application, it should provide means for secure authentication
+		* It should focus on privacy and security
+		* The Service Level Agreement (SLA) tend to be simple
+	* Enterprise that uses the cloud to provide services to a end user
+		* SLA tend to be detailed
+		* It should provide, if needed, means of authentication for customers of the enterprise
+		* It should be location-aware for legal purposes
+		* It should proved monitoring services for the enterprise
+		* It should provide standard APIs for different vendors
+	* Enterprise that internally uses cloud services
+		* It may function as a suppletive storage
+		* It may provide peak resources
+		* It should use standards to avoid vendor lock-in (from the perspective of the enterprise)
+	* Different enterprises that use the same cloud
+		* It must handle correctly concurrent access
+		* If some resources (es. storage) are shared, they must be reliably modified by both enterprises
+	* The implementation of a private cloud
+		* It does not require standard APIs, concurrency management, and other issues typical of a public cloud
+	* The process of changing cloud provider
+		* Here standardization is essential
+	* The creation of an hybrid cloud
+		* For the end user the shift from the private to the public cloud should be transparent
 * Migrating an application to the cloud can be motivated by reduction of costs, business agility and savings on management
+	* Public clouds can be adapted much quicker to the demand!
 * The choice of a public or private cloud can be influenced by the cost of WAN traffic, security concerns and integration with pre-existing applications
-* Migrating to a SaaS is not actually a migration but a chango of application
+* Migrating to a SaaS is not actually a migration but a change of application
 * Web hosting is one of the most common cloud use cases
-* Public clouds can be adapted much quicker to the demand!
+* Cloud computing services can be provised with or without virtualization
+	* Cloud virtualization often allows to reduce operational costs
+	* In many cases containers can be provided instead of full-blown virtual machines
+	* A VM is only a building block: real life apps need databases, autoscaling features, ecc.
+	* The Cloud is much more than provisioning VMs
 * Multi-tiered application are organized into a data management tier, a business logic tier and a presentation tier
+	* The data management tier concerns with the databases
 	* If well designed it is possible to migrate the tiers independently to the cloud
-* A stateless service does not store the state (non-interactive web server)
-* A stateful service stores information about user interaction (a shopping cart
+		* This is not always possible, for example in cases with high network traffic between tiers
+* A stateless service does not store the state (a non-interactive web server is stateless)
+* A stateful service stores information about user interactions (a shopping cart is a stateful application)
 	* It cannot be replicated easily!
-* A cloud-friendly application is stateless and distributed
+* A cloud-aware application is stateless and distributed
+	* Disaster recovery and scaling should be built-in in the app, not rely on system features
 	* If there is a rise in requests I can just duplicate the system and create a new instance
-* Cloud-friendly applications are like cattle: I can easily replace them when needed
-* Legacy applications are like pets: I cannot replicate them and I need to take care of them
+	* Cloud-friendly applications are like cattle: I can easily replace them when needed
+* Legacy applications are stateful and monolitic
+	* Fail-over is managed by the infrastructure
+	* Scaling is managed by the infrastructure
+	* Legacy applications are like pets: I cannot replicate them and I need to take care of them
 * The reduction of costs in the cloud is due to economy of scale and less requirements for management
 	* Cooling systems are cheaper if used for huge datacenters
-	* Lower hardware costs due to the number of units bought
-* The cloud democratizes resource access to small actors, since it make the resources more finely divideable
+	* Lower hardware and power costs due to more contractual power
+	* Management costs are shared for a higher number of paying customers
+	* Resource aggregation allows for more efficient utilization
+* The cloud democratizes resource access to small actors, since it make the resources more finely subdivideable
+* Thanks to its practically infinite capacity, the cloud moves problems from batch mode to real-time mode
 * SaaS applications provide ubiquitous access to resources from any device without specific software needed
-* Cloud risks: security, privacy, vendor lock-in, data loss
+	* An example is Google Docs, Dropbox
+* The rise of cloud computing generates new business opportunities
+	* Training and support the use of cloud services
+	* Possibility for companies to develop open-source software for the cloud
+* Cloud risks: security, privacy, vendor lock-in, data loss, isolation failure, incomplete data deletion
 	* In the terms of service for standard accounts there is no guarantee of continuity, reliability, ecc
 	* In many case cloud services are not completely mature
+* AWS was launched in 2006 and it had a revenue of 17.5 billion dollars in 2017
+	* It provides services to governments, companies, and individuals on a paid subscription basis
+	* Most of its revenue is from IaaS
+* Cloud provisioning Terms of Contract (ToC) explicitally decline any responsibility for unavailability or loss of data
+	* There is no guarantee that the service will be uninterrupted, error-free, or free from harmful components
+	* There is no guarantee that the data are stored safely and without any risk of data loss
+	* The service is provisioned "as is"
+	* The user is responsible for keeping its data safe, secure, and for making backups
+* The set of cloud technologies is sometimes not completely stable
+	* Tuning and experts are often needed
+	* Sometimes non production-ready solutions are offered in order to avoid complex configs
+* The cloud raises serious privacy and security concerns
+	* How do I know that when I terminate a contract with a provider my data is actually deleted?
+	* How can I avoid vendor lock-in
+* Is my data on tyhe cloud safe from governments?
+	* The CLarifying the Overseas Use of Data (CLOUD) Act, signed in the US in 2018, allows US officials to turn over user data regardless of the physical location of the servers
+	* UK law requires ISPs to store the browsing history of clients for one year
+* It is really hard to delete someone's own account from certain websites
+	* `justdelete.me` provides a list of website categorized on how hard is it to delete an account hosted on them
+		* It also provides instructions for how to do it
+	* For some websites, it is actually impossible to delete an account: Wikipedia, Steam, Starbucks, Netflix, Evernote, Wordpress, Udacity, Pastebin
+* The EU and the US have a very different privacy approach
+	* Regulations in the EU are more stable across legislations
+	* In EU individuals have more control over their data
+	* The same authority enforces privacy laws in the EU, while several governmental organization do so in the US
+	* There are fewer organizations that support privacy in EU
+	* EU citizens, but not US citizens, have the right to be forgotten
+* The General Data Protection Regulation (GDPR, 2018) is a EU regulation that enforces privacy of personal data
+	* The fines for breaching GDPR are of 20 million € (or 4% of global turnover, whicherver is greater)
 
-# Virtualization
-* Virtualizing means creating a virtual version of a physical resource through an abstraction layer that hides the underlying implementation
-* Virtual machine are hardware-independent and their resource usage can be dynamically adapted
-* Thanks to virtualization I can consolidate the services provided by many servers
-* Applications are sandboxed in a virtual environment
-* Virtual applications can be provisioned on demand
-* Virtualization is vulberable to bugs and hacking, since many different hosts and OS are co-existing in the same hardware
-	* A VM can have unauthorized acces to data of another VM
-	* Some hypervisors work directly at the level of the hardware: everything can be compromised
-* Performances in a virtual environment can be worse due to the overhead for the physical host
-	* This is true particularly for I/O operations
-* The cloud can be provised with or without virtualization
-* Provisioning of VMs is NOT cloud computing if it does not respect the self-service, on-demand, network-based, elastic offer and pay-per-use paradigms
-
-## SQL
-* It is a relational DBMS based on tables
-* It works with a specific schema
-* It uses the powerfull SQL query language
-* Implementations are MySQL, Oracle, Sqlite, Postgres
-* It is typically commercially supported
-* It focuses mostly on consistency: the database of a bank
-	* We can say that it focuses on the ACID properties: atomicity, consistency, isolation, durability
-* Scalability is vertical
-
-## NoSQL
-* In is non-relational and document-based
-* It can consist in key-value pairs, graphs, wide-columns
-* The schema is flexible and it can also host unstructured data
-* Scalability is horizontal: I can just increase the number of servers in the pool
-* It uses the non-standard UnQL query language (unstructured query)
-* Implementations are MongoDB, Cassandra
-* It is typically supported by the community
-* It focuses on availability: it does everything possible to remain operational also in case of errors
-* Consistency is eventual: it is not guaranteed at the end of each transaction but eventually it is restored when there is time available for the operation
-* Apache Cassandra is open-source, distributed
-	* There is no central node, so no single point of failure
-	* It works with wide-columns
-	* It was initially developped at Facebook
-	* It supports Hadoop integration and MapReduce
-	* It uses the novel query language CQL
-* Apache Kafka is a distributed streaming platform
 
 # Parallel computing
 * The distributed infrastructures we saw until now were localised in the same WAN
