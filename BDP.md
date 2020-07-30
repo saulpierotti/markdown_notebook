@@ -909,7 +909,17 @@
 	* It can install libraries, transfer data and executables, check software and hardware
 * A job also contains an epilogue that runs post-execution scripts
 	* It can transfer output data, update databases, compute checksums and perform final checks
-* In some infrastructures the job itself cannot be modified by the user, but only prologie and epilogue can be modified
+* In some infrastructures the job itself cannot be modified by the user, but only prologue and epilogue can be modified
+* Different data distribution strategies can be implemented
+	* A-priori push: I know already the resources to be used and I distribute the data before launching the jobs
+	* Job pull: the job itself pull the needed data
+	* No data distribution possible: the data is already distributed by someone else because of a policy
+	* Output data can be left where it was produced, or moved somewhere else (in the job itself or in the prologue)
+* When distributing data it is important to consider
+	* A backup strategy: using different QoS for redundancy (i.e. tape and HDDs)
+	* A failover strategy: use more than one phyisical site
+	* Access policies: restrict write access to raw, irreplacable data
+	* Dostributing equally the load on the nodes
 
 # Parallel computing
 * The distributed infrastructures we saw until now were localised in the same WAN
