@@ -920,6 +920,16 @@
 	* A failover strategy: use more than one phyisical site
 	* Access policies: restrict write access to raw, irreplacable data
 	* Dostributing equally the load on the nodes
+* Remember: everithing that could go wrong will
+* It can be interesting to include input data in the infrastructure itself (VM images or snapshots)
+* Also the data management can be delegated to third party services
+* Data-driven computing model: I can decide to run my job in the nodes that happen to have the relevant data available
+	* Not always I can afford to move data because of policies, privacy, network bandwidth
+	* The matchmaking process between jobs and nodes in these cases needs to take into consideration data availability
+* CPU-driven computing model: I can decide to send jobs wherever computing power is available, and transfer the data accordingly
+	* Data distribution is done a priori or by the job itself
+* A real-life complex workflow can be a linear combination of CPU-driven and Data-driven models
+	* This is usually the case when different jobs of the workflow need very different hardware architectures (HTC vs HPC)
 
 # Parallel computing
 * The distributed infrastructures we saw until now were localised in the same WAN
