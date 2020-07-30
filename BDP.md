@@ -946,62 +946,88 @@
 * CRAY-2 (1985) had 4 processor and was able of 1.9 GFLOPs
 * Subsequently in the 80s there was a shift for vector machines to massively parallel processors (MPP)
 	* They used many standard processors connected in the same machine
+	* This shift was made possible by the rise of microprocessors
+* The Caltech Cosmic Cube used 64 Intel 8086 processors forming a 6-dimensional hypercube
+* A MPP can be a single computer with many networked processors
+	* There can be thousands of processors
 * In MPP processors need to communicate, since they are operating together on a single job
-	* There are low-latency connections between them and specialized netwroks
+	*  Low-latency connections between single cores and specialized networks are needed
 * In time many dedicated MPP supercomputers were produced
 * In 1985 Thinking Machines produced the CM-1, and then the CM-200 and CM-5
 	* CM-200 had 65536 1-bit CPUs and was capable of 40 GFLOPs
 * Intel Paragon was lauched in 1993 and had 4000 Intel i860 RISC microprocessors
 	* It was capable of 184 GFLOPs
 * ASCI Red MPP (1997) was capable of 1.4 TFLOPs and it was the first supercomputer above 1 TFLOP
-* IBM BlueGene was designed as multiple SoCs (system on a chip) and was able of 20 PFLOPs
+* IBM BlueGene was designed as multiple SoCs (System on a Chips) and was able of 20 PFLOPs
 	* It was focused on low power consumption
-* A cluster is a paralle computer system made of an integrated collection of independent nodes (each of them capable of autonomous operation) and derived from products developped for other stand-alone purposes
+* A cluster is a parallel computer system made of an integrated collection of independent nodes (each of them capable of autonomous operation) and DERIVED FROM PRODUCTS DEVELOPPED FOR OTHER STAND-ALONE PURPOSES
 * It is possible to use a cluster of commercial-grade servers for HPC
 	* In this case I need a really low-latency network to make them cooperate effectively
-* Most HPC systems are built for the industry, not for research
-* Main applications of HPCs are astronomy, molecular dynamics, earth simulations, fluid dynamics, brain simulations, general relativity calculations
-* The speedup of an application when it runs in parallel on P processors is the ratio among the running time on a sequential system and that on the parallel system
-	* If the speedup is equal to the number of processors it means that there is no overhead for the parallism: perfect linear speedup
+* The top supercomputers in the world
+	* The Summit OLCF-4 supercomputer is in the USand it is used for civilian scientific applications
+	* Its twin Sierra is also in the US and it is used for nulcear weapons simulations
+	* Sunway TaihuLight is a chinese supercomputer used for oil research, weather forecast and drug discovery
+* Some trends for HPC
+	* Most supercomputers now are built as clusters, followed by a MPP architecture
+	* Most supercomputers use Intel technology for their chips
+	* Most HPC systems are built for the industry, not for research
+	* Nvidia is the main provider of accelerators for HPC systems
+	* Lenovo is the main HPC manufacturer
+	* China has the biggest share of current HPC systems
+	* Main applications of HPCs are astronomy, molecular dynamics, earth simulations, fluid dynamics, brain simulations, general relativity calculations
+* The speedup of an application when it runs in parallel on P processors is the ratio among the running time of the same application on a sequential system and that on the parallel system
+	* If the speedup is equal to the number of processors it means that there is no overhead for the parallelism: we are in a perfect linear speedup
 * The efficiency of a parallel system is the ratio among the speedup and the number of processors
 	* It is 1 in case of perfect linear speedup
 * In rare cases the speedup can be superlinear, usually because of memory caching
 * Amdahl's law predicts the speedup of a computation by assuming linear speedup
 	* It leaves the serial processing part of the job untouched while it divides the parallel computation by the number of nodes
 	* The maximum possible speedup is $S= 1/\alpha$ where $\alpha$ is the serial fraction of the computation
+		* $S=1 / \alpha$ is the actual statement of Amdahl's law
+		* The maximum possible speedup is the time without parallelization divided by the time needed for only the serial part
+		* This is because the limit of time needed for the parallel part approaches 0 when the number of cores approaches infinity
 * HPC systems can use shared memory (RAM) in order to share information among threads and processes
 	* Processes can run in the same or different processors when using shared memory
 	* This is an efficient mean for sharing information among processes
-* In uniform memory access (UMA) all the processors share uniformly the same RAM
-* In non-uniform memory access (NUMA) the memory access time depends on the location of the memory relatively to the processor
-* When I am using shared memory I need to ensure that also the CPU caches are syncronised!
-* A Race condition is when the output of a parallel program changes by changing the order of execution of its threads, and it is generally bad
+	* A shared memory can be accessed simultaneously by different processors
+	* Also memory sharing among different threads of the same process is referred to as shared memory
+	* In uniform memory access (UMA) all the processors share uniformly the same RAM
+	* In non-uniform memory access (NUMA) the memory access time depends on the location of the memory relatively to the processor
+	* It is relatively easy to implement a shared memory system
+	* Communication between processes is as fast as a concurrent memory access to the same location
+	* Typical problems of a shared memory implementation are cache coherence and race conditions
+	* When I am using shared memory I need to ensure that also the CPU caches are syncronised!
+	* A Race condition is when the output of a parallel program changes by changing the order of execution of its threads, and it is generally a bad thing
 * The NUMA API is used for setting shared memory allocation policies
-	* libnuma can be used for setting up a NUMA environment
+	* `libnuma` can be used for setting up a NUMA environment
 * OpenMP is another API used for writing multithreaded applications
 	* It shares variables among threads and greatly simplifies parallel programming in C/C++/Fortran
+	* Communication happens through the sharing of variables among threads
 	* It can cause a Race condition when common variables are unintentianally introduced in the threads
 	* I can use synchronization to protect data conflicts, but it is computationally expensive
-* Distributed memory refers to a multiprocessor system where each CPU has its own memory
-	* In this case the communication among threads in mediated by explicit send/receive calls
+* Distributed memory refers to a multiprocessor system where each CPU has its own private memory
 	* Each CPU can only operate on local data
-* MPI is an API used for creating distributed HPC
+	* A program in distributed memory implementations is a collection of named processes
+	* Each process has a local address space without sharing
+	* Communication among threads in mediated by explicit send/receive calls
+* MPI is an API used for creating distributed HPC systems
 	* Its core is representedby the functions `MPI_Send` and `MPI_Recv`
 	* The data to be sent or received is blocked, meaning that the function returns only when the data can be safely used
 	* The reduction operation can be used for summarising a set of numbers ot a smaller set of numbers
-		* It takes the input from tje distributed processes and then places the result only in the root process
-* Hardware coprocessors can be used for accelerating FLOPS
-* Coprocessors are not a new idea: in 1980 the Intel 8087 was on of the first floating point coprocessors
-	* The 8087 was the first coprocessor to use the x87 instruction set
-	* The x87 was adopting the important IEE74 standard for floating point operations
-* Vector coprocessors in time were absorbed into CPUs and now are a main part of every CPU
-* The GPU is one of the most used coprocessors
-* In the 2006 CUDA was born: it is a parallel computing platform for performing general computation in GPU
-* A GPU is driven by a CPU that manages the code to be executed on GPUs, the memory of the GPU and the movements between CPU and GPU
-* A modern siliconn chip contains integrated components: in the same chip I can have CPU, GPU, chaches
-* HPC applications can be bounded by computing or by bandwidth
-* When comparing performances of CPU and GPU, be sure that the applications used for the comparison are optimized for both CPU and GPU and that the algorithm is state of the art!
-* When you see claims of 100+ speedup due to GPU, be suspicious!
+		* It takes the input from the distributed processes and then places the result only in the root process
+* Hardware coprocessors can be used for accelerating the FLOPSof a HPC system
+	* Coprocessors are not a new idea: in 1980 the Intel 8087 was one of the first floating point coprocessors
+		* The 8087 was the first coprocessor to use the x87 instruction set
+		* The x87 adopted the important IEEE754 standard for floating point operations
+	* Vector coprocessors in time were absorbed into CPUs and now are a main part of every CPU
+	* The GPU is one of the most used coprocessors
+		* In the 2006 CUDA was born: it is a parallel computing platform for performing general computation on a Nvidia GPU
+		* A GPU is driven by a CPU that manages the code to be executed on GPUs, the memory of the GPU and the movements between CPU and GPU
+		* Optimized HPC applications can be bounded by computing or by bandwidth
+		* When comparing performances of CPU and GPU, be sure that the applications used for the comparison are optimized for both CPU and GPU and that the algorithm is state of the art!
+		* When you see claims of 100x speedup due to GPU, be suspicious!
+		* A GPU has a penalty compared to a CPU since it needs to move data across the PCI bus from the CPU to the GPU: this must be considered when making comparisons
+	* A modern silicon chip contains integrated components: in the same chip I can have CPU, GPU, chaches, and other devices
 * The distributed infrastructures we saw until now were localised in the same WAN
 * High throughput computing (HTC) I want to maximise the number of jobs executed, not speed up the single job
 * High performance computing (HPC): I want to speed up the execution time of the single jobs
