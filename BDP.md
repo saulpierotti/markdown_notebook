@@ -875,6 +875,42 @@
 * In 2021 70% of public cloud service revenue is dominated by the top 10 providers
 * There is no cloud, it's just someone else's computer
 
+# Computing models
+* Workload management is the process of determining the proper workload distribution so to provide optimal performances
+	* It controls where each job is run in order to maximise workload throughput andn ensure that each node is not over/underused
+	* It handles job status, monitoring, information retrieving, and eventual input/output sandboxes
+* Job scheduling in distributed infrastructures is challenging
+	* Eager scheduling (push model) binds a job to an available resource as soon as possible, and executes it on that resource
+	* Lazy scheduling  (pull model) helds the job until a resource becomes available: jobs are extracted from a queue as soon as resources are available
+* A Workload Managament System (WMS) can be developped in house for simple workloads, but it is almost always better to use community developped applications
+* In a push submission model, jobs can be submitted trough the WMS or directly to computing resources 
+	* The WMS has a clear picture of the state of the resources, and so it can distribute load efficiently
+	* In a direct submission model the user has to take care of balancing the load across resources
+	* It is possible to build a simple WMS on top of a direct submission system
+* A pilot job submission model is a way to implement a pull submission system
+	* A special job called Pilot is submitted a priori to all the available resources
+	* The Pilot does not execute any payload, but it checks the hardware and software environment
+	* Real jobs are pulled by the Pilot from a central task queue
+	* If no tasks are available in the queue, the Pilot is terminated
+	* A pilot submission mode has several advantages
+		* The resources are tested by the pilot, and so there is less risk that they are faulty
+		* It is easy with it to optimize the usage of resources
+		* It can, to an extent, allow to bypass the priorities set by the sysadmin
+	* However, it has also disadvantages
+		* It destroys any system of a-priori data distribution and pre-placement
+		* The central queue is a single point of failure if not implemented correctly
+		* The Pilot job introduces some overhead
+* Input and Output Sandboxes indicate the set of files that travel with the job when submitted
+	* It is IMPORTANT to use SMALL sandboxes to avoid overloading the server handling them
+	* Big files should be transferred using the tools provided by the infrastructure
+	* A reasonable size for a sandbox is less than 5 Mb
+	* If I use data management command instead of sandboxes, the load for the transfer is on the node and not on the server
+* A job contains a prologue that prepares the environment for executing the job
+	* It can install libraries, transfer data and executables, check software and hardware
+* A job also contains an epilogue that runs post-execution scripts
+	* It can transfer output data, update databases, compute checksums and perform final checks
+* In some infrastructures the job itself cannot be modified by the user, but only prologie and epilogue can be modified
+
 # Parallel computing
 * The distributed infrastructures we saw until now were localised in the same WAN
 * High throughput computing (HTC) I want to maximise the number of jobs executed, not speed up the single job
