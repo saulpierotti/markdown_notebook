@@ -1079,10 +1079,10 @@ service individual homes and offices across the country" (Len Kleinrock, 1969)
 	* The resources on a Grid are accessible to members of virtual organizations
 	* The resource owner decides which virtual organizations are allowed to use the resources
 	* The Grid implements a single sign on policy: one access system grants all the resources available
-	* The Grid should allow for delegation: it should be possible for a user to endow a program with the ability to access on the user's behalf the resources that the user is authorized to use
-	* The X.509 certificate is used for signing into a Grid
-		* It contains the Public key of the certificate owner, its identity, information on the Certification Authority (CA), time of validity, serial number, digital signature of the CA
-		* A X.509 certificate is basically a public key of the certificate owner signed by a CA, with additional metadata
+	* The Grid should allow for delegation: automatic access by programs
+* The X509 certificate is used for signing into a Grid
+	* It contains the Public key of the owner, its identity
+	* It is sgned by a certification authority
 * The certification signs the authorization for the user
 * The user can in turn sign a proxy authorization for allowing delegation
 * Each job on the Grid is identified by an URL containing the address of the server who accepted it and a random string
