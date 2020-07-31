@@ -1125,6 +1125,9 @@ service individual homes and offices across the country" (Len Kleinrock, 1969)
 	* I also need the docker engine!
 * There are many container engines, but they are usually compatible
 	* You can build a container with an engine and then run it with another
+* Comtainers are ephimeral: every data in them exists only while the container is running
+	* I need to commit the modifications of a container in order to make them persistent
+	* Another approach for making data persistent is to bind-mount a host directory to a container, or to create a Docker volume
 
 # Low power devices
 * Exascale computing with traditional means requires a nuclear reactor for power!
