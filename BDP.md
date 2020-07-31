@@ -1083,9 +1083,14 @@ service individual homes and offices across the country" (Len Kleinrock, 1969)
 	* The X.509 certificate is used for signing into a Grid
 		* It contains the Public key of the certificate owner, its identity, information on the Certification Authority (CA), time of validity, serial number, digital signature of the CA
 		* A X.509 certificate is basically a public key of the certificate owner signed by a CA, with additional metadata
-* The certification signs the authorization for the user
-* The user can in turn sign a proxy authorization for allowing delegation
-* Each job on the Grid is identified by an URL containing the address of the server who accepted it and a random string
+	* A proxy X.509 certificate is a certificate with limited lifetime that is signed with the private key of the root entity certificate, or with another proxy certificate
+		* A proxy certificate allows for delegation of authentication to remote processes
+	* The X.509 workflow: a CA signs the root certificate of an entity, which is in turn used to sign proxy certificates
+		* The proxy certificates are then used to sign daily by the user
+* A Grid job is similar to a job in a cluster: it contains input and output sandboxes, the executable, prologue and epilogue, and other information
+* Each job on the Grid is identified by an URL containing the address of the server who accepted it and a job ID
+	* The job ID is unique and virtually non-recyclable
+	* The ID is a random string, since no serial numbering is possible in a decentralised system
 
 # Containers
 * A container is a framework used on top of other infrastructures, typically a cloud
