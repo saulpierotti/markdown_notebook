@@ -1033,19 +1033,37 @@
 
 # HTC
 * High throughput computing (HTC) I want to maximise the number of jobs executed, not speed up the single job
+	* Many copies of the same job are run in parallel
+	* There is no speedup for the single job
+	* It maximises the throughput of the system
+* HTC infrastructures deliver high computational power in a long time, while HPC infratructures deliver huge computational power in short bursts
 * HTC infrastructures are PC clusters, server clusters, distributed systems and grids
-* A Grid is an hardware and software infrastructure that provides inexpensive access to high-end computational capabilities
-	* It is NOT subject to centralised control
-	* Uses standard and general-purpose interfaces
+* A Grid is an hardware and software infrastructure that provides dependable, consistent, and inexpensive access to high-end computational capabilities
+	* A Grid coordinates resources that are NOT subject to centralised control
+	* Uses standard, open and general-purpose interfaces and protocols
 	* Delivers non-trivial QoS
-* The user of a Grid is a virtual organization
-	* It is a set of individuals that share the resources under certain rules
+* The users of a Grid are virtual organizations
+	* A cirtual organization is a set of individuals that share resources under certain rules
 	* Sharing of resources is highly controlled and well-defined
 	* The owner of the individual resources decides who can access them
-* 95% of the Grid is agreement on protocols between participating institutions
+* First law of the Grid: 95% of the Grid is agreement on protocols between participating institutions
+	* Standards, protocols, and interfaces aim at providing common abstractions of different implementations of similar services
 * There is no Grid owner and the network is distributed: I do not know which machine is processing my data
-* Grids can be based on supercomputers, servers, or volunteers that share desktop PC power
-* Grids are really complex, and they often fail
+	* My job gets processed somewhere, somehow, after some time
+* The Grid is similar to the power grid: "We will probably see the spread of computer utilities, which, like present electric and telephone utilities, will 
+* The Grid paradigm: a Grid middelware makes supercomputers, PC clusters, scientific equipment, storage devices, sensors, networks and the internet available to users in forms such as mobile access, desktop workstations, and visualization tools
+service individual homes and offices across the country" (Len Kleinrock, 1969) 
+* Grids can be of different types
+	* Grid services based on supercomputers
+	* Grids based on conventional clusters
+	* Grids based on clusters of desktop PC voluntarily contributed by users, that share part of their computational power
+* The LHC computing Grid is a computer Grid established by CERN for dealing with the large amount of data produced by the Large Hadron Collider (LHC)
+	* It has a tiered architecture with Tier 0 being the LHC itself, Tier 1 being formed by 11 national datacenters (INFN-CNAF for Italy), and Tier 2 being formed by about 130 other centers
+	* It includes 400k logical CPUs, 122 Pb of disk storage, and 128 Pb of tape storage
+* The European Grid Infrastructure (EGI) supports scientific research in different disciplines
+* Second law of the Grid: anything that can go wrong, will
+	* Grids are really complex, and they often fail
+	* "A distributed system is one in which the failure of a computer you didn't even know existed can render your computer unusable" (Leslie Lamport)
 * The Grid implements a single sign on policy (one access system grants all the resources available)
 * The Grid should allow for delegation (automatic access by programs)
 * The X509 certificate is used for signing into a Grid
