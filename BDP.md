@@ -730,6 +730,7 @@
 	* Performances in a virtual environment can be worse due to the overhead for the physical host
 		* This is true particularly for I/O operations
 * Provisioning of VMs is NOT cloud computing if it does not respect the self-service, on-demand, network-based, elastic offer and pay-per-use paradigms (see next section)
+* KVM is a Linux kernel module for virtualization
 
 # Cloud Computing
 * Cloud computing deals with supplying information and communication technologies as a service
@@ -1100,31 +1101,30 @@ service individual homes and offices across the country" (Len Kleinrock, 1969)
 	* The speedup is very unstable over time
 
 # Containers
-* A container is a framework used on top of other infrastructures, typically a cloud
-* Virtualization is the creation of a virtual version of something
-	* It can be anything: storage, network device, OS, ...
-	* A virtual machine is a virtual copy of a real machine
-* KVM is a linux kernel module used for virtualization
-* The host is also called hypervisor
-* A VM includes a guest OS, so it has a lot of overhead
+* Virtual machines carry quite a bit of overhead due to the duplication of many OS components
+* A container is a virtualization framework that includes only an application and its dependency
+	* It enjoys the isolation and resource allocation benefits of a virtual machine without much of the associated overhead
+	* Containers share the OS and, where possible, libraries, with the host
+* Containers require less resources than virtual machines
+	* They start faster and run faster than virtual machines
+	* Many more containers than VMs can fit in the same host
+* Very important: containers simplify enormously software development and deployment because they allow to encapsulate applications in a controlled and extensible way
+* They can be compared to shipping containers for goods
+* Docker is one of the most popular container engines
+	* It is open source
+	* Their website `hub.docker.com` features a git-like repository
+	* The Docker engine must be present in the host in order to run a Docker container
+	* The Docker engine manages resources for the different containers
+	* The same container can be easily shared and run on different hosts (provided that they have the same kernel)
 * A (docker) container does not include an OS, it is based on the host OS
 	* It operates at the application level
 	* It has the same pros without many of the cons of VMs
 	* It emulates binaries and libraries needed for the application
 	* It is an extended version of `chroot`
-* The docker engine manages resources for the different containers
-* They make software deployment (distribution) much easier
-	* I can create a container with an application and its dependecies and just distribute it
-* They can be compared to shipping containers for goods
 * In order to execute a container I just need the right kernel, without worrying about libraries and binaries
 	* I also need the docker engine!
-* Docker is a software used to manage and create containers
-	* It provides also a git-like versioning system
-	* You build a container image and push it to a container image repository
-	* From another host I pull the container image and just run
-		* Need to have the same kernel!
 * There are many container engines, but they are usually compatible
-	* You can build with a manager and then run with another
+	* You can build a container with an engine and then run it with another
 
 # Low power devices
 * Exascale computing with traditional means requires a nuclear reactor for power!
