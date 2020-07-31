@@ -1091,6 +1091,13 @@ service individual homes and offices across the country" (Len Kleinrock, 1969)
 * Each job on the Grid is identified by an URL containing the address of the server who accepted it and a job ID
 	* The job ID is unique and virtually non-recyclable
 	* The ID is a random string, since no serial numbering is possible in a decentralised system
+* The HTC paradigm is suited to many applications
+	* Embarassing parallel jobs
+	* Opportunistic usage
+* The crunching factor or speedup in a distributed system is the ratio between the time needed to execute a task on a single machine and on a distributed infrastructure
+	* It depends on the number of available resources, the priority of the user, the congestion of the infrastructure
+	* It is highly influenced by data transfer times and by errors/resubmissions
+	* The speedup is very unstable over time
 
 # Containers
 * A container is a framework used on top of other infrastructures, typically a cloud
