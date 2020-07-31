@@ -1129,6 +1129,32 @@ service individual homes and offices across the country" (Len Kleinrock, 1969)
 	* I need to commit the modifications of a container in order to make them persistent
 	* Another approach for making data persistent is to bind-mount a host directory to a container, or to create a Docker volume
 * Docker can be used for doing development on a local laptop, and then ship it to the production infrastructure
+* It is possible to create an application stack with Docker Compose
+	* An application stack is a set of containers linked together in order to provide a service
+	* Docker Compose is a different software from Docker
+	* An application stack can be described with a `.yaml` file, which is parsed by Docker Compose
+	* Docker Compose is best suited when autoscaling or a multi-server environment is not needed
+	* For more complex setups, Docker Swarm or Kubernetes is preferrable (see BDP2)
+* Best practices with containers
+	* A container should contain only ONE application
+	* The entry point in the container should be explicitly defined (`CMD` field)
+	* Keep containers as small as possible
+* Some words on security
+	* Docker is required for running containers, and it requires root priviledges in order to be installed
+	* Containers downloaded from the web may contain viruses
+	* Passwords and tokens should NOT be embedded in containers
+		* Docker has a purpose-built secret management feature
+	* If the host is compromised, container isolation is compromised
+	* There can be exploit that allow to breach isolation and interact with the host
+	* Since starting containers is easy, it is possible to have a DoS attack
+	* Containers should be update regularly when new security patches for the included softwares become available
+* Even tough Docker is really useful, many HPC systems and traditional cluster do not have it installed
+	* You need root priviledges to install it, or you need to contact an administrator
+	* Sometimes administrators do not want to install docker because of security concerns
+	* Udocker (INDIGO, INFN-CNAF) is a user-space tool that can run Docker containers without requiring any support from the kernel
+		* It is a single python script
+	* It is NOT possible to create images from Udocker
+		* It does not require root priviledges
 
 # Low power devices
 * Exascale computing with traditional means requires a nuclear reactor for power!
