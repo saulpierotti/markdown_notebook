@@ -1235,6 +1235,11 @@ service individual homes and offices across the country" (Len Kleinrock, 1969)
 	* Community Fog Nodes: for the use of organizations joined in a community that has shared concerns
 	* Public Fog Node: for open use by the general public
 	* Hybrid Fog Node: a complex node that is composed of 2 nodes of disticint deployment models, that are unique but bound by technologies that grant data and application portability
+* A digital twin is a digital replica of a physical entity
+	* It integrates IoT, machine learning, and software analytics with spatial network graphs
+	* It creates a living simulation model that is updated and changes as their physical twin changes
+	* It is useful for testing and simulations
+	* The object that is miirored can be a wind turbine, an engine, an entire airplane,...
 
 # Part 2 - Prof. Salomoni
 
