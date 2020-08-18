@@ -1157,10 +1157,36 @@ service individual homes and offices across the country" (Len Kleinrock, 1969)
 		* It does not require root priviledges
 
 # Low power devices
-* Exascale computing with traditional means requires a nuclear reactor for power!
+* In the past HPC systems tended to use vector processors, but in time these started to be replaced by cheaper, highly available, and more energy-efficient microprocessors
+* Microprocessors started to be mass-produced with the rise of the PC: they are said to be commodity hardware
+* System on Chip (SoC) devices tend to have a multitude of different cores
+	* There are cores specialised for power efficency, and cores specialised for peak performances
+		* This architecture concept is called heterogeneous multiprocessing (HMP)
+	* SoCs can be found in mobile devices and embedded systems
+* We are now seeing a trend in computing where SoCs are being used more and more, at the expenses of mircroprocessors
+	* Is history repeating as for the replacement of vector processors with microprocessors?
+	* It is not easy to say, but SoCs are definitively becoming more and more important
 * Europe is leader in the production of SoCs and low-power devices
-* ARM was born in the UK, but now it is owned by a japanese firm
-	* It is the main SoC producer
+* ARM is the main SoC producer for mobile (CPU and GPU)
+	* It was born in the UK, but now it is owned by a japanese firm
+* The main producers of SoCs for embedded systems are Siemens, Bosch, Infineon
+* The MontBlanc Project is a european energy-efficient HPC project
+	* It is based on many ARM SoCs mounted on PCI cards
+* Exascale computing with traditional means requires a nuclear reactor for power!
+* Exascale computing poses many challanges beside power consuption
+	* The cost of the power required
+	* The possibility to pack enough components in a reasonable space
+	* Resilience to component failure
+	* Availability of adequate software for exploiting the architecture
+* The general architecture of a HPC low-power system is NOT an iPhone cluster
+	* It implements a standard rack confoguration
+	* It uses Linux
+	* It uses a batch scheduler to handle the execution of scientific jobs
+* The ODROID-XU3 board has a maximum power comsumption of 15 W and a cost of 150 euros
+	* It uses an ARM big.LITTLE technology with HMP and a Mali-T628 MP6 GPU
+	* It uses Ubuntu 14.4 as an operating system
+	* It has 2 GB of RAM, an HDMI port and 64 GB of flash storage
+* When changing the computing paradigm (CPU, GPU, SoC, ...) always ensure the numerical correctness of the results you obtain, do not only look at performances!
 
 # Internet of Things (IoT)
 * The IoT is the network of connected physical devices through their electronic components
