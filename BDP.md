@@ -1186,11 +1186,55 @@ service individual homes and offices across the country" (Len Kleinrock, 1969)
 	* It uses an ARM big.LITTLE technology with HMP and a Mali-T628 MP6 GPU
 	* It uses Ubuntu 14.4 as an operating system
 	* It has 2 GB of RAM, an HDMI port and 64 GB of flash storage
+* The NVIDIA JETSON TK1 board an ARM+CUDA programmable SoC architecture
+	* It is also based on linux
+* A System on Module (SoM) is a device that integrates a series on component on a single module (es. a PCI slot)
 * When changing the computing paradigm (CPU, GPU, SoC, ...) always ensure the numerical correctness of the results you obtain, do not only look at performances!
 
 # Internet of Things (IoT)
-* The IoT is the network of connected physical devices through their electronic components
-* Each 'Thing' can be identified via its MAC address
+* The IoT is the network of physical devices connected through their electronic components
+* Each 'Thing' can be identified via its unique MAC address and is able to cooperate with the existing internet infrastructure
+* The IoT is a network of devices that collect and share huge amounts of data
+* The collected data are processed in a central Cloud-based service, where it is aggregated with other data and made available to the end-user in a processed form
+* IoT increases automation in homes, schools, and businesses
+
+# Fog and Edge Computing
+* Traditionally, the wast amount of data produced by IoT systems has been streamed and processed in a centralised cloud
+* The access to data through the cloud can be slow because of the time required for streaming data back and forth from the local device
+* There can be privacy concerns in streaming certain kinds of data to the cloud
+* Case study: self-driving cars
+	* The many sensor in a self-driving car produce 40 TB of data every 8 hours of drive
+	* It is unsafe, unnecessary and unpractical to send this many data to the cloud
+* It is needed a decentralised, adaptive computational paradigm
+	* Data should be accessed locally, so to reduce the access latency
+	* This can reduce network congestion and improve scalability
+	* Fog and Edge Computing provide faster approaches that enjoy better situational awareness in a way more timely manner
+* Edge computing refers to the infrastructure that exists close to the source of data and outside a centralised cloud
+	* Its role has been mostly that of ingesting, gather, store, filter and send data to cloud systems
+	* A lot of processing can be done on the source of data itself or next to it, at the edge of the network
+	* Edge computing significantly improves latency and reduces the volume of data movements
+	* It provides new possibilities for IoT applications for those relying on
+		* Machine learning for object detection, face recognition, language processing
+		* Intermittent connectivity, for instance applications in remote locations where bandwith is expensive or inconsistent
+	* It is particularly useful for real-time analytics
+	* It improves privacy and security by keeping sensitive data on the source devices
+* Fog Computing is a layered model for ubiquitous access to a shared continuum of scalable computing resources
+	* It consists of fog nodes residing between end-devices and cloud services
+	* Fog nodes are context-aware and support a common communication protocol
+	* Fog computing minimises latency
+	* It provides local computing resources to end-devices and, when required, network connectivity to centralised services
+
+* Essential characteristics of Fog Computing
+	* Contextual location awareness of the nodes and low latency
+	* Geographical distribution of the nodes
+	* Interoperability and federation of nodes
+	* Real-time interaction instead of batch processing
+	* Predominance of wireless access
+* Fog nodes can be deployed under different models
+	* Private Fog Nodes: for the exclusive use of an organization comprising multiple customers
+	* Community Fog Nodes: for the use of organizations joined in a community that has shared concerns
+	* Public Fog Node: for open use by the general public
+	* Hybrid Fog Node: a complex node that is composed of 2 nodes of disticint deployment models, that are unique but bound by technologies that grant data and application portability
 
 # Part 2 - Prof. Salomoni
 
