@@ -1250,7 +1250,7 @@ service individual homes and offices across the country" (Len Kleinrock, 1969)
 * The main topics are: cloud storage, Docker containers, authentication and authorization for cloud services, automation for cloud applications
 * Professor is also a physicist from INFN, graduated from UniBo
 
-# PaaS
+## PaaS
 * The PaaS type is a way to program a Cloud infrastructure so to allow developpers to build applications and services
 * A PaaS service can include preconfigured features to which cutsomers can subscribe, so to make the system fit their requirements
 * The services are updated and maintained by the cloud provider, so the user does not need to worry about these details
@@ -1263,7 +1263,9 @@ service individual homes and offices across the country" (Len Kleinrock, 1969)
 	* Cloudify
 	* RedHat OpenShift
 
-# File systems
+# Cloud Storage
+
+## File Systems
 * Data can be stored directly in a block device
 	* In this case data is stored sequentially, and no metadata is stored
 * Data can be stored in a database as key:value pairs
@@ -1327,7 +1329,7 @@ service individual homes and offices across the country" (Len Kleinrock, 1969)
 	* Arrays are delimited by square brackets
 	* In Python JSON is offered by the `json` module
 
-# Object storage
+## Object Storage
 * Especially in the cloud, not all the storage is organised with POSIX interfaces
 * Object storage organises data into a storage system in self-contained entities called objects
 * Each object is assigned an unique ID, managed in a flat index
@@ -1376,6 +1378,21 @@ service individual homes and offices across the country" (Len Kleinrock, 1969)
 	* Data is stored in object storage servers
 	* An abstraction layer provides to users acces to data in a POSIX-like way
 	* Examples of this are IBM Spectrum Scale (GPFS), Dell EMC Elastic Cloud Storage, Ceph, Lustre
+
+## Virtual File Systems
+* A virtual files system is an abstraction layer on top of one or more concrete storage devices or file systems
+* Its purpose is to offer a standardised POSIX interface to applications, so that they do not need to worry about technical details
+* Onedata is a virtual file system that provides unified data access across globally distributed environments
+	* It allows users to easily share collaborate on stored data
+	* It is mostly used for scientific applications
+	* Data is organised in distributed virtual volumes called spaces
+	* Entities who support spaces with actual storage resources are called providers
+	* A zone is a federation of providers which enables the creation of closed or interconnected communities
+* MinIO is an high-performance, software-defined object storage suite compatible with AWS S3
+	* It allows to mount a remote bucket as if it were a local directory
+	* It is the native storage system for Kubernetes
+* The fundamental concept is that in a virtual file system I can acces files with POSIX calls, I do not need to prefetch data with HTTP GET requests
+	* However, if I want I can use an S3-compatible interface
 
 
 
