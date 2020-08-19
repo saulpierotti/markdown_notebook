@@ -1295,7 +1295,7 @@ service individual homes and offices across the country" (Len Kleinrock, 1969)
 		* Write operations require strong consistency: a write call blocks application execution until the system can guarantee that any read call will see the newly written data
 		* A dirty solution to stateful I/O is requiring strong consistency for write operations only until the file is written to a memory page, not until the file is permanently stored on disk
 			* These memory pages that contain data not yet flushed to disk are called dirty pages, and they are tracked by the OS
-				* This is called page caching
+			* The use of dirty pages is called page caching
 			* The OS flushes asynchronously dirty pages to disk
 			* This apporach is POSIX-complaint since the OS tracks dirty pages and returns their content to successive read calls, not the content of the file stored on disk
 * A networked file system like NFS is used for accessing files over a network in a way very similar to how local files are accessed
@@ -1312,5 +1312,71 @@ service individual homes and offices across the country" (Len Kleinrock, 1969)
 		* While a file is open there is no consistency guarantee: if 2 nodes open the same file at the same time it is possible for them to hold dirty pages
 		* It is up to client application to manage concurrent access to the same files
 	* Other distributed file systems like Lustre or GPFS implement a complex locking mechanism to ensure consistency
+
+# REST and JSON
+* A POSIX interface is not the only possible way to work with files
+* REST (REpresentational State Transfer) is an architecture style for designing networked applications
+* For all practical purposes, RESTful applications use HTTP GET requests to make calls between machines (create, update, read, delete data)
+* Many web services offer REST API
+* REST can be used in Python via several libraries such as `httplib, urllib, requests`
+* JSON (JavaScript Object Notation) is a lightweight format for storing and transporting data
+	* It is commonly used to transfer data to/from web servers
+	* Data is organised in key:value pairs
+	* Data is separated by commas
+	* Objects are delimited by curly brackets
+	* Arrays are delimited by square brackets
+	* In Python JSON is offered by the `json` module
+
+# Object storage
+* Especially in the cloud, not all the storage is organised with POSIX interfaces
+* Object storage organises data into a storage system in self-contained entities called objects
+* Each object is assigned an unique ID, managed in a flat index
+	* This is contrapposed to the tree-like structure of POSIX file systems
+* An object can be accessed by an application by providing its unique ID to the object storage system
+* Objects tend to have rich metadata
+	* Some of these metadata are non-editable and they are set at the time of object creation
+	* Editable metadata can have fixed keys or they can be custom fields
+* Fixed-key metadata have fixed keys and allow only the editing of the value field
+	* Access control metadata: object storage uses IAM (Identity and Access Management) and ACLs (Access Control Lists) to control the access to objects
+	* Content type: also called MIME type, it specifies the kind of data contained in the object
+	* Content disposition: it controls the presentation style of the content (automatic opening, fullscreen mode,...)
+	* Content encoding: it can indicate that an object is compressed, and the compression algorithm used
+	* Content language: the language that the object is intended for
+	* Cache control: it specifies whether the object can be cached and whether the data can be transformed
+* Custom metadata allow editing of both the key and the value fields
+	* They are specified as a key:value pair and they can be added and removed
+	* They are limited to a maximum of 100 instances and 10 MB
+* A key advatage of object storage is its simplicity
+* Object storage system implement only a few commands
+	* `PUT`, similar to a POSIX `write`, puts the object into the storage system
+	* `GET`, similar to a POSIX `read`, gets the object from the storage system
+	* `DELETE`, removes the object from the storage system
+	* `HEAD`, returns only the object's metadata
+* Object storage follows a write once, read many approach
+	* Data is written once, when an object is created
+		* Modifying an object means creating a new object: IDs are unique
+		* It is up to the user to keep track of which ID refers to which file
+		* Since objects are immutable, there is no need to manage concurrent access from different clients
+			* Some object storage systems do not allow even to edit the metadata of an object to avoid concurrency problems!
+		* An object is uniquely referred to by its ID
+			* A simple hashing of the ID can be used to determine the physical location of an object
+	* The same object can be read many times
+* Objects cannot be used for scratch space or hot storage
+* Object-based application are often focused on data archival
+* The use of unique IDs allow great scalability, allowing for fast access to a vast number of objects
+* It is possible to store vast amounts of unstructured data in an object storage system
+* Object storage is used for storing pictures on Facebook, songs on Spotify, and files in Dropbox
+* Object storage systems are software-defined scale-out architectures that can take advantage of commodity hardware
+	* Scaling out referes to multiplicating the number of equal resources available, instead of scaling up the type of resource
+	* I can just add more storage devices to increase capacity, according to demand
+* An object storage cluster typically uses a cluster of nodes based on object storage, which communicate to a gateway layer through REST APIs
+* Popular cloud storage services based on object storage are AWS S3 (Simple Storage Service), Google CLoud Storage, Rackspace Files
+* Some distributed file systems use object storage
+	* Metadata is stored in metadata servers
+	* Data is stored in object storage servers
+	* An abstraction layer provides to users acces to data in a POSIX-like way
+	* Examples of this are IBM Spectrum Scale (GPFS), Dell EMC Elastic Cloud Storage, Ceph, Lustre
+
+
 
 
