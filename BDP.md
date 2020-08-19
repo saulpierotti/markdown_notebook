@@ -1249,12 +1249,68 @@ service individual homes and offices across the country" (Len Kleinrock, 1969)
 * This module focuses on topics beyond the IaaS model and it is mostly hands on
 * The main topics are: cloud storage, Docker containers, authentication and authorization for cloud services, automation for cloud applications
 * Professor is also a physicist from INFN, graduated from UniBo
-* INFN centers are linked by the high speed connections provided by the GARR network
-* The cloud is useful since it allows to optimize resource usage in presence of elastic demand
-* The cloud should be accessible on demand as a self-service
-* The access is network-based, relies on resource sharing and it is assumed to be infinitely elastic
-* It has a pay-per-use model
-* Above the IaaS/PaaS/SaaS axis there is the isolation model dimension and the deployment model dimension
+
+# PaaS
+* The PaaS type is a way to program a Cloud infrastructure so to allow developpers to build applications and services
+* A PaaS service can include preconfigured features to which cutsomers can subscribe, so to make the system fit their requirements
+* The services are updated and maintained by the cloud provider, so the user does not need to worry about these details
+	* E.g an Oracle database as a PaaS: no need for the user to update the Oracle software
+* PaaS providers can assist developpers in the design of their applications and in the testing an deployment phases
+* AWS offers Elastic Beanstalk as a PaaS service
+	* It is useful for deploying and scaling web applications and services developped with Java, Python, Docker, and other systems on familiar services such as Apache and Nginx
+* There are several PaaS frameworks available, some public and some that can be installed on private resources
+	* The INDIGO-DataCloud PaaS layer
+	* Cloudify
+	* RedHat OpenShift
+
+# File systems
+* Data can be stored directly in a block device
+	* In this case data is stored sequentially, and no metadata is stored
+* Data can be stored in a database as key:value pairs
+* Data can be stored in a file system
+	* Data is organised in a tree-like directory structure
+	* Metadata such as filename, timestamps, size can be stored also by the file system
+* There are many types of filesystems
+	* For disk storage there is FAT (File Allocation Table) with several variants (FAT16, FAT32, exFAT), NTFS, HFS, ext2 (extended filesystem), ext3, ext4, XFS, BTRFS (B-tree filesystem),...
+* Network file systems allow to access files from remote computers
+* Shared file systems allow files to be shared among a set of machines
+* The Portable Operating System Interface for Unix (POSIX) standards are a set of standards that define an API and some shell and utility interfaces to maintain compatibility among operating systems
+	* It was developped primarly for Unix-like systems, but any OS can use the POSIX standards
+	* POSIX emerged from a project started in 1985
+	* The POSIX standards are collected in IEEE1003, also called ISO/IEC9945
+* POSIX I/O (a non-official name) is the portion of POSIX that defines the I/O interface
+	* It provides `read(), write(), open(), close()` and other functions
+	* It prescribes a set of metadata that a file must possess
+		* The user and group which own the file
+		* The permissions that are given for read, write, and execute to different users and groups
+		* Attributes such as creation and last modification timestamps
+	* POSIX calls can show and manipulate POSIX metadata
+		* `chmod` and `stat` are shell commands that provide an interface for the relevant POSIX calls
+	* POSIX I/O is stateful
+		* Reading and writing data is governed by some persistent statethat is maintained by the OS in the form of file descriptors
+		* A file descriptor (or file handle) is a number that uniquely identifies an open file in the kernel global file table
+			* The file table contains information such as the inode of the file, the byte offset, and the file permissions
+		* Applications cannot read or wirte a file before opening it, so that they can get a file descriptor
+		* The position where the next read or write will take place is the position at which the last read, write or seek call ended
+		* Write operations require strong consistency: a write call blocks application execution until the system can guarantee that any read call will see the newly written data
+		* A dirty solution to stateful I/O is requiring strong consistency for write operations only until the file is written to a memory page, not until the file is permanently stored on disk
+			* These memory pages that contain data not yet flushed to disk are called dirty pages, and they are tracked by the OS
+				* This is called page caching
+			* The OS flushes asynchronously dirty pages to disk
+			* This apporach is POSIX-complaint since the OS tracks dirty pages and returns their content to successive read calls, not the content of the file stored on disk
+* A networked file system like NFS is used for accessing files over a network in a way very similar to how local files are accessed
+	* It uses a POSIX-like syntax implementing open, read, and write calls
+	* Page caching is more complicated in a networked file system since different clients that operate in the same file will not share the same memory pages
+	* In general, it is NOT safe to assume that consistency is automatically respected with parallel reads or writes in a networked file system
+	* In order to enforce strong POSIX consistency in a networked file system it is needed to enforce that no node can read data until the dirty pages have been flushed to the remote server storing the data: different approaches are possible to enforce this
+		* A file system can avoid page caching at all to solve this problem, at the cost of I/O latency
+		* It can relax POSIX consistency such that it provides consostency in most reasonable I/O workloads, but does NOT guarantee consistency if 2 nodes try to modify the same part of a file at the same time
+		* It can enforce a locking mechanism so that a node cannot modify a file that is open in anothe node
+	* NFS relaxes POSIX consistency in order to guarantee a reasonable level of consistency in most use cases
+		* It guarantees a close-to-open consistency
+		* A file is guaranteed to be consistent from when it is closed to when it is open again
+		* While a file is open there is no consistency guarantee: if 2 nodes open the same file at the same time it is possible for them to hold dirty pages
+		* It is up to client application to manage concurrent access to the same files
+	* Other distributed file systems like Lustre or GPFS implement a complex locking mechanism to ensure consistency
 
 
-* Docker containers are lighter than traditional VMs since they include only what is different between the host and the guest so to be able to run applications on the guest
