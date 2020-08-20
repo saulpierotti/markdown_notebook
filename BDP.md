@@ -1395,6 +1395,8 @@ service individual homes and offices across the country" (Len Kleinrock, 1969)
 	* However, if I want I can use an S3-compatible interface
 
 # Advanced Docker Containers
+
+## Networking
 * Docker implements versioning (git-like), component re-use, and sharing through a public repository
 * Networking in Docker containers can be handled in several ways
 	* Possible options for networking are no networking, bridge networking, host networking, overlay networking, Macvlan networking
@@ -1430,6 +1432,27 @@ service individual homes and offices across the country" (Len Kleinrock, 1969)
 	* No NAT service is used, since the container has its own MAC address
 	* With macvlan mode, it is easy to get an IP address exhaustion
 	* Also macvlan is used only in special cases
+* The networks covered up to this point are applicable to containers running on the same host
+* Docker overlay networks instead can connect Docker deamons running on different hosts
 
+## Process Management and Logging
+* It is possible to monitor the state of resources from inside a container, but it is more useful to be able to monitor reosources from the host
+	* This is especially the case when many containers are running on the same host
+* `docker stats` is a live tool that streams container resource usage statistics
+* By default a container has no resource constraint and so it can use the host resources for as much as it is allowed by the Docker host kernel scheduler
+	* This means that if a container is misbehaving, the host may crash
+* It is possible to limit the resource usage of a container with the flags `--memory="256MB"` and `--cpus=".5"`
+	* The cpu flag specifies how many cores the container can use: `--cpus=".5"` allows the container to use half of a core
+* When containers are running in the background, it is not practical to check its activity live
+* The STDOUT and STDERR of a container can be inspected with the `docker logs --follow <container>` command
+* Containers can also be managed graphically using the open source tool Portainer
 
+## Best Practices
+* In order to increase resiliency and allow for versioning and tracking of changes in software, it is important to use a version-control sistem like git
+* Git is a distributed version control system for tracking changes in source code during software development
+* A repository is a collection of all the files belonging to a project, including their history
+* Development typically takes place in branches
+	* A branch is a line of development
+	* In git, there is a main branch with the production code called "master"
+	* Once a new feature is implemented in a branch, the branch can be merged to the master branch
 
