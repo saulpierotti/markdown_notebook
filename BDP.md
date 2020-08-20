@@ -1395,5 +1395,41 @@ service individual homes and offices across the country" (Len Kleinrock, 1969)
 	* However, if I want I can use an S3-compatible interface
 
 # Advanced Docker Containers
+* Docker implements versioning (git-like), component re-use, and sharing through a public repository
+* Networking in Docker containers can be handled in several ways
+	* Possible options for networking are no networking, bridge networking, host networking, overlay networking, Macvlan networking
+	* The networking mode can be specified with the `--network=<my_net>` flag in the `docker run` command
+	* Bridge networking is the default networking mode in the absence of a spacific flag
+* The flag `--network=none` disables networking for containers
+	* It is useful when the containerised application does not need to acces the network
+	* In a container run with this option `ip address show` will show only the loopback device
+* Bridge networking is the default option for Docker
+	* A bridge is a network device that allows the transfer of packets in the same network segment
+	* Docker creates a virtual bridge between container and host
+	* If 2 containers are connected to the same bridge they can communicate with each other
+		* All the containers connected to the same bridge have an IP address in the same network
+	* By default, Docker creates a single bridge called "bridge", to which all the containers are connected
+	* A new bridge can be created with the command `docker network create my_bridge`
+	* The available networks for Docker can be inspected with the command `docker network ls`
+	* Containers connected to different bridges cannot communicate with each other
+	* In order to connect a container to a custom bridge, I can just specify its name in the flag as `--network=my_bridge`
+	* Using different bridges for containers enhances security by making it impossible for containers to communicate with each other
+	* Containers connected to the same bridge see automatically all the ports of the other containers
+	* In the default bridge there is no automatic name resolution
+	* In custom bridges container names are resolved autmatically
+		* `ping container1` resolves the actual IP address of container1
+	* It is possible to connect a container to more than 1 bridge with the command `docker network connect <bridge> <container>`
+	* When connecting to the internet, a container assumes the IP of its host thanks to the NAT service of the Docker engine
+* Host networking is specified by the flag `--network=host`
+	* This option connects the container directly to the host network, without using a NAT service
+	* In this case the container uses the IP address of the host
+	* Port mapping is not possiblein host mode, since all the ports of the host correspond to that of the container
+	* It is not possible to have 2 containers in host mode running a service on the same port
+	* Host networking is used only in special cases
+* Macvlan networking assigns an idividual MAC address and IP address to each container
+	* No NAT service is used, since the container has its own MAC address
+	* With macvlan mode, it is easy to get an IP address exhaustion
+	* Also macvlan is used only in special cases
+
 
 
