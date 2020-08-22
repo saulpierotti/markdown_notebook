@@ -1484,5 +1484,28 @@ service individual homes and offices across the country" (Len Kleinrock, 1969)
 		* A Distinguished Name (DN), an unique identifier
 		* A collection of attributes where data is actually stored
 		* A collection of object classes: information about the type of entry (a person, a service,...)
+	* LDAP is the simplest example of Attribute Authority
+		* It is a place where authoritative information about something can be stored
+		* We can use DAP to store all the information about the identity of a person (passwords, roles in the organization)
+	* LDAP can be used to enforce both authorization and authentication of users
+	* In general, LDAP was born for authorization (i.e. storing which users can do what) and NOT for authentication
+		* Authentication was implemented later, and every authentication request generates a load on the LDAP server
+			* This can be problematic when there are many users or with some application that do not deal with authentication in a smart way
+* Another commonly used protocol for IdM is RADIUS (Remote Authentication Dial-in User Service)
+	* A RADIUS server sits between the user and other services: it is an intermediate service
+	* RADIUS queries LDAP to assess the identity of a person, but then it can query other services for authenticating it (es. an OTP service)
+	* It uses UDP and it is more flexible then LDAP (I can plug-in multiple services to RADIUS), but it is more complex to set up
+* Kerberos is a service that implements strong authentication for client/server applications based on secret-key criptography
+	* It was developped at MIT
+	* Usually Kerberos is used in parallel to LDAP to manage only the authentication part (while authorization is up to LDAP)
+	* A client can contact a Kerberos server, which provides a signed encrypted ticket that can be used to access resources
+	* The ticket is valid for some time, so this reduces the problem of overloading the authentication server
+	* Kerberos is based on symmetric key criptography: the client and the server have a shared secret
+	* Kerberos implements a Key Distribution Center (KDC)
+		* It is a trusted party between client and server
+		* It hosts secrets for all the users of the infrastructure
+	* Kerberos is used to implement Single Sign On (SSO) environments
+		* A single login unlocks a range of different services
+		* In AWS a single login unlocks EC2, S3,...
 
 # Cloud Automation
