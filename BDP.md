@@ -1456,3 +1456,33 @@ service individual homes and offices across the country" (Len Kleinrock, 1969)
 	* In git, there is a main branch with the production code called "master"
 	* Once a new feature is implemented in a branch, the branch can be merged to the master branch
 
+# Authentication and Authorization Infrastructure (AAI)
+* We typically want to protect our data or applications with some form of authentication and with various degrees of authorization to access them
+* The simplest form of authentication to a resource is the use of a local username and password
+	* This approach is local: every system stores its own set of credentials
+	* In linux local credentials are stored in `/etc/passwd` and `/etc/shadow`
+	* This method is definitely NOT scalable
+* The resources that we want to protect should have some form of Identity Management System (IdM)
+* In the early days, an IdM consisted of directories storing "objects" that described generic "entities"
+	* One of such directories was basically a distributed database
+	* This standard was defined in 1988 and came to be known as the X.500 standard
+* The X.500 standard led to the definition of "The Directory"
+	* It was a worldwide white page service accessed through a Directory Access Protocol (DAP) through the OSI stack
+	* From a common root it was possible to access countries and organizations, and from those more specific groups until single individuals
+* In the early 90's, there was a long debate about the adoption of the OSI model or the TCP/IP model
+	* The TCP/IP model was supported bu the US Department of Defence and won at the end
+	* Now the OSI model is rarely used in practice but is an unseful theoretical framework for how applications should work
+* With the affirmation of TCP/IP, in order to access the X.500 Directory a simpler protocol than DAP was required
+	* DAP was built with the OSI model in mind
+* The protocol defined for accessing X.500 from TCP/IP is called LDAP (Lightweight DAP)
+	* Despite its original use, it not only allows to lookup information in a directory service, but also for adding and updating it
+	* Today nobody talks about X.500, but LDAP is still used!
+	* Microsoft Active Directory can be accessed with LDAP
+	* In LDAP data is kept in key:value pairs called attributes
+	* Attributes are stored in a tree of entries
+	* Each entry in LDAP has 3 components
+		* A Distinguished Name (DN), an unique identifier
+		* A collection of attributes where data is actually stored
+		* A collection of object classes: information about the type of entry (a person, a service,...)
+
+# Cloud Automation
