@@ -1498,6 +1498,9 @@ service individual homes and offices across the country" (Len Kleinrock, 1969)
 * Kerberos is a service that implements strong authentication for client/server applications based on secret-key criptography
 	* It was developped at MIT
 	* Usually Kerberos is used in parallel to LDAP to manage only the authentication part (while authorization is up to LDAP)
+		* Kerberos manages the credentials for different users
+		* LDAP stores authoritative information about what users are allowed to do
+		* This approach is still widely used in computing and sotrage resources
 	* A client can contact a Kerberos server, which provides a signed encrypted ticket that can be used to access resources
 	* The ticket is valid for some time, so this reduces the problem of overloading the authentication server
 	* Kerberos is based on symmetric key criptography: the client and the server have a shared secret
@@ -1507,5 +1510,23 @@ service individual homes and offices across the country" (Len Kleinrock, 1969)
 	* Kerberos is used to implement Single Sign On (SSO) environments
 		* A single login unlocks a range of different services
 		* In AWS a single login unlocks EC2, S3,...
+	* Kerberos has a main issue: it relies on a TRUSTED KDC which holds all the secrets
+		* If someone is able to compromise the KDC, then everithyng is compromised
+		* This approach is not scalable because it would require mutual trust between different KDC servers: impossible on the internet
+* From the X.500 standard, a new standard called X.509 was created
+	* It defines the format for public key certificates
+	* An X.509 certificate contains a public key and an identity
+	* Each X.509 certificate is either self-signed (signed by the private key corresponding to the public key included in the certificate) or signed by a Certificate Authority (CA)
+	* Self-signed certificates are not so trustworthy
+	* Certificate Authorities are a limited number of organizations that are well-known and act as a Trusted Party
+		* They are used for-profit companies, but a notable exception is the non-profit Let's Encrypt
+	* X.509 is widely used by TLS/SSL protocol, which is the basis of https
+	* X.509 is based on public key criptography (asymmetric cryptography)
+		* The public key is known by everyone, while the private key is only known by the key owner
+		* The private key should never be communicated to anyone
+		* Public key criptography enables encryption (with the public key of the intended recipient) and decryption of data (by the recipient with its private key)
+		* It also enables signing of data (nonnrepudiation): I can let others trust that some data came from be by encrypting it with my private key, and showing that it can be decrypted only with my public key
+* Http transmission is in clear, and it uses the TCP port 80 (but it can also be configured to use other ports)
+* Https transmission is encrypted and it uses the TCP port 443 (but can be configured)
 
 # Cloud Automation
