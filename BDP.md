@@ -1502,7 +1502,7 @@ service individual homes and offices across the country" (Len Kleinrock, 1969)
 		* LDAP stores authoritative information about what users are allowed to do
 		* This approach is still widely used in computing and sotrage resources
 	* A client can contact a Kerberos server, which provides a signed encrypted ticket that can be used to access resources
-	* The ticket is valid for some time, so this reduces the problem of overloading the authentication server
+	  The ticket is valid for some time, so this reduces the problem of overloading the authentication server
 	* Kerberos is based on symmetric key criptography: the client and the server have a shared secret
 	* Kerberos implements a Key Distribution Center (KDC)
 		* It is a trusted party between client and server
@@ -1521,6 +1521,7 @@ service individual homes and offices across the country" (Len Kleinrock, 1969)
 	* Certificate Authorities are a limited number of organizations that are well-known and act as a Trusted Party
 		* They are used for-profit companies, but a notable exception is the non-profit Let's Encrypt
 	* X.509 is widely used by TLS/SSL protocol, which is the basis of https
+	* X.509 is also used for authenticating to GRID resources
 	* X.509 is based on public key criptography (asymmetric cryptography)
 		* The public key is known by everyone, while the private key is only known by the key owner
 		* The private key should never be communicated to anyone
@@ -1528,5 +1529,22 @@ service individual homes and offices across the country" (Len Kleinrock, 1969)
 		* It also enables signing of data (nonnrepudiation): I can let others trust that some data came from be by encrypting it with my private key, and showing that it can be decrypted only with my public key
 * Http transmission is in clear, and it uses the TCP port 80 (but it can also be configured to use other ports)
 * Https transmission is encrypted and it uses the TCP port 443 (but can be configured)
+* Since now we saw LDPA and Kerberos for authenthication, and X.509 for htpps access, but these approaches are not suitable for authenticating to Cloud applications
+* SAML (Security Assertion Markup Language) is an open standard based on XML
+	* It allows to share security credentials that can be used for authentication and authorization
+	* It is a quite mature standard (from 2005)
+	* Its primary use is that of implementing SSO for web applications
+	* SAML is NOT well suited for mobile applications (es. to create an API gateway)
+* eduGAIN (Global Academic Interfederation Service) is a SAML2-based federation of service providers
+	* It enables transparent SSO for members of the research and education community
+	* In Italy any service that wants to join eduGAIN must connect to the Italian Federation Identity (IDEM)
+		* IDEM is managed by GARR
+* In Italy since 2013 SPID (Sistema Pubblico di Identità Digitale) was created as a SSO for citizens towards public institutions
+	* SPID uses SAML2
+	* There is a discussion about how SPID and eduGAIN/IDEM should interoperate, also because universities are public institutions and therefore should offfer their services through SPID
+* Multi-Factor Authentication (MFA, also called 2FA) access to a resource is granted only after multiple credentials have been presented
+	* It is a widespread practice used for increasing security
+	* A best practice is to use MFA whenever using a service connected to the internet (especially for services holding private data)
+	* MFA works by combining something that you know (password) with something that you have (an OTP, fingerprint, email address,...)
 
 # Cloud Automation
