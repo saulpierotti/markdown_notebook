@@ -1546,5 +1546,30 @@ service individual homes and offices across the country" (Len Kleinrock, 1969)
 	* It is a widespread practice used for increasing security
 	* A best practice is to use MFA whenever using a service connected to the internet (especially for services holding private data)
 	* MFA works by combining something that you know (password) with something that you have (an OTP, fingerprint, email address,...)
+* In order to authenticate and authorize services in the cloud, 2 newer protocols are used: OAuth and OpenID-Connect
+* OAuth is an authorization framework and does not deal with authentication
+	* In OAuth an access token states the authorization rights of the client
+	* SAML is typically used for enterprise SSO of web applications, while OAuth is designed for the authorization of generic applications or resources on the Internet
+	* OAuth can be used for web applications but differently from SAML does not assume that the client is a web application
+* In OAuth there are several roles
+	* Resource owner: a user that own resources hosted at a service
+	* Client: an application that wants to access resources
+	* Authorization server: a service that authenticates user and client and issues access tokens accordingly
+	* Resource server: a service that holds protected resources and grants access based on access tokens
+* The first interaction of a client with the OAuth server involves the registration of the client
+	* During the registration a client receivs an id and a secret
+* OpenID-Connect (OIDC) handles authentication of users in the cloud
+	* It is a simple identity layer on top of the OAuth protocol
+	* It allows clients to verify the identity of an end user based on the authentication performed by an authrization server
+	* It allows clients to obtain information about an user in an interopaerable REST-like manner
+	* OIDC returns information on who an user is and how it was authenticated using an ID token
+		* The ID token is a JSON Web Token (JWT)
+* OIDC/OAuth is used in most web services like Google, Facebook, Microsoft, GitHub
+* JSON Web Token is an open standard for securely transmitting information as JSON objects
+	* JWT are usually signed and, if required, encrypted
+* Why to prefer OAuth, OIDC, and JWT to other solutions?
+	* They are widely used, standard, not bound to any specific authentication system
+	* They are scalable since they rely on distributed verification of access and identity tokens
+
 
 # Cloud Automation
