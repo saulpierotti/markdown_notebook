@@ -14,7 +14,7 @@
 	* CNAF developped an managed the Italian research network, now managed by GARR
 	* In 1990 CNAF realized the LHC Tier-1 datacenter in Bologna
 	* One of the main actors in GRID worldwide computing
-	* It offers CPU and sotrage resources to many INFN initiatives
+	* It offers CPU and storage resources to many INFN initiatives
 * This course is about infrastructures, not about Big Data
 
 # Big data
@@ -1471,7 +1471,7 @@ service individual homes and offices across the country" (Len Kleinrock, 1969)
 	* From a common root it was possible to access countries and organizations, and from those more specific groups until single individuals
 * In the early 90's, there was a long debate about the adoption of the OSI model or the TCP/IP model
 	* The TCP/IP model was supported bu the US Department of Defence and won at the end
-	* Now the OSI model is rarely used in practice but is an unseful theoretical framework for how applications should work
+	* Now the OSI model is rarely used in practice but is an useful theoretical framework for how applications should work
 * With the affirmation of TCP/IP, in order to access the X.500 Directory a simpler protocol than DAP was required
 	* DAP was built with the OSI model in mind
 * The protocol defined for accessing X.500 from TCP/IP is called LDAP (Lightweight DAP)
@@ -1500,9 +1500,9 @@ service individual homes and offices across the country" (Len Kleinrock, 1969)
 	* Usually Kerberos is used in parallel to LDAP to manage only the authentication part (while authorization is up to LDAP)
 		* Kerberos manages the credentials for different users
 		* LDAP stores authoritative information about what users are allowed to do
-		* This approach is still widely used in computing and sotrage resources
+		* This approach is still widely used in computing and storage resources
 	* A client can contact a Kerberos server, which provides a signed encrypted ticket that can be used to access resources
-	  The ticket is valid for some time, so this reduces the problem of overloading the authentication server
+	* The ticket is valid for some time, so this reduces the problem of overloading the authentication server
 	* Kerberos is based on symmetric key criptography: the client and the server have a shared secret
 	* Kerberos implements a Key Distribution Center (KDC)
 		* It is a trusted party between client and server
