@@ -1698,4 +1698,37 @@ service individual homes and offices across the country" (Len Kleinrock, 1969)
 	* Which ports should be exposed
 * Any node that is part of a Swarm cluster can still run regular containers in addition to Swarm services
 * Differently from standaone containers, it is possible to modify the configuration of a Swarm cluster without bringing down the service
-* Docker Swarm services are persistent
+* Docker Swarm services are persistent, while the load balancer is not
+
+## Docker Secrets
+* Writing and persisting application data for containers is not so simple
+* If I need to include a password or other sensitive data, I cannot store it in clear text in my docker-compose file, especially if I want to syncronise this file to a public CLoud like GitHub
+* Docker provides secretes for storing sensitive data that should not be transmitted over a network
+* Secrets are only available to Swarm services, not to standalone containers
+	* They are encrypted at rest and only made available to running Swarm services that have been granted explicit access to them
+	* They are never stored in clear text and only made available to Swarm services in memory (or in a RAM disk)
+* If I want to use secrets in a standalone container, I can just create a Swarm of scale 1
+* Secrets should be used for usernames, passwords, ssh keys, and other important data
+
+## Swarm Configs
+* Non-sensitive information such as configuration files do not need to be stored in encrypted form
+* Docker provides for this scenario Swarm configs
+* They are like secrets but are not encrypted and they are not stored in RAM, but mounted directly into a container's filesystem
+* Like secrets, also configs are only available to Swarm services and not to standalone containers
+
+## Kubernetes
+* Kubernetes (K8s) is another popular container orchestrator
+* It is open source and backed by Google and RedHat
+* A Kubernetes cluster is composed of a Master that coordinates the cluster and Nodes that run applications
+* A pod is the basic building block of Kubernetes and it represents a running process on a cluster
+	* It encapsulates an application container, storage resources, a network IP and options that govern how the container should run
+* The most common Kubernetes use case is that of a pod running a single container
+	* In this case the pod can be thought of as a wrapper around the container
+* A pod can also run multiple containers that need to cooperate
+	* It can encapsulate a multi-container application
+	* The pod in this case wraps the containers and the storage resources in a single manageable entity
+* A kubernetes service is an abstraction that defines a logical set of pods and a policy by which to access it
+	* Pods have IP adresses but they are not exposed outside of the cluster
+	* Services on the contrary allow applications to receive traffic
+* Deploying a Kubernetes cluster is not trivial, and because of this many clouds provide an already-configured Kubernetes cluster on which I can deploy my containers
+	* This is known as "Kubernetes as a service"
