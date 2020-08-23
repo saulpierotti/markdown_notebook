@@ -1732,3 +1732,7 @@ service individual homes and offices across the country" (Len Kleinrock, 1969)
 	* Services on the contrary allow applications to receive traffic
 * Deploying a Kubernetes cluster is not trivial, and because of this many clouds provide an already-configured Kubernetes cluster on which I can deploy my containers
 	* This is known as "Kubernetes as a service"
+	* AWS provides the "Elastic Container Service for Kubernetes" (EKS)
+	* A Kubernetes cluster is composed of a control plane and a data plane
+	* The control plane includes the masters, while the data plane includes the worker nodes
+	* EKS provides a managed control plane that is automatically updated with new releases of the Kubernetes software
