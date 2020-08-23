@@ -1463,6 +1463,8 @@ service individual homes and offices across the country" (Len Kleinrock, 1969)
 	* In linux local credentials are stored in `/etc/passwd` and `/etc/shadow`
 	* This method is definitely NOT scalable
 * The resources that we want to protect should have some form of Identity Management System (IdM)
+
+## X.500, DAP, LDAP
 * In the early days, an IdM consisted of directories storing "objects" that described generic "entities"
 	* One of such directories was basically a distributed database
 	* This standard was defined in 1988 and came to be known as the X.500 standard
@@ -1491,10 +1493,14 @@ service individual homes and offices across the country" (Len Kleinrock, 1969)
 	* In general, LDAP was born for authorization (i.e. storing which users can do what) and NOT for authentication
 		* Authentication was implemented later, and every authentication request generates a load on the LDAP server
 			* This can be problematic when there are many users or with some application that do not deal with authentication in a smart way
+
+## RADIUS
 * Another commonly used protocol for IdM is RADIUS (Remote Authentication Dial-in User Service)
 	* A RADIUS server sits between the user and other services: it is an intermediate service
 	* RADIUS queries LDAP to assess the identity of a person, but then it can query other services for authenticating it (es. an OTP service)
 	* It uses UDP and it is more flexible then LDAP (I can plug-in multiple services to RADIUS), but it is more complex to set up
+
+## Kerberos
 * Kerberos is a service that implements strong authentication for client/server applications based on secret-key criptography
 	* It was developped at MIT
 	* Usually Kerberos is used in parallel to LDAP to manage only the authentication part (while authorization is up to LDAP)
@@ -1513,22 +1519,26 @@ service individual homes and offices across the country" (Len Kleinrock, 1969)
 	* Kerberos has a main issue: it relies on a TRUSTED KDC which holds all the secrets
 		* If someone is able to compromise the KDC, then everithyng is compromised
 		* This approach is not scalable because it would require mutual trust between different KDC servers: impossible on the internet
+
+## X.509
 * From the X.500 standard, a new standard called X.509 was created
-	* It defines the format for public key certificates
-	* An X.509 certificate contains a public key and an identity
-	* Each X.509 certificate is either self-signed (signed by the private key corresponding to the public key included in the certificate) or signed by a Certificate Authority (CA)
-	* Self-signed certificates are not so trustworthy
-	* Certificate Authorities are a limited number of organizations that are well-known and act as a Trusted Party
-		* They are used for-profit companies, but a notable exception is the non-profit Let's Encrypt
-	* X.509 is widely used by TLS/SSL protocol, which is the basis of https
-	* X.509 is also used for authenticating to GRID resources
-	* X.509 is based on public key criptography (asymmetric cryptography)
-		* The public key is known by everyone, while the private key is only known by the key owner
-		* The private key should never be communicated to anyone
-		* Public key criptography enables encryption (with the public key of the intended recipient) and decryption of data (by the recipient with its private key)
-		* It also enables signing of data (nonnrepudiation): I can let others trust that some data came from be by encrypting it with my private key, and showing that it can be decrypted only with my public key
+* It defines the format for public key certificates
+* An X.509 certificate contains a public key and an identity
+* Each X.509 certificate is either self-signed (signed by the private key corresponding to the public key included in the certificate) or signed by a Certificate Authority (CA)
+* Self-signed certificates are not so trustworthy
+* Certificate Authorities are a limited number of organizations that are well-known and act as a Trusted Party
+	* They are used for-profit companies, but a notable exception is the non-profit Let's Encrypt
+* X.509 is widely used by TLS/SSL protocol, which is the basis of https
+* X.509 is also used for authenticating to GRID resources
+* X.509 is based on public key criptography (asymmetric cryptography)
+	* The public key is known by everyone, while the private key is only known by the key owner
+	* The private key should never be communicated to anyone
+	* Public key criptography enables encryption (with the public key of the intended recipient) and decryption of data (by the recipient with its private key)
+	* It also enables signing of data (nonnrepudiation): I can let others trust that some data came from be by encrypting it with my private key, and showing that it can be decrypted only with my public key
 * Http transmission is in clear, and it uses the TCP port 80 (but it can also be configured to use other ports)
 * Https transmission is encrypted and it uses the TCP port 443 (but can be configured)
+
+## SAML
 * Since now we saw LDPA and Kerberos for authenthication, and X.509 for htpps access, but these approaches are not suitable for authenticating to Cloud applications
 * SAML (Security Assertion Markup Language) is an open standard based on XML
 	* It allows to share security credentials that can be used for authentication and authorization
@@ -1546,6 +1556,8 @@ service individual homes and offices across the country" (Len Kleinrock, 1969)
 	* It is a widespread practice used for increasing security
 	* A best practice is to use MFA whenever using a service connected to the internet (especially for services holding private data)
 	* MFA works by combining something that you know (password) with something that you have (an OTP, fingerprint, email address,...)
+
+## OAuth and OpenID Connect
 * In order to authenticate and authorize services in the cloud, 2 newer protocols are used: OAuth and OpenID-Connect
 * OAuth is an authorization framework and does not deal with authentication
 	* In OAuth an access token states the authorization rights of the client
@@ -1584,6 +1596,8 @@ service individual homes and offices across the country" (Len Kleinrock, 1969)
 	* Supports full auditing: keeps track of security events for legal and logging purposes
 * Since OAuth/OIDC was developped by the industry, it does not completely fulfill the checklist of requirements of academic institutions
 	* There is a trend in acedemia to develop AAI systems that extend the standard protocols
+
+## INDIGO-IAM
 * INDIGO-IAM was developped at INFN and implements SAML, X.509 and OIDC
 	* Authentication is flexible: SAML, X.509, OIDC, or username and password
 	* Accounts can be linked
@@ -1608,3 +1622,40 @@ service individual homes and offices across the country" (Len Kleinrock, 1969)
 
 
 # Cloud Automation
+* Cloud Automation is a set of processes and technologies that allow to automayte several operations related to cloud computing
+* Automation is tightly linked to reproducibility
+
+## Microservices
+* Microservices are a way to build applications as a collection of many small autonomous services
+* They are contrapposed to the old monolith architecture
+* Microservices are like cattle, while a monolith application is like a pet
+* In an organization, each microservice can be managed and developped by a specific team, which operates in an autonomous way and is responsible for the service
+* In a microservice architecture multiple independent processes communicate with each other through the network
+* Differently from monoliths, in a microservice architecture states are external to the application
+* In a monolith a business is organized as 1 large team per tier (backend, frontend, database)
+* With microservices there is a tendency to have 2 pizza teams (a team that is small enough to order only 2 pizzas) composed of people from different backgrounds (backend, frontend, database) that work on a specific task (orders, shipping, catalog)
+	* Each team is directly responsible to the end user for its service
+* Databases tend to not be monolytic but split: I have an account DB, an inventory DB, a shipping DB
+* Communication between microservices are typically done with REST APIs
+* Microservices are not perfect and sometimes a monolyt is preferrable
+	* Deployment is more complex since each service must be deplyed independently
+	* I need to worry about the orchestration of the services
+	* There are more services to monitor
+* However, microservices offer several advantages
+	* They are more reliable, since there is no single point of failure
+	* They are more scalable horizontally
+	* Scaling can be granular and involve only the required components, and not necessarily the entire application
+
+## DevOps
+* DevOps (Development Operations) is a pattern developping scalable and applications where development and operation are tightly integrated
+* Instead of developping a production-ready application and deploying it, I follow a tight release and feedback schedule (release early, release often)
+* The continuous feedback allows to avoid unnecessary work and create something that the users will like
+* The main principle is to involve the end users in the project as early as possible
+* It uses a set of tools and processes to facilitate automation, monitoring, and continuous integration
+* DevOps is an example of risk reduction in software development
+* It is typically applicable to distributed microservices-based applications
+
+## Continuous Integration
+* Continuous Integration is a software development practice where developpers frequently merge their code changes to a central repository, after which automated builds and tests are run
+* This approach produces deployment packages that can be used for deployment to multiple environments
+* Jenkins is a widely used tools for this scope
