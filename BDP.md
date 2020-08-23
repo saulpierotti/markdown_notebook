@@ -1584,6 +1584,23 @@ service individual homes and offices across the country" (Len Kleinrock, 1969)
 	* Authentication is flexible: SAML, X.509, OIDC, or username and password
 	* Accounts can be linked
 	* It is a concrete implementation of the several protocols seen so far
+* The authorization workflow with IAM for a web application
+	* A web app integrates with IAM to delegate user authentication
+		* OAuth and OIDC provide the authorization code flow for this process
+	* An user accesses the web app, that redirects back to IAM for authentication
+	* The user does not have a valid session on IAM, so a login page is shown
+	* The user logs in with one of the external providers (Google, eduGAIN) or with username and password
+	* If the user chooses an external Identity Provider (IdP), he is redirected to the relevant login page
+	* The home IdP (for the user) authenticates him and sends back an authentication assertion to IAM
+	* IAM validates the assertion, and shows a consent page for authorizing the web app to obtain information on the user
+	* IAM generates an authorization code and sends it back to the web app using http redirect
+	* The web app shows to IAM its authorization code and receives from it an access token and an id token
+		* In IAM these tokens are both JWT tokens
+		* The access token provides mainly authorization information
+		* The id token provides mainly authentication information
+	* IAM validates the tokens following the OIDC protocol
+	* The application can request additional information by quering the `/userinfo` endpoint and presenting the acess token
+		* IAM returns a JWT with content that can partially overlap with the id token
 
 
 # Cloud Automation
