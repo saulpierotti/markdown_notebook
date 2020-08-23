@@ -1457,7 +1457,7 @@ service individual homes and offices across the country" (Len Kleinrock, 1969)
 	* Once a new feature is implemented in a branch, the branch can be merged to the master branch
 
 # Authentication and Authorization Infrastructure (AAI)
-* We typically want to protect our data or applications with some form of authentication and with various degrees of authorization to access them
+* We typically want to protect our data or applications with some form of authentication (AuthN) and with various degrees of authorization (AuthZ) to access them
 * The simplest form of authentication to a resource is the use of a local username and password
 	* This approach is local: every system stores its own set of credentials
 	* In linux local credentials are stored in `/etc/passwd` and `/etc/shadow`
@@ -1567,6 +1567,10 @@ service individual homes and offices across the country" (Len Kleinrock, 1969)
 * OIDC/OAuth is used in most web services like Google, Facebook, Microsoft, GitHub
 * JSON Web Token is an open standard for securely transmitting information as JSON objects
 	* JWT are usually signed and, if required, encrypted
+	* A JWT contains an header, a payload and a signature
+	* The header and payload are converted with base64 encoding
+	* The signature uses an hashing algorithm to combine header, payload and a secret from the signer
+	* If the signature does not match the content, the JWT is rejected
 * Why to prefer OAuth, OIDC, and JWT to other solutions?
 	* They are widely used, standard, not bound to any specific authentication system
 	* They are scalable since they rely on distributed verification of access and identity tokens
@@ -1600,7 +1604,7 @@ service individual homes and offices across the country" (Len Kleinrock, 1969)
 		* The id token provides mainly authentication information
 	* IAM validates the tokens following the OIDC protocol
 	* The application can request additional information by quering the `/userinfo` endpoint and presenting the acess token
-		* IAM returns a JWT with content that can partially overlap with the id token
+	* IAM returns a JWT with content that can partially overlap with the id token
 
 
 # Cloud Automation
