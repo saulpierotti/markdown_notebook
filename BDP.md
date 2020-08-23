@@ -1570,6 +1570,20 @@ service individual homes and offices across the country" (Len Kleinrock, 1969)
 * Why to prefer OAuth, OIDC, and JWT to other solutions?
 	* They are widely used, standard, not bound to any specific authentication system
 	* They are scalable since they rely on distributed verification of access and identity tokens
+	* They are driven and developped by industry, not research
+* In general, for the Cloud we want an AAI twith certain characteristics
+	* Open Source and uses widely adopted standards
+	* Supports for enrollment and registration of users (and optionally self-registration)
+	* It is able to link various credentials to a single identity
+	* It is flexible: it should be possible to grant administration priviledges to users, add users to groups, manage membership requests, and edit user information
+	* It is able to expose user and group information to applications that request them
+	* Supports full auditing: keeps track of security events for legal and logging purposes
+* Since OAuth/OIDC was developped by the industry, it does not completely fulfill the checklist of requirements of academic institutions
+	* There is a trend in acedemia to develop AAI systems that extend the standard protocols
+* INDIGO-IAM was developped at INFN and implements SAML, X.509 and OIDC
+	* Authentication is flexible: SAML, X.509, OIDC, or username and password
+	* Accounts can be linked
+	* It is a concrete implementation of the several protocols seen so far
 
 
 # Cloud Automation
