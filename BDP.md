@@ -1674,7 +1674,7 @@ service individual homes and offices across the country" (Len Kleinrock, 1969)
 * A regular baseline for monitoring should be acquired, and metrics over a period of time should be compared to it
 * When scalable, reliable, and maintainable applications need to be deployed to the cloud, it is important to find a way to instantiate the resources needed by the application
 
-## Container Orchestration
+## Docker Swarm
 * Containers are excellent for the creation of a microservice architecture
 * We saw already `docker-compose` for creating an application stack on a single host
 * Container orchestration instead refers to orchestrating many containers across distributed hosts
@@ -1700,7 +1700,7 @@ service individual homes and offices across the country" (Len Kleinrock, 1969)
 * Differently from standaone containers, it is possible to modify the configuration of a Swarm cluster without bringing down the service
 * Docker Swarm services are persistent, while the load balancer is not
 
-## Docker Secrets
+## Swarm Secrets and Configs
 * Writing and persisting application data for containers is not so simple
 * If I need to include a password or other sensitive data, I cannot store it in clear text in my docker-compose file, especially if I want to syncronise this file to a public CLoud like GitHub
 * Docker provides secretes for storing sensitive data that should not be transmitted over a network
@@ -1709,8 +1709,6 @@ service individual homes and offices across the country" (Len Kleinrock, 1969)
 	* They are never stored in clear text and only made available to Swarm services in memory (or in a RAM disk)
 * If I want to use secrets in a standalone container, I can just create a Swarm of scale 1
 * Secrets should be used for usernames, passwords, ssh keys, and other important data
-
-## Swarm Configs
 * Non-sensitive information such as configuration files do not need to be stored in encrypted form
 * Docker provides for this scenario Swarm configs
 * They are like secrets but are not encrypted and they are not stored in RAM, but mounted directly into a container's filesystem
@@ -1736,3 +1734,7 @@ service individual homes and offices across the country" (Len Kleinrock, 1969)
 	* A Kubernetes cluster is composed of a control plane and a data plane
 	* The control plane includes the masters, while the data plane includes the worker nodes
 	* EKS provides a managed control plane that is automatically updated with new releases of the Kubernetes software
+
+## Docker Swarm vs Kubernetes
+* Docker Swarm should be used for small projects and for prototyping, since it is easy to use for who is already familiar with Docker
+* Kubernetes is best for enterprise solutions, and it is also the Google way of dealing with microservices, but the learning curve is quite steep
