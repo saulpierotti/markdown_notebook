@@ -1655,7 +1655,7 @@ service individual homes and offices across the country" (Len Kleinrock, 1969)
 * DevOps is an example of risk reduction in software development
 * It is typically applicable to distributed microservices-based applications
 
-## Continuous Integration, Deployment, Delivery, Learning, Monitoring
+## Continuous Approach
 * Continuous Integration is a software development practice where developpers frequently merge their code changes to a central repository, after which automated builds and tests are run
 * This approach produces deployment packages that can be used for deployment to multiple environments
 * Jenkins is a widely used tools for this scope
@@ -1738,3 +1738,51 @@ service individual homes and offices across the country" (Len Kleinrock, 1969)
 ## Docker Swarm vs Kubernetes
 * Docker Swarm should be used for small projects and for prototyping, since it is easy to use for who is already familiar with Docker
 * Kubernetes is best for enterprise solutions, and it is also the Google way of dealing with microservices, but the learning curve is quite steep
+
+## Infrastructure as Code
+* Infrastructure as Code (IaC) refers to the definition of a computing infrastructure through a structred language
+	* This is contrapposed to the manual creation of an infrastructure
+	* IaC is based on the realization that "complexity kills productivity"
+	* It simplifies the realization of complex infrastructures and set-ups
+	* All the specifications for the infrastructure are written in configuration files
+* The most popular IaC tools are Puppet, Ansible, Terraform, and Chef
+	* Also Docker provides some form of IaC through Dockerfiles
+* In general, it is important that whatever is done with code and data be reproducible and manageable
+	* It is encouraged to use automated configuration and installation tools
+* In IaC the focus is more on what I need than on how to create the infrastructure
+	* This is achieved through templating mechanisms
+	* This is linked to the concept of extending and reusing what is available instead of reinventing the wheel
+* The Amazon way of doing IaC is the AWS CLoudFormation language
+	* It defines the complete topology of an application
+	* It is specific to Amazon and cannot be used with other Cloud providers
+* TOSCA (Topology and Orchestration Specification for Cloud Applications) is a public standard
+	* It is an OASIS standard language to describe the topology of cloud-based web services, their components, their relationships, and the processes managing them
+	* It standardizes the language to describe the topology model (struvture of the IT service), orchestrate operational behaviour (build, deploy, patch, shutdown), and describes a declarative model that spans applications and infrastructures
+* CloudFormation and TOSCA allow us to realize service composition (combine different services to implement complex topologies)
+	* The INFN National Cloud is an example of service composition that provides a portfolio of services based on a set of core open source components, visible to the end user via simple configurable buttons
+		* Each button underlies a TOSCA template
+		* When a new service is needed, it is built starting from an existing TOSCA template and modifying it as appropriate
+
+## Serverless Computing
+* In traditional cloud applications we need to provision and manage the resources, we are charged for the resource uptime even when they are idle, and we are responsible for updated and security patches
+* In the serverless paradigm, or FaaS (function as a service) the Cloud provider is responsible for executing a piece of code that you write by dynamically allocating the resources needed
+	* You are only charged for the resources actually used and only when the code runs
+	* Since code is typically structured in functions, serverless computing is also called FaaS
+* The running of serverless functions can be triggered by some conditions (database events, file uploads, schedules, alerts,...)
+* The application should be structured in a set of stateless functions, consistently with the microservice paradigm
+* Functions in FaaS tend to have some core characteristics
+	* Can be written in multiple languages
+	* Are reusable
+	* Do not implement long-running services (they typically do not expose any port)
+	* Are stateless
+	* May use existing services in variuos Cloud infrastructures
+	* Execute rapidly (in AWS the timeout is 15 minutes)
+* Nowadays FaaS is really popular because
+	* It is the next step towards offering a service focused on the application
+	* It extends the microservice paradigm
+	* It can save costs by paying only for when my application is running
+* However, there are some drawbacks
+	* FaaS can be difficult to use and lead to vendor lock-in
+	* It can be difficult to debug since it is distributed and dynamic
+	* It can be difficult ot size and integrate
+* AWS Lambda is the Amazon way of doing serverless computing
