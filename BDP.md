@@ -1786,3 +1786,10 @@ service individual homes and offices across the country" (Len Kleinrock, 1969)
 	* It can be difficult to debug since it is distributed and dynamic
 	* It can be difficult ot size and integrate
 * AWS Lambda is the Amazon way of doing serverless computing
+* OpenFaaS is an open source solution to bring FaaS to any cloud infratructure
+	* It allows you to write a function in any language and package it in a Docker container
+	* The container can then be run in a Docker Swarm or in a Kubernetes cluster, or in a single host
+* Functions can be synchronous or asynchronous
+	* In a synchronous function the output is returned only when the execution of the function itself finishes
+	* Asynchronous functions return immediately, and the otput is instead returned when ready
+* OpenFaaS supports both synchronous and asynchronous functions
