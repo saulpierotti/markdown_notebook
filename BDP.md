@@ -1793,3 +1793,7 @@ service individual homes and offices across the country" (Len Kleinrock, 1969)
 	* In a synchronous function the output is returned only when the execution of the function itself finishes
 	* Asynchronous functions return immediately, and the otput is instead returned when ready
 * OpenFaaS supports both synchronous and asynchronous functions
+* Serverless provides a significant improvement to machine learning
+	* Pigo and OpenCV are popular toolkits to implement machine learning methods
+	* From a Google paper "serverless technologies are believed to provide a significant simplification to solving ML problems, exactly because they allow to focus as much as possible on ML code and as little as possible on 'glue code' needed to provision the underlying layers (storage, compute, network, etc.)"
+
