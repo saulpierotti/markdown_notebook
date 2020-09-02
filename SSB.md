@@ -67,3 +67,41 @@ $$ z_j = g(\sum_i w_{ij} x_i - \theta_j)$$
 	* Training means optimizing the value of the trainable parameters for a set of know examples
 * The non trainable parameters of the network are called hyperparameters
 	* In the perceptron these are the number of neurons in the input and output layers
+* I can train the parameters by starting from random values
+* For a given set of parameters $\vec{w}$, I evaluate the output values $z_j$ for a set of examples (training data) $x^k$
+* I compare the output with a set of desired outputs for the training set $d^k$
+* I can define an error (or loss) function $E$ that represents how well the output $\vec{z_k}$ agrees with the desired output $\vec{d_k}$
+* A possible error function is a simple difference
+$$ E = \sum_{k,j} (z_j((x_k,w_{j,k})-d_{j,k}) $$
+	* This is not a good function since contributions with opposite signs cancel each other
+* I can use the absolute values of the differences
+$$ E = \sum_{k,j} |(z_j((x_k,w_{j,k}))-d_{j,k})| $$
+	* This function is not derivable, and so it does not allow to calculate a gradient
+* It is better to use the square of the error
+$$ E = \frac{1}{2}\sum_{k,j} (z_j((x_k,w_{j,k}))-d_{j,k})^2 $$
+	* The constant factor $\frac{1}{2}$ is useful to simplify a computation later, it does not have a specific meaning
+	* This is the most used error function in classical neural networks
+* The cross entropy is xxx
+* After evaluating my error function, I need to update my parameters accordingly if the error is not below a satisfactory threshold
+* I can update the parameters randomly
+	* This is used in some approaches, but in general it is not so smart if the parameter space is really large
+	* In a perceptron with $n$ input neurons and $m$ output neurons the parameter space is $(n+1)m$ (weights plus the thresholds)
+		* I have $nm$ weights and $m$ thresholds
+* The error function is a function
+$$ E_{\vec{w},\theta} : \mathbb{R}^{(n+1)m} \to \mathbb{R}$$
+* The analytical solution of the maxima and minima of the error function is usually not computationally feasible
+	* I am in a extremum (or a saddle/flexus) when all the partial derivatives of the error function are 0
+	* In order to define a gradient the error function must be derivable
+	* Since the error function includes the transfer function, also this must be derivable
+	* This approach would be really good since it does not need any inizialization and outputs a set of all the extrema and saddle points/flexuses
+	* I could then just subsitute for all of these points and find the global extrema
+* I can use gradient descent for updating the parameters
+	* I update the parameters in the direction that would lower the error function, given the set of partial derivatives (the gradient!)
+	* I can define the new parameter $w_1$ as a function of the old parameter $w_0$
+$$ w_1 = w_0 - \eta \frac{\partial E}{\partial w}|w_0$$
+	* $\eta$ is the learning rate, a hyperparameter
+	* I repeat the process iteratively until $E$ is below a certain acceptable threshold
+* A gradient is a vector containing all the first order partial derivatives of a function
+$$ \nabla f(x)= (\frac{\partial f}{\partial x_1},\frac{\partial f}{\partial x_2},...,\frac{\partial f}{\partial x_n})$$
+* A function with 2 to inputs and 1 output can be represented with contour lines* The gradient is always perpendicular to the level curves and points always in the direction where the function is increasing
+
