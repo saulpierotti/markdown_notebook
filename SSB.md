@@ -64,6 +64,6 @@ $$ z_j = g(\sum_i w_{ij} x_i - \theta_j)$$
 * Also a NOT(1) can be implemented with the same topology
 	* I choose $w_{13}=-0.5$, $w_{23}=0.1$, $\theta=-0.25$
 * The weights $w$ are the trainable parameters of the network
-	* Training means optimizing the value of the parameters for a set of know examples
+	* Training means optimizing the value of the trainable parameters for a set of know examples
 * The non trainable parameters of the network are called hyperparameters
 	* In the perceptron these are the number of neurons in the input and output layers
