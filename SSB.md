@@ -70,16 +70,18 @@ $$ z_j = g(\sum_i w_{ij} x_i - \theta_j)$$
 * I can train the parameters by starting from random values
 * For a given set of parameters $\vec{w}$, I evaluate the output values $z_j$ for a set of examples (training data) $x^k$
 * I compare the output with a set of desired outputs for the training set $d^k$
-* I can define an error (or loss) function $E$ that represents how well the output $\vec{z_k}$ agrees with the desired output $\vec{d_k}$
+* I can define an error (or loss) function $E$ that represents how well the output $\vec{z}^{(k)}$ agrees with the desired output $\vec{d}^{(k)}$
+	* In this representation $k$ represents the number of training examples, and $j$ the various output neurons
 * A possible error function is a simple difference
-$$ E = \sum_{k,j} (z_j((x_k,w_{j,k})-d_{j,k}) $$
+$$ E(\vec{w}) = \sum_{k,j} (z_j(x^{(k)},\vec{w})-d_j^{(k)}) $$
 	* This is not a good function since contributions with opposite signs cancel each other
 * I can use the absolute values of the differences
-$$ E = \sum_{k,j} |(z_j((x_k,w_{j,k}))-d_{j,k})| $$
+$$ E(\vec{w}) = \sum_{k,j} |z_j(x^{(k)},\vec{w})-d_j^{(k)}| $$
 	* This function is not derivable, and so it does not allow to calculate a gradient
 * It is better to use the square of the error
-$$ E = \frac{1}{2}\sum_{k,j} (z_j((x_k,w_{j,k}))-d_{j,k})^2 $$
+$$ E(\vec{w}) = \frac{1}{2}\sum_{k,j} (z_j(x^{(k)},\vec{w})-d_j^{(k)})^2 $$
 	* The constant factor $\frac{1}{2}$ is useful to simplify a computation later, it does not have a specific meaning
+	* It makes the expression more similar the one for kinetic energy
 	* This is the most used error function in classical neural networks
 * The cross entropy is xxx
 * After evaluating my error function, I need to update my parameters accordingly if the error is not below a satisfactory threshold
@@ -110,5 +112,50 @@ $$ \nabla f(x)|_{\vec{w}_0}= (\frac{\partial f}{\partial x_1}|_{\vec{w}_0},\frac
 * The general rule for the steepest descent is that I start from a function $E(\vec{w})$, and from the point $\vec{w}_0$, and I define the next point $\vec{w}_1$ as $\vec{w}_1 = \vec{w}_0 - \eta \nabla E | \vec{w}_0$
 * This can be generalised as
 $$\vec{w}_{t+1}= \vec{w}_t - \eta \nabla E | \vec{w}_t$$
+* Demonstration of orthogonality of gradient to level curves xxx
 * An analytical procedure for finding a global extremum of a function is still an open problem
 * In order to optimize the choice of learning rate, I can use the second order partial derivatives (Hessian matrix)
+* A perceptron performs a mapping $\mathbb{R}^n \to \mathbb{R}^m$
+* Given the error function $E$, with transfer function $g(a)=\frac{1}{1+e^{-a}}$
+$$ E(\vec{w}) = \frac{1}{2}\sum_{k,j} (z_j(x^{(k)},\vec{w})-d_j^{(k)})^2 $$
+* I want to compute the gradient $\nabla E$
+* I can compute the derivative of $E$ relative to a specific weight $w_{rs}$ (the weight from input $r$ to output $s$) by scomponing the problem with the chain rule
+$$\frac{\partial E}{\partial w_{rs}} = \frac{\partial E}{\partial z_s}\frac{\partial z_s}{\partial w_{rs}}$$
+$$= \frac{\partial E}{\partial z_s}\frac{\partial z_s}{\partial a_s}\frac{\partial a_s}{\partial w_{rs}}$$
+* I can solve the first term
+$$\frac{\partial E}{\partial z_s} = \frac{1}{2} \sum_{k,j}(z_j(x^{(k)}-d_j^{(k)}))^2$$
+* For the second term, noting that $z_s = g(a_s)$
+$$\frac{\partial z_s}{\partial a_s} = g'(a_s)$$
+* For the last term, noting that $a_s = \sum_i w_{is} x_i^{(k)}$ ($w_{is}$ is the weight of the connection between the input neuron $i$ and the output neuron $s$)
+	* In the derivative I am only interested in input $r$, so
+$$\frac{\partial a_s}{\partial w_{rs}} = x_r^{(k)}$$
+* So putting everything toghether
+$$\frac{\partial E}{\partial w_{rs}} = \sum_{k}(z_s(x^{(k)}-d_s^{(k)}))^2 * g'(a_s) * x_r^{(k)}$$
+* The term $\sum_{k}(z_s(x^{(k)}-d_s^{(k)}))^2 * g'(a_s)$ is called $\delta_s^{(k)}$ (deviation) and depends only on the output neuron $s$, not on the input $r$
+* I can therefore write everything as
+$$\frac{\partial E}{\partial w_{rs}} = \sum_{k} \delta_s^{(k)} * x_r^{(k)}$$
+* If the activation function is not linear, its derivative $g'(a)$ will be really variable across its domain
+* The training for a single parameter converges when $$\frac{\partial E}{\partial w_{rs}} \approx 0$$
+* The number of layers in a neural network can be measured according to 2 different definitions
+	* The number of weight layers
+		* In this framework a perceptron has 1 layer
+	* The number of neuron layers
+		* In this framework a perceptron has 2 layers
+* The computational power of a perceptron is limited to linear relationships (or linear decision boundaries in the case of classification probelems)
+	* The activation can be expresses as $\sum_i w_i x_i - \theta$, which is the equation of an i-dimensional manifold
+	* Using feature crosses, I can indirectly implement non linear boundaries but those are not learnt by the perceptron, I am just translating the space to a linearly separable one
+* This limitation of the perceptron is a well-known computational problem, the XOR problem
+	* XOR returns 0 when the inputs are both 0 or both 1, and 1 otherwise
+	* It is not possible to implement a XOR function with a perceptron, since this function is non linear
+	* When it was proven that the XOR problem could not be solved by a perceptron, neural networks disappeared from the AI research for 15 years
+* In order to learn non-linear relationships, I can use a feed-forward network with hidden layers
+	* The number of hidden layers and the number of neurons in the hidden layers are hyperparameters
+	* This is still a feed-forward network, so there is no back-communication and communication across same-layer neurons
+* With a network with 1 hidden layer, I have $n$ input neurons, $m$ output neurons, and $h$ hidden neurons
+* For the hidden neuron $j$ in layer 1 I have that
+$$z_j^{(1)} = g(\sum_i w_{ij}^{(1)}x_i-\theta_j^{(1)})$$
+* For the output layer instead the input is the output of the hidden layer ($z^{(1)}$)
+$$z_j^{(2)} = g(\sum_i w_{ij}^{(2)}z_i^{(1)}-\theta_j^{(1)})$$
+* With a multilayer network I can solve the XOR problem
+* The hidden layer maps the input to a new space where the points are linearly separable
+
