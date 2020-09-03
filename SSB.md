@@ -103,5 +103,12 @@ $$ w_1 = w_0 - \eta \frac{\partial E}{\partial w}|w_0$$
 	* I repeat the process iteratively until $E$ is below a certain acceptable threshold
 * A gradient is a vector containing all the first order partial derivatives of a function
 $$ \nabla f(x)= (\frac{\partial f}{\partial x_1},\frac{\partial f}{\partial x_2},...,\frac{\partial f}{\partial x_n})$$
-* A function with 2 to inputs and 1 output can be represented with contour lines* The gradient is always perpendicular to the level curves and points always in the direction where the function is increasing
-
+* A function with 2 to inputs and 1 output can be represented with contour lines
+* The gradient is always perpendicular to the level curves and points always in the direction where the function is increasing
+* The gradient evaluated at a point $\vec{w}_0$ is the vector of all the first order partial derivatives evaluated at that point
+$$ \nabla f(x)|_{\vec{w}_0}= (\frac{\partial f}{\partial x_1}|_{\vec{w}_0},\frac{\partial f}{\partial x_2}|_{\vec{w}_0},...,\frac{\partial f}{\partial x_n}|_{\vec{w}_0})$$
+* The general rule for the steepest descent is that I start from a function $E(\vec{w})$, and from the point $\vec{w}_0$, and I define the next point $\vec{w}_1$ as $\vec{w}_1 = \vec{w}_0 - \eta \nabla E | \vec{w}_0$
+* This can be generalised as
+$$\vec{w}_{t+1}= \vec{w}_t - \eta \nabla E | \vec{w}_t$$
+* An analytical procedure for finding a global extremum of a function is still an open problem
+* In order to optimize the choice of learning rate, I can use the second order partial derivatives (Hessian matrix)
