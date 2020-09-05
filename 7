@@ -253,24 +253,8 @@ $$\frac{\partial E}{\partial a_j^{(1,k)}} = \sum_m \frac{\partial E}{\partial a_
 	* The sum is across the neurons of the output layer
 	* The first term is the derivative of the error function with respect to the activation of neuron $m$ of the second layer (I sum over all of them)
 	* The second term is the derivative of the activation of neuron $m$ of the second layer with respect to the activation of neuron $j$ of the first layer
-* The activation $a_m^{(2,k)}$ of a neuron $m$ of the second layer can be expressed in terms of the activations $a_j^{(1,k)}$ of all the neurons $j$ of the first layer
-$$a_m^{(2,k)}=\sum_j z_j^{(1,k)}w_{jm}^{(2)}=\sum_j g(a_j^{(1,k)})w_{jm}^{(2)}$$
-	* $g(x)$ is the transfer function
-* The derivative of the activation of neuron $m$ of the second layer with respect to the activation of neuron $j$ of the first layer can thus be expressed as
-$$\frac{\partial a_m^{(2,k)}}{\partial a_j^{(1,k)}}=g'(a_j^{(1,k)})w_{jm}^{(2)}$$
-	* The sum disappears since all the terms besides the one relative to neuron $j$ are constants and thus have a derivative of 0
-* Thus I can define $\delta^{(1,k)}_j$ as
-$$ \delta^{(1,k)}_j = \frac{\partial E}{\partial a_j^{(1,k)}} = \sum_m \delta^{(2,k)}_m g'(a_j^{(1,k)}) w_{jm}^{(2)}$$
-	* This is because
-$$\delta^{(2,k)}_m = \frac{\partial E}{\partial a_m^{(2,k)}}$$
-* In the backpropagation algorithm I proceed as follows for a single output neuron $m$
-	* I compute the output $z^{(2,k)}_m$ for each example $k$ (feed-forward step)
-	* From the output, I compute the deviation of the second layer $\delta^{(2,k)}_m$
-	* I compute the deviation of the hidden layer $\delta^{(1,k)}_j$ from the deviation of the output layer, the activation of the first layer and the weights connecting the 2 layers
-	* I compute then the gradient $\nabla E$ with respect to all the weights $w$
-* In the update I can also add an inertial hyperparameter $\alpha$ (called momentum) to speed up the training
-$$w_{ij}^{t+1}=w_{ij}^t-\eta\frac{\partial E}{\partial w_{ij}}+ \alpha \Delta w_{ij}^t$$
-	* This makes update bigger when previous updates where bigger, and smaller when they where smaller
+* The activation $a_m^{(2,k)}$ of a neuron $m$ of the second layer can be expressed in terms of the activations of the first layer
+$$a_m^{(2,k)}=\sum_p g(a_p^{(1,k)})w_{pm}^{(2)}$$
 
 
 
