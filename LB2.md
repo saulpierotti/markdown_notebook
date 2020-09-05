@@ -24,3 +24,22 @@
 	* If $\Delta \Delta G < -1.0$ the variation decreases protein stability
 	* If $\Delta \Delta G < -1.0$ the variation decreases protein stability
 	* If $1.0 < \Delta \Delta G < 1.0$ the variation has little effect on protien stability
+* HMMs can be used to model domains, not entire proteins
+* Comparing protein topology allows to predict the structure of entire proteins
+* If you are lost for a protein, predict its secondary structure and allign it against the PDB filtered so to apper as a set of secondary structures
+* The accuracy of secondary structure predictors is around 80-90%
+	* According to Rost this accuracy is an upper limit, given the resolution of the atomic coordinates of proteins
+* The topology is the organization in space of all the secondary structure motives of a protein
+	* For our purpose it is all the different patterns of secondary structure from the N to C terminus
+* The DSS algorithm is embedded in many visualization softwares
+* An helix is at least 4 residues long, while a strand is at least 2 residues long
+* There is no upper limit, but there are helices in fibers which are several hundred residues long
+
+# LB2 Project
+* We will compare 2 different approaches for predicting protein secondary structure
+	* The GOR method, based on statistical analysis
+	* Using SVM (background from Martelli)
+* We will be given the training data and the cross-validation splits
+* Training data are FASTA files and DSSP secondary structures
+* We will implement everything in python
+* They will provide us a virtual machine with linux with 8 Gb RAM and 50 Gb HDD, with all the necessary software installed in conda
