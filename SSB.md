@@ -240,15 +240,19 @@ $$z_j^{(2)} = g(\sum_i w_{ij}^{(2)}z_i^{(1)})$$
 * The backpropagation algorith was invented in a 1974 PhD thesis (Werbos) and extended in a 1986 paper (Rumelhart, Hinton, Williams)
 * This algorithm is the most used approach for obtaining the gradient of the error function in multi-layer perceptrons
 * It is called backpropagation since the cost propagates back to the network layers in order to compute the gradient
-* The analytical expression for the gradient is easy to obtain, but can be hard to compute
+* For the second layer, I can just use the classical perceptron formula by substituting the input $x_i$ with the output of the previos layer $z_i$
 $$ \frac{\partial E}{\partial w^{(2)}_{ij}} = \sum_k \delta^{(2,k)}_j z^{(1,k)}_i$$
+$$\frac{\partial E}{\partial w_{ij}} = \sum_k (z_j^{(2)}(x^{(k)},w_{ij})-d_j^{(k)}) g'(a^{(2,k)}_j) z_i^{(1,k)}$$
+	* I know all the terms
+* For the hidden layer the situation is less clear, since I do not know what the desired output is
 $$ \frac{\partial E}{\partial w^{(1)}_{ij}} = \sum_k \delta^{(1,k)}_j x^{(k)}_i$$
-* I note that the derivative with respect to a single weight of the first layer $w^{(1)}_{ij}$ can be decomposed with the chain rule as
+	* I need to derive an expression for $\delta^{(1,k)}_j$, the sensitivity of the error to a variation in the activation of a neuron in the hidden layer
+* I note that the derivative of the error function with respect to a single weight of the first layer $w^{(1)}_{ij}$ can be decomposed with the chain rule as
 $$ \frac{\partial E}{\partial w^{(1)}_{ij}} = \sum_k \frac{\partial E}{\partial a_j^{(1,k)}} \frac{\partial a_j^{(1,k)}}{\partial w_{ij}^{(1)}}$$
 	* The sum is across the training samples
-	* The first term is the derivative of the error function with respect to the activation of the neuron $j$ of the first layer (the one receiving the connection $w_{ij}$)
+	* The first term is the derivative of the error function with respect to the activation of the neuron $j$ of the first layer (the one receiving the connection $w_{ij}$), and so it is the deviation of the neuron of the hidden layer $\delta^{(1,k)}_j$
 	* The second term is the derivative of the activation of the neuron $j$ of the first layer with respect to the weight $w^{(1)}_{ij}$ of the first layer
-* I note that the first term can be further decomposed as
+* I note that the deviation can be further decomposed in terms of the activation of the output layer
 $$\frac{\partial E}{\partial a_j^{(1,k)}} = \sum_m \frac{\partial E}{\partial a_m^{(2,k)}}\frac{\partial a_m^{(2,k)}}{\partial a_j^{(1,k)}}$$
 	* The sum is across the neurons of the output layer
 	* The first term is the derivative of the error function with respect to the activation of neuron $m$ of the second layer (I sum over all of them)
@@ -268,25 +272,27 @@ $$\delta^{(2,k)}_m = \frac{\partial E}{\partial a_m^{(2,k)}}$$
 	* From the output, I compute the deviation of the second layer $\delta^{(2,k)}_m$
 	* I compute the deviation of the hidden layer $\delta^{(1,k)}_j$ from the deviation of the output layer, the activation of the first layer and the weights connecting the 2 layers
 	* I compute then the gradient $\nabla E$ with respect to all the weights $w$
+	* I perform gradient descent on $\nabla E$
 * In the update I can also add an inertial hyperparameter $\alpha$ (called momentum) to speed up the training
 $$w_{ij}^{t+1}=w_{ij}^t-\eta\frac{\partial E}{\partial w_{ij}}+ \alpha \Delta w_{ij}^t$$
 	* This makes update bigger when previous updates where bigger, and smaller when they where smaller
 
-
-
-
-
-* Neural networks can be used for regression as well as for classification, without particular modifications
+## Final Thoughts
+* Neural networks can be used for regression as well as for classification without particular modifications
+	* I just replace the desired class $d$ with a desired continuous output $y$
+* In a regression problem the desired outputs are real numbers, in a classification problem they are either 0 or 1
 * Increasing the number of neurons in the hidden layer increses the risk for overfitting the data
 * It can be proven that neural networks are universal approximators
-	* Other universal approximators are polynomials (Stone-Weistress theorem)
 * Given some general conditions, by increasing the number of hidden neurons in a layer (width) or by increasing the number of hidden layers (depth), NNs can approximate any continuous and derivable function with arbitrary precision
+* Other universal approximators are polynomials (Stone-Weistress theorem)
 * The fact that NN are universal approximators exposes them to the risk of overfitting
 * The number of parameters must be far lower than the number of training points in order to avoid overfitting
 * A typical sign of overfitting is having weights with really high absolute value
-* If possible it is good to limit the magnitude of parameters by using regularizers
-* The number of parameters in a network with $n$ input neurons, $r$ hidden neurons and $k$ output neurons is $r(n+1)+(r+1)m$
+* If possible it is good to limit the magnitude of parameters by using a regularizer $\lambda$
+$$E=\frac{1}{2}\sum_{k,j}(z_j(x^{(k)},w)-y^{(k)}_{ij})^2+\lambda\sum (w_{ij^{(k)}})^2$$
+	* The regularizer penalizes the use of weights with large absolute value
 * I can evaluate the performance of my network on a validation set, which I use to fix the hyperparameters
 * I should always reserve a test set that is never used for the computation
+* Backpropagation is not suitable for training deep networks: we need deep learning procedures
+* The number of parameters in a network with $n$ input neurons, $r$ hidden neurons and $k$ output neurons is $r(n+1)+(r+1)m$
 * In classical NN (trained with backpropagation), increasing the width of the network is much better than increasing the depth
-* How do you represent a sequence for a NN?
