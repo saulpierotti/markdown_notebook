@@ -19,6 +19,7 @@
 	* This is in spite of primary structure
 * A genetic variant of a protein (an allele with a single aminoacid difference) can have a different stability than the original protein allele
 * A variation in $\Delta G$ among 2 proteins due to a genetic variant, called $\Delta \Delta G$ can increase or decrease protein stability
+$$ \Delta \Delta G = \Delta G_{mut}-\Delta G_{nat}$$
 	* If $\Delta \Delta G > 1.0$ the variation increases protein stability
 	* If $\Delta \Delta G < -1.0$ the variation decreases protein stability
 	* If $\Delta \Delta G < -1.0$ the variation decreases protein stability
