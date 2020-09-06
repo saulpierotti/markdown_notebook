@@ -2,14 +2,13 @@
 % Saul Pierotti
 % \today
 
-# Random
+# Secondary Structure
 * JCE has been removed from the PDB website
 * I can use TopMatch for pairwise structural alignment, and Mustang for multiple structural alignment
+* H is usually not visible in 3D structures, since it needs a resolution better than 1 $\AA$
+* Approximately 50% or protein atoms and 35% of nucleic acids atoms are hydrogens
 * Molecular visualization softwares in order to show secondary structure use algorithms that compute the position of hydrogens
 	* Jahnet Tornhton developped one of the most used algorithms
-	* DSSP is another algorithm developped by Sander and Kabasch
-	* First hydrogens are added according to the chemical properties of elements
-	* DSSP uses a purely electrostatic definition to assign hydrogen bonding patterns and, from this, secondary structure
 * A protein is a stable entity when there is the right combination of residues that allow the backbone to fold in the solvent space
 * An hydrogen bond is on average $2 \AA$ long
 * The atoms involved in the H bonding should be strongly electronegative
@@ -29,11 +28,62 @@
 * If you are lost for a protein, predict its secondary structure and allign it against the PDB filtered so to apper as a set of secondary structures
 * The accuracy of secondary structure predictors is around 80-90%
 	* According to Rost this accuracy is an upper limit, given the resolution of the atomic coordinates of proteins
-* The topology is the organization in space of all the secondary structure motives of a protein
-	* For our purpose it is all the different patterns of secondary structure from the N to C terminus
-* The DSS algorithm is embedded in many visualization softwares
 * An helix is at least 4 residues long, while a strand is at least 2 residues long
 * There is no upper limit, but there are helices in fibers which are several hundred residues long
+* The topology is the organization in space of all the secondary structure motives of a protein
+	* For our purpose it is all the different patterns of secondary structure from the N to C terminus
+
+# Uniprot
+* Annotation in UniProt is manual and automatic
+* SwissPort includes only manually reviewed proteis, despite their annotation quality
+* Automatic annotation is based on UniRule and SAAS
+* UniRule rules are made by expert curators, while SAAS rules are automatically generated
+* SAAS uses machine learning to create rules from analysing manually and UniRule annotated entries
+
+# DSSP
+* DSSP is an algorithm developped by Sander and Kabasch in 1983 for the assignment of secondary structure to 3D structures
+	* First hydrogens are added according to the chemical properties of elements
+	* Then DSSP uses a purely electrostatic definition to assign hydrogen bonding patterns and, from this, secondary structure
+* The DSS algorithm is embedded in many visualization softwares
+* The goal of DSSP is to approximate the intuitive concept of secondary structure with an objective algorithm
+* Extracting structural features from a set of coordinates is a pattern recognition process
+* Using torsion angles for assessing secondary structure requires many parameters, while using the presence of hydrogen bonds requires a single parameter: bond lenght
+	* Torsion angles are defined using the position of 4 atoms each
+* n-turns are defined by the presence of an H-bind between the CO of residue $i$ and the NH of residue $i+n$, with $n=3,4,5$
+* Bridges are defined similarly to turns, but for $n>5$
+* Bridges are also required to be at least 3 residues long
+* Alpha helices are described by repeating 4-turns, while beta structures are defined by repeating bridges
+* A series of 3-turns describes a 3:10 helix, while a series of 5-turns describes a $\pi$ helix
+* Other structures such as 3-10 helices, $\pi$ helices, single turns, and single beta bridges are derived from combinations of these fundamental elements
+* Bends, chirality, and solvent exposure are defined geometrically
+* Each feature is assigned independently and structural overlaps are resolved by defining a summary that assigns a single state to each residue
+* H bonds in proteins have little wave-function overlap and can be descrobed with purely electrostatic terms
+* Partial charges are placed in the H bonding groups
+	* C is assigned +0.42 eV, O -0.42 eV
+	* N is assigned -0.20 eV, H +0.20 eV
+* The electrostatic interaction is then calculated as
+$$E = q_1q_2(\frac{1}{r_{ON}}+\frac{1}{r_{CH}}-\frac{1}{r_{OH}}-\frac{1}{r_{CN}})*f$$
+* A good H bond as an energy of -3 kcal/mol, but the cutoff used is -0.5 kcal/mol to account for errors in coordinates and bifurcated bonds
+* There is no universally accepted H bond definition, so a description is necessarily tailored to a purpose
+	* Their definition demonstrated to be adequate for the purpose
+* Imperfections in helices are allowed in order to account for kinks
+* Bends are assigned to regions with a curvature of more than 70° along 5 consecutive residues
+	* The bend is assigned to the central of 5 residues
+* Chirality is defined at each residue (except chain ends) as the sign of the dihedral angle among 4 consecutive Ca
+* SS bonds are taken directly from the PDB record, since they can be considered part of the primary structure
+* Chain breaks are assumed for peptide bonds longer than 2.5 $\AA$
+* Structural overlaps are resolved with a priority rule
+* Each secondary structure is assigned a code, that is also used in many applications outside of DSSP
+	* G is a 3:10 helix of at least 3 residues
+	* H is an alpha helix of at least 4 residues
+	* I is an $\pi$ helix of at least 5 residues
+	* T is a turn (3,4, or 5 turn)
+	* E is an extended strand (parallel or antiparallel) in beta conformation, at least 2 residues long
+	* B is an isolated bridge of 1 residue
+	* S is a bend, assigned not according to H bonds but to geometry
+	* C is a coil, a residue in none of the above conformations
+	* Other categories exist, but are rarely used
+* DSSP is generally accepted as a tool for assigning secondary structure
 
 # LB2 Project
 * We will compare 2 different approaches for predicting protein secondary structure
