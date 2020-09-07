@@ -296,3 +296,26 @@ $$E=\frac{1}{2}\sum_{k,j}(z_j(x^{(k)},w)-y^{(k)}_{ij})^2+\lambda\sum (w_{ij^{(k)
 * Backpropagation is not suitable for training deep networks: we need deep learning procedures
 * The number of parameters in a network with $n$ input neurons, $r$ hidden neurons and $k$ output neurons is $r(n+1)+(r+1)m$
 * In classical NN (trained with backpropagation), increasing the width of the network is much better than increasing the depth
+* Representing a sequence for a neural network can be done using a input neuron for each possible symbol
+* Deep networks cannot be trained with backpropagation since the backpropagated effect to deep hidden layers is so small that no effective training is possible
+
+# Support Vector Machines
+* A SVM finds the hyperplane that solves a linearly separable problem  and maximizes the distance among the hyperplane itself and any of the datapoints
+	* This minimizes the risk for misclassification
+	* The distance among the hyperplane and any of the datapoints is called margin
+* An hyperplane can be represented as the set of points $\vec{x}$ that are perpendicolar to a given vector $\vec{w}$ and have a certain constant projection $b$ on $\vec{w}$
+$$<\vec{w}\vec{x}> +b = 0$$
+	* The sign of the projection $b$ depends on the direction of $\vec{w}$
+* The margin can be defined as 2 parallel hyperplanes that are the closest possible to the decision boundary that pass through a point respectively in the 2 classes
+* Each of these hyperplanes is defined by the same vector $\vec{w}$ and by a different projection $b_i$
+* I can calclulate the margin as
+$$m = \frac{|b_2-b_1|}{|w|}$$
+* If I choose $\vec{w}$ and $b$ so that the decision boundary and the margins are as follows, the margin is $m = \frac{2}{|\vec{w}|}$
+$$ dec\_bound =  <\vec{w}\vec{x}> +b = 0 $$
+$$ marg_1 = <\vec{w}\vec{x}> +b = -1 $$
+$$ marg_2 = <\vec{w}\vec{x}> +b = +1 $$
+$$m = \frac{2}{|\vec{w}|}$$
+* Since I defined then the margin $m = \frac{2}{|\vec{w}|}$, the problem of maximizing the margin becomes the problem of minimizing $|\vec{w}|$
+	* I need to exclude the trivial case $|\vec{w}|=0$, that does not define any hyperplane
+* To understand if a point is on one side or the other of an hyperplane, I can compare its projection on $\vec{w}$ with the projection on it of the hyperplane
+
