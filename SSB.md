@@ -313,7 +313,7 @@ $$ \vec{w_j} \vec{x} - \theta_j = 0$$
 	* The decision boundary is choosen as an hyperplane parallel to the 2 margin hyperplanes and equally distant ot both of them
 * A kernel is a generalization of SVMs that implements non-linear decision boundaries
 
-## Vectors, Hyperplanes
+## Vectors and Hyperplanes
 * The dot product of 2 vectors is the product of their norm, multiplide by the angle between them
 $$<\vec{a}\vec{b}>=|\vec{a}||\vec{b}|\cos \theta$$
 	* The result is a scalar
@@ -321,7 +321,9 @@ $$<\vec{a}\vec{b}>=|\vec{a}||\vec{b}|\cos \theta$$
 	* The dot product is the projection of one vector onto the other scaled by the magnitude of the second vector
 	* The scalar product is 0 when the projection of one vector onto the other is 0, when they are normal to each other ($cos 90° = 0$)
 	* A 0 scalar product means that 2 vectors are normal to each other
-* An hyperplane can be represented as the set of vectors $\vec{x}$ that have a certain constant projection on a defining vector $\vec{w}$
+* An hyperplane passing through the origin can be represented as the set of vectors $\vec{x}$ that are normal (i.e. they have a 0 projection) to defining vector $\vec{w}$
+$$<\vec{x}\vec{w}> = 0$$
+* Any hyperplane can be represented as the set of vectors $\vec{x}$ that have a certain constant projection (positive or negative) on a defining vector $\vec{w}$
 $$<\vec{x}\vec{w}>+b = 0$$
 	* The hyperplane itself is always normal to $\vec{w}$, but the vectors defining the points on the hyperplane are not and they have a constant non-zero projection on $\vec{w}$
 	* The projection of a vector $\vec{x}$ on $\vec{w}$ is
@@ -330,7 +332,7 @@ $$|\vec{x}|\cos \theta = \frac{<\vec{x}\vec{w}>}{|\vec{w}|} = -\frac{b}{|\vec{w}
 $$\frac{<\vec{x}\vec{w}>}{|\vec{w}|} + \frac{b}{|\vec{w}|} = 0 \iff <\vec{x}\vec{w}>+b = 0$$
 	* The sign of $b$ depends on the direction of $\vec{w}$ with respect to $\vec{x}$
 
-## Definition of the Margin
+## Margins and Classification
 * The margin can be defined as the distance among 2 parallel hyperplanes that are the closest possible to the decision boundary and that pass through a point respectively in the 2 classes
 * Each of these hyperplanes is defined by the same vector $\vec{w}$ and by a different $b_i$
 * I can calclulate the margin $m$ as the difference between the projections of the hyperplane onto $\vec{w}$
@@ -347,9 +349,19 @@ $$m = \frac{2}{|\vec{w}|}$$
 * Since I defined then the margin $m = \frac{2}{|\vec{w}|}$, the SVM problem of maximizing the margin becomes the problem of minimizing $|\vec{w}|$
 	* I need to exclude the trivial case $|\vec{w}|=0$, that does not define any hyperplane
 	* It is easier to minimize actually the square of the norm of $\vec{w}$, $|\vec{w}|^2$, since this is a derivable function while the norm itself is not
+	* Actually, to simplify the derivatives we minimize the quantity $\frac{1}{2}|\vec{w}|^2$
 * To understand if a point is on one side or the other of an hyperplane, I can compare its projection on $\vec{w}$ with the projection of the hyperplane on $\vec{w}$
 	* If the projection is greater, the point is more on the direction where $\vec{w}$ points than the hyperplane
 * The goal of SVM is to find a $\vec{w}$ such that $|\vec{w}|$ is minimal but not 0
+* Let $\{x1, x_2, ..., x_i\}$ be our data point with $\{y_1, y_2, ..., y_i\}$ their class label such that $y_i \in \{-1,1\}$
+	* A point $x_i$ with $y_i = -1$ belongs to the negative class, while if $y_i = 1$ it belongs to the positive class
+* Since I defined the margin as having scaled projections of 1 and -1, I want to define $\vec{w}$ such that all the points to fall on the correct side of the margins
+$$y_i = 1 \implies <\vec{x_i}\vec{w}>+b > 1$$
+$$y_i = -1 \implies <\vec{x_i}\vec{w}>+b > -1$$
+* I can summarise this condition as
+$$ y_i(<\vec{x_i}\vec{w}>+b) \geq 1 \ \forall \ i$$
+* I can then define the goal of a SVM as minimizing $\frac{1}{2}|\vec{w}|^2$ under the constraint $y_i(<\vec{x_i}\vec{w}>+b) \geq 1 \ \forall \ i$
+* This is a constrained optimization problem, that can be tackled using Lagrange multipliers
 
 ## Lagrange Theory
 * Lagrange multipliers are used for solving constrained optimization problems
