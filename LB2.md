@@ -33,6 +33,11 @@ $$ \Delta \Delta G = \Delta G_{mut}-\Delta G_{nat}$$
 * There is no upper limit, but there are helices in fibers which are several hundred residues long
 * The topology is the organization in space of all the secondary structure motives of a protein
 	* For our purpose it is all the different patterns of secondary structure from the N to C terminus
+* When using a sliding window, the central residue of the window is assigned the average value of the entire window
+	* This causes a smoothing of the values across a sequence
+* Local features are better grapsed by sliding windows
+* HMMs are not suitable for modelling local features like secondary structures
+* Chamelion segments are combinations of residues that can be found in different secondary structures
 
 # Uniprot
 * Annotation in UniProt is manual and automatic
@@ -85,6 +90,8 @@ $$E = q_1q_2(\frac{1}{r_{ON}}+\frac{1}{r_{CH}}-\frac{1}{r_{OH}}-\frac{1}{r_{CN}}
 	* C is a coil, a residue in none of the above conformations
 	* Other categories exist, but are rarely used
 * DSSP is generally accepted as a tool for assigning secondary structure
+* I can get solvent exposure values that are higher than expected when heteroatoms are present, since they are ignored
+* I can get solvent exposure values that are lower than expected when oligomers are present, since the exposure is calculated for the oligomer and not for the monomer
 
 # LB2 Project
 * We will compare 2 different approaches for predicting protein secondary structure

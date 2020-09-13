@@ -300,22 +300,90 @@ $$E=\frac{1}{2}\sum_{k,j}(z_j(x^{(k)},w)-y^{(k)}_{ij})^2+\lambda\sum (w_{ij^{(k)
 * Deep networks cannot be trained with backpropagation since the backpropagated effect to deep hidden layers is so small that no effective training is possible
 
 # Support Vector Machines
-* A SVM finds the hyperplane that solves a linearly separable problem  and maximizes the distance among the hyperplane itself and any of the datapoints
+* A simple perceptron with an heaviside activation function produces an output $z>0$ iff the activation is bigger than 0
+$$ z_j>0 \iff \sum_i w_{ij} x_i - \theta_j > 0$$
+* For each of its outputs $z_j$, a perceptron like this effectively defines an hyperplane that splits the input space with equation
+$$ \vec{w_j} \vec{x} - \theta_j = 0$$
+* Given 2 classes of input points for a linearòy separable problem, there can be many correct decision boundaries
+* A perceptron can find one of such boundaries, but intuitively these boundaries are not all equally good
+* In general, I want my decision boundary to be as far from the datapoints as possible: I want to maximise the margin between the decision boundary and the nearest datapoints
+* A SVM (Support Vector Machine) finds the hyperplane that solves a linearly separable problem  and maximizes the distance among the hyperplane itself and any of the datapoints
 	* This minimizes the risk for misclassification
-	* The distance among the hyperplane and any of the datapoints is called margin
-* An hyperplane can be represented as the set of points $\vec{x}$ that are perpendicolar to a given vector $\vec{w}$ and have a certain constant projection $b$ on $\vec{w}$
-$$<\vec{w}\vec{x}> +b = 0$$
-	* The sign of the projection $b$ depends on the direction of $\vec{w}$
-* The margin can be defined as 2 parallel hyperplanes that are the closest possible to the decision boundary that pass through a point respectively in the 2 classes
-* Each of these hyperplanes is defined by the same vector $\vec{w}$ and by a different projection $b_i$
-* I can calclulate the margin as
+	* The distance among the hyperplanes passing on the closest datapoints of the 2 classes is the margin
+	* The decision boundary is choosen as an hyperplane parallel to the 2 margin hyperplanes and equally distant ot both of them
+* A kernel is a generalization of SVMs that implements non-linear decision boundaries
+
+## Vectors, Hyperplanes
+* The dot product of 2 vectors is the product of their norm, multiplide by the angle between them
+$$<\vec{a}\vec{b}>=|\vec{a}||\vec{b}|\cos \theta$$
+	* The result is a scalar
+	* The product of the norm of one of the vectors times the angle between them is the norm of the projection of the first vector onto the other
+	* The dot product is the projection of one vector onto the other scaled by the magnitude of the second vector
+	* The scalar product is 0 when the projection of one vector onto the other is 0, when they are normal to each other ($cos 90° = 0$)
+	* A 0 scalar product means that 2 vectors are normal to each other
+* An hyperplane can be represented as the set of vectors $\vec{x}$ that have a certain constant projection on a defining vector $\vec{w}$
+$$<\vec{x}\vec{w}>+b = 0$$
+	* The hyperplane itself is always normal to $\vec{w}$, but the vectors defining the points on the hyperplane are not and they have a constant non-zero projection on $\vec{w}$
+	* The projection of a vector $\vec{x}$ on $\vec{w}$ is
+$$|\vec{x}|\cos \theta = \frac{<\vec{x}\vec{w}>}{|\vec{w}|} = -\frac{b}{|\vec{w}|}$$
+	* If we define $b$ so that $\frac{b}{|\vec{w}|}$ is the negative projection of a vector $\vec{x}$ onto $\vec{w}$, then
+$$\frac{<\vec{x}\vec{w}>}{|\vec{w}|} + \frac{b}{|\vec{w}|} = 0 \iff <\vec{x}\vec{w}>+b = 0$$
+	* The sign of $b$ depends on the direction of $\vec{w}$ with respect to $\vec{x}$
+
+## Definition of the Margin
+* The margin can be defined as the distance among 2 parallel hyperplanes that are the closest possible to the decision boundary and that pass through a point respectively in the 2 classes
+* Each of these hyperplanes is defined by the same vector $\vec{w}$ and by a different $b_i$
+* I can calclulate the margin $m$ as the difference between the projections of the hyperplane onto $\vec{w}$
 $$m = \frac{|b_2-b_1|}{|w|}$$
-* If I choose $\vec{w}$ and $b$ so that the decision boundary and the margins are as follows, the margin is $m = \frac{2}{|\vec{w}|}$
-$$ dec\_bound =  <\vec{w}\vec{x}> +b = 0 $$
+* I can choose $\vec{w}$ and $b$ so that the decision boundary and the margins are as follows
+$$ dec\_bound =  <\vec{w}\vec{x}> + b = 0 $$
 $$ marg_1 = <\vec{w}\vec{x}> +b = -1 $$
 $$ marg_2 = <\vec{w}\vec{x}> +b = +1 $$
+* In this case, the margin $m$ is $\frac{2}{|\vec{w}|}$
+$$ marg_1 = <\vec{w}\vec{x}> +b_1 = 0,\ marg_1 = <\vec{w}\vec{x}> +b = -1 \implies b_1 = b+1$$
+$$ marg_2 = <\vec{w}\vec{x}> +b_2 = 0,\ marg_2 = <\vec{w}\vec{x}> +b = +1 \implies b_2 = b-1$$
+$$m = \frac{|b_1-b_2|}{|w|} \implies m = \frac{(b+1)-(b-1)}{|\vec{w}|}$$
 $$m = \frac{2}{|\vec{w}|}$$
-* Since I defined then the margin $m = \frac{2}{|\vec{w}|}$, the problem of maximizing the margin becomes the problem of minimizing $|\vec{w}|$
+* Since I defined then the margin $m = \frac{2}{|\vec{w}|}$, the SVM problem of maximizing the margin becomes the problem of minimizing $|\vec{w}|$
 	* I need to exclude the trivial case $|\vec{w}|=0$, that does not define any hyperplane
-* To understand if a point is on one side or the other of an hyperplane, I can compare its projection on $\vec{w}$ with the projection on it of the hyperplane
+	* It is easier to minimize actually the square of the norm of $\vec{w}$, $|\vec{w}|^2$, since this is a derivable function while the norm itself is not
+* To understand if a point is on one side or the other of an hyperplane, I can compare its projection on $\vec{w}$ with the projection of the hyperplane on $\vec{w}$
+	* If the projection is greater, the point is more on the direction where $\vec{w}$ points than the hyperplane
+* The goal of SVM is to find a $\vec{w}$ such that $|\vec{w}|$ is minimal but not 0
 
+## Lagrange Theory
+* Lagrange multipliers are used for solving constrained optimization problems
+* Let $f(\vec{x})$ be a function with $\vec{x} \in \mathbb{R}^n$
+* Let $g(\vec{x})=0$ be a constraint on the value of $\vec{x}$
+* I want to minimize (or maximize) $f(\vec{x})$ under the constraint $g(\vec{x})=0$
+* In order to be an extremum, a point $f(\vec{x})$ must be tangent to a level curve
+$$ \vec{\nabla f}|_{\vec{x}=0} = \lambda \vec{\nabla g}|_{\vec{x}=0}$$
+	* The gradients are always normal to level curves, so a point is a tangency point if the gradients of the 2 functions are parallel (equal allowing for a constant factor)
+
+## KKT (Karush-Kuhn-Tucker) Theory
+* It is a generalization of the lagrange
+* A constraint $g(\vec{x})=0$ with $\vec{x} \in \mathbb{R}^n$ defines an $n-1$ dimensional manifold
+	* The constraint represents all the points of $g(\vec{x})$ which are cut by an hyperplane centered in $g=0$
+* This constraint divides the space in 2 regions, one where $g(\vec{x})>0$ and one where $g(\vec{x})\leq 0$
+* I want to minimize a function $f(\vec{x})$ by in the portion of space where $g(\vec{x})\leq 0$
+* If the gradients of the 2 functions at a point point in the same direction, the point cannot be an allowed minimum
+$$ \vec{\nabla f}|_{\vec{x}=0} = \lambda \vec{\nabla g}|_{\vec{x}=0}$$
+$$\lambda > 0$$
+	* I can decrease the function by remaining in the allowed region
+	* The solution is internal and not on the constraint
+* If the gradients of the 2 functions at a point point in the opposite directions, the point can be a minimum
+$$ \vec{\nabla f}|_{\vec{x}=0} = \lambda \vec{\nabla g}|_{\vec{x}=0}$$
+$$\lambda \leq 0$$
+	* In order to decrease the function I should go in the disallowed region
+	* In this case the solution is on the constraint
+* The convention of the KKT theory is to use a multiplier with opposite sign to the one used in the Lagrange theory
+
+## Soft Margin SVM
+* When problems are not linearly separable, I can implement a soft margin
+* I add a slack variable $\zeta \geq 0$ that represent the error in the classification for each point
+	* The slack variable is greater than 0 only for points that are on the wrong side of the margin
+* The quantity to be minimized include also the sum of the slack variables
+$$\frac{1}{2}|\vec{w}|^2 + C \sum_i \zeta_i$$
+	* The hyperparameter C determines if the error or the margin weight more on the determination of the margin
+	* A large C makes the soft margin behave more like an hard margin
+* Soft margins tend to be more robust to noise
