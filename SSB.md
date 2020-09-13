@@ -364,16 +364,78 @@ $$ y_i(<\vec{x_i}\vec{w}>+b) \geq 1 \ \forall \ i$$
 * This is a constrained optimization problem, that can be tackled using Lagrange multipliers
 
 ## Lagrange Theory
-* Lagrange multipliers are used for solving constrained optimization problems
-* Let $f(\vec{x})$ be a function with $\vec{x} \in \mathbb{R}^n$
-* Let $g(\vec{x})=0$ be a constraint on the value of $\vec{x}$
-* I want to minimize (or maximize) $f(\vec{x})$ under the constraint $g(\vec{x})=0$
-* In order to be an extremum, a point $f(\vec{x})$ must be tangent to a level curve
-$$ \vec{\nabla f}|_{\vec{x}=0} = \lambda \vec{\nabla g}|_{\vec{x}=0}$$
-	* The gradients are always normal to level curves, so a point is a tangency point if the gradients of the 2 functions are parallel (equal allowing for a constant factor)
+* I want to maximize the function $z = f(x,y)$ subject to the constraint $g(x,y) = c$
+* The constraint defines a n-1 dimensional curve $y=h(x)$ in the x,y plane such that $g(x,y)=g(x,h(x))=c$
+* The naive solution would be to solve the constraint by defining $h(x)$, and then finding the maximum in $x$ of $g(x,h(x))$
+	* This analytical solution can be very difficult
+* A level curve on the $z=f(x,y)$ surface can be defined as a set of points such that $f(x,y)=d$
+* In order to maximise the function $f(x,y)$ under the constraint $g(x,y)=c$, I can walk along the constraint until I find a point of tangency with a level curve
+	* If the constraint is tangent to a level curve, that point is either a maximum or a minimum (or a flexus) of $f(x,y)$ under the constraint
+* The constraint is tangent to a level curve if the local normal to the constraint and to the level curve are parallel
+* The direction that is normal to the level curve of a function is the gradient of the function
+* For the constraint $g(x,y)=c$, the gradient $\nabla g$ is
+$$ \nabla g = (\frac{\partial g}{\partial x}, \frac{\partial g}{\partial y})$$
+* I move from $g(x,y)=c$ to another point on the constraint $g(x+\epsilon_x,y+\epsilon_y)=c$
+* If $\epsilon_x,\epsilon_y$ are small
+$$g(x+\epsilon_x,y+\epsilon_y) \approx g(x,y)+\epsilon_x \frac{\partial g}{\partial x}|_{(x,y)}+\epsilon_y \frac{\partial g}{\partial y}|_{(x,y)}$$
+$$g(x+\epsilon_x,y+\epsilon_y) \approx g(x,y)+\vec{\epsilon} \ \nabla g|_{(x,y)}$$
+* Since both points are on the constraint
+$$c \approx c+\vec{\epsilon} \ \nabla g|_{(x,y)}$$
+* As a consequence, the gradient must be perpendicular to the local movement along the constraint
+$$\vec{\epsilon} \ \nabla g|_{(x,y)} = 0$$
+* The extrema of $f(x,y)$ that respect the constraint must have a gradient which is parallel to the gradient of the constraint itself and where the constraint is respected
+$$ \nabla f = \lambda \nabla g$$
+$$ g(x,y)=c$$
+	* 2 vectors are parallel if they are equal, allowing for a scalar factor
+	* The scalar factor $\lambda$ is called Lagrange multiplier
+* If $\lambda < 0$ the 2 gradients point in opposite directions, if $\lambda > 0$ they point in the same direction
+	* If $\lambda=0$ it means that $f(x,y)$ is flat (its gradient is the 0 vector)
+* I introduce the Lagrangian function to incorporate all of these conditions
+$$\mathcal{L}(x,y,\lambda) = f(x,y) - \lambda*(g(x,y)-c)$$
+* I can find the tangency points by solving for the gradient of the Lagrangian
+$$ \nabla \mathcal{L}_{x,y,\lambda} = 0$$
+
+## Constrained SVM Optimization
+* As said before, I can define the goal of a SVM as minimizing $\frac{1}{2}|\vec{w}|^2$ under the constraint $y_i(<\vec{x_i}\vec{w}>+b) \geq 1 \ \forall \ i$
+* This problem is similar to the Lagrange problem, but it requires a constraint $g(x,y) \geq c$ instead of $g(x,y)=c$
+* This kind of constraint instead of defining a curve in the x,y plane, divides the plane in 2 regions, one in which $g(x,y)< c$ and one in which $g(x,y)\geq c$
+* The boundary of the 2 regions is the classic Lagrange constraint $g(x,y)=c$
+* If $\lambda >0$ the gradients of the constraint and of the function are parallel
+	* I want to minimize the function, and the function decreases by going away from the constraint in the allowed region of space
+	* The minimum of the function CANNOT be on the contraint
+	* In this case the presence of the constraint does not alter the solution
+* If $\lambda < 0$ the gradients of the constraint and of the function are antiparallel
+	* I want to minimize the function, and the function decreases by going towards the constraint in the allowed region of space
+	* The minimum of the function MUST be on the contraint
+* If my goal is a maximization and not a minimization, the situation is reversed
+* Also if the constraint is $g(x,y) \leq c$ instead of $g(x,y) \geq c$ the situation is reversed
 
 ## KKT (Karush-Kuhn-Tucker) Theory
-* It is a generalization of the lagrange
+* The KKT theory is a generalization of the Lagrange theory
+* A function $f(\vec{x})$ is under a set of constraints $g_i(\vec{x}) \leq 0$ or $g_i(\vec{x}) \geq 0$ and I want to either minimize or maximise $f(\vec{x})$ under the constraint
+* I define a modified Lagrangian function
+$$\mathcal{L}(\vec{x},\alpha_i) = f(\vec{x})+\sum_i \alpha_i g_i(\vec{x}) $$
+	* I omit $c$ withouth loss of generality beacause I can always reframe $g_1(x)=c$ in terms of $g_2(x)=0$ by defining $g_2(x)=g_1(x)-c$
+* Note that in the KKT theory the second term is added and not subtracted
+	* This does not change anything in practice, but $\alpha$ as an opposite sign compared to $\lambda$ when determining the direction of the gradient
+* I constrain the sign of $\alpha_i$
+	* If $g_i(\vec{x}) \leq 0$ and I want to minimize $f(\vec{x})$, then I impose that $\alpha_i \geq 0$
+	* If $g_i(\vec{x}) \leq 0$ and I want to maximize $f(\vec{x})$, then I impose that $\alpha_i \leq 0$
+	* If $g_i(\vec{x}) \geq 0$ and I want to minimize $f(\vec{x})$, then I impose that $\alpha_i \leq 0$
+	* If $g_i(\vec{x}) \geq 0$ and I want to maximize $f(\vec{x})$, then I impose that $\alpha_i \geq 0$
+* I need also to respect the complementarity condition for a point $\vec{x}_0$ to be a solution of the constraint optimization problem
+$$\alpha_i g_i(\vec{x}_0) = 0 \ \forall i$$
+	* If $g_i(\vec{x}_0)=0$, it means that $\vec{x}_0$ is a point on the constraint
+	* If instead $\alpha_i = 0$, it means that the constraint is not acting
+* The complementarity condition implies also that
+$$\alpha_i \not= 0 \implies g_i(\vec{x}_0) = 0$$
+	* This means that the constraint is enforced only when on the border, and cancels out in other cases
+	* In practice, $\alpha_i=0$ for each training point not on the margin, that thus does not contribute to the onjective function
+* I want to minimize the KKT Lagrangian while respecting these 2 conditions
+* Given an optimization problem, it is possible to solve it by solving its dual problem
+	* I can 
+* I can define the solution $x$ as a function of the multipliers $\alpha_i$
+* If I substitute these definition of $x$ in place of $x$ in the KKT Lagrangian, I obtain the dual Lagrangian
 * A constraint $g(\vec{x})=0$ with $\vec{x} \in \mathbb{R}^n$ defines an $n-1$ dimensional manifold
 	* The constraint represents all the points of $g(\vec{x})$ which are cut by an hyperplane centered in $g=0$
 * This constraint divides the space in 2 regions, one where $g(\vec{x})>0$ and one where $g(\vec{x})\leq 0$
@@ -389,13 +451,17 @@ $$\lambda \leq 0$$
 	* In order to decrease the function I should go in the disallowed region
 	* In this case the solution is on the constraint
 * The convention of the KKT theory is to use a multiplier with opposite sign to the one used in the Lagrange theory
+* xxx check after whatching recordings
 
 ## Soft Margin SVM
 * When problems are not linearly separable, I can implement a soft margin
 * I add a slack variable $\zeta \geq 0$ that represent the error in the classification for each point
-	* The slack variable is greater than 0 only for points that are on the wrong side of the margin
-* The quantity to be minimized include also the sum of the slack variables
+	* The slack variable is greater than 0 only for points that are on the wrong side of the margin, otherwise it is 0
+* The new conditions for the SVM margins become
+$$ marg_1 = <\vec{w}\vec{x}> +b = -1 + \zeta$$
+$$ marg_2 = <\vec{w}\vec{x}> +b = +1 - \zeta$$
+* The quantity to be minimized include now also the sum of the slack variables
 $$\frac{1}{2}|\vec{w}|^2 + C \sum_i \zeta_i$$
-	* The hyperparameter C determines if the error or the margin weight more on the determination of the margin
+	* The hyperparameter C determines the relative weight of the error and of the margin width on the determination of the margin hyperplanes
 	* A large C makes the soft margin behave more like an hard margin
-* Soft margins tend to be more robust to noise
+* Soft margins tend to be more robust to noise in the data, and are practically almost always used
