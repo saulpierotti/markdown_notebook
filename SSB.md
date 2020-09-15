@@ -465,3 +465,46 @@ $$\frac{1}{2}|\vec{w}|^2 + C \sum_i \zeta_i$$
 	* The hyperparameter C determines the relative weight of the error and of the margin width on the determination of the margin hyperplanes
 	* A large C makes the soft margin behave more like an hard margin
 * Soft margins tend to be more robust to noise in the data, and are practically almost always used
+
+# Kernel Methods
+* I cannot use SVM to solve non linearly separable problems
+* I can map the original input space to a linearly separable feature space, which I can solve with SVMs
+	* The input vector $\vec{x} \in \mathbb{R}$ is transformed to the feature vector $\vec{\phi}(\vec{x}) \in \mathbb{R}$
+* In order to apply the SVM to the feature space, I define the dual Lagrangian on the feature space
+* A kernel $K$ is a function of 2 input points $\vec{x}$,$\vec{z}$ that replaces the scalar product in the SVM dual Lagrangian, to implicitly implement a translation of the input to the feature space
+$$ K(\vec{x},\vec{z})=<\vec{\phi}(\vec{x}),\vec{\phi}(\vec{z})>$$
+* I do not want to craf a feature space that is specific to the problem, but I can apply some general concepts
+* Increasing the dimensionality of the input space increases the number of hyperplanes and thus the likelyhood of linear separability
+* I can define a kernel as a simple function of the components of the vectors
+$$ K(\vec{x},\vec{z})=<\vec{\phi}(\vec{x}),\vec{\phi}(\vec{z})>$$
+$$\vec{\phi}(\vec{x}) = (1,\sqrt{2}x_1,\sqrt{2}x_2,\sqrt{2}x_1x_2,x_1^2,x_2^2)$$
+$$\vec{\phi}(\vec{z}) = (1,\sqrt{2}z_1,\sqrt{2}z_2,\sqrt{2}z_1z_2,z_1^2,z_2^2)$$
+* I can create a very high-dimensional feature space withouth actually storing these high dimensional points
+* The only thing that I need from the feature space is the definition of the scalar product in that space
+	* I only need to do a scalar product of the vectors in the dual Lagrangian
+	* I can just derive the scalar product from a kernel once, and use it always without actually dealing with the high-dimensional space
+* Many different functions can work as kernels
+	* They just need to be symmetric and to repsect a set of conditions
+* A kernel is actually just a measure of similarity between $\vec{x}$ and $\vec{z}$
+	* I am not restricted to use a vector as input
+	* In bioinformatics it is not very useful to use non-standard kernels
+
+## Polynomial Kernels
+* The homogeneous polynomial kernel is defined as
+$$ K(x^i,x^j)=(<x_i x_j>)^d$$
+	* This kernel includes all the possible expansions of the degree $d$ of the vector components
+	* The number of dimensions for an homogeneous polynomial kernel of grade $d$ with an input space $\mathbb{R}^n$ is $~ n^d$ for $n >> d$
+* The polynomial kernel is defiend as
+$$ K(x^i,x^j)=(1+<x_i x_j>)^d$$
+	* This kernel is more widely adopted since it includes all the possible combinations of degree up to $d$ (it has many more dimensions!)
+	* Also here the number of dimension grows like $n^d$
+* The degree of the polynomial kernel influences the likelyhood of overfitting the data
+* An high degree polynomial tends to increase the number of support vectors
+	* This is because the curve tends to fit the data as well as possible
+	* A way to limit overfitting is to assure that the number of support vectors is much smaller than the total number of points
+
+# Radial Basis Function Kernel
+* The RBF kernel is defined as
+$$K(x_i,x_j) = e^{\frac{(x_i-x_j)^2}{2\sigma^2}} = e^{-\beta (x_i-x_j)^2}$$
+* It can be viewed as a generalization of a polynomial kernel with infinite degree
+* The value of the kernel is big when the difference between $x_i,x_j$ is big, and tends rapidly to 0 otherwise
