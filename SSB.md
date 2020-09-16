@@ -360,7 +360,8 @@ $$y_i = 1 \implies <\vec{x_i}\vec{w}>+b > 1$$
 $$y_i = -1 \implies <\vec{x_i}\vec{w}>+b > -1$$
 * I can summarise this condition as
 $$ y_i(<\vec{x_i}\vec{w}>+b) \geq 1 \ \forall \ i$$
-* I can then define the goal of a SVM as minimizing $\frac{1}{2}|\vec{w}|^2$ under the constraint $y_i(<\vec{x_i}\vec{w}>+b) \geq 1 \ \forall \ i$
+* I can then define the goal of a SVM as minimizing $\frac{1}{2}|\vec{w}|^2$ under the constraints $y_i(<\vec{x_i}\vec{w}>+b) \geq 1 \ \forall \ i$
+	* The number of constraint is equal to the number of training data
 * This is a constrained optimization problem, that can be tackled using Lagrange multipliers
 
 ## Lagrange Theory
@@ -392,48 +393,66 @@ $$ g(x,y)=c$$
 	* If $\lambda=0$ it means that $f(x,y)$ is flat (its gradient is the 0 vector)
 * I introduce the Lagrangian function to incorporate all of these conditions
 $$\mathcal{L}(x,y,\lambda) = f(x,y) - \lambda*(g(x,y)-c)$$
+* If instead of a constraint $g(x)=c$ I equivalently define it as $g(x)=0$, and instead of $x,y$ I define an input vector $\vec{x}$
+$$\mathcal{L}(\vec{x},\lambda) = f(\vec{x}) - \lambda*(g(\vec{x})$$
 * I can find the tangency points by solving for the gradient of the Lagrangian
-$$ \nabla \mathcal{L}_{x,y,\lambda} = 0$$
+$$ \nabla \mathcal{L}_{x_i,\lambda} = 0$$
+* The gradient of the Lagrangian provides the corrent solution since it can be decomposed as
+$$\nabla \mathcal{L}_{x_i,\lambda} = 0 \implies \begin{cases} \frac{d\mathcal{L}}{dx_i} = 0 \\  \frac{d\mathcal{L}}{d\lambda} = 0 \end{cases}$$
+* Which can be expanded further
+$$\frac{d\mathcal{L}}{dx_i} = 0 \implies \nabla f_x - \lambda \nabla g_x = 0$$
+$$\frac{d\mathcal{L}}{d\lambda} = 0 \implies g(\vec{x}) = 0$$
+* Which were the original constraints
 
-## Constrained SVM Optimization
-* As said before, I can define the goal of a SVM as minimizing $\frac{1}{2}|\vec{w}|^2$ under the constraint $y_i(<\vec{x_i}\vec{w}>+b) \geq 1 \ \forall \ i$
-* This problem is similar to the Lagrange problem, but it requires a constraint $g(x,y) \geq c$ instead of $g(x,y)=c$
-* This kind of constraint instead of defining a curve in the x,y plane, divides the plane in 2 regions, one in which $g(x,y)< c$ and one in which $g(x,y)\geq c$
-* The boundary of the 2 regions is the classic Lagrange constraint $g(x,y)=c$
-* If $\lambda >0$ the gradients of the constraint and of the function are parallel
-	* I want to minimize the function, and the function decreases by going away from the constraint in the allowed region of space
-	* The minimum of the function CANNOT be on the contraint
-	* In this case the presence of the constraint does not alter the solution
-* If $\lambda < 0$ the gradients of the constraint and of the function are antiparallel
-	* I want to minimize the function, and the function decreases by going towards the constraint in the allowed region of space
-	* The minimum of the function MUST be on the contraint
-* If my goal is a maximization and not a minimization, the situation is reversed
-* Also if the constraint is $g(x,y) \leq c$ instead of $g(x,y) \geq c$ the situation is reversed
-
-## KKT (Karush-Kuhn-Tucker) Theory
-* The KKT theory is a generalization of the Lagrange theory
-* A function $f(\vec{x})$ is under a set of constraints $g_i(\vec{x}) \leq 0$ or $g_i(\vec{x}) \geq 0$ and I want to either minimize or maximise $f(\vec{x})$ under the constraint
-* I define a modified Lagrangian function
-$$\mathcal{L}(\vec{x},\alpha_i) = f(\vec{x})+\sum_i \alpha_i g_i(\vec{x}) $$
-	* I omit $c$ withouth loss of generality beacause I can always reframe $g_1(x)=c$ in terms of $g_2(x)=0$ by defining $g_2(x)=g_1(x)-c$
-* Note that in the KKT theory the second term is added and not subtracted
+## KKT (Karush-Kuhn-Tucker) Conditions
+* I can define the goal of a SVM as minimizing $\frac{1}{2}|\vec{w}|^2$ under the constraint $y_i(<\vec{x_i}\vec{w}>+b) \geq 1 \ \forall \ i$
+* This problem is similar to the Lagrange problem, but it requires a constraint $g(\vec{x}) \geq 0$ instead of $g(\vec{x})=0$
+* This kind of constraint instead of defining a curve in the x,y plane, divides the plane in 2 regions, one in which $g(x,y)< 0$ and one in which $g(x,y)\geq 0$
+* The boundary of the 2 regions is the classic Lagrange constraint $g(x,y)=0$
+* My problem is to maximize-minimize $f(\vec{x})$ under the constraint $g(\vec{x})\lessgtr 0$
+* Let's suppose that I have a point $x_0$ of maximum or minimum of the function along the constraint
+$$x_0 : \ \nabla f|_{x=x_0} = \lambda \nabla g|_{x=x_0}$$ 
+* Let my constraint be $g(\vec{x})\leq 0$ and my goal to minimize $f(\vec{x})$
+	* If $\lambda >0$ the gradients of the constraint and of the function are parallel at $x_0$
+		* I want to minimize the function, and the function decreases by going away from the constraint in the allowed region of space
+		* The minimum of the function CANNOT be on the contraint
+		* In this case the presence of the constraint does not alter the solution, which is said to be internal
+	* If $\lambda < 0$ the gradients of the constraint and of the function are antiparallel at $x_0$
+		* I want to minimize the function, and the function increases by going away from $g\vec{x})=0$ in the allowed region of space
+		* The minimum of the function MUST be on the contraint
+* If my goal is a maximization and not a minimization, or if the constraint is in the form $g(\vec{x}) \geq 0$ the situation is of course reversed
+* A function $f(\vec{x})$ is under a set of constraints $g_i(\vec{x}) \leq 0$ or $g_i(\vec{x}) \geq 0$ and I want to either minimize or maximise $f(\vec{x})$ under the constraints
+* In the KKT conditions literature the Lagrangian is defined using $\alpha = -\lambda$
+$$\mathcal{L}(\vec{x},\alpha) = f(\vec{x})+\alpha g(\vec{x})$$
+$$\nabla f(\vec{x}) = -\alpha \nabla g(\vec{x})$$
+	* Note that in the KKT theory the second term is added and not subtracted
 	* This does not change anything in practice, but $\alpha$ as an opposite sign compared to $\lambda$ when determining the direction of the gradient
-* I constrain the sign of $\alpha_i$
-	* If $g_i(\vec{x}) \leq 0$ and I want to minimize $f(\vec{x})$, then I impose that $\alpha_i \geq 0$
-	* If $g_i(\vec{x}) \leq 0$ and I want to maximize $f(\vec{x})$, then I impose that $\alpha_i \leq 0$
-	* If $g_i(\vec{x}) \geq 0$ and I want to minimize $f(\vec{x})$, then I impose that $\alpha_i \leq 0$
-	* If $g_i(\vec{x}) \geq 0$ and I want to maximize $f(\vec{x})$, then I impose that $\alpha_i \geq 0$
-* I need also to respect the complementarity condition for a point $\vec{x}_0$ to be a solution of the constraint optimization problem
-$$\alpha_i g_i(\vec{x}_0) = 0 \ \forall i$$
-	* If $g_i(\vec{x}_0)=0$, it means that $\vec{x}_0$ is a point on the constraint
-	* If instead $\alpha_i = 0$, it means that the constraint is not acting
-* The complementarity condition implies also that
-$$\alpha_i \not= 0 \implies g_i(\vec{x}_0) = 0$$
-	* This means that the constraint is enforced only when on the border, and cancels out in other cases
-	* In practice, $\alpha_i=0$ for each training point not on the margin, that thus does not contribute to the onjective function
-* I want to minimize the KKT Lagrangian while respecting these 2 conditions
-* Given an optimization problem, it is possible to solve it by solving its dual problem
-	* I can 
+* The KKT conditions are statements about the sign of $\alpha$
+	* If $g(\vec{x}) \leq 0$ and I want to minimize $f(\vec{x})$, then I impose that $\alpha \geq 0$
+	* If $g(\vec{x}) \leq 0$ and I want to maximize $f(\vec{x})$, then I impose that $\alpha \leq 0$
+	* If $g(\vec{x}) \geq 0$ and I want to minimize $f(\vec{x})$, then I impose that $\alpha \leq 0$
+	* If $g(\vec{x}) \geq 0$ and I want to maximize $f(\vec{x})$, then I impose that $\alpha \geq 0$
+* The reason for these restrictions on $\alpha$ is that, according to the kind of constraint ($\leq 0$ or $\geq 0$) and the desired optimization problem (minimization or maximization), an $\alpha$ that does not respect those conditions denotes a constraint that is not acting, and thus must be removed in the minimization of the Lagrangian
+* From these statements about $\alpha$, I can derive the complementarity condition
+$$ \alpha_i g_i(\vec{x}) = 0 \ \forall \ i$$
+	* If $\alpha = 0$, then the constraint is not acting and the condition is respected
+	* If $\alpha \not= 0$, then the constraint is acting, and thus the solution must be on the constraint itself: $g_i(\vec{x}) = 0$
+* In SVM optimization, the function $f(\vec{x})$ is a function of the norm of $\vec{w}$, and the constraints $g_i(\vec{x})$ are position of the points with repsect to the margins
+$$f(\vec{x}) = \frac{1}{2}|\vec{w}|^2$$
+$$g_i(\vec{x}_i) = y_i(<\vec{x}_i\vec{w}>+b) \geq 1$$
+* I can rewrite the constraint as
+$$g_i(\vec{x}_i) = y_i(<\vec{x}_i\vec{w}>+b)-1 \geq 0$$
+* If I want the constraint to be in the form $g(\vec{x}) \leq 0$
+$$g_i(\vec{x}_i) = 1-y_i(<\vec{x}_i\vec{w}>+b) \leq 0$$
+* In this framework ($g(\vec{x}) \leq 0$) and with a minimization goal on $f(\vec{x})$ (I want to minimize the norm of $\vec{w}$!), from the KKT conditions I have that
+$$\alpha_i \leq 0$$
+$$\alpha_i g_i(\vec{x}) = 0$$
+	* 
+
+
+
+
+
 * I can define the solution $x$ as a function of the multipliers $\alpha_i$
 * If I substitute these definition of $x$ in place of $x$ in the KKT Lagrangian, I obtain the dual Lagrangian
 * A constraint $g(\vec{x})=0$ with $\vec{x} \in \mathbb{R}^n$ defines an $n-1$ dimensional manifold
@@ -466,14 +485,14 @@ $$\frac{1}{2}|\vec{w}|^2 + C \sum_i \zeta_i$$
 	* A large C makes the soft margin behave more like an hard margin
 * Soft margins tend to be more robust to noise in the data, and are practically almost always used
 
-# Kernel Methods
-* I cannot use SVM to solve non linearly separable problems
+## Kernel Methods
+* I cannot use a linear SVM to solve non linearly separable problems
 * I can map the original input space to a linearly separable feature space, which I can solve with SVMs
 	* The input vector $\vec{x} \in \mathbb{R}$ is transformed to the feature vector $\vec{\phi}(\vec{x}) \in \mathbb{R}$
 * In order to apply the SVM to the feature space, I define the dual Lagrangian on the feature space
-* A kernel $K$ is a function of 2 input points $\vec{x}$,$\vec{z}$ that replaces the scalar product in the SVM dual Lagrangian, to implicitly implement a translation of the input to the feature space
+* A kernel $K$ is a function of 2 input points $\vec{x}$,$\vec{z}$ that replaces the scalar product in the SVM objective function, to implicitly implement a translation of the input to the feature space
 $$ K(\vec{x},\vec{z})=<\vec{\phi}(\vec{x}),\vec{\phi}(\vec{z})>$$
-* I do not want to craf a feature space that is specific to the problem, but I can apply some general concepts
+* I do not want to craft a feature space that is specific to the problem, but I can apply some general concepts
 * Increasing the dimensionality of the input space increases the number of hyperplanes and thus the likelyhood of linear separability
 * I can define a kernel as a simple function of the components of the vectors
 $$ K(\vec{x},\vec{z})=<\vec{\phi}(\vec{x}),\vec{\phi}(\vec{z})>$$
@@ -481,19 +500,26 @@ $$\vec{\phi}(\vec{x}) = (1,\sqrt{2}x_1,\sqrt{2}x_2,\sqrt{2}x_1x_2,x_1^2,x_2^2)$$
 $$\vec{\phi}(\vec{z}) = (1,\sqrt{2}z_1,\sqrt{2}z_2,\sqrt{2}z_1z_2,z_1^2,z_2^2)$$
 * I can create a very high-dimensional feature space withouth actually storing these high dimensional points
 * The only thing that I need from the feature space is the definition of the scalar product in that space
-	* I only need to do a scalar product of the vectors in the dual Lagrangian
+	* I only need to do a scalar product of the vectors in the objective function
 	* I can just derive the scalar product from a kernel once, and use it always without actually dealing with the high-dimensional space
 * Many different functions can work as kernels
 	* They just need to be symmetric and to repsect a set of conditions
 * A kernel is actually just a measure of similarity between $\vec{x}$ and $\vec{z}$
 	* I am not restricted to use a vector as input
 	* In bioinformatics it is not very useful to use non-standard kernels
-
-## Polynomial Kernels
+* Kernels are not only used for SVM, they can be used wherever only scalar products need to be defined
+	* They are also used in PCA and other classification techniques
+* A stationary kernel is defined in terms of a difference between inputs
+$$K(x_i,x_j)=k(x_i-x_j)$$
+	* They are called stationary since they are invariant to translations of the input space
+* A radial basis function kernel (or homogeneous kernel) measure the euclidean distance among points
+$$K(x_i,x_j)=k(||x_i-x_j||)$$
 * The homogeneous polynomial kernel is defined as
 $$ K(x^i,x^j)=(<x_i x_j>)^d$$
 	* This kernel includes all the possible expansions of the degree $d$ of the vector components
 	* The number of dimensions for an homogeneous polynomial kernel of grade $d$ with an input space $\mathbb{R}^n$ is $~ n^d$ for $n >> d$
+* The classic SVM without kernel can be seen as an homogeneous polynomial kernel of degree $1$
+$$ K(x^i,x^j)=<x_i x_j>$$
 * The polynomial kernel is defiend as
 $$ K(x^i,x^j)=(1+<x_i x_j>)^d$$
 	* This kernel is more widely adopted since it includes all the possible combinations of degree up to $d$ (it has many more dimensions!)
@@ -502,9 +528,16 @@ $$ K(x^i,x^j)=(1+<x_i x_j>)^d$$
 * An high degree polynomial tends to increase the number of support vectors
 	* This is because the curve tends to fit the data as well as possible
 	* A way to limit overfitting is to assure that the number of support vectors is much smaller than the total number of points
-
-# Radial Basis Function Kernel
 * The RBF kernel is defined as
 $$K(x_i,x_j) = e^{\frac{(x_i-x_j)^2}{2\sigma^2}} = e^{-\beta (x_i-x_j)^2}$$
 * It can be viewed as a generalization of a polynomial kernel with infinite degree
+	* This is because an exponential can be approximated by an infintite polynomial sum
+* Small polynomial degrees have a large weight, while high degrees have less weight
 * The value of the kernel is big when the difference between $x_i,x_j$ is big, and tends rapidly to 0 otherwise
+* The hyperparameter beta (or sigma) determines the width of the curve
+	* They determine the scale of the diffenrence among points that is considered significant for the kernel
+	* A small sigma creates a more complex hyperplane
+	* Whith extremely small sigmas, all the points become support vectors
+	* A large sigma tends to a linear discrimination
+* The Spectral kernel uses sequence similarity as a measure
+	* In general, non-vector kernels are not so effective, but they are an intriguing

@@ -101,3 +101,5 @@ $$E = q_1q_2(\frac{1}{r_{ON}}+\frac{1}{r_{CH}}-\frac{1}{r_{OH}}-\frac{1}{r_{CN}}
 * Training data are FASTA files and DSSP secondary structures
 * We will implement everything in python
 * They will provide us a virtual machine with linux with 8 Gb RAM and 50 Gb HDD, with all the necessary software installed in conda
+
+# Protein Phase Separation
