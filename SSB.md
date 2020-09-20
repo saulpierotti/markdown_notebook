@@ -669,6 +669,83 @@ $$exp(x) = \sum_{n=0}^\infty \frac{x^n}{n!}$$
 * I can control explicitly the tradeoff between complexity and error
 * The main problem of SVMs is that they are heavily dependent on the kernel choosen
 
-## Regression with SVM
-* 
+# Regression
+* A regression is an analysis of several variables where the focus is on the relationship between a dependent variable and one or more independent variables
+* I want to interpolate the data with a continuous function of the independent variable(s)
+	* It is possible to do regression also with non-continuous functions, but you need to have particular reasons to do so
+* Classification can be seen as a regression with a discontinuous function
 
+## Linear Regression
+* A linear regression is a line $y = ax+b$ that minimizes some measure of error wrt the datapoints
+* A training point $y_i$ can be defined in term of the interpolating line as
+$$ax_i+b+\epsilon_i$$
+	* $\epsilon_i$ is the error relative to that point
+* A common error metric is the least sum of squared distances from the line
+* With the least squares, the error function is
+$E = \sum_i \epsilon_i^2 = \sum_i [y_i-(ax_i+b)]^2$
+* The partial derivative of the error function wrt to b is 0 when
+$$\frac{\partial E}{\partial b}=0$$
+$$b = y^*-ax^*$$
+* While with respect to a
+$$\frac{\partial E}{\partial a}=0$$
+$$ a = \frac{cov(x,y)}{\sigma_x^2}$$
+
+## Polynomial Regression
+* I can use a polynomial to interpolate my points in the form
+$$y=P(x)=\sum_{k=1}^p a_kx^k+b$$
+* $p$ is the degree of the polynomial and $a_k$ the trainable parameters
+* The error function is
+$$E=\sum_i (y^i-P(x))^2$$
+	* Here $P(x)$ incorporates all the coefficients $a_k$ and $b$
+* I can find the solution of the optimization by equating to 0 all the partial derivatives of the error function with respect to the parameters
+
+## Regularization
+* Having an high number of parameters leds to overfitting
+* A typical sign of overfitting is the presence of coefficient which are very large or very negative
+* Introducing a regularazing term in the error function discourages the presence of coefficients with very large absolute value
+* The regularized error function for a polynomial regression is thus
+$$E=\sum_i (y^i-P(x))^2 + \lambda \sum_k a_k^2$$
+	* $\lambda$ is an hyperparameter that tweaks how heavily the model penalizes large coefficients
+
+## Neural Networks for Regression
+* The classification error function for NN is
+$$E=\frac{1}{2}\sum_{i,j}(z_j(x^i,\vec{w})-y^i_j)^2$$
+	* $i$ iterates through the training examples
+	* $j$ iterates through the output neurons
+	* $z_j$ represents the output of one of the output neurons
+	* $\vec{w}$ is a vector of weights
+	* $y^i_j$ is the correct value of output neuron $j$ for input $i$
+		* In a classification problem it is either 0 or 1
+* In a regression problem nothing really changes, I just make $y_i^j$ be a real number instead of 0 or 1
+* Also for NN it is useful to introduce a regularizing hyperparameter on the value of the weights
+
+## Support Vector Machines for Regression
+* The situation here is less straightforward than for NNs
+* Suppose that I have a point $\vec{x}^i \in \mathbb{R}^n$ associated to the point $y^i \in \mathbb{R}$
+	* Note that in this case $y^i$ is a real number, not only 1 or -1 like for the classification case
+* I define a function $f(\vec{x}) \in \mathbb{R}$
+$$f(\vec{x}^i)=w_1x_1+w_2x_2+...+w_nx_n$$
+$$f(\vec{x})=<\vec{w},\vec{x}>+b$$
+	* Note that this is NOT an hyperplane but a function of the vector $\vec{x}$ that produces a real number!
+	* This function is a line in the real space
+* I introduce the hyperparameter $\epsilon$ that defines what is the error that I allow on the regression
+	* It is the maximum allowed distance from the line to any of the training points
+	* It is similar to a margin, but it is an hyperparameter!
+* So my goal is to find a line that respect the condition $|y^i-f(\vec{x}^i) \leq \epsilon$
+* This constraint can be summarised, removing the absolute value, as
+$$\begin{cases}
+y^i-(<\vec{w},\vec{x}^i>+b) \leq \epsilon\\
+(<\vec{w},\vec{x}^i>+b)-y^i \leq \epsilon
+\end{cases}$$
+* Among all the lines that respect this constraint I choose the one that minimizes $\frac{1}{2}|\vec{w}|^2$
+	* Minimizing the norm of $\vec{w}$ here corresponds to a regularization parameter
+	* The components of $\vec{w}$ are the coefficients of the regression, so minimizing the norm of $\vec{w}$ I minimize the value of the coefficients
+	* In practice, with this formulation the SVM will choose the line that is as flat as possible
+* Also for regression it is possible to implement a soft margin
+	* I introduce 2 slack variables $\zeta$ and $\zeta^*$, one for the points above and one for the points below the line
+	* The slack variables allow some points to exceed the distance of $\epsilon$ from the line
+* I can then obtain as usual the Lagrangian, write the KKT conditions and obtain the Dual Lagrangian
+* The SVM Dual Lagrangian used for regression is a bit more complex than the one used for classification but still depends on the data only by a scalar product
+* This means that I can use kernels also for regression with SVMs
+* Using kernels with SVMs I can do a non-linear regression
+* The kernels used are the same used for classification: polynomial and RBF
