@@ -749,3 +749,9 @@ y^i-(<\vec{w},\vec{x}^i>+b) \leq \epsilon\\
 * This means that I can use kernels also for regression with SVMs
 * Using kernels with SVMs I can do a non-linear regression
 * The kernels used are the same used for classification: polynomial and RBF
+* Predicting new points with regression SVMs also requires only scalar products, and so I can use kernels also here
+* The important thing to remember from SVM regression is that it is a method that incorporates automatically a regularization, and that the allowed error $\epsilon$ is an hyperparameter
+* A small $\epsilon$ leads to overfitting since it effectively neutralizes the regularization
+	* It is not possible to find a solution that keeps the points inside the margin with a small $\epsilon$
+* It is possible also to define different penalty function for the slack variables
+	* We used the $\epsilon$-insensitive but there are many others
