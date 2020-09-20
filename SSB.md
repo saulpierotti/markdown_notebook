@@ -445,9 +445,9 @@ $$g_i(\vec{x}_i) = y_i(<\vec{x}_i\vec{w}>+b)-1 \geq 0$$
 * If I want the constraint to be in the form $g(\vec{x}) \leq 0$
 $$g_i(\vec{x}_i) = 1-y_i(<\vec{x}_i\vec{w}>+b) \leq 0$$
 * In this framework ($g(\vec{x}) \leq 0$) and with a minimization goal on $f(\vec{x})$ (I want to minimize the norm of $\vec{w}$!), from the KKT conditions I have that
-$$\alpha_i \leq 0$$
+$$\alpha_i \geq 0$$
 $$\alpha_i g_i(\vec{x}) = 0$$
-	* If $\alpha_i < 0$ then $g_i(\vec{x})=0$ 
+	* If $\alpha_i > 0$ then $g_i(\vec{x})=0$ 
 		* The constraint is acting, and so the solution is on the constraint
 	* If $\alpha_i = 0$ then $g_i(\vec{x})$ can be different from 0
 		* The constraint is not acting, and so $\alpha_i=0$ cancel it from the calculation
@@ -459,7 +459,7 @@ $$\mathcal{L}(\vec{x},\alpha_i) = f(\vec{x}) + \sum_i \alpha_i * (g_i(\vec{x})$$
 $$f(\vec{w})=\frac{1}{2}|\vec{w}|^2=\frac{1}{2}<\vec{w},\vec{w}>$$
 $$g_i(\vec{w},b)=1-y_j(<\vec{w},\vec{x}>+b) \leq 0$$
 $$\alpha_i g_i(\vec{w},b)=0$$
-$$\alpha_i \leq 0$$
+$$\alpha_i \geq 0$$
 * So I can rewrite the Lagrangian as
 $$\mathcal{L}(\vec{w},b,\alpha^i) = \frac{1}{2}<\vec{w},\vec{w}> + \sum_i \alpha^i * [1-y^i(<\vec{w},\vec{x}^i>+b)]$$
 * I can obtain the Dual Lagrangian by equating the partial derivatives of the Lagrangian with respect to $\vec{w}$ and to b to 0, and substitute these expression in the original Lagrangian
@@ -479,6 +479,8 @@ $$\vec{w}=\sum_i \alpha^i y^i \vec{x}^i$$
 * By equating the partial derivative of $b$ to 0
 $$\frac{\partial \mathcal{L}}{\partial b}=0$$
 $$\sum_i \alpha^i y_i = 0$$
+	* I can recall that b just translates the decision hyperplane
+	* This condition expresses the fact that the Lagrange multipliers of the points of the 2 classes must cance out, and so must be balanced
 * Now I can substitute the expression for $\vec{w}$ in the original Lagrangian
 $$\mathcal{L}(\vec{w},b,\alpha^i) = \frac{1}{2}<\vec{w},\vec{w}> + \sum_i \alpha^i * [1-y^i(<\vec{w},\vec{x}^i>+b)]$$
 $$\mathcal{L'}(b,\alpha^i) = \frac{1}{2}<\sum_i \alpha^i y^i \vec{x}^i,\sum_j \alpha^j y^j \vec{x}^j> + \sum_i \alpha^i * [1-y^i(<\sum_j \alpha^j y^j \vec{x}^j,\vec{x}^i>+b)]$$
@@ -495,10 +497,26 @@ $$\mathcal{L'}(\alpha^i) = -\frac{1}{2}\sum_i \sum_j \alpha^i \alpha^j y^i y^j <
 $$\mathcal{\bar{L}}(\alpha^i) = -\frac{1}{2}\sum_i \sum_j \alpha^i \alpha^j y^i y^j <\vec{x}^i,\vec{x}^j> + \sum_i \alpha^i$$
 * Always under the KKT conditions
 $$\alpha_i [1-y_j(<\vec{w},\vec{x}>+b)]=0 \ \forall \ i$$
-$$\alpha_i \leq 0 \ \forall \ i$$
+$$\alpha_i \geq 0 \ \forall \ i$$
+* The maximization of the Dual Lagrangian is a Quadratic Programming (QP) problem, since $\alpha_i$ appears at most as a bilinear term
+
+## Quadratic Programming
+* QP is the problem of optimizing a quadratic objective function and is one of the simplest forms of non-linar programming
+* In a QP problem the objective function can contain bilinear and up to quadratic polynomial terms
+* The constraints are linear and can be equalities or inequalities
+* Many approaches have been proposed to solve QP problems
+	* Logo, cplex, ...
+* Most of them are interior-point methods
+	* They start from an initial solution that can violate the constraints
+	* They improve the solution by optimizing the objective function and reducing the amount of constraint violation
+* For SVM, the most popular approach is the Sequential Minimization Optimization (SMO)
+	* A QP problem in 2 variables is trivial to solve
+	* Each SMO iteration picks a pair of variables $\alpha^i,\alpha^j$ and solves the QP with them
+	* The approach is repeated until convergence
+* We can treat the QP solver as a black box
 
 ## Solution of the SVM optimization
-* The maximization of the Dual Lagrangian is a Quadratic Programming (QP) problem
+* The maximization of the Dual Lagrangian is a Quadratic Programming (QP) problem, since $\alpha_i$ appears at most as a bilinear term
 	* This implies that a global maximum wrt $\alpha_i$ can always be found
 * Once I find all the $alpha_i$, I can obtain $\vec{w}$
 $$ w_r = \sum_i \alpha^i y^i x^i_r$$
@@ -512,19 +530,58 @@ $$ w_r = \sum_{j=1}^s \alpha_t^j y_t^j {x_t^j}_r$$
 	* I compute the function
 $$f(\vec{z}) = <\vec{w},\vec{z}>+b=\sum_{j=1}^s \alpha_t^j y_t^j (\vec{x}_t^j \vec{z})+b$$
 	* If the function is positive the points is assigned to the class 1, if it is negative to -1
+* The fact that the Dual Lagrangian is a QP problem means that SVM provide a globally optimal solution at a very low computational cost
 
 ## Soft Margin SVM
 * When problems are not linearly separable, I can implement a soft margin
 * I add a slack variable $\zeta \geq 0$ that represent the error in the classification for each point
 * The slack variable is greater than 0 only for points that are on the wrong side of the margin, otherwise it is 0
-* The new conditions for the SVM margins become
-$$ marg_1 = <\vec{w}\vec{x}> +b = -1 + \zeta$$
-$$ marg_2 = <\vec{w}\vec{x}> +b = +1 - \zeta$$
-* The quantity to be minimized include now also the sum of the slack variables
+* The new conditions for the SVM for each training point $\vec{x}_i$ become
+$$ \begin{cases}
+<\vec{w}\vec{x}_i> +b \geq 1 - \zeta_i    & y_i = 1 \\
+<\vec{w}\vec{x}_i> +b \leq - 1 + \zeta_i  & y_i = -1\\
+\zeta_i \geq 0 & \forall \ i
+\end{cases}$$
+* I want as always to minimize the norm of $\vec{w}$, but in soft margin SVM I want also to minimize the error $\zeta_i$ for each training point
+* The quantity to be minimized thus includes now also the sum of the slack variables
 $$\frac{1}{2}|\vec{w}|^2 + C \sum_i \zeta_i$$
+	* Subject to
+$$y_i (<\vec{w}\vec{x}_i> +b) \geq 1 - \zeta_i$$
+$$\zeta_i \geq 0$$
+	* This can be rewritten as
+$$1 - \zeta_i - y_i (<\vec{w}\vec{x}_i> +b) \leq 0$$
+$$-\zeta_i \leq 0$$
 * The hyperparameter C determines the relative weight of the error and of the margin width on the determination of the margin hyperplanes
 * A large C makes the soft margin behave more like an hard margin
+* We can see an hard margin SVM as a soft margin SVM with $C=\infty$
 * Soft margins tend to be more robust to noise in the data, and are practically almost always used
+* I can rewrite the SVM Lagrangian to include the slack variables and the fact that they must be all greater than 0
+$$\mathcal{L}(\vec{w},b,\zeta^i,\alpha^i,\mu^i) = \frac{1}{2}<\vec{w},\vec{w}> + C \sum_i \zeta^i + \sum_i \alpha^i * [1-\zeta^i-y^i(<\vec{w},\vec{x}^i>+b)]+\sum_i \mu^i(-\zeta^i)$$
+	* In this case besides the $\alpha_i$ there are other Lagrange multipliers for the slack variables, $\mu_i$
+	* In the last term $\zeta^i$ is negative since in this way $\mu^i$ is subject to the same KKT conditions as $\alpha^i$
+	* Under the KKT conditions all the multipliers must be positive
+$$\alpha^i \geq 0 \ \forall  i$$
+$$\mu^i \geq 0 \ \forall  i$$
+	* And the product of the multiplier and teh constraint must be 0
+$$\alpha^i [1-\zeta^i-y^i(<\vec{w},\vec{x}^i>+b)]=0 \ \forall i$$
+$$\mu^i(-\zeta^i) = 0 \ \forall i \implies \mu^i \zeta^i = 0 \ \forall i$$
+* From this I can derive the Dual Lagrangian that depends only on the Lagrange multipliers
+* I impose that the partial derivative of the Lagrangian with respect to $\vec{w}$ and $b$ be 0
+$$\frac{\partial \mathcal{L}}{\partial \vec{w}}=0$$
+$$\frac{\partial \mathcal{L}}{\partial b}=0$$
+	* $\vec{w}$ and $b$ appears exactly on the same components as for the hard margin SVM
+	* I just recover the solutions previously obtained
+$$\vec{w} = \sum_i \alpha^i y^i \vec{x}^i$$
+$$\sum_i \alpha^i y^i = 0$$
+* I impose that the partial derivative of the Lagrangian with respect to $\zeta^i$ be 0
+$$\frac{\partial \mathcal{L}}{\partial \zeta^i}=0$$
+$$C - \alpha^i - \mu^i = 0$$
+$$\alpha^i = C - \mu^i$$
+	* Since for the KKT conditions both multipliers are positive I observe that
+$$ 0 \leq \alpha_i \leq C$$
+	* This last equation is the only real difference for soft margin SVM with respect to hard margin SVM
+* Thus the Dual Lagrangian is
+$$\bar{\mathcal{L}}(\alpha^i,\mu^i) = $$
 
 ## Kernel Methods
 * I cannot use a linear SVM to solve non linearly separable problems
