@@ -565,7 +565,7 @@ $$\mu^i \geq 0 \ \forall  i$$
 	* And the product of the multiplier and teh constraint must be 0
 $$\alpha^i [1-\zeta^i-y^i(<\vec{w},\vec{x}^i>+b)]=0 \ \forall i$$
 $$\mu^i(-\zeta^i) = 0 \ \forall i \implies \mu^i \zeta^i = 0 \ \forall i$$
-* From this I can derive the Dual Lagrangian that depends only on the Lagrange multipliers
+* From this I can derive the Dual Lagrangian
 * I impose that the partial derivative of the Lagrangian with respect to $\vec{w}$ and $b$ be 0
 $$\frac{\partial \mathcal{L}}{\partial \vec{w}}=0$$
 $$\frac{\partial \mathcal{L}}{\partial b}=0$$
@@ -580,10 +580,14 @@ $$\alpha^i = C - \mu^i$$
 	* Since for the KKT conditions both multipliers are positive I observe that
 $$ 0 \leq \alpha_i \leq C$$
 	* This last equation is the only real difference for soft margin SVM with respect to hard margin SVM
-* Thus the Dual Lagrangian is
-$$\bar{\mathcal{L}}(\alpha^i,\mu^i) = $$
+* Thus the Dual Lagrangian, that depends only on $\alpha^i$, is identical to the one for the hard margin SVM
+$$\mathcal{\bar{L}}(\alpha^i) = -\frac{1}{2}\sum_i \sum_j \alpha^i \alpha^j y^i y^j <\vec{x}^i,\vec{x}^j> + \sum_i \alpha^i$$
+* But the constraints are different, since I have now an hyperparameter that defines an upper bound on $\alpha^i$
+$$\alpha_i [1-y_j(<\vec{w},\vec{x}>+b)]=0 \ \forall \ i$$
+$$ 0 \leq \alpha_i \leq C \ \forall i$$
+* An hard margin SVM corresponds, as said before, to a soft margin SVM with $C=\infty$, and so with $\alpha^i$ without any upper bound
 
-## Kernel Methods
+## Kernels
 * I cannot use a linear SVM to solve non linearly separable problems
 * I can map the original input space to a linearly separable feature space, which I can solve with SVMs
 * The input vector $\vec{x} \in \mathbb{R}$ is transformed to the feature vector $\vec{\phi}(\vec{x}) \in \mathbb{R}$
