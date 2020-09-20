@@ -112,15 +112,15 @@ $$ E = \sum_{k,j} |z_j(x^{(k)},w)-d_j^{(k)}| $$
 $$ E = \frac{1}{2}\sum_{k,j} (z_j(x^{(k)},w)-d_j^{(k)})^2 $$
 	* The constant factor $\frac{1}{2}$ is useful to simplify a computation later, it does not have a specific meaning
 		* It makes the expression more similar the one for kinetic energy
-	* This is the most used error function in classical neural networks
+* This is the most used error function in classical neural networks
 * The cross entropy is another possible error function
 $$ E = -\frac{1}{m}\sum_{k,j} (d_j^{(k)}\ln{z_j(x^{(k)},w)})$$
-	* $m$ is the number of output neurons
+* $m$ is the number of output neurons
 * After evaluating my error function, I need to update my parameters accordingly if the error is not below a satisfactory threshold
 * I can update the parameters randomly
-	* This is used in some approaches, but in general it is not so smart if the parameter space is really large
-	* In a perceptron with $n$ input neurons and $m$ output neurons the parameter space is $(n+1)m$ (weights plus the thresholds)
-		* I have $nm$ weights and $m$ thresholds
+* This is used in some approaches, but in general it is not so smart if the parameter space is really large
+* In a perceptron with $n$ input neurons and $m$ output neurons the parameter space is $(n+1)m$ (weights plus the thresholds)
+	* I have $nm$ weights and $m$ thresholds
 
 ## Gradient
 * A function with 2 to inputs and 1 output can be represented with level curves
@@ -132,7 +132,7 @@ $$\nabla f = (\frac{\partial f}{\partial x},\frac{\partial f}{\partial y})$$
 * If I consider 2 points on the level curve $f(x,y)=c$, that are $(x,y)$ and $(x+\epsilon_x,y+\epsilon_y)$
 * For $\epsilon_x,\epsilon_y \to 0$ I notice that
 $$f(x+\epsilon_x,y+\epsilon_y)\approx f(x,y) + \epsilon_x \frac{\partial f}{\partial x}|_{(x,y)} + \epsilon_y \frac{\partial f}{\partial y}|_{(x,y)}=f(x,y)+\epsilon^T \nabla f|_{(x,y)}$$
-	* The new points tends to approximate the old point plus 2 contributions of magnitude $\epsilon$, in the direction of the partial derivatives with respect to $x$ and to $y$
+* The new points tends to approximate the old point plus 2 contributions of magnitude $\epsilon$, in the direction of the partial derivatives with respect to $x$ and to $y$
 * Since both points belong to the curve $f(x,y)=c$, I obtain that
 $$c \approx c + \epsilon^T \nabla f|_{(x,y)}$$
 * This implies that the product of the movent along the curve $\epsilon^T$ and the gradient at that point is 0
@@ -144,22 +144,22 @@ $$ \nabla f(x)|_{w_0}= (\frac{\partial f}{\partial x_1}|_{w_0},\frac{\partial f}
 
 ## Gradient Descent
 * A perceptron performs a mapping $\mathbb{R}^n \to \mathbb{R}^m$
-	* $n$ is the number of inputs and $m$ the number of outputs
+* $n$ is the number of inputs and $m$ the number of outputs
 * The error function is a function
 $$ E_{\vec{w},\theta} : \mathbb{R}^{(n+1)m} \to \mathbb{R}$$
 * Training means finding the set of parameters $w$ (which includes $\theta$) that minimizes the error function
 * The analytical solution of the maxima and minima of the error function is usually not computationally feasible
-	* I am in a extremum (or a saddle/flexus) when all the partial derivatives of the error function are 0
-	* In order to define a gradient the error function must be derivable
-	* Since the error function includes the transfer function, also this must be derivable
-	* This approach would be really good since it does not need any inizialization and outputs a set of all the extrema and saddle points/flexuses
-	* I could then just subsitute for all of these points and find the global extrema
+* I am in a extremum (or a saddle/flexus) when all the partial derivatives of the error function are 0
+* In order to define a gradient the error function must be derivable
+* Since the error function includes the transfer function, also this must be derivable
+* This approach would be really good since it does not need any inizialization and outputs a set of all the extrema and saddle points/flexuses
+* I could then just subsitute for all of these points and find the global extrema
 * An analytical procedure for finding a global extremum of a function is still an open problem
 * Iterative algorithms are generally adopted,but they do not guarantee to find a global minimum
 * If the desired output $d$ is binary we have a classification problem, if it is a real number a regression problem
 * Gradient descent finds a LOCAL minimum of a function by always going against the gradient
 * In order to compute the gradient of the error function, I need to compute the first derivative of the transfer function
-	* This implies that the transfer function be derivable!
+* This implies that the transfer function be derivable!
 * If the activation function is not linear, its derivative $g'(a)$ will be really variable across its domain
 * The derivative $g'(a)$ of the sigmoid transfer function $g(a)$ is
 $$g(a)=\frac{1}{1+e^{-a}}$$
@@ -167,7 +167,7 @@ $$g'(a)=g(a)(1-g(a))$$
 * Given the error function $E$ and some initial parameters $\vec{w}$, I want to evaluate the partial derivative of the error function with respect to a single parameter $w_{ij}$
 $$ E(\vec{w}) = \frac{1}{2}\sum_{k,j} (z_j(x^{(k)},w)-d_j^{(k)})^2 $$
 $$ \frac{\partial E}{\partial w_{ij}} = \sum_k \frac{\partial E}{\partial z_j}\frac{\partial z_j(a_j)}{\partial a_j}\frac{\partial a_j(w_{ij},x^{(k)})}{\partial w_{ij}}$$
-	* This is just the chain rule on $E, z_j, a_j$
+* This is just the chain rule on $E, z_j, a_j$
 * I can decompose the first term
 $$ E(z_j^{(k)},d_j^{(k)}) = \frac{1}{2}\sum_k (z_j^{(k)} - d_j^{(k)})^2$$
 $$\frac{\partial E}{\partial z_j} = \sum_k z_j^{(k)}-d_j^{(k)}$$
@@ -184,13 +184,13 @@ $$ \delta_j^{(k)}=(z_j^{(k)}-d_j^{(k)}) z_j(a_j)(1-z_j(a_j))$$
 $$\frac{\partial E}{\partial w_{ij}} = \sum_k \delta_j^{(k)} x_i^{(k)}$$
 * The partial derivative $\frac{\partial E}{\partial w_{ij}}$ can be used to update the weight $w_{ij}$
 $$ w_{ij} = \underline{w}_{ij} - \eta \frac{\partial E}{\partial w_{ij}}|_{\underline{w}_{ij}}$$
-	* $\eta$ is the learning rate, a hyperparameter
+* $\eta$ is the learning rate, a hyperparameter
 * Now that I know the partial derivative with respect to one of the weights $w_{ij}$, I can calculate it for all of the weights, obtaining the gradient $\nabla E$
 * I can use gradient descent for updating all the parameters simultaneously
-	* I update the parameters in the direction that would lower the error function, given the set of partial derivatives (the gradient!)
-	* I can define the set of parameters $w_1$ as a function of the old set of parameters $w_0$
+* I update the parameters in the direction that would lower the error function, given the set of partial derivatives (the gradient!)
+* I can define the set of parameters $w_1$ as a function of the old set of parameters $w_0$
 $$ w_1 = w_0 - \eta \nabla E|w_0$$
-	* I repeat the process iteratively until $E$ is below a certain acceptable threshold
+* I repeat the process iteratively until $E$ is below a certain acceptable threshold
 * The general gradient descent formula is thus
 $$ w_{t+1} = w_t - \eta \nabla E|w_t$$
 * A gradient descent converges when $\nabla E = \vec{0}$
@@ -200,23 +200,23 @@ $$ w_{t+1} = w_t - \eta \nabla E|w_t$$
 
 ## Linear Separability
 * The computational power of a perceptron is limited to linear relationships (or linear decision boundaries in the case of classification probelems)
-	* The activations can be expressed as $\sum_i w_i x_i$, which is the equation of an i-dimensional manifold
-	* Using feature crosses, I can indirectly implement non linear boundaries but those are not learnt by the perceptron, I am just translating the space to a linearly separable one
+* The activations can be expressed as $\sum_i w_i x_i$, which is the equation of an i-dimensional manifold
+* Using feature crosses, I can indirectly implement non linear boundaries but those are not learnt by the perceptron, I am just translating the space to a linearly separable one
 * This limitation of the perceptron is a well-known computational problem, the XOR problem
 * XOR returns 0 when the inputs are both 0 or both 1, and 1 if they are different
 * It is not possible to implement a XOR function with a perceptron, since this function is non linear
-	* When it was proven that the XOR problem could not be solved by a perceptron, neural networks disappeared from the AI research for 15 years (1960 to 1980)
+* When it was proven that the XOR problem could not be solved by a perceptron, neural networks disappeared from the AI research for 15 years (1960 to 1980)
 
 ## Multi-layer Feed-Forward NNs
 * In order to learn non-linear relationships, I can use a feed-forward network with hidden layers
-	* The number of hidden layers and the number of neurons in the hidden layers are hyperparameters of the network
-	* This is still a feed-forward network, so there is no back-communication and communication across same-layer neurons
+* The number of hidden layers and the number of neurons in the hidden layers are hyperparameters of the network
+* This is still a feed-forward network, so there is no back-communication and communication across same-layer neurons
 * The number of layers in a neural network can be measured according to 2 different definitions
-	* The number of weight layers
-		* In this framework a perceptron has 1 layer
-	* The number of neuron layers
-		* In this framework a perceptron has 2 layers
-	* I will use the number of weight layers as a definiton
+* The number of weight layers
+	* In this framework a perceptron has 1 layer
+* The number of neuron layers
+	* In this framework a perceptron has 2 layers
+* I will use the number of weight layers as a definiton
 * In a network with 1 hidden layer, I have $n$ input neurons, $m$ output neurons, and $h$ hidden neurons
 * I put the superscript $^{(1)}$ to things belonging to the first level, and $^{(2)}$ for the second level
 * The output of the first layer can be easily described
@@ -224,14 +224,14 @@ $$z_j^{(1)} = g(\sum_i w_{ij}^{(1)}x_i)$$
 * The output of the second layer can be described in terms of the output of the hidden layer
 $$z_j^{(2)} = g(\sum_i w_{ij}^{(2)}z_i^{(1)})$$
 * With a 2-layer network I can solve the XOR problem
-	* The hidden layer has 2 neurons
-	* 1 of the hidden neurons (neuron A) performs and AND operation: it is active if both inputs are 1
-	* The other hidden neuron (neuron B) performs and OR operation: it is active if either of the inputs is active
-	* The output neuron performs B AND (NOT A): it is active if B is active but A is not
+* The hidden layer has 2 neurons
+* 1 of the hidden neurons (neuron A) performs and AND operation: it is active if both inputs are 1
+* The other hidden neuron (neuron B) performs and OR operation: it is active if either of the inputs is active
+* The output neuron performs B AND (NOT A): it is active if B is active but A is not
 * The hidden layer maps the input to a new space where the points are linearly separable
 * In multi-layer networks using non-linear transfer function facilitates the discrimination of non-linearly-separable problems
 * With deep learning is also possible to use non-derivable transfer functions like the ReLU
-	* In this case the algorithm need to be changed a little bit
+* In this case the algorithm need to be changed a little bit
 * With a multi-layer network I cannot use the same training strategy used for the perceptron, since I do NOT know the desired output of the hidden layer!
 * For the output layer I could use the training formula since I know the desired output, but I do not know its input
 * The input of the second layer is the output of the first layer, which I can express as a function of the real input
@@ -243,43 +243,43 @@ $$z_j^{(2)} = g(\sum_i w_{ij}^{(2)}z_i^{(1)})$$
 * For the second layer, I can just use the classical perceptron formula by substituting the input $x_i$ with the output of the previos layer $z_i$
 $$ \frac{\partial E}{\partial w^{(2)}_{ij}} = \sum_k \delta^{(2,k)}_j z^{(1,k)}_i$$
 $$\frac{\partial E}{\partial w_{ij}} = \sum_k (z_j^{(2)}(x^{(k)},w_{ij})-d_j^{(k)}) g'(a^{(2,k)}_j) z_i^{(1,k)}$$
-	* I know all the terms
+* I know all the terms
 * For the hidden layer the situation is less clear, since I do not know what the desired output is
 $$ \frac{\partial E}{\partial w^{(1)}_{ij}} = \sum_k \delta^{(1,k)}_j x^{(k)}_i$$
-	* I need to derive an expression for $\delta^{(1,k)}_j$, the sensitivity of the error to a variation in the activation of a neuron in the hidden layer
+* I need to derive an expression for $\delta^{(1,k)}_j$, the sensitivity of the error to a variation in the activation of a neuron in the hidden layer
 * I note that the derivative of the error function with respect to a single weight of the first layer $w^{(1)}_{ij}$ can be decomposed with the chain rule as
 $$ \frac{\partial E}{\partial w^{(1)}_{ij}} = \sum_k \frac{\partial E}{\partial a_j^{(1,k)}} \frac{\partial a_j^{(1,k)}}{\partial w_{ij}^{(1)}}$$
-	* The sum is across the training samples
-	* The first term is the derivative of the error function with respect to the activation of the neuron $j$ of the first layer (the one receiving the connection $w_{ij}$), and so it is the deviation of the neuron of the hidden layer $\delta^{(1,k)}_j$
-	* The second term is the derivative of the activation of the neuron $j$ of the first layer with respect to the weight $w^{(1)}_{ij}$ of the first layer
+* The sum is across the training samples
+* The first term is the derivative of the error function with respect to the activation of the neuron $j$ of the first layer (the one receiving the connection $w_{ij}$), and so it is the deviation of the neuron of the hidden layer $\delta^{(1,k)}_j$
+* The second term is the derivative of the activation of the neuron $j$ of the first layer with respect to the weight $w^{(1)}_{ij}$ of the first layer
 * I note that the deviation can be further decomposed in terms of the activation of the output layer
 $$\frac{\partial E}{\partial a_j^{(1,k)}} = \sum_m \frac{\partial E}{\partial a_m^{(2,k)}}\frac{\partial a_m^{(2,k)}}{\partial a_j^{(1,k)}}$$
-	* The sum is across the neurons of the output layer
-	* The first term is the derivative of the error function with respect to the activation of neuron $m$ of the second layer (I sum over all of them)
-	* The second term is the derivative of the activation of neuron $m$ of the second layer with respect to the activation of neuron $j$ of the first layer
+* The sum is across the neurons of the output layer
+* The first term is the derivative of the error function with respect to the activation of neuron $m$ of the second layer (I sum over all of them)
+* The second term is the derivative of the activation of neuron $m$ of the second layer with respect to the activation of neuron $j$ of the first layer
 * The activation $a_m^{(2,k)}$ of a neuron $m$ of the second layer can be expressed in terms of the activations $a_j^{(1,k)}$ of all the neurons $j$ of the first layer
 $$a_m^{(2,k)}=\sum_j z_j^{(1,k)}w_{jm}^{(2)}=\sum_j g(a_j^{(1,k)})w_{jm}^{(2)}$$
-	* $g(x)$ is the transfer function
+* $g(x)$ is the transfer function
 * The derivative of the activation of neuron $m$ of the second layer with respect to the activation of neuron $j$ of the first layer can thus be expressed as
 $$\frac{\partial a_m^{(2,k)}}{\partial a_j^{(1,k)}}=g'(a_j^{(1,k)})w_{jm}^{(2)}$$
-	* The sum disappears since all the terms besides the one relative to neuron $j$ are constants and thus have a derivative of 0
+* The sum disappears since all the terms besides the one relative to neuron $j$ are constants and thus have a derivative of 0
 * Thus I can define $\delta^{(1,k)}_j$ as
 $$ \delta^{(1,k)}_j = \frac{\partial E}{\partial a_j^{(1,k)}} = \sum_m \delta^{(2,k)}_m g'(a_j^{(1,k)}) w_{jm}^{(2)}$$
-	* This is because
+* This is because
 $$\delta^{(2,k)}_m = \frac{\partial E}{\partial a_m^{(2,k)}}$$
 * In the backpropagation algorithm I proceed as follows for a single output neuron $m$
-	* I compute the output $z^{(2,k)}_m$ for each example $k$ (feed-forward step)
-	* From the output, I compute the deviation of the second layer $\delta^{(2,k)}_m$
-	* I compute the deviation of the hidden layer $\delta^{(1,k)}_j$ from the deviation of the output layer, the activation of the first layer and the weights connecting the 2 layers
-	* I compute then the gradient $\nabla E$ with respect to all the weights $w$
-	* I perform gradient descent on $\nabla E$
+* I compute the output $z^{(2,k)}_m$ for each example $k$ (feed-forward step)
+* From the output, I compute the deviation of the second layer $\delta^{(2,k)}_m$
+* I compute the deviation of the hidden layer $\delta^{(1,k)}_j$ from the deviation of the output layer, the activation of the first layer and the weights connecting the 2 layers
+* I compute then the gradient $\nabla E$ with respect to all the weights $w$
+* I perform gradient descent on $\nabla E$
 * In the update I can also add an inertial hyperparameter $\alpha$ (called momentum) to speed up the training
 $$w_{ij}^{t+1}=w_{ij}^t-\eta\frac{\partial E}{\partial w_{ij}}+ \alpha \Delta w_{ij}^t$$
-	* This makes update bigger when previous updates where bigger, and smaller when they where smaller
+* This makes update bigger when previous updates where bigger, and smaller when they where smaller
 
 ## Final Thoughts
 * Neural networks can be used for regression as well as for classification without particular modifications
-	* I just replace the desired class $d$ with a desired continuous output $y$
+* I just replace the desired class $d$ with a desired continuous output $y$
 * In a regression problem the desired outputs are real numbers, in a classification problem they are either 0 or 1
 * Increasing the number of neurons in the hidden layer increses the risk for overfitting the data
 * It can be proven that neural networks are universal approximators
@@ -290,7 +290,7 @@ $$w_{ij}^{t+1}=w_{ij}^t-\eta\frac{\partial E}{\partial w_{ij}}+ \alpha \Delta w_
 * A typical sign of overfitting is having weights with really high absolute value
 * If possible it is good to limit the magnitude of parameters by using a regularizer $\lambda$
 $$E=\frac{1}{2}\sum_{k,j}(z_j(x^{(k)},w)-y^{(k)}_{ij})^2+\lambda\sum (w_{ij^{(k)}})^2$$
-	* The regularizer penalizes the use of weights with large absolute value
+* The regularizer penalizes the use of weights with large absolute value
 * I can evaluate the performance of my network on a validation set, which I use to fix the hyperparameters
 * I should always reserve a test set that is never used for the computation
 * Backpropagation is not suitable for training deep networks: we need deep learning procedures
@@ -308,29 +308,29 @@ $$ \vec{w_j} \vec{x} - \theta_j = 0$$
 * A perceptron can find one of such boundaries, but intuitively these boundaries are not all equally good
 * In general, I want my decision boundary to be as far from the datapoints as possible: I want to maximise the margin between the decision boundary and the nearest datapoints
 * A SVM (Support Vector Machine) finds the hyperplane that solves a linearly separable problem  and maximizes the distance among the hyperplane itself and any of the datapoints
-	* This minimizes the risk for misclassification
-	* The distance among the hyperplanes passing on the closest datapoints of the 2 classes is the margin
-	* The decision boundary is choosen as an hyperplane parallel to the 2 margin hyperplanes and equally distant ot both of them
+* This minimizes the risk for misclassification
+* The distance among the hyperplanes passing on the closest datapoints of the 2 classes is the margin
+* The decision boundary is choosen as an hyperplane parallel to the 2 margin hyperplanes and equally distant ot both of them
 * A kernel is a generalization of SVMs that implements non-linear decision boundaries
 
 ## Vectors and Hyperplanes
 * The dot product of 2 vectors is the product of their norm, multiplide by the angle between them
 $$<\vec{a}\vec{b}>=|\vec{a}||\vec{b}|\cos \theta$$
-	* The result is a scalar
-	* The product of the norm of one of the vectors times the angle between them is the norm of the projection of the first vector onto the other
-	* The dot product is the projection of one vector onto the other scaled by the magnitude of the second vector
-	* The scalar product is 0 when the projection of one vector onto the other is 0, when they are normal to each other ($cos 90° = 0$)
-	* A 0 scalar product means that 2 vectors are normal to each other
+* The result is a scalar
+* The product of the norm of one of the vectors times the angle between them is the norm of the projection of the first vector onto the other
+* The dot product is the projection of one vector onto the other scaled by the magnitude of the second vector
+* The scalar product is 0 when the projection of one vector onto the other is 0, when they are normal to each other ($cos 90° = 0$)
+* A 0 scalar product means that 2 vectors are normal to each other
 * An hyperplane passing through the origin can be represented as the set of vectors $\vec{x}$ that are normal (i.e. they have a 0 projection) to defining vector $\vec{w}$
 $$<\vec{x}\vec{w}> = 0$$
 * Any hyperplane can be represented as the set of vectors $\vec{x}$ that have a certain constant projection (positive or negative) on a defining vector $\vec{w}$
 $$<\vec{x}\vec{w}>+b = 0$$
-	* The hyperplane itself is always normal to $\vec{w}$, but the vectors defining the points on the hyperplane are not and they have a constant non-zero projection on $\vec{w}$
-	* The projection of a vector $\vec{x}$ on $\vec{w}$ is
+* The hyperplane itself is always normal to $\vec{w}$, but the vectors defining the points on the hyperplane are not and they have a constant non-zero projection on $\vec{w}$
+* The projection of a vector $\vec{x}$ on $\vec{w}$ is
 $$|\vec{x}|\cos \theta = \frac{<\vec{x}\vec{w}>}{|\vec{w}|} = -\frac{b}{|\vec{w}|}$$
-	* If we define $b$ so that $\frac{b}{|\vec{w}|}$ is the negative projection of a vector $\vec{x}$ onto $\vec{w}$, then
+* If we define $b$ so that $\frac{b}{|\vec{w}|}$ is the negative projection of a vector $\vec{x}$ onto $\vec{w}$, then
 $$\frac{<\vec{x}\vec{w}>}{|\vec{w}|} + \frac{b}{|\vec{w}|} = 0 \iff <\vec{x}\vec{w}>+b = 0$$
-	* The sign of $b$ depends on the direction of $\vec{w}$ with respect to $\vec{x}$
+* The sign of $b$ depends on the direction of $\vec{w}$ with respect to $\vec{x}$
 
 ## Margins and Classification
 * The margin can be defined as the distance among 2 parallel hyperplanes that are the closest possible to the decision boundary and that pass through a point respectively in the 2 classes
@@ -347,31 +347,31 @@ $$ marg_2 = <\vec{w}\vec{x}> +b_2 = 0,\ marg_2 = <\vec{w}\vec{x}> +b = +1 \impli
 $$m = \frac{|b_1-b_2|}{|w|} \implies m = \frac{(b+1)-(b-1)}{|\vec{w}|}$$
 $$m = \frac{2}{|\vec{w}|}$$
 * Since I defined then the margin $m = \frac{2}{|\vec{w}|}$, the SVM problem of maximizing the margin becomes the problem of minimizing $|\vec{w}|$
-	* I need to exclude the trivial case $|\vec{w}|=0$, that does not define any hyperplane
-	* It is easier to minimize actually the square of the norm of $\vec{w}$, $|\vec{w}|^2$, since this is a derivable function while the norm itself is not
-	* Actually, to simplify the derivatives we minimize the quantity $\frac{1}{2}|\vec{w}|^2$
+* I need to exclude the trivial case $|\vec{w}|=0$, that does not define any hyperplane
+* It is easier to minimize actually the square of the norm of $\vec{w}$, $|\vec{w}|^2$, since this is a derivable function while the norm itself is not
+* Actually, to simplify the derivatives we minimize the quantity $\frac{1}{2}|\vec{w}|^2$
 * To understand if a point is on one side or the other of an hyperplane, I can compare its projection on $\vec{w}$ with the projection of the hyperplane on $\vec{w}$
-	* If the projection is greater, the point is more on the direction where $\vec{w}$ points than the hyperplane
+* If the projection is greater, the point is more on the direction where $\vec{w}$ points than the hyperplane
 * The goal of SVM is to find a $\vec{w}$ such that $|\vec{w}|$ is minimal but not 0
 * Let $\{x1, x_2, ..., x_i\}$ be our data point with $\{y_1, y_2, ..., y_i\}$ their class label such that $y_i \in \{-1,1\}$
-	* A point $x_i$ with $y_i = -1$ belongs to the negative class, while if $y_i = 1$ it belongs to the positive class
+* A point $x_i$ with $y_i = -1$ belongs to the negative class, while if $y_i = 1$ it belongs to the positive class
 * Since I defined the margin as having scaled projections of 1 and -1, I want to define $\vec{w}$ such that all the points to fall on the correct side of the margins
 $$y_i = 1 \implies <\vec{x_i}\vec{w}>+b > 1$$
 $$y_i = -1 \implies <\vec{x_i}\vec{w}>+b > -1$$
 * I can summarise this condition as
 $$ y_i(<\vec{x_i}\vec{w}>+b) \geq 1 \ \forall \ i$$
 * I can then define the goal of a SVM as minimizing $\frac{1}{2}|\vec{w}|^2$ under the constraints $y_i(<\vec{x_i}\vec{w}>+b) \geq 1 \ \forall \ i$
-	* The number of constraint is equal to the number of training data
+* The number of constraint is equal to the number of training data
 * This is a constrained optimization problem, that can be tackled using Lagrange multipliers
 
 ## Lagrange Theory
 * I want to maximize the function $z = f(x,y)$ subject to the constraint $g(x,y) = c$
 * The constraint defines a n-1 dimensional curve $y=h(x)$ in the x,y plane such that $g(x,y)=g(x,h(x))=c$
 * The naive solution would be to solve the constraint by defining $h(x)$, and then finding the maximum in $x$ of $g(x,h(x))$
-	* This analytical solution can be very difficult
+* This analytical solution can be very difficult
 * A level curve on the $z=f(x,y)$ surface can be defined as a set of points such that $f(x,y)=d$
 * In order to maximise the function $f(x,y)$ under the constraint $g(x,y)=c$, I can walk along the constraint until I find a point of tangency with a level curve
-	* If the constraint is tangent to a level curve, that point is either a maximum or a minimum (or a flexus) of $f(x,y)$ under the constraint
+* If the constraint is tangent to a level curve, that point is either a maximum or a minimum (or a flexus) of $f(x,y)$ under the constraint
 * The constraint is tangent to a level curve if the local normal to the constraint and to the level curve are parallel
 * The direction that is normal to the level curve of a function is the gradient of the function
 * For the constraint $g(x,y)=c$, the gradient $\nabla g$ is
@@ -387,10 +387,10 @@ $$\vec{\epsilon} \ \nabla g|_{(x,y)} = 0$$
 * The extrema of $f(x,y)$ that respect the constraint must have a gradient which is parallel to the gradient of the constraint itself and where the constraint is respected
 $$ \nabla f = \lambda \nabla g$$
 $$ g(x,y)=c$$
-	* 2 vectors are parallel if they are equal, allowing for a scalar factor
-	* The scalar factor $\lambda$ is called Lagrange multiplier
+* 2 vectors are parallel if they are equal, allowing for a scalar factor
+* The scalar factor $\lambda$ is called Lagrange multiplier
 * If $\lambda < 0$ the 2 gradients point in opposite directions, if $\lambda > 0$ they point in the same direction
-	* If $\lambda=0$ it means that $f(x,y)$ is flat (its gradient is the 0 vector)
+* If $\lambda=0$ it means that $f(x,y)$ is flat (its gradient is the 0 vector)
 * I introduce the Lagrangian function to incorporate all of these conditions
 $$\mathcal{L}(x,y,\lambda) = f(x,y) - \lambda*(g(x,y)-c)$$
 * If instead of a constraint $g(x)=c$ I equivalently define it as $g(x)=0$, and instead of $x,y$ I define an input vector $\vec{x}$
@@ -413,30 +413,30 @@ $$\frac{d\mathcal{L}}{d\lambda} = 0 \implies g(\vec{x}) = 0$$
 * Let's suppose that I have a point $x_0$ of maximum or minimum of the function along the constraint
 $$x_0 : \ \nabla f|_{x=x_0} = \lambda \nabla g|_{x=x_0}$$ 
 * Let my constraint be $g(\vec{x})\leq 0$ and my goal to minimize $f(\vec{x})$
-	* If $\lambda >0$ the gradients of the constraint and of the function are parallel at $x_0$
-		* I want to minimize the function, and the function decreases by going away from the constraint in the allowed region of space
-		* The minimum of the function CANNOT be on the contraint
-		* In this case the presence of the constraint does not alter the solution, which is said to be internal
-	* If $\lambda < 0$ the gradients of the constraint and of the function are antiparallel at $x_0$
-		* I want to minimize the function, and the function increases by going away from $g\vec{x})=0$ in the allowed region of space
-		* The minimum of the function MUST be on the contraint
+* If $\lambda >0$ the gradients of the constraint and of the function are parallel at $x_0$
+	* I want to minimize the function, and the function decreases by going away from the constraint in the allowed region of space
+	* The minimum of the function CANNOT be on the contraint
+	* In this case the presence of the constraint does not alter the solution, which is said to be internal
+* If $\lambda < 0$ the gradients of the constraint and of the function are antiparallel at $x_0$
+	* I want to minimize the function, and the function increases by going away from $g\vec{x})=0$ in the allowed region of space
+	* The minimum of the function MUST be on the contraint
 * If my goal is a maximization and not a minimization, or if the constraint is in the form $g(\vec{x}) \geq 0$ the situation is of course reversed
 * A function $f(\vec{x})$ is under a set of constraints $g_i(\vec{x}) \leq 0$ or $g_i(\vec{x}) \geq 0$ and I want to either minimize or maximise $f(\vec{x})$ under the constraints
 * In the KKT conditions literature the Lagrangian is defined using $\alpha = -\lambda$
 $$\mathcal{L}(\vec{x},\alpha) = f(\vec{x})+\alpha g(\vec{x})$$
 $$\nabla f(\vec{x}) = -\alpha \nabla g(\vec{x})$$
-	* Note that in the KKT theory the second term is added and not subtracted
-	* This does not change anything in practice, but $\alpha$ as an opposite sign compared to $\lambda$ when determining the direction of the gradient
+* Note that in the KKT theory the second term is added and not subtracted
+* This does not change anything in practice, but $\alpha$ as an opposite sign compared to $\lambda$ when determining the direction of the gradient
 * The KKT conditions are statements about the sign of $\alpha$
-	* If $g(\vec{x}) \leq 0$ and I want to minimize $f(\vec{x})$, then I impose that $\alpha \geq 0$
-	* If $g(\vec{x}) \leq 0$ and I want to maximize $f(\vec{x})$, then I impose that $\alpha \leq 0$
-	* If $g(\vec{x}) \geq 0$ and I want to minimize $f(\vec{x})$, then I impose that $\alpha \leq 0$
-	* If $g(\vec{x}) \geq 0$ and I want to maximize $f(\vec{x})$, then I impose that $\alpha \geq 0$
+* If $g(\vec{x}) \leq 0$ and I want to minimize $f(\vec{x})$, then I impose that $\alpha \geq 0$
+* If $g(\vec{x}) \leq 0$ and I want to maximize $f(\vec{x})$, then I impose that $\alpha \leq 0$
+* If $g(\vec{x}) \geq 0$ and I want to minimize $f(\vec{x})$, then I impose that $\alpha \leq 0$
+* If $g(\vec{x}) \geq 0$ and I want to maximize $f(\vec{x})$, then I impose that $\alpha \geq 0$
 * The reason for these restrictions on $\alpha$ is that, according to the kind of constraint ($\leq 0$ or $\geq 0$) and the desired optimization problem (minimization or maximization), an $\alpha$ that does not respect those conditions denotes a constraint that is not acting, and thus must be removed in the minimization of the Lagrangian
 * From these statements about $\alpha$, I can derive the complementarity condition
 $$ \alpha_i g_i(\vec{x}) = 0 \ \forall \ i$$
-	* If $\alpha = 0$, then the constraint is not acting and the condition is respected
-	* If $\alpha \not= 0$, then the constraint is acting, and thus the solution must be on the constraint itself: $g_i(\vec{x}) = 0$
+* If $\alpha = 0$, then the constraint is not acting and the condition is respected
+* If $\alpha \not= 0$, then the constraint is acting, and thus the solution must be on the constraint itself: $g_i(\vec{x}) = 0$
 * In SVM optimization, the function $f(\vec{x})$ is a function of the norm of $\vec{w}$, and the constraints $g_i(\vec{x})$ are position of the points with repsect to the margins
 $$f(\vec{x}) = \frac{1}{2}|\vec{w}|^2$$
 $$g_i(\vec{x}_i) = y_i(<\vec{x}_i\vec{w}>+b) \geq 1$$
@@ -447,48 +447,89 @@ $$g_i(\vec{x}_i) = 1-y_i(<\vec{x}_i\vec{w}>+b) \leq 0$$
 * In this framework ($g(\vec{x}) \leq 0$) and with a minimization goal on $f(\vec{x})$ (I want to minimize the norm of $\vec{w}$!), from the KKT conditions I have that
 $$\alpha_i \leq 0$$
 $$\alpha_i g_i(\vec{x}) = 0$$
-	* 
+	* If $\alpha_i < 0$ then $g_i(\vec{x})=0$ 
+		* The constraint is acting, and so the solution is on the constraint
+	* If $\alpha_i = 0$ then $g_i(\vec{x})$ can be different from 0
+		* The constraint is not acting, and so $\alpha_i=0$ cancel it from the calculation
 
+# The Dual Lagrangian
+* Taking into account the KKT conditions, I can write the standard Lagrangian for that serves as objective function for the SVM optimization
+$$\mathcal{L}(\vec{x},\alpha_i) = f(\vec{x}) + \sum_i \alpha_i * (g_i(\vec{x})$$
+* In the case of SVM optimization, I have that
+$$f(\vec{w})=\frac{1}{2}|\vec{w}|^2=\frac{1}{2}<\vec{w},\vec{w}>$$
+$$g_i(\vec{w},b)=1-y_j(<\vec{w},\vec{x}>+b) \leq 0$$
+$$\alpha_i g_i(\vec{w},b)=0$$
+$$\alpha_i \leq 0$$
+* So I can rewrite the Lagrangian as
+$$\mathcal{L}(\vec{w},b,\alpha^i) = \frac{1}{2}<\vec{w},\vec{w}> + \sum_i \alpha^i * [1-y^i(<\vec{w},\vec{x}^i>+b)]$$
+* I can obtain the Dual Lagrangian by equating the partial derivatives of the Lagrangian with respect to $\vec{w}$ and to b to 0, and substitute these expression in the original Lagrangian
+	* In this way only $\alpha_i$ remains as a variable in the optimization
+	* This corresponds to restricting the solution space to those regions where the partial derivatives of $\vec{w}$ and $b$ are 0
+	* The minimization of the Lagrangian corresponds to the maximization of the Dual Lagrangian
+	* The Dual Lagrangian is a convex function, so I am guaranteed to find a global maximum
+* I equate the partial derivative with respect to $\vec{w}$ to 0 to obtain an expression for $\vec{w}$ itself
+$$\frac{\partial \mathcal{L}}{\partial \vec{w}}=0$$
+	* The derivative with respect to a vector is just the derivative with respect to all of its components
+$$\frac{\partial \mathcal{L}}{\partial w_r}=0 \ \forall \ r$$
+	* By remembering that $|\vec{w}|^2 = <\vec{w},\vec{w}> \sum_r w_r^2$ and $<\vec{w},\vec{x}>=\sum_r w_r x_r$
+$$w_r - \sum_i \alpha^i y^i x^i_r =0$$
+$$w_r= \sum_i \alpha^i y^i x^i_r$$
+	* Recomponing the vector from the single components
+$$\vec{w}=\sum_i \alpha^i y^i \vec{x}^i$$
+* By equating the partial derivative of $b$ to 0
+$$\frac{\partial \mathcal{L}}{\partial b}=0$$
+$$\sum_i \alpha^i y_i = 0$$
+* Now I can substitute the expression for $\vec{w}$ in the original Lagrangian
+$$\mathcal{L}(\vec{w},b,\alpha^i) = \frac{1}{2}<\vec{w},\vec{w}> + \sum_i \alpha^i * [1-y^i(<\vec{w},\vec{x}^i>+b)]$$
+$$\mathcal{L'}(b,\alpha^i) = \frac{1}{2}<\sum_i \alpha^i y^i \vec{x}^i,\sum_j \alpha^j y^j \vec{x}^j> + \sum_i \alpha^i * [1-y^i(<\sum_j \alpha^j y^j \vec{x}^j,\vec{x}^i>+b)]$$
+$$\mathcal{L'}(b,\alpha^i) = \frac{1}{2}\sum_i \sum_j \alpha^i \alpha^j y^i y^j <\vec{x}^i,\vec{x}^j> + \sum_i \alpha^i * [1-y^i(\sum_j \alpha^j y^j <\vec{x}^j,\vec{x}^i>+b)]$$
+$$\mathcal{L'}(b,\alpha^i) = \frac{1}{2}\sum_i \sum_j \alpha^i \alpha^j y^i y^j <\vec{x}^i,\vec{x}^j> + \sum_i \alpha^i - \sum_i \alpha^i y^i(\sum_j \alpha^j y^j <\vec{x}^j,\vec{x}^i>+b)$$
+	* Factorizing the scalar product
+$$\mathcal{L'}(b,\alpha^i) = \frac{1}{2}\sum_i \sum_j \alpha^i \alpha^j y^i y^j <\vec{x}^i,\vec{x}^j> + \sum_i \alpha^i - \sum_i \alpha^i y^i \sum_j \alpha^j y^j <\vec{x}^j,\vec{x}^i> - \sum_i \alpha^i y^i b$$
+$$\mathcal{L'}(b,\alpha^i) = \frac{1}{2}\sum_i \sum_j \alpha^i \alpha^j y^i y^j <\vec{x}^i,\vec{x}^j> - \sum_i \sum_j \alpha^i y^i \alpha^j y^j <\vec{x}^j,\vec{x}^i> + \sum_i \alpha^i - \sum_i \alpha^i y^i b$$
+$$\mathcal{L'}(b,\alpha^i) = (\frac{1}{2}-1)\sum_i \sum_j \alpha^i \alpha^j y^i y^j <\vec{x}^i,\vec{x}^j> + \sum_i \alpha^i - \sum_i \alpha^i y^i b$$
+$$\mathcal{L'}(b,\alpha^i) = -\frac{1}{2} \sum_i \sum_j \alpha^i \alpha^j y^i y^j <\vec{x}^i,\vec{x}^j> + \sum_i \alpha^i - \sum_i \alpha^i y^i b$$
+	* Since $\sum_i \alpha^i y^i = 0$, the last term disappears and the function does not depend on b anymore
+$$\mathcal{L'}(\alpha^i) = -\frac{1}{2}\sum_i \sum_j \alpha^i \alpha^j y^i y^j <\vec{x}^i,\vec{x}^j> + \sum_i \alpha^i$$
+* So the Dual Lagrangian that needs to be MAXIMISED for the SVM problem is
+$$\mathcal{\bar{L}}(\alpha^i) = -\frac{1}{2}\sum_i \sum_j \alpha^i \alpha^j y^i y^j <\vec{x}^i,\vec{x}^j> + \sum_i \alpha^i$$
+* Always under the KKT conditions
+$$\alpha_i [1-y_j(<\vec{w},\vec{x}>+b)]=0 \ \forall \ i$$
+$$\alpha_i \leq 0 \ \forall \ i$$
 
-
-
-
-* I can define the solution $x$ as a function of the multipliers $\alpha_i$
-* If I substitute these definition of $x$ in place of $x$ in the KKT Lagrangian, I obtain the dual Lagrangian
-* A constraint $g(\vec{x})=0$ with $\vec{x} \in \mathbb{R}^n$ defines an $n-1$ dimensional manifold
-	* The constraint represents all the points of $g(\vec{x})$ which are cut by an hyperplane centered in $g=0$
-* This constraint divides the space in 2 regions, one where $g(\vec{x})>0$ and one where $g(\vec{x})\leq 0$
-* I want to minimize a function $f(\vec{x})$ by in the portion of space where $g(\vec{x})\leq 0$
-* If the gradients of the 2 functions at a point point in the same direction, the point cannot be an allowed minimum
-$$ \vec{\nabla f}|_{\vec{x}=0} = \lambda \vec{\nabla g}|_{\vec{x}=0}$$
-$$\lambda > 0$$
-	* I can decrease the function by remaining in the allowed region
-	* The solution is internal and not on the constraint
-* If the gradients of the 2 functions at a point point in the opposite directions, the point can be a minimum
-$$ \vec{\nabla f}|_{\vec{x}=0} = \lambda \vec{\nabla g}|_{\vec{x}=0}$$
-$$\lambda \leq 0$$
-	* In order to decrease the function I should go in the disallowed region
-	* In this case the solution is on the constraint
-* The convention of the KKT theory is to use a multiplier with opposite sign to the one used in the Lagrange theory
-* xxx check after whatching recordings
+## Solution of the SVM optimization
+* The maximization of the Dual Lagrangian is a Quadratic Programming (QP) problem
+	* This implies that a global maximum wrt $\alpha_i$ can always be found
+* Once I find all the $alpha_i$, I can obtain $\vec{w}$
+$$ w_r = \sum_i \alpha^i y^i x^i_r$$
+* In the solution, many of the $\alpha_i$ will be 0
+	* This means that many of the training points do not influence the solution
+* The points $\vec{x}^i$ with $\alpha^i \not= 0$ are the support vectors
+* Therefore, $\vec{w}$ can be expressed just in term of the $s$ support vectors $\vec{x}_t$
+$$ w_r = \sum_{j=1}^s \alpha_t^j y_t^j {x_t^j}_r$$
+* Note that there is no need to form $\vec{w}$ explicitly
+* If I have a new datapoint $\vec{z}$ that I want to classify with a trained SVM
+	* I compute the function
+$$f(\vec{z}) = <\vec{w},\vec{z}>+b=\sum_{j=1}^s \alpha_t^j y_t^j (\vec{x}_t^j \vec{z})+b$$
+	* If the function is positive the points is assigned to the class 1, if it is negative to -1
 
 ## Soft Margin SVM
 * When problems are not linearly separable, I can implement a soft margin
 * I add a slack variable $\zeta \geq 0$ that represent the error in the classification for each point
-	* The slack variable is greater than 0 only for points that are on the wrong side of the margin, otherwise it is 0
+* The slack variable is greater than 0 only for points that are on the wrong side of the margin, otherwise it is 0
 * The new conditions for the SVM margins become
 $$ marg_1 = <\vec{w}\vec{x}> +b = -1 + \zeta$$
 $$ marg_2 = <\vec{w}\vec{x}> +b = +1 - \zeta$$
 * The quantity to be minimized include now also the sum of the slack variables
 $$\frac{1}{2}|\vec{w}|^2 + C \sum_i \zeta_i$$
-	* The hyperparameter C determines the relative weight of the error and of the margin width on the determination of the margin hyperplanes
-	* A large C makes the soft margin behave more like an hard margin
+* The hyperparameter C determines the relative weight of the error and of the margin width on the determination of the margin hyperplanes
+* A large C makes the soft margin behave more like an hard margin
 * Soft margins tend to be more robust to noise in the data, and are practically almost always used
 
 ## Kernel Methods
 * I cannot use a linear SVM to solve non linearly separable problems
 * I can map the original input space to a linearly separable feature space, which I can solve with SVMs
-	* The input vector $\vec{x} \in \mathbb{R}$ is transformed to the feature vector $\vec{\phi}(\vec{x}) \in \mathbb{R}$
+* The input vector $\vec{x} \in \mathbb{R}$ is transformed to the feature vector $\vec{\phi}(\vec{x}) \in \mathbb{R}$
 * In order to apply the SVM to the feature space, I define the dual Lagrangian on the feature space
 * A kernel $K$ is a function of 2 input points $\vec{x}$,$\vec{z}$ that replaces the scalar product in the SVM objective function, to implicitly implement a translation of the input to the feature space
 $$ K(\vec{x},\vec{z})=<\vec{\phi}(\vec{x}),\vec{\phi}(\vec{z})>$$
@@ -500,44 +541,48 @@ $$\vec{\phi}(\vec{x}) = (1,\sqrt{2}x_1,\sqrt{2}x_2,\sqrt{2}x_1x_2,x_1^2,x_2^2)$$
 $$\vec{\phi}(\vec{z}) = (1,\sqrt{2}z_1,\sqrt{2}z_2,\sqrt{2}z_1z_2,z_1^2,z_2^2)$$
 * I can create a very high-dimensional feature space withouth actually storing these high dimensional points
 * The only thing that I need from the feature space is the definition of the scalar product in that space
-	* I only need to do a scalar product of the vectors in the objective function
-	* I can just derive the scalar product from a kernel once, and use it always without actually dealing with the high-dimensional space
+* I only need to do a scalar product of the vectors in the objective function
+* I can just derive the scalar product from a kernel once, and use it always without actually dealing with the high-dimensional space
 * Many different functions can work as kernels
-	* They just need to be symmetric and to repsect a set of conditions
+* They just need to be symmetric and to repsect a set of conditions
 * A kernel is actually just a measure of similarity between $\vec{x}$ and $\vec{z}$
-	* I am not restricted to use a vector as input
-	* In bioinformatics it is not very useful to use non-standard kernels
+* I am not restricted to use a vector as input
+* In bioinformatics it is not very useful to use non-standard kernels
 * Kernels are not only used for SVM, they can be used wherever only scalar products need to be defined
-	* They are also used in PCA and other classification techniques
+* They are also used in PCA and other classification techniques
 * A stationary kernel is defined in terms of a difference between inputs
 $$K(x_i,x_j)=k(x_i-x_j)$$
-	* They are called stationary since they are invariant to translations of the input space
+* They are called stationary since they are invariant to translations of the input space
 * A radial basis function kernel (or homogeneous kernel) measure the euclidean distance among points
 $$K(x_i,x_j)=k(||x_i-x_j||)$$
 * The homogeneous polynomial kernel is defined as
 $$ K(x^i,x^j)=(<x_i x_j>)^d$$
-	* This kernel includes all the possible expansions of the degree $d$ of the vector components
-	* The number of dimensions for an homogeneous polynomial kernel of grade $d$ with an input space $\mathbb{R}^n$ is $~ n^d$ for $n >> d$
+* This kernel includes all the possible expansions of the degree $d$ of the vector components
+* The number of dimensions for an homogeneous polynomial kernel of grade $d$ with an input space $\mathbb{R}^n$ is $~ n^d$ for $n >> d$
 * The classic SVM without kernel can be seen as an homogeneous polynomial kernel of degree $1$
 $$ K(x^i,x^j)=<x_i x_j>$$
 * The polynomial kernel is defiend as
 $$ K(x^i,x^j)=(1+<x_i x_j>)^d$$
-	* This kernel is more widely adopted since it includes all the possible combinations of degree up to $d$ (it has many more dimensions!)
-	* Also here the number of dimension grows like $n^d$
+* This kernel is more widely adopted since it includes all the possible combinations of degree up to $d$ (it has many more dimensions!)
+* Also here the number of dimension grows like $n^d$
 * The degree of the polynomial kernel influences the likelyhood of overfitting the data
 * An high degree polynomial tends to increase the number of support vectors
-	* This is because the curve tends to fit the data as well as possible
-	* A way to limit overfitting is to assure that the number of support vectors is much smaller than the total number of points
+* This is because the curve tends to fit the data as well as possible
+* A way to limit overfitting is to assure that the number of support vectors is much smaller than the total number of points
 * The RBF kernel is defined as
 $$K(x_i,x_j) = e^{\frac{(x_i-x_j)^2}{2\sigma^2}} = e^{-\beta (x_i-x_j)^2}$$
 * It can be viewed as a generalization of a polynomial kernel with infinite degree
-	* This is because an exponential can be approximated by an infintite polynomial sum
+* This is because an exponential can be approximated by an infintite polynomial sum
 * Small polynomial degrees have a large weight, while high degrees have less weight
 * The value of the kernel is big when the difference between $x_i,x_j$ is big, and tends rapidly to 0 otherwise
 * The hyperparameter beta (or sigma) determines the width of the curve
-	* They determine the scale of the diffenrence among points that is considered significant for the kernel
-	* A small sigma creates a more complex hyperplane
-	* Whith extremely small sigmas, all the points become support vectors
-	* A large sigma tends to a linear discrimination
+* They determine the scale of the diffenrence among points that is considered significant for the kernel
+* A small sigma creates a more complex hyperplane
+* Whith extremely small sigmas, all the points become support vectors
+* A large sigma tends to a linear discrimination
 * The Spectral kernel uses sequence similarity as a measure
-	* In general, non-vector kernels are not so effective, but they are an intriguing
+* In general, non-vector kernels are not so effective, but they are an intriguing
+
+## Regression with SVM
+* 
+
