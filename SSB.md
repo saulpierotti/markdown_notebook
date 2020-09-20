@@ -452,7 +452,7 @@ $$\alpha_i g_i(\vec{x}) = 0$$
 	* If $\alpha_i = 0$ then $g_i(\vec{x})$ can be different from 0
 		* The constraint is not acting, and so $\alpha_i=0$ cancel it from the calculation
 
-# The Dual Lagrangian
+## Dual Lagrangian
 * Taking into account the KKT conditions, I can write the standard Lagrangian for that serves as objective function for the SVM optimization
 $$\mathcal{L}(\vec{x},\alpha_i) = f(\vec{x}) + \sum_i \alpha_i * (g_i(\vec{x})$$
 * In the case of SVM optimization, I have that
@@ -590,59 +590,84 @@ $$ 0 \leq \alpha_i \leq C \ \forall i$$
 ## Kernels
 * I cannot use a linear SVM to solve non linearly separable problems
 * I can map the original input space to a linearly separable feature space, which I can solve with SVMs
-* The input vector $\vec{x} \in \mathbb{R}$ is transformed to the feature vector $\vec{\phi}(\vec{x}) \in \mathbb{R}$
-* In order to apply the SVM to the feature space, I define the dual Lagrangian on the feature space
-* A kernel $K$ is a function of 2 input points $\vec{x}$,$\vec{z}$ that replaces the scalar product in the SVM objective function, to implicitly implement a translation of the input to the feature space
-$$ K(\vec{x},\vec{z})=<\vec{\phi}(\vec{x}),\vec{\phi}(\vec{z})>$$
-* I do not want to craft a feature space that is specific to the problem, but I can apply some general concepts
+* In general I do not want to craft a feature space that is specific to the problem, but I can apply some general concepts
 * Increasing the dimensionality of the input space increases the number of hyperplanes and thus the likelyhood of linear separability
-* I can define a kernel as a simple function of the components of the vectors
-$$ K(\vec{x},\vec{z})=<\vec{\phi}(\vec{x}),\vec{\phi}(\vec{z})>$$
-$$\vec{\phi}(\vec{x}) = (1,\sqrt{2}x_1,\sqrt{2}x_2,\sqrt{2}x_1x_2,x_1^2,x_2^2)$$
-$$\vec{\phi}(\vec{z}) = (1,\sqrt{2}z_1,\sqrt{2}z_2,\sqrt{2}z_1z_2,z_1^2,z_2^2)$$
-* I can create a very high-dimensional feature space withouth actually storing these high dimensional points
-* The only thing that I need from the feature space is the definition of the scalar product in that space
-* I only need to do a scalar product of the vectors in the objective function
-* I can just derive the scalar product from a kernel once, and use it always without actually dealing with the high-dimensional space
+* The input vector $\vec{x} \in \mathbb{R}$ is transformed to the feature vector $\vec{\phi}(\vec{x}) \in \mathbb{R}$
+* Computing the transformation can be costly since the feature space can have a very high number of dimensions (even infinite!)
+* The kernel trick makes instead an equivalent computation with a really small computational cost
+	* Let's recall the SVM Dual Lagrangian
+$$\mathcal{\bar{L}}(\alpha^i) = -\frac{1}{2}\sum_i \sum_j \alpha^i \alpha^j y^i y^j <\vec{x}^i,\vec{x}^j> + \sum_i \alpha^i$$
+	* The data points appear only as a scalar product $<\vec{x}^i,\vec{x}^j>$
+	* If I am able to calculate just the scalar product in the feature space, I do not need to define that space explicitly in order to use it for the SVM
+	* Many common geometric operations can be expressed in terms of scalar product of vectors
+* A kernel $K$ is a function of 2 input points $\vec{x}_i$,$\vec{x}_j$ that replaces the scalar product in the SVM objective function, to implicitly implement a translation of the input to the feature space
+$$ K(\vec{x}_i,\vec{x}_j)=<\vec{\phi}(\vec{x}_i),\vec{\phi}(\vec{x}_j)>$$
+* Let's suppose that my feature space is defined as
+$$\phi(\vec{x})=\phi(\begin{pmatrix} x_1 \\ x_2 \end{pmatrix})=\begin{pmatrix}1 \\ \sqrt{2} x_1 \\ \sqrt{2} x_2 \\ x_1^2 \\ x_2^2 \\ \sqrt{2}x_1x_2 \end{pmatrix}$$
+* A scalar product in this space is
+$$K(\vec{x}_i,\vec{x}_j)=<\phi(\vec{x}_i),\phi(\vec{x}_j)>$$
+$$K(\vec{x}_i,\vec{x}_j)=
+\begin{pmatrix}1 \\ \sqrt{2} {x_1}_i \\ \sqrt{2} {x_2}_i \\ {x_1}_i^2 \\ {x_2}_i^2 \\ \sqrt{2}{x_1}_i{x_2}_i \end{pmatrix}
+\begin{pmatrix}1 \\ \sqrt{2} {x_1}_j \\ \sqrt{2} {x_2}_j \\ {x_1}_j^2 \\ {x_2}_j^2 \\ \sqrt{2}{x_1}_j{x_2}_j \end{pmatrix}$$
+$$K(\vec{x}_i,\vec{x}_j)= 1 + 2{x_1}_i{x_1}_j + 2{x_2}_i{x_2}_j + {x_1}_i^2{x_1}_j^2 + {x_2}_i^2{x_2}_j^2 + 2{x_1}_i{x_1}_j{x_2}_i{x_2}_j$$
+$$K(\vec{x}_i,\vec{x}_j)= (1 + {x_1}_i{x_1}_j + {x_2}_i{x_2}_j)^2$$
+* The use of the kernel function instead of explicitly defining the feature space is the kernel trick
+* In general, given a mapping $\vec{x} \to \phi(\vec{x})$ its kernel $K(\vec{x}_i,\vec{x}_j)$ is defined as the sum of the product of all the components of the feature space
+$$K(\vec{x}_i,\vec{x}_j) = \sum_k \phi_k(\vec{x}_i),\phi_k(\vec{x}_j)$$
+* A kernel must be symmetric and satisfy some conditions that we did not see in detail (Mercer's condition)
+* In the SVM Dual Lagrangian, I can just substitute all the scalar products with kernels in training and classification
+$$\mathcal{\bar{L}}(\alpha^i) = -\frac{1}{2}\sum_i \sum_j \alpha^i \alpha^j y^i y^j K(\vec{x}^i,\vec{x}^j) + \sum_i \alpha^i$$
 * Many different functions can work as kernels
-* They just need to be symmetric and to repsect a set of conditions
-* A kernel is actually just a measure of similarity between $\vec{x}$ and $\vec{z}$
-* I am not restricted to use a vector as input
-* In bioinformatics it is not very useful to use non-standard kernels
+* A kernel is actually just a measure of similarity between 2 objects (usually vectors)
+* I am not restricted to use a vector as input for a kernel
+* However, in bioinformatics it is not very useful to use non-standard kernels
 * Kernels are not only used for SVM, they can be used wherever only scalar products need to be defined
-* They are also used in PCA and other classification techniques
+	* They are also used in PCA and other classification techniques
 * A stationary kernel is defined in terms of a difference between inputs
-$$K(x_i,x_j)=k(x_i-x_j)$$
-* They are called stationary since they are invariant to translations of the input space
+$$K(x_i,x_j)=k(\vec{x}^i-\vec{x}^j)$$
+	* It is called stationary since it is invariant to translations of the input space
 * A radial basis function kernel (or homogeneous kernel) measure the euclidean distance among points
-$$K(x_i,x_j)=k(||x_i-x_j||)$$
-* The homogeneous polynomial kernel is defined as
-$$ K(x^i,x^j)=(<x_i x_j>)^d$$
-* This kernel includes all the possible expansions of the degree $d$ of the vector components
-* The number of dimensions for an homogeneous polynomial kernel of grade $d$ with an input space $\mathbb{R}^n$ is $~ n^d$ for $n >> d$
+$$K(\vec{x}^i,\vec{x}^j)=k(||\vec{x}^i-\vec{x}^j||)$$
+* The homogeneous polynomial kernel of degree d is defined as
+$$ K(\vec{x}^i,\vec{x}^j)=(<\vec{x}^i \vec{x}^j>)^d$$
+	* This kernel includes all (and only) the possible expansions of degree $d$ of the vector components
+	* The number of dimensions for an homogeneous polynomial kernel of grade $d$ with an input space $\mathbb{R}^n$ is
+$$\frac{(n+d)!}{n!d!}$$
+	* This grows as $~ n^d$ for $n >> d$
 * The classic SVM without kernel can be seen as an homogeneous polynomial kernel of degree $1$
-$$ K(x^i,x^j)=<x_i x_j>$$
-* The polynomial kernel is defiend as
-$$ K(x^i,x^j)=(1+<x_i x_j>)^d$$
-* This kernel is more widely adopted since it includes all the possible combinations of degree up to $d$ (it has many more dimensions!)
-* Also here the number of dimension grows like $n^d$
+$$ K(\vec{x}^i,\vec{x}^j)=<\vec{x}^i,\vec{x}^j>$$
+* The non-homogeneus polynomial kernel is defiend as
+$$ K(\vec{x}^i,\vec{x}^j)=(1+<\vec{x}^i,\vec{x}^j>)^d$$
+	* This kernel is more widely adopted since it includes all the possible combinations of degree up to $d$ (it has many more dimensions!)
+	* Also here the number of dimension grows like $n^d$
 * The degree of the polynomial kernel influences the likelyhood of overfitting the data
-* An high degree polynomial tends to increase the number of support vectors
-* This is because the curve tends to fit the data as well as possible
-* A way to limit overfitting is to assure that the number of support vectors is much smaller than the total number of points
-* The RBF kernel is defined as
-$$K(x_i,x_j) = e^{\frac{(x_i-x_j)^2}{2\sigma^2}} = e^{-\beta (x_i-x_j)^2}$$
-* It can be viewed as a generalization of a polynomial kernel with infinite degree
-* This is because an exponential can be approximated by an infintite polynomial sum
-* Small polynomial degrees have a large weight, while high degrees have less weight
-* The value of the kernel is big when the difference between $x_i,x_j$ is big, and tends rapidly to 0 otherwise
-* The hyperparameter beta (or sigma) determines the width of the curve
-* They determine the scale of the diffenrence among points that is considered significant for the kernel
-* A small sigma creates a more complex hyperplane
-* Whith extremely small sigmas, all the points become support vectors
-* A large sigma tends to a linear discrimination
+	* An high degree polynomial tends to increase the number of support vectors
+	* This is because the curve tends to fit the data as well as possible
+	* A way to limit overfitting is to assure that the number of support vectors is much smaller than the total number of points
+* The RBF (Radial Basis Function) or gaussian kernel is defined as
+$$K(\vec{x}^i,\vec{x}^j) = exp(\frac{(|\vec{x}^i-\vec{x}^j|)^2}{2\sigma^2}) = exp(-\beta (|\vec{x}^i-\vec{x}^j|)^2)$$
+	* It can be viewed as a generalization of a polynomial kernel with infinite degree
+	* This is because an exponential can be approximated by an infintite polynomial sum
+$$exp(x) = \sum_{n=0}^\infty \frac{x^n}{n!}$$
+	* Small polynomial degrees have a large weight, while high degree ones have less weight
+	* The value of the kernel is big when the difference between $\vec{x}^i,\vec{x}^j$ is big, and tends rapidly to 0 otherwise
+	* The hyperparameter beta (or sigma) determines the width of the curve
+	* They determine the scale of the diffenrence among points that is considered significant for the kernel
+	* A small sigma creates a more complex hyperplane
+	* Whith extremely small sigmas, all the points become support vectors
+	* A large sigma tends to a linear discrimination
+* New kernels can be defined from the linear combination, product, exponential, polynomial transformation, and function of existing kernels
 * The Spectral kernel uses sequence similarity as a measure
-* In general, non-vector kernels are not so effective, but they are an intriguing
+	* In general, non-vector kernels are not so effective, but they are an intriguing
+* The choice of the kernel is the most tricky part of SVMs
+* In general, I start from a low-degree polynomial kernel or RBF with large sigma
+
+## Final Remarks on SVM for Classification
+* In general, SVMs do not provide a confidence level on the classification
+* I can interpret the SVM discriminant function as a probability by performing logistic regression on the SVM output of a validation set
+* SVMs are easy to train and provide global optima, differently from NNs
+* I can control explicitly the tradeoff between complexity and error
+* The main problem of SVMs is that they are heavily dependent on the kernel choosen
 
 ## Regression with SVM
 * 
