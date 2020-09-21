@@ -755,3 +755,44 @@ y^i-(<\vec{w},\vec{x}^i>+b) \leq \epsilon\\
 	* It is not possible to find a solution that keeps the points inside the margin with a small $\epsilon$
 * It is possible also to define different penalty function for the slack variables
 	* We used the $\epsilon$-insensitive but there are many others
+
+# Random Forest
+
+## Decision Trees
+* Decision trees were invented twice, once by statisticians and once by the AI community
+* A tree is a set of decisions that determine which variables to consider at each step, and the outcome of each decision until we reach a leaf with an output category
+	* Each internal node tests an attribute of the data
+	* Each branch corresponds to an attribute value
+	* Each leaf corresponds to an output category
+	* Different branches are allowed to have different depths
+* At each decision step, the data table is reduced and can be used to train lower levels of the network
+* Decisions in a tree can be easily implemented with if...else statements
+* It is possible to represent the same conditions with a different tree
+	* In general I want to select the simplest tree that can represent a given condition
+* Training a tree means to minimize the number of misclassification errors, while maximizing its simplicity
+* It is almost always possible to build a perfectly discriminating tree, but at the cost of having a very high number of decisions
+	* In case of ambiguous examples, it is not possible to create a perfect tree, no matter the number of decisions
+	* Ambiguous examples are 2 training points with the same input variables but with different output variables
+* The naif approach to create a tree is to create a path for each example
+	* This is trivial but not useful
+	* I am just memorizing the training examples, without learning anything
+* In the top-down Decision Tree induction (TDIDT) I proceed as follows
+	* The current table or sub-table is called Learning Sample (LS)
+	* If all the objects in the LS are in the same class
+		* Create a leaf with that class
+	* Else
+		* Find the splitting attribute A
+		* Create a node for the attribute A
+		* For each value of A
+			* I create a sub-table LS for data with that value
+			* I iterate the algorithm in that LS
+* TDIDT is very fast but sub-optimal and highly dependent on the criteria used for the selection of the best attribute
+	* This is the most used approach
+	* DTs are used in random forests, where no single tree needs to be optimal
+	* In a sense actually I want some noise in each tree
+* When deciding the best attribute for a split, I want to maximize the purity of the split
+* I want the purity of a split to be maximal when all the resulting objects are of the same class
+* I want the purity of a split to be minimal when the resulting objects have the same probability to belong to all the classes
+* I want the purity to be symmetric with repsect to the various classes
+* A possible impurity index is the information entropy
+$$S=$$
