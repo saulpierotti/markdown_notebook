@@ -756,9 +756,9 @@ y^i-(<\vec{w},\vec{x}^i>+b) \leq \epsilon\\
 * It is possible also to define different penalty function for the slack variables
 	* We used the $\epsilon$-insensitive but there are many others
 
-# Random Forest
+# Decision Trees
 
-## Decision Trees
+## Decision Trees for Classification
 * Decision trees were invented twice, once by statisticians and once by the AI community
 * A tree is a set of decisions that determine which variables to consider at each step, and the outcome of each decision until we reach a leaf with an output category
 	* Each internal node tests an attribute of the data
@@ -767,8 +767,9 @@ y^i-(<\vec{w},\vec{x}^i>+b) \leq \epsilon\\
 	* Different branches are allowed to have different depths
 * At each decision step, the data table is reduced and can be used to train lower levels of the network
 * Decisions in a tree can be easily implemented with if...else statements
-* It is possible to represent the same conditions with a different tree
-	* In general I want to select the simplest tree that can represent a given condition
+	* They are disjunctions of conjunctions of constraint on the attribute value instances
+* It is possible to represent the same set of conditions with a different tree
+	* In general I want to select the simplest tree that can represent a given set of conditions
 * Training a tree means to minimize the number of misclassification errors, while maximizing its simplicity
 * It is almost always possible to build a perfectly discriminating tree, but at the cost of having a very high number of decisions
 	* In case of ambiguous examples, it is not possible to create a perfect tree, no matter the number of decisions
@@ -776,23 +777,161 @@ y^i-(<\vec{w},\vec{x}^i>+b) \leq \epsilon\\
 * The naif approach to create a tree is to create a path for each example
 	* This is trivial but not useful
 	* I am just memorizing the training examples, without learning anything
-* In the top-down Decision Tree induction (TDIDT) I proceed as follows
+* In the Top-Down Induction on Decision Trees (TDIDT) I proceed as follows
 	* The current table or sub-table is called Learning Sample (LS)
 	* If all the objects in the LS are in the same class
 		* Create a leaf with that class
 	* Else
-		* Find the splitting attribute A
+		* Find the best splitting attribute A
 		* Create a node for the attribute A
 		* For each value of A
 			* I create a sub-table LS for data with that value
 			* I iterate the algorithm in that LS
+* TDIDT is an hill-climbing algorithm in the space of possible decision trees
+	* It adds a sub-tree to the current tree and continues
+	* It never backtracks
 * TDIDT is very fast but sub-optimal and highly dependent on the criteria used for the selection of the best attribute
-	* This is the most used approach
-	* DTs are used in random forests, where no single tree needs to be optimal
-	* In a sense actually I want some noise in each tree
+	* It is however the most used approach
+* DTs are used in random forests, where no single tree needs to be optimal
+	* In a sense actually I want some noise in a tree
 * When deciding the best attribute for a split, I want to maximize the purity of the split
-* I want the purity of a split to be maximal when all the resulting objects are of the same class
-* I want the purity of a split to be minimal when the resulting objects have the same probability to belong to all the classes
-* I want the purity to be symmetric with repsect to the various classes
-* A possible impurity index is the information entropy
-$$S=$$
+	* The purity of a split is a measure of how pure (belonging to the same class) each successor of a split is
+	* By maximizing purity, I minimise the height of the tree
+* I can define an impurity measure $I$ on a learning set $LS$ such that
+	* Let $p_j$ be the proportion of samples in $LS$ of class $j=1,...,J$
+	* $I(LS)$ is minimal when all the objects in $LS$ belong to the same output class $i$
+$$ p_i = 1 \land p_j = 0 \ \forall\ j\not=i$$
+		* It is certain that an object belongs to class $i$ ($p_i=1$) and impossible that it belongs to any class $j$ different from $i$ ($p_j=0\ \forall\ j\not=i$)
+	* $I(LS)$ is maximal when the probability of an object to belong to each of the possible classes is equal
+$$ p_j = \frac{1}{J} \ \forall \ j$$
+	* $I(LS)$ is symmetric with respect to all classes $j=1,...,J$
+* The best split of a $LS$ is the one that maximizes the expected reduction of impurity $\Delta I$
+$$ argmax_A(\Delta I (LS,A))\ ; \qquad\Delta I (LS,A) = I(LS) - \sum_a \frac{|LS_a|}{|LS|}I(LS_a)$$
+	* $\Delta I$ is defined for each attribute $A$, with possible attribute values $a$
+	* $LS_a$ is the subset of the $LS$ with value $a$ for the attribute $A$
+	* $\Delta I$ is called score measure or splitting criterion
+	* The best split is the one on the attribute $A$ that maximises the reduction in impurity of the $LS$
+	* The impurity of each of the resulting splits is weighted on the number of training samples involved
+* I can define the impurity of a $LS$ in term of its information (Shannon's) entropy
+$$H(LS)=-\sum_j p_j \log_2 p_j$$
+	* The reduction in entropy is called information gain
+* Other possible measures of impurity are
+	* The Gini Index, which is similar to the Shannon's entropy
+$$I(LS) = \sum_j p_j (1-p_j)=\sum_{j\not=k}p_jp_k$$
+	* The misclassification error rate
+$$I(LS) = 1-max_j(p_j)$$
+* Trees tend to be quite unstable (high variance) and not so competitive compared to other approaches
+* A tree $T$ is overfitting the training data if exists a tree $T'$ such that the error of $T$ on the training set is lower than that of $T'$, but the error on unseen data is lower for $T'$
+* Overfitting happens when I do not have enough data in some parts of the learning sample to make a good decision
+* Overfitting in DT can be avoided by using pre- or post-pruning, or ensemble methods
+* In pre-pruning I proceed with TDIDT as usual but I stop splitting a node if
+	* The number of object in the node is under a threshold
+	* The impurity of the $LS$ is under a threshold
+	* The classification improvement of an additional split is not significant according to some test
+* The main limitation of pre-pruning is that the value of the thresholds are problem-dependent
+* Pre-pruning is normally used by default with very permissinve parameters so to avoid clearly unnecessary work
+* In post-pruning I allow the tree to grow (eventually with a very permissive pre-pruning) and then remove some of the nodes
+	* I split the original learning sample $LS$ in a growing sample $GS$ and a validation sample $VS$
+	* I build a complete tree (or I use permissive pre-pruning) from $GS$
+	* I compute a sequence of trees $\{T_1,T_2,...\}$ where
+		* $T_1$ is the complete tree (or pre-pruned tree)
+		* $T_i$ is obtained by collapsing some nodes in $T_{i-1}$
+	* I select the tree $T_i^*$ from this sequence that minimizes the error on $VS$
+* If I have a large dataset, I split it into training, validation, and testing sets and use them as usual in ML
+* If my dataset is limited, I grow a tree from the whole dataset and
+	* I pre-prune with default parameters (this is risky, I can skip an optimum)
+	* I post-prune by 10-fold cross-validation
+	* I estimate the accuracy by 10-fold cross-validation
+* DTs can deal easily with continuous attributes
+	* I can discretize them in bins before growing the tree
+	* I can use a threshold as decision parameter in the tree itself
+* In order to find the best cut-point for a continuous attribute, I can try a range of values and select the one that produces the purest split
+* In DTs, it is advisable to use always binary splits, even for attributes that have more than 2 values (by gruping them!)
+* When there are missing data, I can deal with them in different ways
+	* I can assign to the missing point the most common value for the attribute in the whole dataset
+	* I can assign to the missing point the most common value for the attribute in the current $LS$
+	* I can assing a probability to each possible value
+
+## Decision Trees for Regression
+* The concept is the same used for classification, but each leaf contains a number instead of a class
+* A regression tree is a piecewise constant function of the input attributes
+* The assigned to a leaf is average output of the learning cases that reach that leaf
+* The impurity of a sample is defined as the vaiance of the output of that sample
+$$I(LS) = var_{y|LS}\{y\}=E_{y|LS}\{(y-E_{y|LS}\{y\})^2\}$$
+	* Since the output for a leaf is the mean of the training values falling under it, the mean squared distance with respect to the mean is the variance of the sample
+	* Thus, the variance is a measure of the error, or impurity, of the $LS$
+* The best split is the one that reduces the most the variance
+$$\Delta I(LS,A) = var_{y|LS}\{y\}-\sum_a\frac{|LS_a|}{|LS|}var_{y|LS_a}\{y\}$$
+* Also in regression we can use pre- and post-pruning
+* In post-pruning, we select the tree that minimizes the squared error on $VS$
+* Pruning is very important in regression trees since they tend to be very complex
+
+## Final Remarks
+* The main advantage of decision trees is their interpretability (they are white boxes)
+	* If an attribute is not important, it will be pruned from the tree
+	* Removing the dependency on attributes can be important of some attributes are costly to measure
+* DTs are often used as a pre-processing step for removing irrelevant attributes for algorithms that are more sensitive to irrelevant variables
+* The importance of variables can be computed from the total reduction in impurity broght by each variable
+$$ Importance(A) = \sum_{nodes\ where\ A\ is\ tested}|LS_{node}|\Delta I(LS_{node},A)$$
+
+
+# Ensemble Methods
+* Ensemble methods predict class label for unseen data by aggregating a set of independent predictions
+* Good questions for ensamble predictors are the ones for which I can expect that all the single predictors have the same likelihood of giving the right answer
+* A bad question for an ensemble method is a question that requires specialised knowledge
+* The main disadvantage of ensemble methods is that they are typically black boxes
+* I have $N$ single binary classifiers, each with an error $\epsilon$, and I apply a majority rule
+	* In order to obtain a wrong answer from the ensamble, the majority of individual classifiers must give a wrong answer
+	* The probability that this happes is given by the binomial distribution
+$$P = \sum_{k=N/2+1}^{N} {N \choose k} \epsilon^k(1-\epsilon)^{N-k}$$
+	* Note: this is true only for INDEPENDENT classifiers!
+	* If I assume that $N=25$ and that the error is $\epsilon = 0.35$ (wrong answer 35% of the times), the ensamble has an error rate of $\epsilon=0.06$!
+* Let $C_i$ be the i-th of M classifiers, its square error with repsect to the desired output $o(x)$ for the examples x is
+$$\epsilon_i = \langle (C_i(x)-o(x))^2 \rangle_x$$
+	* The angle brackets indicate the mean over the x samples
+* I define the average error of the a classifier
+$$\bar{\epsilon}=\frac{1}{M}\sum_{i=1}^M\epsilon_i$$
+* Let $H$ be the ensemble classifier, with all the $M$ classifiers have a weight of $\frac{1}{M}$ each on its outcome
+$$H(x)=\frac{1}{M}\sum_{i=1}^MC_i(x)$$
+* The error of the ensemble method is the squared difference of the ensemble prediction from the desired outcome
+$$\epsilon_H = \langle (H(x)-o(x))^2 \rangle_x$$
+* It can be derived that the error of an ensemble method is the average error of the classifiers minus the variance of the classifier predictions with respect to the ensemble method
+$$\epsilon_H = \bar{\epsilon}-\frac{1}{M}\sum_{i=1}^M \langle(C_i(x)-H(x))^2)\rangle_x$$
+	* The squared distances from the ensemble prediciton are necessarily positive, so $\epsilon_H \leq \bar{\epsilon}$
+	* The improvement of ensemble methods is high when classifiers are very dissimilar but of similar accuracy
+
+## Bootstrap AGGregatING (BAGGING)
+* Bootstrapping is resampling with replacement
+* Bagging reduces the variance of predictors by voting or averaging across bootstraps
+	* In some situations it could also decresase the perfromances
+	* Usually, the more classifiers I use the better
+	* It is really useful for noisy data
+* In the training procedure, I resample the dataset $S$ with replacement and create a number of bootstraps $S_i$, with which I train a number of classifiers $C_i$
+* For classificating an unknown example $x$, I assign to it the class predicted by the majority of individual classifiers
+* Bagging can be used for regression by taking as an ensemble output the average of all the predictions
+* If small changes in the training set cause large changes in the learned classifier, the training algorithm of that kind of classifier is said to be unstable
+* Bagging is really effective with unstable learning algorithms: decision trees, linear regression, SVM, ...
+
+## Random Forests
+* Another approach similar to bagging is to randomize the learning algorithm instead of the input data
+	* Some algorithms already feature a random component (initiation point of gradient descent)
+	* Most algorithms can be randomized by picking one of the best options at random intead of the absolute best at each step, or by inserting randomness in the split rule of decision trees
+* Random Forests (RF) are a combination of decision trees trained with bagging
+	* The dataset is resampled with replacement, and individual trees are trained for each replicate
+	* Single tree splits are choosen randomly from a set of the best features, instead than from the absolute best
+	* Ensamble decisions are taken by majority voting
+* In a set $S$ containing $M$ training examples, the bootstrap with replacement dataset $S_i$ also of size $M$ has a probability of $\frac{1}{e} \approx \frac{1}{3}$ of not containing one of the training examples for $M \to \infty$
+	* The examples that are not selected are called out of bag (oob) examples
+* I can use the oob examples for obtaining the oob error estimate
+	* I train a tree $T_i$ with the bootstrap dataset $S_i$, and then estimate its error against the oob examples
+	* This will give a performance metric on about a third of the trees
+	* At the end of the run, let $j$ be the class that got the most votes every time the example $n$ was oob
+	* The fraction of times that $j$ was not the true class of $n$, averaged over all the oob examples, is the oob error estimate
+* It is possible also to estimate variable importance from oob errors
+	* I evaluate the oob error as usual
+	* I permute randomly the variable $i$ in the oob cases
+	* I subtract the fraction of correct votes in the permutated sample from the oob error
+	* The average over all the trees is the raw importance for variable $i$
+
+# Systems Biology
+* A system is a set of elements that have more interactions among themselves than with what does not belong to the system
