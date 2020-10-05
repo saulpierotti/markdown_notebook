@@ -920,13 +920,23 @@ $$\epsilon_H = \bar{\epsilon}-\frac{1}{M}\sum_{i=1}^M \langle(C_i(x)-H(x))^2)\ra
 	* The dataset is resampled with replacement, and individual trees are trained for each replicate
 	* Single tree splits are choosen randomly from a set of the best features, instead than from the absolute best
 	* Ensamble decisions are taken by majority voting
-* In a set $S$ containing $M$ training examples, the bootstrap with replacement dataset $S_i$ also of size $M$ has a probability of $\frac{1}{e} \approx \frac{1}{3}$ of not containing one of the training examples for $M \to \infty$
-	* The examples that are not selected are called out of bag (oob) examples
+	* No post-pruning (and occasionally only very little pre-pruning) is used on the trees, since overfitting is dealed with by the ensamble
+* The probability that a training example is extracted $k$ times in one bagging process can be derived from the binomial distribution
+$$p(k) = {m \choose k} (\frac{1}{M})^k (1-\frac{1}{M})^{m-k}$$
+* So the proabability that a sample is never extracted ($k=0$) is
+$$p(0) = {m \choose 0} (\frac{1}{M})^0 (1-\frac{1}{M})^{m}$$
+$$p(0) = (1-\frac{1}{M})^{m}$$
+* In the case that the bootstrap datasets have the same size of the original one ($m=M$) I have that
+$$p(0) = (1-\frac{1}{M})^{M}$$
+$$\lim_{M \to \infty} p(0) = \frac{1}{e}\approx \frac{1}{3}$$
+* The examples that are not selected in a single bagging are called out of bag (oob) examples, and they tend to be around a third of the training points for large datasets
+* Since oob examples are not used in the training of the single tree, they can be used for validation
 * I can use the oob examples for obtaining the oob error estimate
 	* I train a tree $T_i$ with the bootstrap dataset $S_i$, and then estimate its error against the oob examples
 	* This will give a performance metric on about a third of the trees
 	* At the end of the run, let $j$ be the class that got the most votes every time the example $n$ was oob
 	* The fraction of times that $j$ was not the true class of $n$, averaged over all the oob examples, is the oob error estimate
+* It is argued that the oob error estimate can be used in place of a testing set, but this is strongly disputed
 * It is possible also to estimate variable importance from oob errors
 	* I evaluate the oob error as usual
 	* I permute randomly the variable $i$ in the oob cases
@@ -934,4 +944,41 @@ $$\epsilon_H = \bar{\epsilon}-\frac{1}{M}\sum_{i=1}^M \langle(C_i(x)-H(x))^2)\ra
 	* The average over all the trees is the raw importance for variable $i$
 
 # Systems Biology
-* A system is a set of elements that have more interactions among themselves than with what does not belong to the system
+* A system consists of many distinguishable parts that strongly interact with each other, and can also interact (weakly or in a different way) with the surrounding environment
+* A system is a set of interacting entities forming an integrated whole
+* Systems have a structure, defined by their parts and their composition
+* Systems have a behaviour, which involves inputs and outputs of material, energy, or information
+* Systems have interconnectivity: the various components have functional and structural relationships to each other
+* Systems can exhibit emergent properties
+* Laplace's deamon: the universe is deterministic and, given complete knowledge of its state, can be predicted in the past and in the future
+* Prediction is very difficult, especially about the future (Niels Bohr)
+* For Weaver, the complexity of a system is the degree of difficulty in predicting the properties of that system from the properties of its parts
+* Complexity is not related to the entropy of the system
+* Gas systems can be described in terms of the componing molecules
+	* Statistical mechanics reduces thermodynamics to classical mechanics
+	* Emergent properties of a gas (not belonging to single molecules) are temperature and pressure
+	* The theory of gasses requires disorganized complexity
+* The pattern of interactions in a complex system is not random but also not regular
+* For Weaver, there is disorganized complexity and organized complexity
+* Disorganized complexity refers to a problem in which there is a very large number of variables, each behaving erraticaly or in an unknown way, but that collectively define well-quantifiable and predictable average properties
+* Organized complexity problems involve a large number of factors interrelated into a organic whole
+* Complexity is not only due to the number of parts: 3-body problem
+	* Poincaré showed that there is no analytical solution of the 3-body problem
+	* The motion is in general not-repeating, except in special cases
+	* A complex system is a system that is difficult to predict
+* Non-linear terms in interactions lead to complex effects
+	* Systems composed of few parts can lead to symmetry breaking and deterministic chaos
+* Symmetry breaking is a phenomenon where small fluctuations on a system cross a critical point and decide the system's fate
+	* It is supposed to play a major role in pattern formation
+* Ferromagnetism is an example of symmetry-breaking
+	* The symmetry in question is the up-down symmetry
+	* The breaking happens with the formation of magnetic domains containing aligned magnetic moments
+	* As temperature increases, thermal motion scrambles the aligned domains
+	* Above the Curie temperature of the material, thermal motion overpowers the alignment of the domains and symmetry breaking does not occurr
+* Polya's urn is also an example of symmetry breaking
+	* An urn contains a red ball and a green ball
+	* A ball is extracted, and 2 balls of the same colour are returned to the urn
+	* After some iterations, most of the balls tend to be of a single color, randomly selected according to the frist few iterations
+	* The system is governed by positive feedback
+* Determininstic chaos refers to a system of elementary units governed by non-linear laws, which exhibits an extreme dependence on initial conditions
+	* The system is deterministic but its evolution is unpredictable
