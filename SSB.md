@@ -982,3 +982,7 @@ $$\lim_{M \to \infty} p(0) = \frac{1}{e}\approx \frac{1}{3}$$
 	* The system is governed by positive feedback
 * Determininstic chaos refers to a system of elementary units governed by non-linear laws, which exhibits an extreme dependence on initial conditions
 	* The system is deterministic but its evolution is unpredictable
+	* Non-linarity is necessary for deterministic chaos
+* Systems that are not at equilibrium tend to behave chaotically
+	* The atmosphere is similar to gas in a chamber, but it behaves chaotically since there is a continuous influx of energy that maintains it far from equilibrium
+	* Non-equilibrium systems can lead to self-organizing behaviours: convection cells in fluids
