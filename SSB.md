@@ -1070,7 +1070,14 @@ $$\vec{x}(t+1)=(\lnot C, \lnot A, \lnot B)$$
 * The ultimate goal of system's biology is to create a silicon cell, a complete model of a cell and of a human body
 
 ## Omics
-* Protein-protein interaction assays tend to be really noisy
+* The main networks that we want to investigate are protein-protein interactions, gene regulation networks, and metabolic networks
+* PPIs can be studied via affinity purification, Y2H, and other techniques
+* Y2H can detect interactions only if they happen in the nucleus!
+* Protein-protein interaction assays tend to be really noisy and not so reproducible
+	* There is very little overlap among the proteome determined by different studies
+	* The result are very sensitive to conditions and to experimental error
+	* One source of error is the presence of indirect interactions
+* Because of the low reproducibility, the definition of proteome is fuzzy
 * Protein interactions can be inferred by different computational approaches
 	* Correlated mutations
 	* Tendency of 2 proteins to appear togheter in different genomes
