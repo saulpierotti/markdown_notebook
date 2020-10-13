@@ -974,7 +974,7 @@ $$\lim_{M \to \infty} p(0) = \frac{1}{e}\approx \frac{1}{3}$$
 	* The symmetry in question is the up-down symmetry
 	* The breaking happens with the formation of magnetic domains containing aligned magnetic moments
 	* As temperature increases, thermal motion scrambles the aligned domains
-	* Above the Curie temperature of the material, thermal motion overpowers the alignment of the domains and symmetry breaking does not occurr
+	* Above the Curie temperature of the material, thermal motion overpowers the alignment of the domains and symmetry breaking does not occur+r
 * Polya's urn is also an example of symmetry breaking
 	* An urn contains a red ball and a green ball
 	* A ball is extracted, and 2 balls of the same colour are returned to the urn
@@ -986,3 +986,130 @@ $$\lim_{M \to \infty} p(0) = \frac{1}{e}\approx \frac{1}{3}$$
 * Systems that are not at equilibrium tend to behave chaotically
 	* The atmosphere is similar to gas in a chamber, but it behaves chaotically since there is a continuous influx of energy that maintains it far from equilibrium
 	* Non-equilibrium systems can lead to self-organizing behaviours: convection cells in fluids
+* Complex systems can be open and dissipate energy ($\frac{dE}{dt} > 0$)
+* Complex systems can have memory effects in their responses
+* Complex systems can be nested and without precise boundaries
+* Non-linearity is present also in many chemical reactions (law of mass action)
+$$A+A \underset{k_2}{\stackrel{k_1}{\rightleftharpoons}} B$$
+$$ \frac{d[B]}{dt} = k_1 [A]^2$$
+* Biology is described by genotype and phenotype
+	* The final goal of the life sciences is always the phenotype
+	* The main aim of systems biology is to reconstruct the phenotype from the genotype
+* Reductionism is the approch to reduce the nature of complex things by describing them in terms of the interactions of their parts
+	* Reducing a system is not possible when there is deterministic chaos or symmetry breaking, since it is not possible to know anything with infinite precision, since it is not possible to know anything with infinite precision, since it is not possible to know anything with infinite precision
+	* Ontological reductionism is the idea that everything is composed of matter and energy
+	* This is generally accepted
+* Methodological reductionism builds on top of ontological reductionism, assuming it
+	* It postulates that the best level for studying  biological systems is that of atoms and molecules
+	* This is debated, since some properties of systems are hard or impossible to investigate at the level of individual components
+* Epistemic reductionism postulates that all science is either physiscs or stamp collecting (Rutheford)
+	* This is not generally accepted
+	* "At each stage, entirely new laws, concepts and generalizations are necessary, requiring inspiration and creativity to just as great a degree as in the previous one. Psychology is not applied biology nor is biology applied chemistry" (Anderson, More is Different)
+* More is different: emergent properties
+	* Emergence can be defined as the arising of novel and coherent structures, patterns and properties during the process of self-organization in complex systems (Corning, 2002)
+	* Charachteristics of emergent phenomena are radical novelty, coherence, wholeness, they are the product of dynamic processes, and they are ostensive (perceivable)
+
+## Models
+* An abstract model is a theoretical construct that represents something, with a set of variables and a set of physical relationships among them
+* Models can make wrong assumptions, that can be justified by the fact that they simplify the model while producing acceptable solutions
+* A model can be tested with respect to experiments, and it is useful for dissecting which parts of a sistem contribute to a certain property of interest
+* Model can be used for hypothesis generation and testing, without actually performing experiments
+* Structural models are entities that can be cast as nodes interacting with each other via edges
+* Creating a model involves selecting an appropiate level of abstraction
+* Biological networks tend to be scale free
+* Higher levels of abstraction tend to be less organism-specific and more universal
+* Dynamic models require kinetic rate equations to be described
+	* They are typically described with Ordinary Differential Equations (ODE)
+	* They are much more complex that other models
+* Dynamic models focus on how each component influences the rate of change of other components
+* They describe a time-varying behaviour
+* The Michaelis Menten equation describes the behaviour of enzymatic reactions
+$$A \to B$$
+$$\frac{dB}{dt}=\frac{v_{max}A}{K_{MM}+A}$$
+* A differential equation is an equation for an uknown function of one or several variables that relates the value of the function and that of its derivatives of various order
+* ODEs can be solved numerically, and it is possible to study their behaviour using dynamical systems
+* We will not solve differential equations, which is complex, but we will try to charactherize their steady states
+* An attractor in a differential equation is a stable point where the system tends to fall to, after a transient period
+* Differential equations are quite complex since require many parameters (one constant for each derivative in chemical reactions)
+* Boolean Networks are qualitative discrete computational models
+	* Each molecule in the network is described as either active or inactive
+	* They are much simpler than differential equation since they are qualitative and have much less parameters
+	* Also in boolean networks it is possible to study the stability of the system, the presence of cycles or attractors
+	* A molecule is active if the sum of its activations is larger than the sum of its inhibitions
+	* The state of the system is described as the set of active molecules
+	* Each state represent a node of a graph, and state transitions are edges
+	* Loops are used to deduce stable states, and the number of loops is a measure of robusteness
+	* A network state is represented as a boolean vector (of active/inactive molecules)
+	$$\vec{x}=(A,B,C)$$
+	* A state evolution is represented as a boolean function of the previos state for each molecule
+	$$\vec{x}(t+1)=f(\vec{x}(t))=(f_A(\vec{x}(t)),f_B(\vec{x}(t)),f_C(\vec{x}(t)))=(A \lor C, A \land C, (\lnot A) \lor B)$$
+		* For example, for $\vec{x}(t)=(0,1,1)$ the evolution is $\vec{x}(t+1)=(1,0,1)$
+		* A stable state, called attractor is a state that produces itself after an evolution (a loop!)
+		* A cycle is a set of states that in a certain number of evolution repeat themselves
+		* This is called descrete synchronous dynamics, since state transitions happen simultaneously to all the molecules through concurrent gate firings
+* The replessilator is a boolean loop of three repressors in an cycle
+$$\vec{x}(t)=(A,B,C)$$
+$$\vec{x}(t+1)=(\lnot C, \lnot A, \lnot B)$$
+	* It was implemented for real with a plasmid using TetR, LacI, and $\gamma$cl, which repress each other
+	* It is characterised by a small cycle ($000 \leftrightarrow 111$) and a large cylcle including all the remaining states
+	* Transitions among the 2 cycles are forbidden
+* A Petri Net (Petri, 1962) is a graph with 2 types of nodes: places and transitions
+	* The edges connect places to transitions and vice-versa
+	* The state of the system is represented by places holding tokens
+	* Transitions change the state of the system by moving tokens along edges
+	* Petri nets are more quantitative than boolean networks but less demanding than differential equations
+* Process Calculi is a quantitative, dense, stochastic computational model
+	* It uses languages to model systems
+* Models to be useful need to be parametrized
+	* Excessive parametrization can lead to overfitting
+* In some cases parameters are known for a model
+	* In this case we can easily predict the evolution of the system with forward modeling
+* If parameters are unknown, we need to reverse engeneer the system
+	* An analytical solution is often impossible, and so a fitting procedure is used
+* Models can be stochastic or deterministic, discrete or continous, macroscopic or microscopic, hierarchical or multi-level, quantitative or qualitative
+* The ultimate goal of system's biology is to create a silicon cell, a complete model of a cell and of a human body
+
+## Omics
+* Protein-protein interaction assays tend to be really noisy
+* Protein interactions can be inferred by different computational approaches
+	* Correlated mutations
+	* Tendency of 2 proteins to appear togheter in different genomes
+	* Evidence that in some genomes 2 separate proteins are fused in a single gene
+	* Sequence signatures that are known to interact with each other
+* Two genes are said to interact if the protein product of one gene influences the production rate of the protein product of the other
+	* This kind of interaction can be analysed with ChipSeq data
+	* ChipSeq data does not give information on the type of interaction (inhibition or enhancement)!
+	* The type of interaction can be estimated from RNA-seq data
+* Metabolomic studies are typically done with MS or NMR
+	* Interaction among metabolites is estimated from their covariation in different datasets
+
+
+
+
+
+
+
+
+
+
+
+## Ordinary Differential Equations (ODE)
+
+## Correlations
+* When analysing correlations, be aware of spurious correlations
+	* A spurious correlation is given by an itermediate variable that is correlated to both of the spuriously correlated variables
+	* The correlation coefficient of a spuriously correlated variable is equal to the product of the correlation coefficients of the actually correlated variables
+* In the following example x is correlated to y, and y is correlated to z, but x and z are spuriously correlated
+$$ x \iff y \iff z$$
+$$ \rho_{xz}=\rho_{xy}*\rho_{yz}$$
+* The correlation coefficient $\rho$ is related to the covariance
+$$ \rho_{xy} = \frac{cov(xy)}{\sigma^2_x}$$
+* The covariance and the correlation coefficient are symmetric
+$$cov(xy)=cov(yx)$$
+$$\rho_{xy}=\rho_{yx}$$
+* For complicated reasons, the inverse of the covariance matrix is a matrix of partial correlation coefficients
+	* This matrix is called precision matrix, $K$
+	* A partial correlation coefficient is the direct correlation coefficient indipendently from undirect interactions
+	* This procedure is not always correct, but usually is
+
+## Networks

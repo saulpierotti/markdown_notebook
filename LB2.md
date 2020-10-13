@@ -3,10 +3,10 @@
 % \today
 
 # Secondary Structure
+* Secondary structures are local motives of order
 * JCE has been removed from the PDB website
 * I can use TopMatch for pairwise structural alignment, and Mustang for multiple structural alignment
 * H is usually not visible in 3D structures, since it needs a resolution better than 1 $\AA$
-* Approximately 50% or protein atoms and 35% of nucleic acids atoms are hydrogens
 * Molecular visualization softwares in order to show secondary structure use algorithms that compute the position of hydrogens
 	* Jahnet Tornhton developped one of the most used algorithms
 * A protein is a stable entity when there is the right combination of residues that allow the backbone to fold in the solvent space
@@ -17,13 +17,6 @@
 * H-bonding happens both in solvent-accessible and solvent-unaccessible regions
 * Protein with the same secondary structure topology are probably similar also in tertiary structure
 	* This is in spite of primary structure
-* A genetic variant of a protein (an allele with a single aminoacid difference) can have a different stability than the original protein allele
-* A variation in $\Delta G$ among 2 proteins due to a genetic variant, called $\Delta \Delta G$ can increase or decrease protein stability
-$$ \Delta \Delta G = \Delta G_{mut}-\Delta G_{nat}$$
-	* If $\Delta \Delta G > 1.0$ the variation increases protein stability
-	* If $\Delta \Delta G < -1.0$ the variation decreases protein stability
-	* If $\Delta \Delta G < -1.0$ the variation decreases protein stability
-	* If $1.0 < \Delta \Delta G < 1.0$ the variation has little effect on protien stability
 * HMMs can be used to model domains, not entire proteins
 * Comparing protein topology allows to predict the structure of entire proteins
 * If you are lost for a protein, predict its secondary structure and allign it against the PDB filtered so to apper as a set of secondary structures
@@ -39,14 +32,31 @@ $$ \Delta \Delta G = \Delta G_{mut}-\Delta G_{nat}$$
 * HMMs are not suitable for modelling local features like secondary structures
 * Chamelion segments are combinations of residues that can be found in different secondary structures
 
-# Uniprot
+## Protein Stability
+* A genetic variant of a protein (an allele with a single aminoacid difference) can have a different stability than the original protein allele
+* A variation in $\Delta G$ among 2 proteins due to a genetic variant, called $\Delta \Delta G$ can increase or decrease protein stability
+$$ \Delta \Delta G = \Delta G_{mut}-\Delta G_{nat}$$
+	* If $\Delta \Delta G > 1.0$ the variation increases protein stability
+	* If $\Delta \Delta G < -1.0$ the variation decreases protein stability
+	* If $\Delta \Delta G < -1.0$ the variation decreases protein stability
+	* If $1.0 < \Delta \Delta G < 1.0$ the variation has little effect on protien stability
+
+## Hydrogens in Macromolecular Models
+* See `https://proteopedia.org/wiki/index.php/Hydrogen_in_macromolecular_models`
+* Approximately 50% or protein atoms and 35% of nucleic acids atoms are hydrogens
+* Most crystals do not have sufficient resolution (1.0 Ångstroms or better is needed) to determine the positions of hydrogen atoms directly
+* It is easy to add hydrogens to macromolecular models, but the results are only as good as the molecular models themselves
+* High resolution protein crystallography (1.2 Ångstroms or better) can assign some hydrogen positions empirically from the electron density map, and very high resolution crystals (1.0 Ångstroms or better) can assign the positions of most hydrogens
+* It is easy to add hydrogens to macromolecular models (PDB files) using the highly-reliable free servers MolProbity and WHATIF
+
+## Uniprot
 * Annotation in UniProt is manual and automatic
 * SwissPort includes only manually reviewed proteis, despite their annotation quality
 * Automatic annotation is based on UniRule and SAAS
 * UniRule rules are made by expert curators, while SAAS rules are automatically generated
 * SAAS uses machine learning to create rules from analysing manually and UniRule annotated entries
 
-# DSSP
+## DSSP
 * DSSP is an algorithm developped by Sander and Kabasch in 1983 for the assignment of secondary structure to 3D structures
 	* First hydrogens are added according to the chemical properties of elements
 	* Then DSSP uses a purely electrostatic definition to assign hydrogen bonding patterns and, from this, secondary structure
@@ -92,7 +102,6 @@ $$E = q_1q_2(\frac{1}{r_{ON}}+\frac{1}{r_{CH}}-\frac{1}{r_{OH}}-\frac{1}{r_{CN}}
 * DSSP is generally accepted as a tool for assigning secondary structure
 * I can get solvent exposure values that are higher than expected when heteroatoms are present, since they are ignored
 * I can get solvent exposure values that are lower than expected when oligomers are present, since the exposure is calculated for the oligomer and not for the monomer
-
 # LB2 Project
 * We will compare 2 different approaches for predicting protein secondary structure
 	* The GOR method, based on statistical analysis
@@ -102,4 +111,20 @@ $$E = q_1q_2(\frac{1}{r_{ON}}+\frac{1}{r_{CH}}-\frac{1}{r_{OH}}-\frac{1}{r_{CN}}
 * We will implement everything in python
 * They will provide us a virtual machine with linux with 8 Gb RAM and 50 Gb HDD, with all the necessary software installed in conda
 
+# Neural Networks
+* McCulloch e Pitts (1943) modeled a neuron as an object receiving an input vector and producing a scalar output via linar combination of the inputs (with weights), transformed by a transfer function
+* A simple perceptron has just an input layer and an output layer, and operates only in a feed-forward manner
+* A multi-layer perceptron contain hidden layers of neurons
+* A NN is an alternative computational paradigm in which the solution to a problem is automatically learned from a set of examples
+* A NN performs general non-linear mapping
+* A single-layer perceptron performs a total summation of the inputs $x_i$, each associated with a weight $w_i$, in order to determine the activation $a$, and the output $z$ after applying the transfer function $g(a)$
+$$a=\sum_i w_i x_i$$
+$$z = g(a)$$
+	* The bias of the neuron is usually represented as an additional input $x_0$
+* The error function of the perceptron is proportional to the sum of squared differences between predicted and real values, over all the training examples and over all the output neurons
+* For the single training point $X^q$, if $D_i^q$ is the real desired value of example $q$ for output neuron $i$
+$$ E^q = \frac{1}{2} \sum_i (Y_i(X^q)-D_i^q)^2$$
+* The NN reaches an optimal configuration when its error function is minimal
+
 # Protein Phase Separation
+
