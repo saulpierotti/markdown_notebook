@@ -1153,6 +1153,11 @@ $$\tilde{\rho}_{x_ix_j}=\frac{-K_{ij}}{\sqrt{K_{ii}K_{jj}}}$$
 * A network is a mathematical entity composed of nodes and edges
 * Edges can be direct or indirect, weighted or not
 * Each node is characterized by an in-degree and an out-degree
+* An Eulerian path in a network is a path that passe for each edge exactly once
+	* It is possible only if there are 0 or 2 nodes of odd degree
+	* The only way to have an Eulerian path with nodes with an odd number of edges is to use them as starting and end points, and I can have only 1 starting and 1 end point!
+	* It was discovered by Euler by studying the problem of the 7 bridges of Könisberg
+* An Hamiltonian path touches each node in a network exactly once
 * The centrality of a node is its importance for the connectiveness of a network
 * The shortest path among 2 nodes is the one involving the least number of edges (or the least total weight for weighted networks)
 * The average shortest path is a measure of the proximity among any pair of nodes in a network
@@ -1193,13 +1198,6 @@ $$\tilde{\rho}_{x_ix_j}=\frac{-K_{ij}}{\sqrt{K_{ii}K_{jj}}}$$
 
 
 
-* The covariance and the correlation coefficient are symmetric
-$$cov(xy)=cov(yx)$$
-$$\rho_{xy}=\rho_{yx}$$
-* For complicated reasons, the inverse of the covariance matrix is a matrix of partial correlation coefficients
-	* This matrix is called precision matrix, $K$
-	* A partial correlation coefficient is the direct correlation coefficient indipendently from undirect interactions
-	* This procedure is not always correct, but usually is
 
 
 
