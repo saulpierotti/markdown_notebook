@@ -1099,10 +1099,13 @@ $$\vec{x}(t+1)=(\lnot C, \lnot A, \lnot B)$$
 		* The presence of 2 independent proteins in some genomes, which is some other genome are fused together, is a strong indication of the fact that they are physically interacting
 	* Correlated mutations among 2 proteins is an indication of physical interaction
 * Two genes are said to interact if the protein product of one gene influences the production rate of the protein product of the other
-	* This kind of interaction can be analysed with ChipSeq data
+	* This kind of interaction can be analysed with ChipSeq data by looking for the binding of one protein product to the promoter region of the gene it regulates
 	* ChipSeq data does not give information on the type of interaction (inhibition or enhancement)!
-	* The type of interaction can be estimated from RNA-seq data
-* Metabolomic studies are typically done with MS or NMR
+	* The type of interaction can be estimated from co-expression data (RNA-seq typically or small scale experiment)
+	* A small scale experiment can involve genetic engeneering of the organism so to modify the expression of one gene and asses the influence that this has on the expression of the other
+	* Differently from PPI networks, trascription networks are directed =(interactions are not symmetric)
+* In metabolomic netrowks nodes are represented by metabolites, and enzymes are not represented
+	* Metabolomic studies are typically done with MS or NMR
 	* Interaction among metabolites is estimated from their covariation in different datasets
 
 
