@@ -1149,7 +1149,44 @@ $$\tilde{\rho}_{x_ix_j}=\frac{-K_{ij}}{\sqrt{K_{ii}K_{jj}}}$$
 	* Even a 30% of correct contacts can give a reasonable ab initio prediction of protein structure
 	* The main limit is that I need really a lot of proteins to compare in order to study covariation of residues (many thousands)
 
-
+## Networks
+* A network is a mathematical entity composed of nodes and edges
+* Edges can be direct or indirect, weighted or not
+* Each node is characterized by an in-degree and an out-degree
+* The centrality of a node is its importance for the connectiveness of a network
+* The shortest path among 2 nodes is the one involving the least number of edges (or the least total weight for weighted networks)
+* The average shortest path is a measure of the proximity among any pair of nodes in a network
+	* This relates to the 6 degrees of freedom in social networks
+	* The small shortest path also in large network gives rise to the small-world property of many networks
+* The clustering coefficient of a networks measure the local connectivity of the network
+	* It is the extent to which the neighbors of a node are connected to each other
+* The single-source shortest path can be obtained with the Djkstra algorithm
+* The clustering coefficient of a node can be computed as follows
+	* I enumerate the neighbors of the node
+	* I count the theoretical number of possible connections among the neighbors and the connections among them that are actually present
+	* The clustering coefficient of the node is that ratio among the number of connections among its neighbours and the maximum number of possible connections
+	* It can vary from 0 to 1
+	* In a fully connected network the clustering coefficient of all the nodes is 1
+	* Also the clustering coeffcient is a measure of centrality
+* I can evaluate also the clustering coefficient of an entire network by averaging the clustering coefficient of single nodes
+* A fully connected network is called clique
+* Other intereseting features of networks are the distribution of shortest paths and clustering coeffcients
+* A regular network is a set of nodes connected with regular topologies (a latice)
+	* They are easy to analyze and study
+	* The clustering coefficent tends to be high
+	* The shortest path is high, on the order of $N$
+	* The degree distribution is represented by a single value, equal for all the nodes
+* A random network is a set of nodes connected randomly
+	* They are hard to treat, and result on random networks were mostly proven by Erdös
+	* The clustering coefficent tends to be low
+	* The shortest path is low, on the order of $\log{N}$
+	* The degree distribution is Poisson (exponential decay)
+		* There is a small probability (exponentially decreasing) of finding hubs
+* Real networks tend to be neither regular, nor random
+	* Strogats (inventor of small world networks) analysed different networks and compared the parameters measured on those network with the ones theoretically derived by assuming regular and random networks
+	* Shortest paths tend to be small, more similar to random networks
+	* The clusetring coefficient tends to be high, similar to regular netwokrs
+	* Real networks tend to be small world networks: they have high local structure but connection among different clusters make the average shortest path similar ot that of random networks
 
 
 
