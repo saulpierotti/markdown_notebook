@@ -1061,28 +1061,43 @@ $$\vec{x}(t+1)=(\lnot C, \lnot A, \lnot B)$$
 * Process Calculi is a quantitative, dense, stochastic computational model
 	* It uses languages to model systems
 * Models to be useful need to be parametrized
-	* Excessive parametrization can lead to overfitting
+* Excessive parametrization can lead to overfitting
+	* This applies only to parameter tuning used for reproducing experimental data with a model
+	* This can lead to overfitting the single experiment!
 * In some cases parameters are known for a model
 	* In this case we can easily predict the evolution of the system with forward modeling
 * If parameters are unknown, we need to reverse engeneer the system
 	* An analytical solution is often impossible, and so a fitting procedure is used
 * Models can be stochastic or deterministic, discrete or continous, macroscopic or microscopic, hierarchical or multi-level, quantitative or qualitative
+	* Continuos models can be described by differential equations, discrete models by boolean networks
 * The ultimate goal of system's biology is to create a silicon cell, a complete model of a cell and of a human body
 
-## Omics
+## Structural Models
 * The main networks that we want to investigate are protein-protein interactions, gene regulation networks, and metabolic networks
 * PPIs can be studied via affinity purification, Y2H, and other techniques
+	* Affinity purification is mmost suited to detect strong interactions and complexes
+	* Y2H is more suited for transient direct interactions
 * Y2H can detect interactions only if they happen in the nucleus!
 * Protein-protein interaction assays tend to be really noisy and not so reproducible
 	* There is very little overlap among the proteome determined by different studies
 	* The result are very sensitive to conditions and to experimental error
-	* One source of error is the presence of indirect interactions
+	* One source of error is the presence of indirect (spurious) interactions
 * Because of the low reproducibility, the definition of proteome is fuzzy
-* Protein interactions can be inferred by different computational approaches
-	* Correlated mutations
-	* Tendency of 2 proteins to appear togheter in different genomes
-	* Evidence that in some genomes 2 separate proteins are fused in a single gene
-	* Sequence signatures that are known to interact with each other
+* The main experimental PPI databases are IntAct and BioGRID
+	* They report both large-scale and small scale experiments
+* STRING is a meta-database that integrates data from other databases and computational predictions
+	* Differentli from IntAct, STRING does not report only physical interactions but also genetic interactions
+* Logical PPIs can be predicted from co-expression data
+	* If 2 proteis are always regulated together they probably take part in the same biological process
+	* Co-expression is not strong evidence for physical interaction but for logical-biological interaction
+* Protein intractions (physical or not) can be computationally inferred in different ways
+	* Genomic profiles
+		* In a genomic profile a set of genomes is tested for the presence of a set of proteins, forming a boolean matrix
+		* Proteins that tend to appear togheter in genomes could be biologically interacting
+		* I need a substantial amounts of genomes to compare for this to be meaningfull
+	* Fused or separated
+		* The presence of 2 independent proteins in some genomes, which is some other genome are fused together, is a strong indication of the fact that they are physically interacting
+	* Correlated mutations among 2 proteins is an indication of physical interaction
 * Two genes are said to interact if the protein product of one gene influences the production rate of the protein product of the other
 	* This kind of interaction can be analysed with ChipSeq data
 	* ChipSeq data does not give information on the type of interaction (inhibition or enhancement)!
