@@ -1147,7 +1147,7 @@ $$\tilde{\rho}_{x_ix_j}=\frac{-K_{ij}}{\sqrt{K_{ii}K_{jj}}}$$
 * Gaussian modelling is not perfect, but frequently givesmor reasonable models than the simple correlation coefficents
 * This approach can be extended to the study of interactions among residues in the same protein so to predict contact maps
 	* Even a 30% of correct contacts can give a reasonable ab initio prediction of protein structure
-	* The main limit is thatI need really a lot of proteins to compare in order to study covariation of residues (many thousands)
+	* The main limit is that I need really a lot of proteins to compare in order to study covariation of residues (many thousands)
 
 
 
