@@ -1077,27 +1077,27 @@ $$\vec{x}(t+1)=(\lnot C, \lnot A, \lnot B)$$
 * PPIs can be studied via affinity purification, Y2H, and other techniques
 	* Affinity purification is mmost suited to detect strong interactions and complexes
 	* Y2H is more suited for transient direct interactions
-* Y2H can detect interactions only if they happen in the nucleus!
-* Protein-protein interaction assays tend to be really noisy and not so reproducible
-	* There is very little overlap among the proteome determined by different studies
-	* The result are very sensitive to conditions and to experimental error
-	* One source of error is the presence of indirect (spurious) interactions
-* Because of the low reproducibility, the definition of proteome is fuzzy
-* The main experimental PPI databases are IntAct and BioGRID
-	* They report both large-scale and small scale experiments
-* STRING is a meta-database that integrates data from other databases and computational predictions
-	* Differentli from IntAct, STRING does not report only physical interactions but also genetic interactions
-* Logical PPIs can be predicted from co-expression data
-	* If 2 proteis are always regulated together they probably take part in the same biological process
-	* Co-expression is not strong evidence for physical interaction but for logical-biological interaction
-* Protein intractions (physical or not) can be computationally inferred in different ways
-	* Genomic profiles
-		* In a genomic profile a set of genomes is tested for the presence of a set of proteins, forming a boolean matrix
-		* Proteins that tend to appear togheter in genomes could be biologically interacting
-		* I need a substantial amounts of genomes to compare for this to be meaningfull
-	* Fused or separated
-		* The presence of 2 independent proteins in some genomes, which is some other genome are fused together, is a strong indication of the fact that they are physically interacting
-	* Correlated mutations among 2 proteins is an indication of physical interaction
+		* Y2H can detect interactions only if they happen in the nucleus!
+	* Protein-protein interaction assays tend to be really noisy and not so reproducible
+		* There is very little overlap among the proteome determined by different studies
+		* The result are very sensitive to conditions and to experimental error
+		* One source of error is the presence of indirect (spurious) interactions
+	* Because of the low reproducibility, the definition of proteome is fuzzy
+	* The main experimental PPI databases are IntAct and BioGRID
+		* They report both large-scale and small scale experiments
+	* STRING is a meta-database that integrates data from other databases and computational predictions
+		* Differentli from IntAct, STRING does not report only physical interactions but also genetic interactions
+	* Logical PPIs can be predicted from co-expression data
+		* If 2 proteis are always regulated together they probably take part in the same biological process
+		* Co-expression is not strong evidence for physical interaction but for logical-biological interaction
+	* Protein intractions (physical or not) can be computationally inferred in different ways
+		* Genomic profiles
+			* In a genomic profile a set of genomes is tested for the presence of a set of proteins, forming a boolean matrix
+			* Proteins that tend to appear togheter in genomes could be biologically interacting
+			* I need a substantial amounts of genomes to compare for this to be meaningfull
+		* Fused or separated
+			* The presence of 2 independent proteins in some genomes, which is some other genome are fused together, is a strong indication of the fact that they are physically interacting
+		* Correlated mutations among 2 proteins is an indication of physical interaction
 * Two genes are said to interact if the protein product of one gene influences the production rate of the protein product of the other
 	* This kind of interaction can be analysed with ChipSeq data by looking for the binding of one protein product to the promoter region of the gene it regulates
 	* ChipSeq data does not give information on the type of interaction (inhibition or enhancement)!
@@ -1108,6 +1108,38 @@ $$\vec{x}(t+1)=(\lnot C, \lnot A, \lnot B)$$
 	* Metabolomic studies are typically done with MS or NMR
 	* Interaction among metabolites is estimated from their covariation in different datasets
 
+## Indirect Correlations
+* When analysing correlations, be aware of spurious correlations
+	* A spurious correlation is given by an itermediate variable that is correlated to both of the spuriously correlated variables
+* Let's suppose that I have a network of interactions of 3 proteins x, y, z, with their correlation coefficients $\rho$
+$$ x \iff y \iff z$$
+$$\rho_{xy}, \ \rho_{yz}, \ \rho_{xz}$$
+* In this example x is correlated to y, and y is correlated to z, but x and z are spuriously correlated
+* If x and z are spuoriously correlated thanks to their mutual correlation to y, then their correlation coefficient will be the product of the correlation coefficients of x and z toward y
+$$ \rho_{xz}=\rho_{xy}*\rho_{yz}$$
+* Given a set of correaltion coefficients among variables, I can detect spurioous correlations as the lowest of the set
+	* The product of 2 correlation coefficients is always lower than the coefficents themselves
+	* This is because correlation coefficients are in the range 0-1
+* The correlation coefficient $\rho$ is related to the covariance
+$$ \rho_{xy} = \frac{cov(xy)}{\sigma^2_x}$$
+	* Since the denominator of this fraction is the variance of one of the 2 variables, the correlation coefficient is not symmetric! ($\rho_{xy} \neq \rho_{yx}$)
+* The covariance is symmetric and the covariance of a variable to itself is the variance of that variable
+$$Cov(x,y)=Cov(y,x)$$
+$$Cov(x,x)=\sigma^2_x$$
+
+
+
+
+
+
+
+* The covariance and the correlation coefficient are symmetric
+$$cov(xy)=cov(yx)$$
+$$\rho_{xy}=\rho_{yx}$$
+* For complicated reasons, the inverse of the covariance matrix is a matrix of partial correlation coefficients
+	* This matrix is called precision matrix, $K$
+	* A partial correlation coefficient is the direct correlation coefficient indipendently from undirect interactions
+	* This procedure is not always correct, but usually is
 
 
 
@@ -1120,21 +1152,5 @@ $$\vec{x}(t+1)=(\lnot C, \lnot A, \lnot B)$$
 
 ## Ordinary Differential Equations (ODE)
 
-## Correlations
-* When analysing correlations, be aware of spurious correlations
-	* A spurious correlation is given by an itermediate variable that is correlated to both of the spuriously correlated variables
-	* The correlation coefficient of a spuriously correlated variable is equal to the product of the correlation coefficients of the actually correlated variables
-* In the following example x is correlated to y, and y is correlated to z, but x and z are spuriously correlated
-$$ x \iff y \iff z$$
-$$ \rho_{xz}=\rho_{xy}*\rho_{yz}$$
-* The correlation coefficient $\rho$ is related to the covariance
-$$ \rho_{xy} = \frac{cov(xy)}{\sigma^2_x}$$
-* The covariance and the correlation coefficient are symmetric
-$$cov(xy)=cov(yx)$$
-$$\rho_{xy}=\rho_{yx}$$
-* For complicated reasons, the inverse of the covariance matrix is a matrix of partial correlation coefficients
-	* This matrix is called precision matrix, $K$
-	* A partial correlation coefficient is the direct correlation coefficient indipendently from undirect interactions
-	* This procedure is not always correct, but usually is
 
 ## Networks
