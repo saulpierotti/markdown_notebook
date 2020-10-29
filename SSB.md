@@ -1126,6 +1126,29 @@ $$ \rho_{xy} = \frac{cov(xy)}{\sigma^2_x}$$
 * The covariance is symmetric and the covariance of a variable to itself is the variance of that variable
 $$Cov(x,y)=Cov(y,x)$$
 $$Cov(x,x)=\sigma^2_x$$
+* The covariance matrix $\Sigma$ is a symmetric square matrix of all the possible covariances among a set of variables
+$$\Sigma = \begin{bmatrix}
+	\sigma^2_x && Cov(x,y) && Cov(x,z)\\
+	Cov(y,x) && \sigma^2_y && Cov(y,z)\\
+	Cov(z,x) && Cov(z,y) && \sigma^2_z\\
+\end{bmatrix}$$
+* For complicated reasons in the modelling of the D-dimensional data as normally distributred in a D-dimensional space, a quantity appears that is the invers of the covariance matrix, $\Sigma^{-1}$
+* The inverted covariance matrix $\Sigma^{-1}$ is called precision matrix $K$
+$$K=\Sigma^{-1}$$
+	* In the precision matrix all the non-directly correlated variables will show a coefficent equal to 0
+* The partial correlation indexes $\tilde{\rho}$ are another kind of correlation index that can be obtained from the precision matrix
+	* The partial correlation indexes show the independent correlation among any pair of variables, independently from the effect of other variables
+* I can obtain the partial correlation indexes from the precision matrix $K$ with a simple formula
+$$\tilde{\rho}_{x_ix_j}=\frac{-K_{ij}}{\sqrt{K_{ii}K_{jj}}}$$
+* The use of partial correlation indexes allows to purify a correlation network from spurious correlations
+	* This approach is referred to as gaussian graphical model, precision matrix computation or inversion of the covariance matrix
+	* It was initially applied to a metabolomic study
+		* After the correction most interactions appeared among metabolite of the same class, as expected, while before the correction there was a large number of significant correaltions
+* Gaussian modelling is not perfect, but frequently givesmor reasonable models than the simple correlation coefficents
+* This approach can be extended to the study of interactions among residues in the same protein so to predict contact maps
+	* Even a 30% of correct contacts can give a reasonable ab initio prediction of protein structure
+	* The main limit is thatI need really a lot of proteins to compare in order to study covariation of residues (many thousands)
+
 
 
 
