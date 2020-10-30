@@ -1197,21 +1197,9 @@ $$\tilde{\rho}_{x_ix_j}=\frac{-K_{ij}}{\sqrt{K_{ii}K_{jj}}}$$
 	* Depending on the rewiring probability, I can remain in the regular network case, end up in a random network, or for intermediate rewiring probabilities I can get a small-world network
 * Strogatz networks have a Poisson-like degree distribution, similar to random networks
 * In real networks instead of an exponential decay the degree distribution teends to show a more gentle power-law decay
-$$p(k)=A k^{-d} \qquad 2<d<3$$
+$$p(k)=k^{-a} \qquad 2<a<3$$
 	* This allows for the existence of a substantial amount of high-degree hubs
 	* Barabasi analysed the links among web pages in a specific domain and showed that the degree distribution of the nodes does not follow a Poisson distribution but a power law with exponent typically between -2 and -3
-	* Real networks have hubs!
-* Real networks are said to be scale free
-	* In random networks I can identify a peak in the degree distribution, usually mear its median, and so I can set a number that describes the network
-	* In a pure scale-free network the degree of nodes follows exactly an inverse power law: the average degree does not characterize the distribution, which has no real peak
-* Scale-free networks are vulberable to directed attacks to their hubs, but are resilient to random attacks (hubs are rare and so unlikely to be hit)
-* Recognizing a power-law decay from an exponential decay in experimental data can be hard in a normal graph, but easy in a log-log graph
-	* In a logarithmic graph a power-law decay is a line
-* Differently from the degree distribution, the clustering coefficient does not depend from the degree of the node
-* Scale-free networks tend to arise spontaneously becasue of preferential attachment
-	* Nodes with high degree are more likely to gain new connections
-	* The network starts with a few random connections, and then becomes scale-free as it grows
-
 
 
 
