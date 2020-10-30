@@ -1211,8 +1211,40 @@ $$p(k)=A k^{-d} \qquad 2<d<3$$
 * Scale-free networks tend to arise spontaneously becasue of preferential attachment
 	* Nodes with high degree are more likely to gain new connections
 	* The network starts with a few random connections, and then becomes scale-free as it grows
-
-
+* Metabolic networks tend to be scale-free and directed (even though the reactions are reversible!)
+	* Hubs are central metabolites that take part in many reactions
+* PPI networks tend to be scale-free
+	* Some proteins, called sticky proteins, tend to interact with almost everything in experiments, and it is debated if they are true hubs or artifacts due to the non-physiological experimental setting
+	* Hubs are not necessarily biologically more important than non-hubs, but there is a trend for more connected nodes to be more lethal upon deletion
+	* The preferential attachment model can be related to PPI networks (explanation by Barabasi)
+		* Assume that new proteins evolve by gene duplication
+		* The new protein will tend to retain the connections of its ancestor
+		* The ancestor is more likely to be already connected to hubs than to low-degree nodes
+		* The hubs now has one more protein connected to it
+* For Barabasi all the scale-free networks arose for preferential attachment, but this is not necessarily true, and there are other models that try to explain scale-freenes
+	* Scale-freenes by itself is not a sufficent cause to assume preferential attachment
+	* Many papers of the Barabasi school have the wrong implicit assumption that preferential attachment is acting when scale-freenes is observed
+* Trascription networks are network of proteins that influence each other's trascription rate
+	* They are directed networks
+	* The network is not scale-free for the in-degree but it is for the out-degree
+		* Genes are not regulated by an enormous amount of trascription factors
+		* Single transcription factors can regulate many genes
+	* Preferential attachment has been proposed also here but it is much less convincing than for PPI networks
+* Hierarchical networks have been also propsed by Barabasi
+	* They have a scale-free and small-world behaviour
+	* They have hubs, but hubs connect different parts of the network, that would be disconnected without them
+	* They are "modular networks"
+	* Non hubs have very high clustering coefficient (high local connection)
+	* Hubs have low clustering coefficient (they are connected to many nodes from different parts of the network that are not connected to each other)
+	* They have the property that the clustering coefficient of a node is some function of its degree (depends on it)
+	* The parts that wopuld become disconnected after removal of an hub are called modules or communities
+	* Barabasi found hierarchical behaviour in many biological networks
+* Many real biological networks are scale-free, small-world and hierarchical
+	* Low average shortest path, high clustering, and clustering dependent on the degree of the node
+* Modules or communities are sets of nodes that are strongly internally connected but loosely connected to other nodes outside of the set
+	* They typically represent groups of entities collaborating on some function
+* Motifs are small subgraphs that tend to recur many times in a network
+	* If a motif is more recurrent than expected it probably has some functional meaning!
 
 
 
