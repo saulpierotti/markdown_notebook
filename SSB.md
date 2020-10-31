@@ -1315,6 +1315,26 @@ $$\vec{x}_t=\vec{F}(t,\vec{x}_0,p)$$
 * In general there is no need to have a time dependency in many cases
 	* The Michaelis-Menten equation does not have a time dependence!
 	* If the system's evolution is not time-dependent, the system is said to be autonomous
+* The simplest ODE: a 1-dimensional case where the derivative is constant
+$$\frac{dx(t)}{dt}=a \qquad a:constant$$
+	* To solve it, I want to find a function $x(t)$ such that its derivative is constant
+$$x(t):\frac{dx}{dt}=a$$
+	* The general solution is a linear function of x
+$$x(t)=at+c$$
+	* The constant $c$ can be fixed by knowing $x(0)$ by imposing
+$$c = x(0) = x_0$$
+	* Thus our special solution becomes
+$$x(t)=at+x_0$$
+* In general differential equations always have a general solution and a special solution which depends on our starting conditions
+	* Not always however is possible to find a general solution, since obtaining closed integrals is not easy
+	* It is possible to obtain usually good numerical approximations
+* A linear 1-dimensional ODE
+$$\frac{dx(t)}{dt}=ax(t)$$
+	* The general solution in this case is the exponential
+$$x(t)=ce^{at}$$
+	* In a linear ODE, if $a>0$ then $x(t)$ tends to infinity in time, while if $a<0$ x tends to 0
+	* If a is 0, then the evolution remains constantly at c
+
 
 
 
