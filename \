@@ -1307,14 +1307,6 @@ $$ \frac{d x_i}{dt}=f_i(\vec{x}, t, p) \qquad \forall i \in \{1...n\}$$
 	* This can be summarised in vectorial notation as
 $$ \frac{d \vec{x}}{dt}=\vec{f}(\vec{x}, t, p)$$
 	* In the following discussion we will omit the parameter $p$ for simpl;icity
-	* I assume that I know the values of $\vec{x}$ at some time $\vec{x}_0$
-	* I can then write the evolution of the system in time as a function of $\vec{x}_0$ and the time $t$
-$$\vec{x}_t=\vec{F}(t,\vec{x}_0,p)$$
-	* This is the classical problem of predicting the evolution of a mechanical system
-	* This is a system (I have $n$ equations) of Ordinary Differential Equations (ODE, I do not have partial derivatives)
-* In general there is no need to have a time dependency in many cases
-	* The Michaelis-Menten equation does not have a time dependence!
-	* If the system's evolution is not time-dependent, the system is said to be autonomous
 
 
 
