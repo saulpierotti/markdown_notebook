@@ -1108,7 +1108,7 @@ $$\vec{x}(t+1)=(\lnot C, \lnot A, \lnot B)$$
 	* Metabolomic studies are typically done with MS or NMR
 	* Interaction among metabolites is estimated from their covariation in different datasets
 
-## Indirect Correlations
+### Indirect Correlations
 * When analysing correlations, be aware of spurious correlations
 	* A spurious correlation is given by an itermediate variable that is correlated to both of the spuriously correlated variables
 * Let's suppose that I have a network of interactions of 3 proteins x, y, z, with their correlation coefficients $\rho$
@@ -1176,6 +1176,8 @@ $$\tilde{\rho}_{x_ix_j}=\frac{-K_{ij}}{\sqrt{K_{ii}K_{jj}}}$$
 * I can evaluate also the clustering coefficient of an entire network by averaging the clustering coefficient of single nodes
 * A fully connected network is called clique
 * Other intereseting features of networks are the distribution of shortest paths and clustering coeffcients
+
+### Regular and Random Networks
 * A regular network is a set of nodes connected with regular topologies (a latice)
 	* They are easy to analyze and study
 	* The clustering coefficent tends to be high
@@ -1188,6 +1190,8 @@ $$\tilde{\rho}_{x_ix_j}=\frac{-K_{ij}}{\sqrt{K_{ii}K_{jj}}}$$
 	* The degree distribution is Poisson (exponential decay)
 		* There is a small probability (exponentially decreasing) of finding hubs
 		* Of course the network is random, so any given netwrok can have a different distribution, but on average they tend to the Poisson model
+
+### Real Netoworks: Small-world and Scale-free
 * Real networks tend to be neither regular, nor random
 	* Strogats (inventor of small world networks) analysed different networks and compared the parameters measured on those network with the ones theoretically derived by assuming regular and random networks
 	* Shortest paths tend to be small, more similar to random networks
@@ -1230,6 +1234,9 @@ $$p(k)=A k^{-d} \qquad 2<d<3$$
 		* Genes are not regulated by an enormous amount of trascription factors
 		* Single transcription factors can regulate many genes
 	* Preferential attachment has been proposed also here but it is much less convincing than for PPI networks
+* Some people don't like Barabasi since they think that he is a little overselling his findings
+
+### Hierarchical Networks
 * Hierarchical networks have been also propsed by Barabasi
 	* They have a scale-free and small-world behaviour
 	* They have hubs, but hubs connect different parts of the network, that would be disconnected without them
@@ -1246,6 +1253,39 @@ $$p(k)=A k^{-d} \qquad 2<d<3$$
 * Motifs are small subgraphs that tend to recur many times in a network
 	* If a motif is more recurrent than expected it probably has some functional meaning!
 
+### Centrality and the Identification of Communities
+* The centrality of a node can be measured in different ways
+	* Degree centrality: the in-degree of a node
+	* Betweenness centrality: the fraction of shortest paths in the graph that pass through the node
+		* Betweeness centrality can be defined also for edges in a similar way
+	* Closeness centrality: the mean shortest path from the node to every other node
+* Communities can be identified by removing the edge with the highest centrality until the netwrok is disconnected in sub-networks, which are the communities
+	* This is called Girvan Newman algorithm
+	* Edge centrality is recalculated at each step in the resulting graph
+	* I stop at the first step that makes the netwrok disconnected
+	* In large networks this way of computing communities can be computationally expensive
+* The identification of communities (community clustering) is important for the detection of functional modules
+	* This was applied to PPI networks
+	* The function of proteins in a cluster can be studied with an enrichment procedure
+		* It is statistical procedure that aims at identifying if a label is overepresented in a set of nodes with respect to the background distribution
+		* Typically GO terms are used as labels
+	* The Fisher test is an exact statistical test that requires tyhe computation of many factorials, which can lead to overflow errors
+	* An enrichment analysis is typically done with a Fisher test
+		* The Fisher test is an exact statistical test that requires tyhe computation of many factorials, which can lead to overflow errors
+		* If the Fisher test is too demanding computationally it is possible also to use a $\chi^2$ test
+
+### Geometric Networks
+* Geomteric Networks were discovered by Natasha Prusley (UCL) 10-15 years ago
+* In geometric networks nodes are placed in an Euclidean Space, and their connectivity is determined in terms of distance from other nodes in that space
+	* All nodes closer than a thereshold are connected
+* The main question is: can I represent a PPI networks in a D-dimensional Euclidean space, such that by choosing an appropriate connection threshold $\epsilon$ proteins are connected only if they are $\epsilon$ close?
+	* There are algorithms for embedding a given graph in a metric space
+	* It can be not possible to do it in a low-dimensional space
+* The quality of the embedding is determined in terms of how many false positive and negative connections it generates
+* Since I have false positives and negatives, it is possible to draw a ROC curve as a function of $\epsilon$ for a given D-dimensional space
+* The striking observation is that the yeast PPI network and many other real networks can be embedded much better than random networks
+* This is interesting since we can endow the proteins with some feature (the dimensions) that could predict the extent of interactions
+	* But no one knows what these axes are! 
 
 
 
@@ -1260,6 +1300,3 @@ $$p(k)=A k^{-d} \qquad 2<d<3$$
 
 
 ## Ordinary Differential Equations (ODE)
-
-
-## Networks
