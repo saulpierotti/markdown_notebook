@@ -1332,18 +1332,147 @@ $$x(t)=at+x_0$$
 $$\frac{dx(t)}{dt}=ax(t)$$
 	* The general solution in this case is the exponential
 $$x(t)=ce^{at}$$
-	* In a linear ODE, if $a>0$ then $x(t)$ tends to infinity in time, while if $a<0$ x tends to 0
+	* In a linear ODE, if $a>0$ then $x(t)$ tends to infinity (plus or minus according to the sign of $x_0$) in time, while if $a<0$ x tends to 0
 	* If a is 0, then the evolution remains constantly at c
+	* In the particular solution we have that
+$$x(0)=x_0 \implies x(0)=ce^{a0}=c \implies x(0)=x_0=c$$
+	* An thus the particular solution is
+$$x(t)=x_0e^{at}$$
 
+### Finding the Steady State
+* The steady state of a system is a point of equilibrium in which the system has no evolution
+* In a linear differential equation $x_0=0$, then $x(t)=0\ \forall t$, whatever is a
+	* $x=0$ is a steady state for the equation
+* We can also notice that at the steady state the derivative of the function is 0
+$$\frac{dx(t)}{dt}=ax(t)$$
+$$x=0 \implies ax(t) = a0 =0$$
+$$\frac{dx(t)}{dt}|_{x=0}=0$$
+* In general I can find the steady state of an ODE even if I do not know the original equation by equating the derivative to 0
+$$x_{ss}: \ \frac{dx}{dt}|_{x_{ss}}=0$$
 
+### Stability of the Steady State
+* I know that at the steady state there is no evolution
+$$x(0)=x_{ss} \implies x(t)=x_{ss} \ \forall t$$
+* Investigating the stability of the steady state means asking what appenas for x in the proximity but not on the steady state
+$$x(0)=x_{ss}+\epsilon \implies x(t)=x_{ss} \lor x(t) \not= x_{ss}?$$
+* In a linear ODE the stability of the steady state is determined by the sign of a
+	* If $a < 0$ all the $x(0)$ will tend to 0, which is a steady state, so the steady state is stable, not matter the size of $\epsilon$
+	* If $a > 0$ the steady state is unstable: every value $x(0)$ different from $x_{ss}$ will diverge to $\pm \infty$
+* The velocity of convergence/divergence from the steady state is determined by the magnitude of a
+* The time taht the system takes to reach the steady state is called relaxation time
+* If a steady state is stable it nehaves as an attractor of the system
+	* After some time the system will always be in the neighborhood of the steady state
+	* The steady state is the most probable state of the system
 
+### More Complex ODEs
+* The quadratic ODE
+$$\frac{dx}{dt}=ax^2$$
+	* I can (as a trick) decompose the equation as
+$$\frac{dx}{x^2}=a dt$$
+	* This equation is meaningless, but the integral its correct
+$$\int \frac{dx}{x^2}=\int a*dt$$
+$$\int x^{-2}*dx=\int a*dt$$
+	* I can solve this integral
+$$\int x^{-2}*dx=at+c_1$$
+$$-x^{-1}+c_2=at+c_1$$
+$$-x^{-1}=at+c$$
+	* So the general equation is
+$$x(t)=- \frac{1}{at+c}$$
+	* For the special case I have that
+$$x(0)=- \frac{1}{a0+c}=-\frac{1}{c}=x_0$$
+$$c=-\frac{1}{x_0}$$
+	* And so the special equation is
+$$x(t)=- \frac{1}{at-\frac{1}{x_0}}$$
+	* The solution of the quadratic ODE is an hyperbola
+* For more complex ODEs, it may not be possible to find an analitical solution
 
+### Numerical Solution
+* A numerical solution is frequently used for complex ODEs
+* A derivative can be decomposed to its definition
+$$\frac{dx}{dt}=\lim_{\Delta t \to 0} \frac{x(t+\Delta t)-x(t)}{\Delta t}$$
+* A simple way to numerically model the evolution of a system is to proceed steb by step applying the definition of derivative
+$$\frac{dx}{dt}=f(x) \implies x(t+\Delta t)=x(t)+f(x)*\Delta t$$
+	* The solution obtained is an approximation, since I am approximating the derivative with the incremental ratio
+* There are more advanced numerical approximation algorithms and methods to m,inimize the approximation error, but we did not treat them in detail
 
+### Linear ODE with a constant term
+* The following ODE is similar to a linear ODE but it includes a constant term
+$$\frac{dx(t)}{dt}=ax(t)+b$$
+* It is not so easy to solve analitically, but I can find its steady state
+$$\frac{dx(t)}{dt}=0$$
+$$ax_{ss}+b=0$$
+$$x_{ss}=-\frac{b}{a}$$
+* Once I know its steady state, I can translate the system of reference so that the steady state will be equal to 0
+* I define $\hat{x}$ such that it has a 0 steady state
+$$\hat{x}_{ss}=0$$
+* The new variable is defined as
+$$\hat{x}(t)=x(t)-x_{ss}$$
+* Thus, given the steady state found before
+$$\hat{x}(t)=x(t)-(-\frac{b}{a})$$
+$$\hat{x}(t)=x(t)+\frac{b}{a}$$
+$$x(t)=\hat{x}(t)-\frac{b}{a}$$
+* I can then define the derivative as
+$$\frac{dx(t)}{dt}=\frac{d}{dt}(\hat{x}(t)-\frac{b}{a})$$
+* I want know to compute $ax(t)+b$ in the new reference system
+$$ax(t)+b=a(\hat{x}(t)-\frac{b}{a})+b$$
+$$ax(t)+b=a\hat{x}(t)$$
+* Putting togheter the 2 equation thus I have that
+$$\frac{d\hat{x}}{dt}=a\hat{x}(t)$$
+* I know the solution for a linear ODE
+$$\hat{x}(t)=ce^{at}$$
+* I can then recover the general solution for a linear ODE with a constant term
+$$\hat{x}(t)=ce^{at}$$
+$$x(t)+\frac{b}{a}=ce^{at}$$
+* The general solution is
+$$x(t)=ce^{at}-\frac{b}{a}$$
+* Linear ODEs with a constant term are called non-homogeneous linear ODEs
+* To obtain the special case, I observe that
+$$x(0)=x_0 \implies \hat{x}_0=x(0)-x_{ss}=x(0)+\frac{b}{a}$$
+* So I can derive
+$$\hat{x}(t)=\hat{x}_0 e^{at}$$
+$$\hat{x}(t)=(x(0)+\frac{b}{a}) e^{at}$$
+$$x(t)+\frac{b}{a}=(x(0)+\frac{b}{a}) e^{at}$$
+$$x(t)=(x(0)+\frac{b}{a}) e^{at}-\frac{b}{a}$$
+* The special solution is
+$$x(t)=(x(0)+\frac{b}{a}) e^{at}-\frac{b}{a}$$
+* A linear non-homogeneous ODE behaves in the same way to a linear ODE, converging when $a < 0$
+	* Of course it will converge to a different steady state
+* The half relxation time for a linear non-homogeneous ODE is
+$$\bar{t}=\frac{\ln{2}}{|a|}$$
 
-
-
-
-
-
-
-
+### Multi-Dimensional Homogeneous ODEs
+* This case is analogous to the linear case but it has more than 1 variable
+	* There is no constant term (it is homgeneous)
+* I have a set of variables in an n-dimensional space
+$$\vec{x} \in \mathbb{R}^n$$
+* The ordinary derivatives of all the variables are defined as
+$$\frac{dx_1}{dt}=a_{11}x_1+a_{12}x_2+...+a_{1n}x_n$$
+$$\frac{dx_2}{dt}=a_{21}x_1+a_{22}x_2+...+a_{2n}x_n$$
+$$...$$
+$$\frac{dx_n}{dt}=a_{n1}x_1+a_{n2}x_2+...+a_{nn}x_n$$
+* This notation can be compacted using a matrix A of coefficients and a vector of variables
+$$\frac{d\vec{x}}{dt}=A\vec{x}$$
+	* The derivative of each variable is a linear combination of all the other variables
+	* The linear coefficient are collected in a square matrix
+* We know that in the 1-dimensional case
+$$\frac{dx(t)}{dt}=ax(t) \implies x(t)=ce^{at}$$
+* I guess that a similar solution works also in the n-dimensional case
+$$\frac{d\vec{x}(t)}{dt}=A\vec{x}(t) \implies \vec{x}(t)=\vec{b} e^{\lambda t}$$
+	* In this expression the coefficient $\vec{b}$ must be a vector and not a scalar, since I need to obtain $\vec{x}(t)$, which is a vector
+	* $\lambda$ is an unknown coefficient that I will now determine
+* By substituting in the first term I obtain that
+$$\frac{d\vec{x}(t)}{dt}=\frac{d}{dt}(\vec{b} e^{\lambda t})$$
+$$\frac{d\vec{x}(t)}{dt}=\vec{b}\frac{d}{dt}(e^{\lambda t})$$
+$$\frac{d\vec{x}(t)}{dt}=\vec{b}\lambda e^{\lambda t}$$
+* In the second term instead
+$$A\vec{x}=A\vec{b}e^{\lambda t}$$
+* Now I can put the 2 halves together
+$$\vec{b}\lambda e^{\lambda t}=A\vec{b}e^{\lambda t}$$
+$$\lambda e^{\lambda t}=Ae^{\lambda t}$$
+* This last expression tells us that $\lambda$ is an Eigenvalue of the matrix A and $\vec{b}$ is an Eigenvector of A
+	* A is a real square matrix, so it has Eigenvectors
+	* A square matrix of size n has n Eigenvectors and Eignevalues (unless the case is degenerate)
+* So there are n general solutions that have the form
+$$\vec{x}(t)=\vec{b}^{(n)} e^{\lambda^{(n)} t}$$
+* Since I am in a linear system the general solution is the linear combination of these n solutions
+$$\vec{x}(t)=\sum_{i=1}^n c_i \vec{b}^{(i)} e^{\lambda_i t}$$
