@@ -1551,7 +1551,21 @@ $$x \in \mathbb{R} \qquad \frac{dx}{dt}=f(x):f(x)\ \text{non linear}$$
 * With non-linear functions I can have more than 1 point where the derivative is 0, so more than 1 steady state
 	* Each point can be a stable or non stable steady state, independently from the others
 * The stability of each steady state can be analysed by approximating the function at that point with a line
-	* The sign of the first derivative at the steady state tells me the behavior of the system
+	* The sign of the first derivative of the ODE at the steady state tells me the behavior of the system
 	* The derivative of a function is its linear approximation at a point
 	* If instead of just the first derivative at the point I use a series of derivatives, I obtain the Taylor approximation of the function
+	* Note that I am taking the derivative of an ODE, which is iteslf a derivative!
 * Each stable steady state has a basin of attraction, consisting of the set of starting points that collapse onto it
+* The logistic model for population growth is a non-linear ODE model
+$$ \frac{dP}{dt} = rP(1-\frac{P}{K}) \qquad r > 0,\ K > 0$$
+	* P is the population size, r the growth rate (the linear term of the derivative!), K is the carrying capacity of the environment (when P approaches K the growth rate becomes 0)
+	* I can define a new variable $x=\frac{P}{K}$ so that
+$$ \frac{dP}{dt} = K \frac{dx}{dt}$$
+$$ \frac{dx}{dt} = rx(1-x) = rx-rx^2$$
+	* This equation describes a parabola
+	* We must exclude all the regions where x is negative, since the population size cannot be negative
+	* The steady states are the points for which $rx(1-x)=0$
+		* There are 2 steady states, 1 and 0
+	* Whatever the starting point, I will collapse to 1 (full carrying capacity) since it is the only stable steady state
+$$f(x)=rx-rx^2$$
+$$ \frac{df}{dx} = r-2rx$$
