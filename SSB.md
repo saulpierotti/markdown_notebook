@@ -1486,6 +1486,7 @@ $$\vec{x}(t)=\sum_{i=1}^n c_i \vec{b}^{(i)} e^{\lambda_i t}$$
 * Any particular solution to the system is just a decomposition of the starting point into the Eignevector components of the system
 	* The overall dynamics is just a linear combination of the dinamycs of the starting point components into the respective Eigenvectors
 	* If one Eigenvector is expanding and the other is contracting, I will collapse to the expanding Eignevector and then expand into it ot infinity
+* In the case of one Eigenvalue positive and the other negative, the system lives in a n-1 dimensional subspace of the original space, which is called saddle point
 * A true stable steady state is possible only when all the Eigenvalues are negative, and thus all the Eigenvectors show a contracting dynamic
 * The steady state is always the origin, so the point $\vec{0}$
 
@@ -1513,7 +1514,7 @@ $$A\vec{x}+\vec{z}=A\hat{\vec{x}}$$
 * So in the new system the equation is identical to the homogeneous case
 $$\frac{d\hat{\vec{x}}}{dt}=A\hat{\vec x}$$
 * This means that the dynamics is identical, just the position of the steady state is different
-	* The behaviour is governed by the sign ofthe Eigenvalues of A
+	* The behaviour is governed by the sign of the Eigenvalues of A
 
 ### Higher Order Linear ODEs
 * It is quite easy to deal with them, by remembering that a second derivative is just the derivative of a derivative (and so on)
@@ -1569,3 +1570,16 @@ $$ \frac{dx}{dt} = rx(1-x) = rx-rx^2$$
 	* Whatever the starting point, I will collapse to 1 (full carrying capacity) since it is the only stable steady state
 $$f(x)=rx-rx^2$$
 $$ \frac{df}{dx} = r-2rx$$
+
+### Multi-Dimensional Higher-Order Homogeneous ODEs
+* Analogously to the previous cases, in this situation the behaviour is determined by the Eigenvalues of the system, that lie in the complex field (due to the presence of higher derivatives)
+* Complex solutions give an oscillatory behaviour, while real solution give a contracting or expanding behaviour
+* The pure complex part of the solution determins the oscillation, while the real part determines the expansion or contraction
+$$ \lambda = a+ib$$
+	* A pure complex solution with $a=0$ gives a circle around the origin
+		* In this case the solution is called a center dynamic
+	* A negative $a$ gives an inward spiral behaviour that converges to 0
+		* In this case the solution is called a stable focus
+	* A positive $a$ gives an outward spiral behaviour that converges to 0
+* Also the Eigenvectors can be complex in this systems, and so they cannot be drawn in the real field
+* Note that the spirals are always in the $x_1,x_2$ plane, while in the graph against time of the single variables the behaviour is a simple oscillation
