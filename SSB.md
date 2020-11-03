@@ -1558,17 +1558,19 @@ $$x \in \mathbb{R} \qquad \frac{dx}{dt}=f(x):f(x)\ \text{non linear}$$
 	* Note that I am taking the derivative of an ODE, which is iteslf a derivative!
 * Each stable steady state has a basin of attraction, consisting of the set of starting points that collapse onto it
 	* The limits of the basin of attraction is determided by the position of the closest unstable steady states with respect to the stable steady state that is its focus
+
+#### Logistic Model of Population Growth
 * The logistic model for population growth is a non-linear ODE model
 $$ \frac{dP}{dt} = rP(1-\frac{P}{K}) \qquad r > 0,\ K > 0$$
-	* P is the population size, r the growth rate (the linear term of the derivative!), K is the carrying capacity of the environment (when P approaches K the growth rate becomes 0)
-	* I can define a new variable $x=\frac{P}{K}$ so that
+* P is the population size, r the growth rate (the linear term of the derivative!), K is the carrying capacity of the environment (when P approaches K the growth rate becomes 0)
+* I can define a new variable $x=\frac{P}{K}$ so that
 $$ \frac{dP}{dt} = K \frac{dx}{dt}$$
 $$ \frac{dx}{dt} = rx(1-x) = rx-rx^2$$
-	* This equation describes a parabola
-	* We must exclude all the regions where x is negative, since the population size cannot be negative
-	* The steady states are the points for which $rx(1-x)=0$
-		* There are 2 steady states, 1 and 0
-	* Whatever the starting point, I will collapse to 1 (full carrying capacity) since it is the only stable steady state
+* This equation describes a parabola
+* We must exclude all the regions where x is negative, since the population size cannot be negative
+* The steady states are the points for which $rx(1-x)=0$
+	* There are 2 steady states, 1 and 0
+* Whatever the starting point, I will collapse to 1 (full carrying capacity) since it is the only stable steady state
 $$f(x)=rx-rx^2$$
 $$ \frac{df}{dx} = r-2rx$$
 
@@ -1624,3 +1626,38 @@ J =
 $$ \frac{d\vec{x}}{dt}|_{x_{ss}} = \vec{f}(\vec{x})|_{x_{ss}} \approx \vec{f}(x_{ss})+J|_{x_{ss}} \vec{\epsilon}$$
 * I can finally use J in place of the matrix A for determining the behaviour of the system close to the steady state
 	* I do it in the usual way by analysing its Eigenvalues
+
+#### Lotka-Volterra Equations
+* The Lokta-Volterra equations are used in ecology to model the evolution of a predator-prey system
+	* It was invented in the 1900
+* Here x is the prey population and y is the predator population
+* The probability that prey and predator meet is xy
+* There is no carrying capacity in this model (it is assumed to be infinite)
+* I have a system of the kind
+$$
+\begin{cases}
+\frac{dx}{dt}=Ax-Bxy\\
+\frac{dy}{dt}=-Cy+Dxy
+\end{cases}
+$$
+$$
+A,B,C,D \in \mathbb{R} > 0
+$$
+	* The prey populatio is negatively influenced by the product xy while the predator population is positively influenced by it
+	* Without prey, the predator population can only decline
+* I need thus to solve for the steady state
+$$
+\begin{cases}
+Ax-Bxy = 0\\
+-Cy+Dxy = 0
+\end{cases}
+$$
+* I can rearrange as
+$$
+\begin{cases}
+x(A-By) = 0\\
+y(-C+Dx) = 0
+\end{cases}
+$$
+* I can notice that this system has a 2 solutions
+$$ x=0 \qquad y=0$$
