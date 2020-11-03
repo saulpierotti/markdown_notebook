@@ -1395,7 +1395,7 @@ $$\frac{dx}{dt}=f(x) \implies x(t+\Delta t)=x(t)+f(x)*\Delta t$$
 	* The solution obtained is an approximation, since I am approximating the derivative with the incremental ratio
 * There are more advanced numerical approximation algorithms and methods to m,inimize the approximation error, but we did not treat them in detail
 
-### Linear ODE with a constant term
+### Non-Homogeneous Linear ODE
 * The following ODE is similar to a linear ODE but it includes a constant term
 $$\frac{dx(t)}{dt}=ax(t)+b$$
 * It is not so easy to solve analitically, but I can find its steady state
@@ -1440,7 +1440,7 @@ $$x(t)=(x(0)+\frac{b}{a}) e^{at}-\frac{b}{a}$$
 * The half relxation time for a linear non-homogeneous ODE is
 $$\bar{t}=\frac{\ln{2}}{|a|}$$
 
-### Multi-Dimensional Homogeneous ODEs
+### Multi-Dimensional Homogeneous Linear ODEs
 * This case is analogous to the linear case but it has more than 1 variable
 	* There is no constant term (it is homgeneous)
 * I have a set of variables in an n-dimensional space
@@ -1474,5 +1474,84 @@ $$\lambda e^{\lambda t}=Ae^{\lambda t}$$
 	* A square matrix of size n has n Eigenvectors and Eignevalues (unless the case is degenerate)
 * So there are n general solutions that have the form
 $$\vec{x}(t)=\vec{b}^{(n)} e^{\lambda^{(n)} t}$$
+	* Each solution is relative to one of the original variables!
 * Since I am in a linear system the general solution is the linear combination of these n solutions
 $$\vec{x}(t)=\sum_{i=1}^n c_i \vec{b}^{(i)} e^{\lambda_i t}$$
+	* The linear combination refers to the addition of terms in the derivative definition
+* The particular solution for the multi-dimensional case can be obtained by substituting the initial conditions and determining the coefficients c
+* The stability of the steady state in a multi-dimensional linear homogeneous ODE is interesting
+	* If I start on an Eignevector, the evolution of the system is determided by the sign and magnitude of the corresponding Eigenvalue
+	* A negative Eignevalue gives a contracting behaviour, and thus a stable steady state
+	* A positive Eigenvalue gives an expanding behaviour, and thus an unstable steady state
+* Any particular solution to the system is just a decomposition of the starting point into the Eignevector components of the system
+	* The overall dynamics is just a linear combination of the dinamycs of the starting point components into the respective Eigenvectors
+	* If one Eigenvector is expanding and the other is contracting, I will collapse to the expanding Eignevector and then expand into it ot infinity
+* A true stable steady state is possible only when all the Eigenvalues are negative, and thus all the Eigenvectors show a contracting dynamic
+* The steady state is always the origin, so the point $\vec{0}$
+
+### Multi-Dimensional Non-Homogeneous Linear ODEs
+* I am in system similar to the previoua one, but with a vector of constant terms added
+$$\frac{d\vec{x}}{dt}=A\vec{x}+\vec{z}$$
+* Similarly to the 1-dimensional case, I can find the solution by traslating the frame of reference so to remove the constant term
+* The steady state is
+$$\frac{d\vec{x}}{dt}|_{x_{ss}}=0 \implies A\vec{x}_{ss}+\vec{z} = 0$$
+* I can recover $\vec{x}_{ss}$
+$$\vec{x}_{ss}=-A^{-1}\vec{z}$$
+	* This requries A to be invertible!
+* I define the new variable $\hat{\vec{x}}$
+$$\hat{\vec{x}}=\vec{x}-\vec{x}_{ss}$$
+$$\hat{\vec{x}}=\vec{x}+A^{-1}\vec{z}$$
+* So reciprocally the old variable $\vec{x}$ is
+$$\vec{x}=\hat{\vec{x}}-A^{-1}\vec{z}$$
+* Since $\vec{x}$ and $\vec{\hat{x}}$ differ only for constant terms their derivatives are equal
+$$\frac{d\hat{\vec x}}{dt}=\frac{d\vec{x}}{dt}$$
+* The second term becomes
+$$A\vec{x}+\vec{z}=A(\hat{\vec{x}}-A^{-1}\vec{z})+\vec{z}$$
+	* Since $A*A^{-1}=I$
+$$A\vec{x}+\vec{z}=A\hat{\vec{x}}-\vec{z}+\vec{z}$$
+$$A\vec{x}+\vec{z}=A\hat{\vec{x}}$$
+* So in the new system the equation is identical to the homogeneous case
+$$\frac{d\hat{\vec{x}}}{dt}=A\hat{\vec x}$$
+* This means that the dynamics is identical, just the position of the steady state is different
+	* The behaviour is governed by the sign ofthe Eigenvalues of A
+
+### Higher Order Linear ODEs
+* It is quite easy to deal with them, by remembering that a second derivative is just the derivative of a derivative (and so on)
+* Let's suppose a system of the kind
+$$\begin{cases}
+\frac{dx}{dt}=ax\\
+\frac{d^2x}{dt^2}=kx
+\end{cases}$$
+* I can define 2 new variables
+$$x_1 =x \qquad x_2=\frac{dx}{dt}$$
+* From the second order derivative, I can build a system with only first-order derivatives
+$$\begin{cases}
+\frac{dx_1}{dt}=x_2\\
+\frac{dx_2}{dt}=kx_1
+\end{cases}$$
+* I can summarise the system in vector notation as
+$$\frac{d\vec{x}}{dt}=\begin{pmatrix}0 && 1\\k && 0\end{pmatrix}\vec{x}$$
+* The Eignevalues of this matrix are $\pm \sqrt k$
+	* If k is positive the Eigenvalues are real, if negative they are complex numbers
+* The expression for the second derivative with k negative is reminiscent of an armonic oscillator
+$$\frac{d^2x}{dt^2}=kx \qquad k < 0$$
+	* The system tends to oscillate arond the equilibrium point
+		* If x is positive the system accelerates negatively (goes back to 0) and viceversa
+	* When in differential equations I found a complex solution ($k < 0$), the behaviour of the system is oscillatory
+* The famous Euler formula can decompose complex numbers in a linear combination of sine and cosine
+$$e^{ia}=\cos a + i \sin a \qquad a \in \mathbb{R}$$
+* Real solutions give contracting or expanding behaviours according to their sign, complex solution give oscillatory behaviour
+* If the solution $\lambda$ contains a complex number with a real component I have a linear combination of a real and complex solution
+$$\lambda = a+ib \implies e^{\lambda t}=e^{(a+ib)t}=e^{at}*e^{ibt}$$
+	* According ot the sign of a, I can have reinforcing oscillations or fading oscillations
+
+### Non-Linear ODEs
+* I have a system of the kind
+$$x \in \mathbb{R} \qquad \frac{dx}{dt}=f(x):f(x)\ \text{non linear}$$
+* With non-linear functions I can have more than 1 point where the derivative is 0, so more than 1 steady state
+	* Each point can be a stable or non stable steady state, independently from the others
+* The stability of each steady state can be analysed by approximating the function at that point with a line
+	* The sign of the first derivative at the steady state tells me the behavior of the system
+	* The derivative of a function is its linear approximation at a point
+	* If instead of just the first derivative at the point I use a series of derivatives, I obtain the Taylor approximation of the function
+* Each stable steady state has a basin of attraction, consisting of the set of starting points that collapse onto it
