@@ -1557,6 +1557,7 @@ $$x \in \mathbb{R} \qquad \frac{dx}{dt}=f(x):f(x)\ \text{non linear}$$
 	* If instead of just the first derivative at the point I use a series of derivatives, I obtain the Taylor approximation of the function
 	* Note that I am taking the derivative of an ODE, which is iteslf a derivative!
 * Each stable steady state has a basin of attraction, consisting of the set of starting points that collapse onto it
+	* The limits of the basin of attraction is determided by the position of the closest unstable steady states with respect to the stable steady state that is its focus
 * The logistic model for population growth is a non-linear ODE model
 $$ \frac{dP}{dt} = rP(1-\frac{P}{K}) \qquad r > 0,\ K > 0$$
 	* P is the population size, r the growth rate (the linear term of the derivative!), K is the carrying capacity of the environment (when P approaches K the growth rate becomes 0)
@@ -1571,15 +1572,55 @@ $$ \frac{dx}{dt} = rx(1-x) = rx-rx^2$$
 $$f(x)=rx-rx^2$$
 $$ \frac{df}{dx} = r-2rx$$
 
-### Multi-Dimensional Higher-Order Homogeneous ODEs
+### Multi-Dimensional Higher-Order ODEs
 * Analogously to the previous cases, in this situation the behaviour is determined by the Eigenvalues of the system, that lie in the complex field (due to the presence of higher derivatives)
 * Complex solutions give an oscillatory behaviour, while real solution give a contracting or expanding behaviour
 * The pure complex part of the solution determins the oscillation, while the real part determines the expansion or contraction
 $$ \lambda = a+ib$$
 	* A pure complex solution with $a=0$ gives a circle around the origin
 		* In this case the solution is called a center dynamic
+		* This is an indifferent stability case: wherever the system starts it remains, without converging or diverging
 	* A negative $a$ gives an inward spiral behaviour that converges to 0
 		* In this case the solution is called a stable focus
 	* A positive $a$ gives an outward spiral behaviour that converges to 0
 * Also the Eigenvectors can be complex in this systems, and so they cannot be drawn in the real field
 * Note that the spirals are always in the $x_1,x_2$ plane, while in the graph against time of the single variables the behaviour is a simple oscillation
+* When we will apply the initial conditions all the imaginary parts cancel out so the system is fully in the real plane, and the solution can be written in term of sine and cosine
+
+### Non-Linear Multi-Dimensional ODEs
+* I have a system of the kind
+$$\vec{x} \in \mathbb{R}^n \qquad\frac{d\vec{x}}{dt}=\vec{f}(\vec{x}):\vec{f}(\vec{x})\ \text{non linear}$$
+* An analytical solution of these system is frequently very hard, and when a solution is needed a numerical approach is preferrable
+* In general I have a number of steady states that goes from 0 to n
+	* Empirical system typically have some steady state
+* Similarly to the uni-dimensional case, I can approximate the function at the steady state with a vector of its first derivatives
+* Since I have many variables in this case, I need to use a linear combination of partial derivatives for each components, so to obtain the total derivative for each of the components
+$$ \frac{dx_j}{dt}|_{x_{ss}} = f_j(\vec{x})|_{x_{ss}} \approx f_j(x_{ss})+\sum_i \epsilon_i \frac{\partial f_j}{\partial x_i}|_{x_{ss}}+O(\epsilon^2)$$
+	* This is a multi-dimensional Taylor expansion of the function at the steady state
+	* $\epsilon$ is the displacement along the input axis (the finite increment)
+	* $f_j(\vec{x})|_{x_{ss}} = 0$ by definition of steady state
+	* The quadratic term relates to the higher order derivatives, and we will not treat it
+* I can then build a matrix of partial derivatives called Jacobian matrix
+$$
+J =
+\begin{bmatrix}
+  \frac{\partial f_1}{\partial x_1} & 
+    \frac{\partial f_1}{\partial x_2} & 
+    ... &
+    \frac{\partial f_1}{\partial x_n}\\[1ex]
+    \frac{\partial f_2}{\partial x_1} & 
+    \frac{\partial f_2}{\partial x_2} & 
+    ... &
+    \frac{\partial f_2}{\partial x_n}\\[1ex]
+    ... &
+    ... &
+    ... & \\[1ex]
+    \frac{\partial f_n}{\partial x_1} & 
+    \frac{\partial f_n}{\partial x_2} & 
+    ... &
+    \frac{\partial f_n}{\partial x_n}
+\end{bmatrix}$$
+* I can use the Jacobian matrix to write the approximation of my function
+$$ \frac{d\vec{x}}{dt}|_{x_{ss}} = \vec{f}(\vec{x})|_{x_{ss}} \approx \vec{f}(x_{ss})+J|_{x_{ss}} \vec{\epsilon}$$
+* I can finally use J in place of the matrix A for determining the behaviour of the system close to the steady state
+	* I do it in the usual way by analysing its Eigenvalues
