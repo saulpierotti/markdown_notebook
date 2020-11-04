@@ -1627,9 +1627,9 @@ $$ \frac{d\vec{x}}{dt}|_{x_{ss}} = \vec{f}(\vec{x})|_{x_{ss}} \approx \vec{f}(x_
 * I can finally use J in place of the matrix A for determining the behaviour of the system close to the steady state
 	* I do it in the usual way by analysing its Eigenvalues
 
-#### Lotka-Volterra Equations
+### Lotka-Volterra Equations
 * The Lokta-Volterra equations are used in ecology to model the evolution of a predator-prey system
-	* It was invented in the 1900
+	* It was invented in the 1900 to explain the fishing patterns in the adriatic sea
 * Here x is the prey population and y is the predator population
 * The probability that prey and predator meet is xy
 * There is no carrying capacity in this model (it is assumed to be infinite)
@@ -1660,4 +1660,108 @@ y(-C+Dx) = 0
 \end{cases}
 $$
 * I can notice that this system has a 2 solutions
-$$ x=0 \qquad y=0$$
+$$ x=0,\ y=0$$
+$$ (A-By)=0,\ (-C+Dx)=0 \implies y=\frac{A}{B},\ x=\frac{C}{D}$$
+* So there are 2 steady steates
+$$x_{ss_1} = (0,0), \qquad x_{ss_2} = (\frac{A}{B},\frac{C}{D})$$
+	* If there is neither prey nor predator, nothing happens
+	* If the population of prey and predator are A/B and C/D, then the system remains at that level
+* I can linearize the system using the first derivative of the functions f$f_x$ and $f_y$
+$$\frac{dx}{dt} = Ax-Bxy = f_x$$
+$$\frac{dy}{dt} = -Cx+Dxy = f_y$$
+* I build the Jacobian matrix of partial derivatives
+$$
+J =
+\begin{bmatrix}
+  \frac{\partial f_x}{\partial x} & \frac{\partial f_x}{\partial y}\\[1ex]
+  \frac{\partial f_y}{\partial x} & \frac{\partial f_y}{\partial y}
+\end{bmatrix}
+=
+\begin{bmatrix}
+  A-By & -Bx\\[1ex]
+  Dx   & -C+Dy
+\end{bmatrix}
+$$
+* I now evaluate the Jacobian at the point (0,0)
+$$
+J =
+\begin{bmatrix}
+  A-By & -Bx\\[1ex]
+  Dy   & -C+Dy
+\end{bmatrix}
+=
+\begin{bmatrix}
+  A & 0\\[1ex]
+  0 & -C
+\end{bmatrix}
+$$
+* I find the Eigenvalues of the matrix
+$$ \lambda_1 = A \qquad \lambda_2 = -C$$
+	* Since the matrix is diagonal, the Eigenvalues are the diagonal elements
+	* A and C are both bigger than 0, so $\lambda_1$ is positive and $\lambda_2$ is negative
+	* The stationary point (0, 0) is thus a saddle point
+	* The expanding axis is corresponding to a state without predators: preys will expand infinitely
+	* The contracting axis correspond ot a state without preys: the population will die out
+* I now evaluate the Jacobian at the point (C/D,A/B)
+$$
+J =
+\begin{bmatrix}
+  A-By & -Bx\\[1ex]
+  Dy   & -C+Dy
+\end{bmatrix}
+=
+\begin{bmatrix}
+  0 & -\frac{BC}{D}\\[1ex]
+  \frac{DA}{B} & 0 
+\end{bmatrix}
+$$
+* I find the Eigenvalues of the matrix
+$$ \lambda^2 = -CA$$
+	* Since -CA is a negative number, $\lambda$ is complex
+$$ \lambda_{1,2} = \pm i\sqrt{|-CA|}$$
+* Both solutions are purely imaginary: the stability point is a center
+	* The population of prey and predator will infinetly oscillate around the stationary point, with a radius depending on the starting point
+	* The oscillation of prey and predator are out of phase with each other
+* Actually, the oscillatory behaviour holds for all the space and not only in the vicitnity of the steady state
+
+### Maltus Model for Population Growth
+* It is similar to the logistic model, buth it also includes an harvesting term H
+$$ \frac{dP}{dt} = rP(1-\frac{P}{K})-H \qquad r > 0,\ K > 0,\ H > 0$$
+* I introduce the new variables x and h that allow me to simplify the model
+$$x = \frac{P}{K} \qquad h=\frac{H}{K}$$
+$$ \frac{dP}{dt} = K \frac{dx}{dt}$$
+$$ \frac{dx}{dt} = rx(1-x)-h \qquad r > 0,\ x > 0,\ h > 0$$
+* There are 2 steady states
+$$x_{ss} = \frac{1}{2} \pm \frac{1}{2} \sqrt{1-4\frac{h}{r}}$$
+* When $4\frac{h}{r} < 1$ I have that
+	* $\frac{1}{2} - \frac{1}{2} \sqrt{1-4\frac{h}{r}}$ is necessarily positive or 0
+		* The subtracted part is at most $\frac{1}{2}$ when h is 0, and it is smaller when h is greater than 0
+		* The steady state depends on the value of h, and it is 0 when h is 0
+		* At most the solution can be $\frac{1}{2}$ when $4\frac{h}{r} = 1$
+	* $\frac{1}{2} - \frac{1}{2} \sqrt{1-4\frac{h}{r}}$ is necessarily positive
+		* It is 1 when h is 0, and decreases until $\frac{1}{2}$ when $4\frac{h}{r} = 1$ 
+* When $4\frac{h}{r} > 1$ there is no solution to the system, and so no steady state
+	* In this case $\frac{dx}{dt}$ is always negative, and so the population will always decrease to 0 (and behyond if it was possible but it is impossible to harvest from a non-existent population, so maintaining h is impossible)
+	* This situation happens with $h > \frac{r}{4}$, and so strong harvesting
+* The steady states are always 2 for any harvesting regime, but they change with changing h
+	* If there is no harvesting, we are back in the logistic model and the steady states are x=0 and x=1 (which correspond to P=0 and P=K, no population or population at the carryng capacity)
+	* If harvesting is present but tolerable, numerous populations (those above half of the carrying capacity) are in a stable equilibrium dep[ending on h
+	* Small populations (those below) are in an unstable equilibrium: either they decrease to 0 or they go to the equilibrium determined by h
+	* If harvesting is too strong, the only possibility is to have a 0 population
+* The abrupt change in behaviour at r/4 is called catastrophe or bifurcation
+	* A small change in the harvesting rate can lead from an equilibrium to a complete loss of population
+
+
+## Boolean Network
+* Sometimes equations are really sensitive to the value of parameters, and if we make small errors in their measurement we can make huge prediction errors
+* Once I know the parameters, I can predict numerically the evolution of the system
+* Boolean or Kauffmann networks are the oppsite extreme: they treat all the variables as boolean vectors
+$$\vec{x} \in \{0, 1\}$$
+* They were born with the study of gene expression, were it was considered interesting to model gene networks as active/inactive
+* Note that also the time is treated discretely, I evaluate time t and time t+1, where 1 can be a series of different things (a timeframe or a logical progression)
+* In general in boolean network is possible to enumerate all the possible states of the system
+* I can implement stocastitcity by introducing random state changes with some probability
+* Randomicity can be added as missing state changes
+	* This will only take effect when more than 1 state changes at the same time, since a missing transition when a single state changes is a no-transition, which generates only a timestep lag
+	* I will thus low-probability transitions to my system
+* Adding stocasticity can dramatically change the evolution of the system
