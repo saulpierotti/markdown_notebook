@@ -2,6 +2,10 @@
 % Saul Pierotti
 % \today
 
+---
+header-includes: \usepackage{chemarr}
+---
+
 # Introduction
 * The first part is about machine learning methods, mostly at the theoretical level
 	* The practical application of SVM and kernel methods is part of the LB2 project
@@ -1765,3 +1769,54 @@ $$\vec{x} \in \{0, 1\}$$
 	* This will only take effect when more than 1 state changes at the same time, since a missing transition when a single state changes is a no-transition, which generates only a timestep lag
 	* I will thus low-probability transitions to my system
 * Adding stocasticity can dramatically change the evolution of the system
+
+## Chemical Kinetic Modelling
+* I have a chemical reaction of the kind
+$$ aA +bB \xrightleftharpoons[k_2]{k_1} cC + dD $$
+* The rate of change of a product depends on the probability of successfull collisions among reactants, minus the probabilitty of successfull destruction of products back into reactants
+$$\frac{dC}{dt} = c k_1 A^aB^b - c k_2 C^cD^d$$
+	* $N^n$ is the concentration of the species to the power of how many molecules must take purt in the reaction at the same time, and it is directly proportional to the probability of a collision
+	* The kinetic constants are proportionality constants among the product of the concentrations and the rate of reaction
+	* c is the number of molecules of c formed in a reaction, which influences directly the derivative
+* The steady state is when
+$$\frac{dC}{dt} = 0$$
+$$c k_1 A^aB^b - c k_2 C^cD^d = 0$$
+$$c k_1 A^aB^b - c k_2 C^cD^d = 0$$
+$$k_1 A^a B^b = k_2 C^c D^d$$
+$$\frac{C^c D^d}{A^a B^b} = \frac{k_1}{k_2} = K_{eq} $$
+	* The steady state is when the reaction is at equilibrium
+* The equilibrium constant is related to the thermodynamics of the system
+* In a simple reaction like the following I can easily determine the steady state
+$$ A \xrightleftharpoons[k_2]{k_1} B $$
+$$A+B=T$$
+$$\begin{cases}
+\frac{dA}{dt}=k_1A-k_2B\\
+\frac{dB}{dt}=-k_1A+k_2B = -\frac{dA}{dt}\\
+\end{cases}
+$$
+$$\frac{dA}{dt}=-k_1A+k_2(T-A) = -(k_1-k_2) A + k_2 T$$
+* I impose the steady state condition to find the equilibrium concentration of A
+$$\frac{dA}{dt}|_{A_{ss}}=0$$
+$$A_{ss}=\frac{k_2 T}{k_1+k_2}$$
+* This is a non-homogeneous linear ODE with a stable steady state
+* An irreversible reaction
+$$ A + A \to  B $$
+$$ 2A + B + T$$
+	* Note that irreversiblity is always practical but not teorethical: nothiong is irreversible, just very umprobable (big difference among kinetic constant in the 2 directions)
+$$\frac{dA}{dt} = -2kA^2$$
+* At the steady state all A is converted to B
+$$\frac{dA}{dt}|_{A_{ss}}=0$$
+$$-2kA^2 = 0 \implies A=0$$
+* This is a non-linear system even if the equation is very simple!
+* Even the linear approximation does not work in this case
+	* The derivative of the function is itself 0 at the steady state
+	* I need thus to study higher order derivatives
+* In this case I can see by plotting that the function is always decreasing, so the steady state is stable
+
+## Michaelis Menten Kinetics
+* The Michaelis Menten equation is, for an enzymatic reaction
+$$A \to B$$
+$$\frac{dB}{dT} = \frac{V_{max}A}{A+K_{mm}}$$
+	* $K_{mm}$ is a constant depending on the enzyme that is equal to the concentration of A when the reaction rate is equal to half of the maximum
+	* $V_{max}$ is a constant taht depends on the enzyme concentration
+* A plot of the reaction rate against the concentration rate is an hyperbolic function that approaches a maximum velocity when the concentration of A approaches infinity
