@@ -1815,8 +1815,41 @@ $$-2kA^2 = 0 \implies A=0$$
 
 ## Michaelis Menten Kinetics
 * The Michaelis Menten equation is, for an enzymatic reaction
-$$A \to B$$
+$$ A + E \xrightleftharpoons[k_{-1}]{k_1} C \to_{k_2} B + E$$
 $$\frac{dB}{dT} = \frac{V_{max}A}{A+K_{mm}}$$
+	* A is the substrate
+	* B is the product
+	* E is the free enzyme
+	* C is the concentration of the enzyme-substrate complex
 	* $K_{mm}$ is a constant depending on the enzyme that is equal to the concentration of A when the reaction rate is equal to half of the maximum
 	* $V_{max}$ is a constant taht depends on the enzyme concentration
 * A plot of the reaction rate against the concentration rate is an hyperbolic function that approaches a maximum velocity when the concentration of A approaches infinity
+* Note that I am making an assumption here that the rate of dissociation of the products from the enzyme ($k_2$) is much higher than the rate of association of the reactants to the enzyme (the ignored $k_{-2}$)
+* Note that an enzyme cannot change the equilibrium constants, only the rate constants!
+* I can write the system as
+$$\begin{cases}
+\frac{dA}{dt}=-k_1AE+k_{-1}C\\
+\frac{dC}{dt}=k_1AE-k_{-1}C-k_2C\\
+\frac{dE}{dt}=-k_1AE+k_{-1}C+k_2C\\
+\frac{dB}{dt}=k_2C\\
+\end{cases}
+$$
+* In orther to have MM kinetics, A must be in excess to E, such that C rapidly reaches and then maintains for the duration of the reaction with a slow decline a typical concentration, called quasi-steady state
+	* This holds in vitro, we don't know what happens in vivo
+	* From this MM assumption, we establish that
+$$\frac{dC}{dt}=0$$
+$$k_1AE-(k_{-1}+k_2)C=0$$
+* By noting that at any time the total enzyme $E_T$ is the sum of free enzyme and complexated enzyme
+$$E_T = E + C$$
+$$k_1A(E_T-C)-(k_{-1}+k_2)C=0$$
+$$k_1AE_T-k_1AC-(k_{-1}+k_2)C=0$$
+$$k_1AE_T-(k_{-1}+k_2+k_1A)C=0$$
+$$C(k_{-1}+k_2+k_1A)=k_1AE_T$$
+$$C=\frac{k_1AE_T}{k_{-1}+k_2+k_1A}$$
+$$C=\frac{AE_T}{\frac{k_{-1}+k_2}{k_1}+A}$$
+* This is the concentration of C at the quasi-steady state
+* By substituting this definition
+$$\frac{dB}{dt}=k_2C$$
+$$\frac{dB}{dt}=\frac{k_2 AE_T}{\frac{k_{-1}+k_2}{k_1}+A}$$
+* By noting that $k_2E_T$ is the $V_{max}$ and calling $\frac{k_{-1}+k_2}{k_1}$ as $K_{MM}$ I obtain the MM equation
+$$\frac{dB}{dT} = \frac{V_{max}A}{A+K_{mm}}$$
