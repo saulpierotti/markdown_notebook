@@ -1631,7 +1631,21 @@ $$ \frac{d\vec{x}}{dt}|_{x_{ss}} = \vec{f}(\vec{x})|_{x_{ss}} \approx \vec{f}(x_
 * I can finally use J in place of the matrix A for determining the behaviour of the system close to the steady state
 	* I do it in the usual way by analysing its Eigenvalues
 
-### Lotka-Volterra Equations
+## Boolean Network
+* Sometimes equations are really sensitive to the value of parameters, and if we make small errors in their measurement we can make huge prediction errors
+* Once I know the parameters, I can predict numerically the evolution of the system
+* Boolean or Kauffmann networks are the oppsite extreme: they treat all the variables as boolean vectors
+$$\vec{x} \in \{0, 1\}$$
+* They were born with the study of gene expression, were it was considered interesting to model gene networks as active/inactive
+* Note that also the time is treated discretely, I evaluate time t and time t+1, where 1 can be a series of different things (a timeframe or a logical progression)
+* In general in boolean network is possible to enumerate all the possible states of the system
+* I can implement stocastitcity by introducing random state changes with some probability
+* Randomicity can be added as missing state changes
+	* This will only take effect when more than 1 state changes at the same time, since a missing transition when a single state changes is a no-transition, which generates only a timestep lag
+	* I will thus low-probability transitions to my system
+* Adding stocasticity can dramatically change the evolution of the system
+
+## Lotka-Volterra Equations
 * The Lokta-Volterra equations are used in ecology to model the evolution of a predator-prey system
 	* It was invented in the 1900 to explain the fishing patterns in the adriatic sea
 * Here x is the prey population and y is the predator population
@@ -1728,7 +1742,7 @@ $$ \lambda_{1,2} = \pm i\sqrt{|-CA|}$$
 	* The oscillation of prey and predator are out of phase with each other
 * Actually, the oscillatory behaviour holds for all the space and not only in the vicitnity of the steady state
 
-### Maltus Model for Population Growth
+## Maltus Model for Population Growth
 * It is similar to the logistic model, buth it also includes an harvesting term H
 $$ \frac{dP}{dt} = rP(1-\frac{P}{K})-H \qquad r > 0,\ K > 0,\ H > 0$$
 * I introduce the new variables x and h that allow me to simplify the model
@@ -1754,21 +1768,6 @@ $$x_{ss} = \frac{1}{2} \pm \frac{1}{2} \sqrt{1-4\frac{h}{r}}$$
 	* If harvesting is too strong, the only possibility is to have a 0 population
 * The abrupt change in behaviour at r/4 is called catastrophe or bifurcation
 	* A small change in the harvesting rate can lead from an equilibrium to a complete loss of population
-
-
-## Boolean Network
-* Sometimes equations are really sensitive to the value of parameters, and if we make small errors in their measurement we can make huge prediction errors
-* Once I know the parameters, I can predict numerically the evolution of the system
-* Boolean or Kauffmann networks are the oppsite extreme: they treat all the variables as boolean vectors
-$$\vec{x} \in \{0, 1\}$$
-* They were born with the study of gene expression, were it was considered interesting to model gene networks as active/inactive
-* Note that also the time is treated discretely, I evaluate time t and time t+1, where 1 can be a series of different things (a timeframe or a logical progression)
-* In general in boolean network is possible to enumerate all the possible states of the system
-* I can implement stocastitcity by introducing random state changes with some probability
-* Randomicity can be added as missing state changes
-	* This will only take effect when more than 1 state changes at the same time, since a missing transition when a single state changes is a no-transition, which generates only a timestep lag
-	* I will thus low-probability transitions to my system
-* Adding stocasticity can dramatically change the evolution of the system
 
 ## Chemical Kinetic Modelling
 * I have a chemical reaction of the kind
