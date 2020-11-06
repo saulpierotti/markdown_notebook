@@ -1856,34 +1856,5 @@ $$\frac{dB}{dT} = \frac{V_{max}A}{A+K_{mm}}$$
 
 ## Cooperative Kinetics
 * Cooperativity of ligands can be positive, negative, homotropic (between moelcules of the same ligand species), or heterotropic
-* In presence of cooperative behavihour the Hill equation is used instead of the MM equation
-	* This model assumes positive homotropic cooperativity
-* A model of the system for an enzyme with 2 binding sites for A would be
-$$\begin{cases}
-A + E \to_{k_1} C_1 \\
-A + C_1 \to_{k_2} C_2 \\
-\end{cases}$$
-* The fractional saturation of the enzyme Y can be obtained as
-$$Y = \frac{C_1+2C_2}{total\ sites} = \frac{C_1+2C_2}{2E+EC_1+2C_2}$$
-* I assume that the binding of the first molecule of A is the rate limiting step, and so the concentration of $C_1$ is negligible
-* My model simplifies to
-$$2A+E \to_(k_1) C_2$$
-* The 2-ligand equilibrium constant $K_B$ can be derived as
-$$ K_B = \frac{C_2}{A^2E}$$
-* I can define now $C_2$ in terms of A and E
-$$C_2 = K_B A^2 E$$
-* The fractional saturation under this simplifing assumption is thus
-$$Y = \frac{2C_2}{2E+2C_2} = \frac{2 K_B A^2 E}{2E+2 K_B A^2 E} = \frac{K_B A^2}{1+K_B A^2}$$
-* The equilibrium constant $K_B$ is meaningful only for a certain number n of ligand molecules per enzyme, so it is written as $K_B^{(n)}$
-	* For the current case, thus, it is $K_B^{(2)}$
-* It is possible to write a standard constant in the form
-$$ \tilde{K_B})^{-n}=K_B^{(n)} $$
-* Using the standard constant, the occupancy equation becomes
-$$Y = \frac{K_B^{(n)} A^2}{1+K_B^{(n)} A^2} = \frac{(\frac{A^2}{\tilde{K_B}})^{(-n)}}{1+(\frac{A^2}{\tilde{K_B}})^{(-n)} A^2}$$
-* I can then derive the Hill kinetics
-$$\frac{dB}{dt} = \frac{V_{max}(\frac{A^2}{\tilde{K_B}})^{(-n)}}{1+(\frac{A^2}{\tilde{K_B}})^{(-n)}} = \frac{V_{max}A^n}{\tilde{K}_B^n+A^n}$$
-* In allosteric inhibition I have an apparent decrease in V max
-* In competitive inhibition I have an apparent increase in $K_{MM}$, with V max unaltered
-* All these models are derived from the law of mass action, which assumes free diffusion: in the cytoplasm this is not always true due to its gel-like behaviour
-* Note that the irreversibility assumption of these models is not always justified
-* Sensory and trascription networks can be both described by Hill functions
+* In presence of cooperative behavihour
+$$C = \frac{\beta (\frac{A}{k_b})^n}{1+(\frac{A}{k_b})^n}$$
