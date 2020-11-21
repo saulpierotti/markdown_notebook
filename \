@@ -7,25 +7,11 @@
 * In the real world you will mostly be alone, so learn to be independent
 * You should be able to create your own tools when pre-made tools are not available
 * Computational results need to be analysed in terms of their exportability ot the wet lab for validation
-
-# Secondary Structure
 * In order to determine the secondary structure of a protein is important to have good resolution structures
 	* From a good structure I can understand torsion angles
 * jCE is not available anymore at the PDB, you can only do sequence alignments and not structural alignments
 * For structural alignments we can use TopMatch (for pairwise) or Mustang (multiple)
-* If I have a CryoEM structure the secondary structure is not easy to determin (depends on resolution)
-* First problem: I have a crystal structure and I want to determine the secondary structure of a protein
-* A 3d structure is a reduce representation of the electron density that collapses all the fuzzy electron density of a molecule to discrete atomic coordinates!
-* It is easier to descibe secondary structure in terms of H bonds, not in terms of torsion angles
-* First I need to locate the hydrogens, that are usually not seen at normal resolutions
-	* H is transparent to X-rays
-	* There are several algortihms for H embedding
-		* A famous one was developped by Janet Thornton (EBI director)
-		* We will use the DSSP algorithm
-	* Also molecular visualization software need to fill-in hydrogens to determine which secondary structure to show!
-* Once I have the hydrogen positions I can determine the secondary structure from the backbone H-bonding pattern among neighboring residues
 
-## DSSP (Define Secondary Structure of Proteins)
 
 
 
