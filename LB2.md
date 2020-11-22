@@ -23,6 +23,8 @@
 	* H is transparent to X-rays
 	* There are several algortihms for H embedding
 		* A famous one was developped by Janet Thornton (EBI director)
+		* Some algorithms are MolProbity and WHATIF
+		* WHATIF was developped by a professor that now lives in the Filippines
 	* Also molecular visualization software need to fill-in hydrogens to determine which secondary structure to show!
 	* In general I can embed hydrogens by following simple chemical rules
 * Once I have the hydrogen positions I can determine the secondary structure from the backbone H-bonding pattern among neighboring residues
@@ -31,11 +33,7 @@
 * Torsion angles are not so easy to extract from 3d structures, so they are not the preferred way for secondary structure determination
 * An H bond is present when the distance among the atoms involved is under 2 $\AA$ and the atoms are co-planar
 	* H bonds can be formed in proteins mainly by O and N
-* In alpha helices the H-bonding happens among residues in position $i$ and $i+4$
-* Alpha helices are self-organizing local structures
-	* They are local in the sense that they do not involve long-range interactions
 * H bonding happens both in solvent accessible and inaccessible areas
-* Beta sheets are less local since they require the interaction of beta strands that can also be far in the sequence
 * Side chains do not really determine secondary structure, so predicting secondary structures from sequence can be misleading
 	* Propensities are only average properties
 * Prediction of secondary structure is important since by assigning a good secondary structure to a sequence I can identify remote homologs
@@ -51,6 +49,23 @@
 * To date SS predictors are all top-scoring, so there is not much to improve
 	* Accuracy is currently $0.8$ to $0.9$
 	* Burckhard Rost suggested in a paper that we are at an hard limit of accuracy since we are limited by uncertainty in the original structural data
+
+## Helices
+* Alpha helices are self-organizing local structures
+	* They are local in the sense that they do not involve long-range interactions
+* In alpha helices the H-bonding happens among residues in position $i$ and $i+4$
+* Alpha-helices are dextrose
+* A summary of helices dimensions
+
+|                  | $\alpha$ helix | $3_{10}$ helix | $\pi$ helix |
+|------------------|---------------:|---------------:|------------:|
+|Residues per turn | 3.6    aa      | 1.0    aa      | 4.4    aa    |
+|Step per residue  | 1.5 $\AA$      | 2.0 $\AA$      | 1.1 $\AA$   |
+|Radius            | 2.3 $\AA$      | 1.9 $\AA$      | 2.8 $\AA$   |
+|Pitch             | 5.4 $\AA$      | 6.0 $\AA$      | 4.8 $\AA$   |
+
+## Strands
+* Beta sheets are not local since they require the interaction of beta strands that can also be far in the sequence
 
 ## $\Delta\Delta G$
 * A major source of stability for a protein is its $\Delta G$ of folding
