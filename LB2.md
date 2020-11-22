@@ -80,9 +80,28 @@
 * SwissProt is used then for the automatic annotation of UniProt
 	* Templates are identified by sequence alignment
 	* Build rules that define conditions to be respected for the transfer of annotation
-		* SAAS is used for the automatic generation of annotation rules 
-		* UniRule is a set of manually created rules
+		* SAAS (Statistical Automatic Annotation System) is used for the automatic generation of annotation rules 
+			* It is a decision tree
+		* UniRule is a set of manually created rules (If...Else statements)
 	* The new rules are checked against SwissProt for validation before being applied
+	* The rules are used for the automatic annotation of UniProt
+* TrEMBL is obtained by automatic translation of EMBL
+	* Finding CDSs on genomic data is not trivial
+* Only 5% of the UniProt entries are obtained directly from the sequencing of proteins
+* Particularly in TrEMBL, annotation can change drammatically among DB version
+	* This is due to the update of UniRule and SAAS
+* Since release 2020_04 SAAS has been replaced with ARBA (Annotation-Rule Based Annotator)
+	* It is a multiclass learning system trained on SwissProt etries
+	* It uses rule-mining techniques to generate human-readable annotation rules
+	* It maintains a set of exclusion rules for properties that cannot be efficiently automatically annotated
+* Each annotation in UniProt reports an evidence tag that assert how that annotation was obtained (experimental evidence or prediction)
+	* This tag system is called ECO, and it is similar ot GO terms (it is an acyclic graph of descriptors)
+
+## InterPro
+* InterPro is a consortium of many different predictors that converge in the annotation of proteins and families
+* It is now at version 82, it is frequently updated!
+* Pfam is included in InterPro, and kind of performs the same function
+
 ## DSSP (Define Secondary Structure of Proteins)
 * DSSP (Kabasch and Sanders) is used for the definitiion of secondary structure in many molecular visualization software
 
