@@ -2,13 +2,15 @@
 % Saul Pierotti
 % \today
 
-# Introduction
+# Part 1 - Prof. Casadio
+
+## Introduction
 * When doing data analysis, check first the quality of your data and ask yourself if it is worth it analysing them
 * In the real world you will mostly be alone, so learn to be independent
 * You should be able to create your own tools when pre-made tools are not available
 * Computational results need to be analysed in terms of their exportability ot the wet lab for validation
 
-# Secondary Structure
+## Secondary Structure
 * In order to determine the secondary structure of a protein is important to have good resolution structures
 	* From a good structure I can understand torsion angles
 * jCE is not available anymore at the PDB, you can only do sequence alignments and not structural alignments
@@ -21,10 +23,79 @@
 	* H is transparent to X-rays
 	* There are several algortihms for H embedding
 		* A famous one was developped by Janet Thornton (EBI director)
-		* We will use the DSSP algorithm
 	* Also molecular visualization software need to fill-in hydrogens to determine which secondary structure to show!
+	* In general I can embed hydrogens by following simple chemical rules
 * Once I have the hydrogen positions I can determine the secondary structure from the backbone H-bonding pattern among neighboring residues
 * I can understand if there is an H bond between 2 C atoms by inspecting their distance (after placing the H)
+* We will use the dssp algorithm for secondary structure assignment from 3d structure
+* Torsion angles are not so easy to extract from 3d structures, so they are not the preferred way for secondary structure determination
+* An H bond is present when the distance among the atoms involved is under 2 $\AA$ and the atoms are co-planar
+	* H bonds can be formed in proteins mainly by O and N
+* In alpha helices the H-bonding happens among residues in position $i$ and $i+4$
+* Alpha helices are self-organizing local structures
+	* They are local in the sense that they do not involve long-range interactions
+* H bonding happens both in solvent accessible and inaccessible areas
+* Beta sheets are less local since they require the interaction of beta strands that can also be far in the sequence
+* Side chains do not really determine secondary structure, so predicting secondary structures from sequence can be misleading
+	* Propensities are only average properties
+* Prediction of secondary structure is important since by assigning a good secondary structure to a sequence I can identify remote homologs
+	* In superfamilies structure is conserved but not sequence
+	* If structure is conserved and I can determine the secondary structure of a sequence, I can align secondary structure elements in order to identify remot homologs
+* From this, I can maybe get a structural model for proteins lackingg obvious homolog structures in the PDB
+	* I can obtain the secondary structure of all the PDB structures using dssp or similar algorithms
+	* I can predict the secondary structure of my sequence
+	* I can try to find a structural template for my protein by  aligning secondary structure elements and finding a protein with similar topology (irrespective of sequence)
+
+## $\Delta\Delta G$
+* A major source of stability for a protein is its $\Delta G$ of folding
+* The $\Delta G$ of folding can be measured in vitro
+* The difference in $\Delta G$ of folding among 2 variants of the same protein is called $\Delta \Delta G$ of folding of that variation
+* A variant shares most of the prilmary sequence with the original protein, and it can change at most in a couple of positions or present indels
+* Note that $\Delta G$ is an experimentally measured quantity with a SD of around $\pm 1 kcal/mol$ with current experimental technique
+	* When calculating a $\Delta \Delta G$ aware of this!
+	* The $\Delta G$ of folding can range from $0$ to $-50 kcal/mol$
+	* A $\Delta G$ of $0 kcal/mol$ does not mean much when it is affected by an error of $\pm 1 kcal/mol$!
+* If $\Delta \Delta G > 1 kcal/mol$ I have an increase in protein stability for the variant with respect to the original protein
+* If $-1 < \Delta \Delta G < 1 kcal/mol$ the variant does not affect protein stability
+* If $\Delta \Delta G < -1 kcal/mol$ I have a decrease in protein stability for the variant with respect to the original protein
+
+---
+
+# Part 2 - Prof. Savojardo
+
+## Introduction to the Project
+* Here we will extend our practice in functional annotation with a project
+* We will compare the GOR method and SVM for the prediction of secondary structure form sequence
+* We will be provided with data (fasta sequences and dssp assignments) and CV splits
+* We will need to generate a testing set from the PDB database
+* We will prepare our data and implement the GOR and SVM predictors
+* We will discuss critically the results and write a manuscript
+* The manuscript should be compliant with the OUP Bioinformatics journal guidelines
+
+## Vritual Machine Configuration
+* All the computationally-intensive tasks will be done in a VM that they will provide
+	* The VM has 2 cores, 8 Gb of RAM, 50 Gb of HDD
+	* All the software needed will be available in a conda environment
+* The VMs will be accessed through a VPN and SSH
+* When you close a terminal, you also close all of its child processes
+* In order to let computationally-intensive tasks run while disconnected from the VM we will use screen
+	* It is possible also to use nohup or at
+* Screen is a terminal  multiplexer: you can start a screen session and then into it start as many virtual terminals as you want
+* Screen sessions are persistent when the terminal that originated them is closed
+* A new screen session is created with the command `screen`, which also creates a window inside the session and starts a shell into it
+* To detach from the current session I press `Ctrl+a d`
+* I can list detached sessions with `screen -ls`
+* I can reattach a detached session with `screen -r`
+* I can create a new window in the same session with `Ctrl+a c`
+* I can list all the windows in the current session with `Ctrl+a "`
+* I can show an help with `Ctrl+a ?`
+
+
+
+
+
+
+---
 
 ## DSSP (Define Secondary Structure of Proteins)
 * 
