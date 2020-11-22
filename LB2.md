@@ -45,6 +45,12 @@
 	* I can obtain the secondary structure of all the PDB structures using dssp or similar algorithms
 	* I can predict the secondary structure of my sequence
 	* I can try to find a structural template for my protein by  aligning secondary structure elements and finding a protein with similar topology (irrespective of sequence)
+* The topology of a protein is the order succession of secondary structurer elements
+* Predicting secondary structure means mapping a 20-charachtr alphabet to a 3-charachter alphabet (H, E, C)
+* Also here, after I am able to assign a structure to my protein I can trasfer annotation from the template: I can do functional annotation
+* To date SS predictors are all top-scoring, so there is not much to improve
+	* Accuracy is currently $0.8$ to $0.9$
+	* Burckhard Rost suggested in a paper that we are at an hard limit of accuracy since we are limited by uncertainty in the original structural data
 
 ## $\Delta\Delta G$
 * A major source of stability for a protein is its $\Delta G$ of folding
@@ -58,6 +64,27 @@
 * If $\Delta \Delta G > 1 kcal/mol$ I have an increase in protein stability for the variant with respect to the original protein
 * If $-1 < \Delta \Delta G < 1 kcal/mol$ the variant does not affect protein stability
 * If $\Delta \Delta G < -1 kcal/mol$ I have a decrease in protein stability for the variant with respect to the original protein
+
+## UniProt Biocuration
+* UniProt/TrEMBL is annotated manually contributing to SwissProt
+	* Protein/Genes in UniProt are first screened to remove redundancies
+	* A sequence analysis step is performed using predictors and expert systems (Pfam, InterPro, ...)
+		* I am here predicting sequence features
+	* Literature is mined to establish links between assertions and experimental evidence
+		* This is a combination of text mining and actual people reading the papers
+	* Curation based on protein families (annotation transfer)
+	* Evidence attribution for individal claims
+	* Quality assurance before integration into SwissProt
+		* Here the annotation score is assigned
+	* The PDB structure is included (if it exists)
+* SwissProt is used then for the automatic annotation of UniProt
+	* Templates are identified by sequence alignment
+	* Build rules that define conditions to be respected for the transfer of annotation
+		* SAAS is used for the automatic generation of annotation rules 
+		* UniRule is a set of manually created rules
+	* The new rules are checked against SwissProt for validation before being applied
+## DSSP (Define Secondary Structure of Proteins)
+* DSSP (Kabasch and Sanders) is used for the definitiion of secondary structure in many molecular visualization software
 
 ---
 
@@ -97,7 +124,6 @@
 
 ---
 
-## DSSP (Define Secondary Structure of Proteins)
 * 
 
 
