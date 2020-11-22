@@ -11,6 +11,11 @@
 * Computational results need to be analysed in terms of their exportability ot the wet lab for validation
 * Information increases by going from sequences to structures
 * The CAF (critical assessment of functional annotation) is an important contest for functional annotation
+* Levitt was a pioneer in molecular dynamics and won a Nobel prize in 2013
+* Homogeneity of the data is a prerequisite if you want to compare your resoults with other people
+	* If I want to predict secondary structure, it is important that we all use the same kind of assignments as labels (dssp)
+* A PDB structure is a reduced representation of a protein
+* In order to calculate the contact surfa among 2 proteins I can just evaluate the difference in solvent accessible area upon binding
 
 ## Secondary Structure
 * In order to determine the secondary structure of a protein is important to have good resolution structures
@@ -51,6 +56,11 @@
 * To date SS predictors are all top-scoring, so there is not much to improve
 	* Accuracy is currently $0.8$ to $0.9$
 	* Burckhard Rost suggested in a paper that we are at an hard limit of accuracy since we are limited by uncertainty in the original structural data
+* Secondary structures were predicted by Linus Pauling and Robert Corey on the basis of H bonding and cooperativity criteria, before the firt crystal structure
+	* Secondary structures are cooperative
+	* Pauling got the Nobel prize in chemistry 1954 (for secondary structures!) and in 1962 
+* A secondaary structure is a local motive of order
+* There are at least 8 types of secondary structure
 
 ## Helices
 * Alpha helices are self-organizing local structures
@@ -135,7 +145,41 @@
 * Pfam is included in InterPro, and kind of performs the same function
 
 ## DSSP (Define Secondary Structure of Proteins)
-* DSSP (Kabasch and Sanders) is used for the definitiion of secondary structure in many molecular visualization software
+* DSSP (Kabasch and Sanders, Heidelberg) is used for the definitiion of secondary structure in many molecular visualization software
+* The recognition of secondary structure is based on a set of criteria, not laws
+* Recognizing secondary structure is a pattern recognition process on H bonds
+* DSSP is not the only SS predictor from structure, but it is very simple and one of the most used
+	* It inspired another predictor, Stride
+	* It is used by basically all the molecular visualization softwares
+* The DSSP paper is from 1983, and the first PDB deposition was done in the 70's
+* DSSP approximates secondary structures with an objective function
+* DSSP uses H bonds as a defining feature and not torsion angles or atomic coordinates, since these can be defined by a single parameters (bond energy cutoff)
+* An $n$-turn is defined as an H bond between the CO of residue $i$ and the NH of residue $i+n$, with $n \in \{3,4,5\}$
+* An H bond between residues not near to each other in the sequence defines a bridge
+* Turns and bridges essentially exhaust all the possible interactions among backbone atoms
+* DSSP was originally written in Pascal
+* The current version was written by the authors of WHATIF (Maarten Hekkelman) and it is in C++
+* The definition of secondary structure is hierarchical: H bonds define turns and bridges, and they define helices and ladders
+* DSSP assigns a secondary structure to each residue
+* H bonds are assumed to be present if they have an energy lower than $-0.5 kcal/mol$
+	* A good H bond is said in the paper to be of about $-3 kcal/mol$
+* The energy of H bonds is represented with a heuristic equation (electrostatic model, not quantistic)
+* The cutoff chosen is permissive to allow for bifurcated H bonds and errors in the coordinates
+* There is no generally correct H bond definition since there is not sharp transition from the quantistic definition (that dominates at short distances) and the electrostatic definition (that dominates at larger distances)
+* The angular flexibility was limited to 60°
+* Helices are represented with H in the output of DSSP, ladders with E (extended)
+* A series of turns is an helix, a series of bridges is a ladder
+* A bend is an angle in which the $C_\alpha$ in position $i$ and $i+2$ form an angle higher than $70°$
+* In practice, everithing that is not an helix or a strand will be considered and represented as a coil (C, or -)
+	* This includes bends!
+* Most helices have positive chirality (right-handedness) while strands have negative chirality
+* As an addendum, DSSP can determine the solvent accessible area of a protein
+	* The solvent exposure calculated is static since it does not include the movent of the protein
+	* The dynamic movent of the protein can alter which portions are accessible!
+	* Physically, we are interested in the number of water molecules in direct contact with the protein
+	* Geometrically, I can just consider the outside surface of the protein (ignoring inside pockets)
+		* The surface is proportional to the number of water molecules in the first hydratation shell
+	* Mathematically, ``
 
 ---
 
