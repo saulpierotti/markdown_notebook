@@ -24,8 +24,10 @@
 		* We will use the DSSP algorithm
 	* Also molecular visualization software need to fill-in hydrogens to determine which secondary structure to show!
 * Once I have the hydrogen positions I can determine the secondary structure from the backbone H-bonding pattern among neighboring residues
+* I can understand if there is an H bond between 2 C atoms by inspecting their distance (after placing the H)
 
 ## DSSP (Define Secondary Structure of Proteins)
+* 
 
 
 
