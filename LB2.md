@@ -9,6 +9,8 @@
 * In the real world you will mostly be alone, so learn to be independent
 * You should be able to create your own tools when pre-made tools are not available
 * Computational results need to be analysed in terms of their exportability ot the wet lab for validation
+* Information increases by going from sequences to structures
+* The CAF (critical assessment of functional annotation) is an important contest for functional annotation
 
 ## Secondary Structure
 * In order to determine the secondary structure of a protein is important to have good resolution structures
@@ -54,6 +56,8 @@
 * Alpha helices are self-organizing local structures
 	* They are local in the sense that they do not involve long-range interactions
 * In alpha helices the H-bonding happens among residues in position $i$ and $i+4$
+* The minimum lenght for an helix is thus 4 residues
+* There is no real maximum lenght, there are fibers that are even 500 residues long
 * Alpha-helices are dextrose
 * A summary of helices dimensions
 
@@ -66,6 +70,8 @@
 
 ## Strands
 * Beta sheets are not local since they require the interaction of beta strands that can also be far in the sequence
+* The minimun length for a strend is 2 residues (Prof. Casadio did the statistics on the PDB)
+* Knowing the minimum length is important in order to assess the reliability of predictions and implement filters
 
 ## $\Delta\Delta G$
 * A major source of stability for a protein is its $\Delta G$ of folding
@@ -111,6 +117,17 @@
 	* It maintains a set of exclusion rules for properties that cannot be efficiently automatically annotated
 * Each annotation in UniProt reports an evidence tag that assert how that annotation was obtained (experimental evidence or prediction)
 	* This tag system is called ECO, and it is similar ot GO terms (it is an acyclic graph of descriptors)
+
+
+## Short Range Interactions
+* H bonds are long around $2 \AA$ and have an energy of $10 kcal/mol$
+	* The bond energy is roughly proportional to the squared distance of the atoms
+* Van der Waals interactions (London dispersion energy) are among induced dipoles
+	* They are heavily depend on distance $r^{-6}$
+* Salt bridges are charged-charged particle interactions
+	* Their strenght depends on the environment (at the core or in the solvent)
+	* They depend on $r$
+* Rotating dipole interactions are temperature dependent
 
 ## InterPro
 * InterPro is a consortium of many different predictors that converge in the annotation of proteins and families
