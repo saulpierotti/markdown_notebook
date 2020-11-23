@@ -177,9 +177,8 @@
 	* The solvent exposure calculated is static since it does not include the movent of the protein
 	* The dynamic movent of the protein can alter which portions are accessible!
 	* Physically, we are interested in the number of water molecules in direct contact with the protein
-	* Geometrically, I can just consider the outside surface of the protein (ignoring inside pockets)
+	* Geometrically, I can roll a sphere representing a water molecule on the surface of the protein and record the positions touched
 		* The surface is proportional to the number of water molecules in the first hydratation shell
-	* Mathematically, ``
 
 ---
 
@@ -211,6 +210,26 @@
 * I can create a new window in the same session with `Ctrl+a c`
 * I can list all the windows in the current session with `Ctrl+a "`
 * I can show an help with `Ctrl+a ?`
+
+## DSSP
+* DSSP is both used to indicate the software and a databae of SS assignments
+* DSSP is not a predictor, it uses an algorithm to assign a secondary structure
+* It is run with the command `mkdssp`, and by defaults it outputs to STDOUT (I can specify an output file with the `-o` parameter)
+* The output is a fixed-width flat-file that can be parsed by extracting substrings
+* The first column contains an internal residue identifier (different from the PDB one)
+	* It contains `!` when a chain break is detected by dssp itself (because 2 successive $C_\alpha$ are too far from each other)
+	* It contains `!*` when there is a chin break in the PDB file
+* DSSP produces 8 different SS types, that then are usually reduced to H, E and C (externally to dssp)
+* Typical mapping is
+	* H, G, I $\to$ H
+	* B, E $\to$ E (sometimes B is mapped to C to avoid short strands)
+	* T, S, " " $\to$ C
+* The last column is the absolute solvent accessibility
+	* Note that the calculation ignores HETATM and unusual residues, so I can get unexpectedly large valuues when these are present
+	* If I have an oligomer the accessibility is returned for the entire assembly, so it neglects the interaction surface!
+		* Extract the chains first if you want the accessibility of the monomer
+* Residues in a disulphide bridge are reported with the same lowercase letter
+
 
 
 
