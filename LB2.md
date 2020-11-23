@@ -183,10 +183,11 @@
 ## Neural Networks
 * Neural networks are inspired by biological neurons
 * McCulloch e Pitts (1943) modeled a neuron as an object receiving an input vector and producing a scalar output via linear combination of the inputs (with weights neign the linear coefficients), transformed by a transfer function
-* A thershold can be considered as just an additional neuron
+* A treshold can be considered as just an additional neuron
 * A simple perceptron has just an input layer and an output layer, and operates only in a feed-forward manner
 * A multi-layer perceptron contain hidden layers of neurons with only feed-forward connections
 * A NN is an alternative computational paradigm in which the solution to a problem is automatically learned from a set of examples
+
 * A NN performs general non-linear mapping
 * A single-layer perceptron performs a total summation of the inputs $x_i$, each associated with a weight $w_i$, in order to determine the activation $a$, and the output $z$ after applying the transfer function $g(a)$
 $$a=\sum_i w_i x_i$$
@@ -196,7 +197,6 @@ $$z = g(a)$$
 * For the single training point $X^q$, if $D_i^q$ is the real desired value of example $q$ for output neuron $i$
 $$ E^q = \frac{1}{2} \sum_i (Y_i(X^q)-D_i^q)^2$$
 * The NN reaches an optimal configuration when its error function is minimal
-
 
 ---
 
