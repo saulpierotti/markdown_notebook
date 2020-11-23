@@ -180,6 +180,24 @@
 	* Geometrically, I can roll a sphere representing a water molecule on the surface of the protein and record the positions touched
 		* The surface is proportional to the number of water molecules in the first hydratation shell
 
+## Neural Networks
+* Neural networks are inspired by biological neurons
+* McCulloch e Pitts (1943) modeled a neuron as an object receiving an input vector and producing a scalar output via linear combination of the inputs (with weights neign the linear coefficients), transformed by a transfer function
+* A thershold can be considered as just an additional neuron
+* A simple perceptron has just an input layer and an output layer, and operates only in a feed-forward manner
+* A multi-layer perceptron contain hidden layers of neurons with only feed-forward connections
+* A NN is an alternative computational paradigm in which the solution to a problem is automatically learned from a set of examples
+* A NN performs general non-linear mapping
+* A single-layer perceptron performs a total summation of the inputs $x_i$, each associated with a weight $w_i$, in order to determine the activation $a$, and the output $z$ after applying the transfer function $g(a)$
+$$a=\sum_i w_i x_i$$
+$$z = g(a)$$
+	* The bias of the neuron is usually represented as an additional input $x_0$
+* The error function of the perceptron is proportional to the sum of squared differences between predicted and real values, over all the training examples and over all the output neurons
+* For the single training point $X^q$, if $D_i^q$ is the real desired value of example $q$ for output neuron $i$
+$$ E^q = \frac{1}{2} \sum_i (Y_i(X^q)-D_i^q)^2$$
+* The NN reaches an optimal configuration when its error function is minimal
+
+
 ---
 
 # Part 2 - Prof. Savojardo
@@ -193,7 +211,7 @@
 * We will discuss critically the results and write a manuscript
 * The manuscript should be compliant with the OUP Bioinformatics journal guidelines
 
-## Vritual Machine Configuration
+## Virtual Machine Configuration
 * All the computationally-intensive tasks will be done in a VM that they will provide
 	* The VM has 2 cores, 8 Gb of RAM, 50 Gb of HDD
 	* All the software needed will be available in a conda environment
@@ -216,6 +234,59 @@
 * DSSP is not a predictor, it uses an algorithm to assign a secondary structure
 * It is run with the command `mkdssp`, and by defaults it outputs to STDOUT (I can specify an output file with the `-o` parameter)
 * The output is a fixed-width flat-file that can be parsed by extracting substrings
+
+\small
+```
+HEADER    HYDROLASE   (SERINE PROTEINASE)         17-MAY-76   1EST
+...
+  240  1  4  4  0 TOTAL NUMBER OF RESIDUES, NUMBER OF CHAINS,
+                  NUMBER OF SS-BRIDGES(TOTAL,INTRACHAIN,INTERCHAIN)                .
+ 10891.0   ACCESSIBLE SURFACE OF PROTEIN (ANGSTROM**2)
+  162 67.5   TOTAL NUMBER OF HYDROGEN BONDS OF TYPE O(I)-->H-N(J)  ; PER 100 RESIDUES
+    0  0.0   TOTAL NUMBER OF HYDROGEN BONDS IN     PARALLEL BRIDGES; PER 100 RESIDUES
+   84 35.0   TOTAL NUMBER OF HYDROGEN BONDS IN ANTIPARALLEL BRIDGES; PER 100 RESIDUES
+...
+   26 10.8   TOTAL NUMBER OF HYDROGEN BONDS OF TYPE O(I)-->H-N(I+2)
+   30 12.5   TOTAL NUMBER OF HYDROGEN BONDS OF TYPE O(I)-->H-N(I+3)
+   10  4.2   TOTAL NUMBER OF HYDROGEN BONDS OF TYPE O(I)-->H-N(I+4)
+...
+  #  RESIDUE AA STRUCTURE BP1 BP2  ACC   N-H-->O  O-->H-N  N-H-->O  O-->H-N
+    2   17   V  B 3   +A  182   0A   8  180,-2.5 180,-1.9   1,-0.2 134,-0.1
+                                   ...Next two lines wrapped as a pair...
+                                    TCO  KAPPA ALPHA  PHI   PSI    X-CA   Y-CA   Z-CA
+                                  -0.776 360.0   8.1 -84.5 125.5  -14.7   34.4   34.8
+                                   ...Next two lines wrapped as a pair...
+                                               CHAIN AUTHCHAIN
+                                                   A         A
+....;....1....;....2....;....3....;....4....;....5....;....6....;....7..
+    .-- sequential resnumber, including chain breaks as extra residues
+    |    .-- original PDB resname, not nec. sequential, may contain letters
+    |    | .-- one-letter chain ID, if any
+    |    | | .-- amino acid sequence in one letter code
+    |    | | |  .-- secondary structure summary based on columns 19-38
+    |    | | |  | xxxxxxxxxxxxxxxxxxxx recommend columns for secstruc details
+    |    | | |  | .-- 3-turns/helix
+    |    | | |  | |.-- 4-turns/helix
+    |    | | |  | ||.-- 5-turns/helix
+    |    | | |  | |||.-- geometrical bend
+    |    | | |  | ||||.-- chirality
+    |    | | |  | |||||.-- beta bridge label
+    |    | | |  | ||||||.-- beta bridge label
+    |    | | |  | |||||||   .-- beta bridge partner resnum
+    |    | | |  | |||||||   |   .-- beta bridge partner resnum
+    |    | | |  | |||||||   |   |.-- beta sheet label
+    |    | | |  | |||||||   |   ||   .-- solvent accessibility
+    |    | | |  | |||||||   |   ||   |
+  #  RESIDUE AA STRUCTURE BP1 BP2  ACC
+    |    | | |  | |||||||   |   ||   |
+   35   47 A I  E     +     0   0    2
+   36   48 A R  E >  S- K   0  39C  97
+   37   49 A Q  T 3  S+     0   0   86
+   38   50 A N  T 3  S+     0   0   34
+   39   51 A W  E <   -KL  36  98C   6
+```
+\normalsize
+
 * The first column contains an internal residue identifier (different from the PDB one)
 	* It contains `!` when a chain break is detected by dssp itself (because 2 successive $C_\alpha$ are too far from each other)
 	* It contains `!*` when there is a chin break in the PDB file
@@ -235,30 +306,10 @@
 
 
 
-
 ---
+# To integrate
 
-* 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-# Secondary Structure
+## Secondary Structure
 * Secondary structures are local motives of order
 * JCE has been removed from the PDB website
 * I can use TopMatch for pairwise structural alignment, and Mustang for multiple structural alignment
@@ -358,7 +409,7 @@ $$E = q_1q_2(\frac{1}{r_{ON}}+\frac{1}{r_{CH}}-\frac{1}{r_{OH}}-\frac{1}{r_{CN}}
 * DSSP is generally accepted as a tool for assigning secondary structure
 * I can get solvent exposure values that are higher than expected when heteroatoms are present, since they are ignored
 * I can get solvent exposure values that are lower than expected when oligomers are present, since the exposure is calculated for the oligomer and not for the monomer
-# LB2 Project
+## LB2 Project
 * We will compare 2 different approaches for predicting protein secondary structure
 	* The GOR method, based on statistical analysis
 	* Using SVM (background from Martelli)
@@ -367,7 +418,7 @@ $$E = q_1q_2(\frac{1}{r_{ON}}+\frac{1}{r_{CH}}-\frac{1}{r_{OH}}-\frac{1}{r_{CN}}
 * We will implement everything in python
 * They will provide us a virtual machine with linux with 8 Gb RAM and 50 Gb HDD, with all the necessary software installed in conda
 
-# Neural Networks
+## Neural Networks
 * McCulloch e Pitts (1943) modeled a neuron as an object receiving an input vector and producing a scalar output via linar combination of the inputs (with weights), transformed by a transfer function
 * A simple perceptron has just an input layer and an output layer, and operates only in a feed-forward manner
 * A multi-layer perceptron contain hidden layers of neurons
@@ -382,5 +433,6 @@ $$z = g(a)$$
 $$ E^q = \frac{1}{2} \sum_i (Y_i(X^q)-D_i^q)^2$$
 * The NN reaches an optimal configuration when its error function is minimal
 
-# Protein Phase Separation
+## Protein Phase Separation
+
 
