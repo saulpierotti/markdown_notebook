@@ -68,24 +68,6 @@
 * A secondaary structure is a local motive of order
 * There are at least 8 types of secondary structures
 
-## History of Secondary Structure Prediction
-* Secondary structures were predicted by Linus Pauling and Robert Corey in 1951 on the basis of H bonding and cooperativity criteria, before the first crystal structure
-	* Pauling got the Nobel prize in chemistry 1954 (for secondary structures!) and in 1962 
-* NN proved to be the best tool for predicting secondary structure
-* The prediction of secondary structure is a bioinformatics success story
-* The first attempt at SS prediction was in 1957
-* Myoglobin was the first prtoein to be solved at atomic resolution in 1960
-* The PDB was born in 1973 with 15 structures
-* First generation SS prediction methods (1960-1970) were based on single residue propensities, often averaged over a sliding window
-	* An example is the Chou-Fasman method
-* Second generation methods (1970-1990) were based on joint probabilities, and so started to investigate the context in which residues were found
-	* Here they started also to use NN
-	* An example is the GOR method
-	* Accuracy stalled at 60%
-* Third generation methods (1990) integrate evolutionary information by using sequence profiles
-	* They were the first to break 70% accuracy
-	* Seminal Rost and Sanders 1994 paper
-
 ## Helices
 * Alpha helices are self-organizing local structures
 	* They are local in the sense that they do not involve long-range interactions
@@ -234,6 +216,46 @@ $$ E^q = \frac{1}{2} \sum_i (Y_i(X^q)-D_i^q)^2$$
 * Transfer functions can be linear, stepwise, sigmoid
 * Neural Networks can perform a non linear functional mapping thanks to their nonlinear tranfer function
 * It is important for tranfer functions to be continuous in order to make the error function derivable
+
+## History of Secondary Structure Prediction
+* Secondary structures were predicted by Linus Pauling and Robert Corey in 1951 on the basis of H bonding and cooperativity criteria, before the first crystal structure
+	* Pauling got the Nobel prize in chemistry 1954 (for secondary structures!) and in 1962 
+* NN proved to be the best tool for predicting secondary structure
+* The prediction of secondary structure is a bioinformatics success story
+* The first attempt at SS prediction was in 1957
+* Myoglobin was the first prtoein to be solved at atomic resolution in 1960
+* The PDB was born in 1973 with 15 structures
+* First generation SS prediction methods (1960-1970) were based on single residue propensities, often averaged over a sliding window
+	* An example is the Chou-Fasman method
+* Second generation methods (1970-1990) were based on joint probabilities, and so started to investigate the context in which residues were found
+	* Here they started also to use NN
+	* An example is the GOR method
+	* Accuracy stalled at 60%
+* Third generation methods (1990) integrate evolutionary information by using sequence profiles
+	* They were the first to break 70% accuracy
+	* Seminal Rost and Sanders 1994 paper
+* These generations actually do not only apply to secondary structure prediction, but in general to many prediction methods of protein properties
+
+## First Generation Methods
+* They are based on the computation of the frequency of occurrence of a residue in relation to a given feature
+* A sliding window is a way for searching for emerging properties in a context
+	* I can associate a property to each sliding window, and I can consider it as an emerging property of the window
+* ProtScale is a website at ExPasy where I can input a sequence (or an identifier) and I get a series of sequence properties
+	* I can get molecular weight, different propensities, ...
+	* I can get all the properties averaged over a sliding window (that I can choose)
+	* I can also decide the summarization method over the sliding window
+* The Kite-Doolittle scale is an average of several hydrophobicity scales (including a partition coefficient) and it is provided at ProtScale
+* The Chou-Fasman scale is also in ProtScale
+* For proteins sliding windows are usually between 3 and 24 residues long
+	* A really long window loses in resolution
+	* A small sliding window is too noisy
+* Using sliding windows I can see the emergence of regions with certain properties
+* Chou-Fasman uses an heuristic for resolving inconsistencies (regions with more than 1 propensity)
+
+## Second Generation Methods
+* Here wee take explicitly advantage of the context
+* 
+
 
 ---
 
