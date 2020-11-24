@@ -16,6 +16,14 @@
 	* If I want to predict secondary structure, it is important that we all use the same kind of assignments as labels (dssp)
 * A PDB structure is a reduced representation of a protein
 * In order to calculate the contact surfa among 2 proteins I can just evaluate the difference in solvent accessible area upon binding
+* Database numbers (24/11/2020)
+
+|          |             |           |
+|----------|------------:|-----------|
+| UniProt  |  195 104 019| proteins  |
+| SwissProt|      563 552| proteins  |
+| PDB      |      171 313| structures|
+| Pfam     |       18 259| families  |
 
 ## Secondary Structure
 * In order to determine the secondary structure of a protein is important to have good resolution structures
@@ -56,11 +64,27 @@
 * To date SS predictors are all top-scoring, so there is not much to improve
 	* Accuracy is currently $0.8$ to $0.9$
 	* Burckhard Rost suggested in a paper that we are at an hard limit of accuracy since we are limited by uncertainty in the original structural data
-* Secondary structures were predicted by Linus Pauling and Robert Corey on the basis of H bonding and cooperativity criteria, before the firt crystal structure
-	* Secondary structures are cooperative
-	* Pauling got the Nobel prize in chemistry 1954 (for secondary structures!) and in 1962 
+* Secondary structures are cooperative
 * A secondaary structure is a local motive of order
-* There are at least 8 types of secondary structure
+* There are at least 8 types of secondary structures
+
+## History of Secondary Structure Prediction
+* Secondary structures were predicted by Linus Pauling and Robert Corey in 1951 on the basis of H bonding and cooperativity criteria, before the first crystal structure
+	* Pauling got the Nobel prize in chemistry 1954 (for secondary structures!) and in 1962 
+* NN proved to be the best tool for predicting secondary structure
+* The prediction of secondary structure is a bioinformatics success story
+* The first attempt at SS prediction was in 1957
+* Myoglobin was the first prtoein to be solved at atomic resolution in 1960
+* The PDB was born in 1973 with 15 structures
+* First generation SS prediction methods (1960-1970) were based on single residue propensities, often averaged over a sliding window
+	* An example is the Chou-Fasman method
+* Second generation methods (1970-1990) were based on joint probabilities, and so started to investigate the context in which residues were found
+	* Here they started also to use NN
+	* An example is the GOR method
+	* Accuracy stalled at 60%
+* Third generation methods (1990) integrate evolutionary information by using sequence profiles
+	* They were the first to break 70% accuracy
+	* Seminal Rost and Sanders 1994 paper
 
 ## Helices
 * Alpha helices are self-organizing local structures
@@ -197,6 +221,19 @@ $$z = g(a)$$
 * For the single training point $X^q$, if $D_i^q$ is the real desired value of example $q$ for output neuron $i$
 $$ E^q = \frac{1}{2} \sum_i (Y_i(X^q)-D_i^q)^2$$
 * The NN reaches an optimal configuration when its error function is minimal
+* The backpropagation algorithm was invented by Rumelhart when he was a PhD student in 1986
+	* It is a gradient descent algorithm
+	* It updates the weight by subtracting to the previous weigths the derivative of the error function with respect to the weight (times the learning rate $\eta$) and adding a momentum term
+	* The momentum term is the previous update to the weights times the hypeerparameter $\mu$
+* The input size of the network is in general, for sequences, the size of the sliding window applied
+* Neural Networks are convenient when an analitical solution for my problem is not available
+* I need a lot of data, and data of a very good quality
+	* Before starting any machine learning approach, check data quality
+* Many journals require specific cross-validation procedures for ML papers
+* As for ML approaches input is it better to use profiles instead of sequences
+* Transfer functions can be linear, stepwise, sigmoid
+* Neural Networks can perform a non linear functional mapping thanks to their nonlinear tranfer function
+* It is important for tranfer functions to be continuous in order to make the error function derivable
 
 ---
 
@@ -300,6 +337,30 @@ HEADER    HYDROLASE   (SERINE PROTEINASE)         17-MAY-76   1EST
 	* If I have an oligomer the accessibility is returned for the entire assembly, so it neglects the interaction surface!
 		* Extract the chains first if you want the accessibility of the monomer
 * Residues in a disulphide bridge are reported with the same lowercase letter
+
+## Dataset
+* Our dataset was the one used for training Jpred4, one of the most recent SS prediction methods
+* The starting set contained 1987 representative domain sequences from each 2.04 SCOP superfamily
+	* They did like this to exclude obvios sequence similarities
+* They filtered out the set to 1497 proteins by removing
+	* Proteins with a structure worse than $2.5 \AA$
+	* Sequences shorter than 30 residues (they cannot contain a domain) or longer than 800 (to avoid long Blast runs)
+	* Missing dssp assignments for more than 9 residues consecutively
+	* Other filters
+* They split the dataset in a training set (1348 sequences) and a blind test set (149 sequences)
+* We will use only the train split, and we will build our own test set
+* We will need to produce some statistics on the dataset in the paper
+
+## Data Visualization
+* Barplots are used for visualizing a quantitative and a qualitative variable
+* Histograms are used with 1 quantitative variable discretized in bins
+	* The dependent variable is the frequency of each bin
+	* The size of the bin is essential for good visualization
+* Density plots are similar to histograms but do not use bins
+	* They use kernel smoothing for plotting probability densities
+	* They are better than histograms since they are not influenced by bin size
+	* A gaussian kernel interpolates a series of gaussians centered into each datapoint
+* Heatmaps visualize trivariate data with 2 independent variables
 
 
 
