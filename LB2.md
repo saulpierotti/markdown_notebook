@@ -236,7 +236,7 @@ $$ E^q = \frac{1}{2} \sum_i (Y_i(X^q)-D_i^q)^2$$
 	* Seminal Rost and Sanders 1994 paper
 * These generations actually do not only apply to secondary structure prediction, but in general to many prediction methods of protein properties
 
-## First Generation Methods
+### First Generation Methods
 * They are based on the computation of the frequency of occurrence of a residue in relation to a given feature
 * A sliding window is a way for searching for emerging properties in a context
 	* I can associate a property to each sliding window, and I can consider it as an emerging property of the window
@@ -252,10 +252,13 @@ $$ E^q = \frac{1}{2} \sum_i (Y_i(X^q)-D_i^q)^2$$
 * Using sliding windows I can see the emergence of regions with certain properties
 * Chou-Fasman uses an heuristic for resolving inconsistencies (regions with more than 1 propensity)
 
-## Second Generation Methods
+### Second Generation Methods
 * Here wee take explicitly advantage of the context
-* 
 
+### Third Generation Methods
+* Here we integrate evolutionary information in the form of sequence profiles
+* Neural networks learn the mapping from sequence to secondary structure
+* I want to use NN when I am not able to provide a simple first principle or a model based solution
 
 ---
 
