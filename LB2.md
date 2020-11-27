@@ -242,6 +242,7 @@ $$SOV = \sum_s \frac{S_1 \cap S_2}{S_1 \cup S_2} \frac{L_1}{N}$$
 	* It should be calculated for H, E, and C (the term s in the sum) and summed
 * Many predictors return also a reliability index for each position in the sequence (in the range 0-9)
 	* In NN I can just derive it from the activations of the output layer by subtracting the best output (the highest) to the second best
+	* It is proven that in a NN the output of a network is the probability of a certain answer
 
 ## History of Secondary Structure Prediction
 * Secondary structures were predicted by Linus Pauling and Robert Corey in 1951 on the basis of H bonding and cooperativity criteria, before the first crystal structure
@@ -295,6 +296,50 @@ $$SOV = \sum_s \frac{S_1 \cap S_2}{S_1 \cup S_2} \frac{L_1}{N}$$
 * Psipred was created at UCL at can predict, among other things, SS
 	* The original was a NN, then it switched to SVM and now maybe itwill switch to deep learning
 	* When the sequence has a structure, they just give the dssp answer
+
+## Bologna Annotation Resource (BAR)
+* Data validation is essential in predictions
+* Experiments to validate protein predictions are lengthy and costly
+* It is possible that 80% of the entries in UniProt are crap
+* Protein function can be described with GO terms (cellular component, biological process, molecular function), EC numbers
+* Each GO term has a tag referring to the way it was annotated (prediction or experimental evidence)
+	* When doing prediction train only with experimental data
+	* If you train on noise you get noise squared
+* If sequence identity with an annotated template is above 80%, I can most probably just transfer the annotation
+	* For molecular function I can transfer quite easily
+	* For cellular component check if the organisms are both eukariotes!
+* For identity above 30% I can say that 2 proteins have a similar structure, but I cannot say much for the function
+* Similarity searches can be done with BLAST, Psi-BLAST, or Pfam (with HMMs)
+* Professor Casadio became famous since she was able to predict the structure of membrane proteins
+* Once they published a prediction that, after the crystal was published, was shown to be wrong (1 helics more)
+	* That protein belonged to a family without any structure
+* Since then, she decided to be very conservative about predictions
+* Her group was given money to use a GRID as large as Emilia Romagna
+* They used 30 million sequence from UniProt
+	* If you filter out fragments and duplicates UniProt becomes much smaller
+* They alligned all those sequences pairwise to create a network of sequences that they called BAR+
+* Today they repeated with more sequences and released BAR+
+* For the alignment they used BLAST
+	* Even if BLAST is a local alignment tool, they were able to use it by forcing a minimum alignment lenght
+* They called this network the protein sequence universe
+* Many proteins in UniProt have some kind of annotation (PDB, GO, Pfam annotation)
+* On the other side, I have all the poorly annotated NCBI proteomes
+* They creatad a sequence similarity network by linking all the sequences that, pairwise, have identity higher than 40% and minimum reciprocal coverage of 90%
+* Each connected component of the network forms a cluster
+* The statistically validated the annotation of each cluster and trasfered annotations to all the cluster members
+* From each cluster I can get an HMM by alligning members of the cluster that have a structure and members directly connected to them
+* Once I have the HMM I can use it to align sequences to it and use modeler to get a structural model
+* Now they are trying to trasfer also EC numbers
+* BAR contains millions of clusters!
+* To statistically validatej each annotation they did bootstrapping and calculated a p-value, and corrected it with Bonferroni
+* There are around 10k cluster HMMs in BAR
+* 23% of the sequences are in cluster that have a PDB!
+* By setting a p-value thershold of 0.01, they were able to increase the nnotation of TrEMBL by 54%!
+* In very large cluster, you can use a community detection algorithm to identify sub-clusters
+* For some enzymes, sub-clusters have different specificities!
+* They took part at the CAFA challange on functional annotation with BAR
+* BAR allows to find the protein types that are most common in different genomes and to do sequence annotation
+* I can transfer annotation among sequences with low similarity thanks to the intermediate alignments in BAR
 
 ---
 
