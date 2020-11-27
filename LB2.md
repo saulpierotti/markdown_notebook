@@ -67,6 +67,11 @@
 * Secondary structures are cooperative
 * A secondaary structure is a local motive of order
 * There are at least 8 types of secondary structures
+* Helices tend to be easier to predict than strands and coils
+	* Sliding windows are grasping the context surrounding the predicted conformation
+	* Since helices are local structures (as compared to strands), they can be better predicted by a sliding window system
+* A chamelion segment is a sliding window configuration that can be found in different configurations
+* A sliding window-based approach can discriminate chamelion segments only if they are shorter of sliding window!
 
 ## Helices
 * Alpha helices are self-organizing local structures
@@ -219,6 +224,24 @@ $$ E^q = \frac{1}{2} \sum_i (Y_i(X^q)-D_i^q)^2$$
 * It is important for tranfer functions to be continuous in order to make the error function derivable
 * The derivative of the sigmoid is the sigmoid itself, so it is really handy in computations for calculating higher derivatives
 	* It is not like this, but so she thinks
+	* It is $\sigma(x)(1-\sigma(x))$ where $\sigma(x)$ is the sigmoid itself
+* Why SVM and NN for predicting protein secondary structure and not HMM?
+	* HMMs are global models for sequences, and they are useful for predicting global properties like domains
+	* ML approaches are local (use a sliding window) and so are better for predicting a local motive of order like secondary structures
+
+## Score Indexes
+* The scoring accuracy is the fraction of correct predictions
+$$Q_1 = \sum_i P_i/N$$
+* The Matthews correlation coefficient is a correlation coefficient for the classes
+	* It is not affected by class umbalance
+* The segment overlap measure (SOV) is used for the prediction of sequences
+$$SOV = \sum_s \frac{S_1 \cap S_2}{S_1 \cup S_2} \frac{L_1}{N}$$
+	* It can be defined in at least 3 different ways
+	* She expect us to put it in the project
+	* It is a measure of the correct superimposition of characters
+	* It should be calculated for H, E, and C (the term s in the sum) and summed
+* Many predictors return also a reliability index for each position in the sequence (in the range 0-9)
+	* In NN I can just derive it from the activations of the output layer by subtracting the best output (the highest) to the second best
 
 ## History of Secondary Structure Prediction
 * Secondary structures were predicted by Linus Pauling and Robert Corey in 1951 on the basis of H bonding and cooperativity criteria, before the first crystal structure
@@ -262,6 +285,16 @@ $$ E^q = \frac{1}{2} \sum_i (Y_i(X^q)-D_i^q)^2$$
 * Here we integrate evolutionary information in the form of sequence profiles
 * Neural networks learn the mapping from sequence to secondary structure
 * I want to use NN when I am not able to provide a simple first principle or a model based solution
+* A sliding window on a profile is a matrix, and it is used as input for ML approaches
+* Each weight multiplies one vector of that matrix
+* Suppose that a first NN gives me an answer with a single residue in H conformation
+	* I could use its output as input for another network in order to filter out these spourios alignments
+	* This is equivalent to adding layers to the network
+* I can use a collection of NN that, for instance, work on different sliding window sizes (or only discriminate one conformation), and then use an ensemble method to get an answer
+* The biocomp group created secpred in the past
+* Psipred was created at UCL at can predict, among other things, SS
+	* The original was a NN, then it switched to SVM and now maybe itwill switch to deep learning
+	* When the sequence has a structure, they just give the dssp answer
 
 ---
 
