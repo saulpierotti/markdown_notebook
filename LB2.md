@@ -215,7 +215,10 @@ $$ E^q = \frac{1}{2} \sum_i (Y_i(X^q)-D_i^q)^2$$
 * As for ML approaches input is it better to use profiles instead of sequences
 * Transfer functions can be linear, stepwise, sigmoid
 * Neural Networks can perform a non linear functional mapping thanks to their nonlinear tranfer function
+* In order to update the weights in the backpropagation algorithm I use the derivative of the error function with respect to the weights
 * It is important for tranfer functions to be continuous in order to make the error function derivable
+* The derivative of the sigmoid is the sigmoid itself, so it is really handy in computations for calculating higher derivatives
+	* It is not like this, but so she thinks
 
 ## History of Secondary Structure Prediction
 * Secondary structures were predicted by Linus Pauling and Robert Corey in 1951 on the basis of H bonding and cooperativity criteria, before the first crystal structure
