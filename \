@@ -347,16 +347,6 @@ $$SOV = \sum_s \frac{S_1 \cap S_2}{S_1 \cup S_2} \frac{L_1}{N}$$
 
 ## The Multi-Dimensional Problem of Protein-Protein Interactions
 * Castrense devolepped the latest PPI predictiors
-* It is possibles to annotate proteins by predicting their interacting partners
-* PPI predictions are one of the main bioinformatics fields where ML is used
-* Macromolecular crowding is underapprectiated
-* Protein phase separation: at high enough concentration of proteins in solution in the cytoplasm, the protein phase can separate
-	* We observe aggregates of proteins
-	* This is a well known chemical phenomenon called liquid phase separation
-* An important question is if liquid phase separation has a biological role (in favoring PPIs)
-	* This is membrane-less compartimentalization
-* Protein flexibility may allow proteins to aggregate with different partners
-* An aggregate can be a single complex or a full metabolic pathway
 
 ---
 
