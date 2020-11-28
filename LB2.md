@@ -18,6 +18,7 @@
 * In order to calculate the contact surfa among 2 proteins I can just evaluate the difference in solvent accessible area upon binding
 * A new protein family can be defined when a structure with a totally new fold is discovered
 	* This is really rare but possible
+* If you want to find a job look at databases, if you are good enough swtich to computational biology and develop algorithms
 * Database numbers (24/11/2020)
 
 |          |             |           |
@@ -357,6 +358,18 @@ $$SOV = \sum_s \frac{S_1 \cap S_2}{S_1 \cup S_2} \frac{L_1}{N}$$
 	* This is membrane-less compartimentalization
 * Protein flexibility may allow proteins to aggregate with different partners
 * An aggregate can be a single complex or a full metabolic pathway
+* Single cell sequencing is the future since it does not average over a large number of cells
+* Data quality is highly strategic, and there are companies specialised in measuring it
+* I can measure data quality in term of completeness
+	* If my data are not complete either I produce them or buy them
+* Conformity among databases is also important (same format for same data)
+* Consistency: are my data contradicting each other
+* Accuracy: how much can I trust the data?
+* Uniqueness: do I have duplicates?
+* Integrity: are data are linked correctly to each other
+* How do I assure that data is correctly mantained?
+* Deep learning, contrary to ML, In general does do feature extraction by itself
+* 
 
 ---
 
