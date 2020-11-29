@@ -417,7 +417,12 @@
 - Now they are working on the prediction of interacting residues from sequence
   - Current MCC is 0.3
   - Note that this requires first to predict the solvent accessible area from sequence (which is hard in itself)
-  -
+- Database of PPI are BioGRID, ComplexPortal, IntAct, MINT, STRING
+  - They usually do not agree on the interactions reported!
+  - Usually if I need to build an interaction network I want to use the intersection of these databases, so the interactions reported by all of them
+- Note that many interaction experiments are done in vitro so I am not sure if the interaction actually happens in cells!
+- An interactome is a partial view of reality!
+- MINT was in Rome but now it is in Milan
 
 # Part 2 - Prof. Savojardo
 
