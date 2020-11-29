@@ -369,7 +369,11 @@ $$SOV = \sum_s \frac{S_1 \cap S_2}{S_1 \cup S_2} \frac{L_1}{N}$$
 * Integrity: are data are linked correctly to each other
 * How do I assure that data is correctly mantained?
 * Deep learning, contrary to ML, In general does do feature extraction by itself
-* 
+* Interactomic studies have very low reproducibility for technical reasons
+* The coverage of proteomic and interactomic studies is never complete
+* Many interactomic studies neglect subcellular localization
+* It is also difficult to detect liquid-phase separation clusters in vivo
+* When I see a network in STRING I do not now if all the interaction happen in the same subcellular compartment!
 
 ---
 
@@ -497,11 +501,6 @@ HEADER    HYDROLASE   (SERINE PROTEINASE)         17-MAY-76   1EST
 	* They are better than histograms since they are not influenced by bin size
 	* A gaussian kernel interpolates a series of gaussians centered into each datapoint
 * Heatmaps visualize trivariate data with 2 independent variables
-
-
-
-
-
 
 ---
 # To integrate
@@ -634,3 +633,4 @@ $$ E^q = \frac{1}{2} \sum_i (Y_i(X^q)-D_i^q)^2$$
 
 sdfsdfsdf (Hello world)
 
+$\pi \mu$
