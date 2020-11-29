@@ -392,7 +392,7 @@
 - When I see a network in STRING I do not now if all the interaction happen in the same subcellular compartment!
 - The first account of PPI was in 1905 about trypsin and its regulators
 - Interactions documented in the PDB are PPIs and ligand-protein interactions
--
+- About 1/3 of the PDB structures are complexes
 
 ---
 
