@@ -417,7 +417,7 @@
 - Now they are working on the prediction of interacting residues from sequence
   - Current MCC is 0.3
   - Note that this requires first to predict the solvent accessible area from sequence (which is hard in itself)
-
+  -
 # Part 2 - Prof. Savojardo
 
 ## Introduction to the Project
