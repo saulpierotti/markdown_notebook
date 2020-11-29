@@ -393,8 +393,13 @@
 - The first account of PPI was in 1905 about trypsin and its regulators
 - Interactions documented in the PDB are PPIs and ligand-protein interactions
 - About 1/3 of the PDB structures are complexes
-
----
+- There is not significance difference in the distribution of areas of homo and hetero-interfaces (but homointerfaces tend to be larger)
+- The distribution of residuea is similar for homo and hetero interfaces (but Cys tend to be more common in heterointerfaces)
+- Note that in X-ray structures not all the interfaces are functional!
+  - Some interfaces can only be due to the unit cell configuration
+- An interface can be defined as the set of residues that undergo a difference in solvent accessible area of more than $1 \AA^2$ ($\Delta{ASA}$) upon binding
+- Proteases have a very easily recognizable interaction surface
+-
 
 # Part 2 - Prof. Savojardo
 
