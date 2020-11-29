@@ -422,7 +422,7 @@
   - Usually if I need to build an interaction network I want to use the intersection of these databases, so the interactions reported by all of them
 - Note that many interaction experiments are done in vitro so I am not sure if the interaction actually happens in cells!
 - An interactome is a partial view of reality!
-- MINT was in Rome but now it is in Milan
+  - MINT was in Rome but now it is in Milan
 
 # Part 2 - Prof. Savojardo
 
