@@ -397,9 +397,26 @@
 - The distribution of residuea is similar for homo and hetero interfaces (but Cys tend to be more common in heterointerfaces)
 - Note that in X-ray structures not all the interfaces are functional!
   - Some interfaces can only be due to the unit cell configuration
-- An interface can be defined as the set of residues that undergo a difference in solvent accessible area of more than $1 \AA^2$ ($\Delta{ASA}$) upon binding
+- An interface can be defined as the set of residues that undergo a difference in solvent accessible area of more than $1 \AA^2$ ($\Delta{ASA}$) upon binding (as calculated by DSSP)
+- Another definition can be the set of residues whose $C_\alpha$ are at less then $12\AA$ Euclidean distance
 - Proteases have a very easily recognizable interaction surface
--
+  - In this way every interacting residue is described by a matrix
+- There are not strong residue propensities for interaction interfaces (just a little enrichment in hydrophobic residues)
+- Since there are no major emerging features for PPI surfaces, ML is the go-to method
+- Casadio's group created the ISPRED series (ISPRED1 to 4) of PPI predictors
+  - ISPRED predicts interacting residues from **structure**
+  - The last version uses hidden support SVMs and conditional random fields
+    - An HMM-SVM is an SVM applied to the output of an HMM
+  - The first implementations were based on NN
+  - They used DSSP to get residues that are more than 16% exposed, and repesented them only in terms of $C_\alpha$
+    - This was done in order to reduce the input space
+  - They then created a window around the interacting residues (selecting the 10 closest exposed residues in space at less than 12 nm distance) and built a profile on it (accornding to a MSA)
+  - Current accuracy is arounf 0.7 and MCC 0.45
+- These predictors can be used as a preliminary operation to docking in order to constrain the docking space
+- Note that these predictors do not predict who the interactors are!
+- Now they are working on the prediction of interacting residues from sequence
+  - Current MCC is 0.3
+  - Note that this requires first to predict the solvent accessible area from sequence (which is hard in itself)
 
 # Part 2 - Prof. Savojardo
 
