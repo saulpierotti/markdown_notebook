@@ -427,8 +427,13 @@
 - Scoring a PPI predictor against interactions observed in the PDB can be misleading, since many interactions have not been crystallized
   - What I see as a false positive can actually be a true positive!
 - Interacting residues tend to not to be alone but to form patches of interaction
+  - A patch shoul contain at least 4-5 residues
 - Another interesting task is to predict the number of interaction of a given protein
   - This is not easy since on the PDB I have a bias for stable interactions
+  - I can consider my false positives as putative new interaction sites
+  - I can compare the number of predicted patches with the number of interactors on PPI databases (the degree of the protein)
+    - I can calculate the correlation among them
+    - Filtering interactions by subcellular colocalization was able to improve the correlation
 
 # Part 2 - Prof. Savojardo
 
