@@ -480,7 +480,7 @@
 - Casadio was using ProTherm to create another index, the perturbation probability index
   - It is the probability of perturbing protein stability (either increasing or decreasing it)
   - They observed that disease-related variations not necessarily are linked to perturbations in protein stability
-  -
+  - There is nonetheless a good (0.88) linear correlation among the 2
 
 # Part 2 - Prof. Savojardo
 
