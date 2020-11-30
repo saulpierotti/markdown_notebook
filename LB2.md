@@ -363,6 +363,7 @@
 
 ## The Multi-Dimensional Problem of Protein-Protein Interactions
 
+- PPI is a multi-dimensional problem since it can be studied at the level of interacting residues or at the mesoscopic level of PPI networks
 - Castrense devolepped the latest PPI predictiors
 - It is possibles to annotate proteins by predicting their interacting partners
 - PPI predictions are one of the main bioinformatics fields where ML is used
@@ -423,6 +424,10 @@
 - Note that many interaction experiments are done in vitro so I am not sure if the interaction actually happens in cells!
 - An interactome is a partial view of reality!
   - MINT was in Rome but now it is in Milan
+- Scoring a PPI predictor against interactions observed in the PDB can be misleading, since many interactions have not been crystallized
+  - What I see as a false positive can actually be a true positive!
+- Another interesting task is to predict the number of interaction of a given protein
+  - This is not easy since on the PDB I have a bias for stable interactions
 
 # Part 2 - Prof. Savojardo
 
