@@ -464,7 +464,23 @@
 - Interoperabilty is well developped at INFN in Bologna
 - A protein variant is an alterntive of a protein affected by a variatio
   - A variation is a change in aminoacids in a protein
--
+- SNPs are reported in dbSNP, and SNPs associated with genetic illnesses are reported in OMIM
+- Goh was the first to propose a human disease network (diseasome)
+  - It is a network of human diseases with edges represented by being caused by the same protein
+- Many protein variants are unstable and cannot fold properly
+- By looking at neutral and disease-associated mutations, we can make some statistics
+  - There are no sigificant differenc on which aminoacid is mutated and pathogenicity
+- Casadio and Fariselli developped the residue disease index
+  - It is a matrix of single aminoacid mutations (SAP)
+  - Not all the possible mutations are observed in databases!
+  - The probability of being disease-related for each observed mutation is reported
+  - They results were quite surprising since mutations among similar residues sometimes were more likely to cause disease than mutation to completely different residues
+- ProTherm is a discontinued project to measure the $\Delta\Delta{G}$ of folding of protein variants
+  - It is a mess to measure many of them experimentally
+- Casadio was using ProTherm to create another index, the perturbation probability index
+  - It is the probability of perturbing protein stability (either increasing or decreasing it)
+  - They observed that disease-related variations not necessarily are linked to perturbations in protein stability
+  -
 
 # Part 2 - Prof. Savojardo
 
