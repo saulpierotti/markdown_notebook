@@ -1,3 +1,4 @@
+:!gitup "from nvim" 
 % Laboratory of Bioinformatics 2
 % Saul Pierotti
 % \today
@@ -451,6 +452,20 @@
   - Network of PPIs can be used for gene enrichment studies
 
 ## Data Analysis in Translational Medicine
+
+- Stratified medicine: matching terapies with biomarkers
+- Precision medicine: integration of molecular research with single-patient data
+- P4 medicine: clinical application of system's biology
+- Personalised medicine: omics and patient empowerment
+- This field is a good idea for a PhD
+- The real challange is the single patient condition, not average data
+- The US is leader in this field
+- A big challenge of translation medicine is interoperability among different institutions
+- ELIXIR has the EBI as central hub, and then many other hubs
+- Interoperabilty is well developped at INFN in Bologna
+- A protein variant is an alterntive of a protein affected by a variatio
+  - A variation is a change in aminoacids in a protein
+- 
 
 # Part 2 - Prof. Savojardo
 
