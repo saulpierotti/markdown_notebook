@@ -427,13 +427,30 @@
 - Scoring a PPI predictor against interactions observed in the PDB can be misleading, since many interactions have not been crystallized
   - What I see as a false positive can actually be a true positive!
 - Interacting residues tend to not to be alone but to form patches of interaction
-  - A patch shoul contain at least 4-5 residues
+  - A patch should contain at least 4-5 residues
 - Another interesting task is to predict the number of interaction of a given protein
   - This is not easy since on the PDB I have a bias for stable interactions
   - I can consider my false positives as putative new interaction sites
   - I can compare the number of predicted patches with the number of interactors on PPI databases (the degree of the protein)
     - I can calculate the correlation among them
     - Filtering interactions by subcellular colocalization was able to improve the correlation
+- In order to understand if a set of interactors in STRING is meaningful I can look for an enrichment in specific GO biological process terms among the interactors
+  - The enrichment reported by STRING is a statistical enrichment, it does not consider the connectivity of the network
+    - This can be a t-test
+  - Another approach is to use NET-GE (biocomp-unibo)
+    - I identify modules in the network and then perform enrichment on the modules
+    - To identify the modules, I start from the set of proteins sharing the same GO term, called seeds
+    - I calculate all the shortest paths among the seed nodes, and include the connecting nodes in the module
+    - I rank the connecting nodes in terms of various measures and prune the low-ranking ones (but preserving the shortest path)
+    - I calculate the enrichment of the GO biological process term used for obtaining the seeds
+    - A multiple testing correction is also implemented
+    - An important point is that I can start from a gene that I want to study, and after putting it in a network I can observe an enrichment for a GO term that was not even annotated to that gene (since it interacts with protein with that term)
+    - Besides STRING, NET-GE can also use KEGG, Reactom, IntAct and other networks
+- In summary, PPI are multi-dimensional and
+  - At the molecular level machine learning is useful
+  - Network of PPIs can be used for gene enrichment studies
+
+## Data Analysis in Translational Medicine
 
 # Part 2 - Prof. Savojardo
 
