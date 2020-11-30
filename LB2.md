@@ -426,6 +426,7 @@
   - MINT was in Rome but now it is in Milan
 - Scoring a PPI predictor against interactions observed in the PDB can be misleading, since many interactions have not been crystallized
   - What I see as a false positive can actually be a true positive!
+- Interacting residues tend to not to be alone but to form patches of interaction
 - Another interesting task is to predict the number of interaction of a given protein
   - This is not easy since on the PDB I have a bias for stable interactions
 
