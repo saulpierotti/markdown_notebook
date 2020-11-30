@@ -1,7 +1,6 @@
 % Laboratory of Bioinformatics 2
 % Saul Pierotti
 % \today
-a
 
 # Part 1 - Prof. Casadio
 
