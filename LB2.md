@@ -1,4 +1,3 @@
-:!gitup "from nvim" 
 % Laboratory of Bioinformatics 2
 % Saul Pierotti
 % \today
@@ -465,7 +464,7 @@
 - Interoperabilty is well developped at INFN in Bologna
 - A protein variant is an alterntive of a protein affected by a variatio
   - A variation is a change in aminoacids in a protein
-- 
+-
 
 # Part 2 - Prof. Savojardo
 
