@@ -484,7 +484,9 @@
 
 ## Predicting the Pathogenicity of Protein Variants
 
--
+- They created an SVM system for the prediction of the pathogenicity of protein variants \*(SNP&GO)
+- They included also GO terms of the protein in the SVM implementation
+- The information content of a GO term is inversely proportional to the distance from the GO root
 
 # Part 2 - Prof. Savojardo
 
