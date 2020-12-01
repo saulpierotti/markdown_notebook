@@ -482,6 +482,10 @@
   - They observed that disease-related variations not necessarily are linked to perturbations in protein stability
   - There is nonetheless a good (0.88) linear correlation among the 2
 
+## Predicting the Pathogenicity of Protein Variants
+
+-
+
 # Part 2 - Prof. Savojardo
 
 ## Introduction to the Project
