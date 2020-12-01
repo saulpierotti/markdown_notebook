@@ -626,5 +626,37 @@ HEADER    HYDROLASE   (SERINE PROTEINASE)         17-MAY-76   1EST
 ## Sequence Profiles
 
 - PsiBLAST is an iterative algorithm that searches a profile against a database using multiple BLAST interations
+  - BLAST does a single iteration using PAM or BLOSUM matrices
+  - PsiBLAST does a first standard BLAST interation
+  - From the result, it builds a position-specific scoring matrix (PSSM)
+  - A PSSM is obtained from a profile by applaying a log ratio against a null model
+  - Instead of being a mtrix of all-against all residues like BLOSUM, PSSM is a matrix of likelihood of each residue in each position of the alignment
+  - It iterates using the PSSM as a scoring matrix (and rebuilds the PSSM)
+  - It stops after a fixed number of iterations (3 or 4) or at convergence
+  - In the checkpoint file PSiBLAST returns the last PSSM and a profile
+  - The profile is calculated using sequence weighting
+    - Sequences are clustered by identity (60-70%) and their weight in the profile is the reciprocal of the cluster size
 - Phmmer and Jackhmmer use HMMs, and Jackhmmer is the iterative version (similar to PsiBLAST)
 - HHBlits performs HMM-HMM alignments
+- We obtained the profiles for our sequences (trai nand test) by doing PSI-BLAST against SwissProt (usually UniRef90 is used but it would take forever)
+  - We obtained the profiles from the checkpoint file
+
+## GOR Method
+
+- SS prediction is basically a solved problem since we are at 90% accuracy
+- SS can be used to align distantly related sequences
+- Some other third generation SS preditction methods
+  - PSIPRED uses 2 feed-forward NNs that process PSIBlast output and uses dynamic programmming to refine the NN output (remove unacceptable assignments)
+- GOR differently from the Chou-Fasman uses a sliding window
+- Training means creating 3 propensity matrices for each SS conformation
+- We will use a sliding window applied to a profile
+- The propensity for a reside type for a given conformation is calculated as the log ratio of the joint probability of the residue and the SS and the product of the marginal probabilities
+- The log ratio is positive if the joint probability is higher than what expected from the marginal probabilities
+- For each positon, the assigned conformation is the one with the highest value of the information function
+- Using a sliding window I just sum all the information functions for each position in order to assign the conformation of the central residue
+  - NOTE: I have a different training table for each SS and for each position in the sliding window!
+  - NOTE2: I am assuming that each position in the sliding window is independent
+  - I need to do like this since for many sliding window configurations I do not have any count!
+  - This is a biologically wrong assumption, hence the lower performances of GOR
+  - The ends of the sequence can be dealt with by padding with 0s
+  - The independence assumption makes the GOR be a linear model (it is a linear combination of information functions)
