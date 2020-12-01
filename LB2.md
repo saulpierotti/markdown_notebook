@@ -622,3 +622,9 @@ HEADER    HYDROLASE   (SERINE PROTEINASE)         17-MAY-76   1EST
   - They are better than histograms since they are not influenced by bin size
   - A gaussian kernel interpolates a series of gaussians centered into each datapoint
 - Heatmaps visualize trivariate data with 2 independent variables
+
+## Sequence Profiles
+
+- PsiBLAST is an iterative algorithm that searches a profile against a database using multiple BLAST interations
+- Phmmer and Jackhmmer use HMMs, and Jackhmmer is the iterative version (similar to PsiBLAST)
+- HHBlits performs HMM-HMM alignments
