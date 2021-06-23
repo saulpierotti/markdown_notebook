@@ -1,0 +1,602 @@
+<h1 id="basic-part">Basic part</h1>
+<hr />
+<h1 id="introduction">Introduction</h1>
+<ul>
+<li>Professor is a physicist in high-energy physics</li>
+<li>We will not go so much into theory</li>
+<li>The exam will be a ML project</li>
+<li>ML is the capacity of a computer to do a task without being explicitly programmed</li>
+<li>AI contains ML, which contains DL (deep learning)
+<ul>
+<li>ML started in 1980, DL in 2010</li>
+</ul></li>
+<li>Strong AI is really far</li>
+<li>ML can learn faster and with lower latency than humans</li>
+<li>It is useful for tasks that humans cannot or don’t want to do</li>
+<li>Why today? Data avalilable and Cloud computing</li>
+<li>ML can be supervised, unsupervised and reinforcement learning</li>
+<li>Supervised: I know some real solutions
+<ul>
+<li>It is a regression or classification problem</li>
+<li>Regression: continuous</li>
+<li>Classification: discrete</li>
+</ul></li>
+<li>Unsupervised: no label on the data
+<ul>
+<li>I use clustering algos</li>
+<li>I want to find some structure in the data</li>
+<li>I can get groups, but I don’t know the meaning of these groups</li>
+</ul></li>
+</ul>
+<h1 id="univariate-linear-regression">Univariate linear regression</h1>
+<ul>
+<li>I can define a cost function that measures the average distance of the real outcomes from my regression</li>
+<li>I want to choose the parameters <eq env="math">\theta</eq>s that minimize the cost function <eq env="math">J(\theta_1,\theta_2,...,\theta_n)</eq>
+<ul>
+<li>In a linear regression the cost function has 2 parameters (!)
+<ul>
+<li>Intercept and angular coefficient</li>
+</ul></li>
+</ul></li>
+<li>To minimise a function I can use a gradient descent algo
+<ul>
+<li>It is an iterative process</li>
+<li>For now, only local minima, no global</li>
+<li>It uses an aggressivness factor <eq env="math">\alpha</eq> , which is how big every step is
+<ul>
+<li>If too small it is too slow</li>
+<li>If it is too large I can miss a minimum</li>
+<li><eq env="math">\alpha</eq> is referred to as an hyperparameter
+<ul>
+<li>It refers to the learning, not to the problem</li>
+</ul></li>
+</ul></li>
+<li>When updating <eq env="math">\theta</eq>s, all of them must be updated simultaneously</li>
+</ul></li>
+<li>The minimization algo can be analytical or iterative
+<ul>
+<li>An analytical solution to univariate linear regression exists</li>
+<li>In ML the analytical version does not scale well</li>
+<li>GD is the iterative approach</li>
+</ul></li>
+<li>The iterative update of <eq env="math">\theta</eq> is done by subtracting to its previous value <eq env="math">\alpha</eq> times the partial derivative of the cost function with respect to <eq env="math">\theta</eq>
+<ul>
+<li>If the derivative is positive <eq env="math">\theta</eq> decreases, if negative increases, if 0 doesn’t change</li>
+<li>The magnitude of the change is proportional to the derivative at that point (!)</li>
+</ul></li>
+<li>In a linear regression the cost function is always a convex quadratic: the only minimum is the global minimum (!)</li>
+<li>Batch GD: start from any point and apply GD until I get to a minimum
+<ul>
+<li>It is batch since at every iteration I evaluate the cost function for the whole batch of datapoints</li>
+</ul></li>
+</ul>
+<h1 id="multivariate-linear-regression">Multivariate linear regression</h1>
+<ul>
+<li>The real world is multivariate (!)
+<ul>
+<li>Nonetheless, unuvariate is useful for understanding concepts</li>
+</ul></li>
+<li>I have one <eq env="math">\theta</eq> for each x, plus <eq env="math">\theta_0</eq>
+<ul>
+<li><eq env="math">\theta_0</eq> is a bit unconfortable, since it is different from the others (no x associated!)</li>
+<li>To make things easier, I introduce <eq env="math">x_0 = 1</eq> that multiplies <eq env="math">\theta_0</eq></li>
+<li>This means that I have n+1 dimentional vectors if n is the number of independent variables</li>
+<li>In this way, I have a vector of xs and a vector of <eq env="math">\theta</eq>s</li>
+<li>I can represent the whole multivariate function as a product of the x vector with the traspose of the <eq env="math">\theta</eq> vector</li>
+<li><eq env="math">h_\theta(x) = \theta_0 x_0 + \theta_1 x_1 + \theta2_2 x_2 + ... + \theta_n x_n = \boldsymbol{\theta}^T \boldsymbol{x}</eq></li>
+</ul></li>
+<li>The different variables can have different magnitudes, and I want to account for this
+<ul>
+<li>To correct, I will do feature scaling</li>
+<li>I divide the data for the highest value for that variable</li>
+<li>My data becomes all in the range 0-1</li>
+<li>Outliers can skew my features: I remove them</li>
+<li>More generally I want to be in the -1/+1 range since <eq env="math">x_0</eq> is already 1</li>
+<li>I need to rescale also features which are really small</li>
+</ul></li>
+<li>A different way can be to do mean normalisation
+<ul>
+<li>I subtract the mean and divide for the range (max-min) or stdev</li>
+</ul></li>
+</ul>
+<h1 id="learning-rate">Learning rate</h1>
+<ul>
+<li>The selection of <eq env="math">\alpha</eq> is important for determining if the GD converges, and if it does how much does it take</li>
+<li>How do I determine if the GD has converged?
+<ul>
+<li>I can decide a threshold decrese, i.e. if J decreses of less than <eq env="math">10^{-3}</eq> in one iteration I stop</li>
+</ul></li>
+<li>If I see a strange behaviour (divergence, bouncing around) the first thing to try is to decrease <eq env="math">\alpha</eq></li>
+<li>But what values for <eq env="math">\alpha</eq>?
+<ul>
+<li>First try in factor 10 steps: 0.0001, 0.001, 0.01, 1, 10, …</li>
+<li>Then go to a factor 3</li>
+</ul></li>
+</ul>
+<h1 id="polynomial-regression">Polynomial regression</h1>
+<ul>
+<li>It is the simplest non-linear model but it can fit really complicated behaviours</li>
+<li>I can create features: instead of using x, why not <eq env="math">e^x</eq>?
+<ul>
+<li>I can make linear dependencies which are not linear</li>
+</ul></li>
+<li>I can reduce any polynomial regression to a linear by adding new features (!)
+<ul>
+<li>I can use <eq env="math">x</eq> and <eq env="math">x^2</eq> instead of only <eq env="math">x</eq></li>
+</ul></li>
+</ul>
+<h1 id="classification">Classification</h1>
+<ul>
+<li>Classification problems can be binary or multiclass</li>
+<li>Linear regression is not good for pure classification problems
+<ul>
+<li>My problem is in nature not linear</li>
+<li>I want an output in the range 0-1, not a continuous one</li>
+</ul></li>
+<li>Logistic regression: a classification algorithm
+<ul>
+<li>It is a sigmoid or logistic function that outputs in the 0-1 range</li>
+<li>It is a function of the regression function itself <eq env="math">\theta^T x</eq>
+<ul>
+<li><eq env="math">h_\theta (x) = \frac{1}{1+e^{-\theta^T x}}</eq></li>
+</ul></li>
+<li>I can interpret it as a probability of belonging to class y=1, given the measurement x and the parametrization <eq env="math">\theta</eq>
+<ul>
+<li><eq env="math">h_\theta (x) = p(y=1|x,\theta)</eq></li>
+</ul></li>
+<li>In general the logistic function takes any range of values, e.g. outputs of a function, and reports it in the range 0-1</li>
+<li>The output is the probability of the input belonging to class 1, and the probability of belonging to 0 is its complementary</li>
+</ul></li>
+<li>I am defining with the logistic a decision bundary that discriminates 1 and 0 outputs</li>
+<li>The decision boundary is not decided by the data, but by our hypothesis
+<ul>
+<li>It is a product of the model we use</li>
+</ul></li>
+<li>The decision boundary is not necessarily linear
+<ul>
+<li>By using higher order polinomials I can have circles and more complex boundaries</li>
+</ul></li>
+<li>The cost fucntion for the logistic regression cannot be the argument of the logistic
+<ul>
+<li>If we apply GD on the initial function that is plugged into the logistic, there is no guarantee of convergence</li>
+<li>This cost function is not convex (!)</li>
+</ul></li>
+<li>We can define this cost function for a single element y
+<ul>
+<li><eq env="math">cost(h_\theta(x), y) = \begin{cases} - \log{(h_\theta (x))} &amp; y=1 \\ - \log{(1-h_\theta(x))} &amp; y=0 \end{cases}</eq></li>
+</ul></li>
+<li>This can be rewritten as
+<ul>
+<li><eq env="math">cost(h_\theta(x), y) = - y \log{(h_\theta (x))} - (1-y) \log{(1-h_\theta(x))}</eq></li>
+</ul></li>
+<li>The total cost function J is then
+<ul>
+<li><eq env="math">J(\theta) = \frac{1}{m} \sum_{i=1}^m cost(h_\theta(x_i), y_i)</eq></li>
+<li><eq env="math">J(\theta) = \frac{1}{m} \sum_{i=1}^m - y_i \log{(h_\theta (x_i))} - (1-y_i) \log{(1-h_\theta(x_i))}</eq></li>
+</ul></li>
+<li>The GD algorithm for classification is identical to that for linear regression
+<ul>
+<li>The only difference is the h itself, so our hypothesis</li>
+<li>The process for optimizing the descent is the same</li>
+</ul></li>
+</ul>
+<h1 id="alternatives-to-gd">Alternatives to GD</h1>
+<ul>
+<li>GD is not the only possibility, there is also conjugate gradients and other approaches</li>
+<li>Other approaches are more opaque, there are libraries that provide them but they are difficult to understand</li>
+</ul>
+<h1 id="multiclass-classification">Multiclass classification</h1>
+<ul>
+<li>One-vs-all approach: I decompose the problem in several binary classifications
+<ul>
+<li>I assign a class to 1 and all the other datapoints to 0</li>
+<li>I determine the decision boundary</li>
+<li>I repeat with the second class and so on</li>
+<li>Now we know the probability that a datapoint belongs to each of the classes</li>
+<li>Our prediction is the class that gives me the highest probability</li>
+</ul></li>
+</ul>
+<h1 id="overfitting">Overfitting</h1>
+<ul>
+<li>I have overfitting when my model does not generalize</li>
+<li>How to reduce overfitting
+<ul>
+<li>Reduce the number of features
+<ul>
+<li>This is risky since I can loose useful information</li>
+</ul></li>
+<li>Tune down the weight of features</li>
+</ul></li>
+<li>I don’t need to specify how small a feature should be (!)</li>
+<li>I can modify my cost function so that the cost for a feature is really high, and thus gets tuned down by the GD
+<ul>
+<li>I can add the square of the parameters that I want to tune down to the cost function</li>
+<li>I add the square because the parameters can be negative (!)</li>
+<li>In this way I penalise when they get too big</li>
+<li>This term is added to the sum of squared distances of the previous cost function</li>
+</ul></li>
+<li>I get a cost function that is a tradeoff between fitting and avoidance of overfitting</li>
+<li>I can do this by introducing the regularization hyperparameter <eq env="math">\lambda</eq>
+<ul>
+<li>It is a multiplier to the sum of squares of all the parameters
+<ul>
+<li>I am actually excluding <eq env="math">\theta_0</eq> from this</li>
+</ul></li>
+<li>It penalizes the cost function when parameters get too large</li>
+</ul></li>
+<li>By tuning <eq env="math">\lambda</eq> I can modify the behaviour of my model
+<ul>
+<li>When <eq env="math">\lambda</eq> is really large I go towards underfitting</li>
+<li>When it is too small I have overfitting</li>
+</ul></li>
+</ul>
+<h1 id="improving-performance">Improving performance</h1>
+<ul>
+<li>Do not over-optimize the model: if needed try to increase the amount of data
+<ul>
+<li>Not always easy!</li>
+</ul></li>
+<li>Another possibility: tune down or remove features!</li>
+<li>Maybe your dataset is not descriptive enough: more features!</li>
+<li>In general, you need experience and gut feeling</li>
+</ul>
+<h1 id="training-and-testing">Training and testing</h1>
+<ul>
+<li>Typically I split in 70/30 or 80/20</li>
+<li>The training set should be larger than the test set</li>
+<li>If there is structure in your data shuffle them!</li>
+<li>When checking performance in the testing set, not always I use the same cost function used in the training
+<ul>
+<li>For logistic regression I can just count the number of correct predictions</li>
+</ul></li>
+<li>I can train my model and test it n times, and then chose the one that performs better in the test set
+<ul>
+<li>In this case I am actually using the test set to choose the best model, so I cannot use it for testing performance!</li>
+<li>I can 2 a 3-partition: I set aside the test set at the beginning and I do cross validation in the remaining part
+<ul>
+<li>I choose the best model and then test it on the test set that I set aside</li>
+<li>A typical split is 60/20/20</li>
+</ul></li>
+</ul></li>
+</ul>
+<h1 id="variance-and-bias">Variance and bias</h1>
+<ul>
+<li>When my hypothesys is too simple I an doing underfitting, I am in anigh-bias case</li>
+<li>When my hypothests is too complex I an doing overfitting, I am in an high-variance case</li>
+<li>For evaluating bias and variance it is usefull to look at the train error and cross-validation (cv) error</li>
+<li>The train error tends to decrease indefinitely and approach 0 when the degree of the polynomial model increases</li>
+<li>The cv error initially decreases by adding higher polynomial features, but then reaches a minimum and it increases again</li>
+<li>If both train and cv error ar high I am in an high-bias scenario</li>
+<li>If cv error is high and train error low, I am in an high-variance scenario</li>
+</ul>
+<h1 id="automatic-regularization">Automatic regularization</h1>
+<ul>
+<li>Choosing a large <eq env="math">\lambda</eq> cause high bias, a small <eq env="math">\lambda</eq> high variance</li>
+<li>I can automatically select <eq env="math">\lambda</eq> by doing model selection
+<ul>
+<li>I create not 1 but a set of models with a range of <eq env="math">\lambda</eq>s</li>
+<li>I test the error on the cv set for each model</li>
+<li>I choose the <eq env="math">\lambda</eq> that minimises <eq env="math">J_{cv}</eq></li>
+</ul></li>
+</ul>
+<h1 id="learning-curves">Learning curves</h1>
+<ul>
+<li>A learning curve is a plot of <eq env="math">J_{train}</eq> and <eq env="math">J_{cv}</eq> as a function of the training set size <eq env="math">m</eq>
+<ul>
+<li>I fist train with 1 sample, then with 2, and so on</li>
+</ul></li>
+<li><eq env="math">J_{train}</eq> is small when the set is small and then increases and reaches a plateau when <eq env="math">m \to \infty</eq></li>
+<li><eq env="math">J_{cv}</eq> is high when the set is small and then decreases and reaches a plateau when <eq env="math">m \to \infty</eq></li>
+<li>The larger <eq env="math">m</eq>, the closer <eq env="math">J_{train}</eq> and <eq env="math">J_{cv}</eq> are</li>
+<li>If <eq env="math">J_{train}</eq> and <eq env="math">J_{cv}</eq> are similar I can be in high bias
+<ul>
+<li>In this case increasing the sample size is not likely to help</li>
+</ul></li>
+<li>If <eq env="math">J_{train}</eq> is low but <eq env="math">J_{cv}</eq> is high (few training samples) I can be in high bias
+<ul>
+<li>In this case increasing the sample size will help</li>
+</ul></li>
+</ul>
+<h1 id="classification-metrics">Classification metrics</h1>
+<ul>
+<li>In a classification problem I can define a confusion matrix
+<ul>
+<li>It has the predicted classes as rows and the actual classes as columns</li>
+<li>In a 2-class positive/negative scenario <eq env="math">cm = \begin{bmatrix}tp &amp; fp \\ fn &amp; tn\end{bmatrix}</eq></li>
+</ul></li>
+<li>Accuracy: general acceptable as a metric but it fails with skewed classes
+<ul>
+<li><eq env="math">ACC = \frac{tp+tn}{tp+fp+fn+tn}</eq></li>
+</ul></li>
+<li>Precision: fraction of the predicted positives that are actually positives
+<ul>
+<li><eq env="math">P = \frac{tp}{tp+fp}</eq></li>
+<li>It is the ability of not labeling as negative a positive sample</li>
+</ul></li>
+<li>Recall: fraction of the true positives that were predicted as positives
+<ul>
+<li><eq env="math">R = \frac{tp}{tp+fn}</eq></li>
+<li>It is the ability to find all the positve samples</li>
+</ul></li>
+<li>Precision and recall are resistant to skewed classes: if <eq env="math">tp = 0 \to P=R=0</eq></li>
+<li>Usually it is used the convention of assigning the label 1 to the rarest class in a binary classification
+<ul>
+<li>Precision and recall are evaluated on the rare class (the positives are the rare class)</li>
+</ul></li>
+<li>In most cases we have a tradeoff between precision and recall</li>
+<li>In some setting I may want to not miss any true positive at the cost of labeling as positive a lot of negatives
+<ul>
+<li>This can be the case for identifying cancer: I want all the cancer patients to be identified and tested, even if I will mislabel some healty patient that will be tested without need</li>
+<li>I want high recall at the cost of low precision</li>
+</ul></li>
+<li>I can plot a PR curve with recall on the x axis and precision on the y axis
+<ul>
+<li>The curve goes from <eq env="math">x=0 \to y=1</eq> to <eq env="math">x=1 \to y=0</eq></li>
+</ul></li>
+<li>I can want a single metric that evaluated my algo by combining precision and recall
+<ul>
+<li>The average of precision and recall is not a good metric</li>
+</ul></li>
+<li>F1 score: a weighted armonic mean of precision and recall
+<ul>
+<li><eq env="math">F1 = 2*\frac{P*R}{P+R}</eq></li>
+<li>It penalizes unbalances between the 2</li>
+<li>If <eq env="math">P=0</eq> or <eq env="math">R=0 \to F1=0</eq></li>
+<li>If <eq env="math">P=R=1 \to F1=1</eq></li>
+</ul></li>
+<li>The F2 score is similar to the F1 score but with different weights
+<ul>
+<li><eq env="math">F2 = \frac{5*P*R}{4(P+R)}</eq></li>
+</ul></li>
+<li>The ROC curve is a plot of true positive rate (recall) vs false positive rate
+<ul>
+<li>It is note dependent on a specific threshold</li>
+<li><eq env="math">TPR=R=\frac{tp}{tp+fn}</eq></li>
+<li><eq env="math">FPR=R=\frac{fp}{fp+tn}</eq></li>
+<li>The ROC curve could be evaluated by testing the model with many different thresholds, but it would be inefficient</li>
+<li>There is a sorting-based algortihm, AUC that can compute the ROC curve</li>
+<li>AUC measures the 2d area under the ROC curve</li>
+<li>A perfect classifier has <eq env="math">AUC=1</eq>, a random classifier <eq env="math">AUC=0.5</eq></li>
+<li>AUC can be interpreted as the probability that the model will rank a random positive sample higher than a random negative sample</li>
+<li>AUC is threshold invariant and scale-invariant</li>
+<li>Scale invariance: it measures how well predictions are ranked, not their absolute values
+<ul>
+<li>This could be desirable or not depending on context</li>
+<li>If I want a precise probability output from my model instead of a discrete binary classification, this is not good</li>
+</ul></li>
+<li>Threshold invariance: it is a single metric for every threshold
+<ul>
+<li>This may not be desirable when I want to minimse just 1 kind of error</li>
+</ul></li>
+</ul></li>
+</ul>
+<h1 id="feature-crosses">Feature crosses</h1>
+<ul>
+<li>In many cases NN are useful, but costly in terms of resources and readability
+<ul>
+<li>When dealing with a lot of data linear learners, if possible, are a better choice</li>
+</ul></li>
+<li>I can try to attack a complex non-linear problem with feature crosses instead, using standard ML algos</li>
+<li>In general I can take n features <eq env="math">x_1, x_2, ..., x_n</eq> and combine them in a new feature <eq env="math">x_a</eq>
+<ul>
+<li>In this way I can encode non-linearity in the new feature, which will be hopefully linear with the hypothesis!</li>
+<li>This is transparent for the ML algo, that treats <eq env="math">x_a</eq> just as another linear feature!</li>
+</ul></li>
+<li>1-hot feature vectors: I can have a feature which is actually a vector containing a 1 and all 0s
+<ul>
+<li>It can encode any kind of information, like class belonging, a binned value, …</li>
+<li>Binned value: I can subdivide a value range in bins and assign a number in the vecotrs to each of them
+<ul>
+<li>All the values will be 0 except the one where my sample belongs, which will be 1</li>
+</ul></li>
+</ul></li>
+<li>Feature crosses are usually done on 1-hot vectors
+<ul>
+<li>The result is essentially a logical conjunction</li>
+<li>If I cross 2 5-class vectors I get a 25-class 1-hot vector encoding the combination of the original vectors</li>
+<li>There is a possible resulting vector status for each possible combination of the original features</li>
+</ul></li>
+<li>Take away message: if you don’t have millions of features probably you don’t need a NN</li>
+<li>However, NN are more flexible and can be applied to many cases</li>
+<li>The Google AI playground is a nice visual tool for understanding feature crosses and neural networks</li>
+</ul>
+<h1 id="infos-for-the-exam">Infos for the exam</h1>
+<ul>
+<li>For the basic part only scikit learn can be used</li>
+<li>For the advanced part Keras and Tensorflow</li>
+<li>If I want to do a project for both I should use both</li>
+<li>The project is end to end: data and goal</li>
+<li>Option 1: a proposal (1 page or an email)</li>
+<li>Option 2: data and problem given by him
+<ul>
+<li>There are easy and difficult problems (but they are all quite easy)</li>
+</ul></li>
+<li>Problems in python with code and documentation, possibly on github
+<ul>
+<li>It can also be a notebook with both</li>
+</ul></li>
+<li>It should be reproducible</li>
+<li>You can copy but be clever!</li>
+</ul>
+<h1 id="advanced-part">Advanced part</h1>
+<hr />
+<h1 id="tools-for-the-advanced-part">Tools for the advanced part</h1>
+<ul>
+<li>We will still use sklearn for preprocessing, but not for the main analysis</li>
+<li>Keras, with TensorFlow as a backend, will be our main tool
+<ul>
+<li>We could also touch PyTorch</li>
+</ul></li>
+<li>CPU will NOT be enough for this part, we need a GPU or TPU (in Colab)</li>
+</ul>
+<h1 id="decision-trees-dt">Decision Trees (DT)</h1>
+<ul>
+<li>Decision trees are implemented in sklearn as <code>DecisionTreeClassifier()</code>
+<ul>
+<li>It is possible to specify the maximum depth of the tree with the <code>max_depth</code> argument</li>
+</ul></li>
+<li>They are binary decision trees which cut the dataset at a threshold for a feature at each level</li>
+<li>I have a root layer and layers at different depth levels</li>
+<li>Nodes can be leaf nodes or non-leaf nodes</li>
+<li>The <code>gini</code> parameter is a property of nodes
+<ul>
+<li>It is a measure of how often a randomly chosen element from the set would be incorrectly labeled if it was randomly labeled according to the distribution of labels in the subset</li>
+</ul></li>
+<li>With decision trees data preparation is not needed, I just need to decide the depth</li>
+<li>Decision boundaries are always orthgonal to each other (e.g. they operate on a feature different from the previous one!)</li>
+<li>If I use a high depth I risk overfiting!</li>
+<li>It is possible to estimate class probabilities for a DT algo prediction
+<ul>
+<li>I first traverse the tree and I go the the relevant leave</li>
+<li>I return the proportion of classes that ends up in that given leaf</li>
+</ul></li>
+<li>DTs are operating like white boxes: I know what is happening inside and I can debug it easily</li>
+<li>DTs in sklearn are trained with the classification and regression tree (CART) algo
+<ul>
+<li>The produced trees are alway binary</li>
+<li>It splits the dataset according to a single threshold <eq env="math">t_k</eq> and a single feature <eq env="math">k</eq></li>
+<li>It searches the <eq env="math">k, t_k</eq> pair that gives the pures subsets, weighted by size</li>
+<li>The parameter pair is choosen by minimizing the following cost function <eq env="displaymath">J(k, t_k) = \frac{n_l}{n}G_l+\frac{n_r}{n}G_r</eq>
+<ul>
+<li><eq env="math">n_l, n_r</eq> are the number of instances in the right and left subsets</li>
+<li><eq env="math">G_r, G_l</eq> is a mesure of the purity of the respective subsets</li>
+</ul></li>
+<li>It then recursively splits the subsets until it reaches the <code>max_depth</code> hyperparameter</li>
+<li>Note: CART is a greedy algo that split in the best LOCAL way! No guarantee of optimal solution!</li>
+<li>The CART algo is stochastic, so if I want my tree to be reproducible and comparable I need to specify a random seed!</li>
+</ul></li>
+<li>DTs can also be used for regression (<code>DecisionTreeRegressor()</code> in sklearn)
+<ul>
+<li>In this case I am not predicting a class, but a value!</li>
+<li>The value predicted for each region is the average of the instances of the dataset in the region!</li>
+</ul></li>
+<li>The main hyperparameter for DTs is the maximum depth</li>
+<li>There are also other possible hyperparameters, linke the minimum number of samples in a single leaf (I do not want a leaf for each sample otherwise I do overfitting!)</li>
+<li>The cost functions of regression and classification DTs tries to minimize MSE (sample impurity)</li>
+<li>DTs are quick to train and powerful, and they are whiteboxes, but
+<ul>
+<li>Really sensitive to small changes in training data</li>
+</ul></li>
+<li>Since splits are orthogonal, they do not cope well with rotation of the training set
+<ul>
+<li>I could use feature crosses, but then why don’t I do PCA or something else?</li>
+<li>PCA is the best approach to correctly orient the dataset</li>
+</ul></li>
+<li>A random forest improves performances by avergaing the prediction of many trees
+<ul>
+<li>They are more stable but more opaque (grey box)!</li>
+<li>It is among the most powerful ML algos available!</li>
+</ul></li>
+</ul>
+<h1 id="support-vector-machines-svm">Support Vector Machines (SVM)</h1>
+<ul>
+<li>They are good for complex (non-linear) but small and medium size datasets
+<ul>
+<li>SVMs are good for linear an non-linear classification tasks, even in presence of outliers</li>
+<li>They don’t cope well with large datasets</li>
+<li>They do not require the computational resources needed for NNs</li>
+</ul></li>
+<li>It build a decision boundary which splits the classes and is as far as possible from the datapoints
+<ul>
+<li>This improves generalization!</li>
+</ul></li>
+<li>SVMs are also known as large margin classifiers: they try to find a line which splits the dataset well and with the widest margins (distance) from the datapoints
+<ul>
+<li>I want to fit the widest possible strip of plane (road) between the classes</li>
+<li>The surface between the 2 margins is called road or street, and it includes the decision boundary at its center</li>
+</ul></li>
+<li>SVMs are so called since they are machines that find a boundary which is fully supported by the support vectors of the dataset, the datapoints outside of the margins
+<ul>
+<li>Adding datapoints of the right class outside of the margins does not affect the decision boundary</li>
+</ul></li>
+<li>SVMs are really sensitive to feature scaling and preparation</li>
+<li>SMV margins can be hard or soft</li>
+<li>With hard margins I strictly impose that all the datapoints be outside the margins
+<ul>
+<li>This is very sensitive to outliers and it can be impossible!</li>
+<li>In the best case, it forces me to have very narrow margins</li>
+</ul></li>
+<li>Soft margins try to keep the margins as wide as possible while minimising margin violation
+<ul>
+<li>The C hyperparameter tunes the balance between margin width and margin violations</li>
+</ul></li>
+<li>In sklearn a linear SVM classifier is found in <code>sklearn.svm</code> as <code>LinearSVC</code>
+<ul>
+<li>There are also other non-linear classes, useful in different scenarios</li>
+<li>Read the documentation!</li>
+</ul></li>
+<li>I can classify a non-linear dataset by using a linear SVC with feature crosses!
+<ul>
+<li>Too few feature tend to not deal well with complex datasets</li>
+<li>Too many feature make the model expensive to train</li>
+</ul></li>
+<li>It is possible to apply a mathematical technique called kernel trick to deal with complex datasets without actually adding polynomial features</li>
+<li>Regression with SVM is basically the opposite of SVM classification
+<ul>
+<li>Instead of finding the margins that best split the dataset, I find the margins that best include the dataset</li>
+<li>In this case I have the hyperparameter <eq env="math">\epsilon</eq> that controls the width of the margins</li>
+</ul></li>
+</ul>
+<h1 id="ensemble-learning">Ensemble learning</h1>
+<ul>
+<li>It means combining the predictions of many different algos</li>
+<li>It is one of the most used approach in real ML</li>
+<li>It is probably the approach that will lead to the best performances with classic ML</li>
+<li>I tend to get similar bias but lower variance from ensemble learning</li>
+<li>There are different ensemble approaches: bagging, boosting, majority voting, stacking</li>
+<li>Bagging: the learners learn independently and the results are then combined in a defined way
+<ul>
+<li>The single learners use random subsamples of the dataset with replacement for training</li>
+<li>The classification is done with a simple average of the predictions</li>
+<li>If I use resampling without replacement it is called pasting</li>
+</ul></li>
+<li>Boosting: I use homogeneous learners that improve the work of each other
+<ul>
+<li>The output of 1 model is the input of the next one</li>
+<li>A weak learner uses a random subsample with replacement of the dataset, with features weighted on the weights of the previous learners</li>
+<li>The classification is a weighted average of the predictions</li>
+<li>Each learner tries to mitigate the errors of the previous ones</li>
+</ul></li>
+<li>Majority voting: similar to bagging but each learner uses the entire training set
+<ul>
+<li>It is based on the wisdom of the corwd paradigm</li>
+<li>The classification is done with simple statistics (es. average)</li>
+<li>In hard voting I just average the predicted classes</li>
+<li>In soft voting I average the predicted probabilities for the classes</li>
+</ul></li>
+<li>Stacking: an advanced kind of voting that is difficult to implement with sklearn
+<ul>
+<li>Heterogeneous weak learners are trained independently</li>
+<li>I create a meta-model that combines the predictions of the various models</li>
+</ul></li>
+<li>If I have many weak learners with high variance and low bias, bagging is the best choice
+<ul>
+<li>Bagging fights the variance</li>
+</ul></li>
+<li>If I have many weak learners with high bias and low variance, boosting is the best choice
+<ul>
+<li>Boosting can fight both variance and bias</li>
+</ul></li>
+</ul>
+<h1 id="neural-networks">Neural Networks</h1>
+<ul>
+<li>Neural Networks (NN) are a family of ML algorithms
+<ul>
+<li>They are an actually old idea, widely used in 1980’s and 1990’s</li>
+<li>They became less popular after 1990</li>
+<li>They had a resurrection when more computing resources became available, together with big data and better algos</li>
+<li>Another factor for theur reapperance is the availability of cloud computing resources, which democratized the access to computing power</li>
+</ul></li>
+<li>NN are used when we need to learn heavily non-linear patterns
+<ul>
+<li>In image recognition each pixel is 3 1-hot feature vectors with 255 levels each!</li>
+<li>It is practically impossible to train a classic ML model on this amount of feature in reasonable time</li>
+</ul></li>
+<li>When possible it is better to avoid NN since they are really expensive
+<ul>
+<li>They are expensive in terms of training time and computing resources</li>
+<li>They are hard debugging</li>
+<li>They lack explainability</li>
+</ul></li>
+<li>Some times problems are intrinsically non-polynomial and cannot be solved in a traightforward manner with calssic ML algos</li>
+</ul>

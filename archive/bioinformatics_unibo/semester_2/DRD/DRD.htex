@@ -1,0 +1,1490 @@
+<h1 id="introduction">Introduction</h1>
+<ul>
+<li>Professor works in human aging</li>
+<li>Module 1 has a written test, module 2 a report (of course)</li>
+<li>Final score is 20 (module 1) + 10 (module 2)</li>
+<li>Experimental questions should be focused</li>
+<li>In an experiment I have to consider experimental and biological variability</li>
+<li>We can find nucleosomes in blood deriving from apoptotic bodies
+<ul>
+<li>They are found in microvescicoles</li>
+<li>Sometimes they can also be free and in this case they are dangerous</li>
+</ul></li>
+<li>In the lab of prof. Capri they tryed to see if the nucleosome-associated DNA in blood is different in young, old people and centenarians
+<ul>
+<li>They work a lot with centenarians and they are so proud of it</li>
+</ul></li>
+<li>We have about 28 millions CpGs in our genome</li>
+<li>Histones are octamers
+<ul>
+<li>H2a and H2b form a dimer</li>
+<li>2 H3 and H4 form a tetramer</li>
+<li>A tetramer binds 2 dimers forming the histone octamer</li>
+<li>Toghether with 148 bp of DNA they form nucleosomes</li>
+<li>The DNA between nucleosome is called linker DNA</li>
+<li>H1 is the linker histone which binds incoming and outgoing DNA from the nucleosome</li>
+</ul></li>
+<li>Histone modifications are one of the essential epigenetic modifications
+<ul>
+<li>Histone modifications: metilation, acetilation, posphorylation, ubiquitinilation</li>
+<li>They usually happen in K, R, S, or T of histone tails</li>
+<li>Histone variants (es. H2ax) mediate also functional alterations</li>
+<li>H3k4me3 is typical of active promoters</li>
+</ul></li>
+<li>TET (Ten Eleven Translocation) is the principal CpG demetylating enzyme</li>
+<li>DNMT1, DNMT3a and DNMT3b are the principal methylating enzymes
+<ul>
+<li>DNMT1 mainly methylates hemimethylated CpGs</li>
+<li>DNMT3 performs mainly de novo methylation</li>
+</ul></li>
+<li>In mammals metilation happens mostly at position 5 of C in a CpG dinucleotide</li>
+<li>High expression is associated with high gene metilation and low promoter metilation
+<ul>
+<li>The causality is not so clear</li>
+</ul></li>
+<li>The inheritance of mathylation patterns is not clear</li>
+<li>CpG methylation can be used as a marker of ageing and pathology</li>
+<li>The metaorganism: nDNA, mtDNA, microbiome
+<ul>
+<li>Microbiome influences our phenotype</li>
+</ul></li>
+<li>The Human Microbiome Project (HMP) aimed at sequencinge the microbiome genome
+<ul>
+<li>The microbiome genome was shown to have more than 33 million genes</li>
+</ul></li>
+<li>RNA expression changes in response to stimuli</li>
+<li>RNA are of many types
+<ul>
+<li>lncRNAs are longer than 200 nt</li>
+<li>sncRNAs are shorter than 35 nt</li>
+<li>Middle-sized RNAs
+<ul>
+<li>Structural: tRNA, rRNA, snRNA, snoRNA</li>
+<li>Regulatory: ncRNA, siRNA, miRNA, piRNA</li>
+<li>tRNA derived fragments (tRF) are involved in several functions like stress response</li>
+</ul></li>
+</ul></li>
+<li>Micro RNAs: pair with mRNA in an inextact way and block translation
+<ul>
+<li>miRNAs are 18-25 nt long</li>
+<li>They can have many targets, that they recognize through pairing of their seed sequence</li>
+<li>They regulate 60% of the mRNAs</li>
+<li>Humans probably have around 600 miRNAs</li>
+<li>Each locus can produce 2 miRNAs (5p and 3p), complementary to each other</li>
+<li>They are in intergenic regions or in introns or also exons!</li>
+<li>pri-miRNAs are transcribed by RNA-Pol-II under the control of specific promoters
+<ul>
+<li>They form a carachteristic hairpin structure</li>
+</ul></li>
+<li>pri-miRNAs are cut by the microprocessor (Drosha(Pasha)/DGCR8) to pre-miRNA
+<ul>
+<li>Drosha is a type III class II RNAse</li>
+</ul></li>
+<li>pre-miRNA are exported from the nucleus by the Ran-GTPase Exportin 5</li>
+<li>Dicer/TRBP trims the pre-miRNA in the cytosol to a miRNA duplex and separates the 5p and 3p miRNAs</li>
+<li>The miRNA takes part in the RISC complex and it silences mRNAs</li>
+<li>miRNAs can be found in vescicles/exosomes and go around the body
+<ul>
+<li>They can act in different cells than the ones that produced them!</li>
+</ul></li>
+</ul></li>
+<li>Astronauts could be ageing faster
+<ul>
+<li>They want to check their DNA associated with nucleosomes before going, after landing and after a while after landing</li>
+</ul></li>
+<li>I can distinguish biological and experimental variability by carefully designing my experiment
+<ul>
+<li>Biological variability is usually a lot</li>
+<li>I should always do technical replicates</li>
+</ul></li>
+<li>When planning an experiment it is essential to know the underlying biology in order to select the correct variables</li>
+</ul>
+<h1 id="basic-statistics">Basic statistics</h1>
+<ul>
+<li><eq env="math">\mu</eq> and <eq env="math">\sigma</eq> refer to population parameters, while <eq env="math">\bar{X}</eq> and <eq env="math">S</eq> are sample parameters</li>
+<li>Coefficient of variability: <eq env="math">CV = (SD/\bar{X})*100</eq></li>
+<li>Population standard deviation: <eq env="displaymath">\sigma = \sqrt{\frac{1}{N}\sum_{i=1}^N (x_i - \mu)^2}</eq></li>
+<li>Unbiased Sample standard deviation: <eq env="displaymath">S = \sqrt{\frac{1}{N-1}\sum_{i=1}^N (x_i - \mu)^2}</eq>
+<ul>
+<li>The standard deviation estimated from a sample must divide by the degrees of freedom!</li>
+<li>I already estimate the mean using the data so I loose 1 df</li>
+<li>The mean of the sample is likely to be closer to the values in the sample than to the general population since it was estimated from them!</li>
+<li>I consistently underestimate the variance if I divide by N!</li>
+</ul></li>
+<li>The standard normal distribution has mean <eq env="math">\mu = 0</eq> and standard deviation and variance <eq env="math">\sigma = \sigma^2 = 1</eq>
+<ul>
+<li><eq env="math">\mu \pm 1 \sigma</eq> are the inflection points of the curve and include 68.2% of the population</li>
+<li><eq env="math">\mu \pm 2 \sigma</eq> includes 95.4% of the population</li>
+<li><eq env="math">\mu \pm 3 \sigma</eq> includes 99.6% of the population</li>
+<li>The Z score is the number of <eq env="math">\sigma</eq> away from the mean in the standard normal curve that my measurement is</li>
+</ul></li>
+<li>Box plot: look at data distribution
+<ul>
+<li>The central line is the median (quartile Q2)</li>
+<li>The sides of the box are the quartiles Q1 and Q3</li>
+<li>The interquartile range (IQR) is Q3-Q1 and contains 50% of the distribution</li>
+<li>The wiskers are 1.5*IQR above/below Q1/Q3</li>
+<li>Outliers are the datapoints outside of the wiskers</li>
+</ul></li>
+</ul>
+<h1 id="microarrays">Microarrays</h1>
+<ul>
+<li>Tiling arrays cover an entire genome
+<ul>
+<li>They can be designed so to study gene variants, transcripts, DNA methylation, chromatine immunoprecipitation, ecc…</li>
+</ul></li>
+<li>There are DNA and protein arrays (Ab arrays!)</li>
+<li>For transcriptomics and DNA metilation I can use competitive or non competitive arrays</li>
+<li>Production technologies
+<ul>
+<li>Oligos can be separately synthesised and spotted (various companies do this)</li>
+<li>DNA can be synthesized directly on the chip (GeneChip)</li>
+<li>Oligos can be separately synthesized and loaded on beads, which are then immobilised on the chip (BeadChips)</li>
+</ul></li>
+<li>Microarray supports can be made of glass, silicon, quartz, nylon</li>
+<li>Competitive microarrays use 2 color channels in order to quantify the relative abundance of 2 different species</li>
+<li>Non-competitive microarrays use just 1 color channel to give an absolute estimate of a species</li>
+<li>Spotting technique: the oldest approach
+<ul>
+<li>A spotting robot with pins spots oligos in the slide</li>
+<li>The glass chip surface can be coated with aminosilane or other amino-modified groups for binding oligos
+<ul>
+<li>This is feasible with longer oligos, that are long enogh to interact strongly with the support</li>
+</ul></li>
+<li>I can use oligos with a 5’ alifatic amine that binds to the glass
+<ul>
+<li>This is typically used for shorter oligos</li>
+</ul></li>
+</ul></li>
+<li>In situ synthesis of oligos
+<ul>
+<li>I synthesize oligos on the slide itself base by base</li>
+<li>I use dNTPs with a protective group at the 5’ that inhibits elongation</li>
+<li>I selectively deprotect the 5’ in different ways</li>
+</ul></li>
+<li>I can use UV exposure to deprotect the 5’, so that sinthesis can continue (Affimetrix)
+<ul>
+<li>I can determine the sequence of each probe by using photolitographic masks to selectively expose probes to UV light</li>
+<li>UV masks are expensive to produce, but once produced they can be used for many arrays</li>
+<li>This technique is highly scalable and it is suityed for standardized (non-custom) arrays</li>
+</ul></li>
+<li>Affimetrix mask deprotection generates rectangular features
+<ul>
+<li>There is refraction of UV light in the mask, so there is bleeding among adjacent features</li>
+<li>The Affimetrix software corrects this by using only the central pixels of each feature</li>
+</ul></li>
+<li>Other approaches are more suited for custom arrays
+<ul>
+<li>I can unse maskless photodeprotection with micromirrors</li>
+<li>I can use inkject chemical deprotection
+<ul>
+<li>This gives the highest-quality features</li>
+</ul></li>
+</ul></li>
+</ul>
+<h2 id="competitive-microarrays">Competitive microarrays</h2>
+<ul>
+<li>They use 2 colors in the same chip and they were invented 20 years ago at Stanford by Patrick O’Reilly Brown</li>
+<li>Tipycally they are used with mRNAs: I do retrotranscription using Cy3(green)/Cy5(red) marked nucleotides for different samples
+<ul>
+<li>Ibridization is usually overnight, then I scan the array and acquire the image</li>
+<li>I can then compare expression level by comparing Cy3/Cy5 intensity at each spot</li>
+</ul></li>
+<li>Cy3 and 5 are both N-hydroxy-succimidyl esters but Cy5 is bigger
+<ul>
+<li>Possible bias during retrotrascription!</li>
+<li>To reverse this, I can retrotrascribe both samples with aminoallyl-dUTP and then couple the dyes via chemical reaction</li>
+</ul></li>
+<li>The array scanner (ScanArray) scans at 550nm (green) for exciting Cy3 and at 649nm (red) for Cy5
+<ul>
+<li>A feature is usually represented by ~50 pixels</li>
+<li>The laser is separately focused in each pixel
+<ul>
+<li>This is done by optics or by moving the slide</li>
+</ul></li>
+<li>Fluorescence is measured by a photomultiplier tube (PMT) for each pixel</li>
+<li>I do not read the whole array toghether, I read 1 pixel at a time!</li>
+<li>Each laser spot size is represented by 1 pixel, or by more than 1
+<ul>
+<li>If a the pixel size is smaller than the laser spot, I blur the image and reduce irregularities</li>
+</ul></li>
+<li>Each pixel of the image is a point of measure</li>
+<li>The 2 channels are then merged in silico</li>
+</ul></li>
+<li>For each channel a 16-bit monochromatic TIFF image is acquired
+<ul>
+<li>A single image can be 32 Mb, so if I scan many arrays storage is an issue</li>
+</ul></li>
+<li>Each channel TIFF image is processed so to obtain a table of intensities for each feature
+<ul>
+<li>I first need to find the features</li>
+<li>Then, for each feature I need to segment it: determine which pixels belong to the feature and wich to the background</li>
+</ul></li>
+<li>For each spot in the final image, the software uses false colors
+<ul>
+<li>A white spot is saturated</li>
+<li>A blue spot is absence of signal</li>
+<li>A red spot has Cy5 upregulation</li>
+<li>A green spot has Cy3 upregulation</li>
+<li>A yellow spot has the same levels of Cy3 and Cy5 intesities</li>
+</ul></li>
+<li>I can address any possible dye bias by swapping the dyes and repeating the experiment</li>
+<li>Background fluorescence can be a problem
+<ul>
+<li>The usual approach is to subract the local background from the feature intensity
+<ul>
+<li>If the result is negative (backgroud is broghter than the feature) I flag the feature as unreliable and filter it out</li>
+</ul></li>
+<li>I can assign the arbitrary value 1 to all the features with intensity lower than the background</li>
+<li>I can use a Bayesian approach to estimate the true feature intensity</li>
+</ul></li>
+<li>For each spot I have a pixel distribution
+<ul>
+<li>I can get the mean signal, SD, median, median absolute deviation (MAD) <eq env="displaymath">MAD = Median(|x_i - \tilde{x}|), \qquad \tilde{x} = Median(x)</eq></li>
+<li>The MAD is the median of the absolute deviations from the median of the dataset!</li>
+</ul></li>
+<li>Image scanning is crucial for data quality
+<ul>
+<li>Low laser intensity for redcing photobleach</li>
+<li>The photomultiplier shuold be set so to balance the Cy3 abd Cy5 channels</li>
+</ul></li>
+<li>Segmentation is the process of identifying clusters in the image
+<ul>
+<li>It is done with algoriths and manual inspection</li>
+<li>There is also an experimental approach that uses DAPI to color the clusters</li>
+</ul></li>
+<li>Spot intensities for Cy3 and Cy5 can be use for estimating the overall expression ratio</li>
+<li>The row data intensity is typically transformed in log_2 scale
+<ul>
+<li>In this way a signal of 1 means a 2-fold upregulation</li>
+<li>Raw data tend to be highly skewed towards 0, while log data are more normally distributed
+<ul>
+<li>This is beacuse raw data has a lognormal distribution (<eq env="math">Y\sim\log{N}</eq>)</li>
+</ul></li>
+</ul></li>
+<li>The MA plot is useful for evaluating the distribution of data in a competitive array
+<ul>
+<li>The x (called A) is the log average intensity <eq env="math">(\log{Cy3}+\log{Cy5})/2</eq></li>
+<li>The y (called M) is <eq env="math">\log{Cy3}/\log{Cy5}</eq> ratio</li>
+<li>It allows to see if the fold change is due to variations in absolute intensity</li>
+</ul></li>
+<li>If the MA plot is not horizontal I need to normalise my data
+<ul>
+<li>Linear normalisation: I can assume that the fluorescence of one of the dyes is related to that of the other by a correction factor k</li>
+<li>This corrects for different absolute intensities of the dyes</li>
+<li>I just scale M (the y) by subtracting the log2 of the constant k</li>
+<li>I can center the M to 0 by using c=log2k=median(M)</li>
+</ul></li>
+<li>Intra-array normalization: use the same reference sample!
+<ul>
+<li>Variability can derive not only from differential expression
+<ul>
+<li>Different response of the Cy dyes and of the apparatus at different wavelenghts</li>
+<li>Different response in different parts of the array (spatial variability)</li>
+</ul></li>
+</ul></li>
+<li>All the following methods for intra-array normalization rely on the assumption that the majority of features are NOT differentially expressed
+<ul>
+<li>Because of the assumption, most of the gross variability is techinical</li>
+<li>Cy5 to Cy3 linear regression
+<ul>
+<li>If the 2 dyes are behaving equally, I expect to observe an equally spaced straight line with <eq env="math">m=1</eq> and <eq env="math">q=0</eq> when plotting in log space</li>
+<li>A non-0 intercept means that one channel is systematically brighter</li>
+<li>A non-1 coefficient means that one channel is more responsive to high intensities
+<ul>
+<li>Usually Cy3 is stronger at high intensity and Cy5 is stronger at low intensity</li>
+</ul></li>
+<li>There can be deviation from linearity</li>
+<li>I can apply this correction by fitting a linear regression to the data and subtracting the fitted Cy3 values from the raw Cy3 values</li>
+<li>In this way I am treating Cy3 and CY5 differently so the method is not reversible!</li>
+</ul></li>
+<li>MA plot linear regression
+<ul>
+<li>If the channels are behaving equally I expect an horizontal regression line centerd in <eq env="math">y = 0</eq></li>
+<li>This regression treats both channels equally</li>
+<li>For each datapoint I subtract the fitted log ratio to the raw log ratio</li>
+<li>This processing makes the linear regression horizontal and centered at <eq env="math">y = 0</eq></li>
+</ul></li>
+<li>In each case when the dependence is not linear I can fit a non-linear model
+<ul>
+<li>The LOESS regression fits locally a polynomial and then smooths the curve</li>
+</ul></li>
+<li>Spatial effects can be due to the array being not horizontal during the scan
+<ul>
+<li>Some regions can be in focus, others not</li>
+</ul></li>
+</ul></li>
+<li>Inter-array normalization: comparing different samples
+<ul>
+<li>Different arrays can have different data distributions</li>
+<li>These methods all make the same central assumption: the variations in the distributions between arrays are a result of experimental conditions and do not represent biological variability</li>
+<li>Data scaling is used to make the means of different distributions equal
+<ul>
+<li>I just subtract the mean log ratio of the distribution from each datapoint in the distribution</li>
+<li>An alternative is to use the median instead of the mean
+<ul>
+<li>The median is less sensitive to outliers and it is more adequate when data is not normally distributed</li>
+</ul></li>
+</ul></li>
+<li>Data centering is used for making the means and standard deviations of the distributions equal
+<ul>
+<li>It is similar to scaling but in addition I also divide for the standard deviation (or MAD in case of median)</li>
+<li>All the resulting distributions have a mean of 0 and a standard deviation of 1</li>
+</ul></li>
+<li>Data normalisation is used for makeing the distributions identical
+<ul>
+<li>First I need to center the data and I order, for each array, the centered data from lowest to highest</li>
+<li>I compute a reference distribution with lowest value the average of the lowest values of each array
+<ul>
+<li>I repeat this fo the second lowest and so on</li>
+</ul></li>
+<li>I replace each measurement with the corresponding average
+<ul>
+<li>The highest measurement is replaced with the higest value of the reference distribution and so on</li>
+</ul></li>
+<li>The resulting distributions are identical and have mean 0 and standard deviation 1</li>
+<li>I am NOT making all the data equal
+<ul>
+<li>A certain feature can be first on one array and 15th on another, and so it will have different values</li>
+<li>The first features of 2 arrays will have the same values, but they can be different features!</li>
+</ul></li>
+</ul></li>
+</ul></li>
+<li>When the assumption of non-differential expression is not reasonable I can use a reference sample for normalization</li>
+<li>In the lognormal model the errors are normally distributed
+<ul>
+<li>In real data errors tend to have sharper peaks and heavier tails than what the distribution predict</li>
+<li>The log-normal distribution for microarray data is an approximation!</li>
+</ul></li>
+<li>Variability in a dataset can be estimated with the coefficient of variation CV
+<ul>
+<li>In the log-normal model for the natural logarithm when I am using the standard deviation of the logged intensities <eq env="displaymath">CV = \sqrt{\exp{\sigma^2}-1}</eq></li>
+<li>If I am using logarithms in base 2 I need to correct the standard deviation by <eq env="math">\ln{2}</eq> <eq env="displaymath">CV = \sqrt{\exp{(\sigma*\ln{2})^2}-1}</eq></li>
+</ul></li>
+<li>Replicate feature variability is the variability among identical features in different physical positions in the array</li>
+<li>Cy3 to Cy5 variability is best evaluated by self-self hybridization or by swapping dyes
+<ul>
+<li>Self hybridization means to labele with both dyes the same sample and hybridise it in the same array</li>
+</ul></li>
+<li>Hybridization variability is the confounded measurement of the variability among hybridization reactions and among arrays
+<ul>
+<li>I cannot distinguish these 2 variabilities, so they are confounded</li>
+<li>I can use an identical reference sample in all the arrays to estimate it</li>
+<li>The distribution of the reference sample is centered in each array</li>
+<li>I usually filter only features for which data is complete</li>
+</ul></li>
+<li>Sample (biological) variability tends to be the biggest source of variability, and it is also what we are usually interested in!</li>
+<li>The MIAME standard is used for uniformating microarray experiments and allowing comparisons
+<ul>
+<li>Many publishers require MIAME compliance!</li>
+<li>The GEO (Gene Expression Omnibus) database supports MIAME-compliant data!</li>
+</ul></li>
+</ul>
+<h1 id="non-competitive-arrays">Non competitive arrays</h1>
+<h2 id="affimetrix-genechip">Affimetrix Genechip</h2>
+<ul>
+<li>Affimetrix Genechips is a closed platform (only usable with reagents and instruments supplied by them)</li>
+<li>The new form of this kind of chips is called Next generation arrays</li>
+<li>The chemistry was invented in 1991 by Stephen Fodor</li>
+<li>Affimetrix started in California as a startup and then it was acquired by Thermo Fisher</li>
+<li>This arrays are produced by photolotography chemistry
+<ul>
+<li>It is used for in situ synthesis of oligos!</li>
+<li>A UV sensitive reaction blocker is selsectively degraded by UV light</li>
+<li>A UV-sensitive blocker is also used on the glass surface to modulate the addition of the first base</li>
+<li>It uses also side protections in nucleotides to avoid the formation of branched chains</li>
+<li>Features are rectangular</li>
+</ul></li>
+<li>Genechips for the following species are available: <em>B. subtilis</em>, barley, cow, <em>C. elegans</em>, dog, chicken, <em>Drosophila</em>, <em>E. coli</em>, human, maize, mouse, <em>P. aeruginosa</em>, and many other</li>
+<li>Probes are typically at the 3’ of transcripts so that they can recognize also partial mRNAs</li>
+<li>Housekeeping genes have probes both at the 3’ and 5’ so that I can compare their intensities and estimate sample degradation</li>
+<li>Probes are redundant, in the sense that there are different probes that target different positions of the same mRNA to cross-check and average results</li>
+<li>The set of probes targeting the same genes is called probe set for that gene</li>
+<li>Mismatch probes are probes similar to normal probes but with a single base mutated in the middle
+<ul>
+<li>They are used to quantify background and non-specific binding and remove it</li>
+<li>It is also a control for the actual binding: I expect to have a lower intensity that for the real probe but correlated to it</li>
+</ul></li>
+<li>There are also complete 8-mer and 9-mer chips!</li>
+<li>The human HG-U133 Genechip is a gene array
+<ul>
+<li>It contains 1.3 million features in a 1 cm*1 cm area</li>
+<li>It has features for 47400 transcripts on 38000 genes</li>
+<li>Gene sequences were obtained from public sources</li>
+<li>It has internal control probes</li>
+<li>11 probes at the 3’ of each gene to measure the level of transcript</li>
+<li>More than 54647 probe sets</li>
+<li>Some genes had more than 1 probe set</li>
+</ul></li>
+<li>The GeneChip 1 ST array is an exon array
+<ul>
+<li>It is a perfect match-only design: there are no mismatch probes</li>
+<li>It has probes on each exon of a gene</li>
+<li>The background is estimated with 20k background probes that do not bind anything</li>
+<li>It includes poly-A control probes and hybridization controls</li>
+</ul></li>
+<li>The Genechip whole-transcript sense target labeling assay can be used for target preparation
+<ul>
+<li>Targets are sense cDNAs obtained from mRNAs</li>
+<li>It usually requires 1 ug of RNA
+<ul>
+<li>The latest kits can work with as little as 100 ng</li>
+</ul></li>
+<li>rRNA is first selectively removed</li>
+<li>First mRNA is reverse-trascribed and then the antisense cDNA made double strand
+<ul>
+<li>At this step poly-A controls are added
+<ul>
+<li>They are artificial transcript at precise concentrations with a poly-A to be used for reference</li>
+</ul></li>
+<li>I can also amplify the dsDNA at this point</li>
+</ul></li>
+<li>The cDNA is in vitro trascribed to cRNA</li>
+<li>The cRNA is retrotrascribed again to sense cDNA using random primers and dUTP instead of dTTP</li>
+<li>cRNA is degraded and cDNA fragmented and terminally labeled with biotin
+<ul>
+<li>The fragmentation happens at dUDPs with UDG and APE1</li>
+<li>The labeled nucleotide is added with TdT</li>
+</ul></li>
+<li>At this step hybridization controls are added</li>
+<li>After hybridization the array is stained with an avidin-containing dye (streptavidin-phyocoerythrin)</li>
+</ul></li>
+<li>After staining the array image can be visually inspected
+<ul>
+<li>The image can be greyscale or in false colors</li>
+<li>The positive probe sets are in specific locations in the array
+<ul>
+<li>They can be at the edges are also form words in the array!</li>
+</ul></li>
+<li>I can check the shape of features</li>
+<li>I can check if features are correctly aligned to the grid by the software</li>
+<li>I can see if there are scratches, dust, washing not complete</li>
+</ul></li>
+<li>The software used for acquiring and elaborating Genechip data is called AGCC</li>
+<li>The raw image of the array is saved in a .dat file</li>
+<li>For each feature I retain only pixel above the 75 percentile value
+<ul>
+<li>This usually means that I remove pixels at the border</li>
+<li>The intensity for a feature is the average of the respective pixel intensities</li>
+</ul></li>
+<li>The elaborated image has a pixel per feature with intensity that is the average of the pixel above the 75 percentile for that feature
+<ul>
+<li>This image is saved in a .cel file</li>
+</ul></li>
+<li>The software does also an automatic data analysis producing a .chp file
+<ul>
+<li>This is usually discarded and data are analysed manually</li>
+</ul></li>
+<li>The information about the probes in the array are contained in a .cdf file, that can be obtained from affimetrix
+<ul>
+<li>A .msk file is also provided that allows to celect certain groups of probes for normalization and scaling purposes</li>
+</ul></li>
+<li>Affimetrix data can also be analysed with bioconductor packages
+<ul>
+<li>I can use YAQCStats to get a QC plot, a frequency histogram of the log_2 intensities</li>
+</ul></li>
+<li>Probes that bind the same transcript can show 2 or more orders of magnitude differences in intensity
+<ul>
+<li>Probe binding strenght depends on the GC content</li>
+<li>Match probes can even be weaker than mismatch probes!</li>
+<li>Variability among arrays for the same probe is orders of magnitude smaller than variations among probes in the same array for probes against the same transcripts!</li>
+</ul></li>
+<li>Data preprocessing typically involves background correction, normalization and summarization (getting a single value from a probe set across multiple arrays)</li>
+<li>The RMA (robust multichip average) is a normalization procedure based on quantile normalization
+<ul>
+<li>This is used for treating data from a probe set, not whole arrays!</li>
+<li>The first step is background correction</li>
+<li>The log_2 of each perfect match probe intensity is calculated</li>
+<li>These values are quantile-normalized</li>
+<li>The normalized values are summarized across arrays and probes</li>
+</ul></li>
+<li>I fit a multichip linear model to the data <eq env="displaymath">\log_2{PM_{ij}} = \alpha_i + \beta_j + \epsilon_{ij}</eq>
+<ul>
+<li><eq env="math">PM_{ij}</eq> is the intensity of the perfect match probe <eq env="math">i</eq> in array <eq env="math">j</eq></li>
+<li><eq env="math">\alpha_i</eq> is the intensity due to the carachteristics of probe <eq env="math">i</eq> (i.e. GC content)</li>
+<li><eq env="math">\beta_j</eq> is the intensity due to true expression of the trascript in array <eq env="math">j</eq></li>
+<li><eq env="math">\epsilon_{ij}</eq> is the error in the measurment of probe <eq env="math">i</eq> in array <eq env="math">j</eq></li>
+</ul></li>
+<li>Fitting is done using the Tukey’s medianpolish algorithm
+<ul>
+<li>It produces a two-way layout table where of probes against arrays, filled with the respective intesities</li>
+<li>It calculates the median of each row (all measurements in one array) and subtracts it from the values</li>
+<li>It calculates the median of each column (all measurements of the same probe across arrays) and subtracts it from the values</li>
+<li>It iterates again for rows and columns until all the row and column medians are 0 (or under a threshold)</li>
+<li>I subtract the obtained values from the original ones to get the fitted values
+<ul>
+<li>In this way I am scaling all the arrays to the same range with the same distribution!</li>
+</ul></li>
+<li>I can then average across probe sets to obtain the RMA average for each chip (row average)</li>
+<li>This is the final value for the trascript in a given chip</li>
+<li>If I subtract the row average from the fitted values I get the probe effect values
+<ul>
+<li>This value is the same for all the chips since they have the same distribution and distances from their respective mean!</li>
+</ul></li>
+</ul></li>
+<li>I can do an MA plot also for Affimetrix arrays!
+<ul>
+<li>I can plot 2 chips agaist each other</li>
+</ul></li>
+<li>The development of GeneChip array was strongly dirven by the competition with NGS techniques</li>
+<li>The GeneChip Human Trascriptome array 2.0 contains more than 6 millions probes covering coding and non-conding transcripts
+<ul>
+<li>It is also colled GG-H (Glue Grant human) array</li>
+<li>It contains also probes for SNPs, alternatively spliced trancripts, …</li>
+</ul></li>
+<li>For each GeneChip I can obtain the relative probset ID and annotation on the ThermoFisher website</li>
+</ul>
+<h2 id="illumina-beadchip">Illumina Beadchip</h2>
+<ul>
+<li>Illumina BeadChip is a technology for producing high density microarrays
+<ul>
+<li>These are denser than photolithography</li>
+</ul></li>
+<li>The array contains 3 um pits where silica beads can be held by VdW and electrostatic interactions</li>
+<li>Each bead is coated with millions of copies of the same oligo</li>
+<li>The beads are assembled randomly on the chip, so a priori their adress is unknown
+<ul>
+<li>Typically more than 1 bead (14-30) with the same oligo are added to each array</li>
+</ul></li>
+<li>The oligos of the beads contain a 29 nt barcode and a 50 nt target-specific portion
+<ul>
+<li>The barcode is used for bead identification</li>
+</ul></li>
+<li>Illumina produces standard BeadChips arrays for various applications, and also custom arrays</li>
+<li>It is possible to order custom arrays in the format of a microscope slide (Sentrix BeadChip)</li>
+<li>It is also possible to order custom arrays in the format of grids of arrays arranged like a 96-wells plate (Sentrix Martrix Array)
+<ul>
+<li>In this case each sub-array is etched in the surface of glass fibers for easier reading</li>
+</ul></li>
+</ul>
+<h3 id="infimium-methylation-arrays">Infimium methylation arrays</h3>
+<ul>
+<li>Illumina Infimium chips are standard BeadChips used for methylation studies</li>
+<li>In humans 70% of CpG dinucleotides are methilated as 5mCpG</li>
+<li>Short regions of high CpG density, CpG islands, are unusually unmethylated
+<ul>
+<li>They are found on 60% of gene promoters</li>
+<li>Cancer cells tend to be globally hypomethylated but with tumor suppressor promoters hypermethylated</li>
+</ul></li>
+<li>In a single cell for a single position methylation can either be 0%, 50% or 100% in a diploid
+<ul>
+<li>When I evaluate methilation with an array I do NOT work on single cells!</li>
+<li>Methilation can take any value between 0% and 100%</li>
+<li>Nonetheless, usually I observe a bimodal distribution clustered around 0% and 100%</li>
+</ul></li>
+<li>DNA methilation islands have a terminology such as shelf, shore, open sea, north and south (upstrean and downstream) in relation with a real island
+<ul>
+<li>The methilation level of shores seems more correlated with gene expression than the island itself</li>
+<li>In general, one element of a CpG region (i.e. its shore) is considered a functional unit and it is expected to be coherently methylated</li>
+</ul></li>
+<li>HumanMethylation27 BeadChip was the first Infinium array
+<ul>
+<li>It had 27K probes, more or less one in each CpG island</li>
+<li>It had only Infinium I chemistry</li>
+</ul></li>
+<li>HumanMethylation450 BeadChip has 450K probes
+<ul>
+<li>For each island I have a bead for the island, for the shore, the shelf, the open sea</li>
+<li>It has both Infinium I and Infinium II probes</li>
+<li>Infinium I is mostly used in CpG islands (CGIs), while Infinium II in intergenic regions</li>
+<li>In a single chip 12 samples can be run in parallel</li>
+</ul></li>
+<li>The last chip, the HumanMethylationEPIC, has 850k probes
+<ul>
+<li>It contains also probes outside CpG islands, non-CpG methylated sites in stem cells (CHH sites), differentially methylated sites in tumors, FANTOM5 (functional annotation of mammals project) enhancers, ENCODE enhancers and open chromatine, DNAse hypersensitive sites, miRNA promoters</li>
+<li>It retains 90% of the probes in the Human Methylation 450k beadchip</li>
+<li>It has Infinium I and II chemistry</li>
+</ul></li>
+<li>Bisulphite conversion: I can deaminate only non-metilated cytosines to uracil
+<ul>
+<li>The methyl group protects cytosine from deamination</li>
+<li>PCR does not reatin methylation patterns so I cannot amplify my sample!</li>
+</ul></li>
+<li>Genotyping or sequencing the DNA before and after bisulphite treatment I can see which sites are methylated by comparing the C/T differences</li>
+<li>Infinium probes have as a last nucletide the one that pairs with the methylated site (Infinium I) or just before it (Infinium II)
+<ul>
+<li>An Infinuim array contains both probe types, aiming at different loci</li>
+</ul></li>
+<li>A single-base reaction extends the probe using the target sequence</li>
+<li>Labelled nucleotides are used, so that the occurrence of extension can be seen by fluorescence
+<ul>
+<li>A and T are labeled with DNP
+<ul>
+<li>A/T is colored red with anti-DNP-red</li>
+</ul></li>
+<li>C and G are labeled with biotin
+<ul>
+<li>C/G is colored green with straptavidin-green</li>
+</ul></li>
+</ul></li>
+<li>Infinium I assay: 1 color
+<ul>
+<li>It uses a bead for unmethylated C (U probe) and one for methylated C (M probe)</li>
+<li>The U probe ends with A (and thus binds T) at the target site, the M probe ends in G</li>
+<li>U probes can extend only unmethylated sites and vice versa</li>
+<li>The color of the signal is not improtant here, just its intensity
+<ul>
+<li>Depending on the base following the CpG, there are RED and GREEN probes emitting on the respective channels</li>
+</ul></li>
+<li>Since the probe is 50 nt, it can span multiple CpG sites
+<ul>
+<li>The methilated probe is built with the assumption that all the included sites are methilated (C/G in C of CpG)</li>
+<li>The unmethilated probe is built with the assumption that all the included sites are not methilated (A/T in the C of CpG)</li>
+<li>This assumption is reasonable in islands but not so much in the open sea</li>
+</ul></li>
+</ul></li>
+<li>Infinium II assay: 2 colors
+<ul>
+<li>It uses just one bead per site, with the last position just before the target site</li>
+<li>Nucleotides are differently marked for methylated (C, G) and unmethylated (A, T)
+<ul>
+<li>Methilated sites are GREEN, unmethilated sites are RED</li>
+</ul></li>
+<li>The methylation is evaluated in the same way as with Infinum I, but with the instensities coming from different channels of the same bead</li>
+<li>It does not make any assumption about the state of other CpGs included in the probe
+<ul>
+<li>It uses degenerate R sites that bind both G and A</li>
+<li>The all or none approach is not possible since the same probe must bind both methylated and unmethilated sites!</li>
+</ul></li>
+<li>Since it uses just 1 bead per site with Infinium II I can include a double number of sites in the array</li>
+</ul></li>
+<li>The raw R/G channel intensities are converted to <eq env="math">\beta</eq> values</li>
+<li>The <eq env="math">\beta</eq> value is evaluated as the the ratio among methilated intensity and methylated and unmethylated intensity <eq env="displaymath">\beta = \frac{m}{m+u+100}</eq>
+<ul>
+<li><eq env="math">\beta</eq> values can go from 0 to ~1</li>
+<li>100 is added at the denominator to avoid division by 0</li>
+</ul></li>
+<li>Infinium II is less sensitive to extreme methilation values and less precise
+<ul>
+<li>Infinium II <eq env="math">\beta</eq> values have a smaller range than in Infinium I</li>
+<li>Infinium II <eq env="math">\beta</eq> values are more shifted toward the center (the distribution is less bimodal)</li>
+<li>Infinium II <eq env="math">\beta</eq> values have higher variance between replicates</li>
+</ul></li>
+<li>When possible, it is better to use Infinium I probes!</li>
+<li><eq env="math">\beta</eq> values have an heteroscedastic distribution
+<ul>
+<li>Its variability (error!) is unequal across its range</li>
+<li>Middle values tend to be more variable than values close to 0 or 1</li>
+<li>Many regression models assume a constant error rate across the range (homoscedasticity) so this is a problem!</li>
+</ul></li>
+<li>The M value is the logarithm of the ratio of methilated and unmethilated signal <eq env="displaymath">M = \log_2{\frac{m}{u}}</eq>
+<ul>
+<li>It is homoscedastic since the central, more variable region is condensed and the less variable extreme regions are streched</li>
+<li>It can take any real value, and when <eq env="math">m=u \implies M=0</eq></li>
+<li>If <eq env="math">m=0</eq> or <eq env="math">u=0</eq> <eq env="math">M</eq> is considered <eq env="math">-\infty</eq> or <eq env="math">+\infty</eq></li>
+</ul></li>
+<li>Comparing Infinium I and II experiments can be done with intra-array nomalisation (peak-based correction, PBC)
+<ul>
+<li>This is an approximation method, but it reduces the variance of Infinium II data and it makes the Infinium I and II peaks superimposable</li>
+<li>Peaks for the Infinium I and II M values are determined using kernel density estimation</li>
+<li>I rescale the M-values using the respective peak summits as references</li>
+<li>Rescaled Infinium II M values are rescaled again to match the Infinium I range and converted back to <eq env="math">\beta</eq> values</li>
+<li>This makes Infinum I and II data (<eq env="math">\beta</eq> values) comparable and reduces the variance of Infinium II data</li>
+<li>PBC depends on the bimodal distribution of the results and breaks down when this is not well-defined!</li>
+</ul></li>
+<li>I can also normalize Infinium data for addressing dye bias and other sources of technical variability</li>
+<li>Between array normalization can be done using quantile normalization</li>
+<li>If the variance observed is not due to technical errors but to true biological variability, do not normalize!</li>
+<li>Normalization in general assumes that most of the observed variability is error</li>
+<li>It is ok to normalize when I am interested in subtle biological differences</li>
+<li>Cytosine methylation can also be studied by bisulphite-WGS (WGBS) or methylated DNA immunoprecipitation (MeDIP)
+<ul>
+<li>MeDIP uses 5mC-specific antibodies</li>
+</ul></li>
+<li>The prof published a paper about the use of the methylation levels of the gene ELOVL2 as an ageing marker</li>
+<li>Peripheral blood mononuclear cells (PBMCs) are a vast range of immune cells
+<ul>
+<li>They include mainly linfocytes and monocites</li>
+</ul></li>
+<li>In another paper the prof observed that semi-supercentenarians and their offspring have a decreased PBMC epigenetic age</li>
+<li>It is notable that Infinium arrays are not able to distinguish methylation (5mC) from hydroxymethylation (5hmC)
+<ul>
+<li>It would be useful to develop a new assay able to distinguish them</li>
+</ul></li>
+</ul>
+<h1 id="analysis-of-differentially-expressed-genes">Analysis of differentially expressed genes</h1>
+<ul>
+<li>Data analysis is the most important part in microarrays bioinformatics</li>
+<li>The questions that we want to answer generally are
+<ul>
+<li>Which genes are differentially expressed among samples?</li>
+<li>What are the relationships between the genes or samples being measured?</li>
+<li>Can we classify samples based on gene expression?</li>
+</ul></li>
+<li>In general all the statistical test that we will see in this section look in parallel at one gene at a time and draw conclusions for each gene</li>
+<li>Data can be paired or unpaired
+<ul>
+<li>In unpaired data different samples have no relationship to each other</li>
+<li>In paired data I typically have the same sample twice before and after a certain treatment, or in different conditions</li>
+<li>In paired data I am interested in the expression changes among samples in a pair, while in unpaired data I am interested in changes in the expression of the whole groups</li>
+</ul></li>
+<li>I can also have complex data, with many groups of different cardinality</li>
+<li>In statistical inference I infere parameters of the population from sample parameters
+<ul>
+<li>It is important that my sample captures the full variability of the population, so I may want to include different age groups, conditions, ecc.</li>
+<li>We do not know the level of population variability from which we draw samples</li>
+</ul></li>
+<li>The fold change (<eq env="math">FC</eq>) is calculated as 2 to the power of the log_2 ratio (<eq env="math">L2R</eq>) of expression <eq env="displaymath"> FC = x_1/x_2 = 2^{L2R}, \quad L2R = \log_2{FC}</eq></li>
+<li>In order to claim differential expression, in the old days of microarray experiment would choose a fixed threshold of log expression change
+<ul>
+<li>This does not take into account the variability of the measurement and the sample size</li>
+</ul></li>
+<li>Hypothesis testing is a more robust way to determine the significance of a variation in expression
+<ul>
+<li>It assumes the null hypothesis <eq env="math">H_0</eq> that there is no real biological variation among the samples</li>
+<li>I can calculate the probability of observing a measurement at least as extreme as the one observed when assuming <eq env="math">H_0</eq>
+<ul>
+<li>This probability is the p-value</li>
+</ul></li>
+<li>Differentially expressed genes are then selected on the basis of a p-value threshold, not according to fold change</li>
+<li>Note: all the probability statements are referred to <eq env="math">H_0</eq>!
+<ul>
+<li>Evidnece against <eq env="math">H_0</eq> is not evidence in favor of any particular <eq env="math">H_A</eq></li>
+<li>Bayes!</li>
+</ul></li>
+<li><eq env="math">\alpha</eq> is the probability of rejecting <eq env="math">H_0</eq> when it is true (type I error)</li>
+<li><eq env="math">\beta</eq> is the probability of not rejecting a false <eq env="math">H_0</eq> (type II error)</li>
+<li>A stringent significance threshold (p-value) increases <eq env="math">\alpha</eq> and decreases <eq env="math">\beta</eq></li>
+<li>Actually, the p-value threshold is by definition my <eq env="math">\alpha</eq>!</li>
+<li>The power of a test is defined as the probability of observing a real positive
+<ul>
+<li>It is <eq env="math">1 - \beta</eq>!</li>
+</ul></li>
+</ul></li>
+</ul>
+<p></p>
+<ul>
+<li>Claiming differential expression of a gene means that the expression level of a gene changes systematically between different samples
+<ul>
+<li>The magnitude of the difference is not relevant</li>
+</ul></li>
+<li>Two measurements are independent if knowing the value of one measurement does not give information about the value of the other
+<ul>
+<li>Measurements of the same gene in different patients are independent</li>
+<li>Replicate measurements of the same gene in the same patient in the same condition are not independent</li>
+</ul></li>
+<li>All the statistical tests here described require independence of measurements
+<ul>
+<li>If I have dependent measurements I need to combine them in a single variable</li>
+</ul></li>
+<li>Note: in these tests I am not using data from the whole array, but only 1 gene across all the samples!</li>
+</ul>
+<h2 id="shapiro-wilk-normality-test">Shapiro-Wilk normality test</h2>
+<ul>
+<li>The Shapiro-Wilk test returns the p-value for the null hypothesis that the data are drawn from a normally distributed population</li>
+<li>It should not be significant in order to apply parametric tests!</li>
+<li>It calculates the <eq env="math">W</eq> statistics, that does not have a defined analytical distribution
+<ul>
+<li>The cutoff values are obtained by MonteCarlo simulations</li>
+</ul></li>
+<li><eq env="math">W</eq> is the ratio between 2 values
+<ul>
+<li>The numerator is the square of the sum of the products of
+<ul>
+<li><eq env="math">a_i</eq>, a coefficient made of strange vector operations</li>
+<li><eq env="math">x_i</eq>, the datapoint of rank <eq env="math">i</eq></li>
+</ul></li>
+<li>The denominator is the sum of squared distances from the mean of all the datapoints <eq env="displaymath"> W = \frac{(\sum_{i=1}^n a_i*x_(i))^2}{\sum_{i=1}^n (x_i - \bar{x})^2} </eq></li>
+</ul></li>
+</ul>
+<h2 id="parametric-statistics">Parametric statistics</h2>
+<ul>
+<li>Parametric staistics assumes that the population follows a type of probabilioty distribution
+<ul>
+<li>That is, it infers parameters of the putative distribution</li>
+<li>It also assume homoscedasticity (uniform variance)</li>
+</ul></li>
+<li>It is usually more powerfull than non-parametric statistics but it makes more assumptions</li>
+</ul>
+<h3 id="paired-t-test">Paired <em>t</em>-test</h3>
+<ul>
+<li>The paired <em>t</em>-test is also referred to as one-sample <em>t</em>-test</li>
+<li>It is used for paired data since those are not independent and need to be combined in a single variable
+<ul>
+<li>Instead of using each measurement as a datapoint, for each patient I have just 1 datapoint which is the difference among the measurement before and after treatment</li>
+</ul></li>
+<li>Central idea
+<ul>
+<li>I assume that there is no difference among pairs of data, so the average of the datapoints is assumed to be 0
+<ul>
+<li>Datapoints are the differences of paired measurements!</li>
+</ul></li>
+<li>If I assume the true average to be 0 but I observe an actual average which is <eq env="math">\bar{x} \not= 0</eq>, I want to know how likely it is to observe that average under the assumption</li>
+<li>The <eq env="math">t</eq> statistics that I evaluate is <eq env="math">\bar{x}</eq> itself corrected for sample size and variance
+<ul>
+<li>If the sample size <eq env="math">n</eq> is bigger the result is more significant</li>
+<li>If the variance <eq env="math">s^2</eq> is smaller the result is more significant</li>
+</ul></li>
+</ul></li>
+<li>From this single column of data I calculate the <eq env="math">t</eq> statistics <eq env="displaymath">t = \frac{\bar{x}}{s/\sqrt{n}}</eq>
+<ul>
+<li><eq env="math">n</eq> is the number of samples</li>
+<li><eq env="math">\bar{x}</eq> is the sample mean</li>
+<li><eq env="math">s</eq> is the sample standard deviation</li>
+</ul></li>
+<li>The <eq env="math">t</eq> statistics is then used to calculate a p-value using the <em>t</em>-distribution with appropriates degrees of freedom</li>
+<li>The degree of freedom is the muber of independent variables in the analysis <eq env="displaymath">df = n - 1</eq>
+<ul>
+<li>in the paired <em>t</em>-test it is the number of patients - 1</li>
+</ul></li>
+<li>When <eq env="math">df \to \infty</eq> the t distribution approximates a normal distribution</li>
+<li>For lower df the t distribution has heavuer tails than the normal distribution</li>
+<li>The <em>t</em>-test is available in all the major software packages and libraries</li>
+<li>This test requires that the differences among the paired samples (the distribution tested!) be normally distributed</li>
+</ul>
+<h3 id="unpaired-t-test">Unpaired <em>t</em>-test</h3>
+<ul>
+<li>The unpaired <em>t</em>-test is also called two-sample <em>t</em>-test</li>
+<li>It is really similar to the paried <em>t</em>-test, only changing the exprimental design</li>
+<li>In this case my <eq env="math">H_0</eq> is that the mean of the 2 patient groups is equal <eq env="displaymath">H_0:~ \bar{x_1}-\bar{x_2} = 0</eq></li>
+<li>Central idea
+<ul>
+<li>The same concept as for the paired <em>t</em>-test, but in this case I explicitly assume the difference of the sample means to be 0
+<ul>
+<li>I do not have a condensed variable as before!</li>
+</ul></li>
+<li>The difference of means is corrected for squared root of the weighted average of the variances of the samples, weighted on sample size</li>
+</ul></li>
+<li>There are actually two variations of the unpaired <em>t</em>-test
+<ul>
+<li>Welch’s <em>t</em>-test allows for different variances for the groups and it is better for microarray data</li>
+<li>Student <em>t</em>-test assumes uniform variance and it is best suited for groups of the same size</li>
+</ul></li>
+<li>This test requires that both datasets be normally distributed</li>
+<li>The <eq env="math">t</eq> statistics is calculated with a formula similar to the paired <em>t</em>-test
+<ul>
+<li>The formula is different for Welch’s and Student’s tests</li>
+<li>Also the degrees of freedom ar calculated differently</li>
+</ul></li>
+</ul>
+<h4 id="students-unpaired-t-test">Student’s unpaired <em>t</em>-test</h4>
+<ul>
+<li>This variant calculates a single variance <eq env="math">s^2</eq>, which is essentially the standard error of the 2 sample means </li>
+</ul>
+<h4 id="welchs-unpaired-t-test">Welch’s unpaired <em>t</em>-test</h4>
+<ul>
+<li>In this case I am using the real variances of the samples <eq env="math">s_1</eq> and <eq env="math">s_2</eq></li>
+</ul>
+<p><eq env="displaymath">
+t = \frac{\bar{x_1}-\bar{x_2}}{\sqrt{\frac{s_1^2}{n_1} + \frac{s_2^2}{n_2}}}
+</eq></p>
+<ul>
+<li>The degrees of freedom are calculated with the complicated Welch–Satterthwaite approximation</li>
+</ul>
+<p></p>
+<h2 id="non-parametric-statistics">Non-parametric statistics</h2>
+<ul>
+<li>These method do not make any assumption about the distribution of data
+<ul>
+<li>They are preferred in presence of outliers and noisy data
+<ul>
+<li>Microarray data is noisy!</li>
+</ul></li>
+</ul></li>
+<li>Microarray data analysis is high throughput, so it can be unpractical to check for normality</li>
+<li>There are 2 types of non-parametric tests
+<ul>
+<li>Classical non-parametric tests are equivalent to parametric tests but use ranks instead of actual data</li>
+<li>Bootstrap tests are more modern and can be applied to a wide range of analyses</li>
+</ul></li>
+<li>When to use non-parametric statistics
+<ul>
+<li>Data better represented by the median</li>
+<li>Small sample size, so the distribution is diffucult to evaluate</li>
+<li>I have ordinal or ranked data</li>
+<li>There are outliers that I cannot or don’t want to remove</li>
+</ul></li>
+</ul>
+<h3 id="classical-non-parametric-statistics">Classical non-parametric statistics</h3>
+<ul>
+<li>These tests are implemented in R, but not in Excel</li>
+<li>They are less powerful than parametric and bootstrap methods
+<ul>
+<li>Because of this, for microarray data bootstrap methods are preferred</li>
+</ul></li>
+</ul>
+<h4 id="wilcoxon-sign-rank-test">Wilcoxon sign-rank test</h4>
+<ul>
+<li>The Wilcoxon sing-rank test is the non-parametric equivalent of the paired <em>t</em>-test</li>
+<li>The <eq env="math">H_0</eq> is that the median of the dataset is 0
+<ul>
+<li>This is a paired test, so the dataset is the difference among pairs of data!</li>
+</ul></li>
+<li>It replaces the real data with ranks according to the absolute magnitude of their difference (or log ratio for microarrays)
+<ul>
+<li>I first compute the differrences among pairs of data, and I take the absolute value of this difference
+<ul>
+<li>If the difference is 0 I exclide the pair of data</li>
+</ul></li>
+<li>In the meantime I note down which differences were positive and which negative (the sign!)</li>
+<li>I perform the ranking on the absolute differences among pairs of data</li>
+<li>The smallest datapoint has rank 1, the largest has rank <eq env="math">n</eq>, and so on
+<ul>
+<li>If 2 values are the same I take the ranks available (i.e. 2 and 3) and assign to both datapoints their average (i.e. 2.5)</li>
+</ul></li>
+</ul></li>
+<li>I compute the sum of all the positive and negative ranks
+<ul>
+<li>The sum of positive ranks is called <eq env="math">W_+</eq>, the sum of negative ranks <eq env="math">W_-</eq></li>
+</ul></li>
+<li>The <eq env="math">W</eq> test statistic is the smallest absolute value among <eq env="math">W_+</eq> and <eq env="math">W_-</eq></li>
+<li>Intuition: a small <eq env="math">W</eq> means that the distributio of ranks is heavily skewed towards the positive or negatives
+<ul>
+<li>If positives and negatives are balanced, <eq env="math">W</eq> is at its maximum</li>
+<li>If all the ranks are positive/negative (and so there is a systematic effect) <eq env="math">W=0</eq> since one of the classes is empty</li>
+</ul></li>
+<li>The <eq env="math">W</eq> statistic is compared against the W distribution to obtaine a p-value
+<ul>
+<li>The <eq env="math">W</eq> is significant if smaller than a threshold value</li>
+</ul></li>
+<li>Albeit not requiring normality of the data, it requires them to be symmetric</li>
+</ul>
+<h4 id="mann-whitney-u-test">Mann-Whitney U test</h4>
+<ul>
+<li>The non-parametric equivalent of the unpaired <em>t</em>-test is the Mann-Whitney test, also called Wilcoxon rank-sum test
+<ul>
+<li>It is similar to the Wilcoxon rank-sign test</li>
+</ul></li>
+<li>The <eq env="math">H_0</eq> is that the median of the 2 datasets is equal</li>
+<li>Data from the 2 groups are combined and ranked together
+<ul>
+<li>Ties are treated in the same way as in the Wilcoxon sign rank test</li>
+</ul></li>
+<li>I sum separately all the ranks for the 2 groups getting the repsective rank sums (<eq env="math">R</eq>)</li>
+<li>I calculate the <eq env="math">U_A</eq> and <eq env="math">U_B</eq> statistics separately for the 2 groups <eq env="displaymath">U = R - \frac{n(n+1)}{2}</eq>
+<ul>
+<li><eq env="math">n</eq> is the number of samples in the respective group</li>
+</ul></li>
+<li>The final value of the <eq env="math">U</eq> test statistic is the smaller value among <eq env="math">U_A</eq> and <eq env="math">U_B</eq></li>
+<li>I then compare <eq env="math">U</eq> against a pre-computed <eq env="math">U</eq> distribution and I reject <eq env="math">H_0</eq> if <eq env="math">U</eq> is smaller than a threshold</li>
+</ul>
+<h2 id="bootstrap-analyses">Bootstrap analyses</h2>
+<ul>
+<li>Bootstrap is based on resampling with or without replacement
+<ul>
+<li>In general both variants give really similar results, there is debate on which one is better</li>
+</ul></li>
+<li>Bootstrap analyses are non-parametric tests so they do not make any assumption on the distribution of the data</li>
+<li>They are more powerfull than classical non-parametric tests</li>
+<li>They should be preferred on microarray data than either parametric and classical non-parametric tests</li>
+<li>They are quite computationally expensive</li>
+<li>There are bootstrap equivalents for paired and unpaired tests, and also for ANOVA, cluster analysis and other more complex tests</li>
+<li>I do resampling and evaluate the <eq env="math">t</eq> statistics in each bootstrap</li>
+<li>I produce a distribution of <eq env="math">t</eq> after thousand of bootstraps</li>
+<li>It is recommended to do a number of bootstraps which is at least 10 times the number of genes in the array</li>
+</ul>
+<h3 id="unpaired-t-test-bootstrap">Unpaired <em>t</em>-test bootstrap</h3>
+<ul>
+<li>This is the easiest bootstrap implementation</li>
+<li>The <eq env="math">H_0</eq> is the usual for the unpaired <em>t</em>-test: no difference among the mean of the groups</li>
+<li>If the <eq env="math">H_0</eq> holds, any of the measurement in the data could have been obtained from any of the individuals
+<ul>
+<li>I create thousands of random datasets by resampling the original data but redistributing randomly the measurements among indivduals of BOTH groups</li>
+<li>If I use replacent the same datapoint can be assigned to 2 different individuals</li>
+</ul></li>
+<li>I calculate the <eq env="math">t</eq> statistic from each of the randomized datasets, without correlating it to a p-value</li>
+<li>I then compare the <eq env="math">t</eq> from the real data with the bootstrap <eq env="math">t</eq>s</li>
+<li>I determine the p-value according to the proportion of bootstrap <eq env="math">t</eq>s that are more extreme than the actual dataset <eq env="math">t</eq> <eq env="displaymath"> p = \frac{count(|t_{bootstrap}| &gt; |t_{real}|)}{n_{bootstraps}}</eq></li>
+<li>I the real <eq env="math">t</eq> is on the edges of the empirical <eq env="math">t</eq> distribution, then it is probably not due by chance</li>
+<li>Basically I evaluate the p-value from the empirical <eq env="math">t</eq> distribution instead than on the theoretical ones (which are calculated on normally distributed data!</li>
+</ul>
+<h2 id="multiple-testing">Multiple testing</h2>
+<ul>
+<li>If I am testing multiple times the same dataset I risk to get an unacceptably high number of false positives</li>
+<li>The false discovery rate (FDR) is the percentage of rejected <eq env="math">H_0</eq> that were true <eq env="displaymath"> FDR = \frac{FP}{FP+TP}</eq></li>
+<li>I can decrease the p-value threshold, but this is a tradeoff: I will decrease the false posiitve rate but increase the false negative rate</li>
+<li>The only way to decrease the false positive rate and also the false negative rate is to increase the sample size</li>
+</ul>
+<h3 id="bonferroni-correction">Bonferroni correction</h3>
+<ul>
+<li>The Bonferroni correction for multiple testing is simple: just divide the desired p-value threshold on a single test by the number of tests
+<ul>
+<li>An equivalent approach is to retain the desired p-value threshold but multiply the obtained p-value by the number of tests</li>
+<li>It is usually too stringent for microarray analysis, not yelding any significant result</li>
+</ul></li>
+</ul>
+<h3 id="benjamini-hochberg-correction">Benjamini Hochberg correction</h3>
+<ul>
+<li>The Benjamini-Hochberg correction for multiple testing is based on a given FDR
+<ul>
+<li>I choose the FDR I want</li>
+</ul></li>
+<li>I first rank all the p-values in ascending order</li>
+<li>I calculate the critical BH values for each p-value as <eq env="math">\frac{i*FDR}{M}</eq>, with <eq env="math">m</eq> total number of tests and <eq env="math">i</eq> the rank of the p-value
+<ul>
+<li>FDR is the FDR that I want</li>
+</ul></li>
+<li>I select as a p-value threshold the largest p-value that is smaller than the respectibe BH threshold</li>
+<li>Intuiton: the p-values are uniformly distributed if data comes from the same distribution, and skewed towards low values if from different distributions</li>
+<li>In multiple testing I can have some true positives (data from different distributions) and many false positives (data from the same distribution)</li>
+<li>I am selecting all the smallest p-values up to a certain FDR: they are the most likely to be true</li>
+</ul>
+<h2 id="anova">ANOVA</h2>
+<ul>
+<li>With microarray data I can want to compare more than 2 groups, or more than 1 variable</li>
+<li>The analysis of variance (ANOVA) test is a generalization of the t test for more than 2 groups</li>
+<li>The one-way ANOVA is used for comparing ONE variable across more than 2 groups</li>
+<li>The two-ways ANOVA is used for comparing 2 variables across more than 2 groups</li>
+<li>ANOVA is parametric and it assumes normal distribution with equal variance</li>
+<li>I can do bootstrap when these assumptions are not true</li>
+</ul>
+<h2 id="one-way-anova">One-way ANOVA</h2>
+<ul>
+<li>It returns a single p-value for the null hypothesis that there is no difference among the means of all the groups
+<ul>
+<li>It does not tell me which group is different if the result is significant!</li>
+</ul></li>
+<li>It is based on the <eq env="math">F</eq> statistic, compared against the F-distribution</li>
+<li>I assume that all the variance inside a group is due to error, and all the variance between group which does not depend on the internal variance of the groups is real biological variability <eq env="displaymath"> F = \frac{SS_b}{SS_w} = \frac{\sum_{j=1}^{m}n_j(\bar{x}_j-\bar{x})^2}{\sum_{j=1}^m \sum_{i=1}^{n_j} (x_{ij}-\bar{x}_j)^2}</eq></li>
+<li><eq env="math">SS_b</eq> is the sum of squares in between the groups and <eq env="math">SS_w</eq> is the sum of squares within the groups</li>
+<li><eq env="math">i</eq> is the index of samples in a group, <eq env="math">j</eq> the index of groups</li>
+<li><eq env="math">n_j</eq> is the number of samples in group <eq env="math">j</eq></li>
+<li><eq env="math">m</eq> is the number of groups</li>
+<li><eq env="math">\bar{x_j}</eq> is the mean of group <eq env="math">j</eq>, <eq env="math">\bar{x}</eq> is the grand mean of the whole dataset</li>
+<li><eq env="math">F</eq> is large (more significant) if the variance within the groups is small while the variance among groups is large</li>
+<li>Under <eq env="math">H_0</eq> <eq env="math">F</eq> has a mean of about 1</li>
+<li>If I have only 2 groups the one-way ANOVA reduces to the <em>t</em>-test with <eq env="math">F=t^2</eq></li>
+<li>The <eq env="math">F</eq> distribution has 2 parameters, the degrees of freedom for numerator and denominator
+<ul>
+<li>The degrees of freedom of the numerator (<eq env="math">SS_b</eq>) is <eq env="math">m-1</eq>, with <eq env="math">m</eq> being the number of groups
+<ul>
+<li>I have <eq env="math">m</eq> groups, and from them I estimate the grand mean</li>
+</ul></li>
+<li>The degrees of freedom of the denominator (<eq env="math">SS_w</eq>) is <eq env="math">n-m</eq>, with <eq env="math">n</eq> being the number of total samples and <eq env="math">m</eq> the number of groups
+<ul>
+<li>I loose one degree of freedom for each group since I estimate the mean</li>
+<li>I have <eq env="math">n</eq> samples amnd estimate <eq env="math">m</eq> means (1 per group), so I have <eq env="math">n-m</eq> degrees of freedom</li>
+</ul></li>
+</ul></li>
+</ul>
+<h2 id="kruskal-wallis-h-test">Kruskal-Wallis H test</h2>
+<ul>
+<li>It is a non-parametric test that estends the Mann-Whitney U test</li>
+<li>It is the non-parametric version of the one-way ANOVA, operating on ranks instead of actual data</li>
+<li>The null hypothesis is that no group stochastically dominates on the others
+<ul>
+<li>If I can assume the same distribution (non necessarily normal) for all groups, then the null hypothesis is a statement about the equivalence of group medians</li>
+</ul></li>
+<li>The data from all groups are ranked like in the Mann-Whitney U test</li>
+<li>The test statistic <eq env="math">H</eq> is calculated as <eq env="displaymath"> H = (N - 1) \frac{\sum_{j=1}^m n_j (\bar{r}_j - \bar{r})^2}{\sum_{j=1}^m \sum_{i=1}^{n_j} (r_{ij} - \bar{r})^2} </eq></li>
+<li><eq env="math">n_j</eq> is the number of observations in group <eq env="math">j</eq></li>
+<li><eq env="math">r_{ij}</eq> is the general rank (across the entire dataset) of obervation <eq env="math">i</eq> from group <eq env="math">j</eq></li>
+<li><eq env="math">N</eq> is the total number of observations</li>
+<li><eq env="math">\bar{r}_j</eq> is the avergae rank of all the observations in group <eq env="math">j</eq></li>
+<li><eq env="math">\bar{r}</eq> is the average of all the ranks</li>
+<li>There is also a simplified formula for when there are no ties <eq env="displaymath"> H = \left(\frac{12}{n(n+1)}\sum_{j=1}^m \frac{T_j^2}{n_j}\right) -3(n+1)</eq></li>
+<li>If using the simplified formula in presence of ties an adjustment is needed, according to the number of ties <eq env="math">t</eq></li>
+</ul>
+<p></p>
+<ul>
+<li>The <eq env="math">H</eq> statistics has an approximate <eq env="math">\chi^2</eq> distribution with <eq env="math">m-1</eq> degrees of freedom
+<ul>
+<li>Calculating the exact distribution of <eq env="math">H</eq> is computationally complex
+<ul>
+<li>Tables are available up to 105 samples</li>
+</ul></li>
+<li>If possible is better to use computed <eq env="math">H</eq> thresholds instead of the <eq env="math">\chi^2</eq> distribution
+<ul>
+<li>The 2 distributions diverge sensibly when there are small groups</li>
+</ul></li>
+</ul></li>
+<li>I reject the null hypothesis if <eq env="math">H &gt; \chi^2_\alpha</eq></li>
+</ul>
+<h1 id="analysis-of-relationships-between-genes-and-samples">Analysis of relationships between genes and samples</h1>
+<ul>
+<li>One of the intuitive goals of microarray studies is to identify genes and samples that have similar expression profiles</li>
+<li>We first need to distinguish if we are interested in similarity among genes or among samples
+<ul>
+<li>Even though from the scientific standpoint these are really different questions, their analysys approach is essentially the same</li>
+<li>Here we will refer to gene profiles understanding that this applies to both gene and sample profiles</li>
+</ul></li>
+<li>Being interested in the similarity among genes across 2 samples means to plot the expression level of all the genes in one sample against the other
+<ul>
+<li>Samples are the axes and genes the datapoints</li>
+<li>It answers to the question: do the samples have similar gene expression profiles?</li>
+</ul></li>
+<li>Being interested in the similarity among samples across 2 genes means to plot the expression level of all the samples for a gene against the other
+<ul>
+<li>Samples are the dataoints and genes the axes</li>
+<li>It answers to the question: do the genes vary their expression together?</li>
+</ul></li>
+<li>Note: data in this cases are always paired, since I have the same gene in different samples or different genes in the same sample</li>
+</ul>
+<h2 id="distance-metrics">Distance metrics</h2>
+<ul>
+<li>I can describe similarity among 2 profiles as a distance metric on the high-dimensional samples-genes space</li>
+<li>Any distance metric should have some properties
+<ul>
+<li>Distances cannot be negative: <eq env="math">d(A,B) \geq 0</eq></li>
+<li>A profile must be at distance 0 to itself: <eq env="math">d(A,A) = 0</eq></li>
+<li>If two profiles are at distance 0, they are identical: <eq env="math">d(A,B) = 0 \implies A=B</eq></li>
+<li>The distance between A and B must be the same as the distance between B and A: <eq env="math">d(A,B) = d(B,A)</eq></li>
+<li>It should satisfy the triangular inequality: <eq env="math">d(A,C) \leq d(A,B) + d(B,C)</eq></li>
+</ul></li>
+</ul>
+<h3 id="pearson-correlation-coefficient">Pearson correlation coefficient</h3>
+<ul>
+<li>It is a similarity measure that quantifies the strenght of the linear relationship among 2 sets of measurements</li>
+<li>Note: I am assuming LINEAR dependency!</li>
+<li>It is NOT a distance metric and it needs to be coverted into one</li>
+<li>Given the sets of measurements <eq env="math">x</eq> and <eq env="math">y</eq>, with <eq env="math">n</eq> observations each, the correlation coefficent <eq env="math">r_{xy}</eq> is <eq env="displaymath"> r_{xy} = \frac{Cov(x,y)}{\sigma_x\sigma_y} = \frac{n \sum_{i=1}^n (x_iy_i) - \sum_{i=1}^n x_i \sum_{i=1}^n y_i}{\sqrt{( n\sum_{i=1}^n x_i^2-(\sum_{i=1}^n x_i)^2) ( n\sum_{i=1}^n y_i^2-(\sum_{i=1}^n y_i)^2)}} </eq></li>
+<li>It can take a value from -1 to +1, where 0 represents no correlation, +1 represents complete correlation, and -1 represent complete inverse correlation</li>
+<li>If the profiles are centered before calculating the correlation so to have mean 0 and standard deviation 1 the formula is much simpler <eq env="displaymath">r_{xy} = \sum_{i=1}^n x_iy_i</eq></li>
+<li>Centering is useful when we are comparing samples to a reference, but not when we are studying a time series
+<ul>
+<li>In the case of a time series, centering the data removes any possible information on the up/down regolation of genes at different timepoints</li>
+<li>Centering is meaningful if I expect the averages to not be different among profiles</li>
+</ul></li>
+<li>I can convert the correlation coefficient to a distance metric in several ways that respect the above stated conditions <eq env="displaymath"> d(XY) = 1 - |r_{xy}|</eq> <eq env="displaymath"> d(XY) = 1 - r_{xy}^2</eq></li>
+<li>The statistical significance of the Pearson correlation coefficient can be evaluated with a <em>t</em>-test <eq env="displaymath"> t = \frac{r}{\sqrt{\frac{1-r^2}{n-2}}}</eq></li>
+<li><eq env="math">r</eq> is the Pearson coefficient and <eq env="math">n</eq> the sample size</li>
+<li>I compare the <eq env="math">t</eq> statistic against the t distribution with n-2 degrees of freedom</li>
+<li>Note: the Pearson correlation is really sensitive to outliers!</li>
+</ul>
+<h3 id="spearman-correlation-coefficient">Spearman correlation coefficient</h3>
+<ul>
+<li>It is a non-parametric measure of correlation that is more robust to outliers with respect to the Pearson correlation
+<ul>
+<li>It is more appropriate for microarray data</li>
+</ul></li>
+<li>I replace real measurements with ranks and then applies the same formula of the Pearson correlation</li>
+<li>As with data centering, ranking the data discards all the information on the direction of gene regulation
+<ul>
+<li>Because of this, Spearman correlation is not adequate for timeseries data</li>
+<li>I just know that the expression in one sample is higher or lower than in another, but I do not now if it is up or down regulated with respect to the reference</li>
+</ul></li>
+<li>The Spearman correlation is a statement about monotonicity, not about linearity</li>
+</ul>
+<h3 id="euclidean-distance">Euclidean distance</h3>
+<ul>
+<li>It it the actual distance in the plot space as given by the Pythegorean theorem</li>
+<li>In 2 dimensions the distance between the points <eq env="math">x:(x_1,x_2)</eq> and <eq env="math">y:(y_1,y_2)</eq> is <eq env="displaymath"> d(x,y) = \sqrt{(x_1-y_1)^2+(x_2-y_2)^2}</eq></li>
+<li>To get the distance in 3 dimensions I first get the hypotenuse between the segments in the <eq env="math">x_1</eq> and <eq env="math">x_2</eq> axes, and then the hypothenuse between the previous hypothenus and the <eq env="math">x_3</eq> segment</li>
+<li>This concept can be easily extended to n dimensions, since the squares and square roots cancel always each other perfectly <eq env="displaymath"> d(x,y) = \sqrt{\sum_{i=1}^n (x_i-y_i)^2}</eq></li>
+<li>Euclidean distance is NOT scale invariant: 2 profiles with the same shape but different magnitudes appear quite different
+<ul>
+<li>This can be solved by centering the profiles before calculating the euclidean distance</li>
+</ul></li>
+<li>Euclidean distance cannot spot negative correlations!
+<ul>
+<li>Negatively correlated profiles are close with Pearson/Spearman correlation but far in Euclidean space</li>
+</ul></li>
+</ul>
+<h2 id="hierarchical-clustering">Hierarchical clustering</h2>
+<ul>
+<li>It is a methodology that arranges genes or samples profiles in a tree, so that similar profiles are close to each other</li>
+<li>It is useful since it can reduce data complexity and reveal clusters of genes acting together</li>
+<li>I first compute a distance matrix among the profiles, using any of the distance metrics examined
+<ul>
+<li>The matrix is triangular, since <eq env="math">d(A,B)=d(B,A)</eq></li>
+</ul></li>
+<li>I join similar profiles together and compute the distance from all the remaining profiles to the new cluster and iterate until only 1 cluster remains</li>
+<li>Usually the lenght of the branches is made so to refelect pairwise distance</li>
+<li>With <eq env="math">n</eq> profiles I have <eq env="math">n-1</eq> nodes and <eq env="math">2^{n-1}</eq> possible dendrograms</li>
+<li>The distance between the new cluster and the remaining genes isevaluated using a linkage method</li>
+<li>The 3 most commonly used linkage methods are single linkage, complete linkage, and average linkage
+<ul>
+<li>They give different results, so it is important to choose them carefully</li>
+</ul></li>
+<li>Since clustering is method-dependent, it is better to not infer too much from observed clusters</li>
+<li>Clustering is also dependent on the distance metric used
+<ul>
+<li>Negatively correlated genes are close in Pearson and Spearman space but far in Euclidean space</li>
+<li>Profiles with the same shape but different scale have distance 0 only in Spearman space</li>
+<li>Euclidean distances tend to be larger than Pearson and Spearman distances and hence produce looser dendrograms</li>
+</ul></li>
+<li>It is suggested to try all the possible distance metrics with hierarchical clustering before drawing conclusions</li>
+</ul>
+<h3 id="single-linkage">Single linkage</h3>
+<ul>
+<li>In single linkage the distance between 2 clusters is defined as the distance between the nearest points in the respective clusters</li>
+<li>In this case I tend to have an effect called chaining: genes are added to a cluster one at a time</li>
+<li>This method is useful when data have natural clusters that are well defined but with irregular shapes</li>
+<li>In general this is NOT recommended for microarray data</li>
+</ul>
+<h3 id="complete-linkage">Complete linkage</h3>
+<ul>
+<li>In complete linkage the distance between 2 clusters is defined as the distance between the farthest points in the clusters</li>
+<li>This produces many small, compact and well defined clusters</li>
+<li>It performs well with well-defined data and not so well with fuzzy data</li>
+</ul>
+<h3 id="average-linkage">Average linkage</h3>
+<ul>
+<li>In average linkage the distance between 2 clusters is defined as the average distance between the all the pairs of points in the clusters</li>
+<li>It has an intermediat behaviour between single and complete linkage</li>
+<li>It tends to perform well with microarray data</li>
+</ul>
+<h3 id="isomorphisms">Isomorphisms</h3>
+<ul>
+<li>If 2 profiles are close to each other in the dendrogram this does not imply that they are near to each other in the clustering: the branches can be really long!</li>
+<li>I can draw a tree in different order and let it be the same tree: there are isomorphic clusters</li>
+</ul>
+<h2 id="reliability-of-hierarchical-clustering">Reliability of hierarchical clustering</h2>
+<ul>
+<li>There are 3 methods for assessing the reliability of cluster analysis</li>
+<li>Visually we can look at gene expression profiles and see if they are similar
+<ul>
+<li>This is subjective and unreliable</li>
+</ul></li>
+<li>By assessing the biological relevance of clusters
+<ul>
+<li>I expect genes in the same cluster to be involved in similar pathways</li>
+<li>This is also subjective and unreliable</li>
+</ul></li>
+<li>Using a statistical measure of known experimental variability
+<ul>
+<li>This is done by building a consesus tree via parametric bootstrapping ### Parametric bootsrapping</li>
+</ul></li>
+<li>I start from the real log ratio for each gene</li>
+<li>I randomly sample numbers from a normal distribution with mean 0 and with a standard deviation equal to the coefficient of variability of the experiment <eq env="displaymath">CV = \sqrt{\exp{(\sigma*\ln{2})^2}-1}</eq>
+<ul>
+<li>This bootstrap is parametric since I am introducing errors sampled from a normal distribution: I assume that the error is normally distributed!</li>
+<li>The coefficient of variability is the standard error!</li>
+</ul></li>
+<li>I add the random numbers to the real log ratios and get a bootstrap dataset
+<ul>
+<li>This dataset as an error added which is exactly of the same magnitude as the real data</li>
+</ul></li>
+<li>I calculate a dendrogram from the bootstrap data, then repeat the bootstrap and calculate another tree for many times</li>
+<li>I typically obtain at least 1000 bootstrap trees</li>
+<li>I create a consesus tree by accepting all the nodes that appear in more than 50% of the bootstrap trees</li>
+<li>There can be genes that are not resolved in the consensus tree!
+<ul>
+<li>This just means that there is not enough evidence for assigning them to a cluster</li>
+</ul></li>
+<li>The percentage of occurrence of a node in the bootstrap set is a measure of the statistical support for that node</li>
+<li>From bootstrap we learn that much of the fine strucutre of dendrograms is not real data, but noise</li>
+</ul>
+<h2 id="heat-maps">Heat maps</h2>
+<ul>
+<li>Data matrices and dendrograms are often associated with an heat map for visualization</li>
+<li>It is a matrix with samples in one axis and genes in the other</li>
+<li>For both samples and genes a dendrogram is reported</li>
+<li>Each point in the matrix (sample/gene association) has a color proportional to the fold change in expression
+<ul>
+<li>Black means no fold change</li>
+<li>Red represents up-regulated genes and green down-regulated genes</li>
+</ul></li>
+<li>By placing genes and sample accoriding to their dendrogram I can spot strucutre in the color scheme</li>
+</ul>
+<h1 id="unsupervised-analysis">Unsupervised analysis</h1>
+<ul>
+<li>Unsupervised techniques are exploratory</li>
+<li>You let the data organise itself withouth any prior assumption</li>
+</ul>
+<h2 id="principal-component-analysis-pca">Principal component analysis (PCA)</h2>
+<ul>
+<li>In microarray analysis we have a lot of data: many genes and many samples</li>
+<li>PCA is a method that projects a high-dimensional space to a lower-dimensional space</li>
+<li>The angle at which to look at the high dimensional space is choosen so to maximise the variability of the original dataset captured in the low-dimensional space</li>
+<li>PCA is recommended as an exploratory tool to uncover unknown trends in the data and identify variance components</li>
+<li>PCA is the orthogonal linear transformation of that transforms the data to a new coordinate system such that the greatest variance by any projection of the data comes to lie on the first coordinate, the second greatest on the second coordinate and so on</li>
+<li>Usually data are centerd before doing PCA (mean centered and variance-scaled)</li>
+<li>PCA can be performed in different ways
+<ul>
+<li>By finding the eigenvectors of a variance-covariance matrix for the original <eq env="math">n</eq> axes (aka EVD, Eigenvalue decomposition)
+<ul>
+<li>It is an <eq env="math">n*n</eq> triangular matrix that represent the covariance of any axes pair and, on the diagonal, the variance of the axes</li>
+<li>The eigenvectors are the unit vectors of the PCs, and the eigenvalues are proportional to the total variance explained by a PC</li>
+<li>The linear correlation of variables is expressed by their covariance</li>
+</ul></li>
+<li>By finding the eigenvectors of a correlation matrix for the original <eq env="math">n</eq> axes
+<ul>
+<li>This is equivalent since the correlation matrix is the normalized covarince matrix</li>
+</ul></li>
+<li>By single-value decomposition (SVD)</li>
+</ul></li>
+<li>I define then the first principal component as the linear combination of the original variables that has the maximum amount of variance
+<ul>
+<li>First I translate the orgin of the coordinate system so that it is at the center of the data</li>
+<li>I choose a random line passing through the origin and I rotate it until I find the line that maximizes the sum of squared distances of each projected point to the origin</li>
+<li>This is equal to minimizing the sum of squared distances from the new axis to all the datapoints (because of Pythagora)</li>
+</ul></li>
+<li>The successive principal componets are selected among the orthogonal lines to PC1, always by maximising the squared sum of distances from the origin of the projected data
+<ul>
+<li>If the original data is 2D I have just 1 possible PC2, nothing to optimise</li>
+<li>If the original data is 3D, there is an entire orthogonal plane to PC1, so I need to rotate PC2 across this plane to optimise it</li>
+<li>In 4D I have an entire 3D space orthogonal to PC1 and so on: In general I have an <eq env="math">n-1</eq>-dimensional space orthogonal to PC1</li>
+</ul></li>
+<li>A scree plot is an histogram showing the percentage of original variance on each PC</li>
+</ul>
+<h2 id="database-for-annotation-visualization-and-integrated-discovery-david">Database for Annotation, Visualization and Integrated Discovery (DAVID)</h2>
+<ul>
+<li>Microarray data analysis often produces a large list of interesting genes, consisting of thousands of elements</li>
+<li>DAVID is an integrated bioinformatics resource consisting of a knowledge base and analytic tools</li>
+<li>It is a convenient platform for understanding the biological meaning of large lists of genes</li>
+<li>It can identify enriched GO terms, functional gene groups</li>
+<li>It can visualize genes on KEGG pathways</li>
+<li>It has many other functions</li>
+<li>In general, if you came up with a list of genes have a look in DAVID</li>
+</ul>
+<h2 id="volcano-plot">Volcano plot</h2>
+<ul>
+<li>A volcano plot is a plot of the fold change (x axis) against the negative log_10 of the p-value (y axis)</li>
+<li>It allows to spot together the magnitude of a difference and its statistical significance</li>
+<li>Data typically clusters towards 0 on the x (small fold change) and towards 0 on the y (not significant)</li>
+<li>Interesting results are on the high portion of the plot, and the further they are from the center the more the magnitude of the effect</li>
+</ul>
+<h2 id="multidimensional-scaling-mds">Multidimensional scaling (MDS)</h2>
+<ul>
+<li>Multidimensional scaling (MDS) is similar to PCA in that it maps an high-dimensional space to a lwer-dimensional space</li>
+<li>I define a distance metric and try to find a lower-dimensional coordinate system that preserves the distances as well as possible
+<ul>
+<li>It tend to give very similar results to PCA, even though possibly at different scales</li>
+</ul></li>
+<li>As long as a distance metric can be defined, MDS can find the smallest number of dimensions that still capture adequately the distance between objects</li>
+<li>An MDS plot is a 2D or 3D plot of points that reside in an higher-dimensional space that maximises the preservation of the distances between points</li>
+<li>The MDS dimensions are a linear combination of the original dimensions</li>
+</ul>
+<h2 id="k-means-clustering">K-means clustering</h2>
+<ul>
+<li>It is an unsupervised ML algo that can be used for hierarchical clustering of microarray data</li>
+<li>It differs from hierarchical clustering in many ways
+<ul>
+<li>I need to specify in advance the number of clusters</li>
+<li>There is no hierarchical relationship among clusters: they are just groups of genes</li>
+<li>It is stochastic and so not perfectly reproducible if I don’t assign a fixed seed</li>
+</ul></li>
+<li>I first choose the number of clusters to be found, called <eq env="math">k</eq></li>
+<li>I randomly split the dataset in <eq env="math">k</eq> clusters and I calculate their centroid
+<ul>
+<li>The centroid is a point which has the average coordinates of all the datapoints in the cluster</li>
+</ul></li>
+<li>For each datapoint (profile) I calculate the distance from it and the centroids of all the clusters</li>
+<li>I move each datapoint to the cluster whose centroid is the closest to the datapoint</li>
+<li>I recalculate all the centroids form the new clusters</li>
+<li>Reiterate until no datapoint moves anymore (each datapoint is in the cluster whose centroid it is closest to)</li>
+<li>Also k-means clustering is dependent on a distance metric!</li>
+<li>In order to choose <eq env="math">k</eq>, do first an MDS plot and look visually at the clusters to get a starting point</li>
+<li>Then try different values until you find a satisfactory one</li>
+<li>k-means clustering can be validated in different ways
+<ul>
+<li>Visually, check if profiles in the same cluster are actually similar to each other</li>
+<li>Try to understand if the clusters make sense biologically</li>
+<li>See if the clustering is reproducible with the same <eq env="math">k</eq> but a different random seed</li>
+<li>Do parametric bootstrapping</li>
+</ul></li>
+</ul>
+<h2 id="caution-notes">Caution notes</h2>
+<ul>
+<li>Batch effects can skew the data and show clusters that are not due to biological differences
+<ul>
+<li>Normalization is not satisfactory</li>
+<li>You can deal with them by randomising the samples</li>
+<li>There are statistical packages aimed at detecting them (ComBat)</li>
+</ul></li>
+</ul>
+<h1 id="chipseq---doctormattiaforcato">ChIPSeq - doctormattiaforcato</h1>
+<ul>
+<li></li>
+</ul>
+<!---
+
+# Practical part - doctormaragiuliabacalini
+* We will prepare a report (:/)
+* We will use mainly R
+* The CRAN repository has general statistics packages
+* Bioconductor is a repository for bioinformatics R packages
+* Contributed packages are not always reliable!
+
+## Workspaces, objects, syntax
+* Comments are rendered with `#`
+* Spaces are ignored except that in variable and function names
+* The R workspace contains
+* An R object is a variable
+    * It cannot contain special characters except for underscore and dot
+    * It needs to start with a letter
+    * It can be a good idea to always start variables with capital, so to not mix them up with function
+    * Objects are assigned with the assignment operator `<-` or `=`
+    * In R the operator `<-` is preferred since `=` can be mistaken by `==`
+* Data types can be symple or aggregated
+* Simple: integer, float, string, boolean, factors, NA (missing data)
+* Aggregated: vector (made of numbers or factors), list (made of any datatype), matrix (2 dimensional and numerical), dataframe (2 dimensional and of any type)
+* Even a number is actually a vector of lenght 1
+* In dataframes columns and rows have names
+* A factor is a categorical variable
+    * It is like a string but without quotes
+    * They can be put in a vector
+    * A list of strings can be converted in a vector of factors with `as.factor(list)`
+    * The function `levels(vector)` returns the possible categorical values
+* In dataframes all the strings are converted to factors
+    * This is memory effective since a single categorical variable is represented by just one integer irrespective of its lenght!
+* Logical operators
+    * Not x `!x`
+    * Or `|`
+    * And `&`
+    * `isTRUE(x)` returns True if the expression x is true
+    * `x %in% y` returns true if x is a subset of y
+* Indeces
+    * A vector is indexed as `v[i]`
+    * A matrix or dataframe as `M[i,j]`
+* Exploratory functions are particularly useful for dataframes
+* Categorical values are ordered alphabetically
+* Objects in R can be of various types
+    * S3 objects are more casual while S4 objects are more structured
+    * An S4 object contains slots, that can be extracted with the operator @
+        * Slots are not meant to be accessed by the user
+        * Helper functions (`get_something()`) should be used to access the relavant information stored in an object
+
+# Minfi
+* Infinium data can be analised with the GUI tool GenomeStudio from Illumina or with one of the many open source R packages
+* Minfi is a bioconductor package for Infinium data analysis
+    * It uses an S4 indexing structure
+* Infinium raw data are in the binary IDAT format (one file per sample)
+* Minfi imports raw data from a folder containing a series of IDAT files and a SampleSheet, which is the output of the Illumina reader
+    * `targets <- read.metharray.sheet(base_dir)` extracts the SampleSheet object from `base_dir`, where there are the IDAT files and the SampleSheet
+* Raw data from the experiment are extracted in an RGChannelSet object by using the SampleSheet object
+    * `RGset <- read.metharray.exp(targets = targets)`
+    * This object contains the raw Red and Green intensities for each probe
+    * It is organised at the probe, not target level
+    * `Red <- getRed(RGset)` and `Green <- getGreen(RGset)` are helper functions that extract a matrix of channel intesities per probe per sample in the SampleSheet
+    * There are various functions that extrac and summarise information from the RGSet
+* The `MSet.raw <- preprocessRaw(RGset)` function converts the RGSet in a MethilSet object
+    * It is organised at the target level
+    * For each locus the methilated and unmethilated signal is reported, idependently of the original channel
+    * The helper functions `Meth <- GetMeth(MSet.raw)` and `Unmeth <- GetUnmeth(MSet.raw)` return the respective matrices organised per IlmnID (target locus)
+* The `GenMetSet <- GenomicMethilSet(MSet.raw)` function converts the MethilSet into a GenMetSet object
+    * It is like the MetSet.raw, but mapped to a genome
+* The `RatioSet <- RatioSet(MSet.raw)` function converts the MethilSet into a RatioSet object
+    * It includes for each target the $\beta$ or $M$ value and, optionally, the copy number
+* Applying either `RatioSet(GenMetSet)` or `GenomicMethilSet(RatioSet)` converts the data to a GenomicRatioSet object
+    * It is like the RatioSet object but mapped to a genome
+* For each Type I probe not only the relevant channel is stored, the instrument measures both Red and Green everywhere
+    * The opposite channel is useful for estimating background and it is called out of band probe
+* I can create a QC plot for checking the quality of the experiment
+    * `qc <- getQC(MSet.raw)` generates a dataframe with a row per sample
+        * For each sample the median methilated and unmethilated signal is reported
+    * `plotQC(qc)` plots the medians in a log plot
+        * Bad samples with low medians are highlighted
+* Control probes are present in the array and they can be queried
+    * Sample independent controls allow to determine the quality of the processing steps
+        * These are staining, extension, target removal and hybridization controls
+    * Sample dependent controls allow to determine the quality across different samples
+    * These are bisulphite conversion I and II, Specificity I and II, nonpolimorphic and negative controls
+* Negative control probes are random permutations of existing probes that should not bind in the genome
+    * Their signal should be in the 100-1000 range
+    * If they show high signal this could indicate poor sample quality
+* Staining control probes have bioitin/DNP already attached and measure the efficiency and sensitivity of the staining step
+    * They should give red/green signal according to the marjer they have (biotin/DNP)
+* Extension control probes have a final hairpin and therefore they are extended without any target
+* Hybridization controls measure the efficiency of binding to sybthetic targets
+    * The targets are available in medium, high and low concentrations
+    * They should give only green signal
+* Target removal controls are not-extendible probes which hybridise with a synthetic target
+    * The target is extensible, but if it is correctly removed it should not give any signal
+    * The target gives green signal, and there should be no signal
+* Bisulphite conversion controls query a non-CpG C/T polimorphism created by the conversion
+    * There are both of type I and type II
+    * They should give UnMeth signal in type I and Red in type II
+* Specificity controls check non-specific extension by querying non-polimorphic sites (always a T)
+    * There are both of type I and type II
+    * They always should give only Red signal in type II, and non methilated signal in type I
+* Non-polimorphic controls also query a non-polimorphic site (but A, T, C, or G)
+    * They check the performance of amplification
+    * They are of a single type
+    * They should give signal according to the queried position
+* The p-value of a probe is measured from the background model
+    * Low-scoring probes should be filtered out
+* A SNP on the target site of a probe or on the flanking base (for type I) alters the results!
+* A SNP near the 3' of a probe can alter the result, depending on how close it is to the 3'
+-->

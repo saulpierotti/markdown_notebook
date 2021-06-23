@@ -1,0 +1,452 @@
+<h1 id="unix">UNIX</h1>
+<ul>
+<li>Unix was developped in 1960 at Bell labs by the founders of C</li>
+<li>It was one of the first OS to be multi-tasking, multi-user</li>
+<li>It has a hierarchical file system</li>
+<li>In the root directory we can find
+<ul>
+<li><code>/bin</code> contains essential user command binaries</li>
+<li><code>/etc</code> configuration files</li>
+<li><code>/sbin</code> contains essential system binaries</li>
+<li><code>/usr</code> contains binaries and support files for user apps</li>
+<li><code>/var</code> contains variable data files</li>
+</ul></li>
+<li>It is written in C</li>
+<li>This part is about shell scripting</li>
+<li>Unix commands are mostly similar everywhere, but sometimes there are differences</li>
+<li>Alisases can be used for typing frequently used command parameters
+<ul>
+<li>They can be removed with the unalias command</li>
+<li>They can be made permanent by putting in the .bashrc</li>
+</ul></li>
+</ul>
+<h1 id="shell">Shell</h1>
+<ul>
+<li>The shell is a language interpreter</li>
+<li>When I type a command, it searches for the command in what is in the <code>$PATH</code> variable
+<ul>
+<li><code>/bin     /usr/bin    /usr/local/bin</code></li>
+</ul></li>
+<li>In order to execute commands that are not in <code>$PATH</code>, i need to give the path
+<ul>
+<li><code>./myscript</code></li>
+</ul></li>
+<li>I can write on multiple line by putting  before pressing enter</li>
+</ul>
+<h1 id="file-permissions">File permissions</h1>
+<ul>
+<li>They work for any file (also directories, which are indeed files)</li>
+<li>The fundamental permissions are r, w and x and they can be applied to owner, group and all</li>
+<li>The combination of permission of a file are represented with 3 bits for a single user
+<ul>
+<li>000 is no permission, 100 is r–, 010 is -w-, 001 is –x and so on</li>
+</ul></li>
+<li>I can express a permission status by specifying 3 numbers, and so using octal numbers
+<ul>
+<li>0 in octal means 000 in bynary, so it is —</li>
+<li>1 means 001, so –x</li>
+<li>7 means 111. so rwx</li>
+<li>000 is ———- or d———</li>
+<li>777 is -rwxrwxrwx or drwxrwxrwx</li>
+<li>345 is –wxr–r-x</li>
+</ul></li>
+</ul>
+<h1 id="some-commands">Some commands</h1>
+<ul>
+<li><code>echo</code> is the Bash way for print</li>
+<li>Print the working directory: <code>pwd</code></li>
+<li>Create a directory: <code>mkdir</code></li>
+<li>Create an empty file: <code>touch</code>
+<ul>
+<li>If I touch an existing file, I change its acces and modification time</li>
+</ul></li>
+<li>Copy files or directories: <code>cp</code>
+<ul>
+<li>For doing recursively (for dirs) use <code>cp -r</code></li>
+<li>It can overwrite: use <code>cp -i</code> to ask for confirmation!
+<ul>
+<li>I can also make an alias <code>cp=cp -i</code></li>
+</ul></li>
+</ul></li>
+<li>Remove files: <code>rm</code>
+<ul>
+<li>There is no confirmation!</li>
+<li><code>rm -r</code> is recursive</li>
+<li><code>rm -i</code> asks for confirmation</li>
+</ul></li>
+<li>Remove empty directories: <code>rmdir</code></li>
+<li>Move or rename: <code>mv</code></li>
+<li>Scroll a file:<code>less</code>
+<ul>
+<li>I can search for words in less with <code>\something</code></li>
+<li>I can exit with <code>q</code></li>
+<li><code>more</code> is a primitive version of <code>less</code></li>
+</ul></li>
+<li>Search a file: <code>find</code>
+<ul>
+<li>I write first the directory in which I want to search and then, for instance, the name of the file</li>
+<li><code>find . -name myfile.txt</code></li>
+<li>I can also search by size, permission (<code>-perm</code>)</li>
+</ul></li>
+<li>Display the manual: <code>man</code></li>
+<li>Path of a command: <code>which</code></li>
+<li>All the paths to a command and associated files: <code>whereis</code></li>
+<li>Quick one-line info on a command: <code>whatis</code></li>
+<li>Info on a file: <code>file</code>
+<ul>
+<li>It tryes to guess the filetype based on its content</li>
+</ul></li>
+<li>Free disk space: <code>df</code></li>
+<li>DIsk usage stats: <code>du</code></li>
+<li>For both <code>df</code> and <code>du</code> the <code>-h</code> option makes the output human-readable</li>
+<li>Reverse a string: <code>rev</code></li>
+<li>Simple calculations: <code>bc</code>
+<ul>
+<li>In order to operate on reals instead of integers, I should use <code>bc -l</code></li>
+</ul></li>
+</ul>
+<h1 id="file-compression">File compression</h1>
+<ul>
+<li>There are many tools and hence formats</li>
+<li><code>gzip</code> and <code>gunzip</code> are used for .gz files</li>
+<li><code>tar cfz</code> and <code>tar xfz</code> are used for .tar</li>
+<li><code>zip</code> and <code>unzip</code> are used for .zip</li>
+</ul>
+<h1 id="network-utilities">Network utilities</h1>
+<ul>
+<li>Connect to a remote machine: <code>ssh</code></li>
+<li>Copy remote files : <code>scp</code>
+<ul>
+<li>It is called secure copy</li>
+<li><code>scp user@remotelocation.org:path/to/file /destination/path</code></li>
+</ul></li>
+<li>Download from the web: <code>wget</code>
+<ul>
+<li>It works with http and ftp urls</li>
+</ul></li>
+</ul>
+<h1 id="globbing">Globbing</h1>
+<ul>
+<li>The Unix shell provides wildcards that can be used to specify filename patterns
+<ul>
+<li><code>*</code> matches any number of characters, also none
+<ul>
+<li><code>echo *</code> is equivalent to <code>ls</code></li>
+</ul></li>
+<li><code>?</code> matches a single character</li>
+<li><code>[abc]</code> matches a, b or c</li>
+<li><code>[!abc]</code> matches not ( a, b or c)</li>
+<li><code>[a-z]</code> matches any single letter</li>
+<li>There are some special patterns like <code>[:lower:]</code> or <code>[:digit:]</code></li>
+</ul></li>
+<li>I can specify more than 1 pattern in the same line
+<ul>
+<li><code>A* T*</code> is equivalent to <code>[AT]*</code></li>
+</ul></li>
+<li>Brace patterns can also match non-existing filenames
+<ul>
+<li><code>{A,B,C}{A,B,C}</code> is expanded to all the 2 characters combinations of the 2 lists</li>
+<li>It would be <code>AA AB AC BA BB BC CA CB CC</code></li>
+</ul></li>
+</ul>
+<h1 id="redirection">Redirection</h1>
+<ul>
+<li>In Unix devices (printers, screen output, ecc.) are treated as files
+<ul>
+<li>The <code>stdout</code> and <code>stderr</code> devices are connected to the monitor</li>
+<li><code>stdin</code> is connected to the keyboard</li>
+</ul></li>
+<li><code>stdout</code> is redirected with <code>&gt;</code></li>
+<li><code>stderr</code> is redirected with <code>2&gt;</code></li>
+<li>I can append instead of overwrite with <code>&gt;&gt;</code> or <code>2&gt;&gt;</code></li>
+<li>I can redirect all the output with <code>&amp;&gt;</code>
+<ul>
+<li>Be careful, <code>&amp;&gt;&gt;</code> does not work on all systems (!)</li>
+</ul></li>
+<li>The standard way to append all the output is to redirect <code>stderr</code> to <code>stdout</code> and then append it
+<ul>
+<li>I can use <code>ls &gt;&gt; file.txt 2&gt;&amp;1</code></li>
+</ul></li>
+<li>I can trash an output by redirecting to <code>/dev/null</code></li>
+<li><code>stdin</code> can be redirected with <code>&lt;</code>
+<ul>
+<li>It is almost useless, and it can not work with some commands</li>
+</ul></li>
+<li>Pipe (<code>|</code>) is used for redirecting the <code>stdout</code> of a command to the <code>stdin</code> of another
+<ul>
+<li>It is used for building pipelines (!)</li>
+</ul></li>
+<li>If I want to store an intermediate result in a pipeline, I use <code>tee</code>
+<ul>
+<li><code>input command1 | tee output1.txt | command2 &gt; output2.txt</code></li>
+</ul></li>
+</ul>
+<h1 id="text-manipulation">Text manipulation</h1>
+<ul>
+<li>Concatenate and print to stdout: <code>cat</code>
+<ul>
+<li><code>cat file1 file2 &gt; file3</code> creates file3 containing the concatenation of file1 and file2</li>
+</ul></li>
+<li>Print the first/last n lines: <code>head -n</code> and <code>tail -n</code>
+<ul>
+<li><code>head -4 myfile.txt</code> prints the first 4 lines</li>
+<li>I can print a specific line by piping head and tail
+<ul>
+<li><code>head -4 myfile | tail -1</code></li>
+</ul></li>
+</ul></li>
+<li>Sort a file content: <code>sort</code>
+<ul>
+<li>The default sorting behaviour is lexicographic: 10 comes before 1</li>
+<li>If I specify to sort according to a specific column I specify -k</li>
+<li>columns are defined by whitespaces</li>
+<li><code>sort -k 2 myfile</code> sorts according to the second column</li>
+<li>I can sort numerically with <code>sort -n</code></li>
+<li>I can remove duplicated lines with <code>sort -u</code>
+<ul>
+<li>This works only if the lines are next to each other ofter sorting (!)</li>
+</ul></li>
+</ul></li>
+<li>Report or omit repeated lines: <code>uniq</code>
+<ul>
+<li>It detects only adiacent duplicates (!)
+<ul>
+<li>It is algortimically complex to detect unsorted duplicates</li>
+</ul></li>
+<li><code>uniq -d</code> prints only duplicated lines</li>
+</ul></li>
+<li>Extract a column from a file: <code>cut -f</code>
+<ul>
+<li><code>-f</code> specifies the field separator, that defaults to Tab</li>
+</ul></li>
+<li>Count stuff: <code>wc</code>
+<ul>
+<li><code>wc -l</code> counts the lines in a file</li>
+<li><code>wc -c</code> counts the bytes (carachters including the newline)</li>
+</ul></li>
+<li>Compare files line by line: <code>diff</code>
+<ul>
+<li>It prints the lines that are missing from the respective files</li>
+<li>It is similar to the NW algorithm</li>
+</ul></li>
+<li>Find common lines in sorted files: <code>comm</code></li>
+</ul>
+<h1 id="regex-and-grep">Regex and grep</h1>
+<ul>
+<li>They are more powerful than globe patterns</li>
+<li><code>grep</code> means global regular expression print
+<ul>
+<li>It searches in a file and prints all the lines that match the pattern</li>
+</ul></li>
+<li><code>egrep</code> can handle extended regex</li>
+<li><code>fgrep</code> is fast but does not deal with regex, it searches fixed patterns</li>
+<li>Regex searches for a string containing the expression
+<ul>
+<li><code>abc</code> matches ANY string containing abc</li>
+</ul></li>
+<li>Standard regex
+<ul>
+<li><code>.</code> matches any single carachter</li>
+<li><code>*</code> matches any number of times (also 0) the previous carachter</li>
+<li><code>^b</code> matches anything that begins with b</li>
+<li><code>[ABC]</code> matches A, B or C</li>
+<li><code>^</code> and <code>$</code> match beginning and end</li>
+<li><code>A{3,5}</code> matches AAA, AAAA and AAAAA, <code>A{2,}</code> matches 2 or more A</li>
+<li><code>\</code> turns of a metacarachter</li>
+</ul></li>
+<li>Extended regex
+<ul>
+<li><code>?</code> matches the preceding 0 or 1 time</li>
+<li><code>+</code> matches the preceding 1 or more times</li>
+<li><code>(exp1|exp2)</code> matches either exp1 or exp2</li>
+</ul></li>
+<li>I can invert the matching with <code>grep -v</code></li>
+<li>I can search for words using <code>grep -w</code></li>
+</ul>
+<h1 id="awk">awk</h1>
+<ul>
+<li><code>awk</code> is a programming language designed for text processing</li>
+<li>The name comes from the initials of the authors</li>
+<li>The awk synthax can be used for text processing, arithmetic operations, string operations, and others</li>
+<li>It reads from STDIN or from a file</li>
+<li>The input is read as a set of records divided into fields</li>
+<li>A record is a line by default</li>
+<li>A field is a word by default</li>
+<li>The field and record separators can be changed, also to regex</li>
+<li>The specified operation is performed for every record, or to records that match a pattern</li>
+<li>The syntax is <code>awk 'pattern {action}' [filename]</code></li>
+<li>If I use regex, it is <code>awk '/regex/ {action} [filename]</code></li>
+<li>If action is not specified, it defaults to echo to STDOUT, essentially behaving like <code>grep</code></li>
+<li>I can reference single fields of a record in the action
+<ul>
+<li><code>$1</code>,<code>$2</code> refer to the first and second field</li>
+<li><code>$0</code> refers to the entire record</li>
+</ul></li>
+<li>I can specify multiple pattern with multiple actions</li>
+<li>There are optional blocks
+<ul>
+<li><code>BEGIN{action}</code> and <code>END{action}</code> are executed before and after the parsing</li>
+</ul></li>
+<li>Variables can be built-ins or user-defined
+<ul>
+<li>Variables do not need to be declared</li>
+<li>It is good practice to initialize them in the BEGIN block</li>
+</ul></li>
+<li>Some built-ins
+<ul>
+<li><code>NR</code> is the number of the current record (line)</li>
+<li><code>NF</code> is the field number (word)</li>
+<li><code>FS</code> is the field separator</li>
+<li><code>RS</code> is the record separator</li>
+<li><code>$n</code> represents the nth field</li>
+</ul></li>
+<li>I can change the field and record separators by assigning <code>FS</code> and <code>RS</code> (!)</li>
+<li>Some standard operators
+<ul>
+<li>Standard arithmetic operators: <code>+ - * / % ++ --</code></li>
+<li>Relational operators: <code>== != &lt; &gt; &lt;= &gt;=</code></li>
+<li>Logical operators: <code>&amp;&amp;(AND) ||(OR) !(NOT)</code></li>
+</ul></li>
+<li>There are 2 regex operators
+<ul>
+<li><code>str ~ /regex/</code> returns true if str matches regex</li>
+<li><code>str !~ /regex/</code> returns true if str does not match regex</li>
+</ul></li>
+<li>Some string operators
+<ul>
+<li>They can change with <code>awk</code> version (!)</li>
+<li><code>length(str)</code> returns the lenght</li>
+<li><code>sub(regex,repl,str)</code> replaces the regex in str with repl</li>
+<li><code>substr(str,pos,len)</code> extracts a substring</li>
+<li><code>index(str,match)</code> returns the index of match in str, if it exists</li>
+<li><code>tolower(str)</code> and <code>toupper(str)</code> convert cases</li>
+</ul></li>
+<li>The print function
+<ul>
+<li><code>print str1,str2</code> prints the strings separated by the built-in <code>OFS</code>
+<ul>
+<li>If <code>,</code> is omitted the strings are printed without separator</li>
+</ul></li>
+<li><code>OFS</code> (output field separator) can be assigned and defaults to space</li>
+<li>A newline is always added at the end of the print</li>
+</ul></li>
+<li>Commands can be separated in a single block by <code>{cmd1; cmd2}</code></li>
+<li><code>getline</code> is used to read the next line from input
+<ul>
+<li>It is like file.readline() in python</li>
+<li>Once read, the line is not read again (!)</li>
+</ul></li>
+<li><code>printf</code> takes in input a format string followed by a comma-separated list of arguments
+<ul>
+<li>printf means formatted printing</li>
+<li>It is similar to printf() in C, since it aek was written by the same author of C (!)</li>
+<li>I can put special symbols in my string, that refer to datatypes
+<ul>
+<li><code>%d %f %s</code> refer to int, float, string</li>
+</ul></li>
+<li>I can then refer to the symbols after the print
+<ul>
+<li><code>{printf "%d is an integer",1}</code></li>
+</ul></li>
+<li>I can remove newlines by
+<ul>
+<li><code>awk '{printf "%s ",$0}</code></li>
+</ul></li>
+</ul></li>
+<li>Associatives arrays are basically dictionaries
+<ul>
+<li><code>awk '{array[key]=value}'</code></li>
+<li>The key can also be in the form <code>[key1,key2,keyn]</code>
+<ul>
+<li>In this case it just concatenates the keys as strings and forms a complex key</li>
+</ul></li>
+<li>Non-existent values default to 0 (!)</li>
+</ul></li>
+<li>The if statement is done like
+<ul>
+<li><code>awk {if(test)codeblock;else codeblock}</code></li>
+</ul></li>
+<li>The for loop is done like in Perl
+<ul>
+<li><code>awk {for(i=0,i&lt;10,i++) codeblock}</code></li>
+</ul></li>
+<li>But I can also iterate on an array
+<ul>
+<li><code>awk {for(key in arr) print arr[key]}</code></li>
+</ul></li>
+<li>The while loop
+<ul>
+<li><code>awk {while(test) codeblock}</code></li>
+</ul></li>
+<li>Be careful with pipes and redirections (!)
+<ul>
+<li>Once opened a pipe inside awk, it remains open for the whole computation</li>
+<li>This can lead to unexpected behaviour</li>
+<li>The standard way to correct is to store the command in a variable</li>
+<li><code>awk '{cmd="my_cmd";close(cmd) code|cmd}'</code></li>
+</ul></li>
+</ul>
+<h1 id="sed">Sed</h1>
+<ul>
+<li>It is a tool for text manipulation</li>
+<li>It is less powerfull than <code>awk</code></li>
+<li><code>sed</code> reads a file line by line and it does things with it</li>
+<li>If I don’t do anything with a line, it goes to STDOUT</li>
+<li><code>sed '1p'</code> duplicates the first line
+<ul>
+<li><code>p</code> is for print</li>
+</ul></li>
+<li><code>sed -n '1p'</code> prints only the first line
+<ul>
+<li><code>-n</code> suppresses default printing to STDOUT of lines</li>
+</ul></li>
+<li>A line can also be specified by regex</li>
+<li><code>sed 1d</code> prints all the file but the first line
+<ul>
+<li><code>d</code> is for delete</li>
+</ul></li>
+<li>Pattern substitution is really easy with <code>sed</code>
+<ul>
+<li>We use the <code>s</code> flag</li>
+<li><code>sed 's/find/replace/'</code></li>
+<li>By default it only works on the first occurrence</li>
+<li>If I want to replace all the occurrencies, I need the flag <code>g</code>
+<ul>
+<li><code>sed 's/find/replace/g'</code></li>
+</ul></li>
+</ul></li>
+<li>The <code>-i</code> option owerwrites the original file</li>
+<li>If I want to do more than one thing
+<ul>
+<li>I can do <code>sed -e 'cmd1' -e 'cmd2'</code></li>
+<li>An alternative is <code>sed 'cmd1;cmd2'</code>
+<ul>
+<li>Be careful, they are executed one after the other (!)</li>
+</ul></li>
+</ul></li>
+<li>I can create a script for sed and call it
+<ul>
+<li>Commands have to be one per line</li>
+<li><code>sed -f script</code></li>
+</ul></li>
+</ul>
+<h1 id="shell-scripting">Shell scripting</h1>
+<ul>
+<li>I can specify the interpreter with an hashbang
+<ul>
+<li><code>#!/path/to/interpreter</code></li>
+</ul></li>
+<li>Comments are rendered with #</li>
+<li>Syntax is somewhat shell-dependent</li>
+<li>Variables are by default local, and can be made global by exporting
+<ul>
+<li><code>VAR=1; echo $VAR</code></li>
+<li><code>VAR=1; export $VAR</code></li>
+</ul></li>
+<li>Special variables
+<ul>
+<li><code>$0</code> is the name of the script, or /bin/bash if interactive</li>
+<li><code>$1</code> is the first argument and so on</li>
+<li><code>$#</code> is the number of arguments</li>
+</ul></li>
+</ul>

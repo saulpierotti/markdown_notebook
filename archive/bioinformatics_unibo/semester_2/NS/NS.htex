@@ -1,0 +1,362 @@
+<h1 id="general-overview">General overview</h1>
+<h2 id="the-brain">The brain</h2>
+<ul>
+<li>The human brain has more that <eq env="math">1*10^{11}</eq> neurons</li>
+<li>Neuroscience started in 1800 with Golgi and Cajal with their accurate description of nerve cells</li>
+<li>Golgi developped silver staining of neurons, which was then used by Cajal to prove the existence of neurons
+<ul>
+<li>The silver ions stain randomly around 1% of the neurons, in a not understood way</li>
+</ul></li>
+<li>The cerebrum is composed of 2 emispheres, each composed of 4 lobes
+<ul>
+<li>The lobes are named after the skull bones above them as frontal, parietal, occipital, temporal</li>
+</ul></li>
+<li>Motor and sensory pathways are crossed: the left emisphere controls and receives information from the right side of the body and vice-versa</li>
+<li>The 2 emispheres are not completely symmetrical in structure and function</li>
+<li>Lobes are composed of gyri separated by sulci
+<ul>
+<li>The main gyri are quite conserved in different people and they have names</li>
+<li>They allow to host more neurons in the same space (increase surface)</li>
+</ul></li>
+<li>The first evidence of functional specilization in the brain came from the stufy of aphasia after stroke in the Broca area</li>
+<li>At the beginning of neuroscience there were 2 main views according to where brain function is located: holistic and discrete</li>
+<li>Broca area was found to be responsible for speech production and it is coveniently located in the association area just in front of the primary motor cortex that controls the mouth
+<ul>
+<li>It is usually located in the left emisphere in the posterior region of the frontal lobe, close to the central sulcus</li>
+<li>Native languages and languages acquired later activate different parts of Broca area!</li>
+</ul></li>
+<li>Wernicke area is responsible for speech comprehension and it is located just in from of the primary auditory cortex
+<ul>
+<li>It is connected to the angular gyrus, an association area that integrates auditory, visual and other sensory information</li>
+</ul></li>
+<li>The arcuate fasciculus connects the Broca area, the angular gyrus and the Wernicke area</li>
+<li>Broadmann’s brain classification is regions is still widely used today</li>
+<li>Wernicke and Broca areas seem to be where the grammatical rules of language are stored
+<ul>
+<li>Each language shares an universal grammar, and so this can be at least in part hard-wired</li>
+</ul></li>
+<li>Distinct emotions can be produced by stimulating distinct brain regions</li>
+<li>The emotional aspects of language are located in the right emisphere and they quite mirror the logical areas of the left emisphere
+<ul>
+<li>The right equivalent of Wernicke area is involved in language emotional comprenshion and the equivalent of Broca area with emotion communication</li>
+</ul></li>
+<li>The organization of brain areas for language is not complete until 7-8 years old
+<ul>
+<li>A child with left hemisphere damage can develop normal language but at the cost of other abilities like spatial reasoning</li>
+</ul></li>
+<li>The 2 hemispheres seem to have each its own consiuosness that became evident in split brains</li>
+</ul>
+<h2 id="neurons-and-neural-circuits">Neurons and neural circuits</h2>
+<ul>
+<li>Neuron action potentials travel at 1 to 100 m/s</li>
+<li>The information conveyed by an action potential is determined not by the form of the signal but by the pathway the signal travels in the brain</li>
+<li>Unipolar neurons are the most frequent in invertebrate while in vertebrates they form the autonomous nervous system
+<ul>
+<li>They have a single main process that gives rise to axon and dendrites</li>
+</ul></li>
+<li>Bipolar neurons are abundant in sensory cells (retina, olfactory epithelium)
+<ul>
+<li>They have a main dendritic process and an axon arising from the soma</li>
+</ul></li>
+<li>Multipolar neurons are the most abundant in the CNS of vertebrates
+<ul>
+<li>They have a single axon and many dendrites</li>
+<li>A single neuron can receive from tens of thousands (spinal cord) to millions (cerebellum) of contacts</li>
+</ul></li>
+<li>There are 2 to 10 times more glial cells than neuron is the vertebrate CNS</li>
+<li>The macroglia has ectoderm origin (the same as neurons), while microglia is made of monocites (mesoderm)</li>
+<li>Macroglial cells are oligodendrocytes, astrocytes and Schwann cells</li>
+<li>In the human brain 80% of the cells are macroglia, half of them oligodendrocytes and half astrocytes</li>
+<li>Schwann cells and oligodendrocytes for the myelin sheet in the PNS and CNS</li>
+<li>Schwann cells surround a single neuron while oligodendrocytes surround 1 to 30 axons</li>
+<li>Node of Ranvier are the gaps between Schwann cells or oligodendrocytes
+<ul>
+<li>Ion channels are concentrated here</li>
+</ul></li>
+<li>There are protoplasmic astrocytes in the grey matter and fibrous astrocytes in the white matter</li>
+<li>Astrocytes are not essential for signal processing but support neurons
+<ul>
+<li>They insulate nearby cells</li>
+<li>They take up excess <eq env="math">K^+</eq> released by neurons when they fire</li>
+<li>They clean-up neurotransmitters after release from the synaptic cleft</li>
+<li>They release neuron growth factors</li>
+</ul></li>
+<li>The resting potential of neurons is around -65 mV (-40 to -80 mV)
+<ul>
+<li>In muscle cells it is greater, around -90 mV</li>
+</ul></li>
+<li>The action potential reaches +40 mV, mostly because of <eq env="math">Na^+</eq> influx
+<ul>
+<li>It lasts for about 1 ms</li>
+</ul></li>
+<li>In addition to long-range action potentials neurons experience local receptor potentials and synaptic potentials, which are not propagated</li>
+<li>There can also be long-range hyperpolarizations</li>
+<li>Receptor potentials and synaptic potentials are graded, not all or none like action potentials
+<ul>
+<li>An example is a stretch-sensitive sensory neuron in a muscle that opens <eq env="math">Na^+</eq> channels when its membrane is stretched
+<ul>
+<li>The <eq env="math">Na^+</eq> influx causes an excitatory receptor potential</li>
+</ul></li>
+<li>Receptor potentials are usually excitatory but there are inhibitory receptor potentials in the retina</li>
+<li>These potential travel at most for 1-2 mm since they are passive</li>
+<li>If a receptor potential is able to reach the first Ranvier node, it generates an action potential</li>
+</ul></li>
+<li>The trigger zone of the axon has the highest concentration of voltage-gated <eq env="math">Na^+</eq></li>
+<li>Information is coded in the number of action potentials and in the time interval between them
+<ul>
+<li>The waveform of an action potential is highly stereotyped</li>
+</ul></li>
+<li>The duration of the input signal determines the number of action potentials, while the strenght of the signal determines their frequency</li>
+<li>The pattern of action potentials determines the amount of neurotrasmitter released</li>
+<li>Some interneurons do not generate action potentials: they are small ans signals spread passively</li>
+<li>In some invertebrates a complex behaviour is initiated by a single cell firing, while in vertebrates it is likely that groups of neurons govern some behaviour</li>
+<li>There is widespread parallel signaling and processing in neuronal pathways</li>
+<li>Feedback circuits allow the brain to function also in the absence of sensory input</li>
+<li>Synaptic terminals show functional plasticity
+<ul>
+<li>There are short-term adaptations that last seconds to hours</li>
+<li>Long-term adaptations involve anatomical alterations</li>
+</ul></li>
+</ul>
+<h2 id="genetics">Genetics</h2>
+<ul>
+<li>The circadian rithm is reset by light but persists also in the absence of stimuli
+<ul>
+<li>It governs sleep and other behavioural patterns</li>
+</ul></li>
+<li>In flies the <eq env="math">per</eq> (period) gene is essential for the circadian rithm
+<ul>
+<li>Some mutants do not have any rithm, some have a longer duration of the period and some have a shorter duration</li>
+<li>There are no other effects on phenotype besides rithm changes in <eq env="math">per</eq> mutants</li>
+<li>The PER protein is a trascription factor</li>
+<li>Its expression is low in the morning, and then it accumulates during the day until it peaks at night and then decreases until the morning</li>
+</ul></li>
+<li>Another important gene for the circadian rithm was identified in mice: <eq env="math">clk</eq> (clock)
+<ul>
+<li>It functions similarly to <eq env="math">per</eq></li>
+</ul></li>
+<li>Both <eq env="math">clk</eq> and <eq env="math">per</eq> have a PAS domain, which is a TF domain</li>
+<li>Actually both mice and flies have both <eq env="math">clock</eq> and <eq env="math">per</eq>, which together regulate the circadian rithm
+<ul>
+<li>CLK together with its partner CYC (cycle) is the effector TF that directly acts on genes modulating behavior</li>
+<li>CLK also stimulates <eq env="math">per</eq> trascription, but PER inhibits <eq env="math">clk</eq> expression</li>
+<li>In the morning PER is low and CLK is high</li>
+<li>This makes CLK stimulate the trascription of <eq env="math">per</eq>, which steadly increases</li>
+<li>PER takes time to become active, since it need to be phosphorylated and interact with other proteins</li>
+<li>When at night PER peaks, it makes CLOCK decrease and therefore PER itself decreases</li>
+<li>This mechanism is conserved also in humans</li>
+</ul></li>
+<li>Mutations in FOXP2 may be a key factor in developping language in humans</li>
+<li>Parental imprinting effects seems to be more common in the brain than in other tissues</li>
+</ul>
+<h1 id="anatomical-organization">Anatomical organization</h1>
+<h2 id="spinal-cord">Spinal cord</h2>
+<ul>
+<li>The spinal cord innervates the trunk and limbs and connects them to the brain</li>
+<li>It is composed of sensory neurons, motor neurons, and interneurons</li>
+<li>It is ticker where the innervation of the limbs is located</li>
+<li>It is formed by a core of grey matter surrounded by white matter</li>
+<li>The grey matter contains cell bodies and it is subdivided in dorsal and ventral horns</li>
+<li>The dorsal horns receive sensory stimuli</li>
+<li>The ventral horns generate motor stimuli and contain also interneurons</li>
+<li>The white matter is formed by rostro-caudal ascending and descending tracts</li>
+<li>There are 31 spinal nerves, each composed of a motor and a sensory division</li>
+<li>The sensory division is called dorsal root since it originates from the dorsal horns, while the motor division is called ventral root</li>
+<li>The ventral root at certain levels contains also sympathetic and parasympathetic fibers</li>
+</ul>
+<h1 id="brain">Brain</h1>
+<ul>
+<li>It is composed of 6 regions: medulla, pons, midbrain, cerebellum, diencephalon, telencephalon</li>
+<li>The 6 regions are found in both emispheres with slight divergences</li>
+<li>Medulla, pons and midbrain toghether form the brain stem</li>
+<li>The medulla is a physical extension of the spinal cord and it resembles to it
+<ul>
+<li>It also contains low-level centers for taste, hearing, balance, neck and facial muscles</li>
+</ul></li>
+<li>The pons protrudes ventrally to the brain stem
+<ul>
+<li>In its ventral part it contains the pontine nucleai, which relay information to the cerebellum</li>
+<li>The dorsal portion contains centers that govern respiration, taste and sleep</li>
+</ul></li>
+<li>The midbrain is rostral to the pons and it connects cerebellum, basal ganglia and cerebral emispheres
+<ul>
+<li>The substantia nigra provides is importantfor volontary movement</li>
+</ul></li>
+<li>There are 12 cranial nerves, that originate from the brain stem and are functionally analogous to the spinal nerves</li>
+<li>The brain stem is the point of entry for all the specialised senses (sight, hearing, balance, taste)</li>
+<li>Specialised neurons in the brain stem mediate parasympathetic refelxes</li>
+<li>A diffuse network in the brain stem, the reticular formation, is involved in arousal and receives most of the sensory input</li>
+<li>The cerebellum is involved in balance and fine motor output</li>
+<li>Half of the neurons of the brain are in the cerebellum, but its structure is quite well understood since it has few types of neurons
+<ul>
+<li>It receives somatic sensations from the spinal cord, balance from the the vestibular organs, and motor and sensory information from the cerebral cortex via the pontine nuclei</li>
+</ul></li>
+<li>The dienacephalon is composed of thalamus and hypothalamus</li>
+<li>The thalamus collects information from all the sensory organs (except olfactory receptors) and relays them to the cerebral emispheres
+<ul>
+<li>It is not a simple realy, but it also filters information</li>
+<li>It also connects the cerebellum and basal ganglia with regions of the cortex involved in movement and cognition</li>
+<li>Like the reticular formation, it is involved in alertness and consciousness</li>
+</ul></li>
+<li>The hypothalamus is ventral to the thalamus and regulates homeostasys and reproductive behaviors
+<ul>
+<li>It is connected to the pituitary gland</li>
+<li>It connects with practically every region of the brain and it is essential in reward and aversion</li>
+<li>The superchiasmatic nucleus regulates the circadian rithm</li>
+</ul></li>
+<li>The cerebral emispheres consist of the cortex, the underlying white matter, the basal ganglia, the amygdala, and hyppocampus</li>
+<li>The 2 emispheres are connected by the corpus callosum</li>
+<li>The amygdala regulates emotions, the hyppocampus memory formation, and the basal ganglia with the control of movement and motor learning</li>
+<li>The cortex is divided in frontal, parietal, temporal and occipital lobes</li>
+<li>The cingulate cortex is the porsion right next to the corpus callosum</li>
+<li>The insula is buried under the frontal, parietal and temporal lobes</li>
+<li>Information is transformed at each synaptic relay
+<ul>
+<li>The arousal level of the animal influences the magnitude and susceptibility of neurons</li>
+</ul></li>
+<li>The sensory areas that process the signal from peripheral organs are arranged topographically simulating the original distribution
+<ul>
+<li>This topography is maintained at different stages of processing</li>
+<li>The same is true for motor pathways</li>
+</ul></li>
+<li>Each functional system is hierarchically organised in primary, secondary, tertiary areas and so on</li>
+<li>The primary auditory cortex is in the tempral lobe, close to the lateral sulcus</li>
+<li>The primary visual cortex is in the occipital lobe, close to the calcarine sulcus</li>
+<li>The primary sensory cortex is posterion to the central sulcus, in the parietal lobe (postcentral gyrus)</li>
+<li>Information is processed in stages to higher order structures, and then down to lower order motor structures</li>
+<li>Most pathways act on the controlater side of the body
+<ul>
+<li>The cross to the opposite side of the brain is called decussation</li>
+<li>The decussation of different systems happens at different levels (in the spinal cord, in the thalamus, …)</li>
+</ul></li>
+<li>The neocortex is organised in layers and columns, while subcortical regions are organised in nuclei</li>
+<li>Most of the cortex contains 6 layers, numbered from the pia madre to the white matter</li>
+<li>Layer 1 (molecular layer) is formed by dendrites of cells located in deeper layers and axon that travel to other areas of the cortex</li>
+<li>Layer 2 (external granular cell layer) and 3 (external pyramidal cell layer) contain small pyramidal neurons that project axons locally and to other cortical areas</li>
+<li>Layer 4 (internal granular cell layer) contains a large number of small spherical neurons
+<ul>
+<li>It is the main recipient of sensory pathways from the thalamus and it is most developped in the sensory cortex</li>
+<li>Areas with a prominent layer 4 are colled granular cortex cortex</li>
+<li>It is almost absent in the primary motor cortex, which is called agranular frontal cortex</li>
+</ul></li>
+<li>Layer 5 (internal pyramidal cell layer) contains pyramidal cells larger that those of layer 3
+<ul>
+<li>Cells in this layer are responsible for the major output pathways</li>
+</ul></li>
+<li>Layer 6 (polymorphic layer) is hetergeneous and blends with the white matter</li>
+<li>All the layers also contain dendrites from neurons in other areas</li>
+<li>Neurons in the neocortex are organised in columns from the white matter to the pia, and these are thought to be the fundamental processing unit of the neocrtex</li>
+<li>Also in the cortex there are interneurons with short axons and principal neurons with long axons</li>
+<li>Interneurons are usually inhibitory and GABAergic</li>
+<li>There is also a population of excitatory glutamergic interneurons</li>
+</ul>
+<h1 id="functional-organization">Functional organization</h1>
+<ul>
+<li>The central axons of the dorsal root ganglion are arranged topographically
+<ul>
+<li>The axons that bring sensory stimuly from the lower libs and abdomen are medial to those bringing input from upper limbs and torso at the cervical level</li>
+</ul></li>
+<li>Pain, temperature, touch and propioception are processed in distinct brain areas</li>
+<li>The thalamus filters all the sensory stimuly except olfaction in accordance to the behavioural state of the animal</li>
+</ul>
+<h1 id="from-lecture">From lecture</h1>
+<ul>
+<li>Most of the neuronal disease are sporadic and not genetic</li>
+<li>It is difficult to develop an animal model for a sporadic disease</li>
+<li>iPSCs from patients are a good alternative</li>
+<li>We are not able to obtain iPSCs from microglia and some interneurons</li>
+<li>Most of our models are 2D, but using 3D models is really important (organoids)</li>
+<li>Brain organoids are good for studying brain development</li>
+<li>Microglial cells are monocites, with different embriological origin that all the other glial cells
+<ul>
+<li>They are the only cells able to pass the BBB</li>
+</ul></li>
+<li>Neuron signal speed is related to myelination and fiber diameter</li>
+</ul>
+<h2 id="neurotransmitters">Neurotransmitters</h2>
+<ul>
+<li>They can be biologic amines (dopamine, serotonine), aminacids (glutamate, glycine), ATP, acetilcholine, …</li>
+<li>Different post-synaptic cells can have different receptors and respond differently to the same neurotransmitter</li>
+<li>Neurotrasmitters need to be removed after excretion
+<ul>
+<li>They can be degraded by enzymes</li>
+<li>They can be re-absarbed by the pre-synaptic cell or by the microglia</li>
+</ul></li>
+<li>Neurotrasmitters act only on the postsynaptic cell while neuromodulators can act both pre- and post-synaptically
+<ul>
+<li>Neuromodulators are usually neuropeptides</li>
+</ul></li>
+<li>The action of neuropeptides in the pre-synaptic cell can regulate gene expression of the peptide itself in a negative loop</li>
+</ul>
+<h2 id="synapses-and-neural-circuits">Synapses and neural circuits</h2>
+<ul>
+<li>Neuronal networks can be convergent or divergent</li>
+<li>Usually our knowledge about neuronal networks comes from the study of invertebrates
+<ul>
+<li>Is this representative?</li>
+</ul></li>
+<li>Axo-axonic synapses are involved in neural modulation</li>
+</ul>
+<h2 id="receptors">Receptors</h2>
+<ul>
+<li>Ionotropic receptors give fast and short-acting receptor potentials
+<ul>
+<li>They are found at the center of the synapsis</li>
+</ul></li>
+<li>Ionotropic receptors usually do not influence gene expression
+<ul>
+<li><eq env="math">Ca^{++}</eq> receptor channels can since they generate a signal cascade</li>
+</ul></li>
+<li>Nicotinic ACh receptors are iomnotropic receptors located in the neuromuscolar junction
+<ul>
+<li>They allow the flow of <eq env="math">K^+</eq> and <eq env="math">Na^+</eq></li>
+</ul></li>
+<li>Ionotropic glutamate receptors are AMPA, Kainate and NMDA
+<ul>
+<li>They are non-selective ion channels formed by many subunits</li>
+</ul></li>
+<li>AMPA receptors can undergo RNA editing in the internal loop
+<ul>
+<li>Without editing the receptor is permable only to <eq env="math">Na^+</eq> and <eq env="math">K^+</eq></li>
+<li>When edited it allows also the flow of <eq env="math">Ca^{++}</eq>, changing its biological effect</li>
+</ul></li>
+<li>NMDA receptors are both ligand and voltage-gated
+<ul>
+<li>An <eq env="math">Mg^{++}</eq> ion clogs the pore and needs depolarization to be removed</li>
+<li>Glutamate is required for opening the channel, together with a co-ligand like glycine or serine</li>
+<li>This means that glycine can be excitatory!</li>
+</ul></li>
+<li>Metabotropic receptors are always GPCRs and they tend to be on the side of the synapsis
+<ul>
+<li>They can also influence gene expression!</li>
+</ul></li>
+<li>Muscarininc ACh receptors are GPCRs</li>
+<li>Glutamate receptors are the basis of neuronal plasticity</li>
+<li>There are several isoforms of metabotropic glutamate receptor</li>
+<li>GABA receptors can be also modulated by steroid hormones!</li>
+</ul>
+<h1 id="perception">Perception</h1>
+<ul>
+<li>Sensation happens in the perifery, perception in the brain</li>
+<li>Each sense has a threshold for sensation, usually defined as the stimuls level that causes a sensation 50% of the times</li>
+<li>Humans can detect electromagnetic radiation at 400 to 700 nm wavelenght</li>
+<li>The cortical representation of the sensory areas is plastic and can adapt
+<ul>
+<li>If you cut some of the vibrissae to a rat, the relative brain areas will be recruited by the remaining vibrissae</li>
+</ul></li>
+</ul>
+<h2 id="chemical-senses">Chemical senses</h2>
+<ul>
+<li>They are smell and taste in humans</li>
+<li>The olphactory bulb is part of the CNS</li>
+<li>Olphactory receptors are GPCRs and they use a specific A subunit of the G protein, called olphactory
+<ul>
+<li>Phosphorilation of the receptor is associated to desensitization</li>
+</ul></li>
+<li>The olphactory epithelium shows a huge variety of cell types
+<ul>
+<li>These neurons are able to regenerate thanks to neural stem cells</li>
+</ul></li>
+<li>Humanse can detect 5 tastes: sweet, sour, salty, bitter, umami</li>
+<li>Flavor perception is an integrated sensation of vision, taste, smell</li>
+</ul>

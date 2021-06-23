@@ -1,0 +1,540 @@
+<h1 id="introduction">Introduction</h1>
+<ul>
+<li>A database is an organized collection of data</li>
+<li>A DBMS is a piece of sofware that allows DB implementation and data mining
+<ul>
+<li>It allows data storing, retrieval, to perform backups, to maintain security</li>
+</ul></li>
+<li>Curation is a synonim of manual annotation</li>
+<li>In the last few years there has been a big effort to standardize DBs</li>
+<li>Even in the best DBs there are errors (!)</li>
+<li>Integration among DBs happens with corss-linking and with merging of DBs
+<ul>
+<li>Uniprot is an example</li>
+</ul></li>
+<li>Not all the structures available are on PDB (!)
+<ul>
+<li>Pharmaceutical companies have their own provate DBs</li>
+</ul></li>
+<li>Some DB terms
+<ul>
+<li>A record is a DB entry containing different fields</li>
+<li>An accession key is a unique identifier of a record</li>
+<li>A table is a DB file containing many records
+<ul>
+<li>Different tables can be connected by the same accession key for some records</li>
+</ul></li>
+<li>A query is a data request submitted to a DB</li>
+</ul></li>
+<li>A query can be organized with boolean operator, in order to retrieve the desired result</li>
+<li>The schema of a DB is the logical structure of the data
+<ul>
+<li>A schema can be written in a flatfile, XML, ecc.</li>
+</ul></li>
+<li>The instance is the set of actual data</li>
+<li>The schema allows the interpretation of the instance</li>
+<li>Pubmed is based in Betsheda, at the National Library of Medicine</li>
+<li>Many DBs have built-in a way to retrieve data from the command line in a structured way
+<ul>
+<li>Entrex Direct allows to retrieve results from Entrez in the Unix command line</li>
+</ul></li>
+<li>The serch engine of PubMed uses automatic term mapping: if I do not specify the search filed, it tries to guess the correct one for each term in the query</li>
+<li>It first looks for the query in the MeSH Translation Table, then for the Journal translation table and then for an Author Index</li>
+<li>MeSH (Medical Subject Headings) is a list of common search terms that are classified in the correct context
+<ul>
+<li>If I search MeSH directly for a term, it gives me a list of possible meanings</li>
+<li>Topics in MeSH are organized in a hierarchical wayH</li>
+<li>I can limit my search to some topics</li>
+</ul></li>
+<li>Some of the main servers that we will use
+<ul>
+<li>NCBI (USA) hosts PubMed</li>
+<li>SIB (Switzerland) hosts the tool ExPASy
+<ul>
+<li>In ExPASy, we can find SwissModel, UniProt, T-Coffee, LALIGN</li>
+<li>T-Cofee is a really powerful alignment tool from Prof.Cedric Notredame, who maybe will give us an advanced lecture</li>
+</ul></li>
+<li>EBI-EMBL (Germany and England)
+<ul>
+<li>It started in Heidelberg and then was transferred to Hinxton</li>
+<li>They provide a lot of training schemes, and freely available data</li>
+<li>Ensemble is a genome browser from EBI</li>
+<li>It hosts also InterPro</li>
+</ul></li>
+</ul></li>
+<li>Elixir is an european platoform for bioinformatics data resources and tools
+<ul>
+<li>Casadio is on the board of directors of Elixir</li>
+</ul></li>
+</ul>
+<h1 id="uniprot">Uniprot</h1>
+<ul>
+<li>Uniprot is composed of entries from Swiss-Prot, PIR and TrEMBL, and from external sources
+<ul>
+<li>PIR was founded but Margaret Dayhoff, the creator of PAM matrices and of the first protein sequence atlas</li>
+<li>SwissProt was part of SIB and it is the most well-curated part</li>
+<li>TrEMBL are automatic translations of EMBL DNA sequences</li>
+<li>It became a central hub for protein information</li>
+<li>It offers extensive cross-linking</li>
+</ul></li>
+<li>Uniprot is itself composed of different parts
+<ul>
+<li>The UniProt Archive (UniParc) is a comprehensive and non-redundant database that contains most of the publicly available protein sequences in the world. Proteins may exist in different source databases and in multiple copies in the same database. UniParc avoided such redundancy by storing each unique sequence only once and giving it a stable and unique identifier (UPI) making it possible to identify the same protein from different source databases. A UPI is never removed, changed or reassigned. UniParc contains only protein sequences. All other information about the protein must be retrieved from the source databases using the database cross-references. UniParc tracks sequence changes in the source databases and archives the history of all changes. UniParc has combined many databases into one at the sequence level and searching UniParc is equivalent to searching many databases simultaneously.</li>
+<li>The UniProt Knowledgebase (UniProtKB) is the central hub for the collection of functional information on proteins, with accurate, consistent and rich annotation. In addition to capturing the core data mandatory for each UniProtKB entry (mainly, the amino acid sequence, protein name or description, taxonomic data and citation information), as much annotation information as possible is added. This includes widely accepted biological ontologies, classifications and cross-references, and clear indications of the quality of annotation in the form of evidence attribution of experimental and computational data.</li>
+<li>The UniProt Reference Clusters (UniRef) provide clustered sets of sequences from the UniProt Knowledgebase (including isoforms) and selected UniParc records in order to obtain complete coverage of the sequence space at several resolutions while hiding redundant sequences (but not their descriptions) from view. Unlike in UniParc, sequence fragments are merged in UniRef: The UniRef100 database combines identical sequences and sub-fragments with 11 or more residues from any organism into a single UniRef entry, displaying the sequence of a representative protein, the accession numbers of all the merged entries and links to the corresponding UniProtKB and UniParc records.</li>
+</ul></li>
+<li>When we publish something using a database, we need to specify the release that we used (!)</li>
+<li>SwissProt is composed of proteins manually curated entries from TrEMBL
+<ul>
+<li>The first step of curation is to asses if there is evidence at the protein level</li>
+<li>GO-terms (and other ontologies), references, isoforms, PTMs (post translational modifications), polimorphisms, crosslinks are added</li>
+<li>If available, the structure of the protein is reported, modelled or experimental</li>
+<li>The correct nomenclature is established and reported</li>
+</ul></li>
+<li>If different isoforms of the protein are identified, the curator searches for the reason of the difference and documents it</li>
+<li>Different isoforms can be due to alternative splicing, natural variations, alternative initiation sites, erroneous prediction, ecc.</li>
+<li>Gene ontology is a classification of a sequence in terms of biological process, molecular function and cellular component</li>
+<li>The TrEMBL part of UniProtKB is mainly redundant, while SwissProt is not-redundant</li>
+<li>How to recognize a SwissProt entry from a TrEMBL entry in Uniprot
+<ul>
+<li>The accession key for TrEMBL proteins is an alphanumeric string, and the entry name repeats the accession key</li>
+<li>The accession key for SwissProt proteins is an alphanumeric string, and the entry name is not related to the accession key</li>
+<li>In the result page, rewied proteins have a golden badge, non reviewed proteins have a blue badge</li>
+</ul></li>
+<li>In Uniprot we can customize the result list to show the information we need</li>
+<li>Entries in UniProt are huge (!)</li>
+<li>Each entry has an annotation score in 1 to 5</li>
+<li>Functional information is a bit sparse in the entry, it can be in many different fields</li>
+<li>There is also a comment field in the entry</li>
+<li>We did an exercise about how to do an advanced search on UniProt and download the result as an Excel file, that I cannot reproduce here
+<ul>
+<li>We basically have to use boolean terms for the search, select the needed columns for display and then download in the required file format</li>
+</ul></li>
+<li>To retrieve the IDs for other databases, we use the Retrieve/ID mapping section
+<ul>
+<li>Many databases have a mapping feature, but UniProt is the best place for doing ID mapping (!)</li>
+<li>UniProt mapping can be done also from the Unix command line</li>
+</ul></li>
+<li>In order to facilitate the retrieval of information from an entry, UniProt creted a visual interface called feature viewer
+<ul>
+<li>This is required because of the high information density of UniProt entries, which makes it difficult to read all the information in a textual format</li>
+</ul></li>
+<li>Automatic annotation in TrEMBL uses data from SwissProt to infer information
+<ul>
+<li>It is composed of 2 main pipelines: Unirule and SAAS</li>
+</ul></li>
+<li>Unirule uses expert-curated rules
+<ul>
+<li>For each automatic annotation, we can see the set of rules that generated it</li>
+</ul></li>
+<li>SAAS uses machine learning for finding the best set of rules, based on sequence features</li>
+<li>HAMAP is used as a partially automated rule source in Unirule
+<ul>
+<li>It is effective when the protein is part of a well defined family</li>
+<li>It is used in place of manual annotation when it gives a result at least as good as the manual one</li>
+<li>It claims to be more error-free than manual annotation</li>
+</ul></li>
+<li>UniParc is the biggest non-redundant protein sequence database, it contains sequences from various sources
+<ul>
+<li>It is not annotated</li>
+</ul></li>
+<li>UniRef provides clusters of sequences from UniProtKB and selected UniParc entry
+<ul>
+<li>It can be accessed from any entry going to the “similar sequences” link</li>
+<li>UniRef100 combines identical sequences with at least 11 residues</li>
+<li>UniRef90 clusters UniRef100 sequences that share at least 90% sequence identity and 80% overlapping with the seed</li>
+<li>UniRef50 in the same way clusters sequences from UniRef90</li>
+<li>It is useful because I can use the seed as a representative of the cluster, and so reduce the number of entries that I analyse
+<ul>
+<li>It can make BLAST searches faster (!)</li>
+</ul></li>
+<li>The seed is the longest or best annotated sequence
+<ul>
+<li>It is considered annotation score, if it is manually annotated, and the source organism</li>
+<li>If the source organism is a model organism it is preferred</li>
+</ul></li>
+</ul></li>
+<li>All the changes that an entry witnessed are stored in UniProt in the “history” link</li>
+<li>In UniProt I can also find complete proteomes
+<ul>
+<li>They are a collection of all the entries from an organism with a completely sequenced genome</li>
+<li>Reference proteomes are the ones with best annotated entries and usually belong to model organisms</li>
+<li>They evolve with time, when new proteins are added</li>
+<li>They involve a lot of manual curation</li>
+</ul></li>
+<li>There are 25000 genes, 100000 transcripts and 1000000 proteins in humans</li>
+<li>Uniprot can be accessed programmatically through a python library</li>
+</ul>
+<h1 id="errors-in-databases">Errors in databases</h1>
+<ul>
+<li>For a long time sequences have been annotated on the basis of structural and sequence similarity</li>
+<li>This approach has its limits, since not always structural or sequence similarity correspond to similar function</li>
+<li>Burkard Rost published a paper where he says that enzyme function is less conserved than expected</li>
+<li>The current level of misannotation is unknown, and seems to be increasing</li>
+<li>The level of misannotation in enzyme superfamilies that comprise families with different functions is particularly high</li>
+<li>The analysis of the conservation of catalytic residues can improve annotation accuracy</li>
+</ul>
+<h1 id="protein-classification-databases">Protein classification databases</h1>
+<ul>
+<li>Classifing proteins reduces the amount of data we need to deal with, and allows us to make predictions about protein function</li>
+<li>Interpro and Pfam are databases of protein classification based on sequence</li>
+<li>Proteins can be classified in superfamilies, families, subfamilies
+<ul>
+<li>The deeper we go, the more we can infer functional features for the members</li>
+</ul></li>
+<li>A domain is an independently-folding unit of protein sequence which harbours a function</li>
+<li>Sequence features are active sites, binding sites and other charachteristics short sequences found inside domains</li>
+<li>A protein signature is a matemathical model build from multiple sequence allignments
+<ul>
+<li>Motives, fingerprint, profiles, HMM are signatures</li>
+</ul></li>
+<li>A signle motif, also called pattern, can be represented by a regular expression
+<ul>
+<li>Prosite is a DB of patterns</li>
+</ul></li>
+<li>A fingerprint is composed of multiple motives in a specific arrangement
+<ul>
+<li>PRINTS is a DB for fingerprints</li>
+<li>Fingerprints are useful for differentiating subfamilies</li>
+</ul></li>
+<li>A profile is built from a multiple global allignment and consists of a position-specifc scoring matrix (PSSM)</li>
+<li>HMMs are complex algorithms capable of modelling the prbabilities of residue change, insertion and deletion
+<ul>
+<li>They are a really powerful protein signature</li>
+</ul></li>
+<li>The general workflow of building a signature is to do a MSA, generate a draft model, use it against the all Uniprot and develop a mature model</li>
+<li>InterPro is a meta-DB that gathers data about patterns, profiles, fingerprints, HMMs
+<ul>
+<li>It is an hub of protein classification and annotation</li>
+<li>It also gathers data from UniProt and PDB</li>
+<li>It is cited by uniprot in each entry</li>
+</ul></li>
+<li>Pfam families are made from a seed alignment manually curated, and then are refined by searching the whole uniprot
+<ul>
+<li>The mature MSA is automatic, while the seed is curated manually</li>
+<li>A Pfam family is represented by an HMM</li>
+<li>Superfamilies in Pfam are called clans</li>
+<li>From 2016 Pfam started to use reference proteomes insted of the whole Uniprot, to decrese redundancy</li>
+</ul></li>
+<li>The number of protein folds is limited, and classifying protein based on their fold allows to understand their functional and structural relationships</li>
+<li>Topology schemes are useful for identifing the fold of a protein</li>
+<li>We can represent the topology of a protein by drawing its secondary structure as a flat diagram</li>
+<li>Structural classification DBs are SCOP and CATH/Gene3D</li>
+<li>It seems that we have discovered all fold types
+<ul>
+<li>No new folds have been reported in SCOP and CATH since 2010</li>
+</ul></li>
+<li>SCOP in itself is dead, but its legacy has been taken by SCOPe
+<ul>
+<li>The first level classification is alpha, alpha/beta, alpha+beta, all beta, small proteins</li>
+<li>The classification is class&gt;fold&gt;superfamily&gt;family&gt;sequence</li>
+</ul></li>
+<li>SCOP2 is a different DB, made from the same people that made SCOP, that uses a different classification system based on networks</li>
+<li>CATH classifies structures from the PDB while Gene3D predicts the location of functional domains in available sequences (Uniprot) using informations from CATH
+<ul>
+<li>The first level classification is Mainly alpha - Alpha-beta - Mainly beta</li>
+<li>The classification is class&gt;architecture&gt;topology or fold&gt;homologous superfamily&gt;sequence family</li>
+</ul></li>
+<li>ECOD is another DB that claims to classify many more domains than CATH and SCOP (it makes a finer classification)
+<ul>
+<li>Its classification is based on evolutionary relationships</li>
+<li>It is a newcomer, we will see how it will go</li>
+</ul></li>
+</ul>
+<h1 id="x-ray-crystallography">X-ray crystallography</h1>
+<ul>
+<li>Bragg’s law: <eq env="math">2 d \sin \theta = n \lambda</eq>
+<ul>
+<li><eq env="math">2 d \sin \theta</eq> is the excess distance traveled by light when hitting a diffraction plane with distance d with an incidence angle <eq env="math">\theta</eq></li>
+<li><eq env="math">n \lambda</eq> is an integer number of wavelenghts</li>
+<li>If the additional distance traveled is an integer number of wavelengts, I have constructive interference and therefore a signal</li>
+<li>The diffracted beam is deviated by <eq env="math">2 \theta</eq> from the incident beam</li>
+</ul></li>
+<li>The distance of a diffraction spot r from the expected incidence point of the primary beam on a detection screen placed at distance A from the crystal is <eq env="math">A \tan 2 \theta</eq></li>
+<li>The phase of a wave is the distance of the first crest from a reference point</li>
+<li>Sychrotron produce X-rays with really high brillance, so I have an high signal-to-noise ratio
+<ul>
+<li>They allow to use smaller crystals</li>
+</ul></li>
+<li>The inverse Fourier transform is equivalent to passing the radiation through a lens
+<ul>
+<li>It does a Fourier synthesis</li>
+<li>We do not have materials that can focus X-rays</li>
+</ul></li>
+<li>The X-rays are scattered by the electron cloud and never reach the nuclei, this is why we get electron densities</li>
+<li>We use crystals instead of single molecules because it amplifies the signal and reduces the noise</li>
+<li>The reciprocal space of a Fourier transform is a graph were each frequency is reported with a corresponding amplitude
+<ul>
+<li>I always get pairs of frequencies, for example 3 and -3, because I cannot discriminate the direction of a wave</li>
+</ul></li>
+<li>A 2d wave can be represented in the reciprocal space as points on the plane, were the combinations of x and y frequency is represented</li>
+<li>The coordinates in the reciprocal space are called h and k</li>
+<li>When I sum more 2d waves, in the reciprocal space I just put all the points deriving from them together</li>
+<li>The phase of the different frequencies refers to how they allign toghether</li>
+<li>If I apply a low-pass filter to the reciprocal space, I get back a less detailed image
+<ul>
+<li>High frequencies are responsible for fine details</li>
+</ul></li>
+<li>On the opposite, with an high-pass filter I get only the details but not the bulk image</li>
+<li>From a 3d Fourier transfor I get a 3d reciprocal space with coordinates hkl</li>
+<li>From rotating the crystal, I get a series of 2d images that allow to reconstruct the 3d reciprocal space</li>
+<li>The unit cell is the minimal translational repeating unit</li>
+<li>The asymmetric unit is the minimal rotational and translational repeating unit</li>
+<li>The unit cell can be organized as 1 of the 14 possible 3-dimensional Bravais lattices</li>
+<li>The space groups refers to the rotational simmetries of the unit cell
+<ul>
+<li>It is important for the crystallographer because they determine the rotations that I have to apply to my crystal during data collection</li>
+</ul></li>
+<li>The space group is represented as <eq env="math">P2_1 2_1 2_1</eq>
+<ul>
+<li>P is the Bravais lattice</li>
+<li>The numbers refer to the rotational simmetry axes
+<ul>
+<li>2 means 180°, 3 means 120°, means 90°</li>
+</ul></li>
+<li>The subscript refers to the screw axis
+<ul>
+<li>1 means a traslation of 1 unit cell along the rotation axis</li>
+</ul></li>
+</ul></li>
+<li>The phase of the diffracted beams cannot be recovered from the diffraction map only</li>
+<li>In multiple isomorphous replacement (MIR) the crystal is immersed in an heavy atom solution, or an heavy atom is co-crystallized with the sample?
+<ul>
+<li>The addition of the heavy atom should not alter the space group (should be isomorphous)</li>
+<li>The diffraction maps are collected both with and without the heavy atoms</li>
+<li>This allows to recover the phases</li>
+<li>At least 2 isomorphus derivatives must be used to determine univocally the phases</li>
+</ul></li>
+<li>In multiwavelenght anomalous dispersion (MAD) the X-ray fluorescence of atoms is used to recover the phases
+<ul>
+<li>Since X-ray fluorescence requires really specific wavelenghts, it can only be done in synchrotrons</li>
+<li>The re-emitted ray has a predictable phase-shift that allows to recover the phases</li>
+</ul></li>
+<li>In molecular replacement (MR) heavy atoms are integrated in the structure of the protein
+<ul>
+<li>Selenocysteine is usually used in place of cystein</li>
+</ul></li>
+<li>The R factor is the ration between the difference between the observed and calculated electron density and the observed electron density</li>
+<li>R-free is calculated in the same way but uses a subset of data not included in the iterative optimization
+<ul>
+<li>It avoids overfitting</li>
+</ul></li>
+</ul>
+<h1 id="nmr">NMR</h1>
+<ul>
+<li>It uses the same principle as MRI
+<ul>
+<li>A collection of nuclei is distributed on various energy levels dependting on their orientation relative to the magnetic field applied</li>
+<li>Radiofrequency is applied and the nuclei are excited</li>
+<li>The nuclei relaxate by releasing energy to the environment (spin-lattice relaxation) or to other nuclei (spin-spin)</li>
+<li>The relaxation time depends on the molecular environment and produces a signal</li>
+</ul></li>
+<li>It requires the use of cryomagnet, made of superconductive materials kept at 4K</li>
+<li>The frequencency of a magnet (es. 600 Hz) refers to the frequency of oscillation of a proton in the field it generates
+<ul>
+<li>It is a way to express field strenght</li>
+<li>Higher field strenght traslates to higher oscillation frequency</li>
+</ul></li>
+<li>Proteins are in solution, and need to be in high concentration
+<ul>
+<li>It cannot be used for membrane proteins</li>
+<li>Also soluble proteins tend to precipitate in high concentration</li>
+</ul></li>
+<li>It cannot be used for big proteins (&gt;80kDa)
+<ul>
+<li>Big proteins require big magnets</li>
+</ul></li>
+<li>It allows to determine also the structure of mobile regions
+<ul>
+<li>This is also used for studying protein folding</li>
+</ul></li>
+<li>1D and homonuclear 2D NMR allows to reach up to 10 kDa</li>
+<li>Heteronuclear NMR (with C13, N15, H2) allows the determination of bigger proteins</li>
+<li>NMR structures dominate the PDB for small proteins</li>
+<li>The wavelength used is on the microwave range</li>
+<li>The conditions in which it is performed are more similar to those encountered in vivo</li>
+<li>The wavelenght is on the microwave spectrum</li>
+<li>In 1D NMR the relaxiation signals are averaged and then the Fourier transform is applied
+<ul>
+<li>This allows to recover the typical frequency of each group</li>
+</ul></li>
+<li>Chemical shift is the variation in magnetic proprieties of nuclei due to their electronic environment
+<ul>
+<li>The proton of an alifatic compound has a different spectrum than that of an hydrophilic environment</li>
+</ul></li>
+<li>Scalar coupling is the transfer of magnetization among nuclei through chemical bonds
+<ul>
+<li>It is measured by COESY spectra</li>
+<li>It works up to 3 bonds apart</li>
+<li>If I see a signal between 2 nuclei, I know that they are at most 3 bonds apart</li>
+</ul></li>
+<li>Dipolar coupling is the interaction of nuclei across space
+<ul>
+<li>It is measured by NOESY</li>
+<li>It gives constraints about distance between nuclei</li>
+</ul></li>
+<li>All these information gives us restraints on dihedral angles, distances</li>
+<li>Structures are determined via simulated annelaing
+<ul>
+<li>I start with a random model</li>
+<li>I try to optimize the restraints and iterate</li>
+</ul></li>
+<li>Since I do simulated annealing, I get different models for each random starting model
+<ul>
+<li>The models are collected in a bundle in the PDB file</li>
+</ul></li>
+<li>Model variability can suggest flexibility or uncertainty</li>
+<li>The dynamics of individual atoms can be checked by specific NMR experiments</li>
+<li>An NMR structure is an average of many models</li>
+<li>Sometimes also the single models in the bundle are deposited</li>
+</ul>
+<h1 id="cryoem">CryoEM</h1>
+<ul>
+<li>The resolution has increased enormusly in the last 20 years
+<ul>
+<li>We went from 25 <eq env="math">\AA</eq> in 2005 to 2 <eq env="math">\AA</eq> in 2015</li>
+</ul></li>
+<li>Lenses for an electron beam are electromagnets</li>
+<li>What allowed a great increase in resolution is cooling the sample, so that it does not get damaged by the electron beam</li>
+<li>We started also to use very low intensity of the beam in order to avoid damage, but this lowers the signal quality
+<ul>
+<li>In order to increase quality we take many images and average them</li>
+</ul></li>
+<li>The cooling is done very fast so that water solidifies in an amorphus form</li>
+<li>The microscope sees many different molecules, all oriented randomly</li>
+<li>An algorithm clusters the images by orientation and averages the ones in the same orientation and conformation, so to increase quality</li>
+<li>From the averaged images, I can obtrain a 3d structure</li>
+<li>In the last years a series of small improvements incresed significantly resolution</li>
+<li>CryoEM gives you an electron density (!)</li>
+<li>Size does not matter (!)</li>
+</ul>
+<h1 id="pdb-file">PDB file</h1>
+<ul>
+<li>The B factor is the mean square deviation of the position, so it is measured in <eq env="math">\AA^2</eq></li>
+<li>There are several parsing tools for PDB files</li>
+<li>Now data are deposited also in xml format</li>
+<li>RSR (real space R value) measures the fit between a residue and the data</li>
+<li>RSRZ is a normalized RSR relative to residue type and resolution
+<ul>
+<li>If RSRZ is &gt;2 we have an outlier</li>
+</ul></li>
+<li>The clashscore refers to atoms bumping into each other
+<ul>
+<li>I have a clash when 2 atoms are closer that the sum of Van der Waals radii plus a margin</li>
+</ul></li>
+<li>The RSR-Z (real space r value)</li>
+<li>Poor ranking does not necessarily mean bad quality!</li>
+</ul>
+<h1 id="chimera">Chimera</h1>
+<ul>
+<li>To select a residue I use <code>select #model:residue@atomtype</code></li>
+<li>There is no need to put and among atoms</li>
+<li>To put more that 1 condition, I put &amp;</li>
+<li>Not is done with ~</li>
+</ul>
+<h1 id="ncbi">NCBI</h1>
+<ul>
+<li>It is the major bioinformatics hub in the US</li>
+<li>It resides in Bethesda, MD</li>
+<li>It is part of the NIH (National Institute of Health)</li>
+<li>There is much training material on NCBI, such as books and tutorials</li>
+<li>From the homepage, I can perform a search on all the NCBI databases
+<ul>
+<li>I get a page that redirects me to results in the different databases</li>
+</ul></li>
+<li>Genbank is the analogue of the ENA (european nucleotide archive)
+<ul>
+<li>It is a database of genetic sequences</li>
+<li>The annotation is provided by the sibmitter of data</li>
+<li>It collects a huge amount of information</li>
+</ul></li>
+<li>NCBI, EBI and DDBJ formed a consortium called INSDC (international nucleotide sequence database collaboration)
+<ul>
+<li>They exchange data daily</li>
+<li>Genbank is the most commonly used portal</li>
+</ul></li>
+<li>Genbank is not a database, but a portal containing many databases
+<ul>
+<li>Sequences are not annotated and only updated by submitters</li>
+</ul></li>
+<li>Sequences are reported with the Genbank flatfile
+<ul>
+<li>There is an accession number, which is unique</li>
+<li>A version for the record</li>
+<li>The GI code is the old accession number format, but it is still present in old entries
+<ul>
+<li>New entries do not have it!</li>
+</ul></li>
+<li>There is a features section
+<ul>
+<li>It specifies source organism, coding sequences (CDS), protein ID</li>
+<li>The protein ID entry contains an in silico translation of the CDS</li>
+</ul></li>
+<li>The property section collets various properties like source database</li>
+</ul></li>
+<li>Genebank is organized in 12 traditional divisions and bulk divisions
+<ul>
+<li>The traditional divisions collect different groups of source organisms and they tend to be well annotated</li>
+<li>The bulk divisions collect data like EST (expressed sequence tags), and they are less accurate</li>
+</ul></li>
+<li>Refseq is a collection of reference sequences
+<ul>
+<li>It is non redundant and contains genomic DNA, mRNA, proteins</li>
+<li>Entry from Genbank are reviewed and then migrated to Refseq</li>
+<li>It is like SwissProt for TrEMBL</li>
+<li>Refseq cannot be searched directly, its entries are inside nucleotide, gene, protein</li>
+</ul></li>
+<li>NCBI is a bit of a mess for how it is organized, there are collection, databases, things are not so intuitive</li>
+<li>Accession number prefixes in Refseq are widely used also in other databases
+<ul>
+<li>NM_123456 means mRNA</li>
+<li>NP_123456 means protein</li>
+<li>NR_123456 means non coding</li>
+<li>NW_123456 is a genome</li>
+<li>XP, XM, XT means the predicted counterpart of NP, NM, NR</li>
+</ul></li>
+<li>Refseq curation is carachterized by status codes: provisional, validated, reviewed</li>
+<li>Gene</li>
+<li>OMIM is a db of disease genes or diseases
+<ul>
+<li>It is the reference database on the topic</li>
+</ul></li>
+<li>dbSNP contains mainly SNPs but also short indels
+<ul>
+<li>The official name has changed but the acronym was retained</li>
+<li>Single SNPs have an ss# accession</li>
+<li>Identical ss# entries are reviewed and consolidated in one rs# entry* BLAST is also hosted in NCBI</li>
+<li>There is BLASTp, BLASTn, BLASTx, psiBLAST,</li>
+<li>psiBLAST uses a position-specific scoring matrix
+<ul>
+<li>This derives from a first MSA generated from a normal BLAST</li>
+</ul></li>
+</ul></li>
+</ul>
+<h1 id="hmmer">HMMER</h1>
+<ul>
+<li>It is an implementation of HMM algorithms for the search of distant homologs It is an alternative of psiBLAST</li>
+<li>It was slow, but now it is almost as fast as BLAST</li>
+</ul>
+<h1 id="ensemble">Ensemble</h1>
+<ul>
+<li>The annotation is first performed automatically for the whole genome (hence the name Ensemble)</li>
+<li>Manual annotation thorugh VEGA and Havana
+<ul>
+<li>These projects focus solely on vertebrate model organisms</li>
+</ul></li>
+<li>Gold color is for when Havana and Ensembl agree on a transcript</li>
+<li>Red transcript can be from only Havana, or only Ensembl
+<ul>
+<li>Their number starts with 20_ for Ensembl and 00_ for Havana</li>
+</ul></li>
+<li>Blue refers to non-conding transcripts
+<ul>
+<li>They are only Havana, we do not have tools to detect them automatically (!)</li>
+</ul></li>
+<li>Green is for genes in the Consensus CDS protein set (CCDS)
+<ul>
+<li>It means that the gene is consistently predicted by NCBI, EBI, UCSC, Sanger</li>
+</ul></li>
+<li>Genese in the forward strand are shown above the contig, genes in the reverse strand are below it</li>
+</ul>

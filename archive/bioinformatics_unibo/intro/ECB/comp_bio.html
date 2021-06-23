@@ -1,0 +1,1060 @@
+<h1 id="introduction-and-topics">Introduction and topics</h1>
+<ul>
+<li>Linear algebra is one of the main topics for developing algorithms</li>
+<li>Biology ha a high level of noise in its data</li>
+<li>I should know the formula of binomial and normal distribution</li>
+<li>We will study tests like T-Student, ANOVA</li>
+<li>Slides: ww.biocomp.unibo.it/gigi/2019-2020/ECB</li>
+</ul>
+<h1 id="linear-algebra">Linear algebra</h1>
+<h2 id="vectors">Vectors</h2>
+<ul>
+<li>Given a reference system, a vector is represented by its components on the axes</li>
+<li>The span of n vectors is the set of all possible vectors that you can represent by their linear combinations</li>
+<li>If a vector can be expressed as a linear combination of another, it is said to be linear dependent from it</li>
+<li>The basis of a vector space is a set of linearly independent vectors that span the full space</li>
+<li> <img class="inlinemath" src="eqn000.png" WIDTH=51 HEIGHT=16 STYLE="vertical-align: -1px; margin: 0;" alt="\vec{x} \in \mathbb{R}^n" /> means x is a real vector in an n-dimensional space</li><li> <img class="inlinemath" src="eqn001.png" WIDTH=51 HEIGHT=16 STYLE="vertical-align: -1px; margin: 0;" alt="\vec{x} \in \mathbb{C}^n" /> means x is a complex vector in an n-dimensional space</li><li>Sum of vectors is done by summing their components or graphically with the parallelogram rule
+<ul>
+<li> <img class="inlinemath" src="eqn002.png" WIDTH=285 HEIGHT=23 STYLE="vertical-align: -4px; margin: 0;" alt="\vec{c} = \vec{a} + \vec{b} \implies c_i = a_i + b_i \:\: \forall \:\: i = 1 \to n" /></li><li>Difference is the same concept</li>
+<li> <img class="inlinemath" src="eqn003.png" WIDTH=145 HEIGHT=20 STYLE="vertical-align: -3px; margin: 0;" alt="\forall \: \vec{v} \:\:\exists \:\: \vec{0} \: : \: \vec{v} + \vec{0} = \vec{v}" /></li><li>You can only sum vectors in the same vector space</li>
+</ul></li>
+<li>The norm of a vector  <img class="inlinemath" src="eqn004.png" WIDTH=28 HEIGHT=20 STYLE="vertical-align: -5px; margin: 0;" alt="||\vec{v}||" /> is its length<ul>
+<li>Can be computed with the pitagorean theorem  <img class="inlinemath" src="eqn005.png" WIDTH=123 HEIGHT=24 STYLE="vertical-align: -7px; margin: 0;" alt="||\vec{v}||=\sqrt{\sum_{i=1}^{n}{v_i^2}}" /></li><li>The norm of the sum is less or equal to the sum of the norm of the components
+<ul>
+<li>This follows from the geometry of a triangle</li>
+</ul></li>
+<li>The scalar product of a norm is the norm of the scalar product
+<ul>
+<li> <img class="inlinemath" src="eqn006.png" WIDTH=96 HEIGHT=20 STYLE="vertical-align: -5px; margin: 0;" alt="\lambda ||\vec{v}||=||\lambda \vec{v}||" /></li></ul></li>
+</ul></li>
+<li>The distance between points in space is the norm of the difference between the vectors defining the points
+<ul>
+<li> <img class="inlinemath" src="eqn007.png" WIDTH=121 HEIGHT=24 STYLE="vertical-align: -5px; margin: 0;" alt="d(a,b)=||\vec{a}-\vec{b}||" /></li></ul></li>
+<li>Scalar multiplication
+<ul>
+<li> <img class="inlinemath" src="eqn008.png" WIDTH=150 HEIGHT=19 STYLE="vertical-align: -4px; margin: 0;" alt="\vec{c} = \lambda \vec{a} \implies c_i = a_i \lambda" /></li><li>A scalar multiplication of a sum is the sum of the scalar multiplications of the components</li>
+</ul></li>
+<li>Dot product, also called scalar or inner product
+<ul>
+<li>You can use the notation  <img class="inlinemath" src="eqn009.png" WIDTH=73 HEIGHT=17 STYLE="vertical-align: -4px; margin: 0;" alt="&lt;A,B&gt;" /></li><li>It is used in physics to calculate work</li>
+<li> <img class="inlinemath" src="eqn010.png" WIDTH=260 HEIGHT=24 STYLE="vertical-align: -5px; margin: 0;" alt="\vec{w}=||\vec{F}||*||\vec{s}||*cos{\theta}=\sum_{i=1}^{n}{F_i*s_i}" /></li><li>It is a number, complex or real depending on the vectors (!)</li>
+<li>It is commutative and distributive</li>
+<li> <img class="inlinemath" src="eqn011.png" WIDTH=118 HEIGHT=21 STYLE="vertical-align: -5px; margin: 0;" alt="&lt;x,x&gt; = ||\vec{x}||^2" /></li><li>It is positive when the angle is acute</li>
+<li>No cancellation rule
+<ul>
+<li> <img class="inlinemath" src="eqn012.png" WIDTH=241 HEIGHT=23 STYLE="vertical-align: -4px; margin: 0;" alt="&lt;A,B&gt;=&lt;A,C&gt; \: \: \not\!\!\!\implies \vec{B}=\vec{C}" /></li></ul></li>
+</ul></li>
+<li>Angle between vectors
+<ul>
+<li>Can be calculated inverting the dot product</li>
+</ul></li>
+<li>A line passing through the origin can be defined as the set of points orthogonal to a vector  <img class="inlinemath" src="eqn013.png" WIDTH=15 HEIGHT=16 STYLE="vertical-align: -1px; margin: 0;" alt="\vec{w}" /> <ul>
+<li> <img class="inlinemath" src="eqn014.png" WIDTH=120 HEIGHT=17 STYLE="vertical-align: -4px; margin: 0;" alt="w_1x_1+w_2x_2=0" /></li><li>In higher dimensions this describes an hyperplane (an n-1 dimensional object)</li>
+</ul></li>
+<li>All the point on a hyperplane have the same projection on its defining vector  <img class="inlinemath" src="eqn013.png" WIDTH=15 HEIGHT=16 STYLE="vertical-align: -1px; margin: 0;" alt="\vec{w}" /> <ul>
+<li>The projection p of  <img class="inlinemath" src="eqn015.png" WIDTH=13 HEIGHT=16 STYLE="vertical-align: -1px; margin: 0;" alt="\vec{x}" /> on  <img class="inlinemath" src="eqn013.png" WIDTH=15 HEIGHT=16 STYLE="vertical-align: -1px; margin: 0;" alt="\vec{w}" /> is calculated as  <img class="inlinemath" src="eqn016.png" WIDTH=57 HEIGHT=16 STYLE="vertical-align: -1px; margin: 0;" alt="\vec{x}*cos\theta" /></li><li>An hyperplane is therefore an object subjected to the constraint  <img class="inlinemath" src="eqn017.png" WIDTH=88 HEIGHT=19 STYLE="vertical-align: -4px; margin: 0;" alt="\vec{x}*cos\theta=p" /></li><li>Given that  <img class="inlinemath" src="eqn018.png" WIDTH=207 HEIGHT=20 STYLE="vertical-align: -5px; margin: 0;" alt="&lt;\vec{x},\vec{w}&gt;=||\vec{x}||*||\vec{w}||*cos \theta" /> we have that  <img class="inlinemath" src="eqn019.png" WIDTH=71 HEIGHT=27 STYLE="vertical-align: -10px; margin: 0;" alt="p=\frac{&lt;\vec{x},\vec{w}&gt;}{||\vec{w}||}" /></li><li>If p&gt;0 the hyperplane is in the direction of  <img class="inlinemath" src="eqn013.png" WIDTH=15 HEIGHT=16 STYLE="vertical-align: -1px; margin: 0;" alt="\vec{w}" />, if it is negative it is in the opposite direction</li><li>Defining  <img class="inlinemath" src="eqn020.png" WIDTH=68 HEIGHT=24 STYLE="vertical-align: -10px; margin: 0;" alt="b=-\frac{p}{||\vec{w}||}" /> we have the canonical equation for the hyperplane<ul>
+<li> <img class="inlinemath" src="eqn021.png" WIDTH=147 HEIGHT=19 STYLE="vertical-align: -4px; margin: 0;" alt="w_1x_1+w_2x_2+b=0" /> in 2 dimensions</li><li> <img class="inlinemath" src="eqn022.png" WIDTH=210 HEIGHT=19 STYLE="vertical-align: -4px; margin: 0;" alt="&lt;\vec{w},\vec{x}&gt;+b=W^tX+b=0" /> in n dimensions</li></ul></li>
+<li>An hyperplane is useful for subdividing space</li>
+</ul></li>
+<li>2 hyperplanes are parallel if their are defined by the same vector  <img class="inlinemath" src="eqn013.png" WIDTH=15 HEIGHT=16 STYLE="vertical-align: -1px; margin: 0;" alt="\vec{w}" /> allowing for a scaling factor  <img class="inlinemath" src="eqn023.png" WIDTH=11 HEIGHT=16 STYLE="vertical-align: -1px; margin: 0;" alt="\lambda" /> <ul>
+<li> <img class="inlinemath" src="eqn024.png" WIDTH=180 HEIGHT=19 STYLE="vertical-align: -4px; margin: 0;" alt="&lt;Y,W&gt;=\lambda&lt;X,W&gt;" /></li></ul></li>
+<li>The distance between parallel hyperplanes is computed as the difference of their projections on  <img class="inlinemath" src="eqn013.png" WIDTH=15 HEIGHT=16 STYLE="vertical-align: -1px; margin: 0;" alt="\vec{w}" /> <ul>
+<li> <img class="inlinemath" src="eqn025.png" WIDTH=186 HEIGHT=28 STYLE="vertical-align: -10px; margin: 0;" alt="d(X,Y)=p_y-p_x=\frac{b_x-b_y}{||W||}" /></li></ul></li>
+<li>The distance of a point A from a hyperplane is the projection of the point on the defining vector  <img class="inlinemath" src="eqn013.png" WIDTH=15 HEIGHT=16 STYLE="vertical-align: -1px; margin: 0;" alt="\vec{w}" />, minus the projection of the hyperplane on the same vector<ul>
+<li> <img class="inlinemath" src="eqn026.png" WIDTH=217 HEIGHT=27 STYLE="vertical-align: -10px; margin: 0;" alt="D(A,X)=p_a-p_x=\frac{&lt;A,W&gt;+b}{||W||}" /></li></ul></li>
+<li>Hyperplanes are useful for the separation of classes of data</li>
+<li>Every column of a matrix can be thought of as a vector
+<ul>
+<li>To make the dot product of 2 vectors using matrices you can multiply one vector for the transpose of the second</li>
+<li> <img class="inlinemath" src="eqn027.png" WIDTH=127 HEIGHT=23 STYLE="vertical-align: -4px; margin: 0;" alt="&lt;\vec{a}, \vec{b}&gt;=A*B^t" /></li></ul></li>
+</ul>
+<h2 id="matrices">Matrices</h2>
+<ul>
+<li>A matrix is an array of numbers arranged in a rectangular structure</li>
+<li>The columns of a matrix are the coordinates where the basis vectors land after the transformation</li>
+<li>It has m rows and n columns, it is represented as  <img class="inlinemath" src="eqn028.png" WIDTH=70 HEIGHT=14 STYLE="vertical-align: -1px; margin: 0;" alt="A\in \mathbb{R}^{m*n}" /> <ul>
+<li> <img class="inlinemath" src="eqn029.png" WIDTH=313 HEIGHT=82 STYLE="vertical-align: -36px; margin: 0;" alt="A=\begin{pmatrix}a_{11}&amp;a_{12}&amp;...&amp;a_{1n}\\a_{21}&amp;a_{22}&amp;...&amp;a_{2n}\\...&amp;...&amp;...&amp;...\\a_{m1}&amp;a,_{m2}&amp;...&amp;a_{mn}\end{pmatrix}" /></li><li>The single  <img class="inlinemath" src="eqn030.png" WIDTH=20 HEIGHT=14 STYLE="vertical-align: -5px; margin: 0;" alt="a_{ij}" /> numbers are called elements</li><li>The index of an element is always mn, meaning first row and then column</li>
+</ul></li>
+<li>If n=1, the matrix is called column matrix, which is a vector</li>
+<li>If m=1, the matrix is a row matrix</li>
+<li>A and B are equal if they have the same dimensions and they are equal element by element
+<ul>
+<li> <img class="inlinemath" src="eqn031.png" WIDTH=162 HEIGHT=20 STYLE="vertical-align: -5px; margin: 0;" alt="A=B\: \iff \: a_{ij}=b_{ij}" /></li></ul></li>
+<li>The 0 matrix contains all 0 elements and does not change the matrix it is added to</li>
+<li>The sum is defined as the sum of the respective elements
+<ul>
+<li>We can sum only matrices of the same dimensions, they are said to be conformable for addition</li>
+<li> <img class="inlinemath" src="eqn032.png" WIDTH=232 HEIGHT=20 STYLE="vertical-align: -5px; margin: 0;" alt="C=B+A\: \iff \:c_{ij}=b_{ij}+a_{ij}" /></li><li>The difference operates in the same way</li>
+</ul></li>
+<li>Scalar multiplication is performed multiplying all the elements of the matrix for the scalar
+<ul>
+<li> <img class="inlinemath" src="eqn033.png" WIDTH=59 HEIGHT=16 STYLE="vertical-align: -1px; margin: 0;" alt="C=\lambda A" /> implies  <img class="inlinemath" src="eqn034.png" WIDTH=68 HEIGHT=20 STYLE="vertical-align: -5px; margin: 0;" alt="c_{ij}=\lambda a_{ij}" /></li></ul></li>
+<li>The negative of A is -A, defined as  <img class="inlinemath" src="eqn035.png" WIDTH=59 HEIGHT=16 STYLE="vertical-align: -3px; margin: 0;" alt="-1*A" /> <ul>
+<li> <img class="inlinemath" src="eqn036.png" WIDTH=77 HEIGHT=16 STYLE="vertical-align: -3px; margin: 0;" alt="A-A=0" /></li></ul></li>
+<li>Matrix addition and scalar multiplication are commutative, associative and distributive</li>
+<li>Matrix product is an operation that is defined only if the number of columns of the first matrix is equal to the number of rows of the second (the matrices are conformable for the product)
+<ul>
+<li>A is of dimensions  <img class="inlinemath" src="eqn037.png" WIDTH=41 HEIGHT=14 STYLE="vertical-align: -4px; margin: 0;" alt="m*p" /> and B of dimensions  <img class="inlinemath" src="eqn038.png" WIDTH=36 HEIGHT=14 STYLE="vertical-align: -4px; margin: 0;" alt="p*n" />, if  <img class="inlinemath" src="eqn039.png" WIDTH=78 HEIGHT=14 STYLE="vertical-align: -1px; margin: 0;" alt="C=A*B" /></li><li> <img class="inlinemath" src="eqn040.png" WIDTH=122 HEIGHT=20 STYLE="vertical-align: -5px; margin: 0;" alt="c_{ij}=\sum_{k=1}^{p}a_{ik}b_{kj}" /></li><li> <img class="inlinemath" src="eqn039.png" WIDTH=78 HEIGHT=14 STYLE="vertical-align: -1px; margin: 0;" alt="C=A*B" /> can be computed as row by column product</li><li>It can be defined only if the number of columns in the first matrix is equal to the number of rows of the second
+<ul>
+<li> <img class="inlinemath" src="eqn041.png" WIDTH=166 HEIGHT=14 STYLE="vertical-align: -1px; margin: 0;" alt="R^{m*p}*R^{p*n}\implies R^{m*n}" /></li></ul></li>
+<li>The result is a matrix with the same number of rows as the first, and the same number of columns as the second</li>
+<li>The product between matrices is NOT commutative (!)</li>
+<li> <img class="inlinemath" src="eqn042.png" WIDTH=165 HEIGHT=20 STYLE="vertical-align: -5px; margin: 0;" alt="A(B+C)=AB+AC" /></li><li> <img class="inlinemath" src="eqn043.png" WIDTH=166 HEIGHT=20 STYLE="vertical-align: -5px; margin: 0;" alt="(A+B)C=AC+BC" /></li><li> <img class="inlinemath" src="eqn044.png" WIDTH=126 HEIGHT=20 STYLE="vertical-align: -5px; margin: 0;" alt="A(BC)=(AB)C" /></li><li>Be aware!
+<ul>
+<li>If  <img class="inlinemath" src="eqn045.png" WIDTH=58 HEIGHT=14 STYLE="vertical-align: -1px; margin: 0;" alt="AB=0" /> we can NOT conclude that B or C are 0</li><li>If  <img class="inlinemath" src="eqn046.png" WIDTH=74 HEIGHT=14 STYLE="vertical-align: -1px; margin: 0;" alt="AB=AC" /> we can NOT conclude that  <img class="inlinemath" src="eqn047.png" WIDTH=50 HEIGHT=14 STYLE="vertical-align: -1px; margin: 0;" alt="B=C" /></li></ul></li>
+</ul></li>
+<li>A square matrix has m=n</li>
+<li>An upper triangular matrix has all the elements below the diagonal equal to 0, and a lower triangular the ones above it</li>
+<li>A diagonal matrix has all the elements outside the diagonal equal to 0</li>
+<li>A diagonal matrix with all 1 elements is the identity matrix I
+<ul>
+<li>It does not change the square matrix it is multiplied to</li>
+<li>In this case,  <img class="inlinemath" src="eqn048.png" WIDTH=100 HEIGHT=14 STYLE="vertical-align: -1px; margin: 0;" alt="AI=IA=A" /></li></ul></li>
+<li>If AB=BA, A and B are said to commute
+<ul>
+<li>If A is a square matrix, it commutes with itself and with I</li>
+</ul></li>
+<li>If AB=-BA, A and B are said to anti-commute</li>
+<li>The transposition of a  <img class="inlinemath" src="eqn049.png" WIDTH=42 HEIGHT=12 STYLE="vertical-align: -1px; margin: 0;" alt="n*m" /> matrix is a  <img class="inlinemath" src="eqn050.png" WIDTH=42 HEIGHT=12 STYLE="vertical-align: -1px; margin: 0;" alt="m*n" /> matrix, called  <img class="inlinemath" src="eqn051.png" WIDTH=19 HEIGHT=16 STYLE="vertical-align: -1px; margin: 0;" alt="A^t" />, where  <img class="inlinemath" src="eqn052.png" WIDTH=82 HEIGHT=20 STYLE="vertical-align: -5px; margin: 0;" alt="[A^t]_{ij}=A_{ji}" /> <ul>
+<li>A and  <img class="inlinemath" src="eqn051.png" WIDTH=19 HEIGHT=16 STYLE="vertical-align: -1px; margin: 0;" alt="A^t" /> are always conformable to product, in both directions</li><li> <img class="inlinemath" src="eqn053.png" WIDTH=71 HEIGHT=20 STYLE="vertical-align: -5px; margin: 0;" alt="(A^t)^t=A" /></li></ul></li>
+<li>A square matrix is symmetric if  <img class="inlinemath" src="eqn054.png" WIDTH=53 HEIGHT=16 STYLE="vertical-align: -1px; margin: 0;" alt="A=A^t" />, antisymmetric (skew-symmetric) if  <img class="inlinemath" src="eqn055.png" WIDTH=66 HEIGHT=17 STYLE="vertical-align: -3px; margin: 0;" alt="A=-A^t" /> <ul>
+<li> <img class="inlinemath" src="eqn056.png" WIDTH=51 HEIGHT=17 STYLE="vertical-align: -3px; margin: 0;" alt="A+A^t" /> is always symmetric</li><li> <img class="inlinemath" src="eqn057.png" WIDTH=51 HEIGHT=17 STYLE="vertical-align: -3px; margin: 0;" alt="A-A^t" /> is always antisymmetric</li><li>An antisymmetric matrix has a 0 diagonal and antisymmetrical elements otherwise</li>
+</ul></li>
+<li>The inverse of a matrix A, called  <img class="inlinemath" src="eqn058.png" WIDTH=29 HEIGHT=17 STYLE="vertical-align: -1px; margin: 0;" alt="A^{-1}" />, is a matrix such that  <img class="inlinemath" src="eqn059.png" WIDTH=166 HEIGHT=17 STYLE="vertical-align: -1px; margin: 0;" alt="A*A^{-1}=A^{-1}*A=I" /> <ul>
+<li>It is defined only if  <img class="inlinemath" src="eqn060.png" WIDTH=79 HEIGHT=20 STYLE="vertical-align: -5px; margin: 0;" alt="det(A)\not=0" /></li></ul></li>
+<li>An orthogonal matrix has its inverse equal to the transpose,  <img class="inlinemath" src="eqn061.png" WIDTH=68 HEIGHT=17 STYLE="vertical-align: -1px; margin: 0;" alt="A^{-1}=A^t" /> <ul>
+<li>An orthogonal matrix describes a spatial rotation</li>
+<li>Therefore,  <img class="inlinemath" src="eqn062.png" WIDTH=113 HEIGHT=16 STYLE="vertical-align: -1px; margin: 0;" alt="AA^t=A^tA=I" /> <ul>
+<li>You can check for orthogonality by checking that  <img class="inlinemath" src="eqn063.png" WIDTH=78 HEIGHT=16 STYLE="vertical-align: -1px; margin: 0;" alt="A*A^t=I" /></li></ul></li>
+</ul></li>
+<li>Some properties of transpose and inverse matrices
+<ul>
+<li> <img class="inlinemath" src="eqn064.png" WIDTH=149 HEIGHT=21 STYLE="vertical-align: -5px; margin: 0;" alt="(AB)^{-1}=B^{-1}*A^{-1}" />, but only if  <img class="inlinemath" src="eqn065.png" WIDTH=55 HEIGHT=21 STYLE="vertical-align: -5px; margin: 0;" alt="(AB)^{-1}" /> exists(!)</li><li> <img class="inlinemath" src="eqn066.png" WIDTH=117 HEIGHT=20 STYLE="vertical-align: -5px; margin: 0;" alt="(AB)^t=B^t*A^t" /></li></ul></li>
+<li>It is possible to associate a number called determinant to any square matrix
+<ul>
+<li> <img class="inlinemath" src="eqn067.png" WIDTH=125 HEIGHT=20 STYLE="vertical-align: -5px; margin: 0;" alt="det(A)=|A|\in \mathbb{R}" /></li><li>For an order 2 square matrix, that is computed subtracting the product of the second diagonal to that of the first
+<ul>
+<li> <img class="inlinemath" src="eqn068.png" WIDTH=205 HEIGHT=20 STYLE="vertical-align: -5px; margin: 0;" alt="det(A)=a_{11}*a_{22}-a_{12}*a_{21}" /></li></ul></li>
+<li>It represents the area of the unit square after the transformation</li>
+<li>Its sign reflects the orientation of space
+<ul>
+<li>If it is negative, the transformation flips the axis</li>
+</ul></li>
+</ul></li>
+<li>The rank of a transformation is the dimensionality of its output space, called column space
+<ul>
+<li>The column space of a transformation is the span of the basis vectors defined by its columns</li>
+</ul></li>
+<li>Some proprieties of determinants
+<ul>
+<li>If an entire row or column is equal to 0, then the determinant of the matrix is 0</li>
+<li> <img class="inlinemath" src="eqn069.png" WIDTH=209 HEIGHT=20 STYLE="vertical-align: -5px; margin: 0;" alt="det(A*B)=det(A)*det(B)" /></li><li>The determinant of an orthogonal matrix is either 1 or -1</li>
+<li> <img class="inlinemath" src="eqn070.png" WIDTH=121 HEIGHT=20 STYLE="vertical-align: -5px; margin: 0;" alt="det(A)=det(A^t)" /></li></ul></li>
+<li>How to compute the inverse of 2*2 matrices
+<ul>
+<li>Given the definition  <img class="inlinemath" src="eqn071.png" WIDTH=88 HEIGHT=17 STYLE="vertical-align: -1px; margin: 0;" alt="A*A^{-1}=I" /> if  <img class="inlinemath" src="eqn060.png" WIDTH=79 HEIGHT=20 STYLE="vertical-align: -5px; margin: 0;" alt="det(A)\not=0" /></li><li>It follows  <img class="inlinemath" src="eqn072.png" WIDTH=233 HEIGHT=44 STYLE="vertical-align: -17px; margin: 0;" alt="A^{-1}=\frac{1}{det(A)} \begin{pmatrix}  a_{22} &amp; -a_{12}\\  -a_{21} &amp; a_{11}  \end{pmatrix}" /></li></ul></li>
+<li>A minor  <img class="inlinemath" src="eqn073.png" WIDTH=27 HEIGHT=19 STYLE="vertical-align: -5px; margin: 0;" alt="M_{ij}" /> of a matrix A is the determinant of any square submatrix of A</li><li>The cofactor of the element  <img class="inlinemath" src="eqn030.png" WIDTH=20 HEIGHT=14 STYLE="vertical-align: -5px; margin: 0;" alt="a_{ij}" /> is  <img class="inlinemath" src="eqn074.png" WIDTH=175 HEIGHT=21 STYLE="vertical-align: -5px; margin: 0;" alt="C_{ij}:C_{ij}=M_{ij}*(-1)^{i+j}" /></li><li>To compute the determinant of any matrix you pick any row or column and sum the product of any element in it for its cofactor
+<ul>
+<li>In a column  <img class="inlinemath" src="eqn075.png" WIDTH=148 HEIGHT=38 STYLE="vertical-align: -15px; margin: 0;" alt="det(A)=\sum\limits_{i=1}^n a_{ij}*C_{ij}" /></li><li>In a row  <img class="inlinemath" src="eqn076.png" WIDTH=149 HEIGHT=41 STYLE="vertical-align: -18px; margin: 0;" alt="det(A)=\sum\limits_{j=1}^n a_{ij}*C_{ij}" /></li><li>It is convenient to choose the row or column with most 0 for the computation</li>
+<li>If 2 rows are identical, det(A)=0</li>
+<li>If one row is 0, then det(A)=0</li>
+<li>If you exchange 2 rows, det(A’)=-det(A)</li>
+<li>The determinant of a triangular matrix is the product of the diagonal elements</li>
+<li>If B is obtained by multiplying every element in a row of A by  <img class="inlinemath" src="eqn023.png" WIDTH=11 HEIGHT=16 STYLE="vertical-align: -1px; margin: 0;" alt="\lambda" />,  <img class="inlinemath" src="eqn077.png" WIDTH=127 HEIGHT=20 STYLE="vertical-align: -5px; margin: 0;" alt="det(B)=\lambda det(A)" /></li><li>For any n*n square matrix,  <img class="inlinemath" src="eqn078.png" WIDTH=143 HEIGHT=20 STYLE="vertical-align: -5px; margin: 0;" alt="det(\lambda A)=\lambda^n det(A)" /></li><li>If A and B are of the same order,  <img class="inlinemath" src="eqn079.png" WIDTH=177 HEIGHT=20 STYLE="vertical-align: -5px; margin: 0;" alt="det(AB)=det(A)det(B)" /></li></ul></li>
+<li>The cofactor matrix of A, called  <img class="inlinemath" src="eqn080.png" WIDTH=20 HEIGHT=14 STYLE="vertical-align: -1px; margin: 0;" alt="A^c" />, is a matrix with each element equal to the cofactor of the same element in a<ul>
+<li> <img class="inlinemath" src="eqn081.png" WIDTH=95 HEIGHT=20 STYLE="vertical-align: -7px; margin: 0;" alt="A^c:a^c_{ij}=C_{ij}" /></li></ul></li>
+<li>The adjugate matrix of A is the transpose of its cofactor matrix
+<ul>
+<li> <img class="inlinemath" src="eqn082.png" WIDTH=78 HEIGHT=20 STYLE="vertical-align: -5px; margin: 0;" alt="A^a=(A^c)^t" /></li></ul></li>
+<li>The inverse matrix can be obtained by dividing the adjugate of a matrix for its determinant
+<ul>
+<li> <img class="inlinemath" src="eqn083.png" WIDTH=89 HEIGHT=26 STYLE="vertical-align: -10px; margin: 0;" alt="A^{-1}=\frac{1}{|A|}A^a" /></li></ul></li>
+<li>Matrices can represent systems of linear equations
+<ul>
+<li>The system  <img class="inlinemath" src="eqn084.png" WIDTH=94 HEIGHT=53 STYLE="vertical-align: -22px; margin: 0;" alt="\begin{cases}x+y=7\\3x-y=5\end{cases}" /> can be represented as  <img class="inlinemath" src="eqn085.png" WIDTH=199 HEIGHT=44 STYLE="vertical-align: -17px; margin: 0;" alt="\begin{pmatrix}1&amp;1\\3&amp;-1\end{pmatrix}\begin{pmatrix}x\\y\end{pmatrix}=\begin{pmatrix}7\\5\end{pmatrix}" /></li><li>The system has a solution if the coefficient matrix is invertible</li>
+</ul></li>
+</ul>
+<h2 id="linear-transformations">Linear transformations</h2>
+<ul>
+<li>A matrix can be thought of as a linear transformation of a vector space
+<ul>
+<li> <img class="inlinemath" src="eqn086.png" WIDTH=72 HEIGHT=14 STYLE="vertical-align: -1px; margin: 0;" alt="A^{m*n}:R^n" /> →  <img class="inlinemath" src="eqn087.png" WIDTH=25 HEIGHT=14 STYLE="vertical-align: -1px; margin: 0;" alt="R^m" /></li><li>A linear transformation is a transformation that preserves linearity and does not move the origin
+<ul>
+<li> <img class="inlinemath" src="eqn088.png" WIDTH=150 HEIGHT=20 STYLE="vertical-align: -5px; margin: 0;" alt="A(\vec{v}+\vec{u})=A\vec{v}+A\vec{u}" /> and  <img class="inlinemath" src="eqn089.png" WIDTH=99 HEIGHT=20 STYLE="vertical-align: -5px; margin: 0;" alt="A(\lambda\vec{v})=\lambda A\vec{v}" /></li></ul></li>
+</ul></li>
+<li>A rotation by an angle  <img class="inlinemath" src="eqn090.png" WIDTH=10 HEIGHT=16 STYLE="vertical-align: -1px; margin: 0;" alt="\theta" /> can be describe by the transformation<ul>
+<li> <img class="inlinemath" src="eqn091.png" WIDTH=189 HEIGHT=44 STYLE="vertical-align: -17px; margin: 0;" alt="A=\begin{pmatrix}\cos \theta&amp;-\sin \theta\\\sin \theta&amp;\cos \theta\end{pmatrix}" /></li></ul></li>
+<li>The inverse transformation takes a transformed vector and restores the original one
+<ul>
+<li>Sometimes it does not exist (!) when det(A)=0</li>
+</ul></li>
+<li>If det(A)=0 the transformation squishes space to a lower-dimensional vector space</li>
+<li>The composition of the transformations A followed by B is  <img class="inlinemath" src="eqn092.png" WIDTH=109 HEIGHT=19 STYLE="vertical-align: -4px; margin: 0;" alt="C=BA\not = AB" /></li><li>The scalar product of the transformation of a vector  <img class="inlinemath" src="eqn093.png" WIDTH=24 HEIGHT=16 STYLE="vertical-align: -1px; margin: 0;" alt="A\vec{v}" /> and the vector  <img class="inlinemath" src="eqn013.png" WIDTH=15 HEIGHT=16 STYLE="vertical-align: -1px; margin: 0;" alt="\vec{w}" /> is equal to the scalar product of the first vector with the second vector transformed by the transpose of A<ul>
+<li> <img class="inlinemath" src="eqn094.png" WIDTH=127 HEIGHT=16 STYLE="vertical-align: -1px; margin: 0;" alt="A\vec{v}*\vec{w}=\vec{v}*A^t\vec{w}" /></li></ul></li>
+<li>The null space of a transformation is the set of vectors that get squished to  <img class="inlinemath" src="eqn095.png" WIDTH=12 HEIGHT=19 STYLE="vertical-align: -1px; margin: 0;" alt="\vec{0}" /> by the transformation<ul>
+<li> <img class="inlinemath" src="eqn096.png" WIDTH=188 HEIGHT=24 STYLE="vertical-align: -5px; margin: 0;" alt="\vec{b}\in Null(A) \iff A\vec{b}=\vec{0}" /></li><li>A trivial null space is always  <img class="inlinemath" src="eqn095.png" WIDTH=12 HEIGHT=19 STYLE="vertical-align: -1px; margin: 0;" alt="\vec{0}" /> itself</li><li>There is a true null space only if  <img class="inlinemath" src="eqn097.png" WIDTH=79 HEIGHT=20 STYLE="vertical-align: -5px; margin: 0;" alt="det(A)=0" /></li><li>If  <img class="inlinemath" src="eqn060.png" WIDTH=79 HEIGHT=20 STYLE="vertical-align: -5px; margin: 0;" alt="det(A)\not=0" />, the only null space is  <img class="inlinemath" src="eqn095.png" WIDTH=12 HEIGHT=19 STYLE="vertical-align: -1px; margin: 0;" alt="\vec{0}" /> itself</li></ul></li>
+<li>The null space of a square matrix can be computed setting up a linear system of equations
+<ul>
+<li>For a matrix  <img class="inlinemath" src="eqn098.png" WIDTH=126 HEIGHT=44 STYLE="vertical-align: -17px; margin: 0;" alt="A=\begin{pmatrix}1&amp;2\\2&amp;4\end{pmatrix}" />,  <img class="inlinemath" src="eqn097.png" WIDTH=79 HEIGHT=20 STYLE="vertical-align: -5px; margin: 0;" alt="det(A)=0" /></li><li> <img class="inlinemath" src="eqn099.png" WIDTH=533 HEIGHT=94 STYLE="vertical-align: -20px; margin: 0;" alt="A\vec{b}=\vec{0} \implies \begin{pmatrix}1&amp;2\\2&amp;4\end{pmatrix} \begin{pmatrix}b_1\\b_2\end{pmatrix}=\begin{pmatrix}0\\0\end{pmatrix}\implies \begin{cases}b_1+2b_2=0\\2b_1+4b_2=0\end{cases} \implies b_1=-2b_2 \implies \vec{b}=\lambda \begin{pmatrix}-2\\1\end{pmatrix}" /></li></ul></li>
+</ul>
+<h2 id="eigenstuff">Eigenstuff</h2>
+<ul>
+<li>For the transformation A, if  <img class="inlinemath" src="eqn100.png" WIDTH=62 HEIGHT=20 STYLE="vertical-align: -1px; margin: 0;" alt="A\vec{b}=\lambda\vec{b}" />,  <img class="inlinemath" src="eqn101.png" WIDTH=11 HEIGHT=20 STYLE="vertical-align: -1px; margin: 0;" alt="\vec{b}" /> is an eigenvector of A and  <img class="inlinemath" src="eqn023.png" WIDTH=11 HEIGHT=16 STYLE="vertical-align: -1px; margin: 0;" alt="\lambda" /> is its eigenvalue<ul>
+<li>An eigenvector of a transformation is a vector that is only rescaled by the transformation</li>
+<li>An eigenvalue is the scaling factor to which the vector is subjected by the transformation</li>
+<li>The  <img class="inlinemath" src="eqn095.png" WIDTH=12 HEIGHT=19 STYLE="vertical-align: -1px; margin: 0;" alt="\vec{0}" /> vector can never be an eigenvector even though  <img class="inlinemath" src="eqn102.png" WIDTH=63 HEIGHT=19 STYLE="vertical-align: -1px; margin: 0;" alt="A\vec{0}=\lambda\vec{0}" /> is always true<ul>
+<li>On the contrary, it is possible that  <img class="inlinemath" src="eqn103.png" WIDTH=42 HEIGHT=16 STYLE="vertical-align: -1px; margin: 0;" alt="\lambda=0" /></li></ul></li>
+</ul></li>
+<li>How to find eigenvalues for the matrix A
+<ul>
+<li> <img class="inlinemath" src="eqn104.png" WIDTH=335 HEIGHT=24 STYLE="vertical-align: -5px; margin: 0;" alt="A\vec{b}=\lambda\vec{b} \implies A\vec{b}-\lambda\vec{b}=0 \implies (A-\lambda I)\vec{b}=0" /></li><li>This means that the eigenvectors  <img class="inlinemath" src="eqn101.png" WIDTH=11 HEIGHT=20 STYLE="vertical-align: -1px; margin: 0;" alt="\vec{b}" /> are the non-trivial null space of the transformation  <img class="inlinemath" src="eqn105.png" WIDTH=64 HEIGHT=20 STYLE="vertical-align: -5px; margin: 0;" alt="(A-\lambda I)" /></li><li>It is required that  <img class="inlinemath" src="eqn106.png" WIDTH=117 HEIGHT=20 STYLE="vertical-align: -5px; margin: 0;" alt="det(A-\lambda I)=0" />, otherwise there are no eigenvectors</li><li>The equation  <img class="inlinemath" src="eqn106.png" WIDTH=117 HEIGHT=20 STYLE="vertical-align: -5px; margin: 0;" alt="det(A-\lambda I)=0" /> is called characteristic equation of A and its root allows to recover the eigenvalues of the matrix</li></ul></li>
+<li>How to find the eigenvectors for the matrix A
+<ul>
+<li>Once I have the eigenvalues  <img class="inlinemath" src="eqn023.png" WIDTH=11 HEIGHT=16 STYLE="vertical-align: -1px; margin: 0;" alt="\lambda" />, the eigenvectors can be found by solving  <img class="inlinemath" src="eqn107.png" WIDTH=102 HEIGHT=24 STYLE="vertical-align: -5px; margin: 0;" alt="(A-\lambda I)\vec{b}=0" /> for  <img class="inlinemath" src="eqn101.png" WIDTH=11 HEIGHT=20 STYLE="vertical-align: -1px; margin: 0;" alt="\vec{b}" />, using all the  <img class="inlinemath" src="eqn023.png" WIDTH=11 HEIGHT=16 STYLE="vertical-align: -1px; margin: 0;" alt="\lambda" /></li></ul></li>
+<li>The number of eigenvalues and eigenvectors (families of linearly dependent eigenvectors) is equal to the dimensions of the vector space
+<ul>
+<li>I always have n families of eigenvectors in the vector space  <img class="inlinemath" src="eqn108.png" WIDTH=22 HEIGHT=14 STYLE="vertical-align: -1px; margin: 0;" alt="R^n" /></li><li>The families of eigenvectors are orthogonal to each other iff the transformation is symmetric</li>
+<li>They define a convenient reference frame, even if they are not orthogonal</li>
+<li>Each eigenvalue scales one of the families of eigenvectors, meaning that it stretches one of the dimensions of the new reference frame</li>
+</ul></li>
+<li>Note that in a triangular or diagonal matrix the diagonal elements are its eigenvalues</li>
+<li>The product of the eigenvalues is equal to the determinant of the matrix
+<ul>
+<li>A non-invertible matrix (also called singular matrix) has always at least a 0 eigenvalue</li>
+<li>The inverse matrix has reciprocal eigenvalues ( <img class="inlinemath" src="eqn109.png" WIDTH=11 HEIGHT=23 STYLE="vertical-align: -7px; margin: 0;" alt="\frac{1}{\lambda}" />)</li><li>The eigenvalue of kA is  <img class="inlinemath" src="eqn110.png" WIDTH=20 HEIGHT=16 STYLE="vertical-align: -1px; margin: 0;" alt="k\lambda" /></li><li>The eigenvalue of  <img class="inlinemath" src="eqn111.png" WIDTH=22 HEIGHT=14 STYLE="vertical-align: -1px; margin: 0;" alt="A^n" /> is  <img class="inlinemath" src="eqn112.png" WIDTH=19 HEIGHT=16 STYLE="vertical-align: -1px; margin: 0;" alt="\lambda^n" /></li><li>Transposition does not change the eigenvalues</li>
+</ul></li>
+<li>The sum of the eigenvalues is the trace of the matrix
+<ul>
+<li>The trace of a matrix is the sum of its diagonal elements</li>
+</ul></li>
+</ul>
+<h2 id="complex-field">Complex field</h2>
+<ul>
+<li>Sometimes there can be no real eigenvalues, but there are always solutions in the complex field
+<ul>
+<li>This happens when the characteristic equation of the matrix has  <img class="inlinemath" src="eqn113.png" WIDTH=46 HEIGHT=14 STYLE="vertical-align: -1px; margin: 0;" alt="\Delta&lt;0" /></li></ul></li>
+<li>A complex number z is written as  <img class="inlinemath" src="eqn114.png" WIDTH=74 HEIGHT=17 STYLE="vertical-align: -3px; margin: 0;" alt="z=a+ib" /> where  <img class="inlinemath" src="eqn115.png" WIDTH=65 HEIGHT=20 STYLE="vertical-align: -4px; margin: 0;" alt="i=\sqrt{-1}" /> <ul>
+<li>a is called real part</li>
+<li>b is called imaginary part</li>
+</ul></li>
+<li>The reference axis of a vector space are NOT necessarily orthogonal to each other (!)
+<ul>
+<li>But they must be linearly independent</li>
+</ul></li>
+</ul>
+<h2 id="change-of-basis-and-diagonalization">Change of basis and diagonalization</h2>
+<ul>
+<li>To go from one system to the other we need the representation of the old basis vectors in term of the new ones
+<ul>
+<li> <img class="inlinemath" src="eqn116.png" WIDTH=86 HEIGHT=21 STYLE="vertical-align: -4px; margin: 0;" alt="\hat{i}=a\hat{i'}+b\hat{j'}" /> and  <img class="inlinemath" src="eqn117.png" WIDTH=88 HEIGHT=21 STYLE="vertical-align: -4px; margin: 0;" alt="\hat{j}=a\hat{i'}+b\hat{j'}" /></li><li>If  <img class="inlinemath" src="eqn118.png" WIDTH=127 HEIGHT=44 STYLE="vertical-align: -17px; margin: 0;" alt="U=\begin{pmatrix}a&amp;c\\b&amp;d\end{pmatrix}" /> we have that  <img class="inlinemath" src="eqn119.png" WIDTH=59 HEIGHT=20 STYLE="vertical-align: -1px; margin: 0;" alt="\vec{v'}=U\vec{v}" /></li><li>It is possible to go back to the original system of reference using  <img class="inlinemath" src="eqn120.png" WIDTH=30 HEIGHT=17 STYLE="vertical-align: -1px; margin: 0;" alt="U^{-1}" /></li></ul></li>
+<li>If I want to use a system of which I know the coordinate of the basis vectors in term of my current basis vectors I need to use the inverse of the matrix containing these coordinates</li>
+<li>If a  <img class="inlinemath" src="eqn121.png" WIDTH=37 HEIGHT=12 STYLE="vertical-align: -1px; margin: 0;" alt="n*n" /> matrix A has n eigenvectors which are linearly independent, I can write the  <img class="inlinemath" src="eqn121.png" WIDTH=37 HEIGHT=12 STYLE="vertical-align: -1px; margin: 0;" alt="n*n" /> matrix U containing all the eigenvectors, and use it to convert to a new system of reference<ul>
+<li>The eigenvectors of A will be the new basis vectors</li>
+</ul></li>
+<li>I can compute A in the new reference frame forming  <img class="inlinemath" src="eqn122.png" WIDTH=89 HEIGHT=17 STYLE="vertical-align: -1px; margin: 0;" alt="\Lambda=U^{-1}AU" /> <ul>
+<li>Given a vector  <img class="inlinemath" src="eqn123.png" WIDTH=12 HEIGHT=16 STYLE="vertical-align: -1px; margin: 0;" alt="\vec{v}" />, I first convert it to the new reference frame where the eigenvectors are the basis vectors using U, then I apply A and finally I go back to the old system of reference using  <img class="inlinemath" src="eqn120.png" WIDTH=30 HEIGHT=17 STYLE="vertical-align: -1px; margin: 0;" alt="U^{-1}" /></li><li>This new matrix  <img class="inlinemath" src="eqn124.png" WIDTH=13 HEIGHT=14 STYLE="vertical-align: -1px; margin: 0;" alt="\Lambda" /> will be diagonal (!)</li><li>Each column will be made of one eigenvector multiplied by its eigenvalue</li>
+<li>It is good to choose normalized vectors for the change of basis, meaning that their norm should be 1
+<ul>
+<li>In this case  <img class="inlinemath" src="eqn125.png" WIDTH=79 HEIGHT=20 STYLE="vertical-align: -5px; margin: 0;" alt="det(U)=1" />, meaning that areas are preserved by the transformation</li></ul></li>
+</ul></li>
+<li>Why do I want to use eigenvectors as reference frames?
+<ul>
+<li>Because the components of any vector are only rescaled by the original transformation A in this reference frame</li>
+<li>This makes much easier to compute transformations</li>
+</ul></li>
+<li>If a matrix is symmetric ( <img class="inlinemath" src="eqn054.png" WIDTH=53 HEIGHT=16 STYLE="vertical-align: -1px; margin: 0;" alt="A=A^t" />) its eigenvalues are real and its eigenvectors are orthogonal<ul>
+<li>If the eigenvectors are normalized  <img class="inlinemath" src="eqn126.png" WIDTH=69 HEIGHT=17 STYLE="vertical-align: -1px; margin: 0;" alt="U^{-1}=U^t" />, therefore  <img class="inlinemath" src="eqn127.png" WIDTH=78 HEIGHT=16 STYLE="vertical-align: -1px; margin: 0;" alt="\Lambda=U^tAU" /></li></ul></li>
+<li>In the same way that a linear form can be represented as all the points orthogonal to a vector with a projection p onto it, a matrix can describe a quadratic form</li>
+</ul>
+<h2 id="quadratic-forms">Quadratic forms</h2>
+<ul>
+<li>A quadratic form is an equation in more than 1 variable were each term has a variable squared or multiplied to another variable
+<ul>
+<li>An example is  <img class="inlinemath" src="eqn128.png" WIDTH=143 HEIGHT=20 STYLE="vertical-align: -4px; margin: 0;" alt="ax^2+bxy+cy^2=0" /></li></ul></li>
+<li>This is represented as  <img class="inlinemath" src="eqn129.png" WIDTH=95 HEIGHT=17 STYLE="vertical-align: -3px; margin: 0;" alt="\vec{x}^tA\vec{x}+b=0" />, where  <img class="inlinemath" src="eqn015.png" WIDTH=13 HEIGHT=16 STYLE="vertical-align: -1px; margin: 0;" alt="\vec{x}" /> is the vector containing the variables, and A is a matrix of coefficients<ul>
+<li>The vector is multiplied 2 times to reflect the fact that the expression is quadratic</li>
+<li>The second time the transpose is used in order to allow the product</li>
+</ul></li>
+<li>By rescaling A, we can obtain the standard form  <img class="inlinemath" src="eqn130.png" WIDTH=67 HEIGHT=16 STYLE="vertical-align: -1px; margin: 0;" alt="\vec{x}^tA\vec{x}=1" /></li><li>The matrix that describes a quadratic form is always symmetric
+<ul>
+<li>If it is not singular (non-invertible), it can be diagonalised as  <img class="inlinemath" src="eqn127.png" WIDTH=78 HEIGHT=16 STYLE="vertical-align: -1px; margin: 0;" alt="\Lambda=U^tAU" /></li><li>If  <img class="inlinemath" src="eqn131.png" WIDTH=65 HEIGHT=20 STYLE="vertical-align: -1px; margin: 0;" alt="\vec{x'}=U^t\vec{x}" />, the quadratic form becomes  <img class="inlinemath" src="eqn132.png" WIDTH=44 HEIGHT=21 STYLE="vertical-align: -1px; margin: 0;" alt="\vec{x'}^t\Lambda\vec{x'}" />, defined canonical form</li></ul></li>
+<li>In the canonical form, a  <img class="inlinemath" src="eqn133.png" WIDTH=34 HEIGHT=14 STYLE="vertical-align: -1px; margin: 0;" alt="2*2" />  <img class="inlinemath" src="eqn124.png" WIDTH=13 HEIGHT=14 STYLE="vertical-align: -1px; margin: 0;" alt="\Lambda" /> contains the eigenvalues of the transformation in the diagonal<ul>
+<li>If they are both positive, the quadratic is an ellipse
+<ul>
+<li>If they are equal, it is a circle</li>
+</ul></li>
+<li>If they are of opposite sign, it is an hyperbole</li>
+<li>If they are both negative, there is no real solution</li>
+</ul></li>
+<li>In 3d, I can get an ellipsoid, a hyperboloid of 1 sheet or an hyperboloid of 2 sheets</li>
+</ul>
+<h1 id="calculus">Calculus</h1>
+<h2 id="functions">Functions</h2>
+<ul>
+<li>Calculus is the study of functions
+<ul>
+<li>Functions are univocal relations between the sets domain and codomain</li>
+</ul></li>
+<li>The function  <img class="inlinemath" src="eqn134.png" WIDTH=107 HEIGHT=20 STYLE="vertical-align: -5px; margin: 0;" alt="f(x)=mx+q" /> is a line passing through  <img class="inlinemath" src="eqn135.png" WIDTH=10 HEIGHT=13 STYLE="vertical-align: -4px; margin: 0;" alt="q" /> at  <img class="inlinemath" src="eqn136.png" WIDTH=41 HEIGHT=14 STYLE="vertical-align: -1px; margin: 0;" alt="x=0" /> with slope  <img class="inlinemath" src="eqn137.png" WIDTH=16 HEIGHT=10 STYLE="vertical-align: -1px; margin: 0;" alt="m" /></li><li>The inverse of a function correlates  <img class="inlinemath" src="eqn138.png" WIDTH=33 HEIGHT=20 STYLE="vertical-align: -5px; margin: 0;" alt="f(x)" /> to  <img class="inlinemath" src="eqn139.png" WIDTH=11 HEIGHT=10 STYLE="vertical-align: -1px; margin: 0;" alt="x" /> <ul>
+<li>It is the reflection of  <img class="inlinemath" src="eqn138.png" WIDTH=33 HEIGHT=20 STYLE="vertical-align: -5px; margin: 0;" alt="f(x)" /> on the line  <img class="inlinemath" src="eqn140.png" WIDTH=63 HEIGHT=20 STYLE="vertical-align: -5px; margin: 0;" alt="g(x)=x" /></li></ul></li>
+<li>The function  <img class="inlinemath" src="eqn141.png" WIDTH=71 HEIGHT=20 STYLE="vertical-align: -5px; margin: 0;" alt="f(x)=a^x" /> is an exponential<ul>
+<li>It passes through 1 at  <img class="inlinemath" src="eqn136.png" WIDTH=41 HEIGHT=14 STYLE="vertical-align: -1px; margin: 0;" alt="x=0" /></li><li> <img class="inlinemath" src="eqn142.png" WIDTH=132 HEIGHT=20 STYLE="vertical-align: -5px; margin: 0;" alt="\lim_{x\to-\infty}f(x)=0" /></li><li> <img class="inlinemath" src="eqn143.png" WIDTH=153 HEIGHT=20 STYLE="vertical-align: -5px; margin: 0;" alt="\lim_{x\to+\infty}f(x)=+\infty" /></li></ul></li>
+<li>The function  <img class="inlinemath" src="eqn144.png" WIDTH=104 HEIGHT=20 STYLE="vertical-align: -5px; margin: 0;" alt="f(x)=\log_a (x)" /> is a logarithmic function<ul>
+<li>It passes through 1 at  <img class="inlinemath" src="eqn136.png" WIDTH=41 HEIGHT=14 STYLE="vertical-align: -1px; margin: 0;" alt="x=0" /></li><li>Common bases  <img class="inlinemath" src="eqn145.png" WIDTH=11 HEIGHT=10 STYLE="vertical-align: -1px; margin: 0;" alt="a" /> are 10, 2 and  <img class="inlinemath" src="eqn146.png" WIDTH=10 HEIGHT=10 STYLE="vertical-align: -1px; margin: 0;" alt="e" /></li><li> <img class="inlinemath" src="eqn147.png" WIDTH=138 HEIGHT=20 STYLE="vertical-align: -5px; margin: 0;" alt="\lim_{x\to 0}f(x)=-\infty" /></li><li> <img class="inlinemath" src="eqn148.png" WIDTH=153 HEIGHT=20 STYLE="vertical-align: -5px; margin: 0;" alt="\lim_{x\to +\infty}f(x)=+\infty" /></li><li>Logarithms are useful for performing products</li>
+<li> <img class="inlinemath" src="eqn149.png" WIDTH=203 HEIGHT=20 STYLE="vertical-align: -5px; margin: 0;" alt="\log_a(xy)=\log_a(x)+\log_a(y)" /></li><li> <img class="inlinemath" src="eqn150.png" WIDTH=144 HEIGHT=20 STYLE="vertical-align: -5px; margin: 0;" alt="\log_a(x^y)=y\log_a(x)" /></li><li> <img class="inlinemath" src="eqn151.png" WIDTH=115 HEIGHT=28 STYLE="vertical-align: -10px; margin: 0;" alt="\log_a(x)=\frac{log_b(x)}{\log_b(a)}" /></li></ul></li>
+<li>Trigonometric functions
+<ul>
+<li>The cosine is an even function because  <img class="inlinemath" src="eqn152.png" WIDTH=123 HEIGHT=20 STYLE="vertical-align: -5px; margin: 0;" alt="\cos(\theta)=\cos(-\theta)" /> <ul>
+<li> <img class="inlinemath" src="eqn153.png" WIDTH=80 HEIGHT=21 STYLE="vertical-align: -7px; margin: 0;" alt="\cos(\frac{\pi}{2})=0" /></li><li> <img class="inlinemath" src="eqn154.png" WIDTH=77 HEIGHT=20 STYLE="vertical-align: -5px; margin: 0;" alt="\cos(0)=1" /></li></ul></li>
+<li>The sine is an odd function because  <img class="inlinemath" src="eqn155.png" WIDTH=133 HEIGHT=20 STYLE="vertical-align: -5px; margin: 0;" alt="\sin(-\theta)=\sin(-\theta)" /></li><li>Sine and cosine are periodical with a  <img class="inlinemath" src="eqn156.png" WIDTH=20 HEIGHT=14 STYLE="vertical-align: -1px; margin: 0;" alt="2\pi" /> period</li><li>The secant is the reciprocal of cosine</li>
+<li>Trigonometric functions can be inverted only in a subdomain</li>
+<li>They are continuous functions</li>
+</ul></li>
+<li>A function is continuous at a point if the limit at that point is equal to the value of the function at that same point
+<ul>
+<li>The composition of continuous function is a continuous function</li>
+</ul></li>
+<li>The intermediate value theorem: a continuous function between two points takes any possible value between them</li>
+<li>Discontinuities can be removed in some cases, but essential discontinuities such as oscillating points, jumps and infinities cannot be removed</li>
+</ul>
+<h2 id="derivatives">Derivatives</h2>
+<ul>
+<li>The slope of a line is defined as  <img class="inlinemath" src="eqn157.png" WIDTH=21 HEIGHT=24 STYLE="vertical-align: -7px; margin: 0;" alt="\frac{\Delta y}{\Delta x}" /></li><li>Therefore, the slope of the secant of a function between two points  <img class="inlinemath" src="eqn158.png" WIDTH=32 HEIGHT=20 STYLE="vertical-align: -5px; margin: 0;" alt="f(a)" /> and  <img class="inlinemath" src="eqn159.png" WIDTH=61 HEIGHT=20 STYLE="vertical-align: -5px; margin: 0;" alt="f(a+h)" /> is  <img class="inlinemath" src="eqn160.png" WIDTH=116 HEIGHT=26 STYLE="vertical-align: -7px; margin: 0;" alt="\frac{\Delta y}{\Delta x}=\frac{f(a+h)-f(a)}{h}" /></li><li>If we try to reduce h as much as possible we obtain the slope of the tangent at point a
+<ul>
+<li> <img class="inlinemath" src="eqn161.png" WIDTH=161 HEIGHT=26 STYLE="vertical-align: -7px; margin: 0;" alt="m=\lim_{h \to 0}\frac{f(a+h)-f(a)}{h}" /></li><li>The tangent at a point is an estimation of the rate of change of the function at that point</li>
+</ul></li>
+<li>The derivative of a function is another function that describes its rate of change, it takes the value of the slope of the tangent of the original function at each point
+<ul>
+<li> <img class="inlinemath" src="eqn162.png" WIDTH=194 HEIGHT=26 STYLE="vertical-align: -7px; margin: 0;" alt="f'(x)|_a=\lim_{h \to 0}\frac{f(a+h)-f(a)}{h}" /></li></ul></li>
+<li>A function to be derivable must be continuous and must have one-sided derivatives defined at the end-points
+<ul>
+<li>However, there are functions that are continuous but not derivable</li>
+<li>Points of non-derivability are cusps, corners, discontinuities and points with vertical tangent</li>
+</ul></li>
+<li>Some derivatives
+<ul>
+<li> <img class="inlinemath" src="eqn163.png" WIDTH=66 HEIGHT=23 STYLE="vertical-align: -7px; margin: 0;" alt="\frac{d}{dx}[a]=0" /></li><li> <img class="inlinemath" src="eqn164.png" WIDTH=75 HEIGHT=23 STYLE="vertical-align: -7px; margin: 0;" alt="\frac{d}{dx}[ax]=a" /></li><li> <img class="inlinemath" src="eqn165.png" WIDTH=107 HEIGHT=23 STYLE="vertical-align: -7px; margin: 0;" alt="\frac{d}{dx}[x^n]=nx^{n-1}" /></li><li> <img class="inlinemath" src="eqn166.png" WIDTH=149 HEIGHT=23 STYLE="vertical-align: -7px; margin: 0;" alt="\frac{d}{dx}[\cos(x)]=-sin(x)" /></li><li> <img class="inlinemath" src="eqn167.png" WIDTH=134 HEIGHT=23 STYLE="vertical-align: -7px; margin: 0;" alt="\frac{d}{dx}[\sin(x)]=cos(x)" /></li><li> <img class="inlinemath" src="eqn168.png" WIDTH=78 HEIGHT=23 STYLE="vertical-align: -7px; margin: 0;" alt="\frac{d}{dx}[e^x]=e^x" /></li><li> <img class="inlinemath" src="eqn169.png" WIDTH=320 HEIGHT=24 STYLE="vertical-align: -7px; margin: 0;" alt="\frac{d}{dx}[a^x]=\frac{d}{dx}[e^{\ln(a)x}]=\ln a*e^{\ln(a)x}=\ln(a)*a^x" /></li><li> <img class="inlinemath" src="eqn170.png" WIDTH=93 HEIGHT=23 STYLE="vertical-align: -7px; margin: 0;" alt="\frac{d}{dx}[\ln(x)]=\frac{1}{x}" /></li><li> <img class="inlinemath" src="eqn171.png" WIDTH=139 HEIGHT=26 STYLE="vertical-align: -10px; margin: 0;" alt="\frac{d}{dx}[\log_a(x)]=\frac{1}{x*\ln(a)}" /></li></ul></li>
+<li>Rules for derivation
+<ul>
+<li> <img class="inlinemath" src="eqn172.png" WIDTH=220 HEIGHT=23 STYLE="vertical-align: -7px; margin: 0;" alt="\frac{d}{dx}[f(x)+g(x)]=f'(x)+g'(x)" /></li><li> <img class="inlinemath" src="eqn173.png" WIDTH=149 HEIGHT=23 STYLE="vertical-align: -7px; margin: 0;" alt="\frac{d}{dx}[k*f(x)]=k f'(x)" /></li><li> <img class="inlinemath" src="eqn174.png" WIDTH=309 HEIGHT=23 STYLE="vertical-align: -7px; margin: 0;" alt="\frac{d}{dx}[g(x)*f(x)]=g(x)*f'(x)+g'(x)*f(x)" /></li><li> <img class="inlinemath" src="eqn175.png" WIDTH=148 HEIGHT=26 STYLE="vertical-align: -8px; margin: 0;" alt="\frac{d}{dx}[g(f(x))]=\frac{dg}{df}*\frac{df}{dx}" /></li><li> <img class="inlinemath" src="eqn176.png" WIDTH=195 HEIGHT=28 STYLE="vertical-align: -10px; margin: 0;" alt="\frac{d}{dx}[\frac{g(x)}{f(x)}]=\frac{g(x)*f'(x)+g'(x)*f(x)}{f(x)^2}" /></li></ul></li>
+<li>Higher order derivatives are computed as the derivative of the derivative
+<ul>
+<li>For the second derivative of f(x) we write  <img class="inlinemath" src="eqn177.png" WIDTH=154 HEIGHT=26 STYLE="vertical-align: -7px; margin: 0;" alt="f''(x)=\frac{d(df/dx)}{dx}=\frac{d^2f}{dx^2}" /></li><li>In the same way, the third derivative  <img class="inlinemath" src="eqn178.png" WIDTH=87 HEIGHT=26 STYLE="vertical-align: -7px; margin: 0;" alt="f'''(x)=\frac{d^3f}{dx^3}" /> and so on for higher orders</li></ul></li>
+<li>The second derivative reflects the convexity of the function
+<ul>
+<li>It is the rate at which the slope of the tangent increases</li>
+</ul></li>
+<li>Derivatives can help to study the behavior of a function</li>
+<li>In a function there are global and local maxima and minima, defined as extremes
+<ul>
+<li>There are NOT methods to compute global extrema, but only local ones</li>
+</ul></li>
+<li>A local extreme is referred to an open interval
+<ul>
+<li>The derivative at that point is 0
+<ul>
+<li>This is NOT sufficient, it can also be a flexus</li>
+</ul></li>
+<li>A minimum has a derivative with positive slope when it intersects the x axis
+<ul>
+<li>In other words, the second derivative is positive</li>
+</ul></li>
+<li>A maximum has a derivative with negative slope when it intersects the x axis
+<ul>
+<li>In other words, the second derivative is negative</li>
+</ul></li>
+</ul></li>
+<li>A critical point of a function is a point where the derivative is 0 or undefined</li>
+</ul>
+<h2 id="integrals">Integrals</h2>
+<ul>
+<li>We can find the area under a curve f(x) by adding rectangles with height f(x) and width dx, in what is called a Riemann sum
+<ul>
+<li>The width dx is also called subinterval</li>
+<li>The area of each rectangle will be then  <img class="inlinemath" src="eqn179.png" WIDTH=113 HEIGHT=20 STYLE="vertical-align: -5px; margin: 0;" alt="A|_x=f(x)*dx" /></li><li>If we sum the area of all the rectangles while letting dx be as small as possible we obtain a new function F(x) called integral of f(x), which for any x gives the area under f(x) from  <img class="inlinemath" src="eqn180.png" WIDTH=39 HEIGHT=14 STYLE="vertical-align: -3px; margin: 0;" alt="-\infty" /> to that point<ul>
+<li> <img class="inlinemath" src="eqn181.png" WIDTH=301 HEIGHT=21 STYLE="vertical-align: -5px; margin: 0;" alt="\lim_{dx \to 0 }\sum_i f(x_i)*dx_i=\int f(x) dx=F(x)" /></li></ul></li>
+</ul></li>
+<li>The derivation process is insensitive to constants, so we have a family of integrals for any given function, that differ by a constant
+<ul>
+<li> <img class="inlinemath" src="eqn182.png" WIDTH=215 HEIGHT=21 STYLE="vertical-align: -5px; margin: 0;" alt="\int f(x) dx =F(x)+c \:\:\: \forall \: c \in \mathbb{R}" /></li></ul></li>
+<li>The difference of the integral F(x) evaluated at point b and a is the area under f(x) between the point b and a
+<ul>
+<li> <img class="inlinemath" src="eqn183.png" WIDTH=264 HEIGHT=26 STYLE="vertical-align: -7px; margin: 0;" alt="AUC|_a^b f(x)=\int_a^bf(x)=F(b)-F(a)" /></li><li>The portion of f(x) between a and b is called partition</li>
+</ul></li>
+<li>The fundamental theorem of calculus: the integral of a derivative of a function is the function itself
+<ul>
+<li> <img class="inlinemath" src="eqn184.png" WIDTH=308 HEIGHT=26 STYLE="vertical-align: -7px; margin: 0;" alt="F(x)=\int_{a}^{b}f(x)dx=\lim_{h\to 0} \sum_{k=1}^n(f(x)*h)" /></li></ul></li>
+<li>The areas computed by integrals have a sign (!)
+<ul>
+<li>They are positive above the x axis, negative below it</li>
+</ul></li>
+<li>Some integrals
+<ul>
+<li> <img class="inlinemath" src="eqn185.png" WIDTH=116 HEIGHT=21 STYLE="vertical-align: -5px; margin: 0;" alt="\int a \:dx = ax+c" /></li><li> <img class="inlinemath" src="eqn186.png" WIDTH=161 HEIGHT=24 STYLE="vertical-align: -8px; margin: 0;" alt="\int x^n dx= \frac{1}{n+1}x^{n+1}+c" /></li><li> <img class="inlinemath" src="eqn187.png" WIDTH=141 HEIGHT=23 STYLE="vertical-align: -7px; margin: 0;" alt="\int \frac{1}{x}dx=\ln(|x|)+c" /></li><li> <img class="inlinemath" src="eqn188.png" WIDTH=116 HEIGHT=21 STYLE="vertical-align: -5px; margin: 0;" alt="\int e^x dx = e^x+c" /></li><li> <img class="inlinemath" src="eqn189.png" WIDTH=146 HEIGHT=26 STYLE="vertical-align: -10px; margin: 0;" alt="\int a^x dx = \frac{1}{\ln(a)}a^x+c" /></li><li> <img class="inlinemath" src="eqn190.png" WIDTH=187 HEIGHT=21 STYLE="vertical-align: -5px; margin: 0;" alt="\int \sin(x)dx=-\cos(x) +c" /></li><li> <img class="inlinemath" src="eqn191.png" WIDTH=171 HEIGHT=21 STYLE="vertical-align: -5px; margin: 0;" alt="\int \cos(x)dx=\sin(x) +c" /></li></ul></li>
+<li>Rules for integration
+<ul>
+<li> <img class="inlinemath" src="eqn192.png" WIDTH=181 HEIGHT=26 STYLE="vertical-align: -7px; margin: 0;" alt="\int_a^bf(x)dx=-\int_b^af(x)dx" /></li><li> <img class="inlinemath" src="eqn193.png" WIDTH=105 HEIGHT=23 STYLE="vertical-align: -7px; margin: 0;" alt="\int_a^af(x)dx=0" /></li><li> <img class="inlinemath" src="eqn194.png" WIDTH=203 HEIGHT=21 STYLE="vertical-align: -5px; margin: 0;" alt="\int k * f(x)dx=k*\int f(x)dx" /></li><li> <img class="inlinemath" src="eqn195.png" WIDTH=254 HEIGHT=26 STYLE="vertical-align: -7px; margin: 0;" alt="\int_a^bf(x)dx+\int_b^cf(x)dx=\int_a^c f(x)dx" /></li><li> <img class="inlinemath" src="eqn196.png" WIDTH=292 HEIGHT=21 STYLE="vertical-align: -5px; margin: 0;" alt="\int [f(x)+g(x)]dx=\int f(x)dx+ \int g(x) dx" /></li></ul></li>
+<li>Finding derivatives is easy because of the chain rule, but finding integrals is hard</li>
+<li>Sometimes it is possible to solve an integral using substitution to rewrite a function that can be integrated
+<ul>
+<li>Usually we can substitute a polynomial in x with the new variable u</li>
+<li> <img class="inlinemath" src="eqn197.png" WIDTH=67 HEIGHT=20 STYLE="vertical-align: -5px; margin: 0;" alt="u=P(x)" /></li><li>Since  <img class="inlinemath" src="eqn198.png" WIDTH=354 HEIGHT=26 STYLE="vertical-align: -10px; margin: 0;" alt="\frac{du}{dx}=P'(x) \implies du=P'(x) dx \implies dx = \frac{1}{P'(x)}du" /></li><li>Therefore, in general we can write  <img class="inlinemath" src="eqn199.png" WIDTH=251 HEIGHT=23 STYLE="vertical-align: -7px; margin: 0;" alt="\int f(g(x)) g'(x) dx=\int f(u) du|_{u=g(x)}" /></li></ul></li>
+<li>We can integrate by parts by inverting the product rule for derivatives
+<ul>
+<li> <img class="inlinemath" src="eqn200.png" WIDTH=530 HEIGHT=42 STYLE="vertical-align: -9px; margin: 0;" alt="\frac{d}{dx} [f(x)*g(x)]=f'(x)g(x)+f(x)g'(x) \implies \int [f(x)*g(x)]' dx=\int f'(x)g(x)dx+\int f(x)g'(x)dx" /></li><li> <img class="inlinemath" src="eqn201.png" WIDTH=545 HEIGHT=42 STYLE="vertical-align: -9px; margin: 0;" alt="f(x)g(x)=\int f'(x)g(x)dx+\int f(x)g'(x)dx \implies f(x)g(x)-\int f'(x)g(x)dx=\int f(x)g'(x)dx" /></li><li>Therefore, if we let  <img class="inlinemath" src="eqn202.png" WIDTH=64 HEIGHT=20 STYLE="vertical-align: -5px; margin: 0;" alt="u=f(x)" /> and  <img class="inlinemath" src="eqn203.png" WIDTH=95 HEIGHT=20 STYLE="vertical-align: -5px; margin: 0;" alt="du=f'(x)dx" />, and  <img class="inlinemath" src="eqn204.png" WIDTH=62 HEIGHT=20 STYLE="vertical-align: -5px; margin: 0;" alt="v=g(x)" /> with  <img class="inlinemath" src="eqn205.png" WIDTH=93 HEIGHT=20 STYLE="vertical-align: -5px; margin: 0;" alt="dv=g'(x)dx" /></li><li> <img class="inlinemath" src="eqn206.png" WIDTH=152 HEIGHT=21 STYLE="vertical-align: -5px; margin: 0;" alt="\int u \: dv = uv-\int v \:du" /></li><li>This is useful when we recognize a product between a function that is the derivative of something and a function for which we know the derivative</li>
+<li>It can also be used to integrate a function for which we know the derivative by adding a 1 multiplicative constant, that we will integrate</li>
+</ul></li>
+</ul>
+<h2 id="taylor-series">Taylor series</h2>
+<ul>
+<li>Polynomials are easier than other functions to work with, therefore approximating a non-polynomial function with a polynomial is really useful</li>
+<li>To find a polynomial  <img class="inlinemath" src="eqn207.png" WIDTH=36 HEIGHT=20 STYLE="vertical-align: -5px; margin: 0;" alt="P(x)" /> of degree n that best approximates the non-polynomial function  <img class="inlinemath" src="eqn138.png" WIDTH=33 HEIGHT=20 STYLE="vertical-align: -5px; margin: 0;" alt="f(x)" /> around the point  <img class="inlinemath" src="eqn136.png" WIDTH=41 HEIGHT=14 STYLE="vertical-align: -1px; margin: 0;" alt="x=0" /> I can proceed by layers</li><li>The first constraint for my polynomial is that at  <img class="inlinemath" src="eqn136.png" WIDTH=41 HEIGHT=14 STYLE="vertical-align: -1px; margin: 0;" alt="x=0" /> it should be equal to the original function<ul>
+<li> <img class="inlinemath" src="eqn208.png" WIDTH=144 HEIGHT=20 STYLE="vertical-align: -5px; margin: 0;" alt="P(x)|_{x=0}=f(x)|_{x=0}" /></li><li>If  <img class="inlinemath" src="eqn209.png" WIDTH=299 HEIGHT=21 STYLE="vertical-align: -5px; margin: 0;" alt="P(x)=c_0+c_1x+c_2x^2+c_3x^3+...+c_nx^n" />, at  <img class="inlinemath" src="eqn136.png" WIDTH=41 HEIGHT=14 STYLE="vertical-align: -1px; margin: 0;" alt="x=0" /> all the terms but  <img class="inlinemath" src="eqn210.png" WIDTH=15 HEIGHT=13 STYLE="vertical-align: -4px; margin: 0;" alt="c_0" /> cancel out</li><li>Therefore, since  <img class="inlinemath" src="eqn211.png" WIDTH=99 HEIGHT=20 STYLE="vertical-align: -5px; margin: 0;" alt="P(x)|_{x=0}=c_0" /> I can set  <img class="inlinemath" src="eqn212.png" WIDTH=96 HEIGHT=20 STYLE="vertical-align: -5px; margin: 0;" alt="c_0=f(x)|_{x=0}" /></li></ul></li>
+<li>In order to better approximate  <img class="inlinemath" src="eqn138.png" WIDTH=33 HEIGHT=20 STYLE="vertical-align: -5px; margin: 0;" alt="f(x)" />, I also want the tangent to  <img class="inlinemath" src="eqn207.png" WIDTH=36 HEIGHT=20 STYLE="vertical-align: -5px; margin: 0;" alt="P(x)" /> to be equal to that of the original function at  <img class="inlinemath" src="eqn136.png" WIDTH=41 HEIGHT=14 STYLE="vertical-align: -1px; margin: 0;" alt="x=0" /> <ul>
+<li> <img class="inlinemath" src="eqn213.png" WIDTH=152 HEIGHT=20 STYLE="vertical-align: -5px; margin: 0;" alt="P'(x)|_{x=0}=f'(x)|_{x=0}" /></li><li> <img class="inlinemath" src="eqn214.png" WIDTH=294 HEIGHT=21 STYLE="vertical-align: -5px; margin: 0;" alt="P'(x)=c_1+2c_2x+3c_3x^2+...+nc_nx^{n-1}" /></li><li> <img class="inlinemath" src="eqn215.png" WIDTH=246 HEIGHT=20 STYLE="vertical-align: -5px; margin: 0;" alt="P'(x)|_{x=0}=c_1 \implies c_1=f'(x)|_{x=0}" /></li><li> <img class="inlinemath" src="eqn214.png" WIDTH=294 HEIGHT=21 STYLE="vertical-align: -5px; margin: 0;" alt="P'(x)=c_1+2c_2x+3c_3x^2+...+nc_nx^{n-1}" /></li></ul></li>
+<li>I can also desire that the concavity of  <img class="inlinemath" src="eqn207.png" WIDTH=36 HEIGHT=20 STYLE="vertical-align: -5px; margin: 0;" alt="P(x)" /> be equal to that of  <img class="inlinemath" src="eqn138.png" WIDTH=33 HEIGHT=20 STYLE="vertical-align: -5px; margin: 0;" alt="f(x)" /> <ul>
+<li> <img class="inlinemath" src="eqn216.png" WIDTH=158 HEIGHT=20 STYLE="vertical-align: -5px; margin: 0;" alt="P''(x)|_{x=0}=f''(x)|_{x=0}" /></li><li> <img class="inlinemath" src="eqn217.png" WIDTH=338 HEIGHT=21 STYLE="vertical-align: -5px; margin: 0;" alt="P''(x)=2c_2+3*2c_3x+...+n*(n-1)c_nx^{n-2}" /></li><li> <img class="inlinemath" src="eqn218.png" WIDTH=269 HEIGHT=23 STYLE="vertical-align: -7px; margin: 0;" alt="P''(x)|_{x=0}=2c_2 \implies c_2=\frac{1}{2}f''(x)|_{x=0}" /></li></ul></li>
+<li>I can proceed like this for higher derivatives to find higher-degree coefficients, until I get to the desired n
+<ul>
+<li> <img class="inlinemath" src="eqn219.png" WIDTH=134 HEIGHT=24 STYLE="vertical-align: -7px; margin: 0;" alt="c_n=\frac{1}{n!}\frac{d^nf}{dx^n}f(x)|_{x=0}" /></li><li>The more degrees that I use, the better the approximation but the more complex the polynomial</li>
+</ul></li>
+<li>The infinite series of polynomial terms that approximate  <img class="inlinemath" src="eqn138.png" WIDTH=33 HEIGHT=20 STYLE="vertical-align: -5px; margin: 0;" alt="f(x)" /> at the point  <img class="inlinemath" src="eqn136.png" WIDTH=41 HEIGHT=14 STYLE="vertical-align: -1px; margin: 0;" alt="x=0" /> is called Maclaurin series<ul>
+<li>Note that this nice cancellation of higher-order polynomials that allow to easily compute high derivatives happens only at  <img class="inlinemath" src="eqn136.png" WIDTH=41 HEIGHT=14 STYLE="vertical-align: -1px; margin: 0;" alt="x=0" /></li></ul></li>
+<li>In order to approximate  <img class="inlinemath" src="eqn138.png" WIDTH=33 HEIGHT=20 STYLE="vertical-align: -5px; margin: 0;" alt="f(x)" /> at a point  <img class="inlinemath" src="eqn220.png" WIDTH=48 HEIGHT=19 STYLE="vertical-align: -4px; margin: 0;" alt="x_a \not= 0" /> I can construct the polynomial so to have the variable  <img class="inlinemath" src="eqn221.png" WIDTH=78 HEIGHT=16 STYLE="vertical-align: -4px; margin: 0;" alt="u=x-x_a" /> <ul>
+<li>In this way, at  <img class="inlinemath" src="eqn222.png" WIDTH=134 HEIGHT=17 STYLE="vertical-align: -4px; margin: 0;" alt="x=x_a \implies u=0" /></li><li>This restore the nice behaviour observed at  <img class="inlinemath" src="eqn136.png" WIDTH=41 HEIGHT=14 STYLE="vertical-align: -1px; margin: 0;" alt="x=0" /></li><li>After the expansion, I can then substitute back  <img class="inlinemath" src="eqn221.png" WIDTH=78 HEIGHT=16 STYLE="vertical-align: -4px; margin: 0;" alt="u=x-x_a" /></li></ul></li>
+<li>The infinite series that generalizes the Maclaurin series at any point  <img class="inlinemath" src="eqn223.png" WIDTH=49 HEIGHT=13 STYLE="vertical-align: -4px; margin: 0;" alt="x=x_a" /> is called Taylor series</li><li>We can give the Taylor series of  <img class="inlinemath" src="eqn138.png" WIDTH=33 HEIGHT=20 STYLE="vertical-align: -5px; margin: 0;" alt="f(x)" /> at the point  <img class="inlinemath" src="eqn224.png" WIDTH=18 HEIGHT=13 STYLE="vertical-align: -4px; margin: 0;" alt="x_a" /> <ul>
+<li> <img class="inlinemath" src="eqn225.png" WIDTH=204 HEIGHT=26 STYLE="vertical-align: -6px; margin: 0;" alt="P(x)=\sum_{i=1}^n [\frac{(x-x_a)^i}{i!}\frac{d^if}{dx^i}|_{x=x_a}]" /></li><li> <img class="inlinemath" src="eqn226.png" WIDTH=537 HEIGHT=49 STYLE="vertical-align: -6px; margin: 0;" alt="P(x)=f(x)|_{x=x_a}+(x-x_a)\frac{df}{dx}|_{x=x_a}+\frac{(x-x_a)^2}{2!}\frac{d^2f}{dx^2}|_{x=x_a}+\frac{(x-x_a)^3}{3!}\frac{d^3f}{dx^3}|_{x=x_a}+...+\frac{(x-x_a)^n}{n!}\frac{d^nf}{dx^n}|_{x=x_a}" /></li></ul></li>
+<li>The Taylor series is an infinite sum, when we consider a certain degree polynomial we call it Taylor polynomial</li>
+<li>The Taylor series is convergent for some functions, like  <img class="inlinemath" src="eqn227.png" WIDTH=70 HEIGHT=20 STYLE="vertical-align: -5px; margin: 0;" alt="f(x)=e^x" />, and divergent for others, like  <img class="inlinemath" src="eqn228.png" WIDTH=90 HEIGHT=20 STYLE="vertical-align: -5px; margin: 0;" alt="f(x)=\ln(x)" /> <ul>
+<li>The maximum distance from  <img class="inlinemath" src="eqn224.png" WIDTH=18 HEIGHT=13 STYLE="vertical-align: -4px; margin: 0;" alt="x_a" /> and the points where the series converges on  <img class="inlinemath" src="eqn138.png" WIDTH=33 HEIGHT=20 STYLE="vertical-align: -5px; margin: 0;" alt="f(x)" /> is the radius of convergence of the Taylor series</li></ul></li>
+</ul>
+<h2 id="functions-in-more-than-1-variable">Functions in more than 1 variable</h2>
+<ul>
+<li>A 2 dimensional function takes 2 inputs  <img class="inlinemath" src="eqn229.png" WIDTH=27 HEIGHT=13 STYLE="vertical-align: -4px; margin: 0;" alt="x,y" /> and gives the output  <img class="inlinemath" src="eqn230.png" WIDTH=10 HEIGHT=10 STYLE="vertical-align: -1px; margin: 0;" alt="z" /> <ul>
+<li> <img class="inlinemath" src="eqn231.png" WIDTH=79 HEIGHT=20 STYLE="vertical-align: -5px; margin: 0;" alt="z=f(x,y)" /></li><li>They are usually represented with 3d surfaces or with level curves on the  <img class="inlinemath" src="eqn229.png" WIDTH=27 HEIGHT=13 STYLE="vertical-align: -4px; margin: 0;" alt="x,y" /> plane</li></ul></li>
+<li>A level curve or contour level is defined as the set of point that respect the constraint  <img class="inlinemath" src="eqn232.png" WIDTH=79 HEIGHT=20 STYLE="vertical-align: -5px; margin: 0;" alt="f(x,y)=c" /></li><li>It is not possible to compute single derivatives of the function</li>
+<li>We can fix  <img class="inlinemath" src="eqn233.png" WIDTH=11 HEIGHT=13 STYLE="vertical-align: -4px; margin: 0;" alt="y" /> and compute the derivative only with respect to  <img class="inlinemath" src="eqn139.png" WIDTH=11 HEIGHT=10 STYLE="vertical-align: -1px; margin: 0;" alt="x" /> <ul>
+<li>This is a 2-dimensional function that gives the slope of the tangent to the 2d curve in the  <img class="inlinemath" src="eqn234.png" WIDTH=27 HEIGHT=13 STYLE="vertical-align: -4px; margin: 0;" alt="x,z" /> plane that cuts the function at a certain value of  <img class="inlinemath" src="eqn233.png" WIDTH=11 HEIGHT=13 STYLE="vertical-align: -4px; margin: 0;" alt="y" /></li><li>This derivative of  <img class="inlinemath" src="eqn235.png" WIDTH=49 HEIGHT=20 STYLE="vertical-align: -5px; margin: 0;" alt="f(x,y)" /> is called partial derivative in  <img class="inlinemath" src="eqn139.png" WIDTH=11 HEIGHT=10 STYLE="vertical-align: -1px; margin: 0;" alt="x" /></li><li> <img class="inlinemath" src="eqn236.png" WIDTH=258 HEIGHT=26 STYLE="vertical-align: -7px; margin: 0;" alt="f_x(x,y)=\frac{\partial f}{\partial x}=\lim_{h \to 0}\frac{f(x+h, y)-f(x,y)}{h}" /></li><li>It is computed like a normal derivative, but considering the fixed variable like a constant</li>
+</ul></li>
+<li>Of course we can do the same fixing  <img class="inlinemath" src="eqn139.png" WIDTH=11 HEIGHT=10 STYLE="vertical-align: -1px; margin: 0;" alt="x" /> and taking the partial derivative in  <img class="inlinemath" src="eqn233.png" WIDTH=11 HEIGHT=13 STYLE="vertical-align: -4px; margin: 0;" alt="y" /> <ul>
+<li> <img class="inlinemath" src="eqn237.png" WIDTH=258 HEIGHT=27 STYLE="vertical-align: -8px; margin: 0;" alt="f_y(x,y)=\frac{\partial f}{\partial y}=\lim_{h \to 0}\frac{f(x, y+h)-f(x,y)}{h}" /></li></ul></li>
+<li>It is possible to take second partial derivatives by taking the partial derivative in  <img class="inlinemath" src="eqn139.png" WIDTH=11 HEIGHT=10 STYLE="vertical-align: -1px; margin: 0;" alt="x" /> of  <img class="inlinemath" src="eqn238.png" WIDTH=18 HEIGHT=24 STYLE="vertical-align: -7px; margin: 0;" alt="\frac{\partial f}{\partial x}" /> or the partial derivative in  <img class="inlinemath" src="eqn233.png" WIDTH=11 HEIGHT=13 STYLE="vertical-align: -4px; margin: 0;" alt="y" /> of  <img class="inlinemath" src="eqn239.png" WIDTH=18 HEIGHT=26 STYLE="vertical-align: -8px; margin: 0;" alt="\frac{\partial f}{\partial y}" /> <ul>
+<li>We will then obtain  <img class="inlinemath" src="eqn240.png" WIDTH=105 HEIGHT=26 STYLE="vertical-align: -7px; margin: 0;" alt="f_{xx}(x,y)=\frac{\partial^2f}{\partial x^2}" /> and  <img class="inlinemath" src="eqn241.png" WIDTH=105 HEIGHT=27 STYLE="vertical-align: -8px; margin: 0;" alt="f_{yy}(x,y)=\frac{\partial^2f}{\partial y^2}" /></li></ul></li>
+<li>We can also take mixed partial derivatives by taking the derivative in  <img class="inlinemath" src="eqn139.png" WIDTH=11 HEIGHT=10 STYLE="vertical-align: -1px; margin: 0;" alt="x" /> of  <img class="inlinemath" src="eqn239.png" WIDTH=18 HEIGHT=26 STYLE="vertical-align: -8px; margin: 0;" alt="\frac{\partial f}{\partial y}" />, or the derivative in  <img class="inlinemath" src="eqn233.png" WIDTH=11 HEIGHT=13 STYLE="vertical-align: -4px; margin: 0;" alt="y" /> of  <img class="inlinemath" src="eqn238.png" WIDTH=18 HEIGHT=24 STYLE="vertical-align: -7px; margin: 0;" alt="\frac{\partial f}{\partial x}" /> <ul>
+<li>The notation for these derivatives is  <img class="inlinemath" src="eqn242.png" WIDTH=112 HEIGHT=27 STYLE="vertical-align: -8px; margin: 0;" alt="f_{xy}(x,y)=\frac{\partial^2 f}{\partial x\partial y}" /> and  <img class="inlinemath" src="eqn243.png" WIDTH=112 HEIGHT=27 STYLE="vertical-align: -8px; margin: 0;" alt="f_{yx}(x,y)=\frac{\partial^2 f}{\partial y\partial x}" /></li></ul></li>
+<li>A fundamental propriety is that the order of differentiation does not matter (!)
+<ul>
+<li> <img class="inlinemath" src="eqn244.png" WIDTH=298 HEIGHT=26 STYLE="vertical-align: -8px; margin: 0;" alt="\frac{\partial }{\partial x}[\frac{\partial f}{\partial y}]=\frac{\partial }{\partial y}[\frac{\partial f}{\partial x}] \iff f_{xy}(x,y)=f_{yx}(x,y)" /></li></ul></li>
+<li>We can generalise this concepts to a function of n variables  <img class="inlinemath" src="eqn245.png" WIDTH=108 HEIGHT=20 STYLE="vertical-align: -5px; margin: 0;" alt="f(x_1,x_2,...,x_n)" /> <ul>
+<li>In any case a consider all the variables constant except the one that I am deriving</li>
+<li>I will have n first order partial derivatives for a function with n inputs</li>
+</ul></li>
+</ul>
+<h2 id="gradient-and-hessian">Gradient and Hessian</h2>
+<ul>
+<li>The vector containing all the first partial derivatives of a function is called gradient of that function, indicated with  <img class="inlinemath" src="eqn246.png" WIDTH=16 HEIGHT=14 STYLE="vertical-align: -1px; margin: 0;" alt="\nabla" /> <ul>
+<li> <img class="inlinemath" src="eqn247.png" WIDTH=229 HEIGHT=26 STYLE="vertical-align: -8px; margin: 0;" alt="\nabla_{f(x_1,x_2,...,x_n)}=(\frac{\partial f}{\partial x_1},\frac{\partial f}{\partial x_2},...,\frac{\partial f}{\partial x_n})" /></li><li>The gradient evaluated at any point  <img class="inlinemath" src="eqn248.png" WIDTH=43 HEIGHT=20 STYLE="vertical-align: -5px; margin: 0;" alt="\nabla f|_{\vec{x_a}}" /> is orthogonal to the contour level at that point</li><li>The gradient represents the direction of steepest ascent, because it is a vector with components which ones evaluated at a certain point are the slope of the tangent along the 2 axes</li>
+<li>We can see the gradient as a vector field, which always points in the direction that maximizes the increase in  <img class="inlinemath" src="eqn249.png" WIDTH=12 HEIGHT=19 STYLE="vertical-align: -4px; margin: 0;" alt="f" />, with length proportional to that increase</li></ul></li>
+<li>The matrix containing all the second partial derivatives of a function is called Hessian of that function, indicated with H
+<ul>
+<li> <img class="inlinemath" src="eqn250.png" WIDTH=436 HEIGHT=103 STYLE="vertical-align: -47px; margin: 0;" alt="H_{f(x_1,x_2,...,x_n)}=\begin{pmatrix}  \frac{\partial^2 f}{\partial x_1^2}&amp;\frac{\partial^2 f}{\partial x_1\partial x_2}&amp;...&amp;\frac{\partial^2 f}{\partial x_1\partial x_n}\\  \frac{\partial^2 f}{\partial x_2 \partial x_1}&amp;\frac{\partial^2 f}{\partial x_2^2}&amp;...&amp;\frac{\partial^2 f}{\partial x_2\partial x_n}\\  ...&amp;...&amp;...&amp;...\\  \frac{\partial^2 f}{\partial x_n \partial x_1}&amp;\frac{\partial^2 f}{\partial x_n\partial x_2}&amp;...&amp;\frac{\partial^2 f}{\partial x_n^2}\\  \end{pmatrix}" /></li><li>Since the mixed partial derivatives are insensitive to the order of differentiation, the Hessian is always symmetric</li>
+</ul></li>
+</ul>
+<h2 id="taylor-expansion-of-a-function-in-more-than-1-variable">Taylor expansion of a function in more than 1 variable</h2>
+<ul>
+<li>The Taylor expansion of grade 2 of a multivariable function can be represented with gradient and Hessian
+<ul>
+<li>We can consider the function as operating on a vector of variables  <img class="inlinemath" src="eqn015.png" WIDTH=13 HEIGHT=16 STYLE="vertical-align: -1px; margin: 0;" alt="\vec{x}" />, with dimensionality equal to the number of variables<ul>
+<li> <img class="inlinemath" src="eqn251.png" WIDTH=161 HEIGHT=20 STYLE="vertical-align: -5px; margin: 0;" alt="f(x_1,x_2,...,x_n)=f(\vec{x})" /></li></ul></li>
+<li>Let  <img class="inlinemath" src="eqn252.png" WIDTH=18 HEIGHT=19 STYLE="vertical-align: -4px; margin: 0;" alt="\vec{x_a}" /> be the point at which we want to do the expansion<ul>
+<li> <img class="inlinemath" src="eqn253.png" WIDTH=450 HEIGHT=23 STYLE="vertical-align: -7px; margin: 0;" alt="f(\vec{x})=f(\vec{x_a})+(\nabla\:f|_{\vec{x_a}})^t*(\vec{x}-\vec{x_a})+\frac{1}{2}(\vec{x}-\vec{x_a})^tH(\vec{x}-\vec{x_a})+..." /></li></ul></li>
+</ul></li>
+<li>Terms with degree higher than 2 will require the analogous of the gradient and Hessian at higher dimensions
+<ul>
+<li>These will be multi-dimensional object difficult to treat</li>
+</ul></li>
+</ul>
+<h2 id="local-extrema-in-multi-variable-functions">Local extrema in multi-variable functions</h2>
+<ul>
+<li>The local extrema of a multivariable function are those points where the gradient of the function is 0
+<ul>
+<li>In those points, the function has an horizontal tangent along all the axes</li>
+</ul></li>
+<li>In order to understand if a critical point  <img class="inlinemath" src="eqn252.png" WIDTH=18 HEIGHT=19 STYLE="vertical-align: -4px; margin: 0;" alt="\vec{x_a}" /> where  <img class="inlinemath" src="eqn254.png" WIDTH=78 HEIGHT=20 STYLE="vertical-align: -5px; margin: 0;" alt="\nabla\:f|_{\vec{x_a}}=0" /> is a local maximum or a local minimum, I need to consider the behavior of the Hessian at that point<ul>
+<li>This is analogous to the evaluation of the second derivative in a standard function in order to understand its concavity</li>
+</ul></li>
+<li>Since the Hessian is a n*n symmetric matrix, it has n real eigenvalues
+<ul>
+<li>If all the eigenvalues of the Hessian are positive, the point is a minimum</li>
+<li>If all the eigenvalues of the Hessian are negative, the point is a maximum</li>
+<li>If the eigenvalues of the Hessian are some positive and some negative, the point is a saddle point is  <img class="inlinemath" src="eqn255.png" WIDTH=20 HEIGHT=17 STYLE="vertical-align: -1px; margin: 0;" alt="\mathbb{R}^2" />, and a more complex shape in other dimensions</li></ul></li>
+<li>When the Hessian is not diagonal, it can be diagonalized so that we can have the eigenvalues on the diagonal
+<ul>
+<li>This corresponds to rotating the system of reference so to align it to the directions of more rapid change in concavity</li>
+<li>Note that I do not need to go back to the previous system of reference, from the Hessian I only want a qualitative information on the concavity, not a number</li>
+</ul></li>
+</ul>
+<h2 id="constrained-optimization-problems-lagrange">Constrained optimization problems (Lagrange)</h2>
+<ul>
+<li>A constraint optimization problem deals with finding the extrema of a function on more than one variable subjected to a constraint
+<ul>
+<li>This has many applications, for example we may want to maximize a function while there is a physical constraint on the variables that we cannot avoid</li>
+<li>The constraint is a set of points that respects a condition
+<ul>
+<li>An example is the constraint  <img class="inlinemath" src="eqn256.png" WIDTH=179 HEIGHT=21 STYLE="vertical-align: -5px; margin: 0;" alt="g(x,y)=x^2+y^2-1=0" />, which means that we are limited to the points on the unit circle in the x,y plane</li></ul></li>
+<li>In 3d we can project the constraint on the surface of our function  <img class="inlinemath" src="eqn235.png" WIDTH=49 HEIGHT=20 STYLE="vertical-align: -5px; margin: 0;" alt="f(x,y)" /> and the problem translates to finding the highest point on the circle</li></ul></li>
+<li>It is easier to visualize the problem in term of contour lines in 2d
+<ul>
+<li>The solution consists then in finding a point where a level curve is tangent to the constraint</li>
+</ul></li>
+<li>Generalizing to any number of dimensions, if we consider that a level curve is an object that respects the condition  <img class="inlinemath" src="eqn257.png" WIDTH=63 HEIGHT=20 STYLE="vertical-align: -5px; margin: 0;" alt="f(\vec{x})=c" />, the constraint optimization problem can be translated in finding the points of tangency between the constraint curve  <img class="inlinemath" src="eqn258.png" WIDTH=64 HEIGHT=23 STYLE="vertical-align: -5px; margin: 0;" alt="g(\vec{x})=\vec{0}" /> and the level curves  <img class="inlinemath" src="eqn259.png" WIDTH=66 HEIGHT=20 STYLE="vertical-align: -5px; margin: 0;" alt="f(\vec{x})=\vec{c}" /></li><li>Since the gradient of a function is perpendicular to the contour level, we can solve the problem by finding the points where the gradient of the function and that of the constraint are parallel
+<ul>
+<li>If the 2 vectors are parallel, they are the same vector scaled by a constant</li>
+<li> <img class="inlinemath" src="eqn260.png" WIDTH=181 HEIGHT=20 STYLE="vertical-align: -5px; margin: 0;" alt="\nabla\:g(\vec{x})|_{\vec{x_a}}=\lambda*\nabla\:f(\vec{x})|_{\vec{x_a}}" /></li><li>The factor  <img class="inlinemath" src="eqn023.png" WIDTH=11 HEIGHT=16 STYLE="vertical-align: -1px; margin: 0;" alt="\lambda" /> is called Lagrange multiplier</li></ul></li>
+<li>We have therefore n+1 variables to find (all the coordinates of  <img class="inlinemath" src="eqn015.png" WIDTH=13 HEIGHT=16 STYLE="vertical-align: -1px; margin: 0;" alt="\vec{x}" /> and  <img class="inlinemath" src="eqn023.png" WIDTH=11 HEIGHT=16 STYLE="vertical-align: -1px; margin: 0;" alt="\lambda" />) and n+1 equations<ul>
+<li>n equations are embedded in  <img class="inlinemath" src="eqn261.png" WIDTH=244 HEIGHT=20 STYLE="vertical-align: -5px; margin: 0;" alt="\nabla\:g(x,y)|_{x_a,y_a}=\lambda*\nabla\:f(x,y)|_{x_a,y_a}" /></li><li>The remaining equation is the constraint itself  <img class="inlinemath" src="eqn262.png" WIDTH=78 HEIGHT=20 STYLE="vertical-align: -5px; margin: 0;" alt="g(x,y)=0" /></li></ul></li>
+<li>All these equations can be expressed in a compact way with a new function, called Lagrangian
+<ul>
+<li> <img class="inlinemath" src="eqn263.png" WIDTH=180 HEIGHT=20 STYLE="vertical-align: -5px; margin: 0;" alt="\mathcal{L}(\vec{x},\lambda)=f(\vec{x})-\lambda*g(\vec{x})" /></li><li>It is not necessary to form the Lagrangian when computing by hand, we can just solve a normal system of equations</li>
+<li>In computational applications however, computers are much faster in solving the gradient of the Lagrangian, and this is a much more compact way of representing the same information</li>
+</ul></li>
+<li>The solutions of the constrained optimization problem then corresponds to finding the values for  <img class="inlinemath" src="eqn015.png" WIDTH=13 HEIGHT=16 STYLE="vertical-align: -1px; margin: 0;" alt="\vec{x}" /> and  <img class="inlinemath" src="eqn023.png" WIDTH=11 HEIGHT=16 STYLE="vertical-align: -1px; margin: 0;" alt="\lambda" /> for which the gradient of the Lagrangian is 0<ul>
+<li> <img class="inlinemath" src="eqn264.png" WIDTH=97 HEIGHT=23 STYLE="vertical-align: -5px; margin: 0;" alt="\nabla \mathcal{L}(\vec{x},\lambda) = \vec{0}" /></li><li>The solutions  <img class="inlinemath" src="eqn015.png" WIDTH=13 HEIGHT=16 STYLE="vertical-align: -1px; margin: 0;" alt="\vec{x}" /> can be more than one, however they are usually in a number that can be easily computed</li><li>I can then use my solutions as an input for  <img class="inlinemath" src="eqn265.png" WIDTH=33 HEIGHT=20 STYLE="vertical-align: -5px; margin: 0;" alt="f(\vec{x})" /> and find the one that is higher, or lower, depending what I am looking for</li><li>The Lagrange multiplier  <img class="inlinemath" src="eqn023.png" WIDTH=11 HEIGHT=16 STYLE="vertical-align: -1px; margin: 0;" alt="\lambda" /> associated with a specific solution tells me how much the function  <img class="inlinemath" src="eqn265.png" WIDTH=33 HEIGHT=20 STYLE="vertical-align: -5px; margin: 0;" alt="f(\vec{x})" /> is sensitive to variations in the constraint  <img class="inlinemath" src="eqn258.png" WIDTH=64 HEIGHT=23 STYLE="vertical-align: -5px; margin: 0;" alt="g(\vec{x})=\vec{0}" /></li></ul></li>
+<li>If we have multiple constraints, we will have a Lagrange multiplier for each constraint</li>
+</ul>
+<h2 id="information-entropy">Information entropy</h2>
+<ul>
+<li>The constrained optimization problem can be used to solve the problem of information entropy: maximize how much information a signal carries</li>
+<li>We can think of a signal with n different possible values  <img class="inlinemath" src="eqn266.png" WIDTH=92 HEIGHT=17 STYLE="vertical-align: -4px; margin: 0;" alt="v_i\:,\:\:i=1...n" /></li><li>Each value can occur with the respective probability  <img class="inlinemath" src="eqn267.png" WIDTH=14 HEIGHT=13 STYLE="vertical-align: -4px; margin: 0;" alt="p_i" /></li><li>The Shannon entropy for the signal is given by the function  <img class="inlinemath" src="eqn268.png" WIDTH=135 HEIGHT=20 STYLE="vertical-align: -5px; margin: 0;" alt="S=-\sum_i [p_i\ln(p_i)]" /></li><li>If we want to maximize the information carried by the signal, we have to maximize the function  <img class="inlinemath" src="eqn269.png" WIDTH=13 HEIGHT=14 STYLE="vertical-align: -1px; margin: 0;" alt="S" /></li><li>Since we are talking about probabilities, we are under the constraint  <img class="inlinemath" src="eqn270.png" WIDTH=139 HEIGHT=20 STYLE="vertical-align: -5px; margin: 0;" alt="C=\sum_i [p_i]-1=0" /></li><li>We have a function and a constraint: we can write the Lagrangian
+<ul>
+<li> <img class="inlinemath" src="eqn271.png" WIDTH=339 HEIGHT=20 STYLE="vertical-align: -5px; margin: 0;" alt="\mathcal{L}=S+\lambda(C)=-\sum_i [p_i\ln(p_i)]-\lambda(\sum_i[p_i]-1)" /></li></ul></li>
+<li>By solving  <img class="inlinemath" src="eqn272.png" WIDTH=59 HEIGHT=19 STYLE="vertical-align: -1px; margin: 0;" alt="\nabla \mathcal{L}=\vec{0}" /> we find that  <img class="inlinemath" src="eqn273.png" WIDTH=76 HEIGHT=20 STYLE="vertical-align: -4px; margin: 0;" alt="p_i=e^{-1-\lambda}" /></li><li>All the  <img class="inlinemath" src="eqn267.png" WIDTH=14 HEIGHT=13 STYLE="vertical-align: -4px; margin: 0;" alt="p_i" /> are equal and they must sum to 1, therefore  <img class="inlinemath" src="eqn274.png" WIDTH=46 HEIGHT=23 STYLE="vertical-align: -7px; margin: 0;" alt="p_i=\frac{1}{n}" /></li><li>By substituting on the original function then we find that the maximum information content of the signal is  <img class="inlinemath" src="eqn275.png" WIDTH=314 HEIGHT=23 STYLE="vertical-align: -7px; margin: 0;" alt="S_{max}=-\sum_i [\frac{1}{n}\ln(\frac{1}{n})]=\sum_i [\frac{1}{n}\ln(n)]=\ln(n)" /></li></ul>
+<h1 id="statistics">Statistics</h1>
+<h2 id="set-theory">Set theory</h2>
+<ul>
+<li>A set is an unordered collection of objects, also called space
+<ul>
+<li> <img class="inlinemath" src="eqn276.png" WIDTH=160 HEIGHT=20 STYLE="vertical-align: -5px; margin: 0;" alt="C=\{x_1, x_2, x_3,...,x_n\}" /></li></ul></li>
+<li>An object that belongs to a set is said to be an element of that set
+<ul>
+<li> <img class="inlinemath" src="eqn277.png" WIDTH=44 HEIGHT=14 STYLE="vertical-align: -1px; margin: 0;" alt="x \in C" /> means that the object x is an element of the set C</li></ul></li>
+<li>A subset of a set is another set such that all the elements it contains are also contained by the main set
+<ul>
+<li> <img class="inlinemath" src="eqn278.png" WIDTH=248 HEIGHT=20 STYLE="vertical-align: -5px; margin: 0;" alt="A \subseteq B \iff [\forall \: x \in A \implies x \in B]" /></li><li> <img class="inlinemath" src="eqn279.png" WIDTH=211 HEIGHT=16 STYLE="vertical-align: -3px; margin: 0;" alt="A \subseteq B \land B \subseteq A \iff A = B" /></li></ul></li>
+<li>A set without elements is called null set, denoted by  <img class="inlinemath" src="eqn280.png" WIDTH=47 HEIGHT=19 STYLE="vertical-align: -4px; margin: 0;" alt="C=\phi" /></li><li>The union of 2 sets is another set containing all the element contained in one of the sets, or in both
+<ul>
+<li> <img class="inlinemath" src="eqn281.png" WIDTH=46 HEIGHT=14 STYLE="vertical-align: -1px; margin: 0;" alt="A \cup B" /></li><li>It corresponds to a logical OR</li>
+</ul></li>
+<li>The intersection of 2 sets is the set containing the elements that belong to both sets
+<ul>
+<li> <img class="inlinemath" src="eqn282.png" WIDTH=46 HEIGHT=14 STYLE="vertical-align: -1px; margin: 0;" alt="A \cap B" /></li><li>It corresponds to a logical AND</li>
+</ul></li>
+<li>If  <img class="inlinemath" src="eqn283.png" WIDTH=78 HEIGHT=19 STYLE="vertical-align: -4px; margin: 0;" alt="A \cup B = \phi" /> the 2 sets are mutually exclusive</li><li>The complement of a subset is the set of all elements in the set but not in the subset
+<ul>
+<li> <img class="inlinemath" src="eqn284.png" WIDTH=180 HEIGHT=16 STYLE="vertical-align: -3px; margin: 0;" alt="A \subset B \implies A^c=B-A" /></li></ul></li>
+<li>De Morgan’s laws
+<ul>
+<li> <img class="inlinemath" src="eqn285.png" WIDTH=142 HEIGHT=20 STYLE="vertical-align: -5px; margin: 0;" alt="(A \cap B)^c=A^c \cap B^c" /></li><li> <img class="inlinemath" src="eqn286.png" WIDTH=142 HEIGHT=20 STYLE="vertical-align: -5px; margin: 0;" alt="(A \cup B)^c=A^c \cup B^c" /></li></ul></li>
+<li>Set union and intersection are commutative and associative
+<ul>
+<li> <img class="inlinemath" src="eqn287.png" WIDTH=112 HEIGHT=14 STYLE="vertical-align: -1px; margin: 0;" alt="A \cap B = B \cap A" /></li><li> <img class="inlinemath" src="eqn288.png" WIDTH=112 HEIGHT=14 STYLE="vertical-align: -1px; margin: 0;" alt="A \cup B = B \cup A" /></li><li> <img class="inlinemath" src="eqn289.png" WIDTH=243 HEIGHT=20 STYLE="vertical-align: -5px; margin: 0;" alt="(A \cap B)\cap C=(A\cap B)\cap(B\cap C)" /></li><li> <img class="inlinemath" src="eqn290.png" WIDTH=243 HEIGHT=20 STYLE="vertical-align: -5px; margin: 0;" alt="(A \cup B)\cup C=(A\cup B)\cup(B\cup C)" /></li></ul></li>
+</ul>
+<h2 id="probability">Probability</h2>
+<ul>
+<li>Probability is a mathematical model for random phenomena</li>
+<li>A phenomenon is probabilistic if the outcome of an experiment is uncertain, but over large numbers we observe a regular distribution</li>
+<li>An experiment is any procedure that can be repeated in theory an infinite number of times and has a well-defined set of possible outcomes</li>
+<li>The sample space of an experiment is the set of all its possible outcomes</li>
+<li>An event is a subset of the sample space</li>
+<li>In a frequency approach, probability is the ratio between the number of favorable events and that of total events
+<ul>
+<li>Let C be the sample space of an experiment such that  <img class="inlinemath" src="eqn291.png" WIDTH=171 HEIGHT=20 STYLE="vertical-align: -5px; margin: 0;" alt="C=\{E_1, E_2, E_3, ..., E_n\}" />, containing n elements</li><li>Let F be an event subset of C containing all the outcomes that are considered favorable,  <img class="inlinemath" src="eqn292.png" WIDTH=50 HEIGHT=16 STYLE="vertical-align: -3px; margin: 0;" alt="F \subseteq C" /></li><li>Let F contain m elements</li>
+<li>Then, the probability that the event F will happen is given by  <img class="inlinemath" src="eqn293.png" WIDTH=75 HEIGHT=21 STYLE="vertical-align: -7px; margin: 0;" alt="P(F) \approx \frac{m}{n}" /></li></ul></li>
+<li>Probability can also be viewed as the confidence in an event happening</li>
+<li>A probability is a number between 0 and 1
+<ul>
+<li> <img class="inlinemath" src="eqn294.png" WIDTH=104 HEIGHT=20 STYLE="vertical-align: -5px; margin: 0;" alt="0\leq P(E_i)\leq1" /></li></ul></li>
+<li>The sum of the probabilities of all the possible outcomes of an experiment is equal to 1, meaning that there will definitely be 1 outcome
+<ul>
+<li> <img class="inlinemath" src="eqn295.png" WIDTH=85 HEIGHT=20 STYLE="vertical-align: -5px; margin: 0;" alt="P(\cup E_i)=1" /></li></ul></li>
+<li>The probability of 1 of 2 events happening is equal to the sum of the probabilities minus their intersection
+<ul>
+<li> <img class="inlinemath" src="eqn296.png" WIDTH=278 HEIGHT=20 STYLE="vertical-align: -5px; margin: 0;" alt="P(A\cup B)=P(A)+P(B)-P(A\cap B)" /></li></ul></li>
+<li>If 2 events are mutually exclusive (they do not have an intersection!), the probability of their union is the sum of their probabilities
+<ul>
+<li> <img class="inlinemath" src="eqn297.png" WIDTH=188 HEIGHT=20 STYLE="vertical-align: -5px; margin: 0;" alt="P(A\cup B)=P(A)+P(B)" /></li></ul></li>
+<li>The intersection of 2 events that are independent and not mutually exclusive is the product of their probabilities
+<ul>
+<li> <img class="inlinemath" src="eqn298.png" WIDTH=184 HEIGHT=20 STYLE="vertical-align: -5px; margin: 0;" alt="P(A \cap B)=P(A)*P(B)" /></li></ul></li>
+<li>The conditional probability of  <img class="inlinemath" src="eqn299.png" WIDTH=14 HEIGHT=14 STYLE="vertical-align: -1px; margin: 0;" alt="A" /> given  <img class="inlinemath" src="eqn300.png" WIDTH=15 HEIGHT=14 STYLE="vertical-align: -1px; margin: 0;" alt="B" /> is represented as  <img class="inlinemath" src="eqn301.png" WIDTH=57 HEIGHT=20 STYLE="vertical-align: -5px; margin: 0;" alt="P(A|B)" /> <ul>
+<li>If the events are independent,  <img class="inlinemath" src="eqn302.png" WIDTH=116 HEIGHT=20 STYLE="vertical-align: -5px; margin: 0;" alt="P(A|B)=P(A)" /></li><li>If they are not independent,  <img class="inlinemath" src="eqn303.png" WIDTH=126 HEIGHT=28 STYLE="vertical-align: -10px; margin: 0;" alt="P(A|B)=\frac{P(A\cap B)}{P(B)}" /></li><li>Conditioning on an event means that the total event space is reduced to that event</li>
+</ul></li>
+<li>The intersection of 2 events that are NOT independent and NOT mutually exclusive is given by
+<ul>
+<li> <img class="inlinemath" src="eqn304.png" WIDTH=332 HEIGHT=20 STYLE="vertical-align: -5px; margin: 0;" alt="P(A\cap B)=P(A)*P(B|A)=P(B)*P(A|B)" /></li></ul></li>
+<li>2 mutually exclusive events cannot be independent, and vice-versa</li>
+<li>The bayes formula:  <img class="inlinemath" src="eqn301.png" WIDTH=57 HEIGHT=20 STYLE="vertical-align: -5px; margin: 0;" alt="P(A|B)" /> is different from  <img class="inlinemath" src="eqn305.png" WIDTH=57 HEIGHT=20 STYLE="vertical-align: -5px; margin: 0;" alt="P(B|A)" /> <ul>
+<li> <img class="inlinemath" src="eqn306.png" WIDTH=155 HEIGHT=28 STYLE="vertical-align: -10px; margin: 0;" alt="P(B|A)=\frac{P(A|B)*P(B)}{P(A)}" /></li><li>Note that this is just a rearrangement of the intersection of non-independent events</li>
+</ul></li>
+<li>To test if A and B are independent events, we can test that both  <img class="inlinemath" src="eqn307.png" WIDTH=250 HEIGHT=20 STYLE="vertical-align: -5px; margin: 0;" alt="P(A|B)=P(A) \land P(B|A)=P(B)" /> be true</li><li>The odds ratio of 2 events is a statistic that quantifies the strength of the association between them
+<ul>
+<li> <img class="inlinemath" src="eqn308.png" WIDTH=157 HEIGHT=28 STYLE="vertical-align: -10px; margin: 0;" alt="odd(A,B)=\frac{P(A\cap B}{P(A)*P(B)}" /></li><li>If  <img class="inlinemath" src="eqn309.png" WIDTH=57 HEIGHT=14 STYLE="vertical-align: -1px; margin: 0;" alt="OR=1" /> the events are independent</li><li>Frequently  <img class="inlinemath" src="eqn310.png" WIDTH=108 HEIGHT=20 STYLE="vertical-align: -5px; margin: 0;" alt="\log(odd(A,B))" /> is used</li></ul></li>
+<li>A partition of the sample space U is an event  <img class="inlinemath" src="eqn311.png" WIDTH=18 HEIGHT=17 STYLE="vertical-align: -4px; margin: 0;" alt="E_i" /> such that the sum of all the  <img class="inlinemath" src="eqn311.png" WIDTH=18 HEIGHT=17 STYLE="vertical-align: -4px; margin: 0;" alt="E_i" /> is equal to U itself, without holes and sovrappositions<ul>
+<li> <img class="inlinemath" src="eqn312.png" WIDTH=259 HEIGHT=20 STYLE="vertical-align: -5px; margin: 0;" alt="U=\cup_i[ E_i] \:\:\land\:\: E_i \cap E_j = \phi \:\:\:\:\forall\: i \not= j" /></li></ul></li>
+<li>If  <img class="inlinemath" src="eqn311.png" WIDTH=18 HEIGHT=17 STYLE="vertical-align: -4px; margin: 0;" alt="E_i" /> is a partition of U and A a subset of U, then<ul>
+<li> <img class="inlinemath" src="eqn313.png" WIDTH=305 HEIGHT=20 STYLE="vertical-align: -5px; margin: 0;" alt="P(A)=\cup_i [P(A \cap E_i)]=\cup_i [P(A|E_i)P(E_i)]" /></li></ul></li>
+</ul>
+<h2 id="counting">Counting</h2>
+<ul>
+<li>A permutation is an ordered arrangement of objects</li>
+<li>A combination is a set of objects, without considering their order
+<ul>
+<li>It is expressed as  <img class="inlinemath" src="eqn314.png" WIDTH=81 HEIGHT=44 STYLE="vertical-align: -17px; margin: 0;" alt="_nC_r=\begin{pmatrix}n\\r\end{pmatrix}" />, which is read “n choose r”</li></ul></li>
+<li>We can have situations in which the same object can be drawn an infinite number of times
+<ul>
+<li>In this case we talk of replacement</li>
+<li>An example is the possible permutations of letters in a 10bp DNA sequence
+<ul>
+<li>A,T,C,G are the objects, but each of them can be drawn more than once</li>
+</ul></li>
+</ul></li>
+<li>In other situations an object can be drawn only once
+<ul>
+<li>I take objects from a physical stack of objects: I cannot take it again after the first time</li>
+</ul></li>
+<li>Permutations with replacement: the sequence of numbers that I can get from 3 dice rolls
+<ul>
+<li>Let n be the number of possible outcomes
+<ul>
+<li>In the case of a dice, there are 6 possible outcomes so  <img class="inlinemath" src="eqn315.png" WIDTH=42 HEIGHT=14 STYLE="vertical-align: -1px; margin: 0;" alt="n=6" /></li></ul></li>
+<li>Let r be the number of outcomes that I consider (the length of the sequence of outcomes)
+<ul>
+<li>For example, how many times I roll my dice</li>
+</ul></li>
+<li>Then, the number of permutations p is given by  <img class="inlinemath" src="eqn316.png" WIDTH=47 HEIGHT=17 STYLE="vertical-align: -4px; margin: 0;" alt="p=n^r" /> <ul>
+<li>This is the possible sequences of 3 numbers that I can obtain from 3 dice rolls ( <img class="inlinemath" src="eqn317.png" WIDTH=63 HEIGHT=17 STYLE="vertical-align: -1px; margin: 0;" alt="6^3=216" />)</li></ul></li>
+</ul></li>
+<li>Permutations without replacement: in how many ways, considering order, I can sit 6 people in 3 chairs
+<ul>
+<li>Let n be the numerosity of my object pool
+<ul>
+<li>In this case, there are 6 people so  <img class="inlinemath" src="eqn315.png" WIDTH=42 HEIGHT=14 STYLE="vertical-align: -1px; margin: 0;" alt="n=6" /></li></ul></li>
+<li>Let r be the number of objects that I will extract from the pool
+<ul>
+<li>For example, how many chairs do I have</li>
+</ul></li>
+<li>We can reason that the first object can be 1 of the n different objects available, the second 1 of the n-1 remaining and so on</li>
+<li>Therefore, the number of permutation without replacement is given by  <img class="inlinemath" src="eqn318.png" WIDTH=239 HEIGHT=20 STYLE="vertical-align: -5px; margin: 0;" alt="n*(n-1)*(n-2)*...*(n-r)" /> <ul>
+<li>We can cleanly express this with factorials</li>
+</ul></li>
+<li>Then, the number of permutations p without replacement is given by  <img class="inlinemath" src="eqn319.png" WIDTH=69 HEIGHT=26 STYLE="vertical-align: -10px; margin: 0;" alt="p=\frac{n!}{(n-r)!}" /> <ul>
+<li>This is the possible ordered ways I can sit 6 people in 3 chairs ( <img class="inlinemath" src="eqn320.png" WIDTH=201 HEIGHT=20 STYLE="vertical-align: -5px; margin: 0;" alt="6!/(6-3)!=4*5*6=120" />)</li></ul></li>
+</ul></li>
+<li>Combinations without replacement: how many different unordered groups of 3 people can I get by choosing from a pool of 6 people
+<ul>
+<li>Let n be the numerosity of my object pool
+<ul>
+<li>In this case, there are 6 people so  <img class="inlinemath" src="eqn315.png" WIDTH=42 HEIGHT=14 STYLE="vertical-align: -1px; margin: 0;" alt="n=6" /></li></ul></li>
+<li>Let r be the number of objects that I will extract from the event pool
+<ul>
+<li>For example, how many people will be in the final group that I want to extract</li>
+</ul></li>
+<li>We can reason that the number of combinations without replacement is necessarily a subset of the number of permutations without replacement
+<ul>
+<li>It is the number of permutations minus the number of permutations containing the same elements in a different order</li>
+</ul></li>
+<li>The number of permutations would be  <img class="inlinemath" src="eqn321.png" WIDTH=39 HEIGHT=26 STYLE="vertical-align: -10px; margin: 0;" alt="\frac{n!}{(n-r)!}" />, and each unique set can be expressed in  <img class="inlinemath" src="eqn322.png" WIDTH=14 HEIGHT=16 STYLE="vertical-align: -1px; margin: 0;" alt="r!" /> different combinations<ul>
+<li>The final set of combination would be  <img class="inlinemath" src="eqn323.png" WIDTH=30 HEIGHT=20 STYLE="vertical-align: -5px; margin: 0;" alt="1/r!" /> of the set of permutations</li></ul></li>
+<li>Therefore, the number of combinations without replacement is given by  <img class="inlinemath" src="eqn324.png" WIDTH=133 HEIGHT=44 STYLE="vertical-align: -17px; margin: 0;" alt="c=\begin{pmatrix}n\\r\end{pmatrix}=\frac{n!}{(n-r)!r!}" /> <ul>
+<li>This is the number of possible different groups of 3 people that I can form from a pool of 6 people ( <img class="inlinemath" src="eqn325.png" WIDTH=317 HEIGHT=20 STYLE="vertical-align: -5px; margin: 0;" alt="6!/[(6-3)!3!]=4*5*6/2*3=120/6=20" />)</li></ul></li>
+</ul></li>
+<li>Combinations with replacement: the unordered set of numbers that I can get from 3 dice rolls
+<ul>
+<li>Let n be the number of possible outcomes per event
+<ul>
+<li>In the case of a dice, there are 6 possible outcomes so  <img class="inlinemath" src="eqn315.png" WIDTH=42 HEIGHT=14 STYLE="vertical-align: -1px; margin: 0;" alt="n=6" /></li></ul></li>
+<li>Let r be the number of outcomes that I consider
+<ul>
+<li>For example, how many times I roll my dice</li>
+</ul></li>
+<li>We can reason that the event pool is made of n objects that get regenerated when I choose one of them, but not for the last one since I will not choose after that
+<ul>
+<li>Therefore, we can choose r objects among n+r-1 non-replaceable objects</li>
+</ul></li>
+<li>Then, the number of combinations with replacement is given by  <img class="inlinemath" src="eqn326.png" WIDTH=195 HEIGHT=44 STYLE="vertical-align: -17px; margin: 0;" alt="c=\begin{pmatrix}n+r-1\\r\end{pmatrix}=\frac{(n+r-1)!}{(n-1)!r!}" /> <ul>
+<li>This is the possible sets of 3 numbers that I can obtain from 3 dice rolls ( <img class="inlinemath" src="eqn327.png" WIDTH=161 HEIGHT=20 STYLE="vertical-align: -5px; margin: 0;" alt="_8C_3=8!/(5!*3!)=56" />)</li></ul></li>
+</ul></li>
+</ul>
+<h2 id="discrete-distributions">Discrete distributions</h2>
+<ul>
+<li>Probabilities can be described with distributions</li>
+<li>I represent with a capital letter the random variable, with a normal letter one of its values</li>
+<li>A random variable is a way of mapping the outcome of an experiment to a number</li>
+<li>Discrete variables can only take specific values
+<ul>
+<li> <img class="inlinemath" src="eqn328.png" WIDTH=142 HEIGHT=20 STYLE="vertical-align: -5px; margin: 0;" alt="x_i \in I=\{x_i, i \in \mathbb{N}\}" /></li><li>The probability distribution is defined by the function  <img class="inlinemath" src="eqn329.png" WIDTH=37 HEIGHT=20 STYLE="vertical-align: -5px; margin: 0;" alt="f(x_i)" />, which for every  <img class="inlinemath" src="eqn330.png" WIDTH=15 HEIGHT=13 STYLE="vertical-align: -4px; margin: 0;" alt="x_i" /> gives the corresponding probability</li><li>The cumulative distribution is given by the function  <img class="inlinemath" src="eqn331.png" WIDTH=40 HEIGHT=20 STYLE="vertical-align: -5px; margin: 0;" alt="F(x_i)" />, which for every  <img class="inlinemath" src="eqn330.png" WIDTH=15 HEIGHT=13 STYLE="vertical-align: -4px; margin: 0;" alt="x_i" /> gives the probability for a value  <img class="inlinemath" src="eqn332.png" WIDTH=38 HEIGHT=17 STYLE="vertical-align: -4px; margin: 0;" alt="\leq x_i" /></li></ul></li>
+<li>A discrete distribution can be normalized, meaning that it is rescaled so to have the total sum of probabilities equal to 1
+<ul>
+<li> <img class="inlinemath" src="eqn333.png" WIDTH=109 HEIGHT=21 STYLE="vertical-align: -7px; margin: 0;" alt="\sum_{i \in I}f(x_i)=1" /></li><li> <img class="inlinemath" src="eqn334.png" WIDTH=103 HEIGHT=21 STYLE="vertical-align: -7px; margin: 0;" alt="F(x_{max(i)})=1" /></li></ul></li>
+<li>Discrete distribution are represented with histograms</li>
+<li>The probability mass function of a discrete distribution (PMF) is a function that given a value of the random variable X, it produces a probability of that occurring
+<ul>
+<li>It is what defines the distribution itself</li>
+<li>If we plot the random variable and the PMF (the probability!) I obtain the histogram of the distribution</li>
+</ul></li>
+<li>The mode of a discrete distribution is the value that occurs with the highest probability
+<ul>
+<li>It is the highest peak of the histogram</li>
+<li>If there are 2 peaks, the distribution is called bimodal</li>
+</ul></li>
+<li>The median of a discrete distribution is the value of the random variable for which  <img class="inlinemath" src="eqn335.png" WIDTH=242 HEIGHT=23 STYLE="vertical-align: -7px; margin: 0;" alt="P(X &gt; x_{med})=P(X &lt; x_{med})=\frac{1}{2}" /> <ul>
+<li>The first step in computing the median is to order the observations from lowest to highest</li>
+<li>If the number of observations is odd, the median is the middle value in the series</li>
+<li>If the number of observations is even, the median is the average of the 2 central observations</li>
+<li>In the same way, the values of x that split the distribution in quarters is called quartile, in fifths quintile and so on</li>
+<li>The distance between the first and the third quartile is called inter-quartile range, and it is a measure of the spreading of the data</li>
+</ul></li>
+<li>The mean or average of a discrete distribution is the expected value of the random variable X (it can be represented as  <img class="inlinemath" src="eqn336.png" WIDTH=38 HEIGHT=20 STYLE="vertical-align: -5px; margin: 0;" alt="E[X]" />,  <img class="inlinemath" src="eqn337.png" WIDTH=12 HEIGHT=13 STYLE="vertical-align: -4px; margin: 0;" alt="\mu" /> or  <img class="inlinemath" src="eqn338.png" WIDTH=55 HEIGHT=14 STYLE="vertical-align: -1px; margin: 0;" alt="&lt;X&gt;" />)<ul>
+<li>It is also called first moment of the random variable, while  <img class="inlinemath" src="eqn339.png" WIDTH=22 HEIGHT=17 STYLE="vertical-align: -1px; margin: 0;" alt="k^{th}" /> moment represents the expected value of  <img class="inlinemath" src="eqn340.png" WIDTH=18 HEIGHT=17 STYLE="vertical-align: -1px; margin: 0;" alt="x^k" /></li><li> <img class="inlinemath" src="eqn341.png" WIDTH=187 HEIGHT=21 STYLE="vertical-align: -7px; margin: 0;" alt="E[f(x)]=\sum_{i \in I} f(x_i)p(x_i)" />, where  <img class="inlinemath" src="eqn138.png" WIDTH=33 HEIGHT=20 STYLE="vertical-align: -5px; margin: 0;" alt="f(x)" /> is a function defined over discrete random variables and  <img class="inlinemath" src="eqn342.png" WIDTH=31 HEIGHT=20 STYLE="vertical-align: -5px; margin: 0;" alt="p(x)" /> is the probability distribution<ul>
+<li>It is essentially a weighted average of the probabilities for a function of X to have a certain value</li>
+<li>In the simplest case  <img class="inlinemath" src="eqn343.png" WIDTH=65 HEIGHT=20 STYLE="vertical-align: -5px; margin: 0;" alt="f(x)=x" />, therefore I am just taking the mean value of the variable</li></ul></li>
+<li>For an empirical distribution it is calculated as  <img class="inlinemath" src="eqn344.png" WIDTH=122 HEIGHT=23 STYLE="vertical-align: -7px; margin: 0;" alt="E[x]=\frac{1}{n}\sum_{i=1}^n x_i" /></li></ul></li>
+<li>The variance is the mean squared distance of x from the mean of the distribution
+<ul>
+<li> <img class="inlinemath" src="eqn345.png" WIDTH=351 HEIGHT=21 STYLE="vertical-align: -5px; margin: 0;" alt="\sigma^2[x]=Var(x)=E[(x-E[x])^2]=E[x^2]-E[x]^2" /></li><li>It is a measure of how much the distribution is spread out</li>
+</ul></li>
+<li>The standard deviation has the same meaning of the variance, but is more useful because it has the same dimensionality of the random variable x
+<ul>
+<li> <img class="inlinemath" src="eqn346.png" WIDTH=121 HEIGHT=23 STYLE="vertical-align: -5px; margin: 0;" alt="\sigma [x]=\sqrt{Var(x)}" /></li></ul></li>
+<li>Some general properties of expected values and variances
+<ul>
+<li> <img class="inlinemath" src="eqn347.png" WIDTH=196 HEIGHT=20 STYLE="vertical-align: -5px; margin: 0;" alt="E[x_1+X_2]=E[x_1]+E[x_2]" /></li><li> <img class="inlinemath" src="eqn348.png" WIDTH=148 HEIGHT=20 STYLE="vertical-align: -5px; margin: 0;" alt="E[x+k]=E[x]+k]" /></li><li> <img class="inlinemath" src="eqn349.png" WIDTH=223 HEIGHT=20 STYLE="vertical-align: -5px; margin: 0;" alt="E[ax_1+bx_2]=aE[x_1]+bE[x_2]" /></li><li> <img class="inlinemath" src="eqn350.png" WIDTH=181 HEIGHT=21 STYLE="vertical-align: -5px; margin: 0;" alt="Var(a*x)=a^2*Var(x)" /></li></ul></li>
+<li>If and only if  <img class="inlinemath" src="eqn351.png" WIDTH=17 HEIGHT=13 STYLE="vertical-align: -4px; margin: 0;" alt="x_1" /> and  <img class="inlinemath" src="eqn352.png" WIDTH=17 HEIGHT=13 STYLE="vertical-align: -4px; margin: 0;" alt="x_2" /> are independent random variables<ul>
+<li> <img class="inlinemath" src="eqn353.png" WIDTH=183 HEIGHT=20 STYLE="vertical-align: -5px; margin: 0;" alt="E[x_1*x_2]=E[x_1]*E[x_2]" /></li><li> <img class="inlinemath" src="eqn354.png" WIDTH=252 HEIGHT=20 STYLE="vertical-align: -5px; margin: 0;" alt="Var(x_1+x_2)=Var(x_1)+Var(x_2)" /></li></ul></li>
+<li>The covariance of 2 random variables describes how their respective variations are related
+<ul>
+<li> <img class="inlinemath" src="eqn355.png" WIDTH=299 HEIGHT=20 STYLE="vertical-align: -5px; margin: 0;" alt="Cov(x_1,x_2)=E[(x_1-E[x_1])(x_2-E[x_2])]" /></li><li>If the 2 random variables are independent  <img class="inlinemath" src="eqn356.png" WIDTH=113 HEIGHT=20 STYLE="vertical-align: -5px; margin: 0;" alt="Cov(x_1,x_2)=0" /></li></ul></li>
+<li>For any pair of random variables
+<ul>
+<li> <img class="inlinemath" src="eqn357.png" WIDTH=377 HEIGHT=20 STYLE="vertical-align: -5px; margin: 0;" alt="Var(x_1+x_2)=Var(x_1)+Var(x_2)+2*Cov(x_1,x_2)" /></li></ul></li>
+<li>The Bernoulli distribution models a single trial that can have 2 mutually exclusive outcomes
+<ul>
+<li>Let’s call the 2 outcomes success and failure, with probabilities p and 1-p</li>
+<li>Let the random variable X be 0 for failure an 1 for success</li>
+<li>The PMF is  <img class="inlinemath" src="eqn358.png" WIDTH=182 HEIGHT=21 STYLE="vertical-align: -5px; margin: 0;" alt="P(X=x)=p^x(1-p)^{1-x}" /></li><li>The Bernoulli distribution is obvious, but Bernoulli trials are at the foundations of many discrete distributions</li>
+</ul></li>
+<li>The binomial distribution models the number of successes in n independent Bernoulli trials
+<ul>
+<li>Let the same conditions of the Bernoulli trial hold, so 2 mutually exclusive outcomes with probability p and 1-p</li>
+<li>Let the random variable X represent the number of successes in n trials</li>
+<li>The PMF is  <img class="inlinemath" src="eqn359.png" WIDTH=220 HEIGHT=44 STYLE="vertical-align: -17px; margin: 0;" alt="P(X=x)=\begin{pmatrix}n\\x\end{pmatrix}p^x(1-p)^{n-x}" /> <ul>
+<li> <img class="inlinemath" src="eqn360.png" WIDTH=90 HEIGHT=20 STYLE="vertical-align: -5px; margin: 0;" alt="p^x(1-p)^{n-x}" /> is the probability of having a specific sequence of length n with x successes</li><li> <img class="inlinemath" src="eqn361.png" WIDTH=28 HEIGHT=17 STYLE="vertical-align: -4px; margin: 0;" alt="_nC_x" /> is the number of different combinations of x successes that I can get in n trials</li><li>So the PMF is the number of possible sequences of outcomes where X=x, times the probability of each of them</li>
+</ul></li>
+<li>The mean is the number of trials times the probability of the favorable event
+<ul>
+<li> <img class="inlinemath" src="eqn362.png" WIDTH=79 HEIGHT=20 STYLE="vertical-align: -5px; margin: 0;" alt="E[X]=np" /></li></ul></li>
+<li>The variance is
+<ul>
+<li> <img class="inlinemath" src="eqn363.png" WIDTH=147 HEIGHT=20 STYLE="vertical-align: -5px; margin: 0;" alt="Var(X)=np(1-p)" /></li></ul></li>
+</ul></li>
+<li>The Poisson distribution models how many Bernoulli successes will occur in a given unit of a continuous axis (time, volume, …), when the probability of the success is constant
+<ul>
+<li>The random variable X counts the number of successes in the unit of time (or area, volume, …)</li>
+<li>The PMF is  <img class="inlinemath" src="eqn364.png" WIDTH=137 HEIGHT=26 STYLE="vertical-align: -7px; margin: 0;" alt="P(X=x)=\frac{\lambda^x*e^{-\lambda}}{x!}" /> <ul>
+<li>We can consider that in an interval of length 1, we have a mean number of successes called  <img class="inlinemath" src="eqn023.png" WIDTH=11 HEIGHT=16 STYLE="vertical-align: -1px; margin: 0;" alt="\lambda" /></li><li>Suppose we subdivide the interval in n parts of equal length  <img class="inlinemath" src="eqn365.png" WIDTH=12 HEIGHT=23 STYLE="vertical-align: -7px; margin: 0;" alt="\frac{1}{n}" /></li><li>Therefore, if n is big enough each subinterval will have a probability of having 2 successes  <img class="inlinemath" src="eqn366.png" WIDTH=32 HEIGHT=14 STYLE="vertical-align: -1px; margin: 0;" alt="\approx 0" /> and the probability of having a success  <img class="inlinemath" src="eqn367.png" WIDTH=12 HEIGHT=23 STYLE="vertical-align: -7px; margin: 0;" alt="\frac{\lambda}{n}" /></li><li>We can see the process as a binomial distribution with probability of success  <img class="inlinemath" src="eqn368.png" WIDTH=42 HEIGHT=23 STYLE="vertical-align: -7px; margin: 0;" alt="p=\frac{\lambda}{n}" />, with n trials</li><li>If we want the probability of having x successes in the unit interval, we can phrase it as the probability of having a success in exactly x of the subintervals</li>
+<li>We therefore have  <img class="inlinemath" src="eqn369.png" WIDTH=225 HEIGHT=44 STYLE="vertical-align: -17px; margin: 0;" alt="P(X=x)\approx \begin{pmatrix}n\\x\end{pmatrix}\frac{\lambda}{n}^x(1-\frac{\lambda}{n})^{n-x}" /></li><li>Let’s consider  <img class="inlinemath" src="eqn370.png" WIDTH=58 HEIGHT=19 STYLE="vertical-align: -4px; margin: 0;" alt="\lim_{n \to \infty}" />, so what happens in infinitely many intervals that are infinitely small</li><li> <img class="inlinemath" src="eqn371.png" WIDTH=352 HEIGHT=44 STYLE="vertical-align: -17px; margin: 0;" alt="P(X=x)=\lim_{n \to \infty}[\begin{pmatrix}n\\x\end{pmatrix}\frac{\lambda}{n}^x(1-\frac{\lambda}{n})^{n-x}]=\frac{\lambda^x*e^{-\lambda}}{x!}" /></li></ul></li>
+<li>The mean and the variance are both equal to  <img class="inlinemath" src="eqn372.png" WIDTH=149 HEIGHT=20 STYLE="vertical-align: -5px; margin: 0;" alt="E[X]=Var(X)=\lambda" /></li><li> <img class="inlinemath" src="eqn023.png" WIDTH=11 HEIGHT=16 STYLE="vertical-align: -1px; margin: 0;" alt="\lambda" /> is the mean number of successes in the given unit interval</li></ul></li>
+<li>Other discrete distributions
+<ul>
+<li>The geometric distribution describes the probability of waiting for X Bernoulli trials for seeing the first success</li>
+<li>The negative binomial or Pascal distribution is a generalization of the geometric distribution that describes the probability of waiting for X Bernoulli trials for seeing n successes</li>
+<li>The hypergeometric distribution models the number of successes in n trials like the binomial, but considers the case of non-independent trials</li>
+</ul></li>
+<li>Maximum likelihood estimation is a technique that allows fitting a distribution to my data
+<ul>
+<li>Likelihood is a concept different from probability
+<ul>
+<li>Probability refers to the observed data with respect to a certain distribution</li>
+<li>Likelihood refers to having a certain distribution parameter given the data</li>
+</ul></li>
+<li>I want to find the best parameters t for my data d, supposing they follow a certain distribution m</li>
+<li>I can solve for  <img class="inlinemath" src="eqn373.png" WIDTH=167 HEIGHT=20 STYLE="vertical-align: -5px; margin: 0;" alt="t^*=argmax[P(d|t,m)]" /></li><li>Supposing that my model is  <img class="inlinemath" src="eqn374.png" WIDTH=47 HEIGHT=20 STYLE="vertical-align: -5px; margin: 0;" alt="m(d|t)" />, I have a likelihood function  <img class="inlinemath" src="eqn375.png" WIDTH=65 HEIGHT=20 STYLE="vertical-align: -5px; margin: 0;" alt="L(t|d,m)" /></li><li>Since I want to find a maximum of this function, I can set  <img class="inlinemath" src="eqn376.png" WIDTH=50 HEIGHT=23 STYLE="vertical-align: -7px; margin: 0;" alt="\frac{dL}{dt}=0" /> and find the correspondent  <img class="inlinemath" src="eqn377.png" WIDTH=14 HEIGHT=14 STYLE="vertical-align: -1px; margin: 0;" alt="t^*" /></li></ul></li>
+</ul>
+<h2 id="continuous-distributions">Continuous distributions</h2>
+<ul>
+<li>Continuous variables can take infinite values in any interval
+<ul>
+<li> <img class="inlinemath" src="eqn378.png" WIDTH=74 HEIGHT=16 STYLE="vertical-align: -3px; margin: 0;" alt="x \in I \subseteq \mathbb{R}" /></li><li>In a continuous distribution the function does NOT represent a probability, but a probability density (!)</li>
+</ul></li>
+<li>It is meaningful to talk about probability only over an interval (!)
+<ul>
+<li> <img class="inlinemath" src="eqn379.png" WIDTH=128 HEIGHT=20 STYLE="vertical-align: -5px; margin: 0;" alt="p(x=x_i)=0 \: \forall \: x_i" /></li></ul></li>
+<li>The cumulative probability is  <img class="inlinemath" src="eqn380.png" WIDTH=122 HEIGHT=21 STYLE="vertical-align: -5px; margin: 0;" alt="F(x)=\int f(x) dx" />, and for a normalize random variable  <img class="inlinemath" src="eqn381.png" WIDTH=66 HEIGHT=20 STYLE="vertical-align: -5px; margin: 0;" alt="F(x)=1" /></li><li>The PDF is the derivative of the cumulative probability  <img class="inlinemath" src="eqn382.png" WIDTH=73 HEIGHT=23 STYLE="vertical-align: -7px; margin: 0;" alt="f(x)=\frac{dF}{dx}" /></li><li>The mean is  <img class="inlinemath" src="eqn383.png" WIDTH=143 HEIGHT=21 STYLE="vertical-align: -5px; margin: 0;" alt="E[x]=\int x*f(x)dx" /> <ul>
+<li>It is the continuous version (integral) of a weighted sum</li>
+</ul></li>
+<li>The variance is  <img class="inlinemath" src="eqn384.png" WIDTH=312 HEIGHT=21 STYLE="vertical-align: -5px; margin: 0;" alt="Var(x)=E[(x-\mu)^2]=\int(x-\mu)^2*f(x)dx" /></li><li>The uniform probability distribution has a constant value in an interval and 0 outside of it
+<ul>
+<li>The PDF is  <img class="inlinemath" src="eqn385.png" WIDTH=247 HEIGHT=53 STYLE="vertical-align: -22px; margin: 0;" alt="\begin{cases}f(x)=\frac{1}{b-a} &amp; a\leq x\leq b\\f(x)=0 &amp; x\leq a \land x\geq b \end{cases}" /></li><li>The mean is  <img class="inlinemath" src="eqn386.png" WIDTH=78 HEIGHT=23 STYLE="vertical-align: -7px; margin: 0;" alt="E[x]=\frac{a+b}{2}" /></li><li>The variance is  <img class="inlinemath" src="eqn387.png" WIDTH=109 HEIGHT=26 STYLE="vertical-align: -6px; margin: 0;" alt="Var[x]=\frac{(b-a)^2}{12}" />, it can be derived by integration</li></ul></li>
+<li>The normal or Gaussian distribution is the most important continuous distribution
+<ul>
+<li>For the central limit theorem, the sum of a number of random variables approaches a normal distribution as the number of variables increases</li>
+<li>The PDF is  <img class="inlinemath" src="eqn388.png" WIDTH=148 HEIGHT=34 STYLE="vertical-align: -10px; margin: 0;" alt="f(x)=\frac{1}{\sqrt{2\pi\sigma^2}}e^{-\frac{(x-\mu)^2}{2\sigma^2}}" /></li><li>To say that a random variable follows a certain normal distribution, we can write  <img class="inlinemath" src="eqn389.png" WIDTH=99 HEIGHT=21 STYLE="vertical-align: -5px; margin: 0;" alt="X\sim N(\mu,\sigma^2)" /></li><li>The mean of the normal distribution is  <img class="inlinemath" src="eqn390.png" WIDTH=175 HEIGHT=21 STYLE="vertical-align: -5px; margin: 0;" alt="E[x]=\int x * f(x) dx=\mu" /></li><li>The variance of the normal distribution is  <img class="inlinemath" src="eqn391.png" WIDTH=247 HEIGHT=21 STYLE="vertical-align: -5px; margin: 0;" alt="Var(x)=\int (x-\mu)^2 * f(x) dx=\sigma^2" /></li><li>The points  <img class="inlinemath" src="eqn392.png" WIDTH=42 HEIGHT=16 STYLE="vertical-align: -4px; margin: 0;" alt="\mu-\sigma" /> and  <img class="inlinemath" src="eqn393.png" WIDTH=42 HEIGHT=16 STYLE="vertical-align: -4px; margin: 0;" alt="\mu+\sigma" /> are the flexus points of the curve<ul>
+<li>The integral between  <img class="inlinemath" src="eqn394.png" WIDTH=47 HEIGHT=17 STYLE="vertical-align: -4px; margin: 0;" alt="i\mu+\sigma" /> and  <img class="inlinemath" src="eqn392.png" WIDTH=42 HEIGHT=16 STYLE="vertical-align: -4px; margin: 0;" alt="\mu-\sigma" /> is  <img class="inlinemath" src="eqn395.png" WIDTH=54 HEIGHT=16 STYLE="vertical-align: -1px; margin: 0;" alt="\approx 68\%" /></li></ul></li>
+<li>The integral between  <img class="inlinemath" src="eqn396.png" WIDTH=50 HEIGHT=17 STYLE="vertical-align: -4px; margin: 0;" alt="\mu-2\sigma" /> and  <img class="inlinemath" src="eqn397.png" WIDTH=50 HEIGHT=17 STYLE="vertical-align: -4px; margin: 0;" alt="\mu+2\sigma" /> is  <img class="inlinemath" src="eqn398.png" WIDTH=54 HEIGHT=16 STYLE="vertical-align: -1px; margin: 0;" alt="\approx 95\%" /></li><li>The integral between  <img class="inlinemath" src="eqn399.png" WIDTH=50 HEIGHT=17 STYLE="vertical-align: -4px; margin: 0;" alt="\mu-3\sigma" /> and  <img class="inlinemath" src="eqn400.png" WIDTH=50 HEIGHT=17 STYLE="vertical-align: -4px; margin: 0;" alt="\mu+3\sigma" /> is  <img class="inlinemath" src="eqn401.png" WIDTH=66 HEIGHT=16 STYLE="vertical-align: -1px; margin: 0;" alt="\approx 99.7\%" /></li><li>The standard normal distribution is a normal distribution with mean 0 and variance 1, indicated with z
+<ul>
+<li> <img class="inlinemath" src="eqn402.png" WIDTH=83 HEIGHT=20 STYLE="vertical-align: -5px; margin: 0;" alt="z \sim N(0,1)" /></li><li>Any distribution can be normalized by introducing the standardized variable z such that  <img class="inlinemath" src="eqn403.png" WIDTH=58 HEIGHT=23 STYLE="vertical-align: -7px; margin: 0;" alt="z=\frac{x-\mu}{\sigma}" /></li></ul></li>
+</ul></li>
+<li>Central limit theorem: the sample mean is normally distributed for large sample sizes, regardless of the original distribution of the population
+<ul>
+<li>We can assume that our data is normally distributed if the sample size is large enough</li>
+</ul></li>
+<li>The normal distribution cannot be integrated analytically, therefore the integral is computed with tables for the standard normal distribution or via software</li>
+<li>In an n-dimensional space the normal distribution is computed with vectors and matrices</li>
+<li>The estimated mean of the distribution of a set of normally distributed data is  <img class="inlinemath" src="eqn404.png" WIDTH=69 HEIGHT=23 STYLE="vertical-align: -7px; margin: 0;" alt="\frac{1}{n}\sum_{i=1}^nx_i" /> <ul>
+<li>This can be derived by a long integration of the formula for the normal distribution</li>
+<li>This is an unbiased estimate</li>
+</ul></li>
+<li>The estimated variance of the distribution of a set of normally distributed data is  <img class="inlinemath" src="eqn405.png" WIDTH=130 HEIGHT=24 STYLE="vertical-align: -8px; margin: 0;" alt="\frac{1}{n-1}\sum_{i=1}^n(x_i-\mu)^2" /> <ul>
+<li>The sample variance underestimates the variance of the population, as can be derived by expanding the variance formula</li>
+<li>Sometimes the variance of the sample is named  <img class="inlinemath" src="eqn406.png" WIDTH=19 HEIGHT=17 STYLE="vertical-align: -1px; margin: 0;" alt="S^2" /> to differentiate it from the real variance</li></ul></li>
+<li>The sample mean  <img class="inlinemath" src="eqn407.png" WIDTH=11 HEIGHT=13 STYLE="vertical-align: -1px; margin: 0;" alt="\bar x" /> is normally distributed with mean equal to the mean of the distribution and variance equal to the variance of the distribution divided by n<ul>
+<li> <img class="inlinemath" src="eqn408.png" WIDTH=65 HEIGHT=20 STYLE="vertical-align: -5px; margin: 0;" alt="E[\bar x]=\mu" /></li><li> <img class="inlinemath" src="eqn409.png" WIDTH=98 HEIGHT=23 STYLE="vertical-align: -7px; margin: 0;" alt="Var[\bar x]=\frac{1}{n}\sigma^2" /></li></ul></li>
+<li>The sample variance is distributed following the  <img class="inlinemath" src="eqn410.png" WIDTH=18 HEIGHT=20 STYLE="vertical-align: -4px; margin: 0;" alt="\chi^2" /> distribution with n-1 degrees of freedom<ul>
+<li>The degrees of freedom  <img class="inlinemath" src="eqn411.png" WIDTH=77 HEIGHT=19 STYLE="vertical-align: -4px; margin: 0;" alt="df=n-1" /> are the number of independent  <img class="inlinemath" src="eqn330.png" WIDTH=15 HEIGHT=13 STYLE="vertical-align: -4px; margin: 0;" alt="x_i" /></li></ul></li>
+<li>The  <img class="inlinemath" src="eqn410.png" WIDTH=18 HEIGHT=20 STYLE="vertical-align: -4px; margin: 0;" alt="\chi^2" /> distribution is a family of asymmetrical distribution for different degrees of freedom which models the distribution of the sample variance of a normal population<ul>
+<li>The distribution of the square of a normal distribution is a  <img class="inlinemath" src="eqn410.png" WIDTH=18 HEIGHT=20 STYLE="vertical-align: -4px; margin: 0;" alt="\chi^2" /> distribution with  <img class="inlinemath" src="eqn412.png" WIDTH=47 HEIGHT=19 STYLE="vertical-align: -4px; margin: 0;" alt="df=1" /></li></ul></li>
+<li>The Student t distribution is the distribution of the variable  <img class="inlinemath" src="eqn413.png" WIDTH=56 HEIGHT=28 STYLE="vertical-align: -15px; margin: 0;" alt="t=\frac{z}{\sqrt{\frac{u}{v}}}" />, where z is a standard normally distributed random variable, u is a random variable with  <img class="inlinemath" src="eqn410.png" WIDTH=18 HEIGHT=20 STYLE="vertical-align: -4px; margin: 0;" alt="\chi^2" /> distribution with v degrees of freedom, and z and u are independent<ul>
+<li>It is used in the Student t-test to compare 2 sample means and determine the probability that they come from the same population</li>
+<li>If we draw n independent observation from a normal population the quantity  <img class="inlinemath" src="eqn414.png" WIDTH=34 HEIGHT=28 STYLE="vertical-align: -10px; margin: 0;" alt="\frac{\bar X-\mu}{S/\sqrt{n}}" /> has a t distribution with  <img class="inlinemath" src="eqn411.png" WIDTH=77 HEIGHT=19 STYLE="vertical-align: -4px; margin: 0;" alt="df=n-1" /></li><li>It is similar to the normal distribution, but it is more spread out</li>
+<li>Its PDF is quite complex</li>
+<li>It converges to the normal distribution for  <img class="inlinemath" src="eqn415.png" WIDTH=66 HEIGHT=17 STYLE="vertical-align: -3px; margin: 0;" alt="k \to +\infty" /></li><li>Its areas are computed via tables or software</li>
+</ul></li>
+<li>The Gumbel or extreme value distribution is used to model the extreme values of a number of samples of various distributions
+<ul>
+<li>It was invented to model the distribution of extreme temperatures during the year, and it is used for modeling rare phenomena</li>
+<li>The PDF is the exponential of an exponential, it decreases very, very fast
+<ul>
+<li> <img class="inlinemath" src="eqn416.png" WIDTH=117 HEIGHT=24 STYLE="vertical-align: -5px; margin: 0;" alt="f(x)=e^{-e^{(x-\mu) /\beta}}" /></li></ul></li>
+<li>The Gumbel distribution is used by BLAST for calculating the E-value
+<ul>
+<li>The expected score E of a match in a database is the number of times that my sequence would obtain a score S higher than the observed one in a random database of the same size</li>
+</ul></li>
+</ul></li>
+</ul>
+<hr />
+<p>rewied until here</p>
+<h2 id="hypothesis-testing">Hypothesis testing</h2>
+<ul>
+<li>When performing an experiment, before analyzing the result I need to formulate hypotheses and assumptions
+<ul>
+<li>I should state a null hypothesis that I want to disprove</li>
+<li>I should state what are my assumptions: statistical independence, distribution of the data…</li>
+<li>I can compute the needed statistics from my data</li>
+<li>I can check the probability of observing my statistics under the null hypothesis, for the distribution given by my assumptions</li>
+<li>If my statistics are more extreme than the critical value chosen, I can reject the null hypothesis</li>
+<li>If my statistics are not more extreme, I fail to reject the null hypothesis</li>
+</ul></li>
+<li>I can never accept the null hypothesis: it is assumed true from the beginning, and failing to disprove does not mean to prove a hypothesis
+<ul>
+<li>This is a logical fallacy known as argument from ignorance</li>
+</ul></li>
+<li>The p-value is the conditional probability of observing a result more extreme or equal to the test statistic given the null hypothesis
+<ul>
+<li> <img class="inlinemath" src="eqn417.png" WIDTH=127 HEIGHT=20 STYLE="vertical-align: -5px; margin: 0;" alt="p=P(X\geq x|H_0)" /></li><li>It was invented by Fisher as a rough estimate of the strength of evidence against the null hypothesis</li>
+</ul></li>
+<li>The significance of a test is the probability that the test rejects  <img class="inlinemath" src="eqn418.png" WIDTH=22 HEIGHT=17 STYLE="vertical-align: -4px; margin: 0;" alt="H_0" /> if it actually holds<ul>
+<li> <img class="inlinemath" src="eqn419.png" WIDTH=169 HEIGHT=20 STYLE="vertical-align: -5px; margin: 0;" alt="\alpha=P(false\:\: positives)" /></li></ul></li>
+<li>The power of a test  <img class="inlinemath" src="eqn420.png" WIDTH=12 HEIGHT=19 STYLE="vertical-align: -4px; margin: 0;" alt="\-\beta" /> is the probability that the test rejects a false null hypothesis<ul>
+<li> <img class="inlinemath" src="eqn421.png" WIDTH=159 HEIGHT=20 STYLE="vertical-align: -5px; margin: 0;" alt="\beta=P(false negative)" /></li></ul></li>
+<li>In any test, we want  <img class="inlinemath" src="eqn422.png" WIDTH=12 HEIGHT=10 STYLE="vertical-align: -1px; margin: 0;" alt="\alpha" /> and  <img class="inlinemath" src="eqn423.png" WIDTH=12 HEIGHT=19 STYLE="vertical-align: -4px; margin: 0;" alt="\beta" /> as small as possible</li><li>The threshold (critical value) used depends on the significance that we desire
+<ul>
+<li>In biology it is common to use  <img class="inlinemath" src="eqn424.png" WIDTH=61 HEIGHT=17 STYLE="vertical-align: -4px; margin: 0;" alt="p=0.05" /></li><li>In physics it is used  <img class="inlinemath" src="eqn425.png" WIDTH=70 HEIGHT=20 STYLE="vertical-align: -4px; margin: 0;" alt="p=10^{-10}" /> or even lower</li></ul></li>
+<li>The critical value is the value for which the area under the curve from that value to the extreme of the distribution is equal to the desired p-value</li>
+<li>The p-value is currently heavily criticized
+<ul>
+<li>From the view of Fisher himself, the p-value is a measure of significance, importance of a result, but not a proof: it requires further testing</li>
+<li>It is often misinterpreted by researchers</li>
+<li>It does not give any information on the magnitude or physical meaning of the observed statistical difference</li>
+<li>Two studies can have similar results but very different p-values because of different sample sizes</li>
+<li> <img class="inlinemath" src="eqn426.png" WIDTH=46 HEIGHT=16 STYLE="vertical-align: -3px; margin: 0;" alt="P \leq x" /> and  <img class="inlinemath" src="eqn427.png" WIDTH=46 HEIGHT=14 STYLE="vertical-align: -1px; margin: 0;" alt="P=x" /> have a very different meaning</li><li>We can and should use both sides of the distribution for calculating p-value, but sometimes one-sided values are reported
+<ul>
+<li>This gives to the p-value more assumptions based on the belief of the researcher, and it is not fair</li>
+</ul></li>
+</ul></li>
+<li>The Bayesian approach to data validation is an alternative to the p-value
+<ul>
+<li>It aims at giving a more useful estimate:  <img class="inlinemath" src="eqn428.png" WIDTH=97 HEIGHT=20 STYLE="vertical-align: -5px; margin: 0;" alt="P(H_0|X\geq x)" /></li><li>It is computed with the Bayes theorem from p-value,  <img class="inlinemath" src="eqn429.png" WIDTH=47 HEIGHT=20 STYLE="vertical-align: -5px; margin: 0;" alt="P(H_0)" /> and  <img class="inlinemath" src="eqn430.png" WIDTH=73 HEIGHT=20 STYLE="vertical-align: -5px; margin: 0;" alt="P(X\geq x)" /></li><li>I need the <em>a priori</em> probability of the observation, which usually is not available</li>
+<li>The Bayesian factor is the ratio between the probability of my data give the null hypothesis and union of the probabilities of my data given any other hypothesis</li>
+</ul></li>
+<li>The Fisher test is aimed at determining the probability of observing the data under the assumption that the categories are independent
+<ul>
+<li>I prepare a contingency table where I put the number of subjects in each combination of categories</li>
+<li>From the table I take the various coefficients and compute the probability of obtaining that table under  <img class="inlinemath" src="eqn418.png" WIDTH=22 HEIGHT=17 STYLE="vertical-align: -4px; margin: 0;" alt="H_0" /> (no association between the variables)</li><li>The probability is computed using the binomial</li>
+<li>The output is a number between 0 and 1 which is the probability of obtaining that table</li>
+<li>It does NOT give the p-value because it doesn’t consider tables that are more extreme of the observed one</li>
+<li>In a 2*2 table with coefficients a, b, c, d and total number of subjects n  <img class="inlinemath" src="eqn431.png" WIDTH=166 HEIGHT=26 STYLE="vertical-align: -7px; margin: 0;" alt="p=\frac{(a+b)!(c+d)!(a+c)!(b+d)!}{n!a!b!c!d!}" /></li></ul></li>
+<li>When I do n tests on the same data, I can expect to have many false positives, in a way that is proportional to n
+<ul>
+<li>The simplest correction that can be made to preserve the significance is the Bonferroni correction
+<ul>
+<li> <img class="inlinemath" src="eqn432.png" WIDTH=67 HEIGHT=20 STYLE="vertical-align: -5px; margin: 0;" alt="\alpha'=\alpha/n" /></li><li>The actual significance to be accepted is the original significance divided by the number of tests</li>
+<li>Sometimes it is too strict, it fails to reject  <img class="inlinemath" src="eqn418.png" WIDTH=22 HEIGHT=17 STYLE="vertical-align: -4px; margin: 0;" alt="H_0" /> that are false</li></ul></li>
+<li>Another common correction is the Benjamini-Hochberg</li>
+</ul></li>
+<li>The means of samples from the same population are normally distributed with a mean equal to the mean of the population and variance equal to the variance of the population divided by the size of the samples
+<ul>
+<li>The sample mean is  <img class="inlinemath" src="eqn433.png" WIDTH=108 HEIGHT=23 STYLE="vertical-align: -7px; margin: 0;" alt="M=\frac{1}{n}\sum_{i=1}^n x_i" /></li><li>The mean of the population  <img class="inlinemath" src="eqn337.png" WIDTH=12 HEIGHT=13 STYLE="vertical-align: -4px; margin: 0;" alt="\mu" /> is best approximated by the mean of the sample means<ul>
+<li> <img class="inlinemath" src="eqn434.png" WIDTH=72 HEIGHT=20 STYLE="vertical-align: -5px; margin: 0;" alt="\mu=E[M]" /></li></ul></li>
+<li>The variance of the sample mean is the variance of the population divided by the sample size
+<ul>
+<li> <img class="inlinemath" src="eqn435.png" WIDTH=106 HEIGHT=23 STYLE="vertical-align: -7px; margin: 0;" alt="Var[M]=\frac{1}{n} \sigma^2" /></li><li>The unbiased variance is used, computed by  <img class="inlinemath" src="eqn436.png" WIDTH=138 HEIGHT=24 STYLE="vertical-align: -8px; margin: 0;" alt="\frac{1}{n-1}\sum_{i=1}^n(x_i-M)^2" /></li></ul></li>
+</ul></li>
+<li>The z-test uses the z-tables to compute the probability of observing a certain standardized value
+<ul>
+<li>If our  <img class="inlinemath" src="eqn418.png" WIDTH=22 HEIGHT=17 STYLE="vertical-align: -4px; margin: 0;" alt="H_0" /> gives us a true population mean ( <img class="inlinemath" src="eqn437.png" WIDTH=85 HEIGHT=17 STYLE="vertical-align: -4px; margin: 0;" alt="H_0:M=\mu" />), we can compute the standardized variable  <img class="inlinemath" src="eqn438.png" WIDTH=65 HEIGHT=27 STYLE="vertical-align: -10px; margin: 0;" alt="z=\frac{M-\mu}{\sigma/\sqrt{n}}" /> <ul>
+<li>I use  <img class="inlinemath" src="eqn439.png" WIDTH=45 HEIGHT=20 STYLE="vertical-align: -5px; margin: 0;" alt="\sigma/\sqrt{n}" /> beacause I need the standard deviation of the sample means, not of the samples</li><li>Note that for the z-test I need the real variance of the population,  <img class="inlinemath" src="eqn440.png" WIDTH=18 HEIGHT=17 STYLE="vertical-align: -1px; margin: 0;" alt="\sigma^2" />, not its estimate based on the sample variance</li></ul></li>
+<li>I need to use the 2 tails if I cannot completely exclude deviations in one direction</li>
+</ul></li>
+<li>If instead that the actual variance of the population I use its estimate, the unbiased sample variance S, I need to use the t-distribution with n-1 degrees of freedom
+<ul>
+<li>The variable t is computed as  <img class="inlinemath" src="eqn441.png" WIDTH=62 HEIGHT=27 STYLE="vertical-align: -10px; margin: 0;" alt="t=\frac{M-\mu}{S/\sqrt{n}}" /></li></ul></li>
+<li>The t-test can also be used to compare the means of 2 samples, to test if they are significantly different
+<ul>
+<li>In this case I require the t-distribution with 2n-2 degrees of freedom</li>
+<li>The formula for computing the variable t is quite complex</li>
+</ul></li>
+<li>The ANOVA (ANalisys Of VAriance), also called F-test, is a generalization of the t-test used to compare k means
+<ul>
+<li>When comparing 2 means, the ANOVA reduces to the t-test with relation  <img class="inlinemath" src="eqn442.png" WIDTH=48 HEIGHT=17 STYLE="vertical-align: -1px; margin: 0;" alt="F=t^2" /></li><li>It assumes that the samples are random and the errors are independent, that the populations are normally distributed and that for each condition the populations have the same variance</li>
+</ul></li>
+<li>The one-way ANOVA compares means of different samples (treatments in the ANOVA jargon)
+<ul>
+<li>The  <img class="inlinemath" src="eqn418.png" WIDTH=22 HEIGHT=17 STYLE="vertical-align: -4px; margin: 0;" alt="H_0" /> is that all the means are equal</li><li>From the different treatments we can compute the means for each treatment and the global mean of all data</li>
+<li>We can compute the treatment variances and the global variance in the same way</li>
+<li>The total variance can be partitioned in random variation and in variation between treatments
+<ul>
+<li>The sum of squares within (SSW) is computed as  <img class="inlinemath" src="eqn443.png" WIDTH=108 HEIGHT=24 STYLE="vertical-align: -8px; margin: 0;" alt="\sum_{i,j} (x_{i,j}*\mu_j)^2" /></li><li>Each value is compared to the mean of its treatment</li>
+<li>The sum of squares between (SSB) is computed as  <img class="inlinemath" src="eqn444.png" WIDTH=107 HEIGHT=24 STYLE="vertical-align: -8px; margin: 0;" alt="\sum_{j} n_j(\mu_j*\mu)^2" /></li><li>Each treatment mean is compared to the global mean and multiplied for the number of samples in the treatment</li>
+</ul></li>
+<li>It can be proven that the sum of squares total (SST) is equal to the sum of SSW and SSB
+<ul>
+<li> <img class="inlinemath" src="eqn445.png" WIDTH=338 HEIGHT=21 STYLE="vertical-align: -5px; margin: 0;" alt="SST=\sigma^2*n_{tot}=\sum_i (x_i-\mu)^2=SSW+SSB" /></li></ul></li>
+<li>We can then define the variable  <img class="inlinemath" src="eqn446.png" WIDTH=100 HEIGHT=23 STYLE="vertical-align: -7px; margin: 0;" alt="f \: : \: f=\frac{MSB}{MSW}" /> <ul>
+<li> <img class="inlinemath" src="eqn447.png" WIDTH=241 HEIGHT=20 STYLE="vertical-align: -5px; margin: 0;" alt="MSW=SSW/(n_{tot}-n_{treatments})" /> <ul>
+<li>It is the mean square within</li>
+</ul></li>
+<li> <img class="inlinemath" src="eqn448.png" WIDTH=218 HEIGHT=20 STYLE="vertical-align: -5px; margin: 0;" alt="MSB=SSB/(n_{treatments}-1)" /> <ul>
+<li>It is the mean square between</li>
+</ul></li>
+</ul></li>
+<li>The variable f is distributed following the Fisher-Snedecor F distribution
+<ul>
+<li>There is one distribution for each combination of degrees of freedom within and between</li>
+</ul></li>
+<li>The null hypothesis can be rejected when f is high enough</li>
+<li>If  <img class="inlinemath" src="eqn449.png" WIDTH=41 HEIGHT=19 STYLE="vertical-align: -4px; margin: 0;" alt="f\leq1" /> the variability between is equal or lower than the variability within</li></ul></li>
+<li>Two-way ANOVA can be used to compare the response to different combination of 2 variables
+<ul>
+<li>It can be used in different treatments defined as different combinations of doses of 2 different drugs</li>
+<li>There are 3  <img class="inlinemath" src="eqn418.png" WIDTH=22 HEIGHT=17 STYLE="vertical-align: -4px; margin: 0;" alt="H_0" />, if I call the treatments A and B<ul>
+<li>No difference in means due to factor A</li>
+<li>No difference in means due to factor B</li>
+<li>No interaction between A and B</li>
+</ul></li>
+<li>It tests for the effect of the single variables and for interaction between them</li>
+<li>If we have the variable A and B, SST is composed of SSW, SSB(A), SSB(B), SSB(A,B)</li>
+<li>I have a SSB for each treatment level, and for any treatment combination</li>
+<li>In order to be powerful, if we increase the number of treatments we need a lot of data</li>
+<li>It is frequently used for the analysis of expression data</li>
+</ul></li>
+<li>The  <img class="inlinemath" src="eqn410.png" WIDTH=18 HEIGHT=20 STYLE="vertical-align: -4px; margin: 0;" alt="\chi^2" />-test is used to determine if the unbiased sample variance is significantly different from the variance of the population<ul>
+<li>We can define the sum of squared distances from the mean  <img class="inlinemath" src="eqn450.png" WIDTH=117 HEIGHT=21 STYLE="vertical-align: -5px; margin: 0;" alt="Q=\sum (x_i-\mu)^2" /></li><li>Q is distributed with a  <img class="inlinemath" src="eqn410.png" WIDTH=18 HEIGHT=20 STYLE="vertical-align: -4px; margin: 0;" alt="\chi^2" /> distribution with n-1 degrees of freedom</li></ul></li>
+<li>The Pearson’s  <img class="inlinemath" src="eqn410.png" WIDTH=18 HEIGHT=20 STYLE="vertical-align: -4px; margin: 0;" alt="\chi^2" /> test is used to determine if some data fits a certain distribution, with certain parameters<ul>
+<li> <img class="inlinemath" src="eqn451.png" WIDTH=114 HEIGHT=27 STYLE="vertical-align: -8px; margin: 0;" alt="\chi^2=\sum \frac{(O_i-E_i)^2}{E_i}" /></li><li>This variable follows a  <img class="inlinemath" src="eqn410.png" WIDTH=18 HEIGHT=20 STYLE="vertical-align: -4px; margin: 0;" alt="\chi^2" /> distribution with n-s-1 degrees of freedom, where s is the number of parameters that define the specific distribution tested</li><li> <img class="inlinemath" src="eqn452.png" WIDTH=19 HEIGHT=17 STYLE="vertical-align: -4px; margin: 0;" alt="O_i" /> is the observed value,  <img class="inlinemath" src="eqn311.png" WIDTH=18 HEIGHT=17 STYLE="vertical-align: -4px; margin: 0;" alt="E_i" /> the expected value given the model</li></ul></li>
+<li>Non-parametric tests make very few assumptions about the data
+<ul>
+<li>They do not estimate parameters from the data and do not assume any distribution</li>
+<li>They can be used with qualitative data and ordinal data
+<ul>
+<li>Ordinal data relies on median instead of mean</li>
+</ul></li>
+<li>They are not susceptible to outliers</li>
+<li>They are tipically used when the data are too skewed for a paramatric test</li>
+<li>They are less powerfull than parametric tests, they are more susceptible to type II errors</li>
+<li>Each parametric test has a non-parametric alternative</li>
+</ul></li>
+</ul>
+<h2 id="correlation-and-regression">Correlation and regression</h2>
+<ul>
+<li>Correlation can be measured by a coefficient  <img class="inlinemath" src="eqn453.png" WIDTH=11 HEIGHT=13 STYLE="vertical-align: -4px; margin: 0;" alt="\rho" /> <ul>
+<li>Given the variables x and y, we can compute  <img class="inlinemath" src="eqn454.png" WIDTH=19 HEIGHT=13 STYLE="vertical-align: -4px; margin: 0;" alt="\mu_x" /> and  <img class="inlinemath" src="eqn455.png" WIDTH=18 HEIGHT=14 STYLE="vertical-align: -5px; margin: 0;" alt="\mu_y" /></li><li>If we graph a point ( <img class="inlinemath" src="eqn456.png" WIDTH=49 HEIGHT=20 STYLE="vertical-align: -5px; margin: 0;" alt="\mu_x,\mu_y)" /> we define the centroid of the data</li><li>The covariance is a good measure of linear dependence between x and y
+<ul>
+<li> <img class="inlinemath" src="eqn457.png" WIDTH=261 HEIGHT=24 STYLE="vertical-align: -8px; margin: 0;" alt="cov(x,y)=\frac{1}{n-1}\sum_i (x_i-\mu_x)(y_i-\mu_y)" /></li></ul></li>
+<li>We can then define the Pearson’s correlation coefficient  <img class="inlinemath" src="eqn458.png" WIDTH=77 HEIGHT=28 STYLE="vertical-align: -10px; margin: 0;" alt="\rho=\frac{cov(x,y)}{\sigma_x \sigma_y}" /> <ul>
+<li>It is a number between -1 and 1 because it is rescaled by the standard deviations of x and y</li>
+<li>The Pearson’s coefficient tests only linear dependency (!)
+<ul>
+<li>If  <img class="inlinemath" src="eqn459.png" WIDTH=41 HEIGHT=17 STYLE="vertical-align: -4px; margin: 0;" alt="\rho=0" /> we can NOT say that x and y are independent, they can have higher-order dependencies</li></ul></li>
+</ul></li>
+<li>The significance of the coefficient is strongly dependent on the number of points
+<ul>
+<li>The value of the coefficient <em>per se</em> does not mean anything, it has always to be tested</li>
+<li>It can be tested using the Student distribution</li>
+</ul></li>
+<li>The Person’s coefficient is very sensitive to outliers</li>
+<li>Always look at the graph before drawing conclusions, because it can be different fro what you think</li>
+</ul></li>
+<li>CORRELATION DOES NOT IMPLY CAUSATION</li>
+<li>The Spearman’s correlation coefficient measure monotonic dependency
+<ul>
+<li>It is the Pearson’s coefficient of the rank of the variables, it is its non-paramtric alternative</li>
+<li>If we make a ranking of values from the lowest to the highest, the rank of a value is its position in the ranking</li>
+<li>We have to test the significance also of this coefficient, that depends on the amount of data</li>
+</ul></li>
+<li>The Matthews correlation coefficient (MCC) is used for categorical variables
+<ul>
+<li>We can assign the values 0 and 1 to the categories in both values</li>
+<li>We can take the Pearson’s coefficient of these values, which is the MCC</li>
+<li>It is used in machine learning in a table real vs predicted</li>
+</ul></li>
+<li>When the dependency is more complex, we can use the mutual information
+<ul>
+<li>It will be a topic for next year</li>
+</ul></li>
+<li>If we have data with a good Pearson correlation, we can define a linear regression</li>
+<li>One technique is to minimize the distance between the points and the line (best fit with least squares)
+<ul>
+<li>We want to minimize the function  <img class="inlinemath" src="eqn460.png" WIDTH=201 HEIGHT=21 STYLE="vertical-align: -5px; margin: 0;" alt="f(a,b)=\sum_i [y_i-(ax_i+b)]^2" /></li></ul></li>
+<li>The same technique can be applied for fitting any polynomial
+<ul>
+<li> <img class="inlinemath" src="eqn461.png" WIDTH=159 HEIGHT=21 STYLE="vertical-align: -5px; margin: 0;" alt="y=P(x)\sum_{k=0}^p a_k*x^k" /></li></ul></li>
+<li>If I use a high degree polynomial I risk doing overfitting
+<ul>
+<li>I have overfitting when the number of data is of the same order of the number of parameters</li>
+<li>In overfitting the values of the parameters are often absurd (really high in absolute value), without any physical meaning</li>
+</ul></li>
+<li>The error can be estimated considering overfitting by giving a penalty for high coefficients</li>
+<li>To test the quality of a model we need to use data not used for building the model itself (!)</li>
+<li>Cross-validation is very dangerous</li>
+</ul>
+<h2 id="principal-component-analysis">Principal component analysis</h2>
+<ul>
+<li>Principal component analysis is used with high-dimensional data
+<ul>
+<li>It reduces the number of dimensions, so to be able to plot the results</li>
+<li>A good idea to preliminarily decrease the number of variables is to remove the ones with the lowest variance</li>
+<li>If we want to find a better system of reference, we can choose the axes with 0 covariance</li>
+</ul></li>
+<li>I can build the covariance matrix of the variables
+<ul>
+<li>The covariance matrix is symmetric and therefore it can be diagonalized easily</li>
+<li>The change of basis matrix U is orthogonal and therefore represents a rotation</li>
+<li> <img class="inlinemath" src="eqn462.png" WIDTH=141 HEIGHT=44 STYLE="vertical-align: -17px; margin: 0;" alt="\Lambda=\begin{pmatrix}\lambda_1&amp;0\\0&amp;\lambda_2\end{pmatrix}" /></li><li>If I rank the eigenvalues from highest to lowest, I can choose to use only a subset of dimensions that maximizes the variation</li>
+</ul></li>
+<li>PCA can discriminate only linear dependencies (!) by rotating the frame of reference so to align it with the variation</li>
+<li>If a variable has a relatively high covariance, it will dominate the principal components</li>
+<li>It makes sense to compare variances only if they are in the same unit of measure</li>
+<li>I can standardize the variables so to have unit variance and 0 mean to avoid this problems</li>
+<li>Instead of a covariance matrix, I can do PCA with a correlation matrix</li>
+<li>The correlation of a variable on each of the eigenvectors is called loading</li>
+<li>To choose the number of principal components, a common rule is to exclude the dimension with  <img class="inlinemath" src="eqn463.png" WIDTH=41 HEIGHT=16 STYLE="vertical-align: -1px; margin: 0;" alt="\lambda &lt; 1" /></li></ul>

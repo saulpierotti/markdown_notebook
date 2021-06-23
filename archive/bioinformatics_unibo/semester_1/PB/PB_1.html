@@ -1,0 +1,326 @@
+<h1 id="course-organization">Course organization</h1>
+<ul>
+<li>5/12 mid term exam on paper, it is worth 8/32 points, finals are on February and march</li>
+<li>This module of the course is about Python</li>
+</ul>
+<h1 id="linux-and-cs-basics">Linux and CS basics</h1>
+<ul>
+<li>The main resource of a computer are RAM and CPU</li>
+<li>The OS allocates resources to programs, and impedes interference among them</li>
+<li>Linux is a kernel, it manages resources for the OS
+<ul>
+<li>It derives from Unix, like also MacOS</li>
+<li>It is multithreaded (it can run more than 1 program at the same time) and multiuser</li>
+<li>The users are isolated from each other, they cannot interfere</li>
+</ul></li>
+<li>A Linux distro includes an install system for the distro itself, drivers, a package manager, tools
+<ul>
+<li>Some tools are really specific, and probabily I will never need them</li>
+<li>A package manager allows to install and remove tools</li>
+</ul></li>
+<li>One user is root, the superuser
+<ul>
+<li>It should be used only when needed and with extreme caution</li>
+</ul></li>
+<li>The shell is the main interface of the OS</li>
+<li>The directory structure is a rooted tree
+<ul>
+<li>The root directory in linux is called <code>/</code></li>
+</ul></li>
+<li>A file is the name given to a set of data</li>
+<li>A file needs to be contained in a directory</li>
+<li>An extension is an indication of the filetype, but does not determine it</li>
+<li>Python programs are text files with extension .py</li>
+<li>Some basic shell commands
+<ul>
+<li>The <code>Tab</code>button autocompletes the commands in the shell</li>
+<li><code>cd</code> is used to enter in a directory</li>
+<li><code>mkdir</code> creates a directory</li>
+<li><code>ls</code> lists all files and directories inside the current directory
+<ul>
+<li><code>ls -l</code> gives more informations on the file, e.g. permissions</li>
+</ul></li>
+<li><code>.</code> is a shortcut for the current dir</li>
+<li><code>..</code> is a shortcut for the parent dir</li>
+<li><code>~</code> is a shrotcut for the home dir of the current user</li>
+<li>Starting my path with the root dir <code>/</code> makes the path absolute</li>
+<li>Starting with a directory directly is like starting with <code>./</code></li>
+<li>Writing <code>cd</code> without parameters is like writing <code>cd ~</code></li>
+<li><code>pwd</code> prints the current dir</li>
+<li><code>cp</code> and <code>mv</code> are the copy and move commands</li>
+<li><code>rm</code> permanently deletes files</li>
+</ul></li>
+<li>Files can have different permissions
+<ul>
+<li>Users can be selectively allowed to read, write and/or execute files</li>
+<li>The owner of a file can set permissions for everyone, users and groups</li>
+<li>Permissions can be read as <code>-rwxrwr--</code>, where the first 3 charachters refer to user, then group, then others, then all</li>
+<li>Permissions are added and remove with the <code>chmod</code> command</li>
+<li><code>chmod u+x</code> adds execute permission to user, while <code>chmod o-w</code> removes write permisission to others</li>
+<li><code>chmod 777</code> gives full permissions to everyone</li>
+</ul></li>
+<li>A running program is identified by a unique PID (program id)
+<ul>
+<li><code>ps -a</code> lists all the running processes with PID</li>
+<li><code>kill PID</code> kills the running process
+<ul>
+<li>This should be used only as a last option, I risk to lose data (!)</li>
+</ul></li>
+</ul></li>
+<li>A single program can span multiple processes</li>
+<li><code>sleep</code> suspends the current shell for the specified time</li>
+<li><code>man</code> opens the manual of a command</li>
+<li>The argument of a command is the subject of the operation</li>
+<li>The parameters of a command are the option that specify its action</li>
+<li>The output of a command can be written to a file with the redirect operator <code>&gt;</code>
+<ul>
+<li><code>ps -a &gt; output.txt</code></li>
+<li>The error messages will still be printed on screen</li>
+<li>If the file already exists, it is overwritten (!)</li>
+<li>If I use the append operator <code>&gt;&gt;</code> instead, it adds the output at the end of the file</li>
+</ul></li>
+<li>To redirect errors we use <code>2&gt;</code>, while to redirect both normal output and error <code>&amp;&gt;</code> is used</li>
+<li>To show the content of a file we can open it in a text editor, or use the following commands
+<ul>
+<li><code>head</code> shows the first 10 lines</li>
+<li><code>tail</code> shows the last 10 lines</li>
+<li><code>cat</code> shows the whole file, and it is unpractical with long files</li>
+<li><code>more</code> shows the whole file page by page</li>
+<li><code>less</code> shows the whole file allowing to scroll</li>
+</ul></li>
+<li>There is a plethora of text editors
+<ul>
+<li><code>nano</code> and <code>pico</code> are easy to use</li>
+<li><code>vim</code> and <code>emacs</code> are more advanced but less easy</li>
+<li>Some have a GUI version, like <code>gvim</code> and <code>xemacs</code></li>
+</ul></li>
+<li>A computer is fast, but stupid, It does exactly what you tell it to do</li>
+<li>Programming is useful for dealing with complex operations, repetitive tasks, huge amounts of data</li>
+<li>Sometimes I can do things with a PC without knowing how they are done: libraries</li>
+<li>Documentation is really useful as a reference, but is not really good for learning</li>
+<li>Things work most of the time, until they do not work once and no one knows why</li>
+<li>I can run a script in the background using an &amp; after the command
+<ul>
+<li><code>~ python test.py &amp;</code></li>
+</ul></li>
+</ul>
+<h1 id="python-basics">Python basics</h1>
+<ul>
+<li>Pyhton is fast to implement, widely used, has many libraries, it is well documented
+<ul>
+<li>It is not used so much by computer scientists, but a lot by non computer scientists</li>
+<li>We want to be as efficient as needed, not as efficient as possible (!)
+<ul>
+<li>Using C can improve efficiency, but not as much as writing a good program</li>
+</ul></li>
+<li>It is an imperative language</li>
+<li>We can use C when we need to work really low-level, but often it is not needed</li>
+</ul></li>
+<li>A Python program can be written and used in different ways
+<ul>
+<li>I can create a text file and run it from the shell</li>
+<li>I can use an IDE to write, execute, access documentation</li>
+<li>I can write directly in the Python interpreter without creating a file</li>
+</ul></li>
+<li>The operator / is division in python2, while in python 3 the operator // is integer division
+<ul>
+<li>The result of integer division is itself an integer</li>
+<li>Floating point division in python3 is done by the operator /</li>
+<li>In python2 the type of division is determined by the context
+<ul>
+<li>It is integer division only if both numbers are integers, otherwise it is floating point</li>
+<li>If I want to do floating point division between integers, I need to first convert one of them to a float</li>
+</ul></li>
+</ul></li>
+<li>The operator % is the remainder of an integer division</li>
+<li>The operator * is multiplication, ** is exponentiation, + and - are sum and addition</li>
+<li>There are many built-in functions to perform calculations</li>
+<li><code>e</code> and <code>pi</code> are recognised as the respective constants</li>
+<li>To use functions from libraries I need to use the syntax
+<ul>
+<li><code>from math import *</code>
+<ul>
+<li><code>*</code> is a wildcard that means everything</li>
+<li>I can also import a single command</li>
+</ul></li>
+<li>The need to import commands is due to avoid an enormous number of function name clashes when I define a custom function</li>
+</ul></li>
+<li>A variable is the name of a memory location that can store a value</li>
+<li>Strings can be accessed by charachter by putting the index in parentheses
+<ul>
+<li><code>str[0]</code></li>
+</ul></li>
+<li>Substrings can be extracted as
+<ul>
+<li><code>str[2:5]</code> extracts 2 included until 5 excluded</li>
+<li>If I omit beginning or end, it considers the beginning or the end</li>
+<li><code>str[-2:2:-1]</code> specific to go by jumps of -1 (go backwards)</li>
+</ul></li>
+<li>String concatenation is done with the operator +</li>
+<li>You cannot change a string by assigning a value to an element of the string, you need to create a new string</li>
+<li>User input is collected with <code>input("message")</code> in python3 and <code>raw_input("message")</code> in python2</li>
+<li>Some methods for strings
+<ul>
+<li><code>s.upper()</code></li>
+<li><code>s.lower()</code></li>
+<li><code>s.replace("a","b")</code></li>
+<li><code>s.startswith("a")</code></li>
+</ul></li>
+</ul>
+<h1 id="functions">Functions</h1>
+<ul>
+<li>A function is a code block with a name</li>
+<li>A built-in function is readily understood by the python interpreter</li>
+</ul>
+<pre><code>def fun(par):
+    my code+par
+x = &quot;some data&quot;
+fun(x)</code></pre>
+<ul>
+<li>The return statement assigns its value to the function</li>
+<li>In the following x=1</li>
+</ul>
+<pre><code>def fun():
+    return 1
+x = fun()</code></pre>
+<ul>
+<li>The first statement in a function is called docstring</li>
+</ul>
+<pre><code>def fun():
+    &quot;&quot;&quot;this is a function that doesn&#39;t do anything&quot;&quot;&quot;</code></pre>
+<ul>
+<li>Comments in pyhton are made with # and they are useful to make code more readable</li>
+</ul>
+<h1 id="lists">Lists</h1>
+<ul>
+<li>Lists behave similarly to strings</li>
+<li>To check if an element is in a string or list I can do</li>
+</ul>
+<pre><code>my_list = [1,2,3,4]
+print(2 in my_list)
+&gt;&gt;&gt; True</code></pre>
+<ul>
+<li>The main difference is that in lists I can reassign elements</li>
+<li>The split function splits a string in a list separated by the separator given as an argument</li>
+<li>I cannot split for the empty charachter, to separate a string in any charachter I should use <code>list(str)</code></li>
+</ul>
+<h1 id="for-loop">For loop</h1>
+<pre><code>my_list = [1,2,3,4]
+for num in my_list:
+    print(num)
+&gt;&gt;&gt;1
+&gt;&gt;&gt;2
+&gt;&gt;&gt;3
+&gt;&gt;&gt;4</code></pre>
+<h1 id="if-statements">If statements</h1>
+<pre><code>if test:
+    code
+elif test2:
+    code
+else:
+    code</code></pre>
+<ul>
+<li>Logical tests are <code>==, !=, &lt;, &gt;, &lt;=, &gt;=</code></li>
+<li>Logical operations are <code>and, or, not</code></li>
+</ul>
+<h1 id="files">Files</h1>
+<ul>
+<li>A file can be opened in reading (r), write (w) and append (a)
+<ul>
+<li>Opening in write destroys the prevoious content of the file (!)</li>
+</ul>
+<pre><code>filein = open(&quot;path/to/file&quot;,&quot;r&quot;)
+print filein
+&gt;&gt;&gt;&lt;open file &#39;path/to/file&#39;, mode &#39;r&#39; at 0x00000&gt;</code></pre></li>
+<li>If I use a for loop in a file, I loop through its lines</li>
+<li>By default, \n is included in the line and it can be removed with string.rstrip()</li>
+<li>A file can be closed with filein.close, and this is really important when we are writing in a file
+<ul>
+<li>Writing operations can be put in a buffer by the OS, and so if my program crashes I do not now if the file has actually been written</li>
+</ul></li>
+<li>To write in a file I can do <code>fileout.write("some string")</code>
+<ul>
+<li>The \n has to be added manually (!)</li>
+</ul></li>
+</ul>
+<h1 id="dictionaries">Dictionaries</h1>
+<ul>
+<li>A dictionary is made of values, that can be retrieved through keys</li>
+</ul>
+<pre><code>my_dic = {key1:value1, key2:value2}
+print(my_dic[key1])
+&gt;&gt;&gt;value1</code></pre>
+<ul>
+<li>Key and value can be strings, integers, floats</li>
+<li>The number of key-value pairs in the dictionary can be retrieved with <code>len(my_dic)</code></li>
+<li>Dictionaries are mutable</li>
+</ul>
+<pre><code>D1 = {&quot;name&quot;:&quot;saul&quot;}
+D1[&quot;surname&quot;] = &quot;pierotti&quot;
+print(D1)
+&gt;&gt;&gt;{&quot;name&quot;:&quot;saul,&quot;surname&quot;:&quot;pierotti&quot;}</code></pre>
+<ul>
+<li>In general, variables can be eliminated with del</li>
+</ul>
+<pre><code>x = 1
+del x
+print(x)
+&gt;&gt;&gt;Traceback (most recent call last):
+&gt;&gt;&gt;  File &quot;&lt;stdin&gt;&quot;, line 1, in &lt;module&gt;
+&gt;&gt;&gt;NameError: name &#39;x&#39; is not defined</code></pre>
+<ul>
+<li>Also dictionary entries can be eliminated</li>
+</ul>
+<pre><code>D1 = {&quot;name&quot;:&quot;saul&quot;}
+D1[&quot;surname&quot;] = &quot;pierotti&quot;
+del D1[&quot;name&quot;]
+print(D1)
+&gt;&gt;&gt;{&quot;surname&quot;:&quot;pierotti&quot;}</code></pre>
+<ul>
+<li>The get method of dictionaries allows to return the value of a key specified as first argument, or the second argument if the key does not exist</li>
+</ul>
+<pre><code>D1 = {&quot;A&quot;:9}
+print(D1.get(&quot;B&quot;,1))
+print(D1.get(&quot;A&quot;,2))
+&gt;&gt;&gt;9
+&gt;&gt;&gt;1</code></pre>
+<ul>
+<li>This is useful for incrementing a value, or creating it if it does not exist</li>
+</ul>
+<pre><code>my_seq = &quot;ATTTAATGGGCCCGGCCCGGG&quot;
+for char in my_seq:
+    D1[char] = D1.get(char, 0) + 1
+print(D1)
+&gt;&gt;&gt;{&quot;A&quot;:3,&quot;T&quot;:4,&quot;C&quot;:6,&quot;G&quot;:8}</code></pre>
+<ul>
+<li>The keys method returns a type dict_keys object with the keys of a dictionary
+<ul>
+<li>In python2 it returns a normal list</li>
+</ul>
+<pre><code>D1 = {&quot;name&quot;:&quot;saul&quot;}
+print(D1.keys())
+&gt;&gt;&gt;dict_keys([&quot;name&quot;])</code></pre></li>
+<li>By default dictionary elements are not sorted, they are in order of insertion
+<ul>
+<li>In python3 they do not have an order</li>
+</ul></li>
+<li>I can sort a list with the sort method</li>
+</ul>
+<pre><code>my_list = [1,3,56,21,12]
+my_list.sort()
+print(my_list)
+&gt;&gt;&gt;[1,3,12,21,56]</code></pre>
+<ul>
+<li>The system time in python can be retrieved with</li>
+</ul>
+<pre><code>import datetime
+datetime.datetime.now()</code></pre>
+<ul>
+<li>I can get the execution time of a task by subtracting the current time at the beginning and end of it</li>
+</ul>
+<h1 id="recursion">Recursion</h1>
+<ul>
+<li>We can have simple recursion if a function invokes itself, or mutual recursion when a function invokes another function that invokes the first one</li>
+<li>A recursive function comprise an inductive case and one or more base cases</li>
+</ul>
+<h1 id="regex">Regex</h1>
